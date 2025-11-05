@@ -1,4 +1,4 @@
-# DWCDP-OWL
+# DWC-OWL
 
 A trial to convert Darwin Core and recently suggested Darwin Core DataPackage terms into OWL concepts of classes and properties.
 
@@ -22,15 +22,10 @@ Originally, the semantics were more consistent with my original proposal, consid
 
 ## Intent of the project
 
-The goal of the project is to provide CSBQ researchers with a database of semantically-described biodiversity datasets. The advantages of this include, but are not limited to:
+The goal of the project is to provide researchers with a semantically-sound ontology to annotate biodiversity datasets. The advantages of this include, but are not limited to:
 
 1. Enhanced data discoverability
 2. Proper attribution of credits to reseachers
 3. Improved dataset querying, promoting data reuse
 4. Easier data publication processes to biodiversity aggregators (GBIF, OBIS)
 5. Direct integration into pipelines that allow the computation of EBVs
-
-## Closing remarks
-
-May the ✨SPARQL✨ be with you!
-
