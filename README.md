@@ -28,6 +28,7 @@ The goal of the project is to provide CSBQ researchers with a database of semant
 2. Proper attribution of credits to reseachers
 3. Improved dataset querying, promoting data reuse
 4. Easier data publication processes to biodiversity aggregators (GBIF, OBIS)
+5. Direct integration into pipelines that allow the computation of EBVs
 
 ## Closing remarks
 
