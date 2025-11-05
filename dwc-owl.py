@@ -2053,11 +2053,9 @@ g.add((BB["Site123"], DWCDP["happenedDuring"], BB["ParentSite456"]))
 # g.add((BB["MidioNo"], DWCDP["isMediaOf"], BB["Sometho"]))
 # g.add((BB["Sometho"], RDF["type"], DWC["Assertion"]))
 
-
-print(g.serialize(format="turtle"))
-
-g.serialize(destination="dwcdp_owl.owl", format="xml")
-print(g.serialize(format="turtle"))
+#####################################################################################################
+# BEGIN OWL API USAGE
+#####################################################################################################
 
 # NOTE: Use ROBOT to use the OWL API directly, better than having to go into Protege everytime.
 # Obtained with curl -L -o robot.jar https://github.com/ontodev/robot/releases/download/v1.9.8/robot.jar
