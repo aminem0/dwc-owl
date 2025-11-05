@@ -25,6 +25,7 @@ DWC = Namespace("http://rs.tdwg.org/dwc/terms/")
 DWCIRI = Namespace("http://rs.tdwg.org/dwc/iri/")
 DWCDP = Namespace("http://rs.tdwg.org/dwcdp/terms/")
 ECO = Namespace("http://rs.tdwg.org/eco/terms")
+ECOIRI = Namespace("http://rs.tdwg.org/eco/iri/")
 EXIF = Namespace("http://ns.adobe.com/exif/1.0/")
 GBIF = Namespace("http://rs.gbif.org/terms/")
 GGBN = Namespace("http://data.ggbn.org/schemas/ggbn/terms/")
@@ -51,11 +52,10 @@ g.bind("mixs", MIXS)
 
 # Define ontology URI and basic definitions.
 ontology_uri = URIRef("http://bioboum.ca/dwc-owl.owl")
-g.add((ontology_uri, RDF.type, OWL.Ontology))
-g.add((ontology_uri, OWL.versionInfo, Literal("0.0.2")))
+g.add((ontology_uri, RDF["type"], OWL["Ontology"]))
+g.add((ontology_uri, OWL["versionInfo"], Literal("0.0.3")))
 g.add((ontology_uri, DC["title"], Literal("Darwin Core OWL")))
 g.add((ontology_uri, DC["description"], Literal("Darwin Core OWL is an attempt to use Darwin Core terms and the newly proposed Darwin Core DataPackage terms and convert them into OWL concepts of classes and properties. Darwin Semantic Web already considered this, considering OWL classes. The purpose here is to consider OWL classes that considers owl:Restrictions. As well as owl:ObjectProperties that can link together the entities, so that we obtain a web of rather than a simple flat RDF representation of biodiversity datasets.", lang="en")))
-
 
 #####################################################################################################
 # BEGIN OWL CLASS DEFINITIONS
@@ -75,7 +75,6 @@ createOC(
     version_of_s="http://rs.tdwg.org/ac/terms/Media",
 )
 
-# BUG: I put in the error owl:Restriction. HermiT in Protege picks up on it, but not the default settings in owlready2. Though running the HermiT .jar file bundled with owlready2 gives the inconsistency. Beware.
 createOC(
     name="Agent",
     namespace=DCTERMS,
@@ -84,19 +83,18 @@ createOC(
     definition=Literal("A resource that acts or has the power to act.", lang="en"),
     comments=Literal("A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious.", lang="en"),
     examples=Literal("`Carl Linnaeus`; `The Terra Nova Expedition`; `The National Science Foundation`; `The El Yunque National Forest ARBIMON System`; `ChatGPT`"),
-    # card1_restrictions=[DWC["agentID"], DWC["agentType"], DWC["eventID"]],
+    card1_restrictions=[DWC["agentID"], DWC["agentType"]],
     card1_restrictions=[DWC["agentID"], DWC["agentType"]],
     card01_restrictions=[DWC["agentRemarks"], DWC["preferredAgentName"]],
     version_of_s="http://purl.org/dc/terms/Agent",
 )
 
-# NOTE: REVOIR VERSION
+# NOTE: Should we consider dwc:Assertion as a special case of dwc:MeasurmentOrFact?
 createOC(
     name="Assertion",
     namespace=DWC,
     graph=g,
     pref_label=Literal("Assertion"),
-#    card1_restrictions=[DWCDP.agentType], # WAS A TEST
     card0_restrictions=[DWCDP["assertedBy"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/MeasurementOrFact",
     references_s="http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13",
@@ -123,7 +121,7 @@ createOC(
     references_s="http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21",
 )
 
-# NOTE: Should we allow for several parent events?
+# NOTE: Should we allow for several parent events? I mean that in the sense of OWL cardinalities.
 createOC(
     name="Event",
     namespace=DWC,
@@ -185,14 +183,13 @@ createOC(
 )
 
 # WARN: Add triples to express owl:Restriction here then integrate to function
-
+# This is done to avoid cross-class use of the term dwcdp:isDerivedFrom, which is the union of
+# ac:Media and dwc:MaterialEntity.
 R_isDerivedFrom = BNode()
 g.add((R_isDerivedFrom, RDF["type"], OWL["Restriction"]))
 g.add((R_isDerivedFrom, OWL["onProperty"], DWCDP["isDerivedFrom"]))
 g.add((R_isDerivedFrom, OWL["allValuesFrom"], DWC["MaterialEntity"]))
 g.add((DWC["MaterialEntity"], RDFS["subClassOf"], R_isDerivedFrom))
-
-
 
 createOC(
     name="NucleotideAnalysis",
@@ -487,7 +484,7 @@ create_CTOP(
     object_prop=DWCDP["about"],
     use_inverse=False,
     values_class=AC["Media"],
-    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Media]."),
+    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [ac:Media]."),
 )
 
 create_CTOP(
@@ -548,7 +545,7 @@ create_CTOP(
     comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Event].")
 )
 
-# NOTE: Particularly important one. It is the only dwc:Protocol that is the domain of the properties from GBIF, MIQUE, MIXS, et al.
+# NOTE: Particularly important one. It is the only dwc:Protocol that is the domain of the properties from GBIF, MIQE, MIXS, et al.
 create_CTOP(
     name="MolecularProtocol",
     namespace=DWC,
@@ -609,48 +606,16 @@ g.add((Robj_class, OWL["onProperty"], DWCDP["relationshipTo"]))
 g.add((Robj_class, OWL["someValuesFrom"], DWC["Organism"]))
 g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], Robj_class))
 
-
-
-    # # Optionally add examples.
-    # if examples:
-    #     graph.add((class_uri, SKOS.example, examples))
-
-    # if use_inverse == True:
-    #     # InvBlank
-    #     property_node  = BNode()
-    #     graph.add((property_node , RDF.type, OWL.ObjectProperty))
-    #     graph.add((property_node , OWL.inverseOf, object_prop))
-    # else:
-    #     property_node = object_prop
-
-    # # OWL Restrictions
-    # R_class = BNode()
-    # graph.add((R_class, RDF.type, OWL.Restriction))
-    # graph.add((R_class, OWL.onProperty, property_node ))
-    # graph.add((R_class, OWL.someValuesFrom, values_class))
-
-    # # owl:equivalentClass via owl:intersectionOf
-    # #graph.add((class_uri, RDFS.subClassOf, R_class))
-    # graph.add((class_uri, OWL.equivalentClass, R_class))
-
-
-
-
 #####################################################################################################
 # BEGIN AXIOMS
 #####################################################################################################
 
-
 # NOTE: Can a dwc:Event be a eco:Survey?
-# declare_disjoint(
-#     classes=[DCTERMS["Agent"], DCTERMS["Location"], AC["Media"], DWC["Assertion"], DWC["Event"], DWC["GeologicalContext"], DWC["MaterialEntity"], DWC["NucleotideAnalysis"], DWC["NucleotideSequence"], DWC["Occurrence"], DWC["Protocol"], DWC["UsagePolicy"], ECO["Survey"], ECO["SurveyTarget"]],
-#     graph=g
-# )
-
 declare_disjoint(
     classes=[CHRONO["ChronometricAge"], DCTERMS["Agent"], DCTERMS["Location"], AC["Media"], DWC["Assertion"], DWC["Event"], DWC["GeologicalContext"], DWC["MaterialEntity"], DWC["NucleotideAnalysis"], DWC["NucleotideSequence"], DWC["Occurrence"], DWC["Organism"], DWC["OrganismInteraction"], DWC["Protocol"], DWC["ResourceRelationship"], DWC["UsagePolicy"], ECO["Survey"], ECO["SurveyTarget"]],
     graph=g
 )
+
 #####################################################################################################
 # BEGIN OBJECT PROPERTY DEFINITIONS
 #####################################################################################################
@@ -949,7 +914,7 @@ createOP(
     graph=g,
     domain_list=[DWC["Event"]],
     range_list=[DCTERMS["Location"]],
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in.", lang="en"),
     examples=Literal("bb:event123 dcterms:spatial bb:location456 .")
 )
 
@@ -1329,8 +1294,8 @@ createDP(
     name="derivedFromMediaID",
     namespace=DWC,
     graph=g,
-    domain_list=[AC.Media],
-    range_list=[RDFS.Literal],
+    domain_list=[AC["Media"]],
+    range_list=[RDFS["Literal"]],
     pref_label=Literal("Derived From Media ID"),
     definition=Literal("An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part."),
     comments=Literal("This term can be used when an [ac:Media] resource has been separated from its source [ac:Media] resource. Recommended best practice is to use a globally unique identifier."),
@@ -1634,7 +1599,7 @@ createDP(
     version_of_s="http://purl.org/dc/terms/type",
 )
 
-# NOTE: Property I created. I do not see why there is not a DWCIRI analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
+# NOTE: Property I created. I do not see why there is not a dwciri: analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
 createDP(
     name="surveyTargetTypeSourceIRI",
     namespace=DWCIRI,
@@ -1643,7 +1608,7 @@ createDP(
     range_list=[XSD["anyURI"]],
     pref_label=Literal("Survey Target Type Source IRI"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
-    comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
     subproperty_list=[DCTERMS["source"]],
     version_of_s="http://purl.org/dc/elements/terms/source",
 )
