@@ -323,8 +323,8 @@ create_CTOP(
     object_prop=DWCDP["assertedBy"],
     use_inverse=True,
     values_class=DWC["Assertion"],
-    definition=Literal("An instance of a [dcterms:Agent] that has made a [dwc:Assertion]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:assertedBy], the class is defined in description logic as [dwcdp:AssertionAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:assertedBy]⁻).[dwc:Assertion].")
+    definition=Literal("An instance of a [dcterms:Agent] that has made a [dwc:Assertion].", lang="en"),
+    comments=Literal("Due to the directionality of the property [dwcdp:assertedBy], the class is defined in description logic as [dwcdp:AssertionAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:assertedBy]⁻).[dwc:Assertion].", lang="en")
 )
 
 create_CTOP(
@@ -336,8 +336,8 @@ create_CTOP(
     object_prop=DWCDP["authoredBy"],
     use_inverse=True,
     values_class=DCTERMS["BibliographicResource"],
-    definition=Literal("An instance of a [dcterms:Agent] that has authored a [dcterms:BibliographicResource]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:authoredBy], the class is defined in description logic as [dwcdp:AuthorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:authoredBy]⁻).[dcterms:BibliographicResource].")
+    definition=Literal("An instance of a [dcterms:Agent] that has authored a [dcterms:BibliographicResource].", lang="en"),
+    comments=Literal("Due to the directionality of the property [dwcdp:authoredBy], the class is defined in description logic as [dwcdp:AuthorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:authoredBy]⁻).[dcterms:BibliographicResource].", lang="en")
 )
 
 create_CTOP(
@@ -349,8 +349,8 @@ create_CTOP(
     object_prop=DWCDP["commentedBy"],
     use_inverse=True,
     values_class=AC["Media"],
-    definition=Literal("An instance of a [dcterms:Agent] that has commented a [dwc:Media]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:commentedBy], the class is defined in description logic as [dwcdp:Commenter] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:commentedBy]⁻).[dwc:Media].")
+    definition=Literal("An instance of a [dcterms:Agent] that has commented a [dwc:Media].", lang="en"),
+    comments=Literal("Due to the directionality of the property [dwcdp:commentedBy], the class is defined in description logic as [dwcdp:Commenter] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:commentedBy]⁻).[ac:Media].", lang="en")
 )
 
 create_CTOP(
@@ -362,11 +362,12 @@ create_CTOP(
     object_prop=DWCDP["conductedBy"],
     use_inverse=True,
     values_class=DWC["Event"],
-    definition=Literal("An instance of a [dcterms:Agent] that has conducted a [dwc:Event]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwcdp:Conductor] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event].")
+    definition=Literal("An instance of a [dcterms:Agent] that has conducted a [dwc:Event].", lang="en"),
+    comments=Literal("Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwcdp:Conductor] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event].", lang="en")
 )
 
 # NOTE: Used bibo: property bibo:editor.
+# But bibo: does not provide straightforward object properties for other relationships like authoring and publishing.
 create_CTOP(
     name="EditorAgent",
     namespace=DWC,
@@ -377,8 +378,8 @@ create_CTOP(
     object_prop=BIBO["editor"],
     use_inverse=True,
     values_class=DCTERMS["BibliographicResource"],
-    definition=Literal("An instance of a [dcterms:Agent] that has edited a [dcterms:BibliographicResource]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:editedBy], the class is defined in description logic as [dwcdp:EditorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:editedBy]⁻).[dcterms:BibliographicResource].")
+    definition=Literal("An instance of a [dcterms:Agent] that has edited a [dcterms:BibliographicResource].", lang="en"),
+    comments=Literal("Due to the directionality of the property [dwcdp:editedBy], the class is defined in description logic as [dwcdp:EditorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:editedBy]⁻).[dcterms:BibliographicResource].", lang="en")
 )
 
 create_CTOP(
@@ -390,8 +391,8 @@ create_CTOP(
     values_class=DWC["Event"],
     use_inverse=True,
     pref_label=Literal("Georeferencer Agent"),
-    definition=Literal("An instance of a [dcterms:Agent] that has georeferenced a [dwc:Event]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:Georeferencer] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event].")
+    definition=Literal("An instance of a [dcterms:Agent] that has georeferenced a [dwc:Event].", lang="en"),
+    comments=Literal("Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:Georeferencer] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event].", lang="en")
 )
 
 # NOTE: An important one to me (and the origin of the whole group of XYZAgents). Came to me during a discussion with Andre Heughebaert. Someone might want to explicitly exclude all observations where identifications were done by AI.
