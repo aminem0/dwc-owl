@@ -1679,6 +1679,7 @@ createDP(
     range_list=[XSD["string"]],
     pref_label=Literal("DNA Sequence"),
     definition=Literal("The DNA sequence.", lang="en"),
+    examples=Literal("`TCTATCCTCAATTATAGGTCATAATTCACCATCAGTAGATTTAGGAATTTTCTCTATTCATATTGCAGGTGTATCATCAATTATAGGATCAATTAATTTTATTGTAACAATTTTAAATATACATACAAAAACTCATTCATTAAACTTTTTACCATTATTTTCATGATCAGTTCTAGTTACAGCAATTCTCCTTTTATTATCATTA`"),
     version_of_s="https://rs.gbif/org/terms/dna_sequence",
 )
 
@@ -1842,6 +1843,18 @@ createDP(
 )
 
 createDP(
+    name="baselineValue",
+    namespace=MIQE,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["integer"]],
+    pref_label=Literal("Fluorescence Baseline Value"),
+    definition=Literal("The number of cycles when fluorescence signal from the target amplification is below background fluorescence not originated from the real target amplification.", lang="en"),
+    examples=Literal("`15`"),
+    version_of_s="http://rs.gbif.org/terms/miqe/baselineValue",
+)
+
+createDP(
     name="probeReporter",
     namespace=MIQE,
     graph=g,
@@ -1867,6 +1880,18 @@ createDP(
 )
 
 createDP(
+    name="quantificationCycle",
+    namespace=MIQE,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["decimal"]],
+    pref_label=Literal("Quantification Cycle Number"),
+    definition=Literal("The number of cycles required for the fluorescent signal to cross a given value threshold above the baseline. Quantification cycle (Cq), threshold cycle (Ct), crossing point (Cp), and take-off point (TOP) refer to the same value from the real-time instrument. Use of quantification cycle (Cq), is preferable according to the RDML (Real-Time PCR Data Markup Language) data standard ([http://www.rdml.org]).", lang="en"),
+    examples=Literal("`37.9450950622558`"),
+    version_of_s="http://rs.gbif.org/terms/miqe/quantificationCycle",
+)
+
+createDP(
     name="thresholdQuantificationCycle",
     namespace=MIQE,
     graph=g,
@@ -1876,18 +1901,6 @@ createDP(
     definition=Literal("Threshold for change in fluorescence signal between cycles.", lang="en"),
     examples=Literal("`0.3`"),
     version_of_s="http://rs.gbif.org/terms/miqe/thresholdQuantificationCycle",
-)
-
-createDP(
-    name="baselineValue",
-    namespace=MIQE,
-    graph=g,
-    domain_list=[DWC["MolecularProtocol"]],
-    range_list=[XSD["integer"]],
-    pref_label=Literal("Fluorescence Background Value"),
-    definition=Literal("The number of cycles when fluorescence signal from the target amplification is below background fluorescence not originated from the real target amplification.", lang="en"),
-    examples=Literal("`15`"),
-    version_of_s="http://rs.gbif.org/terms/miqe/baselineValue",
 )
 
 # NOTE: Double check if accepts Literal or not.
@@ -2017,6 +2030,24 @@ g.add((BB["Site123"], DWCDP["happenedDuring"], BB["ParentSite456"]))
 
 # g.add((BB["MidioNo"], DWCDP["isMediaOf"], BB["Sometho"]))
 # g.add((BB["Sometho"], RDF["type"], DWC["Assertion"]))
+
+
+
+g.add((BB["Butterfly123"], RDF["type"], DWC["Organism"]))
+g.add((BB["Spider456"], RDF["type"], DWC["Organism"]))
+g.add((BB["Joey366"], RDF["type"], DCTERMS["Agent"]))
+#
+g.add((BB["Butterfly123EatenBySpider456"], RDF["type"], DWC["ResourceRelationship"]))
+g.add((BB["Butterfly123EatenBySpider456"], RDF["type"], RDF["Statement"]))
+g.add((BB["Butterfly123EatenBySpider456"], RDF["subject"], BB["Butterfly123"]))
+g.add((BB["Butterfly123EatenBySpider456"], RDF["predicate"], URIRef("https://www.inaturalist.org/observation_fields/879")))
+g.add((BB["Butterfly123EatenBySpider456"], RDF["object"], BB["Spider456"]))
+#
+g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipEstablishedDate"], Literal("15-06-2025")))
+g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipRemarks"], Literal("The butterfly was a dead adult.", lang="en")))
+g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingTo"], Literal("Joey Saucedo")))
+g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingToID"], BB["Joey366"]))
+
 
 #####################################################################################################
 # BEGIN OWL API USAGE

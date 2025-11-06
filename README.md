@@ -29,3 +29,7 @@ The goal of the project is to provide researchers with a semantically-sound onto
 3. Improved dataset querying, promoting data reuse
 4. Easier data publication processes to biodiversity aggregators (GBIF, OBIS)
 5. Direct integration into pipelines that allow the computation of EBVs
+
+## Applications of the ontology
+
+The terms in this ontology are being applied to model real-world datasets at [another GitHub repository](https://github.com/aminem0/dwc-owl-rdf)
