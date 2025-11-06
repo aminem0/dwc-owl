@@ -55,7 +55,7 @@ ontology_uri = URIRef("http://bioboum.ca/dwc-owl.owl")
 g.add((ontology_uri, RDF["type"], OWL["Ontology"]))
 g.add((ontology_uri, OWL["versionInfo"], Literal("0.0.3")))
 g.add((ontology_uri, DC["title"], Literal("Darwin Core OWL")))
-g.add((ontology_uri, DC["description"], Literal("Darwin Core OWL is an attempt to use Darwin Core terms and the newly proposed Darwin Core DataPackage terms and convert them into OWL concepts of classes and properties. Darwin Semantic Web already considered this, considering OWL classes. The purpose here is to consider OWL classes that considers owl:Restrictions. As well as owl:ObjectProperties that can link together the entities, so that we obtain a web of rather than a simple flat RDF representation of biodiversity datasets.", lang="en")))
+g.add((ontology_uri, DC["description"], Literal("Darwin Core OWL is an attempt to use Darwin Core terms and the newly proposed Darwin Core DataPackage terms and convert them into OWL concepts of classes and properties. Darwin Semantic Web already considered this, considering OWL classes. The purpose here is to consider OWL classes that considers owl:Restrictions. As well as owl:ObjectProperties that can link together the entities, so that we obtain a network of semantically-connected entities, rather than a simple flat RDF representation of biodiversity datasets.", lang="en")))
 
 #####################################################################################################
 # BEGIN OWL CLASS DEFINITIONS
@@ -83,7 +83,6 @@ createOC(
     definition=Literal("A resource that acts or has the power to act.", lang="en"),
     comments=Literal("A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious.", lang="en"),
     examples=Literal("`Carl Linnaeus`; `The Terra Nova Expedition`; `The National Science Foundation`; `The El Yunque National Forest ARBIMON System`; `ChatGPT`"),
-    card1_restrictions=[DWC["agentID"], DWC["agentType"]],
     card1_restrictions=[DWC["agentID"], DWC["agentType"]],
     card01_restrictions=[DWC["agentRemarks"], DWC["preferredAgentName"]],
     version_of_s="http://purl.org/dc/terms/Agent",
@@ -2023,7 +2022,10 @@ g.add((BB["Site123"], DWCDP["happenedDuring"], BB["ParentSite456"]))
 # BEGIN OWL API USAGE
 #####################################################################################################
 
+# Serialize the ontology to xml.
+g.serialize(destination="dwc-owl.owl", format="xml")
+
 # NOTE: Use ROBOT to use the OWL API directly, better than having to go into Protege everytime.
 # Obtained with curl -L -o robot.jar https://github.com/ontodev/robot/releases/download/v1.9.8/robot.jar
 # Put in .gitgnore since it is borderline LFS.
-subprocess.run(["java", "-jar", "robot.jar", "convert", "--input", "dwcdp_owl.owl", "--output", "ontology.ttl"])
+subprocess.run(["java", "-jar", "robot.jar", "convert", "--input", "dwc-owl.owl", "--output", "ontology.ttl"])

@@ -11,9 +11,9 @@
 @base <http://bioboum.ca/dwc-owl.owl> .
 
 <http://bioboum.ca/dwc-owl.owl> rdf:type owl:Ontology ;
-                                 dc:description "Darwin Core OWL is an attempt to use Darwin Core terms and the newly proposed Darwin Core DataPackage terms and convert them into OWL concepts of classes and properties. Darwin Semantic Web already considered this, considering OWL classes. The purpose here is to consider OWL classes that considers owl:Restrictions. As well as owl:ObjectProperties that can link together the entities, so that we obtain a web of rather than a simple flat RDF representation of biodiversity datasets."@en ;
+                                 dc:description "Darwin Core OWL is an attempt to use Darwin Core terms and the newly proposed Darwin Core DataPackage terms and convert them into OWL concepts of classes and properties. Darwin Semantic Web already considered this, considering OWL classes. The purpose here is to consider OWL classes that considers owl:Restrictions. As well as owl:ObjectProperties that can link together the entities, so that we obtain a network of semantically-connected entities, rather than a simple flat RDF representation of biodiversity datasets."@en ;
                                  dc:title "Darwin Core OWL" ;
-                                 owl:versionInfo "0.0.2" .
+                                 owl:versionInfo "0.0.3" .
 
 #################################################################
 #    Annotation properties
@@ -56,7 +56,7 @@ dcterms:spatial rdf:type owl:ObjectProperty ;
                 rdfs:domain <http://rs.tdwg.org/dwc/terms/Event> ;
                 rdfs:range dcterms:Location ;
                 rdfs:isDefinedBy dcterms: ;
-                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in." ;
+                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."@en ;
                 skos:example "bb:event123 dcterms:spatial bb:location456 ." .
 
 
@@ -809,7 +809,7 @@ dcterms:type rdf:type owl:DatatypeProperty ;
                                                        rdfs:domain <http://rs.tdwg.org/eco/termsSurveyTarget> ;
                                                        rdfs:range xsd:anyURI ;
                                                        dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
-                                                       rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary."@en ;
+                                                       rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
                                                        rdfs:isDefinedBy <http://rs.tdwg.org/dwc/iri/> ;
                                                        skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
                                                        skos:prefLabel "Survey Target Type Source IRI" .
@@ -1441,9 +1441,9 @@ dcterms:Location rdf:type owl:Class ;
                                                                     owl:someValuesFrom <http://rs.tdwg.org/dwc/terms/Assertion>
                                                                   ] ;
                                               rdfs:subClassOf dcterms:Agent ;
-                                              rdfs:comment "Due to the directionality of the property [dwcdp:assertedBy], the class is defined in description logic as [dwcdp:AssertionAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:assertedBy]⁻).[dwc:Assertion]." ;
+                                              rdfs:comment "Due to the directionality of the property [dwcdp:assertedBy], the class is defined in description logic as [dwcdp:AssertionAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:assertedBy]⁻).[dwc:Assertion]."@en ;
                                               rdfs:isDefinedBy <http://rs.tdwg.org/dwc/terms/> ;
-                                              skos:definition "An instance of a [dcterms:Agent] that has made a [dwc:Assertion]." ;
+                                              skos:definition "An instance of a [dcterms:Agent] that has made a [dwc:Assertion]."@en ;
                                               skos:prefLabel "Assertion Agent" .
 
 
@@ -1455,9 +1455,9 @@ dcterms:Location rdf:type owl:Class ;
                                                                  owl:someValuesFrom dcterms:BibliographicResource
                                                                ] ;
                                            rdfs:subClassOf dcterms:Agent ;
-                                           rdfs:comment "Due to the directionality of the property [dwcdp:authoredBy], the class is defined in description logic as [dwcdp:AuthorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:authoredBy]⁻).[dcterms:BibliographicResource]." ;
+                                           rdfs:comment "Due to the directionality of the property [dwcdp:authoredBy], the class is defined in description logic as [dwcdp:AuthorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:authoredBy]⁻).[dcterms:BibliographicResource]."@en ;
                                            rdfs:isDefinedBy <http://rs.tdwg.org/dwc/terms/> ;
-                                           skos:definition "An instance of a [dcterms:Agent] that has authored a [dcterms:BibliographicResource]." ;
+                                           skos:definition "An instance of a [dcterms:Agent] that has authored a [dcterms:BibliographicResource]."@en ;
                                            skos:prefLabel "Author Agent" .
 
 
@@ -1481,9 +1481,9 @@ dcterms:Location rdf:type owl:Class ;
                                                                     owl:someValuesFrom <http://rs.tdwg.org/ac/terms/Media>
                                                                   ] ;
                                               rdfs:subClassOf dcterms:Agent ;
-                                              rdfs:comment "Due to the directionality of the property [dwcdp:commentedBy], the class is defined in description logic as [dwcdp:Commenter] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:commentedBy]⁻).[dwc:Media]." ;
+                                              rdfs:comment "Due to the directionality of the property [dwcdp:commentedBy], the class is defined in description logic as [dwcdp:Commenter] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:commentedBy]⁻).[ac:Media]."@en ;
                                               rdfs:isDefinedBy <http://rs.tdwg.org/dwc/terms/> ;
-                                              skos:definition "An instance of a [dcterms:Agent] that has commented a [dwc:Media]." ;
+                                              skos:definition "An instance of a [dcterms:Agent] that has commented a [dwc:Media]."@en ;
                                               skos:prefLabel "Commenter Agent" .
 
 
@@ -1495,9 +1495,9 @@ dcterms:Location rdf:type owl:Class ;
                                                                     owl:someValuesFrom <http://rs.tdwg.org/dwc/terms/Event>
                                                                   ] ;
                                               rdfs:subClassOf dcterms:Agent ;
-                                              rdfs:comment "Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwcdp:Conductor] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event]." ;
+                                              rdfs:comment "Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwcdp:Conductor] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event]."@en ;
                                               rdfs:isDefinedBy <http://rs.tdwg.org/dwc/terms/> ;
-                                              skos:definition "An instance of a [dcterms:Agent] that has conducted a [dwc:Event]." ;
+                                              skos:definition "An instance of a [dcterms:Agent] that has conducted a [dwc:Event]."@en ;
                                               skos:prefLabel "Conductor Agent" .
 
 
@@ -1509,9 +1509,9 @@ dcterms:Location rdf:type owl:Class ;
                                                                  owl:someValuesFrom dcterms:BibliographicResource
                                                                ] ;
                                            rdfs:subClassOf dcterms:Agent ;
-                                           rdfs:comment "Due to the directionality of the property [dwcdp:editedBy], the class is defined in description logic as [dwcdp:EditorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:editedBy]⁻).[dcterms:BibliographicResource]." ;
+                                           rdfs:comment "Due to the directionality of the property [dwcdp:editedBy], the class is defined in description logic as [dwcdp:EditorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:editedBy]⁻).[dcterms:BibliographicResource]."@en ;
                                            rdfs:isDefinedBy <http://rs.tdwg.org/dwc/terms/> ;
-                                           skos:definition "An instance of a [dcterms:Agent] that has edited a [dcterms:BibliographicResource]." ;
+                                           skos:definition "An instance of a [dcterms:Agent] that has edited a [dcterms:BibliographicResource]."@en ;
                                            skos:prefLabel "Editor Agent" .
 
 
@@ -1593,9 +1593,9 @@ dcterms:Location rdf:type owl:Class ;
                                                                         owl:someValuesFrom <http://rs.tdwg.org/dwc/terms/Event>
                                                                       ] ;
                                                   rdfs:subClassOf dcterms:Agent ;
-                                                  rdfs:comment "Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:Georeferencer] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event]." ;
+                                                  rdfs:comment "Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:Georeferencer] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event]."@en ;
                                                   rdfs:isDefinedBy <http://rs.tdwg.org/dwc/terms/> ;
-                                                  skos:definition "An instance of a [dcterms:Agent] that has georeferenced a [dwc:Event]." ;
+                                                  skos:definition "An instance of a [dcterms:Agent] that has georeferenced a [dwc:Event]."@en ;
                                                   skos:prefLabel "Georeferencer Agent" .
 
 
@@ -1659,7 +1659,7 @@ dcterms:Location rdf:type owl:Class ;
                                                                   ] ;
                                               rdfs:subClassOf <http://rs.tdwg.org/dwc/terms/Assertion> ;
                                               rdfs:isDefinedBy <http://rs.tdwg.org/dwc/terms/> ;
-                                              skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Media]." ;
+                                              skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [ac:Media]." ;
                                               skos:prefLabel "Media Assertion" .
 
 
