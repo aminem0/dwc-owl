@@ -2103,7 +2103,7 @@ od = OntPub(ontology=g, sort_subjects=True)
 
 
 #
-od.make_html(destination="docs/dwc-owl.html", include_css=True)
+od.make_html(destination="docs/index.html", include_css=True)
 
 #
 #with open(file="dwc-owl.html", mode="w") as f:
