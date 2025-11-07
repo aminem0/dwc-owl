@@ -226,6 +226,20 @@ dwcdp:happenedDuring rdf:type owl:ObjectProperty ,
                      skos:prefLabel "Happened During" .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/happenedWithin
+dwcdp:happenedWithin rdf:type owl:ObjectProperty ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( dwc:Event
+                                                 dwc:MaterialEntity
+                                               )
+                                 ] ;
+                     rdfs:range dwc:GeologicalContext ;
+                     rdfs:isDefinedBy dwcdp: ;
+                     skos:definition "An [owl:ObjectProperty] used to relate either a [dwc:Event] or a [dwc:MaterialEntity] to the [dwc:GeologicalContext] within which it happened." ;
+                     skos:example "bb:Event123 dwcdp:happenedWithin bb:GeologicalContext456 ." ;
+                     skos:prefLabel "Happened Within" .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/hasMedia
 dwcdp:hasMedia rdf:type owl:ObjectProperty ;
                owl:inverseOf dwcdp:isMediaOf ;
@@ -884,7 +898,7 @@ dcterms:type rdf:type owl:DatatypeProperty ;
                                                dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionValueIRI> ;
                                                rdfs:isDefinedBy <http://rs.tdwg.org/dwc/iri/> ;
                                                skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
-                                               skos:example "`http://purl.obolibrary/obo/UBERON_0014860`" ;
+                                               skos:example "`http://purl.obolibrary.org/obo/OBA_VT0000047`" ;
                                                skos:prefLabel "Assertion Value (IRI)" .
 
 
@@ -1046,6 +1060,18 @@ dwc:assertionValueSource rdf:type owl:DatatypeProperty ;
                          skos:prefLabel "Assertion Value Source" .
 
 
+###  http://rs.tdwg.org/dwc/terms/bed
+dwc:bed rdf:type owl:DatatypeProperty ;
+        rdfs:domain dwc:GeologicalContext ;
+        rdfs:range rdfs:Literal ;
+        dcterms:isVersionOf dwc:bed ;
+        dcterms:references <http://rs.tdwg.org/dwc/terms/version/bed-2023-09-13> ;
+        rdfs:isDefinedBy dwc: ;
+        skos:definition "The full name of the lithostratigraphic bed from which the [dwc:MaterialEntity] was collected."@en ;
+        skos:example "`Harlem coal`" ;
+        skos:prefLabel "Bed" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/derivedFromMediaID
 dwc:derivedFromMediaID rdf:type owl:DatatypeProperty ;
                        rdfs:domain <http://rs.tdwg.org/ac/terms/Media> ;
@@ -1055,6 +1081,66 @@ dwc:derivedFromMediaID rdf:type owl:DatatypeProperty ;
                        rdfs:isDefinedBy dwc: ;
                        skos:definition "An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part." ;
                        skos:prefLabel "Derived From Media ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/earliestAgeOrLowestStage
+dwc:earliestAgeOrLowestStage rdf:type owl:DatatypeProperty ;
+                             rdfs:domain dwc:GeologicalContext ;
+                             rdfs:range rdfs:Literal ;
+                             dcterms:isVersionOf dwc:earliestAgeOrLowestStage ;
+                             dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestAgeOrLowestStage-2023-09-13> ;
+                             rdfs:isDefinedBy dwc: ;
+                             skos:definition "The full name of the earliest possible geochronologic age or lowest chronostratigraphic stage attributable to the stratigraphic horizon from which the dwc:MaterialEntity was collected."@en ;
+                             skos:example "`Atlantic`; `Boreal`; `Skullrockian`" ;
+                             skos:prefLabel "Earliest Age Or Lowest Stage" .
+
+
+###  http://rs.tdwg.org/dwc/terms/earliestEonOrLowestEonothem
+dwc:earliestEonOrLowestEonothem rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:GeologicalContext ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf dwc:earliestEonOrLowestEonothem ;
+                                dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestEonOrLowestEonothem-2023-09-13> ;
+                                rdfs:isDefinedBy dwc: ;
+                                skos:definition "The full name of the earliest possible geochronologic eon or lowest chronostratigraphic eonothem or the informal name (`Precambrian`) attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                                skos:example "`Phanerozoic`; `Proterozoic`" ;
+                                skos:prefLabel "Earliest Eon Or Lowest Eonothem" .
+
+
+###  http://rs.tdwg.org/dwc/terms/earliestEpochOrLowestSeries
+dwc:earliestEpochOrLowestSeries rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:GeologicalContext ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf dwc:earliestEpochOrLowestSeries ;
+                                dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestEpochOrLowestSeries-2023-09-13> ;
+                                rdfs:isDefinedBy dwc: ;
+                                skos:definition "The full name of the earliest possible geochronologic epoch or lowest chronostratigraphic series attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                                skos:example "`Holocene`; `Pleistocene`; `Ibexian Series`" ;
+                                skos:prefLabel "Earliest Epoch Or Lowest Series" .
+
+
+###  http://rs.tdwg.org/dwc/terms/earliestEraOrLowestErathem
+dwc:earliestEraOrLowestErathem rdf:type owl:DatatypeProperty ;
+                               rdfs:domain dwc:GeologicalContext ;
+                               rdfs:range rdfs:Literal ;
+                               dcterms:isVersionOf dwc:earliestEraOrLowestErathem ;
+                               dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestEraOrLowestErathem-2023-09-13> ;
+                               rdfs:isDefinedBy dwc: ;
+                               skos:definition "The full name of the earliest possible geochronologic era or lowest chronostratigraphic erathem attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                               skos:example "`Cenozoic`; `Mesozoic`" ;
+                               skos:prefLabel "Earliest Era Or Lowest Erathem" .
+
+
+###  http://rs.tdwg.org/dwc/terms/earliestPeriodOrLowestSystem
+dwc:earliestPeriodOrLowestSystem rdf:type owl:DatatypeProperty ;
+                                 rdfs:domain dwc:GeologicalContext ;
+                                 rdfs:range rdfs:Literal ;
+                                 dcterms:isVersionOf dwc:earliestPeriodOrLowestSystem ;
+                                 dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestPeriodOrLowestSystem-2023-09-13> ;
+                                 rdfs:isDefinedBy dwc: ;
+                                 skos:definition "The full name of the earliest possible geochronologic period or lowest chronostratigraphic system attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                                 skos:example "`Neogene`; `Tertiary`; `Quaternary`" ;
+                                 skos:prefLabel "Earliest Period Or Lowest System" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/eventID
@@ -1075,6 +1161,18 @@ dwc:eventID rdf:type owl:DatatypeProperty ;
             skos:prefLabel "Event ID" .
 
 
+###  http://rs.tdwg.org/dwc/terms/formation
+dwc:formation rdf:type owl:DatatypeProperty ;
+              rdfs:domain dwc:GeologicalContext ;
+              rdfs:range rdfs:Literal ;
+              dcterms:isVersionOf dwc:formation ;
+              dcterms:references <http://rs.tdwg.org/dwc/terms/version/formation-2023-09-13> ;
+              rdfs:isDefinedBy dwc: ;
+              skos:definition "The full name of the lithostratigraphic formation from which the [dwc:MaterialEntity] was collected."@en ;
+              skos:example "`Notch Peak Formation`; `House Limestone`; `Fillmore Formation`" ;
+              skos:prefLabel "Formation" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/geologicalContextID
 dwc:geologicalContextID rdf:type owl:DatatypeProperty ;
                         rdfs:domain dwc:GeologicalContext ;
@@ -1085,6 +1183,114 @@ dwc:geologicalContextID rdf:type owl:DatatypeProperty ;
                         rdfs:isDefinedBy dwc: ;
                         skos:definition "An identifier for a [dwc:GeologicalContext]." ;
                         skos:prefLabel "Geological Context ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/group
+dwc:group rdf:type owl:DatatypeProperty ;
+          rdfs:domain dwc:GeologicalContext ;
+          rdfs:range rdfs:Literal ;
+          dcterms:isVersionOf dwc:group ;
+          dcterms:references <http://rs.tdwg.org/dwc/terms/version/group-2023-09-13> ;
+          rdfs:isDefinedBy dwc: ;
+          skos:definition "The full name of the lithostratigraphic group from which the [dwc:MaterialEntity] was collected."@en ;
+          skos:example "`Bathurst`; `Lower Wealden`" ;
+          skos:prefLabel "Group" .
+
+
+###  http://rs.tdwg.org/dwc/terms/highestBiostratigraphicZone
+dwc:highestBiostratigraphicZone rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:GeologicalContext ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf dwc:highestBiostratigraphicZone ;
+                                dcterms:references <http://rs.tdwg.org/dwc/terms/version/highestBiostratigraphicZone-2023-09-13> ;
+                                rdfs:isDefinedBy dwc: ;
+                                skos:definition "The full name of the highest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                                skos:example "`Blancan`" ;
+                                skos:prefLabel "Highest Biostratigraphic Zone" .
+
+
+###  http://rs.tdwg.org/dwc/terms/latestAgeOrHighestStage
+dwc:latestAgeOrHighestStage rdf:type owl:DatatypeProperty ;
+                            rdfs:domain dwc:GeologicalContext ;
+                            rdfs:range rdfs:Literal ;
+                            dcterms:isVersionOf dwc:latestAgeOrHighestStage ;
+                            dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestAgeOrHighestStage-2023-09-13> ;
+                            rdfs:isDefinedBy dwc: ;
+                            skos:definition "The full name of the latest possible geochronologic age or highest chronostratigraphic stage attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                            skos:example "`Atlantic`; `Boreal`; `Skullrockian`" ;
+                            skos:prefLabel "Latest Age Or Highest Stage" .
+
+
+###  http://rs.tdwg.org/dwc/terms/latestEonOrHighestEonothem
+dwc:latestEonOrHighestEonothem rdf:type owl:DatatypeProperty ;
+                               rdfs:domain dwc:GeologicalContext ;
+                               rdfs:range rdfs:Literal ;
+                               dcterms:isVersionOf dwc:latestEonOrHighestEonothem ;
+                               dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestEonOrHighestEonothem-2025-06-12> ;
+                               rdfs:isDefinedBy dwc: ;
+                               skos:definition "The full name of the latest possible geochronologic eon or highest chronostratigraphic eonothem or the informal name (`Precambrian`) attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                               skos:example "`Phanerozoic`; `Proterozoic`" ;
+                               skos:prefLabel "Latest Eon Or Highest Eonothem" .
+
+
+###  http://rs.tdwg.org/dwc/terms/latestEpochOrHighestSeries
+dwc:latestEpochOrHighestSeries rdf:type owl:DatatypeProperty ;
+                               rdfs:domain dwc:GeologicalContext ;
+                               rdfs:range rdfs:Literal ;
+                               dcterms:isVersionOf dwc:latestEpochOrHighestSeries ;
+                               dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestEpochOrHighestSeries-2023-09-13> ;
+                               rdfs:isDefinedBy dwc: ;
+                               skos:definition "The full name of the latest possible geochronologic epoch or highest chronostratigraphic series attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                               skos:example "`Holocene`; `Pleistocene`; `Ibexian Series`" ;
+                               skos:prefLabel "Latest Epoch Or Highest Series" .
+
+
+###  http://rs.tdwg.org/dwc/terms/latestEraOrHighestErathem
+dwc:latestEraOrHighestErathem rdf:type owl:DatatypeProperty ;
+                              rdfs:domain dwc:GeologicalContext ;
+                              rdfs:range rdfs:Literal ;
+                              dcterms:isVersionOf dwc:latestEraOrHighestErathem ;
+                              dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestEraOrHighestErathem-2023-09-13> ;
+                              rdfs:isDefinedBy dwc: ;
+                              skos:definition "The full name of the latest possible geochronologic era or highest chronostratigraphic erathem attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                              skos:example "`Cenozoic`; `Mesozoic`" ;
+                              skos:prefLabel "Latest Era Or Highest Erathem" .
+
+
+###  http://rs.tdwg.org/dwc/terms/latestPeriodOrHighestSystem
+dwc:latestPeriodOrHighestSystem rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:GeologicalContext ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf dwc:latestPeriodOrHighestSystem ;
+                                dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestPeriodOrHighestSystem-2023-09-13> ;
+                                rdfs:isDefinedBy dwc: ;
+                                skos:definition "The full name of the latest possible geochronologic period or highest chronostratigraphic system attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                                skos:example "`Neogene`; `Tertiary`; `Quaternary`" ;
+                                skos:prefLabel "Latest Period Or Highest System" .
+
+
+###  http://rs.tdwg.org/dwc/terms/lithostratigraphicTerms
+dwc:lithostratigraphicTerms rdf:type owl:DatatypeProperty ;
+                            rdfs:domain dwc:GeologicalContext ;
+                            rdfs:range rdfs:Literal ;
+                            dcterms:isVersionOf dwc:lithostratigraphicTerms ;
+                            dcterms:references <http://rs.tdwg.org/dwc/terms/version/lithostratigraphicTerms-2025-06-12> ;
+                            rdfs:isDefinedBy dwc: ;
+                            skos:definition "The combination of all lithostratigraphic names for the rock from which the [dwc:MaterialEntity] was collected."@en ;
+                            skos:example "`Pleistocene-Weichselien`" ;
+                            skos:prefLabel "Lithostratigraphic Terms" .
+
+
+###  http://rs.tdwg.org/dwc/terms/lowestBiostratigraphicZone
+dwc:lowestBiostratigraphicZone rdf:type owl:DatatypeProperty ;
+                               rdfs:domain dwc:GeologicalContext ;
+                               rdfs:range rdfs:Literal ;
+                               dcterms:isVersionOf dwc:lowestBiostratigraphicZone ;
+                               dcterms:references <http://rs.tdwg.org/dwc/terms/version/lowestBiostratigraphicZone-2023-09-13> ;
+                               rdfs:isDefinedBy dwc: ;
+                               skos:definition "The full name of the lowest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                               skos:example "`Maastrichtian`" ;
+                               skos:prefLabel "Lowest Biostratigraphic Zone" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/materialEntityID
@@ -1112,6 +1318,18 @@ dwc:mediaID rdf:type owl:DatatypeProperty ;
             rdfs:isDefinedBy dwc: ;
             skos:definition "An identifier for an [ac:Media] resource." ;
             skos:prefLabel "Media ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/member
+dwc:member rdf:type owl:DatatypeProperty ;
+           rdfs:domain dwc:GeologicalContext ;
+           rdfs:range rdfs:Literal ;
+           dcterms:isVersionOf dwc:member ;
+           dcterms:references <http://rs.tdwg.org/dwc/terms/version/member-2023-09-13> ;
+           rdfs:isDefinedBy dwc: ;
+           skos:definition "The full name of the lithostratigraphic member from which the [dwc:MaterialEntity] was collected."@en ;
+           skos:example "`Lava Dam Member`; `Hellnmaria Member`" ;
+           skos:prefLabel "Member" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/molecularProtocolID
@@ -1691,7 +1909,7 @@ dwc:GeologicalContext rdf:type owl:Class ;
                       rdfs:isDefinedBy dwc: ;
                       skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
                       skos:example "`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`"@en ;
-                      skos:prefLabel "GeologicalContext" .
+                      skos:prefLabel "Geological Context" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/GeologicalContextMedia
@@ -1770,6 +1988,18 @@ dwc:MaterialEntityAssertion rdf:type owl:Class ;
                             rdfs:isDefinedBy dwc: ;
                             skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]." ;
                             skos:prefLabel "Material Entity Assertion" .
+
+
+###  http://rs.tdwg.org/dwc/terms/MaterialEntityMedia
+dwc:MaterialEntityMedia rdf:type owl:Class ;
+                        owl:equivalentClass [ rdf:type owl:Restriction ;
+                                              owl:onProperty dwcdp:isMediaOf ;
+                                              owl:someValuesFrom dwc:MaterialEntity
+                                            ] ;
+                        rdfs:subClassOf <http://rs.tdwg.org/ac/terms/Media> ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "A [ac:Media] about a [dwc:MaterialEntity]." ;
+                        skos:prefLabel "Material Entity Media" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/MediaAssertion

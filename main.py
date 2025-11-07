@@ -144,7 +144,7 @@ createOC(
     name="GeologicalContext",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("GeologicalContext"),
+    pref_label=Literal("Geological Context"),
     definition=Literal("A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location].", lang="en"),
     examples=Literal("`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`", lang="en"),
     card1_restrictions=[DWC["geologicalContextID"]],
@@ -609,6 +609,19 @@ create_CTOP(
 
 # NOTE: owl:inverseFunction test
 create_CTOP(
+    name="MaterialEntityMedia",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Material Entity Media"),
+    subclass_list=[AC["Media"]],
+    object_prop=DWCDP["isMediaOf"],
+    use_inverse=False,
+    values_class=DWC["MaterialEntity"],
+    definition=Literal("A [ac:Media] about a [dwc:MaterialEntity]."),
+)
+
+# NOTE: owl:inverseFunction test
+create_CTOP(
     name="OccurrenceMedia",
     namespace=DWC,
     graph=g,
@@ -794,6 +807,18 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to its parent [dwc:Event]."),
     comments=Literal("This property is also an [owl:TransitiveProperty], which allows reasoners to infer hierarchical sampling patterns."),
     examples=Literal("bb:event123 dwcdp:happenedDuring bb:event456 ."),
+)
+
+# WARN: Check for consistency.
+createOP(
+    name="happenedWithin",
+    namespace=DWCDP,
+    graph=g,
+    domain_list=[DWC["Event"], DWC["MaterialEntity"]],
+    range_list=[DWC["GeologicalContext"]],
+    pref_label=Literal("Happened Within"),
+    definition=Literal("An [owl:ObjectProperty] used to relate either a [dwc:Event] or a [dwc:MaterialEntity] to the [dwc:GeologicalContext] within which it happened."),
+    examples=Literal("bb:Event123 dwcdp:happenedWithin bb:GeologicalContext456 ."),
 )
 
 createOP(
@@ -1376,6 +1401,19 @@ createDP(
 )
 
 createDP(
+    name="bed",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Bed"),
+    definition=Literal("The full name of the lithostratigraphic bed from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Harlem coal`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/bed",
+    references_s="http://rs.tdwg.org/dwc/terms/version/bed-2023-09-13",
+)
+
+createDP(
     name="derivedFromMediaID",
     namespace=DWC,
     graph=g,
@@ -1385,6 +1423,71 @@ createDP(
     definition=Literal("An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part."),
     comments=Literal("This term can be used when an [ac:Media] resource has been separated from its source [ac:Media] resource. Recommended best practice is to use a globally unique identifier."),
     version_of_s="http://example.com/term-pending/dwc/derivedFromMediaID",
+)
+
+createDP(
+    name="earliestAgeOrLowestStage",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Earliest Age Or Lowest Stage"),
+    definition=Literal("The full name of the earliest possible geochronologic age or lowest chronostratigraphic stage attributable to the stratigraphic horizon from which the dwc:MaterialEntity was collected.", lang="en"),
+    examples=Literal("`Atlantic`; `Boreal`; `Skullrockian`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/earliestAgeOrLowestStage",
+    references_s="http://rs.tdwg.org/dwc/terms/version/earliestAgeOrLowestStage-2023-09-13",
+)
+
+createDP(
+    name="earliestEonOrLowestEonothem",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Earliest Eon Or Lowest Eonothem"),
+    definition=Literal("The full name of the earliest possible geochronologic eon or lowest chronostratigraphic eonothem or the informal name (`Precambrian`) attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Phanerozoic`; `Proterozoic`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/earliestEonOrLowestEonothem",
+    references_s="http://rs.tdwg.org/dwc/terms/version/earliestEonOrLowestEonothem-2023-09-13",
+)
+
+createDP(
+    name="earliestEpochOrLowestSeries",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Earliest Epoch Or Lowest Series"),
+    definition=Literal("The full name of the earliest possible geochronologic epoch or lowest chronostratigraphic series attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Holocene`; `Pleistocene`; `Ibexian Series`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/earliestEpochOrLowestSeries",
+    references_s="http://rs.tdwg.org/dwc/terms/version/earliestEpochOrLowestSeries-2023-09-13",
+)
+
+createDP(
+    name="earliestEraOrLowestErathem",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Earliest Era Or Lowest Erathem"),
+    definition=Literal("The full name of the earliest possible geochronologic era or lowest chronostratigraphic erathem attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Cenozoic`; `Mesozoic`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/earliestEraOrLowestErathem",
+    references_s="http://rs.tdwg.org/dwc/terms/version/earliestEraOrLowestErathem-2023-09-13",
+)
+
+createDP(
+    name="earliestPeriodOrLowestSystem",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Earliest Period Or Lowest System"),
+    definition=Literal("The full name of the earliest possible geochronologic period or lowest chronostratigraphic system attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Neogene`; `Tertiary`; `Quaternary`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/earliestPeriodOrLowestSystem",
+    references_s="http://rs.tdwg.org/dwc/terms/version/earliestPeriodOrLowestSystem-2023-09-13",
 )
 
 createDP(
@@ -1401,6 +1504,19 @@ createDP(
 )
 
 createDP(
+    name="formation",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Formation"),
+    definition=Literal("The full name of the lithostratigraphic formation from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Notch Peak Formation`; `House Limestone`; `Fillmore Formation`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/formation",
+    references_s="http://rs.tdwg.org/dwc/terms/version/formation-2023-09-13",
+)
+
+createDP(
     name="geologicalContextID",
     namespace=DWC,
     graph=g,
@@ -1411,6 +1527,123 @@ createDP(
     comments=Literal("Recommended best practice is to use a globally unique identifier."),
     version_of_s="http://rs.tdwg.org/dwc/terms/geologicalContextID",
     references_s="http://rs.tdwg.org/dwc/terms/version/geologicalContextID-2023-06-28"
+)
+
+createDP(
+    name="group",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Group"),
+    definition=Literal("The full name of the lithostratigraphic group from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Bathurst`; `Lower Wealden`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/group",
+    references_s="http://rs.tdwg.org/dwc/terms/version/group-2023-09-13",
+)
+
+createDP(
+    name="highestBiostratigraphicZone",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Highest Biostratigraphic Zone"),
+    definition=Literal("The full name of the highest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Blancan`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/highestBiostratigraphicZone",
+    references_s="http://rs.tdwg.org/dwc/terms/version/highestBiostratigraphicZone-2023-09-13",
+)
+
+createDP(
+    name="latestAgeOrHighestStage",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Latest Age Or Highest Stage"),
+    definition=Literal("The full name of the latest possible geochronologic age or highest chronostratigraphic stage attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Atlantic`; `Boreal`; `Skullrockian`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/latestAgeOrHighestStage",
+    references_s="http://rs.tdwg.org/dwc/terms/version/latestAgeOrHighestStage-2023-09-13",
+)
+
+createDP(
+    name="latestEonOrHighestEonothem",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Latest Eon Or Highest Eonothem"),
+    definition=Literal("The full name of the latest possible geochronologic eon or highest chronostratigraphic eonothem or the informal name (`Precambrian`) attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Phanerozoic`; `Proterozoic`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/latestEonOrHighestEonothem",
+    references_s="http://rs.tdwg.org/dwc/terms/version/latestEonOrHighestEonothem-2025-06-12",
+)
+
+createDP(
+    name="latestEpochOrHighestSeries",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Latest Epoch Or Highest Series"),
+    definition=Literal("The full name of the latest possible geochronologic epoch or highest chronostratigraphic series attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Holocene`; `Pleistocene`; `Ibexian Series`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/latestEpochOrHighestSeries",
+    references_s="http://rs.tdwg.org/dwc/terms/version/latestEpochOrHighestSeries-2023-09-13",
+)
+
+createDP(
+    name="latestEraOrHighestErathem",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Latest Era Or Highest Erathem"),
+    definition=Literal("The full name of the latest possible geochronologic era or highest chronostratigraphic erathem attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Cenozoic`; `Mesozoic`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/latestEraOrHighestErathem",
+    references_s="http://rs.tdwg.org/dwc/terms/version/latestEraOrHighestErathem-2023-09-13",
+)
+
+createDP(
+    name="latestPeriodOrHighestSystem",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Latest Period Or Highest System"),
+    definition=Literal("The full name of the latest possible geochronologic period or highest chronostratigraphic system attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Neogene`; `Tertiary`; `Quaternary`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/latestPeriodOrHighestSystem",
+    references_s="http://rs.tdwg.org/dwc/terms/version/latestPeriodOrHighestSystem-2023-09-13",
+)
+
+createDP(
+    name="lithostratigraphicTerms",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Lithostratigraphic Terms"),
+    definition=Literal("The combination of all lithostratigraphic names for the rock from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Pleistocene-Weichselien`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/lithostratigraphicTerms",
+    references_s="http://rs.tdwg.org/dwc/terms/version/lithostratigraphicTerms-2025-06-12",
+)
+
+createDP(
+    name="lowestBiostratigraphicZone",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Lowest Biostratigraphic Zone"),
+    definition=Literal("The full name of the lowest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Maastrichtian`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/lowestBiostratigraphicZone",
+    references_s="http://rs.tdwg.org/dwc/terms/version/lowestBiostratigraphicZone-2023-09-13",
 )
 
 createDP(
@@ -1437,6 +1670,19 @@ createDP(
     definition=Literal("An identifier for an [ac:Media] resource."),
     comments=Literal("Recommended best practice is to use a globally unique identifier."),
     version_of_s="http://example.com/term-pending/dwc/mediaID",
+)
+
+createDP(
+    name="member",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["GeologicalContext"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Member"),
+    definition=Literal("The full name of the lithostratigraphic member from which the [dwc:MaterialEntity] was collected.", lang="en"),
+    examples=Literal("`Lava Dam Member`; `Hellnmaria Member`"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/member",
+    references_s="http://rs.tdwg.org/dwc/terms/version/member-2023-09-13",
 )
 
 createDP(
@@ -2177,11 +2423,7 @@ subprocess.run(["java", "-jar", "robot.jar", "convert", "--input", "dwc-owl.owl"
 
 # 
 od = OntPub(ontology=g, sort_subjects=True)
-
+#od = OntPub(ontology=g, sort_subjects=False)
 
 #
 od.make_html(destination="docs/index.html", include_css=True)
-
-#
-#with open(file="dwc-owl.html", mode="w") as f:
-#    f.write()
