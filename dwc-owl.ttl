@@ -1,4 +1,5 @@
 @prefix : <http://bioboum.ca/dwc-owl.owl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -12,7 +13,9 @@
 @base <http://bioboum.ca/dwc-owl.owl> .
 
 <http://bioboum.ca/dwc-owl.owl> rdf:type owl:Ontology ;
-                                 dcterms:created "2025-04-03"^^xsd:date ;
+                                 dc:created "2025-04-03"^^xsd:date ;
+                                 dc:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin Semantic Web has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
+                                 dc:title "Darwin Core OWL" ;
                                  vann:preferredNamespacePrefix "dwcowl" ;
                                  owl:versionInfo "0.0.3" .
 
@@ -20,8 +23,16 @@
 #    Annotation properties
 #################################################################
 
-###  http://purl.org/dc/terms/created
-dcterms:created rdf:type owl:AnnotationProperty .
+###  http://purl.org/dc/elements/1.1/created
+dc:created rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/dc/terms/isVersionOf
@@ -83,7 +94,7 @@ dcterms:spatial rdf:type owl:ObjectProperty ;
                 rdfs:isDefinedBy dcterms: ;
                 skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."@en ;
                 skos:example "bb:event123 dcterms:spatial bb:location456 ." ;
-                skos:prefLabel "Spatial" .
+                skos:prefLabel "Spatial Coverage" .
 
 
 ###  http://purl.org/ontology/bibo/editor
@@ -468,34 +479,45 @@ dwcdp:usedFor rdf:type owl:ObjectProperty .
                                                                    skos:prefLabel "Ratio Of Absorbance At 260 nm and 280 nm" .
 
 
+###  http://ns.adobe.com/xap/1.0/CreateDate
+<http://ns.adobe.com/xap/1.0/CreateDate> rdf:type owl:DatatypeProperty ;
+                                         rdfs:domain dwc:MolecularProtocol ;
+                                         rdfs:range rdfs:Literal ;
+                                         dcterms:isVersionOf <http://ns.adobe.com/xap/1.0/CreateDate> ;
+                                         rdfs:comment "The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples."@en ;
+                                         rdfs:isDefinedBy <http://ns.adobe.com/xap/1.0/> ;
+                                         skos:definition "The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different."@en ;
+                                         skos:prefLabel "Original Date and Time" .
+
+
 ###  http://purl.org/dc/elements/1.1/rights
-<http://purl.org/dc/elements/1.1/rights> rdf:type owl:DatatypeProperty ;
-                                         rdfs:domain dwc:UsagePolicy ;
-                                         rdfs:range [ rdf:type rdfs:Datatype ;
-                                                      owl:unionOf ( xsd:anyURI
-                                                                    xsd:string
-                                                                  )
-                                                    ] ;
-                                         dcterms:isVersionOf <http://purl.org/dc/elements/1.1/rights> ;
-                                         rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
-                                         skos:definition "Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions." ;
-                                         skos:example "`Copyright 2014 Ron Thomas`; `http://creativecommons.org/licenses/by/3.0/legalcode`" ;
-                                         skos:prefLabel "Rights (DC)" .
+dc:rights rdf:type owl:DatatypeProperty ;
+          rdfs:domain dwc:UsagePolicy ;
+          rdfs:range [ rdf:type rdfs:Datatype ;
+                       owl:unionOf ( xsd:anyURI
+                                     xsd:string
+                                   )
+                     ] ;
+          dcterms:isVersionOf dc:rights ;
+          rdfs:isDefinedBy dc: ;
+          skos:definition "Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions." ;
+          skos:example "`Copyright 2014 Ron Thomas`; `http://creativecommons.org/licenses/by/3.0/legalcode`" ;
+          skos:prefLabel "Rights (DC)" .
 
 
 ###  http://purl.org/dc/elements/1.1/source
-<http://purl.org/dc/elements/1.1/source> rdf:type owl:DatatypeProperty ;
-                                         rdfs:domain dwc:UsagePolicy ;
-                                         rdfs:range [ rdf:type rdfs:Datatype ;
-                                                      owl:unionOf ( xsd:anyURI
-                                                                    xsd:string
-                                                                  )
-                                                    ] ;
-                                         dcterms:isVersionOf <http://purl.org/dc/elements/1.1/source> ;
-                                         rdfs:comment "The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en ;
-                                         rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
-                                         skos:definition "A related resource from which the described resource is derived"@en ;
-                                         skos:prefLabel "Source (DC)" .
+dc:source rdf:type owl:DatatypeProperty ;
+          rdfs:domain dwc:UsagePolicy ;
+          rdfs:range [ rdf:type rdfs:Datatype ;
+                       owl:unionOf ( xsd:anyURI
+                                     xsd:string
+                                   )
+                     ] ;
+          dcterms:isVersionOf dc:source ;
+          rdfs:comment "The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en ;
+          rdfs:isDefinedBy dc: ;
+          skos:definition "A related resource from which the described resource is derived"@en ;
+          skos:prefLabel "Source (DC)" .
 
 
 ###  http://purl.org/dc/terms/description
@@ -793,6 +815,18 @@ dcterms:type rdf:type owl:DatatypeProperty ;
                                      skos:prefLabel "Radius" .
 
 
+###  http://rs.tdwg.org/ac/terms/subtypeLiteral
+<http://rs.tdwg.org/ac/terms/subtypeLiteral> rdf:type owl:DatatypeProperty ;
+                                             rdfs:domain <http://rs.tdwg.org/ac/terms/Media> ;
+                                             rdfs:range rdfs:Literal ;
+                                             dcterms:isVersionOf <http://rs.tdwg.org/ac/terms/subtypeLiteral> ;
+                                             dcterms:references <http://rs.tdwg.org/ac/terms/version/subtypeLiteral-2023-09-05> ;
+                                             rdfs:comment "The [ac:subtypeLiteral] term MUST NOT be applied to Collection objects. However, the Description term in the Content Coverage Vocabulary might add further description to a Collection object. Controlled string values SHOULD be selected from the Controlled Vocabulary for [ac:subtype]. Human-readable information about the Controlled Vocabulary for [ac:subtype] is at [http://rs.tdwg.org/ac/doc/subtype/]. It is best practice to use [ac:subtype] instead of [ac:subytpeLiteral] whenever practical." ;
+                                             rdfs:isDefinedBy <http://rs.tdwg.org/ac/terms/> ;
+                                             skos:definition "A subcategory that allows further specialization of a [dwc:Media] resource type than [mediaType]." ;
+                                             skos:prefLabel "Subtype Literal" .
+
+
 ###  http://rs.tdwg.org/ac/terms/widthFrac
 <http://rs.tdwg.org/ac/terms/widthFrac> rdf:type owl:DatatypeProperty ;
                                         rdfs:domain <http://rs.tdwg.org/ac/terms/Media> ;
@@ -972,10 +1006,10 @@ dwc:assertionType rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/assertionTypeSource
 dwc:assertionTypeSource rdf:type owl:DatatypeProperty ;
-                        rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/source> ;
+                        rdfs:subPropertyOf dc:source ;
                         rdfs:domain dwc:Assertion ;
                         rdfs:range rdfs:Literal ;
-                        dcterms:isVersionOf <http://purl.org/dc/elements/1.1/source> ;
+                        dcterms:isVersionOf dc:source ;
                         rdfs:isDefinedBy dwc: ;
                         skos:definition "A reference to the controlled vocabulary in which the definition of a value in [dwc:assertionType] is given." ;
                         skos:prefLabel "Assertion Type Source" .
@@ -1003,10 +1037,10 @@ dwc:assertionValueNumeric rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/assertionValueSource
 dwc:assertionValueSource rdf:type owl:DatatypeProperty ;
-                         rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/source> ;
+                         rdfs:subPropertyOf dc:source ;
                          rdfs:domain dwc:Assertion ;
                          rdfs:range rdfs:Literal ;
-                         dcterms:isVersionOf <http://purl.org/dc/elements/1.1/source> ;
+                         dcterms:isVersionOf dc:source ;
                          rdfs:isDefinedBy dwc: ;
                          skos:definition "A reference to a controlled vocabulary in which the definition of a value in [dwc:assertionValue] is given." ;
                          skos:prefLabel "Assertion Value Source" .
@@ -1240,10 +1274,10 @@ dwc:surveyTargetType rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/surveyTargetTypeSource
 dwc:surveyTargetTypeSource rdf:type owl:DatatypeProperty ;
-                           rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/source> ;
+                           rdfs:subPropertyOf dc:source ;
                            rdfs:domain <http://rs.tdwg.org/eco/terms/SurveyTarget> ;
                            rdfs:range xsd:string ;
-                           dcterms:isVersionOf <http://purl.org/dc/elements/1.1/source> ;
+                           dcterms:isVersionOf dc:source ;
                            rdfs:isDefinedBy dwc: ;
                            skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given." ;
                            skos:prefLabel "Survey Target Type Source" .
@@ -1481,6 +1515,18 @@ dcterms:Location rdf:type owl:Class ;
                                                   skos:prefLabel "Chronometric Age" .
 
 
+###  http://rs.tdwg.org/dwc/terms/AgentMedia
+dwc:AgentMedia rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                     owl:onProperty dwcdp:isMediaOf ;
+                                     owl:someValuesFrom dcterms:Agent
+                                   ] ;
+               rdfs:subClassOf <http://rs.tdwg.org/ac/terms/Media> ;
+               rdfs:isDefinedBy dwc: ;
+               skos:definition "A [ac:Media] about a [dcterms:Agent]." ;
+               skos:prefLabel "Agent Media" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/Assertion
 dwc:Assertion rdf:type owl:Class ;
               rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
@@ -1646,6 +1692,18 @@ dwc:GeologicalContext rdf:type owl:Class ;
                       skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
                       skos:example "`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`"@en ;
                       skos:prefLabel "GeologicalContext" .
+
+
+###  http://rs.tdwg.org/dwc/terms/GeologicalContextMedia
+dwc:GeologicalContextMedia rdf:type owl:Class ;
+                           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                 owl:onProperty dwcdp:isMediaOf ;
+                                                 owl:someValuesFrom dwc:GeologicalContext
+                                               ] ;
+                           rdfs:subClassOf <http://rs.tdwg.org/ac/terms/Media> ;
+                           rdfs:isDefinedBy dwc: ;
+                           skos:definition "A [ac:Media] about a [dwc:GeologicalContext]." ;
+                           skos:prefLabel "Geological Context Media" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/GeoreferencerAgent
@@ -1883,6 +1941,18 @@ dwc:Occurrence rdf:type owl:Class ;
                skos:prefLabel "Occurrence" .
 
 
+###  http://rs.tdwg.org/dwc/terms/OccurrenceMedia
+dwc:OccurrenceMedia rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:isMediaOf ;
+                                          owl:someValuesFrom dwc:Occurrence
+                                        ] ;
+                    rdfs:subClassOf <http://rs.tdwg.org/ac/terms/Media> ;
+                    rdfs:isDefinedBy dwc: ;
+                    skos:definition "A [ac:Media] about a [dwc:Occurrence]." ;
+                    skos:prefLabel "Occurrence Media" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/Organism
 dwc:Organism rdf:type owl:Class ;
              rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
@@ -1998,7 +2068,7 @@ dwc:ReviewerAgent rdf:type owl:Class ;
 ###  http://rs.tdwg.org/dwc/terms/UsagePolicy
 dwc:UsagePolicy rdf:type owl:Class ;
                 rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                         owl:onProperty <http://purl.org/dc/elements/1.1/rights> ;
+                                                         owl:onProperty dc:rights ;
                                                          owl:minCardinality "0"^^xsd:nonNegativeInteger
                                                        ]
                                                        [ rdf:type owl:Restriction ;
@@ -2010,7 +2080,7 @@ dwc:UsagePolicy rdf:type owl:Class ;
                                                          owl:cardinality "1"^^xsd:nonNegativeInteger
                                                        ]
                                                        [ rdf:type owl:Restriction ;
-                                                         owl:onProperty <http://purl.org/dc/elements/1.1/rights> ;
+                                                         owl:onProperty dc:rights ;
                                                          owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                                        ]
                                                        [ rdf:type owl:Restriction ;
@@ -2188,6 +2258,23 @@ rdf:Statement rdf:type owl:Class .
 <http://bioboum.ca/ParentSite456> rdf:type owl:NamedIndividual .
 
 
+###  http://bioboum.ca/Peter123
+<http://bioboum.ca/Peter123> rdf:type owl:NamedIndividual ,
+                                      dcterms:Agent .
+
+
+###  http://bioboum.ca/PictureOfPeter123CatchingSunfish456FromSeineNet789
+<http://bioboum.ca/PictureOfPeter123CatchingSunfish456FromSeineNet789> rdf:type owl:NamedIndividual ;
+                                                                       dwcdp:isMediaOf <http://bioboum.ca/Peter123> ,
+                                                                                       <http://bioboum.ca/SeineNet789> ,
+                                                                                       <http://bioboum.ca/Sunfish456> .
+
+
+###  http://bioboum.ca/SeineNet789
+<http://bioboum.ca/SeineNet789> rdf:type owl:NamedIndividual ,
+                                         dwc:Event .
+
+
 ###  http://bioboum.ca/Site123
 <http://bioboum.ca/Site123> rdf:type owl:NamedIndividual ;
                             dwcdp:happenedDuring <http://bioboum.ca/ParentSite456> .
@@ -2202,10 +2289,9 @@ rdf:Statement rdf:type owl:Class .
                                        dwc:Organism .
 
 
-###  http://bioboum.ca/dwc-owl.owl
-<http://bioboum.ca/dwc-owl.owl> rdf:type owl:NamedIndividual ;
-                                dcterms:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin Semantic Web has previously explored similar ideas using OWL classes, this work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
-                                dcterms:title "Darwin Core OWL" .
+###  http://bioboum.ca/Sunfish456
+<http://bioboum.ca/Sunfish456> rdf:type owl:NamedIndividual ,
+                                        dwc:Occurrence .
 
 
 #################################################################

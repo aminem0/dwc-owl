@@ -1,6 +1,6 @@
 # DWC-OWL
 
-A trial to convert Darwin Core and recently suggested Darwin Core DataPackage terms into OWL concepts of classes and properties.
+A trial to convert [Darwin Core](https://dwc.tdwg.org/list/) and recently suggested [Darwin Core DataPackage](https://www.gbif.org/composition/3Be8w9RzbjHtK2brXxTtun/introducing-the-darwin-core-data-package) terms into OWL concepts of classes and properties.
 
 ## Initial motivation
 
@@ -18,7 +18,7 @@ The data in the triplestore follows the ontology I have described in *sparql-com
 
 Therefore, I wanted to have a robust and consistent way to validate the underlying semantics. This is done by combining an OWL-based ontology and a SHACL-based validation of the constructed RDF graphs.
 
-Originally, the semantics were more consistent with my original proposal, considering `foaf:Agent` and `foaf:Document` (which has the benefit of being equivalent to `bibo:Document`), but has been reworked to be compatible with the terms proposed by the [Darwin Core DataPackage](https://www.gbif.org/composition/3Be8w9RzbjHtK2brXxTtun/introducing-the-darwin-core-data-package) publishing model.
+Originally, the semantics were more consistent with my original proposal, considering `foaf:Agent` and `foaf:Document` (which has the benefit of being equivalent to `bibo:Document`), but has been reworked to be compatible with the terms proposed by the Darwin Core DataPackage publishing model.
 
 ## Intent of the project
 
@@ -38,4 +38,4 @@ You can also load the `dwc-owl.ttl` file into an ontology viewer such as [Proteg
 
 ## Applications of the ontology
 
-The terms in this ontology are being applied to model real-world datasets at [another GitHub repository](https://github.com/aminem0/dwc-owl-rdf)
+The terms in this ontology are being applied to model real-world datasets at [another GitHub repository](https://github.com/aminem0/dwc-owl-rdf).

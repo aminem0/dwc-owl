@@ -58,10 +58,9 @@ ontology_uri = URIRef("http://bioboum.ca/dwc-owl.owl")
 g.add((ontology_uri, RDF["type"], OWL["Ontology"]))
 g.add((ontology_uri, OWL["versionInfo"], Literal("0.0.3")))
 g.add((ontology_uri, VANN["preferredNamespacePrefix"], Literal("dwcowl")))
-g.add((ontology_uri, DCTERMS["title"], Literal("Darwin Core OWL")))
-#g.add((ontology_uri, DCTERMS["description"], Literal("Darwin Core OWL is an attempt to use Darwin Core terms and the newly proposed Darwin Core DataPackage terms and convert them into OWL concepts of classes and properties. Darwin Semantic Web already considered this, considering OWL classes. The purpose here is to consider OWL classes that considers owl:Restrictions. As well as owl:ObjectProperties that can link together the entities, so that we obtain a network of semantically-connected entities, rather than a simple flat RDF representation of biodiversity datasets.", lang="en")))
-g.add((ontology_uri, DCTERMS["description"], Literal("Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin Semantic Web has previously explored similar ideas using OWL classes, this work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation.", lang="en")))
-g.add((ontology_uri, DCTERMS["created"], Literal("2025-04-03", datatype=XSD["date"])))
+g.add((ontology_uri, DC["title"], Literal("Darwin Core OWL")))
+g.add((ontology_uri, DC["description"], Literal("Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin Semantic Web has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation.", lang="en")))
+g.add((ontology_uri, DC["created"], Literal("2025-04-03", datatype=XSD["date"])))
 
 #####################################################################################################
 # BEGIN OWL CLASS DEFINITIONS
@@ -569,6 +568,18 @@ create_CTOP(
 
 ##############################################
 
+# NOTE: owl:inverseFunction test
+create_CTOP(
+    name="AgentMedia",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Agent Media"),
+    subclass_list=[AC["Media"]],
+    object_prop=DWCDP["isMediaOf"],
+    use_inverse=False,
+    values_class=DCTERMS["Agent"],
+    definition=Literal("A [ac:Media] about a [dcterms:Agent]."),
+)
 
 # NOTE: owl:inverseFunction test
 create_CTOP(
@@ -581,6 +592,32 @@ create_CTOP(
     use_inverse=False,
     values_class=DWC["Event"],
     definition=Literal("A [ac:Media] about a [dwc:Event]."),
+)
+
+# NOTE: owl:inverseFunction test
+create_CTOP(
+    name="GeologicalContextMedia",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Geological Context Media"),
+    subclass_list=[AC["Media"]],
+    object_prop=DWCDP["isMediaOf"],
+    use_inverse=False,
+    values_class=DWC["GeologicalContext"],
+    definition=Literal("A [ac:Media] about a [dwc:GeologicalContext]."),
+)
+
+# NOTE: owl:inverseFunction test
+create_CTOP(
+    name="OccurrenceMedia",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Occurrence Media"),
+    subclass_list=[AC["Media"]],
+    object_prop=DWCDP["isMediaOf"],
+    use_inverse=False,
+    values_class=DWC["Occurrence"],
+    definition=Literal("A [ac:Media] about a [dwc:Occurrence]."),
 )
 
 g.add((DWCDP["hasMedia"], OWL["inverseOf"], DWCDP["isMediaOf"]))
@@ -945,7 +982,7 @@ createOP(
     graph=g,
     domain_list=[DWC["Event"]],
     range_list=[DCTERMS["Location"]],
-    pref_label=Literal("Spatial"),
+    pref_label=Literal("Spatial Coverage"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in.", lang="en"),
     examples=Literal("bb:event123 dcterms:spatial bb:location456 .")
 )
@@ -1035,6 +1072,20 @@ createDP(
     examples=Literal("`100`"),
     version_of_s="http://rs.tdwg.org/ac/terms/radius",
     references_s="http://rs.tdwg.org/ac/terms/version/radius-2021-10-05",
+)
+
+# NOTE: JSON file says dwc:Media, but we mostly consider ac:Media.
+createDP(
+    name="subtypeLiteral",
+    namespace=AC,
+    graph=g,
+    domain_list=[AC["Media"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Subtype Literal"),
+    definition=Literal("A subcategory that allows further specialization of a [dwc:Media] resource type than [mediaType]."),
+    comments=Literal("The [ac:subtypeLiteral] term MUST NOT be applied to Collection objects. However, the Description term in the Content Coverage Vocabulary might add further description to a Collection object. Controlled string values SHOULD be selected from the Controlled Vocabulary for [ac:subtype]. Human-readable information about the Controlled Vocabulary for [ac:subtype] is at [http://rs.tdwg.org/ac/doc/subtype/]. It is best practice to use [ac:subtype] instead of [ac:subytpeLiteral] whenever practical."),
+    version_of_s="http://rs.tdwg.org/ac/terms/subtypeLiteral",
+    references_s="http://rs.tdwg.org/ac/terms/version/subtypeLiteral-2023-09-05",
 )
 
 createDP(
@@ -1615,7 +1666,7 @@ createDP(
     range_list=[XSD["anyURI"]],
     pref_label=Literal("Assertion Value (IRI)"),
     definition=Literal("An IRI of the controlled vocabulary value for a value of a [dwc:Assertion].", lang="en"),
-    examples=Literal("`http://purl.obolibrary/obo/UBERON_0014860`"),
+    examples=Literal("`http://purl.obolibrary.org/obo/OBA_VT0000047`"),
     version_of_s="http://example.com/term-pending/dwciri/assertionValueIRI",
 )
 
@@ -2006,6 +2057,17 @@ createDP(
     version_of_s="https://w3id.org/mixs/0001322",
 )
 
+createDP(
+    name="CreateDate",
+    namespace=XMP,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Original Date and Time"),
+    definition=Literal("The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different.", lang="en"),
+    comments=Literal("The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples.", lang="en"),
+    version_of_s="http://ns.adobe.com/xap/1.0/CreateDate",
+)
 
 #####################################################################################################
 # BEGIN INDIVIDUALS DEFINITIONS FOR REASONER TEST CASES
@@ -2064,6 +2126,21 @@ g.add((BB["Site123"], DWCDP["happenedDuring"], BB["ParentSite456"]))
 
 # g.add((BB["MidioNo"], DWCDP["isMediaOf"], BB["Sometho"]))
 # g.add((BB["Sometho"], RDF["type"], DWC["Assertion"]))
+
+
+
+
+
+g.add((BB["Peter123"], RDF["type"], DCTERMS["Agent"]))
+g.add((BB["Sunfish456"], RDF["type"], DWC["Occurrence"]))
+g.add((BB["SeineNet789"], RDF["type"], DWC["Event"]))
+#
+#g.add((BB["PictureOfPeter123CatchingSunfish456FromSeineNet789"], RDF["type"], AC["Media"]))
+#
+g.add((BB["PictureOfPeter123CatchingSunfish456FromSeineNet789"], DWCDP["isMediaOf"], BB["Peter123"]))
+g.add((BB["PictureOfPeter123CatchingSunfish456FromSeineNet789"], DWCDP["isMediaOf"], BB["Sunfish456"]))
+g.add((BB["PictureOfPeter123CatchingSunfish456FromSeineNet789"], DWCDP["isMediaOf"], BB["SeineNet789"]))
+
 
 
 
