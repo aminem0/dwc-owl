@@ -28,7 +28,13 @@ The goal of the project is to provide researchers with a semantically-sound onto
 2. Proper attribution of credits to reseachers
 3. Improved dataset querying, promoting data reuse
 4. Easier data publication processes to biodiversity aggregators (GBIF, OBIS)
-5. Direct integration into pipelines that allow the computation of EBVs
+5. Direct integration into pipelines that allow the computation of biological indicators
+
+## Ontology exploration
+
+The easiest way to explore the ontology is to look at the `dwc-owl.html` file in the `docs/` folder for a complete listing of the terms considered in the ontology. Links to terms used in the ontology allow for further information about the terms considered.
+
+You can also load the `dwc-owl.ttl` file into an ontology viewer such as [Protege](https://protege.stanford.edu/). The difference is that protege includes reasoners such as HermiT, that allow reasoning over the test individuals created at the end of the ontology.
 
 ## Applications of the ontology
 

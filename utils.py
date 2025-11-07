@@ -192,6 +192,7 @@ def createOP(
     graph: Graph,
     domain_list: list[Node],
     range_list: list[Node],
+    pref_label: Literal,
     additional_list: list[Node] | None = None,
     definition: Literal | None = None,
     comments: Literal | None = None,
@@ -232,6 +233,7 @@ def createOP(
 
     # Declare the property type (no surprise owl:ObjectProperty)
     graph.add((op_uri, RDF["type"], OWL["ObjectProperty"]))
+    graph.add((op_uri, SKOS["prefLabel"], pref_label))
 
     # Begin with basic annotation properties.
     if definition:

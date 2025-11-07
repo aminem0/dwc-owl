@@ -1,5 +1,4 @@
 @prefix : <http://bioboum.ca/dwc-owl.owl#> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -7,25 +6,22 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
 @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @base <http://bioboum.ca/dwc-owl.owl> .
 
 <http://bioboum.ca/dwc-owl.owl> rdf:type owl:Ontology ;
-                                 dc:description "Darwin Core OWL is an attempt to use Darwin Core terms and the newly proposed Darwin Core DataPackage terms and convert them into OWL concepts of classes and properties. Darwin Semantic Web already considered this, considering OWL classes. The purpose here is to consider OWL classes that considers owl:Restrictions. As well as owl:ObjectProperties that can link together the entities, so that we obtain a network of semantically-connected entities, rather than a simple flat RDF representation of biodiversity datasets."@en ;
-                                 dc:title "Darwin Core OWL" ;
+                                 dcterms:created "2025-04-03"^^xsd:date ;
+                                 vann:preferredNamespacePrefix "dwcowl" ;
                                  owl:versionInfo "0.0.3" .
 
 #################################################################
 #    Annotation properties
 #################################################################
 
-###  http://purl.org/dc/elements/1.1/description
-dc:description rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/elements/1.1/title
-dc:title rdf:type owl:AnnotationProperty .
+###  http://purl.org/dc/terms/created
+dcterms:created rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/dc/terms/isVersionOf
@@ -34,6 +30,10 @@ dcterms:isVersionOf rdf:type owl:AnnotationProperty .
 
 ###  http://purl.org/dc/terms/references
 dcterms:references rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
 
 
 ###  http://rs.tdwg.org/dwc/terms/relationshipAccordingTo
@@ -65,6 +65,14 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 
 
 #################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
 #    Object Properties
 #################################################################
 
@@ -74,7 +82,8 @@ dcterms:spatial rdf:type owl:ObjectProperty ;
                 rdfs:range dcterms:Location ;
                 rdfs:isDefinedBy dcterms: ;
                 skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."@en ;
-                skos:example "bb:event123 dcterms:spatial bb:location456 ." .
+                skos:example "bb:event123 dcterms:spatial bb:location456 ." ;
+                skos:prefLabel "Spatial" .
 
 
 ###  http://purl.org/ontology/bibo/editor
@@ -84,7 +93,8 @@ dcterms:spatial rdf:type owl:ObjectProperty ;
                                        rdfs:comment "A person having managerial and sometimes policy-making responsibility for the editorial part of a publishing firm or of a newspaper, magazine, or other publication."@en ;
                                        rdfs:isDefinedBy <http://purl.org/ontology/bibo/> ;
                                        skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it."@en ;
-                                       skos:example "bb:bibliographicResource123 bibo:editor bb:agent456 ." .
+                                       skos:example "bb:bibliographicResource123 bibo:editor bb:agent456 ." ;
+                                       skos:prefLabel "Edited By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/about
@@ -100,7 +110,8 @@ dwcdp:about rdf:type owl:ObjectProperty ;
                        ] ;
             rdfs:isDefinedBy dwcdp: ;
             skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis]." ;
-            skos:example "bb:assertion123 dwcdp:about bb:event456 ." .
+            skos:example "bb:assertion123 dwcdp:about bb:event456 ." ;
+            skos:prefLabel "About" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/assertedBy
@@ -109,7 +120,8 @@ dwcdp:assertedBy rdf:type owl:ObjectProperty ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the [dcterms:Agent] that asserted it." ;
-                 skos:example "bb:assertion123 dwcdp:assertedBy bb:agent456 ." .
+                 skos:example "bb:assertion123 dwcdp:assertedBy bb:agent456 ." ;
+                 skos:prefLabel "Asserted By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/authoredBy
@@ -118,7 +130,8 @@ dwcdp:authoredBy rdf:type owl:ObjectProperty ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that authored it." ;
-                 skos:example "bb:bibliographicResource123 dwcdp:authoredBy bb:agent456 ." .
+                 skos:example "bb:bibliographicResource123 dwcdp:authoredBy bb:agent456 ." ;
+                 skos:prefLabel "Authored By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/basedOn
@@ -134,7 +147,8 @@ dwcdp:basedOn rdf:type owl:ObjectProperty ;
                          ] ;
               rdfs:isDefinedBy dwcdp: ;
               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the entity on which it is based. These entities include [ac:Media], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:NucleotideSequence] and [dwc:Occurrence]." ;
-              skos:example "bb:identification123 dwcdp:basedOn bb:nucleotideSequence456 ." .
+              skos:example "bb:identification123 dwcdp:basedOn bb:nucleotideSequence456 ." ;
+              skos:prefLabel "Based On" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/commentedBy
@@ -143,7 +157,8 @@ dwcdp:commentedBy rdf:type owl:ObjectProperty ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that commented it." ;
-                  skos:example "bb:event123 dwcdp:commentedBy bb:agent456 ." .
+                  skos:example "bb:event123 dwcdp:commentedBy bb:agent456 ." ;
+                  skos:prefLabel "Commented By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/conductedBy
@@ -152,7 +167,8 @@ dwcdp:conductedBy rdf:type owl:ObjectProperty ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Agent] that conducted it." ;
-                  skos:example "bb:event123 dwcdp:conductedBy bb:agent456 ." .
+                  skos:example "bb:event123 dwcdp:conductedBy bb:agent456 ." ;
+                  skos:prefLabel "Conducted By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/followed
@@ -167,7 +183,8 @@ dwcdp:followed rdf:type owl:ObjectProperty ;
                rdfs:range dwc:Protocol ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [dwc:Event], [dwc:NucleotideAnalysis]" ;
-               skos:example "bb:event123 dwcdp:followed bb:protocol456 ." .
+               skos:example "bb:event123 dwcdp:followed bb:protocol456 ." ;
+               skos:prefLabel "Followed" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/georeferencedBy
@@ -176,7 +193,8 @@ dwcdp:georeferencedBy rdf:type owl:ObjectProperty ;
                       rdfs:range dcterms:Agent ;
                       rdfs:isDefinedBy dwcdp: ;
                       skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dwc:Agent] that georeferenced it." ;
-                      skos:example "bb:event123 dwcdp:georeferencedBy bb:agent456 ." .
+                      skos:example "bb:event123 dwcdp:georeferencedBy bb:agent456 ." ;
+                      skos:prefLabel "Georeferenced By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/happenedDuring
@@ -186,14 +204,15 @@ dwcdp:happenedDuring rdf:type owl:ObjectProperty ,
                                    owl:unionOf ( dwc:Event
                                                  dwc:Occurrence
                                                  dwc:OrganismInteraction
-                                                 <http://rs.tdwg.org/eco/termsSurvey>
+                                                 <http://rs.tdwg.org/eco/terms/Survey>
                                                )
                                  ] ;
                      rdfs:range dwc:Event ;
                      rdfs:comment "This property is also an [owl:TransitiveProperty], which allows reasoners to infer hierarchical sampling patterns." ;
                      rdfs:isDefinedBy dwcdp: ;
                      skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to its parent [dwc:Event]." ;
-                     skos:example "bb:event123 dwcdp:happenedDuring bb:event456 ." .
+                     skos:example "bb:event123 dwcdp:happenedDuring bb:event456 ." ;
+                     skos:prefLabel "Happened During" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/hasMedia
@@ -213,7 +232,8 @@ dwcdp:hasMedia rdf:type owl:ObjectProperty ;
                rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:isMediaOf], which allows reasoners queries to go through different ways." ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]" ;
-               skos:example "bb:event123 dwcdp:hasMedia bb:media456 ." .
+               skos:example "bb:event123 dwcdp:hasMedia bb:media456 ." ;
+               skos:prefLabel "Has Media" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/identifiedBy
@@ -222,7 +242,8 @@ dwcdp:identifiedBy rdf:type owl:ObjectProperty ;
                    rdfs:range dcterms:Agent ;
                    rdfs:isDefinedBy dwcdp: ;
                    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Agent] that identified it." ;
-                   skos:example "bb:identification123 dwcdp:identifiedBy bb:agent456 ." .
+                   skos:example "bb:identification123 dwcdp:identifiedBy bb:agent456 ." ;
+                   skos:prefLabel "Identified By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/interactionBy
@@ -232,7 +253,8 @@ dwcdp:interactionBy rdf:type owl:ObjectProperty ;
                     rdfs:comment "To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the subject of the statement."@en ;
                     rdfs:isDefinedBy dwcdp: ;
                     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves."@en ;
-                    skos:example "bb:RobberflyHuntingBee dwcdp:interactionBy bb:Robberfly123 ." .
+                    skos:example "bb:RobberflyHuntingBee dwcdp:interactionBy bb:Robberfly123 ." ;
+                    skos:prefLabel "Interaction By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/interactionWith
@@ -242,7 +264,8 @@ dwcdp:interactionWith rdf:type owl:ObjectProperty ;
                       rdfs:comment "To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the object of the statement."@en ;
                       rdfs:isDefinedBy dwcdp: ;
                       skos:definition "An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves."@en ;
-                      skos:example "bb:RobberflyHuntingBee dwcdp:interactionWith bb:Bee456 ." .
+                      skos:example "bb:RobberflyHuntingBee dwcdp:interactionWith bb:Bee456 ." ;
+                      skos:prefLabel "Interaction With" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/involves
@@ -251,7 +274,8 @@ dwcdp:involves rdf:type owl:ObjectProperty ;
                rdfs:range dwc:Organism ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [dwc:Organism] it involves." ;
-               skos:example "bb:occurrence123 dwcdp:involves bb:occurrence456 ." .
+               skos:example "bb:occurrence123 dwcdp:involves bb:occurrence456 ." ;
+               skos:prefLabel "Involves" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/isDerivedFrom
@@ -270,7 +294,8 @@ dwcdp:isDerivedFrom rdf:type owl:ObjectProperty ,
                     rdfs:comment "Though the [rdf:domain] and [rdf:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term." ;
                     rdfs:isDefinedBy dwcdp: ;
                     skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived." ;
-                    skos:example "bb:material123 dwcdp:isDerivedFrom bb:material456 ." .
+                    skos:example "bb:material123 dwcdp:isDerivedFrom bb:material456 ." ;
+                    skos:prefLabel "Is Derived From" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/isMediaOf
@@ -294,7 +319,8 @@ dwcdp:isPartOf rdf:type owl:ObjectProperty ;
                rdfs:comment "Though the [rdf:domain] and [rdf:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term." ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived." ;
-               skos:example "bb:material123 dwcdp:isPartOf bb:material456 ." .
+               skos:example "bb:material123 dwcdp:isPartOf bb:material456 ." ;
+               skos:prefLabel "Is Part Of" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/materialCollectedDuring
@@ -303,7 +329,8 @@ dwcdp:materialCollectedDuring rdf:type owl:ObjectProperty ;
                               rdfs:range dwc:Event ;
                               rdfs:isDefinedBy dwcdp: ;
                               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:Event] from which the material was collected." ;
-                              skos:example "bb:nucleotideAnalysis123 dwcdp:materialCollectedDuring bb:event456 ." .
+                              skos:example "bb:nucleotideAnalysis123 dwcdp:materialCollectedDuring bb:event456 ." ;
+                              skos:prefLabel "Material Collected During" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/ownedBy
@@ -312,7 +339,8 @@ dwcdp:ownedBy rdf:type owl:ObjectProperty ;
               rdfs:range dcterms:Agent ;
               rdfs:isDefinedBy dwcdp: ;
               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] which owns it." ;
-              skos:example "bb:materialEntity123 dwcdp:ownedBy bb:agent456 ." .
+              skos:example "bb:materialEntity123 dwcdp:ownedBy bb:agent456 ." ;
+              skos:prefLabel "Owned By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/produced
@@ -321,7 +349,8 @@ dwcdp:produced rdf:type owl:ObjectProperty ;
                rdfs:range dwc:NucleotideSequence ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideSequence] to the [dwc:NucleotideAnalysis] that produced it." ;
-               skos:example "bb:nucleotideAnalysis123 dwcdp:basedOn bb:nucleotideSequence456 ." .
+               skos:example "bb:nucleotideAnalysis123 dwcdp:basedOn bb:nucleotideSequence456 ." ;
+               skos:prefLabel "Produced" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/publishedBy
@@ -330,7 +359,8 @@ dwcdp:publishedBy rdf:type owl:ObjectProperty ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it." ;
-                  skos:example "bb:bibliographicResource123 dwcdp:publishedBy bb:agent456 ." .
+                  skos:example "bb:bibliographicResource123 dwcdp:publishedBy bb:agent456 ." ;
+                  skos:prefLabel "Published By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/relationshipOf
@@ -340,7 +370,8 @@ dwcdp:relationshipOf rdf:type owl:ObjectProperty ;
                      rdfs:comment "To keep the interaction terms semantically correct and in order, the resource considered by this property should be the subject of the statement."@en ;
                      rdfs:isDefinedBy dwcdp: ;
                      skos:definition "An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves."@en ;
-                     skos:example "bb:RobberflyHuntingBee dwcdp:interactionBy bb:Robberfly123 ." .
+                     skos:example "bb:RobberflyHuntingBee dwcdp:interactionBy bb:Robberfly123 ." ;
+                     skos:prefLabel "Relationship Of" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/relationshipTo
@@ -350,7 +381,8 @@ dwcdp:relationshipTo rdf:type owl:ObjectProperty ;
                      rdfs:comment "To keep the interaction terms semantically correct and in order, the resource considered by this property should be the object of the statement."@en ;
                      rdfs:isDefinedBy dwcdp: ;
                      skos:definition "An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves."@en ;
-                     skos:example "bb:RobberflyHuntingBee dwcdp:interactionWith bb:Bee456 ." .
+                     skos:example "bb:RobberflyHuntingBee dwcdp:interactionWith bb:Bee456 ." ;
+                     skos:prefLabel "Relationship To" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/reviewedBy
@@ -359,7 +391,8 @@ dwcdp:reviewedBy rdf:type owl:ObjectProperty ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that reviewed it." ;
-                 skos:example "bb:event123 dwcdp:reviewedBy bb:agent456 ." .
+                 skos:example "bb:event123 dwcdp:reviewedBy bb:agent456 ." ;
+                 skos:prefLabel "Reviewed By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/storedIn
@@ -368,7 +401,8 @@ dwcdp:storedIn rdf:type owl:ObjectProperty ;
                rdfs:range dcterms:Agent ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] in which it is stored." ;
-               skos:example "bb:materialEntity123 dwcdp:storedIn bb:agent456 ." .
+               skos:example "bb:materialEntity123 dwcdp:storedIn bb:agent456 ." ;
+               skos:prefLabel "Stored In" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/usedFor
@@ -435,38 +469,38 @@ dwcdp:usedFor rdf:type owl:ObjectProperty .
 
 
 ###  http://purl.org/dc/elements/1.1/rights
-dc:rights rdf:type owl:DatatypeProperty ;
-          rdfs:domain dwc:UsagePolicy ;
-          rdfs:range [ rdf:type rdfs:Datatype ;
-                       owl:unionOf ( xsd:anyURI
-                                     xsd:string
-                                   )
-                     ] ;
-          dcterms:isVersionOf dc:rights ;
-          rdfs:isDefinedBy dc: ;
-          skos:definition "Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions." ;
-          skos:example "`Copyright 2014 Ron Thomas`; `http://creativecommons.org/licenses/by/3.0/legalcode`" ;
-          skos:prefLabel "Rights (DC)" .
+<http://purl.org/dc/elements/1.1/rights> rdf:type owl:DatatypeProperty ;
+                                         rdfs:domain dwc:UsagePolicy ;
+                                         rdfs:range [ rdf:type rdfs:Datatype ;
+                                                      owl:unionOf ( xsd:anyURI
+                                                                    xsd:string
+                                                                  )
+                                                    ] ;
+                                         dcterms:isVersionOf <http://purl.org/dc/elements/1.1/rights> ;
+                                         rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                         skos:definition "Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions." ;
+                                         skos:example "`Copyright 2014 Ron Thomas`; `http://creativecommons.org/licenses/by/3.0/legalcode`" ;
+                                         skos:prefLabel "Rights (DC)" .
 
 
 ###  http://purl.org/dc/elements/1.1/source
-dc:source rdf:type owl:DatatypeProperty ;
-          rdfs:domain dwc:UsagePolicy ;
-          rdfs:range [ rdf:type rdfs:Datatype ;
-                       owl:unionOf ( xsd:anyURI
-                                     xsd:string
-                                   )
-                     ] ;
-          dcterms:isVersionOf dc:source ;
-          rdfs:comment "The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en ;
-          rdfs:isDefinedBy dc: ;
-          skos:definition "A related resource from which the described resource is derived"@en ;
-          skos:prefLabel "Source (DC)" .
+<http://purl.org/dc/elements/1.1/source> rdf:type owl:DatatypeProperty ;
+                                         rdfs:domain dwc:UsagePolicy ;
+                                         rdfs:range [ rdf:type rdfs:Datatype ;
+                                                      owl:unionOf ( xsd:anyURI
+                                                                    xsd:string
+                                                                  )
+                                                    ] ;
+                                         dcterms:isVersionOf <http://purl.org/dc/elements/1.1/source> ;
+                                         rdfs:comment "The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en ;
+                                         rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                         skos:definition "A related resource from which the described resource is derived"@en ;
+                                         skos:prefLabel "Source (DC)" .
 
 
 ###  http://purl.org/dc/terms/description
 dcterms:description rdf:type owl:DatatypeProperty ;
-                    rdfs:domain <http://rs.tdwg.org/ac/terms/Media> ;
+                    rdfs:domain owl:Thing ;
                     rdfs:range rdfs:Literal ;
                     dcterms:isVersionOf dcterms:description ;
                     rdfs:comment "Description of collection or individual resource, containing the Who, What, When, Where and Why as free-form text. This property optionally allows the presentation of detailed information and will in most cases be show together with the resource title. If both a [dcterms:description] and a [ac:caption] are present in the metadata, a [dcterms:description] is typically displayed instead of the resource, whereas a [ac:caption] is displayed together with the resource. The [dcterms:description] should aim to be a good proxy for the underlying media resource in cases where only text can be shown, whereas the [ac:caption] may only make sense when shown together with the media. Thus, in HTML it would e appropriate to use [dcterms:description] values for alt attributes in img elements. Often only one of description or caption is present; choose the term most appropriate for your metadata. It is the role of implementers of an [ac:] concrete representation (e.g. an XML Schema, an RDF representation, etc.) to decide and document how formatting advice will be represented in descriptions serialized according to such representations." ;
@@ -504,7 +538,7 @@ dcterms:source rdf:type owl:DatatypeProperty ;
 
 ###  http://purl.org/dc/terms/title
 dcterms:title rdf:type owl:DatatypeProperty ;
-              rdfs:domain <http://rs.tdwg.org/ac/terms/Media> ;
+              rdfs:domain owl:Thing ;
               rdfs:range rdfs:Literal ;
               dcterms:isVersionOf dcterms:title ;
               rdfs:comment "Concise title, name, or brief descriptive label of institution, resource collection, or individual resource. This field SHOULD include the complete title with all the subtitles, if any. It is strongly suggested to provide a title. The title facilitates interactions with humans: e.g, it could be used as display text of hyperlinks or to provide a choice of images in a pick list. The title is therefore highly useful and an effort should be made to provide it where it is not already available. When the resource is a collection without an institutional or official name, but with a thematic content, a descriptive title, e.g. \"Urban Ants of New England\", would be suitable. In individual media resources depicting taxa, the scientific name or names of taxa are often a good title. Common names, in addition to or instead of scientific names are also acceptable. Indications of action or roles captured by the media resource, such as predatory acts, are desireable (\"Rattlesnake eating deer mouse\", \"Pollinators of California Native Plants\")." ;
@@ -823,7 +857,7 @@ dcterms:type rdf:type owl:DatatypeProperty ;
 ###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeIRI
 <http://rs.tdwg.org/dwc/iri/surveyTargetTypeIRI> rdf:type owl:DatatypeProperty ;
                                                  rdfs:subPropertyOf dcterms:type ;
-                                                 rdfs:domain <http://rs.tdwg.org/eco/termsSurveyTarget> ;
+                                                 rdfs:domain <http://rs.tdwg.org/eco/terms/SurveyTarget> ;
                                                  rdfs:range xsd:anyURI ;
                                                  dcterms:isVersionOf dcterms:type ;
                                                  rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
@@ -835,7 +869,7 @@ dcterms:type rdf:type owl:DatatypeProperty ;
 ###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeSourceIRI
 <http://rs.tdwg.org/dwc/iri/surveyTargetTypeSourceIRI> rdf:type owl:DatatypeProperty ;
                                                        rdfs:subPropertyOf dcterms:source ;
-                                                       rdfs:domain <http://rs.tdwg.org/eco/termsSurveyTarget> ;
+                                                       rdfs:domain <http://rs.tdwg.org/eco/terms/SurveyTarget> ;
                                                        rdfs:range xsd:anyURI ;
                                                        dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
                                                        rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
@@ -938,10 +972,10 @@ dwc:assertionType rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/assertionTypeSource
 dwc:assertionTypeSource rdf:type owl:DatatypeProperty ;
-                        rdfs:subPropertyOf dc:source ;
+                        rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/source> ;
                         rdfs:domain dwc:Assertion ;
                         rdfs:range rdfs:Literal ;
-                        dcterms:isVersionOf dc:source ;
+                        dcterms:isVersionOf <http://purl.org/dc/elements/1.1/source> ;
                         rdfs:isDefinedBy dwc: ;
                         skos:definition "A reference to the controlled vocabulary in which the definition of a value in [dwc:assertionType] is given." ;
                         skos:prefLabel "Assertion Type Source" .
@@ -969,10 +1003,10 @@ dwc:assertionValueNumeric rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/assertionValueSource
 dwc:assertionValueSource rdf:type owl:DatatypeProperty ;
-                         rdfs:subPropertyOf dc:source ;
+                         rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/source> ;
                          rdfs:domain dwc:Assertion ;
                          rdfs:range rdfs:Literal ;
-                         dcterms:isVersionOf dc:source ;
+                         dcterms:isVersionOf <http://purl.org/dc/elements/1.1/source> ;
                          rdfs:isDefinedBy dwc: ;
                          skos:definition "A reference to a controlled vocabulary in which the definition of a value in [dwc:assertionValue] is given." ;
                          skos:prefLabel "Assertion Value Source" .
@@ -995,7 +1029,7 @@ dwc:eventID rdf:type owl:DatatypeProperty ;
                           owl:unionOf ( dwc:Event
                                         dwc:EventAssertion
                                         dwc:NucleotideAnalysis
-                                        <http://rs.tdwg.org/eco/termsSurvey>
+                                        <http://rs.tdwg.org/eco/terms/Survey>
                                       )
                         ] ;
             rdfs:range rdfs:Literal ;
@@ -1169,8 +1203,8 @@ dwc:sequence rdf:type owl:DatatypeProperty ;
 ###  http://rs.tdwg.org/dwc/terms/surveyID
 dwc:surveyID rdf:type owl:DatatypeProperty ;
              rdfs:domain [ rdf:type owl:Class ;
-                           owl:unionOf ( <http://rs.tdwg.org/eco/termsSurvey>
-                                         <http://rs.tdwg.org/eco/termsSurveyTarget>
+                           owl:unionOf ( <http://rs.tdwg.org/eco/terms/Survey>
+                                         <http://rs.tdwg.org/eco/terms/SurveyTarget>
                                        )
                          ] ;
              rdfs:range xsd:string ;
@@ -1183,7 +1217,7 @@ dwc:surveyID rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/surveyTargetID
 dwc:surveyTargetID rdf:type owl:DatatypeProperty ;
-                   rdfs:domain <http://rs.tdwg.org/eco/termsSurveyTarget> ;
+                   rdfs:domain <http://rs.tdwg.org/eco/terms/SurveyTarget> ;
                    rdfs:range xsd:string ;
                    dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyTargetID> ;
                    rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
@@ -1194,7 +1228,7 @@ dwc:surveyTargetID rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/surveyTargetType
 dwc:surveyTargetType rdf:type owl:DatatypeProperty ;
-                     rdfs:domain <http://rs.tdwg.org/eco/termsSurveyTarget> ;
+                     rdfs:domain <http://rs.tdwg.org/eco/terms/SurveyTarget> ;
                      rdfs:range rdfs:Literal ;
                      dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyTargetType> ;
                      rdfs:comment "Recommended best practice is to use a controlled vocabulary." ;
@@ -1206,10 +1240,10 @@ dwc:surveyTargetType rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/surveyTargetTypeSource
 dwc:surveyTargetTypeSource rdf:type owl:DatatypeProperty ;
-                           rdfs:subPropertyOf dc:source ;
-                           rdfs:domain <http://rs.tdwg.org/eco/termsSurveyTarget> ;
+                           rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/source> ;
+                           rdfs:domain <http://rs.tdwg.org/eco/terms/SurveyTarget> ;
                            rdfs:range xsd:string ;
-                           dcterms:isVersionOf dc:source ;
+                           dcterms:isVersionOf <http://purl.org/dc/elements/1.1/source> ;
                            rdfs:isDefinedBy dwc: ;
                            skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given." ;
                            skos:prefLabel "Survey Target Type Source" .
@@ -1248,56 +1282,56 @@ dwc:verbatimAssertionType rdf:type owl:DatatypeProperty ;
                           skos:prefLabel "Verbatim Assertion Type" .
 
 
-###  http://rs.tdwg.org/eco/termssiteCount
-<http://rs.tdwg.org/eco/termssiteCount> rdf:type owl:DatatypeProperty ;
-                                        rdfs:domain <http://rs.tdwg.org/eco/termsSurvey> ;
-                                        rdfs:range xsd:integer ;
-                                        dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/siteCount> ;
-                                        dcterms:references <http://rs.tdwg.org/eco/terms/version/siteCount-2024-02-28> ;
-                                        rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy."@en ;
-                                        rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms> ;
-                                        skos:definition "Total number of sites surveyed during a [dwc:Event]."@en ;
-                                        skos:example "`1`; `15`" ;
-                                        skos:prefLabel "Site Count" .
+###  http://rs.tdwg.org/eco/terms/siteCount
+<http://rs.tdwg.org/eco/terms/siteCount> rdf:type owl:DatatypeProperty ;
+                                         rdfs:domain <http://rs.tdwg.org/eco/terms/Survey> ;
+                                         rdfs:range xsd:integer ;
+                                         dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/siteCount> ;
+                                         dcterms:references <http://rs.tdwg.org/eco/terms/version/siteCount-2024-02-28> ;
+                                         rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy."@en ;
+                                         rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms/> ;
+                                         skos:definition "Total number of sites surveyed during a [dwc:Event]."@en ;
+                                         skos:example "`1`; `15`" ;
+                                         skos:prefLabel "Site Count" .
 
 
-###  http://rs.tdwg.org/eco/termssiteNestingDescription
-<http://rs.tdwg.org/eco/termssiteNestingDescription> rdf:type owl:DatatypeProperty ;
-                                                     rdfs:domain <http://rs.tdwg.org/eco/termsSurvey> ;
-                                                     rdfs:range rdfs:Literal ;
-                                                     dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/siteNestingDescription> ;
-                                                     dcterms:references <http://rs.tdwg.org/eco/terms/version/siteNestingDescription-2024-02-28> ;
-                                                     rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy."@en ;
-                                                     rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms> ;
-                                                     skos:definition "Textual description of a hierarchical sampling design."@en ;
-                                                     skos:example "`5 sampling sites of 3-5 plots each`" ;
-                                                     skos:prefLabel "Site Nesting Description" .
+###  http://rs.tdwg.org/eco/terms/siteNestingDescription
+<http://rs.tdwg.org/eco/terms/siteNestingDescription> rdf:type owl:DatatypeProperty ;
+                                                      rdfs:domain <http://rs.tdwg.org/eco/terms/Survey> ;
+                                                      rdfs:range rdfs:Literal ;
+                                                      dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/siteNestingDescription> ;
+                                                      dcterms:references <http://rs.tdwg.org/eco/terms/version/siteNestingDescription-2024-02-28> ;
+                                                      rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy."@en ;
+                                                      rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms/> ;
+                                                      skos:definition "Textual description of a hierarchical sampling design."@en ;
+                                                      skos:example "`5 sampling sites of 3-5 plots each`" ;
+                                                      skos:prefLabel "Site Nesting Description" .
 
 
-###  http://rs.tdwg.org/eco/termsverbatimSiteDescriptions
-<http://rs.tdwg.org/eco/termsverbatimSiteDescriptions> rdf:type owl:DatatypeProperty ;
-                                                       rdfs:domain <http://rs.tdwg.org/eco/termsSurvey> ;
-                                                       rdfs:range rdfs:Literal ;
-                                                       dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/verbatimSiteDescriptions> ;
-                                                       dcterms:references <http://rs.tdwg.org/eco/terms/version/verbatimSiteDescriptions-2024-02-28> ;
-                                                       rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
-                                                       rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms> ;
-                                                       skos:definition "Original textual description of site(s)."@en ;
-                                                       skos:example "`Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick *Andropogon* spp., *Sporobolus floridanus*, *Vaccinium* spp., *Rhynchospora* spp., *Centella erecta*, *Panicum rigidulum*`" ;
-                                                       skos:prefLabel "Verbatim Site Description" .
+###  http://rs.tdwg.org/eco/terms/verbatimSiteDescriptions
+<http://rs.tdwg.org/eco/terms/verbatimSiteDescriptions> rdf:type owl:DatatypeProperty ;
+                                                        rdfs:domain <http://rs.tdwg.org/eco/terms/Survey> ;
+                                                        rdfs:range rdfs:Literal ;
+                                                        dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/verbatimSiteDescriptions> ;
+                                                        dcterms:references <http://rs.tdwg.org/eco/terms/version/verbatimSiteDescriptions-2024-02-28> ;
+                                                        rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
+                                                        rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms/> ;
+                                                        skos:definition "Original textual description of site(s)."@en ;
+                                                        skos:example "`Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick *Andropogon* spp., *Sporobolus floridanus*, *Vaccinium* spp., *Rhynchospora* spp., *Centella erecta*, *Panicum rigidulum*`" ;
+                                                        skos:prefLabel "Verbatim Site Description" .
 
 
-###  http://rs.tdwg.org/eco/termsverbatimSiteNames
-<http://rs.tdwg.org/eco/termsverbatimSiteNames> rdf:type owl:DatatypeProperty ;
-                                                rdfs:domain <http://rs.tdwg.org/eco/termsSurvey> ;
-                                                rdfs:range rdfs:Literal ;
-                                                dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/verbatimSiteNames> ;
-                                                dcterms:references <http://rs.tdwg.org/eco/terms/version/verbatimSiteNames-2024-02-28> ;
-                                                rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
-                                                rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms> ;
-                                                skos:definition "A list (concatenated and separated) of original site names."@en ;
-                                                skos:example "`East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1`" ;
-                                                skos:prefLabel "Verbatim Site Names" .
+###  http://rs.tdwg.org/eco/terms/verbatimSiteNames
+<http://rs.tdwg.org/eco/terms/verbatimSiteNames> rdf:type owl:DatatypeProperty ;
+                                                 rdfs:domain <http://rs.tdwg.org/eco/terms/Survey> ;
+                                                 rdfs:range rdfs:Literal ;
+                                                 dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/verbatimSiteNames> ;
+                                                 dcterms:references <http://rs.tdwg.org/eco/terms/version/verbatimSiteNames-2024-02-28> ;
+                                                 rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
+                                                 rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms/> ;
+                                                 skos:definition "A list (concatenated and separated) of original site names."@en ;
+                                                 skos:example "`East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1`" ;
+                                                 skos:prefLabel "Verbatim Site Names" .
 
 
 ###  https://w3id.org/mixs/0000008
@@ -1964,7 +1998,7 @@ dwc:ReviewerAgent rdf:type owl:Class ;
 ###  http://rs.tdwg.org/dwc/terms/UsagePolicy
 dwc:UsagePolicy rdf:type owl:Class ;
                 rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                         owl:onProperty dc:rights ;
+                                                         owl:onProperty <http://purl.org/dc/elements/1.1/rights> ;
                                                          owl:minCardinality "0"^^xsd:nonNegativeInteger
                                                        ]
                                                        [ rdf:type owl:Restriction ;
@@ -1976,7 +2010,7 @@ dwc:UsagePolicy rdf:type owl:Class ;
                                                          owl:cardinality "1"^^xsd:nonNegativeInteger
                                                        ]
                                                        [ rdf:type owl:Restriction ;
-                                                         owl:onProperty dc:rights ;
+                                                         owl:onProperty <http://purl.org/dc/elements/1.1/rights> ;
                                                          owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                                        ]
                                                        [ rdf:type owl:Restriction ;
@@ -2021,45 +2055,45 @@ dwcdp:EventProtocol rdf:type owl:Class ;
                     skos:prefLabel "Event Protocol" .
 
 
-###  http://rs.tdwg.org/eco/termsSurvey
-<http://rs.tdwg.org/eco/termsSurvey> rdf:type owl:Class ;
-                                     rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                              owl:onProperty dwc:eventID ;
-                                                                              owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                                            ]
-                                                                            [ rdf:type owl:Restriction ;
-                                                                              owl:onProperty dwc:surveyID ;
-                                                                              owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                                            ]
-                                                                          ) ;
-                                                       rdf:type owl:Class
-                                                     ] ;
-                                     dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/Survey> ;
-                                     rdfs:comment "This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget]."@en ;
-                                     rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms> ;
-                                     skos:definition "A biotic survey or inventory."@en ;
-                                     skos:example "`a botanical survey of a protected area to assess native and invasive plant species`; `a wetland vegetation mapping`; `a camera trap deployment in a rainforest to monito large mammals`; `a frog call survey in wetlands across breeding seasons`; `a coverboard survey for reptiles in forested environments`; `a pollinator survey in an agricultural landscape`; `a macroinvertebrate sampling in a freshwater stream to assess water quality`; `a habitat- or ecosystem-level survey` (e.g. `coral reef health assessment`, `forest biodiversity assessment`); `an environmental impact assessment` (e.g. `pre-construction baseline survey for a wind farm project`)" ;
-                                     skos:prefLabel "Survey" .
+###  http://rs.tdwg.org/eco/terms/Survey
+<http://rs.tdwg.org/eco/terms/Survey> rdf:type owl:Class ;
+                                      rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty dwc:eventID ;
+                                                                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty dwc:surveyID ;
+                                                                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                             ]
+                                                                           ) ;
+                                                        rdf:type owl:Class
+                                                      ] ;
+                                      dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/Survey> ;
+                                      rdfs:comment "This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget]."@en ;
+                                      rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms/> ;
+                                      skos:definition "A biotic survey or inventory."@en ;
+                                      skos:example "`a botanical survey of a protected area to assess native and invasive plant species`; `a wetland vegetation mapping`; `a camera trap deployment in a rainforest to monito large mammals`; `a frog call survey in wetlands across breeding seasons`; `a coverboard survey for reptiles in forested environments`; `a pollinator survey in an agricultural landscape`; `a macroinvertebrate sampling in a freshwater stream to assess water quality`; `a habitat- or ecosystem-level survey` (e.g. `coral reef health assessment`, `forest biodiversity assessment`); `an environmental impact assessment` (e.g. `pre-construction baseline survey for a wind farm project`)" ;
+                                      skos:prefLabel "Survey" .
 
 
-###  http://rs.tdwg.org/eco/termsSurveyTarget
-<http://rs.tdwg.org/eco/termsSurveyTarget> rdf:type owl:Class ;
-                                           rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                                    owl:onProperty dwc:surveyID ;
-                                                                                    owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                                                  ]
-                                                                                  [ rdf:type owl:Restriction ;
-                                                                                    owl:onProperty dwc:surveyTargetID ;
-                                                                                    owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                                                  ]
-                                                                                ) ;
-                                                             rdf:type owl:Class
-                                                           ] ;
-                                           dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/SurveyTarget> ;
-                                           rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms> ;
-                                           skos:definition "An intended scope for [dwc:Occurrence]s in a [eco:Survey]."@en ;
-                                           skos:example "`all bird species`; `all bird species except *Larus* gulls, fulmars and kittiwakes`; reproductive female *Ctenomys sociabilis* (only)`; `*Oncorhynchus mykiss* and *Oncorhynchus clarkii* (only)`; `all total lengths except < 12 inches`" ;
-                                           skos:prefLabel "Survey Target" .
+###  http://rs.tdwg.org/eco/terms/SurveyTarget
+<http://rs.tdwg.org/eco/terms/SurveyTarget> rdf:type owl:Class ;
+                                            rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty dwc:surveyID ;
+                                                                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty dwc:surveyTargetID ;
+                                                                                     owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                                   ]
+                                                                                 ) ;
+                                                              rdf:type owl:Class
+                                                            ] ;
+                                            dcterms:isVersionOf <http://rs.tdwg.org/eco/terms/SurveyTarget> ;
+                                            rdfs:isDefinedBy <http://rs.tdwg.org/eco/terms/> ;
+                                            skos:definition "An intended scope for [dwc:Occurrence]s in a [eco:Survey]."@en ;
+                                            skos:example "`all bird species`; `all bird species except *Larus* gulls, fulmars and kittiwakes`; reproductive female *Ctenomys sociabilis* (only)`; `*Oncorhynchus mykiss* and *Oncorhynchus clarkii* (only)`; `all total lengths except < 12 inches`" ;
+                                            skos:prefLabel "Survey Target" .
 
 
 ###  http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement
@@ -2168,6 +2202,12 @@ rdf:Statement rdf:type owl:Class .
                                        dwc:Organism .
 
 
+###  http://bioboum.ca/dwc-owl.owl
+<http://bioboum.ca/dwc-owl.owl> rdf:type owl:NamedIndividual ;
+                                dcterms:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin Semantic Web has previously explored similar ideas using OWL classes, this work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
+                                dcterms:title "Darwin Core OWL" .
+
+
 #################################################################
 #    General axioms
 #################################################################
@@ -2189,8 +2229,8 @@ rdf:Statement rdf:type owl:Class .
                 dwc:Protocol
                 dwc:ResourceRelationship
                 dwc:UsagePolicy
-                <http://rs.tdwg.org/eco/termsSurvey>
-                <http://rs.tdwg.org/eco/termsSurveyTarget>
+                <http://rs.tdwg.org/eco/terms/Survey>
+                <http://rs.tdwg.org/eco/terms/SurveyTarget>
               )
 ] .
 
