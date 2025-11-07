@@ -888,10 +888,10 @@ createOP(
     name="relationshipOf",
     namespace=DWCDP,
     graph=g,
-    domain_list=[DWC["ResourceRelationship"]],
-    range_list=[DWC["Occurrence"]],
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves.", lang="en"),
-    comments=Literal("To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the subject of the statement.", lang="en"),
+    domain_list=[OWL["Thing"]],
+    range_list=[OWL["Thing"]],
+    definition=Literal("An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves.", lang="en"),
+    comments=Literal("To keep the interaction terms semantically correct and in order, the resource considered by this property should be the subject of the statement.", lang="en"),
     examples=Literal("bb:RobberflyHuntingBee dwcdp:interactionBy bb:Robberfly123 ."),
 )
 
@@ -900,10 +900,10 @@ createOP(
     name="relationshipTo",
     namespace=DWCDP,
     graph=g,
-    domain_list=[DWC["ResourceRelationship"]],
-    range_list=[DWC["Occurrence"]],
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves.", lang="en"),
-    comments=Literal("To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the object of the statement.", lang="en"),
+    domain_list=[OWL["Thing"]],
+    range_list=[OWL["Thing"]],
+    definition=Literal("An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves.", lang="en"),
+    comments=Literal("To keep the interaction terms semantically correct and in order, the resource considered by this property should be the object of the statement.", lang="en"),
     examples=Literal("bb:RobberflyHuntingBee dwcdp:interactionWith bb:Bee456 ."),
 )
 
