@@ -892,6 +892,18 @@ createOP(
     examples=Literal("bb:nucleotideAnalysis123 dwcdp:materialCollectedDuring bb:event456 ."),
 )
 
+# NOTE: dwc:MolecularProtocol is included in the explorer, but I think it should be handled by dwc:Protocol.
+createOP(
+    name="mentionnedIn",
+    namespace=DWCDP,
+    graph=g,
+    domain_list=[CHRONO["ChronometricAge"], DWC["Event"], DWC["Identification"], DWC["MaterialEntity"], DWC["Occurrence"], DWC["Organism"], DWC["OrganismInteraction"], DWC["Protocol"], ECO["Survey"]],
+    range_list=[DCTERMS["BibliographicResource"]],
+    pref_label=Literal("Mentionned In"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."),
+    examples=Literal("bb:FishTrawlMethod123 dwcdp:mentionnedIn bb:ScientificPaper456 ."),
+)
+
 createOP(
     name="ownedBy",
     namespace=DWCDP,
@@ -2058,7 +2070,7 @@ createDP(
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
     range_list=[RDFS["Literal"], XSD["anyURI"]],
-    pref_label=Literal("Reverse PCR Primer Name"),
+    pref_label=Literal("PCR Primer Reference"),
     definition=Literal("Reference for the PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment.", lang="en"),
     examples=Literal("`https:doi.org/10.11861742-9994-10-31`"),
     version_of_s="https://rs.gbif/org/terms/pcr_primer_reference",
@@ -2305,7 +2317,7 @@ createDP(
 
 # NOTE: I copied the example from definition to the example section.
 createDP(
-    name="0000020",
+    name="0000021",
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
@@ -2313,7 +2325,40 @@ createDP(
     pref_label=Literal("Ploidy"),
     definition=Literal("The ploidy level of the genome (e.g. `allopolyploid`, `haploid`, `diploid`, `triploid`, `tetraploid`). It has implications for the downstream study of duplicated gene and regions of the genomes (and perhaps for difficulties in assembly). For terms, please select terms listed under class ploidy ([pato:001374]) of Phenotypic Quality Ontology ([pato:]), and for a browser of PATO (v 2018-03-27) please refer to [http://purl.bioontology.org/ontology/PATO].", lang="en"),
     examples=Literal("`allopolyploid`; `haploid`; `diploid`; `triploid`; `tetraploid`"),
-    version_of_s="https://w3id.org/mixs/0000020",
+    version_of_s="https://w3id.org/mixs/0000021",
+)
+
+createDP(
+    name="0000022",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["integer"]],
+    pref_label=Literal("Number Of Replicons"),
+    definition=Literal("Reports the number of replicons in a nuclear genome of eukaryotes, in the genome of a bacterium or archaea or the number of segments in a segmented virus. Always applied to the haploid chromosome count of a eukaryote.", lang="en"),
+    version_of_s="https://w3id.org/mixs/0000022",
+)
+
+createDP(
+    name="0000023",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Extrachromosomal Elements"),
+    definition=Literal("Do plasmids exist of significant phenotypic consequence (e.g. ones that determine virulence or antibiotic resistance). Megaplasmids? Other plasmids (borrelia has 15+ plasmids).", lang="en"),
+    version_of_s="https://w3id.org/mixs/0000023",
+)
+
+createDP(
+    name="0000024",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Estimated size"),
+    definition=Literal("The estimated size of the genome prior to sequencing. Of particular importance in the sequencing of (eukaryotic) genome which could remain in draft form for a long or unspecified period.", lang="en"),
+    version_of_s="https://w3id.org/mixs/0000024",
 )
 
 createDP(
@@ -2499,7 +2544,7 @@ g.add((BB["PictureOfPeter123CatchingSunfish456FromSeineNet789"], DWCDP["isMediaO
 
 
 
-
+# TEST: Reification test example with iNaturalist data.
 g.add((BB["Butterfly123"], RDF["type"], DWC["Organism"]))
 g.add((BB["Spider456"], RDF["type"], DWC["Organism"]))
 g.add((BB["Joey366"], RDF["type"], DCTERMS["Agent"]))
