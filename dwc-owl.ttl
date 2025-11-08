@@ -453,6 +453,16 @@ dwcdp:storedIn rdf:type owl:ObjectProperty ;
                skos:prefLabel "Stored In" .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/targetFor
+dwcdp:targetFor rdf:type owl:ObjectProperty ;
+                rdfs:domain <http://rs.tdwg.org/eco/terms/SurveyTarget> ;
+                rdfs:range <http://rs.tdwg.org/eco/terms/Survey> ;
+                rdfs:isDefinedBy dwcdp: ;
+                skos:definition "An [owl:ObjectProperty] used to relate a [eco:SurveyTarget] to the [eco:Survey] it is a target for." ;
+                skos:example "bb:IncludeAllFishOver5mm dwcdp:targetFor bb:FishTrawl456 ." ;
+                skos:prefLabel "Target For" .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/usedFor
 dwcdp:usedFor rdf:type owl:ObjectProperty .
 

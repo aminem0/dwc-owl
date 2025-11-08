@@ -982,6 +982,16 @@ createOP(
     examples=Literal("bb:materialEntity123 dwcdp:storedIn bb:agent456 .")
 )
 
+createOP(
+    name="targetFor",
+    namespace=DWCDP,
+    graph=g,
+    domain_list=[ECO["SurveyTarget"]],
+    range_list=[ECO["Survey"]],
+    pref_label=Literal("Target For"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [eco:SurveyTarget] to the [eco:Survey] it is a target for."),
+    examples=Literal("bb:IncludeAllFishOver5mm dwcdp:targetFor bb:FishTrawl456 .")
+)
 
 # NOTE: For the dwc:OrganismInteraction, preferably consider longer names and avoid reserved keywords.
 createOP(
