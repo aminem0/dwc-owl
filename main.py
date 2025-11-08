@@ -508,7 +508,7 @@ create_CTOP(
     name="OrganismAssertion",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Nucleotide Analysis Assertion"),
+    pref_label=Literal("Organism Assertion"),
     subclass_list=[DWC["Assertion"]],
     object_prop=DWCDP["about"],
     use_inverse=False,
@@ -958,7 +958,7 @@ createOP(
     pref_label=Literal("Interaction By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves.", lang="en"),
     comments=Literal("To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the subject of the statement.", lang="en"),
-    examples=Literal("bb:RobberflyHuntingBee dwcdp:interactionBy bb:Robberfly123 ."),
+    examples=Literal("bb:Robberfly123HuntingBee456 dwcdp:interactionBy bb:Robberfly123 ."),
 )
 
 # NOTE: For the dwc:OrganismInteraction, preferably consider longer names and avoid reserved keywords.
@@ -971,7 +971,7 @@ createOP(
     pref_label=Literal("Interaction With"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves.", lang="en"),
     comments=Literal("To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the object of the statement.", lang="en"),
-    examples=Literal("bb:RobberflyHuntingBee dwcdp:interactionWith bb:Bee456 ."),
+    examples=Literal("bb:Robberfly123HuntingBee546 dwcdp:interactionWith bb:Bee456 ."),
 )
 
 # NOTE: For the dwc:ResourceRelationship, preferably consider longer names and avoid reserved keywords.
@@ -2094,7 +2094,7 @@ createDP(
     namespace=GGBN,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[XSD["decimal"]],
+    range_list=[RDFS["Literal"]],
     pref_label=Literal("DNA Concentration Unit"),
     definition=Literal("Unit used for [ggbn:concentration] measurement.", lang="en"),
     examples=Literal("`ng/µL`"),
@@ -2248,6 +2248,74 @@ createDP(
     version_of_s="https://w3id.org/mixs/00000008",
 )
 
+# NOTE: Double check if accepts Literal or not.
+# NOTE: I copied the example from definition to the example section.
+createDP(
+    name="0000012",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Broad-scale Environmental Context"),
+    definition=Literal("In this field, report which major environmental system your sample or specimen came from. The systems identified should have a coarse spatial grain, to provide the general environmental context of where the sampling was done (e.g. were you in the desert or a rainforest?). We recommend using subclasses of ENVO’s biome class: [http://purl.obolibrary.org/obo/ENVO_00000428]. Format (one term): termLabel [termID], Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a water sample from the photic zone in middle of the Atlantic Ocean, consider: oceanic epipelagic zone biome [ENVO:01000033]. Example: Annotating a sample from the Amazon rainforest consider: tropical moist broadleaf forest biome [ENVO:01000228]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
+    examples=Literal("`oceanic epipelagic zone biome [ENVO:01000033]`; `tropical moist broadleaf forest biome [ENVO:01000228]`"),
+    version_of_s="https://w3id.org/mixs/0000012",
+)
+
+# NOTE: Double check if accepts Literal or not.
+# NOTE: I copied the example from definition to the example section.
+createDP(
+    name="0000013",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Local Environmental Context"),
+    definition=Literal("In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
+    examples=Literal("`canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]`"),
+    version_of_s="https://w3id.org/mixs/0000013",
+)
+
+# NOTE: Double check if accepts Literal or not.
+# NOTE: I copied the example from definition to the example section.
+createDP(
+    name="0000014",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Environmental Medium"),
+    definition=Literal("In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
+    examples=Literal("`ocean water [ENVO:00002151]`; `pond water [ENVO:00002228]|air ENVO_00002005`"),
+    version_of_s="https://w3id.org/mixs/0000014",
+)
+
+# NOTE: I copied the example from definition to the example section.
+createDP(
+    name="0000020",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Subspecific Genetic Lineage"),
+    definition=Literal("This should provide further information about the genetic distinctness of the sequenced organism by recording additional information e.g. serovar, serotype, biotype, ecotype, or any relevant genetic typing schemes like Group I plasmid. It can also contain alternative taxonomic information. It should contain both the lineage name, and the lineage rank, i.e. `biovar:abc123`.", lang="en"),
+    examples=Literal("`biovar:abc123`"),
+    version_of_s="https://w3id.org/mixs/0000020",
+)
+
+# NOTE: I copied the example from definition to the example section.
+createDP(
+    name="0000020",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Ploidy"),
+    definition=Literal("The ploidy level of the genome (e.g. `allopolyploid`, `haploid`, `diploid`, `triploid`, `tetraploid`). It has implications for the downstream study of duplicated gene and regions of the genomes (and perhaps for difficulties in assembly). For terms, please select terms listed under class ploidy ([pato:001374]) of Phenotypic Quality Ontology ([pato:]), and for a browser of PATO (v 2018-03-27) please refer to [http://purl.bioontology.org/ontology/PATO].", lang="en"),
+    examples=Literal("`allopolyploid`; `haploid`; `diploid`; `triploid`; `tetraploid`"),
+    version_of_s="https://w3id.org/mixs/0000020",
+)
+
 createDP(
     name="0000092",
     namespace=MIXS,
@@ -2276,7 +2344,7 @@ createDP(
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
     range_list=[RDFS["Literal"]],
-    pref_label=Literal("Sample Taxon ID"),
+    pref_label=Literal("Taxonomy ID Of DNA Sample"),
     definition=Literal("NCBI taxon ID of the sample. May be a single taxon or mixed taxa sample. Use \"synthetic metagenome\" for mock community positive controls, or \"blank sample\" for negative controls.", lang="en"),
     version_of_s="https://w3id.org/mixs/0001320",
 )
@@ -2314,6 +2382,44 @@ createDP(
     comments=Literal("The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples.", lang="en"),
     version_of_s="http://ns.adobe.com/xap/1.0/CreateDate",
 )
+
+createDP(
+    name="relationshipEstablishedDate",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["ResourceRelationship"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Relationship Established Date"),
+    definition=Literal("A date on which a [dwc:ResourceRelationship] was established.", lang="en"),
+    comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/relationshipEstablishedDate",
+    references_s="http://rs.tdwg.org/dwc/terms/version/relationshipEstablishedDate-2025-06-12",
+)
+
+createDP(
+    name="relationshipRemarks",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["ResourceRelationship"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Relationship Remarks"),
+    definition=Literal("Comments or notes about a [dwc:ResourceRelationship].", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/relationshipRemarks",
+    references_s="http://rs.tdwg.org/dwc/terms/version/relationshipRemarks-2023-06-28",
+)
+
+
+
+
+# g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipEstablishedDate"], Literal("15-06-2025")))
+# g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipRemarks"], Literal("The butterfly was a dead adult.", lang="en")))
+# g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingTo"], Literal("Joey Saucedo")))
+# g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingToID"], BB["Joey366"]))
+
+
+
+
+
 
 #####################################################################################################
 # BEGIN INDIVIDUALS DEFINITIONS FOR REASONER TEST CASES
@@ -2376,7 +2482,11 @@ g.add((BB["Site123"], DWCDP["happenedDuring"], BB["ParentSite456"]))
 
 
 
-
+# TEST: Complex case to show a multiple class entity.
+# A media of a dcterms:Agent taking a dwc:Occurrence during a dwc:Event.
+# However, only dwcdp:isMediaOf is used. The reasoner will infer
+# All classes bb:PictureOfPeter123CatchingSunfish456FromSeineNet789 belongs to.
+#
 g.add((BB["Peter123"], RDF["type"], DCTERMS["Agent"]))
 g.add((BB["Sunfish456"], RDF["type"], DWC["Occurrence"]))
 g.add((BB["SeineNet789"], RDF["type"], DWC["Event"]))
