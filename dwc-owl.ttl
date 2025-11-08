@@ -190,6 +190,16 @@ dwcdp:followed rdf:type owl:ObjectProperty ;
                skos:prefLabel "Followed" .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/fundedBy
+dwcdp:fundedBy rdf:type owl:ObjectProperty ;
+               rdfs:domain dwc:Provenance ;
+               rdfs:range dcterms:Agent ;
+               rdfs:isDefinedBy dwcdp: ;
+               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dwc:Agent] that funded it." ;
+               skos:example "bb:FishesOfTheDeep123 dwcdp:fundedBy bb:MarineInstitute456 ." ;
+               skos:prefLabel "Funded By" .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/georeferencedBy
 dwcdp:georeferencedBy rdf:type owl:ObjectProperty ;
                       rdfs:domain dwc:Event ;
@@ -2016,6 +2026,20 @@ dwc:EventMedia rdf:type owl:Class ;
                skos:prefLabel "Event Media" .
 
 
+###  http://rs.tdwg.org/dwc/terms/FunderAgent
+dwc:FunderAgent rdf:type owl:Class ;
+                owl:equivalentClass [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf dwcdp:fundedBy
+                                                     ] ;
+                                      owl:someValuesFrom dwc:Provenance
+                                    ] ;
+                rdfs:subClassOf dcterms:Agent ;
+                rdfs:comment "Due to the directionality of the property [dwcdp:fundedBy], the class is defined in description logic as [dwcdp:FunderAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:fundedBy]⁻).[dwc:Provenance]."@en ;
+                rdfs:isDefinedBy dwc: ;
+                skos:definition "An instance of a [dcterms:Agent] that has funded a [dwc:Provenance]."@en ;
+                skos:prefLabel "Funder Agent" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/GeologicalContext
 dwc:GeologicalContext rdf:type owl:Class ;
                       rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
@@ -2053,7 +2077,7 @@ dwc:GeoreferencerAgent rdf:type owl:Class ;
                                              owl:someValuesFrom dwc:Event
                                            ] ;
                        rdfs:subClassOf dcterms:Agent ;
-                       rdfs:comment "Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:Georeferencer] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event]."@en ;
+                       rdfs:comment "Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event]."@en ;
                        rdfs:isDefinedBy dwc: ;
                        skos:definition "An instance of a [dcterms:Agent] that has georeferenced a [dwc:Event]."@en ;
                        skos:prefLabel "Georeferencer Agent" .
@@ -2375,6 +2399,10 @@ dwc:Protocol rdf:type owl:Class ;
              skos:definition "A method used during an action."@en ;
              skos:example "`a pitfall method for sampling ground-dwelling arthropods`; `a point-radius georeferencing method`; `a linear regression model to estimate body mass from skeletal measurements`; `a Bayesian phylogenetic inference method`" ;
              skos:prefLabel "Protocol" .
+
+
+###  http://rs.tdwg.org/dwc/terms/Provenance
+dwc:Provenance rdf:type owl:Class .
 
 
 ###  http://rs.tdwg.org/dwc/terms/PublisherAgent

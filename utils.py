@@ -260,6 +260,10 @@ def createOP(
         graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
         graph.add((op_uri, RDFS["domain"], domain_union_class))
 
+    # TEST: Add all domains with a for loop.
+    # for domain in domain_list:
+    #     graph.add((op_uri, RDFS["domain"], domain))
+
     # If there is only a single element in the list, take it as the range
     # otherwise consider a blank node that is the intersect
     # NOTE: Eventually, it would be best to have the function accept either

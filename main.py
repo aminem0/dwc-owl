@@ -387,6 +387,19 @@ create_CTOP(
 )
 
 create_CTOP(
+    name="FunderAgent",
+    namespace=DWC,
+    graph=g,
+    subclass_list=[DCTERMS["Agent"]],
+    object_prop=DWCDP["fundedBy"],
+    values_class=DWC["Provenance"],
+    use_inverse=True,
+    pref_label=Literal("Funder Agent"),
+    definition=Literal("An instance of a [dcterms:Agent] that has funded a [dwc:Provenance].", lang="en"),
+    comments=Literal("Due to the directionality of the property [dwcdp:fundedBy], the class is defined in description logic as [dwcdp:FunderAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:fundedBy]⁻).[dwc:Provenance].", lang="en")
+)
+
+create_CTOP(
     name="GeoreferencerAgent",
     namespace=DWC,
     graph=g,
@@ -396,7 +409,7 @@ create_CTOP(
     use_inverse=True,
     pref_label=Literal("Georeferencer Agent"),
     definition=Literal("An instance of a [dcterms:Agent] that has georeferenced a [dwc:Event].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:Georeferencer] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event].", lang="en")
+    comments=Literal("Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event].", lang="en")
 )
 
 # NOTE: An important one to me (and the origin of the whole group of XYZAgents). Came to me during a discussion with Andre Heughebaert. Someone might want to explicitly exclude all observations where identifications were done by AI.
@@ -783,6 +796,16 @@ createOP(
 # WARN: Later link to subclasses of dwc:Protocol to avoid cross-class usage of the term.
 g.add((DWCDP["usedFor"], OWL["inverseOf"], DWCDP["followed"]))
 
+createOP(
+    name="fundedBy",
+    namespace=DWCDP,
+    graph=g,
+    domain_list=[DWC["Provenance"]],
+    range_list=[DCTERMS["Agent"]],
+    pref_label=Literal("Funded By"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dwc:Agent] that funded it."),
+    examples=Literal("bb:FishesOfTheDeep123 dwcdp:fundedBy bb:MarineInstitute456 ."),
+)
 
 createOP(
     name="georeferencedBy",
