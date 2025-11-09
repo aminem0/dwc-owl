@@ -267,7 +267,7 @@ dwcdp:hasMedia rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/identificationsBy
 dwcdp:identificationsBy rdf:type owl:ObjectProperty ;
-                        rdfs:domain dwc:Identification ;
+                        rdfs:domain <http://rs.tdwg.org/eco/terms/Survey> ;
                         rdfs:range dcterms:Agent ;
                         rdfs:comment "The property [dwcdp:idenficationsBy] should not be confused with [dwcdp:identifiedBy], which has a different [rdfs:domain]. The former applies to a [eco:Survey], whereas the latter applies to a [dwc:Identification]."@en ;
                         rdfs:isDefinedBy dwcdp: ;
