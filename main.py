@@ -769,6 +769,17 @@ createOP(
     examples=Literal("bb:event123 dwcdp:conductedBy bb:agent456 .")
 )
 
+createOP(
+    name="datedMaterial",
+    namespace=DWCDP,
+    graph=g,
+    domain_list=[CHRONO["ChronometricAge"]],
+    range_list=[DWC["MaterialEntity"]],
+    pref_label=Literal("Dated Material"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [chrono:ChronometricAge] to the [dwc:MaterialEntity] it represents the age of.", lang="en"),
+    examples=Literal("bb:CarbonDating123 dwcdp:datedMaterial bb:FossilShell456 ."),
+)
+
 # NOTE: Could be redundant to bibo:editor, but bibo:editor has a domain of bibo:Document, not dcterms:BibliographicResource, so resources would need to be declared as both.
 # NOTE: I imagine this is related to the OWA.
 # createOP(

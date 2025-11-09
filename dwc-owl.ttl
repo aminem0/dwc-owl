@@ -176,6 +176,16 @@ dwcdp:conductedBy rdf:type owl:ObjectProperty ;
                   skos:prefLabel "Conducted By" .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/datedMaterial
+dwcdp:datedMaterial rdf:type owl:ObjectProperty ;
+                    rdfs:domain <http://rs.tdwg.org/chrono/terms/ChronometricAge> ;
+                    rdfs:range dwc:MaterialEntity ;
+                    rdfs:isDefinedBy dwcdp: ;
+                    skos:definition "An [owl:ObjectProperty] used to relate a [chrono:ChronometricAge] to the [dwc:MaterialEntity] it represents the age of."@en ;
+                    skos:example "bb:CarbonDating123 dwcdp:datedMaterial bb:FossilShell456 ." ;
+                    skos:prefLabel "Dated Material" .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/followed
 dwcdp:followed rdf:type owl:ObjectProperty ;
                owl:inverseOf dwcdp:usedFor ;
