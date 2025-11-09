@@ -518,6 +518,18 @@ create_CTOP(
 )
 
 create_CTOP(
+    name="OccurrenceAssertion",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Occurrence Assertion"),
+    subclass_list=[DWC["Assertion"]],
+    object_prop=DWCDP["about"],
+    use_inverse=False,
+    values_class=DWC["Occurrence"],
+    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."),
+)
+
+create_CTOP(
     name="OrganismAssertion",
     namespace=DWC,
     graph=g,
@@ -694,9 +706,9 @@ createOP(
     namespace=DWCDP,
     graph=g,
     domain_list=[DWC["Assertion"]],
-    range_list=[AC["Media"], CHRONO["ChronometricAge"], DWC["Event"], DWC["MaterialEntity"], DWC["NucleotideAnalysis"]],
+    range_list=[AC["Media"], CHRONO["ChronometricAge"], DWC["Event"], DWC["MaterialEntity"], DWC["NucleotideAnalysis"], DWC["Occurrence"], DWC["Organism"]],
     pref_label=Literal("About"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis]."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism].", lang="en"),
     examples=Literal("bb:assertion123 dwcdp:about bb:event456 .")
 )
 
@@ -707,7 +719,7 @@ createOP(
     domain_list=[DWC["Assertion"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Asserted By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the [dcterms:Agent] that asserted it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the [dcterms:Agent] that asserted it.", lang="en"),
     examples=Literal("bb:assertion123 dwcdp:assertedBy bb:agent456 ."),
 )
 
@@ -718,7 +730,7 @@ createOP(
     domain_list=[DCTERMS["BibliographicResource"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Authored By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that authored it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that authored it.", lang="en"),
     examples=Literal("bb:bibliographicResource123 dwcdp:authoredBy bb:agent456 .")
 )
 
@@ -730,7 +742,7 @@ createOP(
     domain_list=[DWC["Identification"]],
     range_list=[AC["Media"], DWC["MaterialEntity"], DWC["NucleotideAnalysis"], DWC["NucleotideSequence"], DWC["Occurrence"]],
     pref_label=Literal("Based On"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the entity on which it is based. These entities include [ac:Media], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:NucleotideSequence] and [dwc:Occurrence]."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the entity on which it is based. These entities include [ac:Media], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:NucleotideSequence] and [dwc:Occurrence].", lang="en"),
     examples=Literal("bb:identification123 dwcdp:basedOn bb:nucleotideSequence456 ."),
 )
 
@@ -742,7 +754,7 @@ createOP(
     domain_list=[AC["Media"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Commented By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that commented it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that commented it.", lang="en"),
     examples=Literal("bb:event123 dwcdp:commentedBy bb:agent456 .")
 )
 
@@ -753,7 +765,7 @@ createOP(
     domain_list=[DWC["Event"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Conducted By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Agent] that conducted it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Agent] that conducted it.", lang="en"),
     examples=Literal("bb:event123 dwcdp:conductedBy bb:agent456 .")
 )
 
@@ -781,7 +793,6 @@ createOP(
     examples=Literal("bb:bibliographicResource123 bibo:editor bb:agent456 .")
 )
 
-
 createOP(
     name="followed",
     namespace=DWCDP,
@@ -789,7 +800,7 @@ createOP(
     domain_list=[DWC["Assertion"], DWC["Event"], DWC["NucleotideAnalysis"]],
     range_list=[DWC["Protocol"]],
     pref_label=Literal("Followed"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [dwc:Event], [dwc:NucleotideAnalysis]"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [dwc:Event], [dwc:NucleotideAnalysis]", lang="en"),
     examples=Literal("bb:event123 dwcdp:followed bb:protocol456 ."),
 )
 
@@ -803,7 +814,7 @@ createOP(
     domain_list=[DWC["Provenance"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Funded By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dwc:Agent] that funded it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dwc:Agent] that funded it.", lang="en"),
     examples=Literal("bb:FishesOfTheDeep123 dwcdp:fundedBy bb:MarineInstitute456 ."),
 )
 
@@ -814,7 +825,7 @@ createOP(
     domain_list=[DWC["Event"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Georeferenced By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dwc:Agent] that georeferenced it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dwc:Agent] that georeferenced it.", lang="en"),
     examples=Literal("bb:event123 dwcdp:georeferencedBy bb:agent456 ."),
 )
 
@@ -828,7 +839,7 @@ createOP(
     pref_label=Literal("Happened During"),
     additional_list=[OWL["TransitiveProperty"]],
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to its parent [dwc:Event]."),
-    comments=Literal("This property is also an [owl:TransitiveProperty], which allows reasoners to infer hierarchical sampling patterns."),
+    comments=Literal("This property is also an [owl:TransitiveProperty], which allows reasoners to infer hierarchical sampling patterns.", lang="en"),
     examples=Literal("bb:event123 dwcdp:happenedDuring bb:event456 ."),
 )
 
@@ -840,7 +851,7 @@ createOP(
     domain_list=[DWC["Event"], DWC["MaterialEntity"]],
     range_list=[DWC["GeologicalContext"]],
     pref_label=Literal("Happened Within"),
-    definition=Literal("An [owl:ObjectProperty] used to relate either a [dwc:Event] or a [dwc:MaterialEntity] to the [dwc:GeologicalContext] within which it happened."),
+    definition=Literal("An [owl:ObjectProperty] used to relate either a [dwc:Event] or a [dwc:MaterialEntity] to the [dwc:GeologicalContext] within which it happened.", lang="en"),
     examples=Literal("bb:Event123 dwcdp:happenedWithin bb:GeologicalContext456 ."),
 )
 
@@ -851,8 +862,8 @@ createOP(
     domain_list=[CHRONO["ChronometricAge"], DCTERMS["Agent"], DWC["Event"], DWC["GeologicalContext"], DWC["MaterialEntity"], DWC["Occurrence"], DWC["OrganismInteraction"]],
     range_list=[AC["Media"]],
     pref_label=Literal("Has Media"),
-    definition=Literal("An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]"),
-    comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:isMediaOf], which allows reasoners queries to go through different ways."),
+    definition=Literal("An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]", lang="en"),
+    comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:isMediaOf], which allows reasoners queries to go through different ways.", lang="en"),
     examples=Literal("bb:event123 dwcdp:hasMedia bb:media456 ."),
 )
 
@@ -863,8 +874,20 @@ createOP(
     domain_list=[DWC["Identification"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Identified By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Agent] that identified it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Agent] that identified it.", lang="en"),
     examples=Literal("bb:identification123 dwcdp:identifiedBy bb:agent456 ."),
+)
+
+createOP(
+    name="identificationsBy",
+    namespace=DWCDP,
+    graph=g,
+    domain_list=[DWC["Identification"]],
+    range_list=[DCTERMS["Agent"]],
+    pref_label=Literal("Identifications By"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [eco:Survey] to the [dwc:Agent] who conducted the identifications.", lang="en"),
+    comments=Literal("The property [dwcdp:idenficationsBy] should not be confused with [dwcdp:identifiedBy], which has a different [rdfs:domain]. The former applies to a [eco:Survey], whereas the latter applies to a [dwc:Identification].", lang="en"),
+    examples=Literal("bb:ForestInsectSurvey123 dwcdp:identificationsBy bb:SkilledEntomologist456 ."),
 )
 
 createOP(
@@ -874,7 +897,7 @@ createOP(
     domain_list=[DWC["Occurrence"]],
     range_list=[DWC["Organism"]],
     pref_label=Literal("Involves"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [dwc:Organism] it involves."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [dwc:Organism] it involves.", lang="en"),
     examples=Literal("bb:occurrence123 dwcdp:involves bb:occurrence456 ."),
 )
 
@@ -887,8 +910,8 @@ createOP(
     range_list=[AC["Media"], DWC["MaterialEntity"]],
     additional_list=[OWL["TransitiveProperty"]],
     pref_label=Literal("Is Derived From"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."),
-    comments=Literal("Though the [rdf:domain] and [rdf:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived.", lang="en"),
+    comments=Literal("Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term.", lang="en"),
     examples=Literal("bb:material123 dwcdp:isDerivedFrom bb:material456 ."),
 )
 
@@ -899,8 +922,8 @@ createOP(
     domain_list=[AC["Media"], DCTERMS["BibliographicResource"], DWC["MaterialEntity"]],
     range_list=[AC["Media"], DCTERMS["BibliographicResource"], DWC["MaterialEntity"]],
     pref_label=Literal("Is Part Of"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."),
-    comments=Literal("Though the [rdf:domain] and [rdf:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived.", lang="en"),
+    comments=Literal("Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term.", lang="en"),
     examples=Literal("bb:material123 dwcdp:isPartOf bb:material456 ."),
 )
 
@@ -911,7 +934,7 @@ createOP(
     domain_list=[DWC["NucleotideAnalysis"]],
     range_list=[DWC["Event"]],
     pref_label=Literal("Material Collected During"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:Event] from which the material was collected."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:Event] from which the material was collected.", lang="en"),
     examples=Literal("bb:nucleotideAnalysis123 dwcdp:materialCollectedDuring bb:event456 ."),
 )
 
@@ -923,7 +946,7 @@ createOP(
     domain_list=[CHRONO["ChronometricAge"], DWC["Event"], DWC["Identification"], DWC["MaterialEntity"], DWC["Occurrence"], DWC["Organism"], DWC["OrganismInteraction"], DWC["Protocol"], ECO["Survey"]],
     range_list=[DCTERMS["BibliographicResource"]],
     pref_label=Literal("Mentionned In"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey].", lang="en"),
     examples=Literal("bb:FishTrawlMethod123 dwcdp:mentionnedIn bb:ScientificPaper456 ."),
 )
 
@@ -934,7 +957,7 @@ createOP(
     domain_list=[DWC["MaterialEntity"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Owned By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] which owns it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] which owns it.", lang="en"),
     examples=Literal("bb:materialEntity123 dwcdp:ownedBy bb:agent456 .")
 )
 
@@ -945,7 +968,7 @@ createOP(
     domain_list=[DWC["NucleotideAnalysis"]],
     range_list=[DWC["NucleotideSequence"]],
     pref_label=Literal("Produced"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:NucleotideSequence] to the [dwc:NucleotideAnalysis] that produced it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:NucleotideSequence] to the [dwc:NucleotideAnalysis] that produced it.", lang="en"),
     examples=Literal("bb:nucleotideAnalysis123 dwcdp:basedOn bb:nucleotideSequence456 ."),
 )
 
@@ -956,7 +979,7 @@ createOP(
     domain_list=[DCTERMS["BibliographicResource"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Published By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it.", lang="en"),
     examples=Literal("bb:bibliographicResource123 dwcdp:publishedBy bb:agent456 .")
 )
 
@@ -967,7 +990,7 @@ createOP(
     domain_list=[AC["Media"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Reviewed By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that reviewed it."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that reviewed it.", lang="en"),
     examples=Literal("bb:event123 dwcdp:reviewedBy bb:agent456 .")
 )
 
@@ -978,7 +1001,7 @@ createOP(
     domain_list=[DWC["MaterialEntity"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Stored In"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] in which it is stored."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] in which it is stored.", lang="en"),
     examples=Literal("bb:materialEntity123 dwcdp:storedIn bb:agent456 .")
 )
 
@@ -989,7 +1012,7 @@ createOP(
     domain_list=[ECO["SurveyTarget"]],
     range_list=[ECO["Survey"]],
     pref_label=Literal("Target For"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [eco:SurveyTarget] to the [eco:Survey] it is a target for."),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [eco:SurveyTarget] to the [eco:Survey] it is a target for.", lang="en"),
     examples=Literal("bb:IncludeAllFishOver5mm dwcdp:targetFor bb:FishTrawl456 .")
 )
 
@@ -1029,7 +1052,7 @@ createOP(
     pref_label=Literal("Relationship Of"),
     definition=Literal("An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves.", lang="en"),
     comments=Literal("To keep the interaction terms semantically correct and in order, the resource considered by this property should be the subject of the statement.", lang="en"),
-    examples=Literal("bb:RobberflyHuntingBee dwcdp:interactionBy bb:Robberfly123 ."),
+    examples=Literal("bb:Robberfly123HuntingBee456 dwcdp:interactionBy bb:Robberfly123 ."),
 )
 
 # NOTE: For the dwc:ResourceRelationship, preferably consider longer names and avoid reserved keywords.
