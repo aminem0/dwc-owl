@@ -882,7 +882,7 @@ createOP(
     name="identificationsBy",
     namespace=DWCDP,
     graph=g,
-    domain_list=[DWC["Identification"]],
+    domain_list=[ECO["Survey"]],
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Identifications By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [eco:Survey] to the [dwc:Agent] who conducted the identifications.", lang="en"),
