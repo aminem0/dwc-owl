@@ -713,6 +713,17 @@ createOP(
 )
 
 createOP(
+    name="analysisOf",
+    namespace=DWCDP,
+    graph=g,
+    domain_list=[DWC["NucleotideAnalysis"]],
+    range_list=[DWC["MaterialEntity"]],
+    pref_label=Literal("Analysis Of"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:MaterialEntity] of which it is an analysis of.", lang="en"),
+    examples=Literal("bb:PcrChain123 dwcdp:analysisOf bb:BoneFragment456 ."),
+)
+
+createOP(
     name="assertedBy",
     namespace=DWCDP,
     graph=g,
@@ -808,10 +819,10 @@ createOP(
     name="followed",
     namespace=DWCDP,
     graph=g,
-    domain_list=[DWC["Assertion"], DWC["Event"], DWC["NucleotideAnalysis"]],
+    domain_list=[DWC["Assertion"], DWC["Event"], DWC["NucleotideAnalysis"], DWC["Occurrence"], ECO["Survey"]],
     range_list=[DWC["Protocol"]],
     pref_label=Literal("Followed"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [dwc:Event], [dwc:NucleotideAnalysis]", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [dwc:Assertion], [dwc:Event], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]", lang="en"),
     examples=Literal("bb:event123 dwcdp:followed bb:protocol456 ."),
 )
 
