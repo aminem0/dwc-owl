@@ -59,7 +59,7 @@ g.add((ontology_uri, RDF["type"], OWL["Ontology"]))
 g.add((ontology_uri, OWL["versionInfo"], Literal("0.0.3")))
 g.add((ontology_uri, VANN["preferredNamespacePrefix"], Literal("dwcowl")))
 g.add((ontology_uri, DC["title"], Literal("Darwin Core OWL")))
-g.add((ontology_uri, DC["description"], Literal("Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin Semantic Web has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation.", lang="en")))
+g.add((ontology_uri, DC["description"], Literal("Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation.", lang="en")))
 g.add((ontology_uri, DC["created"], Literal("2025-04-03", datatype=XSD["date"])))
 
 #####################################################################################################
@@ -367,7 +367,21 @@ create_CTOP(
     use_inverse=True,
     values_class=DWC["Event"],
     definition=Literal("An instance of a [dcterms:Agent] that has conducted a [dwc:Event].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwcdp:Conductor] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event].", lang="en")
+    comments=Literal("Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwc:ConductorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event].", lang="en")
+)
+
+# NOTE: Possibly find a better name, it looks too much like the object property dwcdp:datedMaterial
+create_CTOP(
+    name="DatedMaterialEntity",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Dated Material Entity"),
+    subclass_list=[DWC["MaterialEntity"]],
+    object_prop=DWCDP["datedMaterial"],
+    use_inverse=True,
+    values_class=CHRONO["ChronometricAge"],
+    definition=Literal("An instance of a [dwc:MaterialEntity] that has been dated by a [chrono:ChronometricAge].", lang="en"),
+    comments=Literal("Due to the directionality of the property [dwcdp:datedMaterial], the class is defined in description logic as [dwc:DatedMaterialEntity] ≡ [dwc:MaterialEntity] ⊓ ∃([dwcdp:datedMaterial]⁻).[dwc:MaterialEntity].", lang="en")
 )
 
 # NOTE: Used bibo: property bibo:editor.
@@ -397,6 +411,19 @@ create_CTOP(
     pref_label=Literal("Funder Agent"),
     definition=Literal("An instance of a [dcterms:Agent] that has funded a [dwc:Provenance].", lang="en"),
     comments=Literal("Due to the directionality of the property [dwcdp:fundedBy], the class is defined in description logic as [dwcdp:FunderAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:fundedBy]⁻).[dwc:Provenance].", lang="en")
+)
+
+# NOTE: Possibly find a better name, a bit too long
+create_CTOP(
+    name="GeologicalContextMaterialEntity",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Geological Context Material Entity"),
+    subclass_list=[DWC["MaterialEntity"]],
+    object_prop=DWCDP["happenedWithin"],
+    use_inverse=False,
+    values_class=CHRONO["GeologicalContext"],
+    definition=Literal("An instance of a [dwc:MaterialEntity] that happened within a [dwc:GeologicalContext].", lang="en"),
 )
 
 create_CTOP(
@@ -819,10 +846,10 @@ createOP(
     name="followed",
     namespace=DWCDP,
     graph=g,
-    domain_list=[DWC["Assertion"], DWC["Event"], DWC["NucleotideAnalysis"], DWC["Occurrence"], ECO["Survey"]],
+    domain_list=[CHRONO["ChronometricAge"], DWC["Assertion"], DWC["Event"], DWC["NucleotideAnalysis"], DWC["MaterialEntity"], DWC["Occurrence"], ECO["Survey"]],
     range_list=[DWC["Protocol"]],
     pref_label=Literal("Followed"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [dwc:Assertion], [dwc:Event], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]", lang="en"),
     examples=Literal("bb:event123 dwcdp:followed bb:protocol456 ."),
 )
 

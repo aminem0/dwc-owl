@@ -14,7 +14,7 @@
 
 <http://bioboum.ca/dwc-owl.owl> rdf:type owl:Ontology ;
                                  dc:created "2025-04-03"^^xsd:date ;
-                                 dc:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin Semantic Web has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
+                                 dc:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
                                  dc:title "Darwin Core OWL" ;
                                  vann:preferredNamespacePrefix "dwcowl" ;
                                  owl:versionInfo "0.0.3" .
@@ -200,8 +200,10 @@ dwcdp:datedMaterial rdf:type owl:ObjectProperty ;
 dwcdp:followed rdf:type owl:ObjectProperty ;
                owl:inverseOf dwcdp:usedFor ;
                rdfs:domain [ rdf:type owl:Class ;
-                             owl:unionOf ( dwc:Assertion
+                             owl:unionOf ( <http://rs.tdwg.org/chrono/terms/ChronometricAge>
+                                           dwc:Assertion
                                            dwc:Event
+                                           dwc:MaterialEntity
                                            dwc:NucleotideAnalysis
                                            dwc:Occurrence
                                            <http://rs.tdwg.org/eco/terms/Survey>
@@ -209,7 +211,7 @@ dwcdp:followed rdf:type owl:ObjectProperty ;
                            ] ;
                rdfs:range dwc:Protocol ;
                rdfs:isDefinedBy dwcdp: ;
-               skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [dwc:Assertion], [dwc:Event], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
+               skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
                skos:example "bb:event123 dwcdp:followed bb:protocol456 ." ;
                skos:prefLabel "Followed" .
 
@@ -1909,6 +1911,10 @@ dcterms:Location rdf:type owl:Class ;
                                                   skos:prefLabel "Chronometric Age" .
 
 
+###  http://rs.tdwg.org/chrono/terms/GeologicalContext
+<http://rs.tdwg.org/chrono/terms/GeologicalContext> rdf:type owl:Class .
+
+
 ###  http://rs.tdwg.org/dwc/terms/AgentMedia
 dwc:AgentMedia rdf:type owl:Class ;
                owl:equivalentClass [ rdf:type owl:Restriction ;
@@ -1998,10 +2004,24 @@ dwc:ConductorAgent rdf:type owl:Class ;
                                          owl:someValuesFrom dwc:Event
                                        ] ;
                    rdfs:subClassOf dcterms:Agent ;
-                   rdfs:comment "Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwcdp:Conductor] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event]."@en ;
+                   rdfs:comment "Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwc:ConductorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event]."@en ;
                    rdfs:isDefinedBy dwc: ;
                    skos:definition "An instance of a [dcterms:Agent] that has conducted a [dwc:Event]."@en ;
                    skos:prefLabel "Conductor Agent" .
+
+
+###  http://rs.tdwg.org/dwc/terms/DatedMaterialEntity
+dwc:DatedMaterialEntity rdf:type owl:Class ;
+                        owl:equivalentClass [ rdf:type owl:Restriction ;
+                                              owl:onProperty [ owl:inverseOf dwcdp:datedMaterial
+                                                             ] ;
+                                              owl:someValuesFrom <http://rs.tdwg.org/chrono/terms/ChronometricAge>
+                                            ] ;
+                        rdfs:subClassOf dwc:MaterialEntity ;
+                        rdfs:comment "Due to the directionality of the property [dwcdp:datedMaterial], the class is defined in description logic as [dwc:DatedMaterialEntity] ≡ [dwc:MaterialEntity] ⊓ ∃([dwcdp:datedMaterial]⁻).[dwc:MaterialEntity]."@en ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "An instance of a [dwc:MaterialEntity] that has been dated by a [chrono:ChronometricAge]."@en ;
+                        skos:prefLabel "Dated Material Entity" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/EditorAgent
@@ -2100,6 +2120,18 @@ dwc:GeologicalContext rdf:type owl:Class ;
                       skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
                       skos:example "`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`"@en ;
                       skos:prefLabel "Geological Context" .
+
+
+###  http://rs.tdwg.org/dwc/terms/GeologicalContextMaterialEntity
+dwc:GeologicalContextMaterialEntity rdf:type owl:Class ;
+                                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                          owl:onProperty dwcdp:happenedWithin ;
+                                                          owl:someValuesFrom <http://rs.tdwg.org/chrono/terms/GeologicalContext>
+                                                        ] ;
+                                    rdfs:subClassOf dwc:MaterialEntity ;
+                                    rdfs:isDefinedBy dwc: ;
+                                    skos:definition "An instance of a [dwc:MaterialEntity] that happened within a [dwc:GeologicalContext]."@en ;
+                                    skos:prefLabel "Geological Context Material Entity" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/GeologicalContextMedia
