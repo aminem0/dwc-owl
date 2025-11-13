@@ -160,6 +160,9 @@ dwcdp:basedOn rdf:type owl:ObjectProperty ;
                                          dwc:Occurrence
                                        )
                          ] ;
+              owl:propertyChainAxiom ( dwcdp:basedOn
+                                       dwcdp:isPartOf
+                                     ) ;
               rdfs:isDefinedBy dwcdp: ;
               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the entity on which it is based. These entities include [ac:Media], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:NucleotideSequence] and [dwc:Occurrence]."@en ;
               skos:example "bb:identification123 dwcdp:basedOn bb:nucleotideSequence456 ." ;
@@ -2646,6 +2649,11 @@ rdf:Statement rdf:type owl:Class .
 <http://bioboum.ca/Agnes> rdf:type owl:NamedIndividual .
 
 
+###  http://bioboum.ca/BearLowerJaw123
+<http://bioboum.ca/BearLowerJaw123> rdf:type owl:NamedIndividual ;
+                                    dwcdp:basedOn <http://bioboum.ca/PieceOfRock456> .
+
+
 ###  http://bioboum.ca/BeeVisitingFlower
 <http://bioboum.ca/BeeVisitingFlower> rdf:type owl:NamedIndividual ;
                                       dwcdp:happenedDuring <http://bioboum.ca/Site123> .
@@ -2655,6 +2663,10 @@ rdf:Statement rdf:type owl:Class .
 <http://bioboum.ca/Bibi> rdf:type owl:NamedIndividual ,
                                   dcterms:BibliographicResource ;
                          dwcdp:authoredBy <http://bioboum.ca/Agnes> .
+
+
+###  http://bioboum.ca/BiggerRock789
+<http://bioboum.ca/BiggerRock789> rdf:type owl:NamedIndividual .
 
 
 ###  http://bioboum.ca/Bobo
@@ -2736,6 +2748,11 @@ rdf:Statement rdf:type owl:Class .
                                                                        dwcdp:isMediaOf <http://bioboum.ca/Peter123> ,
                                                                                        <http://bioboum.ca/SeineNet789> ,
                                                                                        <http://bioboum.ca/Sunfish456> .
+
+
+###  http://bioboum.ca/PieceOfRock456
+<http://bioboum.ca/PieceOfRock456> rdf:type owl:NamedIndividual ;
+                                   dwcdp:isPartOf <http://bioboum.ca/BiggerRock789> .
 
 
 ###  http://bioboum.ca/SeineNet789
