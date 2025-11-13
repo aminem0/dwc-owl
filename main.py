@@ -724,6 +724,18 @@ declare_disjoint(
     graph=g
 )
 
+from rdflib.collection import Collection
+
+# NOTE: Try a property chain
+# For a test case: dwcdp:basedOn o dwcdp:isPartOf -> basedOn
+prop_chain = BNode()
+Collection(g, prop_chain, [DWCDP["basedOn"], DWCDP["isPartOf"]])
+g.add((DWCDP["basedOn"], OWL.propertyChainAxiom, prop_chain))
+
+# Example individuals
+g.add((BB["BearLowerJaw123"], DWCDP["basedOn"], BB["PieceOfRock456"]))
+g.add((BB["PieceOfRock456"], DWCDP["isPartOf"], BB["BiggerRock789"]))
+
 #####################################################################################################
 # BEGIN OBJECT PROPERTY DEFINITIONS
 #####################################################################################################
