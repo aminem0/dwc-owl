@@ -727,7 +727,7 @@ declare_disjoint(
 from rdflib.collection import Collection
 
 # NOTE: Try a property chain
-# For a test case: dwcdp:basedOn o dwcdp:isPartOf -> basedOn
+# For a test case: dwcdp:basedOn o dwcdp:isPartOf -> dwcdp:basedOn
 prop_chain = BNode()
 Collection(g, prop_chain, [DWCDP["basedOn"], DWCDP["isPartOf"]])
 g.add((DWCDP["basedOn"], OWL.propertyChainAxiom, prop_chain))
