@@ -58,6 +58,7 @@ ontology_uri = URIRef("http://bioboum.ca/dwc-owl.owl")
 g.add((ontology_uri, RDF["type"], OWL["Ontology"]))
 g.add((ontology_uri, OWL["versionInfo"], Literal("0.0.3")))
 g.add((ontology_uri, VANN["preferredNamespacePrefix"], Literal("dwcowl")))
+g.add((ontology_uri, VANN["example"], URIRef("https://github.com/aminem0/dwc-owl-rdf")))
 g.add((ontology_uri, DC["title"], Literal("Darwin Core OWL")))
 g.add((ontology_uri, DC["description"], Literal("Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation.", lang="en")))
 g.add((ontology_uri, DC["created"], Literal("2025-04-03", datatype=XSD["date"])))
@@ -2419,7 +2420,7 @@ createDP(
     version_of_s="https://w3id.org/mixs/0000014",
 )
 
-from utils import createDP2
+from utils import createEDP
 
 # relenum_list = [Literal("aerobic"), Literal("anaerobic")]
 
@@ -2445,14 +2446,16 @@ from utils import createDP2
 #     version_of_s="https://w3id.org/mixs/0000015",
 # )
 
-createDP2(
+# WARN: I added the comment to be clearer
+createEDP(
     name="0000015",
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    oneOf_list=[Literal("aerobic"), Literal("anaerobic"), Literal("thirdOption")],
+    oneOf_list=[Literal("aerobe"), Literal("anaerobe"), Literal("facultative"), Literal("microaerophilic"), Literal("microanaerobe"), Literal("obligate aerobe"), Literal("obligate anaerobe")],
     pref_label=Literal("Relation To Oxygen"),
-    definition=Literal("Text will come here later.", lang="en"),
+    definition=Literal("Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments.", lang="en"),
+    comments=Literal("This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/]", lang="en"),
     examples=Literal("`aerobic`; `anaerobic`"),
     version_of_s="https://w3id.org/mixs/0000015",
 )
@@ -2731,13 +2734,13 @@ g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingToID"], BB[
 #####################################################################################################
 
 # Serialize the ontology to xml.
-# g.serialize(destination="dwc-owl.owl", format="xml")
+# g.serialize(destination="dwc-owl.owl", format="pretty-xml")
 g.serialize(destination="dwc-owl.ttl", format="turtle")
 
 # NOTE: Use ROBOT to use the OWL API directly, better than having to go into Protege everytime.
 # Obtained with curl -L -o robot.jar https://github.com/ontodev/robot/releases/download/v1.9.8/robot.jar
 # Put in .gitgnore since it is borderline LFS.
-# subprocess.run(["java", "-jar", "robot.jar", "convert", "--input", "dwc-owl.owl", "--output", "dwc-owl.ttl"])
+subprocess.run(["java", "-jar", "robot.jar", "convert", "--input", "dwc-owl.ttl", "--output", "dwc-owl-v2.ttl"])
 
 #####################################################################################################
 # BEGIN PYLODE DOCUMENTATION GENERATION

@@ -186,12 +186,13 @@ def createDP(
         for prop_type in additional_list:
             graph.add((dp_uri, RDF["type"], prop_type))
 
-def createDP2(
+
+# TEST: Function that creates an owl:DatatypeProperty but allows only a finite set of possibilities
+def createEDP(
         name: str,
         namespace: Namespace,
         graph: Graph,
         domain_list: list[Node],
-#        range_list: list[Node],
         oneOf_list: list[Node],
         pref_label: Literal,
         version_of_s: str,
@@ -252,28 +253,9 @@ def createDP2(
         # Define the domain of the owl:DatatypeProperty
         graph.add((dp_uri, RDFS["domain"], domain_union_class))
 
-    # # If just one range, take it and go.
-    # if len(range_list) == 1:
-    #     graph.add((dp_uri, RDFS["range"], range_list[0]))
-
-    # # Otherwise do the blank node process.
-    # else:
-    #     # Create blank node to contain union list
-    #     range_bnode = BNode()
-
-    #     # Fill it with
-    #     Collection(graph, range_bnode, range_list)
-
-    #     # Define the union of classes for the range datatype
-    #     range_union_datatype = BNode()
-    #     graph.add((range_union_datatype, RDF["type"], RDFS["Datatype"]))
-    #     graph.add((range_union_datatype, OWL["unionOf"], range_bnode))
-
-    #     # Define the range of the owl:DatatypeProperty
-    #     graph.add((dp_uri, RDFS["range"], range_union_datatype))
-
-    # WARN: Here goes
-    # If enumerated literals are provided, build an OWL datatype with owl:oneOf
+    # WARN: Here goes a rewrite to consider an enumeration of all allowed datatypes
+    # If enumerated literals are provided, build an OWL datatype with owl:oneOf and
+    # a Collection of allowable litterals
     if oneOf_list:
         # Create a blank node for the enumerated datatype
         enum_datatype = BNode()

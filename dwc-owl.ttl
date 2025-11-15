@@ -64,6 +64,7 @@ bb:dwc-owl.owl a owl:Ontology ;
     dc:created "2025-04-03"^^xsd:date ;
     dc:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
     dc:title "Darwin Core OWL" ;
+    vann:example <https://github.com/aminem0/dwc-owl-rdf> ;
     vann:preferredNamespacePrefix "dwcowl" ;
     owl:versionInfo "0.0.3" .
 
@@ -379,10 +380,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -1403,11 +1404,12 @@ mixs:0000014 a owl:DatatypeProperty ;
 
 mixs:0000015 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000015 ;
+    rdfs:comment "This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/]"@en ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
     rdfs:range [ a rdfs:Datatype ;
-            owl:oneOf ( "aerobic" "anaerobic" "thirdOption" ) ] ;
-    skos:definition "Text will come here later."@en ;
+            owl:oneOf ( "aerobe" "anaerobe" "facultative" "microaerophilic" "microanaerobe" "obligate aerobe" "obligate anaerobe" ) ] ;
+    skos:definition "Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments."@en ;
     skos:example "`aerobic`; `anaerobic`" ;
     skos:prefLabel "Relation To Oxygen" .
 
