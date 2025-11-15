@@ -6,7 +6,7 @@ import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
-from utils import createOC, createDP, createOP, create_CTOP, declare_disjoint
+from utils import create_CTOP, createDP, createEDP, createOC, createOP, declare_disjoint
 
 #####################################################################################################
 # BEGIN ONTOLOGY DEFINITION
@@ -2420,32 +2420,6 @@ createDP(
     version_of_s="https://w3id.org/mixs/0000014",
 )
 
-from utils import createEDP
-
-# relenum_list = [Literal("aerobic"), Literal("anaerobic")]
-
-# relenum_uri = URIRef("https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/")
-# g.add((relenum_uri, RDF["type"], RDFS["Datatype"]))
-
-# # Create RDF list of the enumeration values
-# enum_list_bnode = BNode()
-# Collection(g, enum_list_bnode, relenum_list)
-
-# # Attach owl:oneOf list to the datatype node
-# g.add((relenum_uri, OWL["oneOf"], enum_list_bnode))
-
-# createDP(
-#     name="0000015",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[relenum_uri],
-#     pref_label=Literal("Relation To Oxygen"),
-#     definition=Literal("Text will come here later.", lang="en"),
-#     examples=Literal("`aerobic`; `anaerobic`"),
-#     version_of_s="https://w3id.org/mixs/0000015",
-# )
-
 # WARN: I added the comment to be clearer
 createEDP(
     name="0000015",
@@ -2456,7 +2430,7 @@ createEDP(
     pref_label=Literal("Relation To Oxygen"),
     definition=Literal("Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments.", lang="en"),
     comments=Literal("This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/]", lang="en"),
-    examples=Literal("`aerobic`; `anaerobic`"),
+    examples=Literal("`aerobe`"),
     version_of_s="https://w3id.org/mixs/0000015",
 )
 
@@ -2469,6 +2443,21 @@ g.add((BB["Moleco1"], MIXS["0000015"], Literal("aerobic")))
 #
 g.add((BB["Moleco2"], RDF["type"], DWC["MolecularProtocol"]))
 g.add((BB["Moleco2"], MIXS["0000015"], Literal("jumpluff")))
+
+# WARN: MiXS page has no mention of OBI.
+createDP(
+    name="0000016",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("sample Material Processing"),
+    definition=Literal("A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed.", lang="en"),
+    examples=Literal("`filtering of seawater, storing samples in ethanol`"),
+    version_of_s="https://w3id.org/mixs/0000016",
+)
+
+
 
 
 # NOTE: I copied the example from definition to the example section.

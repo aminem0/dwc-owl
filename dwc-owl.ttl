@@ -1410,8 +1410,17 @@ mixs:0000015 a owl:DatatypeProperty ;
     rdfs:range [ a rdfs:Datatype ;
             owl:oneOf ( "aerobe" "anaerobe" "facultative" "microaerophilic" "microanaerobe" "obligate aerobe" "obligate anaerobe" ) ] ;
     skos:definition "Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments."@en ;
-    skos:example "`aerobic`; `anaerobic`" ;
+    skos:example "`aerobe`" ;
     skos:prefLabel "Relation To Oxygen" .
+
+mixs:0000016 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:0000016 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed."@en ;
+    skos:example "`filtering of seawater, storing samples in ethanol`" ;
+    skos:prefLabel "sample Material Processing" .
 
 mixs:0000020 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000020 ;
