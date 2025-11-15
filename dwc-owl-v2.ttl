@@ -191,12 +191,17 @@ dwcdp:basedOn rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/commentedBy
 dwcdp:commentedBy rdf:type owl:ObjectProperty ;
+                  owl:inverseOf dwcdp:commentedOn ;
                   rdfs:domain ac:Media ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that commented it."@en ;
                   skos:example "bb:event123 dwcdp:commentedBy bb:agent456 ." ;
                   skos:prefLabel "Commented By" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/commentedOn
+dwcdp:commentedOn rdf:type owl:ObjectProperty .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/conductedBy
@@ -2085,8 +2090,7 @@ dwc:ChronometricAgeAssertion rdf:type owl:Class ;
 ###  http://rs.tdwg.org/dwc/terms/CommenterAgent
 dwc:CommenterAgent rdf:type owl:Class ;
                    owl:equivalentClass [ rdf:type owl:Restriction ;
-                                         owl:onProperty [ owl:inverseOf dwcdp:commentedBy
-                                                        ] ;
+                                         owl:onProperty dwcdp:commentedOn ;
                                          owl:someValuesFrom ac:Media
                                        ] ;
                    rdfs:subClassOf dcterms:Agent ;
@@ -2703,13 +2707,12 @@ bb:Midio rdf:type owl:NamedIndividual ;
 ###  http://bioboum.ca/Moleco1
 bb:Moleco1 rdf:type owl:NamedIndividual ,
                     dwc:MolecularProtocol ;
-           <https://w3id.org/mixs/0000015> "aerobic" .
+           <https://w3id.org/mixs/0000015> "aerobe" .
 
 
 ###  http://bioboum.ca/Moleco2
 bb:Moleco2 rdf:type owl:NamedIndividual ,
-                    dwc:MolecularProtocol ;
-           <https://w3id.org/mixs/0000015> "jumpluff" .
+                    dwc:MolecularProtocol .
 
 
 ###  http://bioboum.ca/Occurro

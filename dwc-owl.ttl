@@ -51,10 +51,9 @@ bb:Mato1 a dwc:MaterialEntity ;
 bb:Midio dwcdp:isMediaOf bb:Occurro .
 
 bb:Moleco1 a dwc:MolecularProtocol ;
-    mixs:0000015 "aerobic" .
+    mixs:0000015 "aerobe" .
 
-bb:Moleco2 a dwc:MolecularProtocol ;
-    mixs:0000015 "jumpluff" .
+bb:Moleco2 a dwc:MolecularProtocol .
 
 bb:PictureOfPeter123CatchingSunfish456FromSeineNet789 dwcdp:isMediaOf bb:Peter123,
         bb:SeineNet789,
@@ -214,8 +213,7 @@ dwc:CommenterAgent a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf dcterms:Agent ;
     owl:equivalentClass [ a owl:Restriction ;
-            owl:onProperty [ a owl:ObjectProperty ;
-                    owl:inverseOf dwcdp:commentedBy ] ;
+            owl:onProperty dwcdp:commentedOn ;
             owl:someValuesFrom ac:Media ] ;
     skos:definition "An instance of a [dcterms:Agent] that has commented a [dwc:Media]."@en ;
     skos:prefLabel "Commenter Agent" .
@@ -1382,6 +1380,8 @@ dwcdp:commentedBy a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that commented it."@en ;
     skos:example "bb:event123 dwcdp:commentedBy bb:agent456 ." ;
     skos:prefLabel "Commented By" .
+
+dwcdp:commentedOn owl:inverseOf dwcdp:commentedBy .
 
 dwcdp:conductedBy a owl:ObjectProperty ;
     rdfs:domain dwc:Event ;

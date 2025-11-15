@@ -345,14 +345,19 @@ createCTOP(
     comments=Literal("Due to the directionality of the property [dwcdp:authoredBy], the class is defined in description logic as [dwcdp:AuthorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:authoredBy]⁻).[dcterms:BibliographicResource].", lang="en")
 )
 
+# WARN: Related to WebVOWL
+# TEST: Trying an inverse object property
+
+g.add((DWCDP["commentedOn"], OWL["inverseOf"], DWCDP["commentedBy"]))
+
 createCTOP(
     name="CommenterAgent",
     namespace=DWC,
     graph=g,
     pref_label=Literal("Commenter Agent"),
     subclass_list=[DCTERMS["Agent"]],
-    object_prop=DWCDP["commentedBy"],
-    use_inverse=True,
+    object_prop=DWCDP["commentedOn"],
+    use_inverse=False,
     values_class=AC["Media"],
     definition=Literal("An instance of a [dcterms:Agent] that has commented a [dwc:Media].", lang="en"),
     comments=Literal("Due to the directionality of the property [dwcdp:commentedBy], the class is defined in description logic as [dwcdp:Commenter] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:commentedBy]⁻).[ac:Media].", lang="en")
@@ -2509,10 +2514,10 @@ g.add((BB["Datato"], RDF["type"], RDFS["Datatype"]))
 
 # TEST: Small instances
 g.add((BB["Moleco1"], RDF["type"], DWC["MolecularProtocol"]))
-g.add((BB["Moleco1"], MIXS["0000015"], Literal("aerobic")))
+g.add((BB["Moleco1"], MIXS["0000015"], Literal("aerobe")))
 #
 g.add((BB["Moleco2"], RDF["type"], DWC["MolecularProtocol"]))
-g.add((BB["Moleco2"], MIXS["0000015"], Literal("jumpluff")))
+# g.add((BB["Moleco2"], MIXS["0000015"], Literal("jumpluff")))
 
 # WARN: MiXS page has no mention of OBI.
 createDP(
