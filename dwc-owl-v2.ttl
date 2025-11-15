@@ -1900,33 +1900,6 @@ eco:verbatimSiteNames rdf:type owl:DatatypeProperty ;
 
 ###  http://purl.org/dc/terms/Agent
 dcterms:Agent rdf:type owl:Class ;
-              rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                       owl:onProperty dwc:agentRemarks ;
-                                                       owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                     ]
-                                                     [ rdf:type owl:Restriction ;
-                                                       owl:onProperty dwc:preferredAgentName ;
-                                                       owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                     ]
-                                                     [ rdf:type owl:Restriction ;
-                                                       owl:onProperty dwc:agentID ;
-                                                       owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                     ]
-                                                     [ rdf:type owl:Restriction ;
-                                                       owl:onProperty dwc:agentType ;
-                                                       owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                     ]
-                                                     [ rdf:type owl:Restriction ;
-                                                       owl:onProperty dwc:agentRemarks ;
-                                                       owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                     ]
-                                                     [ rdf:type owl:Restriction ;
-                                                       owl:onProperty dwc:preferredAgentName ;
-                                                       owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                     ]
-                                                   ) ;
-                                rdf:type owl:Class
-                              ] ;
               dcterms:isVersionOf dcterms:Agent ;
               rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
               rdfs:isDefinedBy dcterms: ;
@@ -1954,13 +1927,6 @@ dcterms:Location rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/ac/terms/Media
 ac:Media rdf:type owl:Class ;
-         rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:radius ;
-                                                  owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                ]
-                                              ) ;
-                           rdf:type owl:Class
-                         ] ;
          dcterms:isVersionOf ac:Media ;
          rdfs:comment "An instance of digital textual media may be better represented as a [dcterms:BibliographicResource]."@en ;
          rdfs:isDefinedBy ac: ;
@@ -1998,13 +1964,6 @@ dwc:AgentMedia rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/Assertion
 dwc:Assertion rdf:type owl:Class ;
-              rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                       owl:onProperty dwcdp:assertedBy ;
-                                                       owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                     ]
-                                                   ) ;
-                                rdf:type owl:Class
-                              ] ;
               dcterms:isVersionOf dwc:MeasurementOrFact ;
               dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
               rdfs:isDefinedBy dwc: ;
@@ -2109,25 +2068,6 @@ dwc:EditorAgent rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/Event
 dwc:Event rdf:type owl:Class ;
-          rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                   owl:onProperty dwcdp:happenedDuring ;
-                                                   owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                 ]
-                                                 [ rdf:type owl:Restriction ;
-                                                   owl:onProperty dwc:preferredEventName ;
-                                                   owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                 ]
-                                                 [ rdf:type owl:Restriction ;
-                                                   owl:onProperty dwc:eventID ;
-                                                   owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                 ]
-                                                 [ rdf:type owl:Restriction ;
-                                                   owl:onProperty dwc:preferredEventName ;
-                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                 ]
-                                               ) ;
-                            rdf:type owl:Class
-                          ] ;
           dcterms:isVersionOf dwc:Event ;
           dcterms:references <http://rs.tdwg.org/dwc/terms/version/Event-2023-09-18> ;
           rdfs:isDefinedBy dwc: ;
@@ -2176,13 +2116,6 @@ dwc:FunderAgent rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/GeologicalContext
 dwc:GeologicalContext rdf:type owl:Class ;
-                      rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                               owl:onProperty dwc:geologicalContextID ;
-                                                               owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                           ) ;
-                                        rdf:type owl:Class
-                                      ] ;
                       dcterms:isVersionOf dwc:GeologicalContext ;
                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
                       rdfs:isDefinedBy dwc: ;
@@ -2368,49 +2301,6 @@ dwc:MolecularProtocol rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/NucleotideAnalysis
 dwc:NucleotideAnalysis rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:materialEntityID ;
-                                                                owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:readCount ;
-                                                                owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:totalReadCount ;
-                                                                owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:eventID ;
-                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:molecularProtocolID ;
-                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:nucleotideAnalysisID ;
-                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:nucleotideSequenceID ;
-                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:materialEntityID ;
-                                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:readCount ;
-                                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:totalReadCount ;
-                                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
-                                       ] ;
                        dcterms:isVersionOf dwc:NucleotideAnalysis ;
                        rdfs:isDefinedBy dwc: ;
                        skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
@@ -2431,21 +2321,6 @@ dwc:NucleotideAnalysisAssertion rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/NucleotideSequence
 dwc:NucleotideSequence rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:nucleotideSequenceRemarks ;
-                                                                owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:nucleotideSequenceID ;
-                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:sequence ;
-                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
-                                       ] ;
                        dcterms:isVersionOf dwc:NucleotideSequence ;
                        rdfs:isDefinedBy dwc: ;
                        skos:definition "A digital representation of a nucleotide sequence."@en ;
@@ -2488,13 +2363,6 @@ dwc:OccurrenceMedia rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/Organism
 dwc:Organism rdf:type owl:Class ;
-             rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                      owl:onProperty dwc:organismID ;
-                                                      owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                    ]
-                                                  ) ;
-                               rdf:type owl:Class
-                             ] ;
              dcterms:isVersionOf dwc:Organism ;
              dcterms:references <http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18> ;
              rdfs:comment "Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class."@en ;
@@ -2518,13 +2386,6 @@ dwc:OrganismAssertion rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismInteraction
 dwc:OrganismInteraction rdf:type owl:Class ;
-                        rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty dwc:organismInteractionID ;
-                                                                 owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                               ]
-                                                             ) ;
-                                          rdf:type owl:Class
-                                        ] ;
                         dcterms:isVersionOf dwc:OrganismInteraction ;
                         rdfs:comment "Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s."@en ;
                         rdfs:isDefinedBy dwc: ;
@@ -2604,29 +2465,6 @@ dwc:ReviewerAgent rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/UsagePolicy
 dwc:UsagePolicy rdf:type owl:Class ;
-                rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                         owl:onProperty dc:rights ;
-                                                         owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                       ]
-                                                       [ rdf:type owl:Restriction ;
-                                                         owl:onProperty dcterms:rights ;
-                                                         owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                       ]
-                                                       [ rdf:type owl:Restriction ;
-                                                         owl:onProperty dwc:usagePolicyID ;
-                                                         owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                       ]
-                                                       [ rdf:type owl:Restriction ;
-                                                         owl:onProperty dc:rights ;
-                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                       ]
-                                                       [ rdf:type owl:Restriction ;
-                                                         owl:onProperty dcterms:rights ;
-                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                       ]
-                                                     ) ;
-                                  rdf:type owl:Class
-                                ] ;
                 dcterms:isVersionOf dwc:UsagePolicy ;
                 rdfs:comment "This is a convenience class to group related properties."@en ;
                 rdfs:isDefinedBy dwc: ;
@@ -2664,17 +2502,6 @@ dwcdp:EventProtocol rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/eco/terms/Survey
 eco:Survey rdf:type owl:Class ;
-           rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                    owl:onProperty dwc:eventID ;
-                                                    owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                  ]
-                                                  [ rdf:type owl:Restriction ;
-                                                    owl:onProperty dwc:surveyID ;
-                                                    owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                  ]
-                                                ) ;
-                             rdf:type owl:Class
-                           ] ;
            dcterms:isVersionOf eco:Survey ;
            rdfs:comment "This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget]."@en ;
            rdfs:isDefinedBy eco: ;
@@ -2685,17 +2512,6 @@ eco:Survey rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/eco/terms/SurveyTarget
 eco:SurveyTarget rdf:type owl:Class ;
-                 rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                          owl:onProperty dwc:surveyID ;
-                                                          owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                        ]
-                                                        [ rdf:type owl:Restriction ;
-                                                          owl:onProperty dwc:surveyTargetID ;
-                                                          owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                        ]
-                                                      ) ;
-                                   rdf:type owl:Class
-                                 ] ;
                  dcterms:isVersionOf eco:SurveyTarget ;
                  rdfs:isDefinedBy eco: ;
                  skos:definition "An intended scope for [dwc:Occurrence]s in a [eco:Survey]."@en ;

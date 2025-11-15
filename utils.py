@@ -2,6 +2,15 @@ from rdflib import BNode, Graph, Literal, Namespace, Node, URIRef
 from rdflib.collection import Collection
 from rdflib.namespace import DCTERMS, OWL, RDF, RDFS, SKOS, XSD
 
+# WARN: Rewriting this function.
+# For some reason, card0_restrictions seems like a useless parameter.
+# It is something that is already stated by stating that a property has
+# a specific domain.
+# The only notions that we "should" take into account is:
+# owl:cardinality of 1 for properties that NEED to be present
+# owl:maxCardinality of 1 for properties that can be absent, but if they
+# are present, MUST NOT EXCEED 1
+# Other properties should be valid under the OWA
 def createOC(
         name: str,
         namespace: Namespace,
@@ -13,8 +22,7 @@ def createOC(
         comments: Literal | None = None,
         examples: Literal | None = None,
         card1_restrictions: list[Node] | None = None,
-        card0_restrictions: list[Node] | None = None,
-        card01_restrictions: list[Node] | None = None,
+        maxcard1_restrictions: list[Node] | None = None,
         references_s: str | None = None,
 ) -> None:
     """
@@ -49,7 +57,7 @@ def createOC(
         for ro_class in subclass_list:
             graph.add((class_uri, RDFS["subClassOf"], ro_class))
 
-    if any(restriction is not None for restriction in (card1_restrictions, card0_restrictions, card01_restrictions)):
+    if any(restriction is not None for restriction in (card1_restrictions, maxcard1_restrictions)):
         # OWL Restrictions
         entity_pylist = []
 
@@ -61,22 +69,8 @@ def createOC(
                 graph.add((R_BNode, OWL["cardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
                 entity_pylist.append(R_BNode)
 
-        if card0_restrictions:
-            for property in card0_restrictions:
-                R_BNode = BNode()
-                graph.add((R_BNode, RDF["type"], OWL["Restriction"]))
-                graph.add((R_BNode, OWL["onProperty"], property))
-                graph.add((R_BNode, OWL["minCardinality"], Literal(0, datatype=XSD["nonNegativeInteger"])))
-                entity_pylist.append(R_BNode)
-
-        if card01_restrictions:
-            for property in card01_restrictions:
-                R0_BNode = BNode()
-                graph.add((R0_BNode, RDF["type"], OWL["Restriction"]))
-                graph.add((R0_BNode, OWL["onProperty"], property))
-                graph.add((R0_BNode, OWL["minCardinality"], Literal(0, datatype=XSD["nonNegativeInteger"])))
-                entity_pylist.append(R0_BNode)
-
+        if maxcard1_restrictions:
+            for property in maxcard1_restrictions:
                 R1_BNode = BNode()
                 graph.add((R1_BNode, RDF["type"], OWL["Restriction"]))
                 graph.add((R1_BNode, OWL["onProperty"], property))

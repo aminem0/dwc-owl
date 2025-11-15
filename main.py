@@ -77,7 +77,7 @@ createOC(
     comments=Literal("An instance of digital textual media may be better represented as a [dcterms:BibliographicResource].", lang="en"),
     examples=Literal("`dcmi:Sound`; `dcmi:StillImage`; `dcmi:MovingImage`"),
     # card01_restrictions=[AC["captureDevice"], AC["digitizationDate"], AC["frameRate"], AC["heightFrac"], AC["widthFrac"], XMP["CreateDate"]],
-    card0_restrictions=[AC["radius"]],
+    #card0_restrictions=[AC["radius"]],
     version_of_s="http://rs.tdwg.org/ac/terms/Media",
 )
 
@@ -89,8 +89,8 @@ createOC(
     definition=Literal("A resource that acts or has the power to act.", lang="en"),
     comments=Literal("A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious.", lang="en"),
     examples=Literal("`Carl Linnaeus`; `The Terra Nova Expedition`; `The National Science Foundation`; `The El Yunque National Forest ARBIMON System`; `ChatGPT`"),
-    card1_restrictions=[DWC["agentID"], DWC["agentType"]],
-    card01_restrictions=[DWC["agentRemarks"], DWC["preferredAgentName"]],
+    # card1_restrictions=[DWC["agentID"], DWC["agentType"]],
+    # card01_restrictions=[DWC["agentRemarks"], DWC["preferredAgentName"]],
     version_of_s="http://purl.org/dc/terms/Agent",
 )
 
@@ -100,7 +100,7 @@ createOC(
     namespace=DWC,
     graph=g,
     pref_label=Literal("Assertion"),
-    card0_restrictions=[DWCDP["assertedBy"]],
+    # card0_restrictions=[DWCDP["assertedBy"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/MeasurementOrFact",
     references_s="http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13",
 )
@@ -134,9 +134,9 @@ createOC(
     pref_label=Literal("Event"),
     definition=Literal("An action, process, or set of circumstances occurring at a [dcterms:Location] during a period of time.", lang="en"),
     examples=Literal("`a material collecting event`; `a bird observation`; `a camera trap image capture`; `an organism occurrence`; `a biotic survey`"),
-    card1_restrictions=[DWC["eventID"]],
-    card0_restrictions=[DWCDP["happenedDuring"]],
-    card01_restrictions=[DWC["preferredEventName"]],
+    # card1_restrictions=[DWC["eventID"]],
+    # card0_restrictions=[DWCDP["happenedDuring"]],
+    # card01_restrictions=[DWC["preferredEventName"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/Event",
     references_s="http://rs.tdwg.org/dwc/terms/version/Event-2023-09-18",
 )
@@ -148,7 +148,7 @@ createOC(
     pref_label=Literal("Geological Context"),
     definition=Literal("A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location].", lang="en"),
     examples=Literal("`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`", lang="en"),
-    card1_restrictions=[DWC["geologicalContextID"]],
+    # card1_restrictions=[DWC["geologicalContextID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/GeologicalContext",
     references_s="http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18",
 )
@@ -202,8 +202,8 @@ createOC(
     graph=g,
     pref_label=Literal("Nucleotide Analysis"),
     definition=Literal("A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol].", lang="en"),
-    card1_restrictions=[DWC["eventID"], DWC["molecularProtocolID"], DWC["nucleotideAnalysisID"], DWC["nucleotideSequenceID"]],
-    card01_restrictions=[DWC["materialEntityID"], DWC["readCount"], DWC["totalReadCount"]],
+    # card1_restrictions=[DWC["eventID"], DWC["molecularProtocolID"], DWC["nucleotideAnalysisID"], DWC["nucleotideSequenceID"]],
+    # card01_restrictions=[DWC["materialEntityID"], DWC["readCount"], DWC["totalReadCount"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/NucleotideAnalysis",
 )
 
@@ -213,8 +213,8 @@ createOC(
     graph=g,
     pref_label=Literal("Nucleotide Sequence"),
     definition=Literal("A digital representation of a nucleotide sequence.", lang="en"),
-    card1_restrictions=[DWC["nucleotideSequenceID"], DWC["sequence"]],
-    card0_restrictions=[DWC["nucleotideSequenceRemarks"]],
+    # card1_restrictions=[DWC["nucleotideSequenceID"], DWC["sequence"]],
+    # card0_restrictions=[DWC["nucleotideSequenceRemarks"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/NucleotideSequence",
 )
 
@@ -237,7 +237,7 @@ createOC(
     definition=Literal("A particular organism or defined group of organisms considered to be taxonomically homogeneous.", lang="en"),
     comments=Literal("Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class.", lang="en"),
     examples=Literal("`a specific bird`; `a specific wolf pack`; `a specific instance of a bacterial culture`"),
-    card1_restrictions=[DWC["organismID"]],
+    # card1_restrictions=[DWC["organismID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/Organism",
     references_s="http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18",
 )
@@ -251,7 +251,7 @@ createOC(
     definition=Literal("An interaction between two [dwc:Organism]s during a [dwc:Event].", lang="en"),
     comments=Literal("Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s.", lang="en"),
     examples=Literal("`a bee visiting a flower`; `a *Mallophora ruficauda* hunting an *Apis mellifera* in flight`; `a viral infection in a plant`; `a female spider mating with a male spider`; `a lion cub nursing from its mother`; `a mosquito sucking blood from a chimpanzee's arm`; `a slug eating a fungus growing on a decomposing stump` (2 interactions)"),
-    card1_restrictions=[DWC["organismInteractionID"]],
+    # card1_restrictions=[DWC["organismInteractionID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/OrganismInteraction",
 )
 
@@ -287,8 +287,8 @@ createOC(
     pref_label=Literal("Usage Policy"),
     definition=Literal("Information about rights, usage, and attribution statements applicable to an entity.", lang="en"),
     comments=Literal("This is a convenience class to group related properties.", lang="en"),
-    card1_restrictions=[DWC["usagePolicyID"]],
-    card01_restrictions=[DC["rights"], DCTERMS["rights"]],
+    # card1_restrictions=[DWC["usagePolicyID"]],
+    # card01_restrictions=[DC["rights"], DCTERMS["rights"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/UsagePolicy",
 )
 
@@ -300,7 +300,7 @@ createOC(
     definition=Literal("A biotic survey or inventory.", lang="en"),
     comments=Literal("This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget].", lang="en"),
     examples=Literal("`a botanical survey of a protected area to assess native and invasive plant species`; `a wetland vegetation mapping`; `a camera trap deployment in a rainforest to monito large mammals`; `a frog call survey in wetlands across breeding seasons`; `a coverboard survey for reptiles in forested environments`; `a pollinator survey in an agricultural landscape`; `a macroinvertebrate sampling in a freshwater stream to assess water quality`; `a habitat- or ecosystem-level survey` (e.g. `coral reef health assessment`, `forest biodiversity assessment`); `an environmental impact assessment` (e.g. `pre-construction baseline survey for a wind farm project`)"),
-    card1_restrictions=[DWC["eventID"], DWC["surveyID"]],
+    # card1_restrictions=[DWC["eventID"], DWC["surveyID"]],
     version_of_s="http://rs.tdwg.org/eco/terms/Survey",
 )
 
@@ -311,7 +311,7 @@ createOC(
     pref_label=Literal("Survey Target"),
     definition=Literal("An intended scope for [dwc:Occurrence]s in a [eco:Survey].", lang="en"),
     examples=Literal("`all bird species`; `all bird species except *Larus* gulls, fulmars and kittiwakes`; reproductive female *Ctenomys sociabilis* (only)`; `*Oncorhynchus mykiss* and *Oncorhynchus clarkii* (only)`; `all total lengths except < 12 inches`"),
-    card1_restrictions=[DWC["surveyID"], DWC["surveyTargetID"]],
+    # card1_restrictions=[DWC["surveyID"], DWC["surveyTargetID"]],
     version_of_s="http://rs.tdwg.org/eco/terms/SurveyTarget",
 )
 
