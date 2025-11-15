@@ -487,7 +487,8 @@ def create_CTOP0(
         graph.add((class_uri, RDFS["subClassOf"], Entity_intersection))
 
 # NOTE: Through the use of rdfs:range, I can get by with just owl:someValuesFrom (i.e. an existential constraint).
-def create_CTOP(
+# WARN: Apply the same logic regarding restrictions to createCTOP
+def createCTOP(
     name: str,
     namespace: Namespace,
     pref_label: Literal,
@@ -500,8 +501,7 @@ def create_CTOP(
     comments: Literal | None = None,
     examples: Literal | None = None,
     card1_restrictions: list[Node] | None = None,
-    card0_restrictions: list[Node] | None = None,
-    card01_restrictions: list[Node] | None = None,
+    maxcard1_restrictions: list[Node] | None = None,
 ) -> None:
     # Create the owl:Class URI.
     class_uri = namespace[name]
@@ -550,7 +550,7 @@ def create_CTOP(
     #graph.add((class_uri, RDFS["subClassOf"], R_class))
     graph.add((class_uri, OWL["equivalentClass"], R_class))
 
-    if any(restriction is not None for restriction in (card1_restrictions, card0_restrictions, card01_restrictions)):
+    if any(restriction is not None for restriction in (card1_restrictions, maxcard1_restrictions)):
         # OWL Restrictions.
         entity_pylist = []
 
@@ -562,27 +562,13 @@ def create_CTOP(
                 graph.add((R_BNode, OWL["cardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
                 entity_pylist.append(R_BNode)
 
-        if card0_restrictions:
-            for property in card0_restrictions:
+        if maxcard1_restrictions:
+            for property in maxcard1_restrictions:
                 R_BNode = BNode()
                 graph.add((R_BNode, RDF["type"], OWL["Restriction"]))
                 graph.add((R_BNode, OWL["onProperty"], property))
-                graph.add((R_BNode, OWL["minCardinality"], Literal(0, datatype=XSD["nonNegativeInteger"])))
+                graph.add((R_BNode, OWL["maxCardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
                 entity_pylist.append(R_BNode)
-
-        if card01_restrictions:
-            for property in card01_restrictions:
-                R0_BNode = BNode()
-                graph.add((R0_BNode, RDF["type"], OWL["Restriction"]))
-                graph.add((R0_BNode, OWL["onProperty"], property))
-                graph.add((R0_BNode, OWL["minCardinality"], Literal(0, datatype=XSD["nonNegativeInteger"])))
-                entity_pylist.append(R0_BNode)
-
-                R1_BNode = BNode()
-                graph.add((R1_BNode, RDF["type"], OWL["Restriction"]))
-                graph.add((R1_BNode, OWL["onProperty"], property))
-                graph.add((R1_BNode, OWL["maxCardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
-                entity_pylist.append(R1_BNode)
 
         # rdfs:subclassOf via owl:intersectionOf.
         Entity_intersection = BNode()

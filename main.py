@@ -6,7 +6,7 @@ import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
-from utils import create_CTOP, createDP, createEDP, createOC, createOP, declare_disjoint
+from utils import createCTOP, createDP, createEDP, createOC, createOP, declare_disjoint
 
 #####################################################################################################
 # BEGIN ONTOLOGY DEFINITION
@@ -319,7 +319,7 @@ createOC(
 # BEGIN CLASSES THROUGH OBJECT PROPERTY DEFINITIONS
 #####################################################################################################
 
-create_CTOP(
+createCTOP(
     name="AssertionAgent",
     namespace=DWC,
     graph=g,
@@ -332,7 +332,7 @@ create_CTOP(
     comments=Literal("Due to the directionality of the property [dwcdp:assertedBy], the class is defined in description logic as [dwcdp:AssertionAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:assertedBy]⁻).[dwc:Assertion].", lang="en")
 )
 
-create_CTOP(
+createCTOP(
     name="AuthorAgent",
     namespace=DWC,
     graph=g,
@@ -345,7 +345,7 @@ create_CTOP(
     comments=Literal("Due to the directionality of the property [dwcdp:authoredBy], the class is defined in description logic as [dwcdp:AuthorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:authoredBy]⁻).[dcterms:BibliographicResource].", lang="en")
 )
 
-create_CTOP(
+createCTOP(
     name="CommenterAgent",
     namespace=DWC,
     graph=g,
@@ -358,7 +358,7 @@ create_CTOP(
     comments=Literal("Due to the directionality of the property [dwcdp:commentedBy], the class is defined in description logic as [dwcdp:Commenter] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:commentedBy]⁻).[ac:Media].", lang="en")
 )
 
-create_CTOP(
+createCTOP(
     name="ConductorAgent",
     namespace=DWC,
     graph=g,
@@ -372,7 +372,7 @@ create_CTOP(
 )
 
 # NOTE: Possibly find a better name, it looks too much like the object property dwcdp:datedMaterial
-create_CTOP(
+createCTOP(
     name="DatedMaterialEntity",
     namespace=DWC,
     graph=g,
@@ -387,7 +387,7 @@ create_CTOP(
 
 # NOTE: Used bibo: property bibo:editor.
 # But bibo: does not provide straightforward object properties for other relationships like authoring and publishing.
-create_CTOP(
+createCTOP(
     name="EditorAgent",
     namespace=DWC,
     graph=g,
@@ -401,7 +401,7 @@ create_CTOP(
     comments=Literal("Due to the directionality of the property [dwcdp:editedBy], the class is defined in description logic as [dwcdp:EditorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:editedBy]⁻).[dcterms:BibliographicResource].", lang="en")
 )
 
-create_CTOP(
+createCTOP(
     name="FunderAgent",
     namespace=DWC,
     graph=g,
@@ -415,7 +415,7 @@ create_CTOP(
 )
 
 # NOTE: Possibly find a better name, a bit too long
-create_CTOP(
+createCTOP(
     name="GeologicalContextMaterialEntity",
     namespace=DWC,
     graph=g,
@@ -427,7 +427,7 @@ create_CTOP(
     definition=Literal("An instance of a [dwc:MaterialEntity] that happened within a [dwc:GeologicalContext].", lang="en"),
 )
 
-create_CTOP(
+createCTOP(
     name="GeoreferencerAgent",
     namespace=DWC,
     graph=g,
@@ -441,7 +441,7 @@ create_CTOP(
 )
 
 # NOTE: An important one to me (and the origin of the whole group of XYZAgents). Came to me during a discussion with Andre Heughebaert. Someone might want to explicitly exclude all observations where identifications were done by AI.
-create_CTOP(
+createCTOP(
     name="IdentificationAgent",
     namespace=DWC,
     graph=g,
@@ -454,7 +454,7 @@ create_CTOP(
     comments=Literal("Due to the directionality of the property [dwcdp:identifiedBy], the class is defined in description logic as [dwcdp:IdentificationAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:identifiedBy]⁻).[dwc:Identification].")
 )
 
-create_CTOP(
+createCTOP(
     name="PublisherAgent",
     namespace=DWC,
     graph=g,
@@ -467,7 +467,7 @@ create_CTOP(
     comments=Literal("Due to the directionality of the property [dwcdp:publishedBy], the class is defined in description logic as [dwcdp:PublisherAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:publishedBy]⁻).[dcterms:BibliographicResource].")
 )
 
-create_CTOP(
+createCTOP(
     name="ReviewerAgent",
     namespace=DWC,
     graph=g,
@@ -484,7 +484,7 @@ create_CTOP(
 ###############################################################################################
 
 
-create_CTOP(
+createCTOP(
     name="EventAssertion",
     namespace=DWC,
     graph=g,
@@ -496,7 +496,7 @@ create_CTOP(
     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Event]."),
 )
 
-create_CTOP(
+createCTOP(
     name="ChronometricAgeAssertion",
     namespace=DWC,
     graph=g,
@@ -509,7 +509,7 @@ create_CTOP(
 )
 
 
-create_CTOP(
+createCTOP(
     name="MaterialEntityAssertion",
     namespace=DWC,
     graph=g,
@@ -521,7 +521,7 @@ create_CTOP(
     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]."),
 )
 
-create_CTOP(
+createCTOP(
     name="MediaAssertion",
     namespace=DWC,
     graph=g,
@@ -533,7 +533,7 @@ create_CTOP(
     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [ac:Media]."),
 )
 
-create_CTOP(
+createCTOP(
     name="NucleotideAnalysisAssertion",
     namespace=DWC,
     graph=g,
@@ -545,7 +545,7 @@ create_CTOP(
     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:NucleotideAnalysis]."),
 )
 
-create_CTOP(
+createCTOP(
     name="OccurrenceAssertion",
     namespace=DWC,
     graph=g,
@@ -557,7 +557,7 @@ create_CTOP(
     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."),
 )
 
-create_CTOP(
+createCTOP(
     name="OrganismAssertion",
     namespace=DWC,
     graph=g,
@@ -575,7 +575,7 @@ create_CTOP(
 
 
 
-create_CTOP(
+createCTOP(
     name="AssertionProtocol",
     namespace=DWCDP,
     graph=g,
@@ -590,7 +590,7 @@ create_CTOP(
 
 # GOOD COMPLEX EXAMPLE
 # BEFORE AFTER ADD
-create_CTOP(
+createCTOP(
     name="EventProtocol",
     namespace=DWCDP,
     graph=g,
@@ -604,7 +604,7 @@ create_CTOP(
 )
 
 # NOTE: Particularly important one. It is the only dwc:Protocol that is the domain of the properties from GBIF, MIQE, MIXS, et al.
-create_CTOP(
+createCTOP(
     name="MolecularProtocol",
     namespace=DWC,
     graph=g,
@@ -616,13 +616,13 @@ create_CTOP(
     definition=Literal("A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]."),
     comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]."),
     card1_restrictions=[DWC["molecularProtocolID"]],
-    card01_restrictions=[DWC["assayType"], MIXS["0000008"], MIXS["0000092"], MIXS["0001107"], MIXS["0001320"]]
+    maxcard1_restrictions=[DWC["assayType"], MIXS["0000008"], MIXS["0000092"], MIXS["0001107"], MIXS["0001320"]]
 )
 
 ##############################################
 
 # NOTE: owl:inverseFunction test
-create_CTOP(
+createCTOP(
     name="AgentMedia",
     namespace=DWC,
     graph=g,
@@ -635,7 +635,7 @@ create_CTOP(
 )
 
 # NOTE: owl:inverseFunction test
-create_CTOP(
+createCTOP(
     name="EventMedia",
     namespace=DWC,
     graph=g,
@@ -648,7 +648,7 @@ create_CTOP(
 )
 
 # NOTE: owl:inverseFunction test
-create_CTOP(
+createCTOP(
     name="GeologicalContextMedia",
     namespace=DWC,
     graph=g,
@@ -661,7 +661,7 @@ create_CTOP(
 )
 
 # NOTE: owl:inverseFunction test
-create_CTOP(
+createCTOP(
     name="MaterialEntityMedia",
     namespace=DWC,
     graph=g,
@@ -674,7 +674,7 @@ create_CTOP(
 )
 
 # NOTE: owl:inverseFunction test
-create_CTOP(
+createCTOP(
     name="OccurrenceMedia",
     namespace=DWC,
     graph=g,

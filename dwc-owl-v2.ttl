@@ -2247,26 +2247,6 @@ dwc:MolecularProtocol rdf:type owl:Class ;
                                           ] ;
                       rdfs:subClassOf dwc:Protocol ,
                                       [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                               owl:onProperty dwc:assayType ;
-                                                               owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000008> ;
-                                                               owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000092> ;
-                                                               owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0001107> ;
-                                                               owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0001320> ;
-                                                               owl:minCardinality "0"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
                                                                owl:onProperty dwc:molecularProtocolID ;
                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
                                                              ]

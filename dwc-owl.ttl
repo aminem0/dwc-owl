@@ -380,10 +380,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -1103,6 +1103,16 @@ dwc:EventAssertion a owl:Class ;
     skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Event]." ;
     skos:prefLabel "Event Assertion" .
 
+dwc:assayType a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/assayType> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary." ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A method used in the study to detect taxon/taxa of interest in the sample" ;
+    skos:example "`targeted`; `metabarcoding`; `other`" ;
+    skos:prefLabel "Assay Type" .
+
 dwc:bed a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:bed ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/bed-2023-09-13> ;
@@ -1518,6 +1528,15 @@ eco:verbatimSiteNames a owl:DatatypeProperty ;
     skos:example "`East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1`" ;
     skos:prefLabel "Verbatim Site Names" .
 
+mixs:0000008 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:00000008 ;
+    rdfs:comment "For a browser of [efo:] (v 2.95) terms, please see [http://purl.bioontology.org/ontology/EFO]; for a browser of [obi:] (v 2018-02-12) terms please see [http://purl.bioontology/ontology/OBI]."@en ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "Experimental factors are essentially the the variable aspects of an experiment design which can be used to describe an experiment, or set of experiments, in an increasingly detailed manner. This field accepts ontology terms from Experimental Factor Ontology ([efo:]) and/or Ontology for Biomedical Investigations ([obi:])."@en ;
+    skos:prefLabel "Experimental Factor" .
+
 mixs:0000012 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000012 ;
     rdfs:domain dwc:MolecularProtocol ;
@@ -1633,16 +1652,6 @@ dcterms:source a owl:DatatypeProperty ;
     skos:definition "A related resource from which the described resource is derived"@en ;
     skos:prefLabel "Source (DCTERMS)" .
 
-dwc:assayType a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/assayType> ;
-    rdfs:comment "Recommended best practice is to use a controlled vocabulary." ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "A method used in the study to detect taxon/taxa of interest in the sample" ;
-    skos:example "`targeted`; `metabarcoding`; `other`" ;
-    skos:prefLabel "Assay Type" .
-
 dwc:organismID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:organismID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/organismID-2023-06-28> ;
@@ -1652,32 +1661,6 @@ dwc:organismID a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "An identifier for a [dwc:Organism]." ;
     skos:prefLabel "Organism ID" .
-
-mixs:0000008 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:00000008 ;
-    rdfs:comment "For a browser of [efo:] (v 2.95) terms, please see [http://purl.bioontology.org/ontology/EFO]; for a browser of [obi:] (v 2018-02-12) terms please see [http://purl.bioontology/ontology/OBI]."@en ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Experimental factors are essentially the the variable aspects of an experiment design which can be used to describe an experiment, or set of experiments, in an increasingly detailed manner. This field accepts ontology terms from Experimental Factor Ontology ([efo:]) and/or Ontology for Biomedical Investigations ([obi:])."@en ;
-    skos:prefLabel "Experimental Factor" .
-
-dcterms:Location a owl:Class ;
-    dcterms:isVersionOf dcterms:Location ;
-    rdfs:isDefinedBy dcterms: ;
-    skos:definition "A spatial region or named place."@en ;
-    skos:example "`the municipality of San Carlos de Bariloche, Río Negro, Argentina`; `the place defined by a georeference`" ;
-    skos:prefLabel "Location" .
-
-dcterms:type a owl:DatatypeProperty ;
-    dcterms:isVersionOf dcterms:type ;
-    rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy dcterms: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "A category that best matches the nature of an [ac:Media] resource." ;
-    skos:example "`Sound`; `StillImage`; `MovingImage`; `InteractiveResource`; `Text`" ;
-    skos:prefLabel "Media Type" .
 
 mixs:0000092 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000092 ;
@@ -1702,6 +1685,23 @@ mixs:0001320 a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "NCBI taxon ID of the sample. May be a single taxon or mixed taxa sample. Use \"synthetic metagenome\" for mock community positive controls, or \"blank sample\" for negative controls."@en ;
     skos:prefLabel "Taxonomy ID Of DNA Sample" .
+
+dcterms:Location a owl:Class ;
+    dcterms:isVersionOf dcterms:Location ;
+    rdfs:isDefinedBy dcterms: ;
+    skos:definition "A spatial region or named place."@en ;
+    skos:example "`the municipality of San Carlos de Bariloche, Río Negro, Argentina`; `the place defined by a georeference`" ;
+    skos:prefLabel "Location" .
+
+dcterms:type a owl:DatatypeProperty ;
+    dcterms:isVersionOf dcterms:type ;
+    rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy dcterms: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A category that best matches the nature of an [ac:Media] resource." ;
+    skos:example "`Sound`; `StillImage`; `MovingImage`; `InteractiveResource`; `Text`" ;
+    skos:prefLabel "Media Type" .
 
 dwcdp:followed a owl:ObjectProperty ;
     rdfs:domain [ a owl:Class ;
@@ -1896,24 +1896,14 @@ dwc:MolecularProtocol a owl:Class ;
             owl:intersectionOf ( [ a owl:Restriction ;
                         owl:cardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty dwc:molecularProtocolID ] [ a owl:Restriction ;
-                        owl:minCardinality "0"^^xsd:nonNegativeInteger ;
-                        owl:onProperty dwc:assayType ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty dwc:assayType ] [ a owl:Restriction ;
-                        owl:minCardinality "0"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000008 ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty mixs:0000008 ] [ a owl:Restriction ;
-                        owl:minCardinality "0"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000092 ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty mixs:0000092 ] [ a owl:Restriction ;
-                        owl:minCardinality "0"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0001107 ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty mixs:0001107 ] [ a owl:Restriction ;
-                        owl:minCardinality "0"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0001320 ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty mixs:0001320 ] ) ],
         dwc:Protocol ;
