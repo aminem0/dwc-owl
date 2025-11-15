@@ -1702,6 +1702,60 @@ eco:verbatimSiteNames rdf:type owl:DatatypeProperty ;
                       skos:prefLabel "Verbatim Site Names" .
 
 
+###  https://w3id.org/mixs/0000001
+<https://w3id.org/mixs/0000001> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000001> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "The total amount or size (volume (ml), mass (g) or aread (m2)) of sample collected."@en ;
+                                skos:example "`5 liter`" ;
+                                skos:prefLabel "Amount Or Size Of Sample Collected" .
+
+
+###  https://w3id.org/mixs/0000002
+<https://w3id.org/mixs/0000002> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000002> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "The device used to collect an environmental sample. This field accepts terms listed under environmental sampling device ([http://purl.obolibrary.org/obo/ENVO]). This field also accepts terms listed under specimen collection device ([http://purl.obolibrary.org/obo/GENEPIO_0002094])."@en ;
+                                skos:prefLabel "Sample Collection Device" .
+
+
+###  https://w3id.org/mixs/0000003
+<https://w3id.org/mixs/0000003> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000003> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Publication reference in the form of pubmed ID (pmid), digital object identifier (doi) or url for isolation and growth condition specifications of the organism/material."@en ;
+                                skos:example "`doi:10.1016/j.syapm.2018.01.009`" ;
+                                skos:prefLabel "Isolation And Growth Condition" .
+
+
+###  https://w3id.org/mixs/0000005
+<https://w3id.org/mixs/0000005> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000005> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "The type of sequence data used as input."@en ;
+                                skos:example "`contigs`" ;
+                                skos:prefLabel "Contamination Screening Input" .
+
+
+###  https://w3id.org/mixs/0000006
+<https://w3id.org/mixs/0000006> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000006> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Kit used to amplify genomic DNA in preparation for sequencing."@en ;
+                                skos:example "`qiagen repli-g`" ;
+                                skos:prefLabel "WGA Amplification Kit" .
+
+
 ###  https://w3id.org/mixs/0000008
 <https://w3id.org/mixs/0000008> rdf:type owl:DatatypeProperty ;
                                 rdfs:domain dwc:MolecularProtocol ;
@@ -1789,7 +1843,18 @@ eco:verbatimSiteNames rdf:type owl:DatatypeProperty ;
                                 rdfs:isDefinedBy mixs: ;
                                 skos:definition "A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed."@en ;
                                 skos:example "`filtering of seawater, storing samples in ethanol`" ;
-                                skos:prefLabel "sample Material Processing" .
+                                skos:prefLabel "Sample Material Processing" .
+
+
+###  https://w3id.org/mixs/0000017
+<https://w3id.org/mixs/0000017> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000017> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Filtering pore size used in sample preparation."@en ;
+                                skos:example "`0-0.22 micrometer`" ;
+                                skos:prefLabel "Size Fraction Selected" .
 
 
 ###  https://w3id.org/mixs/0000020
@@ -2255,7 +2320,43 @@ dwc:MolecularProtocol rdf:type owl:Class ;
                                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                                              ]
                                                              [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000001> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000002> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000003> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000005> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000006> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
                                                                owl:onProperty <https://w3id.org/mixs/0000008> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000012> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000013> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000015> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000017> ;
                                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                                              ]
                                                              [ rdf:type owl:Restriction ;

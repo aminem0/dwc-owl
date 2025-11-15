@@ -616,7 +616,11 @@ createCTOP(
     definition=Literal("A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]."),
     comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]."),
     card1_restrictions=[DWC["molecularProtocolID"]],
-    maxcard1_restrictions=[DWC["assayType"], MIXS["0000008"], MIXS["0000092"], MIXS["0001107"], MIXS["0001320"]]
+    maxcard1_restrictions=[DWC["assayType"],
+                           MIXS["0000001"], MIXS["0000002"], MIXS["0000003"], MIXS["0000005"], MIXS["0000006"], MIXS["0000008"],
+                           MIXS["0000012"], MIXS["0000013"], MIXS["0000015"],
+                           
+                        MIXS["0000017"], MIXS["0000092"], MIXS["0001107"], MIXS["0001320"]]
 )
 
 ##############################################
@@ -2364,6 +2368,66 @@ createDP(
     version_of_s="http://rs.gbif.org/terms/miqe/thresholdQuantificationCycle",
 )
 
+createDP(
+    name="0000001",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Amount Or Size Of Sample Collected"),
+    definition=Literal("The total amount or size (volume (ml), mass (g) or aread (m2)) of sample collected.", lang="en"),
+    examples=Literal("`5 liter`"),
+    version_of_s="https://w3id.org/mixs/00000001",
+)
+
+createDP(
+    name="0000002",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Sample Collection Device"),
+    definition=Literal("The device used to collect an environmental sample. This field accepts terms listed under environmental sampling device ([http://purl.obolibrary.org/obo/ENVO]). This field also accepts terms listed under specimen collection device ([http://purl.obolibrary.org/obo/GENEPIO_0002094]).", lang="en"),
+    version_of_s="https://w3id.org/mixs/00000002",
+)
+
+createDP(
+    name="0000003",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Isolation And Growth Condition"),
+    definition=Literal("Publication reference in the form of pubmed ID (pmid), digital object identifier (doi) or url for isolation and growth condition specifications of the organism/material.", lang="en"),
+    examples=Literal("`doi:10.1016/j.syapm.2018.01.009`"),
+    version_of_s="https://w3id.org/mixs/00000003",
+)
+
+createDP(
+    name="0000005",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Contamination Screening Input"),
+    definition=Literal("The type of sequence data used as input.", lang="en"),
+    examples=Literal("`contigs`"),
+    version_of_s="https://w3id.org/mixs/00000005",
+)
+
+createDP(
+    name="0000006",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("WGA Amplification Kit"),
+    definition=Literal("Kit used to amplify genomic DNA in preparation for sequencing.", lang="en"),
+    examples=Literal("`qiagen repli-g`"),
+    version_of_s="https://w3id.org/mixs/00000006",
+)
+
+
 # NOTE: Double check if accepts Literal or not.
 # NOTE: I felt that the browser comment is better suited for a comment.
 createDP(
@@ -2451,11 +2515,25 @@ createDP(
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
     range_list=[RDFS["Literal"]],
-    pref_label=Literal("sample Material Processing"),
+    pref_label=Literal("Sample Material Processing"),
     definition=Literal("A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed.", lang="en"),
     examples=Literal("`filtering of seawater, storing samples in ethanol`"),
     version_of_s="https://w3id.org/mixs/0000016",
 )
+
+createDP(
+    name="0000017",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Size Fraction Selected"),
+    definition=Literal("Filtering pore size used in sample preparation.", lang="en"),
+    examples=Literal("`0-0.22 micrometer`"),
+    version_of_s="https://w3id.org/mixs/0000017",
+)
+
+
 
 
 

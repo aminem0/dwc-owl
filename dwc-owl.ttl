@@ -1528,6 +1528,50 @@ eco:verbatimSiteNames a owl:DatatypeProperty ;
     skos:example "`East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1`" ;
     skos:prefLabel "Verbatim Site Names" .
 
+mixs:0000001 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:00000001 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "The total amount or size (volume (ml), mass (g) or aread (m2)) of sample collected."@en ;
+    skos:example "`5 liter`" ;
+    skos:prefLabel "Amount Or Size Of Sample Collected" .
+
+mixs:0000002 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:00000002 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "The device used to collect an environmental sample. This field accepts terms listed under environmental sampling device ([http://purl.obolibrary.org/obo/ENVO]). This field also accepts terms listed under specimen collection device ([http://purl.obolibrary.org/obo/GENEPIO_0002094])."@en ;
+    skos:prefLabel "Sample Collection Device" .
+
+mixs:0000003 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:00000003 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "Publication reference in the form of pubmed ID (pmid), digital object identifier (doi) or url for isolation and growth condition specifications of the organism/material."@en ;
+    skos:example "`doi:10.1016/j.syapm.2018.01.009`" ;
+    skos:prefLabel "Isolation And Growth Condition" .
+
+mixs:0000005 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:00000005 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "The type of sequence data used as input."@en ;
+    skos:example "`contigs`" ;
+    skos:prefLabel "Contamination Screening Input" .
+
+mixs:0000006 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:00000006 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "Kit used to amplify genomic DNA in preparation for sequencing."@en ;
+    skos:example "`qiagen repli-g`" ;
+    skos:prefLabel "WGA Amplification Kit" .
+
 mixs:0000008 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:00000008 ;
     rdfs:comment "For a browser of [efo:] (v 2.95) terms, please see [http://purl.bioontology.org/ontology/EFO]; for a browser of [obi:] (v 2018-02-12) terms please see [http://purl.bioontology/ontology/OBI]."@en ;
@@ -1536,24 +1580,6 @@ mixs:0000008 a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "Experimental factors are essentially the the variable aspects of an experiment design which can be used to describe an experiment, or set of experiments, in an increasingly detailed manner. This field accepts ontology terms from Experimental Factor Ontology ([efo:]) and/or Ontology for Biomedical Investigations ([obi:])."@en ;
     skos:prefLabel "Experimental Factor" .
-
-mixs:0000012 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000012 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "In this field, report which major environmental system your sample or specimen came from. The systems identified should have a coarse spatial grain, to provide the general environmental context of where the sampling was done (e.g. were you in the desert or a rainforest?). We recommend using subclasses of ENVO’s biome class: [http://purl.obolibrary.org/obo/ENVO_00000428]. Format (one term): termLabel [termID], Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a water sample from the photic zone in middle of the Atlantic Ocean, consider: oceanic epipelagic zone biome [ENVO:01000033]. Example: Annotating a sample from the Amazon rainforest consider: tropical moist broadleaf forest biome [ENVO:01000228]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
-    skos:example "`oceanic epipelagic zone biome [ENVO:01000033]`; `tropical moist broadleaf forest biome [ENVO:01000228]`" ;
-    skos:prefLabel "Broad-scale Environmental Context" .
-
-mixs:0000013 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000013 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
-    skos:example "`canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]`" ;
-    skos:prefLabel "Local Environmental Context" .
 
 mixs:0000014 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000014 ;
@@ -1564,17 +1590,6 @@ mixs:0000014 a owl:DatatypeProperty ;
     skos:example "`ocean water [ENVO:00002151]`; `pond water [ENVO:00002228]|air ENVO_00002005`" ;
     skos:prefLabel "Environmental Medium" .
 
-mixs:0000015 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000015 ;
-    rdfs:comment "This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/]"@en ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range [ a rdfs:Datatype ;
-            owl:oneOf ( "aerobe" "anaerobe" "facultative" "microaerophilic" "microanaerobe" "obligate aerobe" "obligate anaerobe" ) ] ;
-    skos:definition "Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments."@en ;
-    skos:example "`aerobe`" ;
-    skos:prefLabel "Relation To Oxygen" .
-
 mixs:0000016 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000016 ;
     rdfs:domain dwc:MolecularProtocol ;
@@ -1582,7 +1597,7 @@ mixs:0000016 a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed."@en ;
     skos:example "`filtering of seawater, storing samples in ethanol`" ;
-    skos:prefLabel "sample Material Processing" .
+    skos:prefLabel "Sample Material Processing" .
 
 mixs:0000020 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000020 ;
@@ -1661,6 +1676,44 @@ dwc:organismID a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "An identifier for a [dwc:Organism]." ;
     skos:prefLabel "Organism ID" .
+
+mixs:0000012 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:0000012 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "In this field, report which major environmental system your sample or specimen came from. The systems identified should have a coarse spatial grain, to provide the general environmental context of where the sampling was done (e.g. were you in the desert or a rainforest?). We recommend using subclasses of ENVO’s biome class: [http://purl.obolibrary.org/obo/ENVO_00000428]. Format (one term): termLabel [termID], Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a water sample from the photic zone in middle of the Atlantic Ocean, consider: oceanic epipelagic zone biome [ENVO:01000033]. Example: Annotating a sample from the Amazon rainforest consider: tropical moist broadleaf forest biome [ENVO:01000228]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
+    skos:example "`oceanic epipelagic zone biome [ENVO:01000033]`; `tropical moist broadleaf forest biome [ENVO:01000228]`" ;
+    skos:prefLabel "Broad-scale Environmental Context" .
+
+mixs:0000013 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:0000013 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
+    skos:example "`canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]`" ;
+    skos:prefLabel "Local Environmental Context" .
+
+mixs:0000015 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:0000015 ;
+    rdfs:comment "This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/]"@en ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:oneOf ( "aerobe" "anaerobe" "facultative" "microaerophilic" "microanaerobe" "obligate aerobe" "obligate anaerobe" ) ] ;
+    skos:definition "Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments."@en ;
+    skos:example "`aerobe`" ;
+    skos:prefLabel "Relation To Oxygen" .
+
+mixs:0000017 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:0000017 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "Filtering pore size used in sample preparation."@en ;
+    skos:example "`0-0.22 micrometer`" ;
+    skos:prefLabel "Size Fraction Selected" .
 
 mixs:0000092 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000092 ;
@@ -1899,7 +1952,25 @@ dwc:MolecularProtocol a owl:Class ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty dwc:assayType ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000001 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000002 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000003 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000005 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000006 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty mixs:0000008 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000012 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000013 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000015 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000017 ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty mixs:0000092 ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
