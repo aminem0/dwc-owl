@@ -1146,6 +1146,12 @@ createOP(
     examples=Literal("bb:event123 dcterms:spatial bb:location456 .")
 )
 
+# TEST: Example to see how not considering owl:unionOf affects WebVOWL
+g.add((DWCDP["hasUsagePolicy"], RDF["type"], OWL["ObjectProperty"]))
+g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], AC["Media"]))
+g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], DWC["MaterialEntity"]))
+g.add((DWCDP["hasUsagePolicy"], RDFS["range"], DWC["UsagePolicy"]))
+
 #####################################################################################################
 # BEGIN DATATYPE PROPERTY DEFINITIONS
 #####################################################################################################

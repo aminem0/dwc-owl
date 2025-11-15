@@ -312,6 +312,13 @@ dwcdp:hasMedia rdf:type owl:ObjectProperty ;
                skos:prefLabel "Has Media" .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/hasUsagePolicy
+dwcdp:hasUsagePolicy rdf:type owl:ObjectProperty ;
+                     rdfs:domain ac:Media ,
+                                 dwc:MaterialEntity ;
+                     rdfs:range dwc:UsagePolicy .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/identificationsBy
 dwcdp:identificationsBy rdf:type owl:ObjectProperty ;
                         rdfs:domain eco:Survey ;

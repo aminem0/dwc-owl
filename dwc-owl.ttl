@@ -717,6 +717,11 @@ dwcdp:hasMedia a owl:ObjectProperty ;
     skos:example "bb:event123 dwcdp:hasMedia bb:media456 ." ;
     skos:prefLabel "Has Media" .
 
+dwcdp:hasUsagePolicy a owl:ObjectProperty ;
+    rdfs:domain ac:Media,
+        dwc:MaterialEntity ;
+    rdfs:range dwc:UsagePolicy .
+
 dwcdp:identificationsBy a owl:ObjectProperty ;
     rdfs:comment "The property [dwcdp:idenficationsBy] should not be confused with [dwcdp:identifiedBy], which has a different [rdfs:domain]. The former applies to a [eco:Survey], whereas the latter applies to a [dwc:Identification]."@en ;
     rdfs:domain eco:Survey ;
@@ -1815,13 +1820,6 @@ dwc:Protocol a owl:Class ;
     skos:example "`a pitfall method for sampling ground-dwelling arthropods`; `a point-radius georeferencing method`; `a linear regression model to estimate body mass from skeletal measurements`; `a Bayesian phylogenetic inference method`" ;
     skos:prefLabel "Protocol" .
 
-dwc:UsagePolicy a owl:Class ;
-    dcterms:isVersionOf dwc:UsagePolicy ;
-    rdfs:comment "This is a convenience class to group related properties."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "Information about rights, usage, and attribution statements applicable to an entity."@en ;
-    skos:prefLabel "Usage Policy" .
-
 dwcdp:about a owl:ObjectProperty ;
     rdfs:domain dwc:Assertion ;
     rdfs:isDefinedBy dwcdp: ;
@@ -1838,6 +1836,13 @@ dwc:OrganismInteraction a owl:Class ;
     skos:definition "An interaction between two [dwc:Organism]s during a [dwc:Event]."@en ;
     skos:example "`a bee visiting a flower`; `a *Mallophora ruficauda* hunting an *Apis mellifera* in flight`; `a viral infection in a plant`; `a female spider mating with a male spider`; `a lion cub nursing from its mother`; `a mosquito sucking blood from a chimpanzee's arm`; `a slug eating a fungus growing on a decomposing stump` (2 interactions)" ;
     skos:prefLabel "Organism Interaction" .
+
+dwc:UsagePolicy a owl:Class ;
+    dcterms:isVersionOf dwc:UsagePolicy ;
+    rdfs:comment "This is a convenience class to group related properties."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "Information about rights, usage, and attribution statements applicable to an entity."@en ;
+    skos:prefLabel "Usage Policy" .
 
 chrono:ChronometricAge a owl:Class ;
     dcterms:isVersionOf chrono:ChronometricAge ;
@@ -1926,14 +1931,6 @@ dwc:MaterialEntity a owl:Class ;
     skos:example "`the entire contents of a trawl`; `a subset of the contents of a trawl`; `the body of a fish`; `the stomach contents of a fish`; `a rock containing fossils`; `a fossil within a rock`; `an herbarium sheet with its attached plant speciment`; `a flower on a plant specimen`; `a pollen grain`; `a specific water sample`; `an isolated molecule of DNA`" ;
     skos:prefLabel "Material Entity" .
 
-ac:Media a owl:Class ;
-    dcterms:isVersionOf ac:Media ;
-    rdfs:comment "An instance of digital textual media may be better represented as a [dcterms:BibliographicResource]."@en ;
-    rdfs:isDefinedBy ac: ;
-    skos:definition "A [dcmi:MediaType] or other media type with other entities as subject matter."@en ;
-    skos:example "`dcmi:Sound`; `dcmi:StillImage`; `dcmi:MovingImage`" ;
-    skos:prefLabel "Media" .
-
 dcterms:Agent a owl:Class ;
     dcterms:isVersionOf dcterms:Agent ;
     rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
@@ -1941,6 +1938,14 @@ dcterms:Agent a owl:Class ;
     skos:definition "A resource that acts or has the power to act."@en ;
     skos:example "`Carl Linnaeus`; `The Terra Nova Expedition`; `The National Science Foundation`; `The El Yunque National Forest ARBIMON System`; `ChatGPT`" ;
     skos:prefLabel "Agent" .
+
+ac:Media a owl:Class ;
+    dcterms:isVersionOf ac:Media ;
+    rdfs:comment "An instance of digital textual media may be better represented as a [dcterms:BibliographicResource]."@en ;
+    rdfs:isDefinedBy ac: ;
+    skos:definition "A [dcmi:MediaType] or other media type with other entities as subject matter."@en ;
+    skos:example "`dcmi:Sound`; `dcmi:StillImage`; `dcmi:MovingImage`" ;
+    skos:prefLabel "Media" .
 
 dwc:MolecularProtocol a owl:Class ;
     rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]." ;
