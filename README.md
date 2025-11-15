@@ -34,7 +34,7 @@ The goal of the project is to provide researchers with a semantically-sound onto
 
 The easiest way to explore the ontology is to look at the `dwc-owl.html` file in the `docs/` folder for a complete listing of the terms considered in the ontology. The documentation for this ontology can be viewed on the [GitHub Pages site of this repository](https://aminem0.github.io/dwc-owl/).
 
-You can also load the `dwc-owl.ttl` file into an ontology viewer such as [Protege](https://protege.stanford.edu/). The difference is that protege includes reasoners such as HermiT, that allow reasoning over the test individuals created at the end of the ontology.
+You can also load the `dwc-owl.ttl` file into an ontology editor such as [Protégé](https://protege.stanford.edu/). The difference is that protege includes reasoners such as HermiT, that allow reasoning over the test individuals created at the end of the ontology.
 
 ## Applications of the ontology
 
