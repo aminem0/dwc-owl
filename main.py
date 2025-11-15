@@ -2419,6 +2419,55 @@ createDP(
     version_of_s="https://w3id.org/mixs/0000014",
 )
 
+from utils import createDP2
+
+# relenum_list = [Literal("aerobic"), Literal("anaerobic")]
+
+# relenum_uri = URIRef("https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/")
+# g.add((relenum_uri, RDF["type"], RDFS["Datatype"]))
+
+# # Create RDF list of the enumeration values
+# enum_list_bnode = BNode()
+# Collection(g, enum_list_bnode, relenum_list)
+
+# # Attach owl:oneOf list to the datatype node
+# g.add((relenum_uri, OWL["oneOf"], enum_list_bnode))
+
+# createDP(
+#     name="0000015",
+#     namespace=MIXS,
+#     graph=g,
+#     domain_list=[DWC["MolecularProtocol"]],
+#     range_list=[relenum_uri],
+#     pref_label=Literal("Relation To Oxygen"),
+#     definition=Literal("Text will come here later.", lang="en"),
+#     examples=Literal("`aerobic`; `anaerobic`"),
+#     version_of_s="https://w3id.org/mixs/0000015",
+# )
+
+createDP2(
+    name="0000015",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    oneOf_list=[Literal("aerobic"), Literal("anaerobic"), Literal("thirdOption")],
+    pref_label=Literal("Relation To Oxygen"),
+    definition=Literal("Text will come here later.", lang="en"),
+    examples=Literal("`aerobic`; `anaerobic`"),
+    version_of_s="https://w3id.org/mixs/0000015",
+)
+
+# TEST: Small triple just to see if OntPub catches it
+g.add((BB["Datato"], RDF["type"], RDFS["Datatype"]))
+
+# TEST: Small instances
+g.add((BB["Moleco1"], RDF["type"], DWC["MolecularProtocol"]))
+g.add((BB["Moleco1"], MIXS["0000015"], Literal("aerobic")))
+#
+g.add((BB["Moleco2"], RDF["type"], DWC["MolecularProtocol"]))
+g.add((BB["Moleco2"], MIXS["0000015"], Literal("jumpluff")))
+
+
 # NOTE: I copied the example from definition to the example section.
 createDP(
     name="0000020",
@@ -2682,12 +2731,13 @@ g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingToID"], BB[
 #####################################################################################################
 
 # Serialize the ontology to xml.
-g.serialize(destination="dwc-owl.owl", format="xml")
+# g.serialize(destination="dwc-owl.owl", format="xml")
+g.serialize(destination="dwc-owl.ttl", format="turtle")
 
 # NOTE: Use ROBOT to use the OWL API directly, better than having to go into Protege everytime.
 # Obtained with curl -L -o robot.jar https://github.com/ontodev/robot/releases/download/v1.9.8/robot.jar
 # Put in .gitgnore since it is borderline LFS.
-subprocess.run(["java", "-jar", "robot.jar", "convert", "--input", "dwc-owl.owl", "--output", "dwc-owl.ttl"])
+# subprocess.run(["java", "-jar", "robot.jar", "convert", "--input", "dwc-owl.owl", "--output", "dwc-owl.ttl"])
 
 #####################################################################################################
 # BEGIN PYLODE DOCUMENTATION GENERATION
