@@ -48,7 +48,13 @@ bb:Mato a dwc:MaterialEntity ;
 bb:Mato1 a dwc:MaterialEntity ;
     dwcdp:isDerivedFrom bb:Mato2 .
 
+bb:Michael dwc:agentID "0000-0002-1234-567X" .
+
+bb:MichaelRathbone dwc:agentID "0000-0002-1234-567X" .
+
 bb:Midio dwcdp:isMediaOf bb:Occurro .
+
+bb:Mikey dwc:agentID "0000-0002-1234-567X" .
 
 bb:Moleco1 a dwc:MolecularProtocol ;
     mixs:0000015 "aerobe" .
@@ -378,10 +384,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -409,13 +415,17 @@ dwc:ReviewerAgent a owl:Class ;
     skos:definition "An instance of a [dcterms:Agent] that has reviewed a [dwc:Media]." ;
     skos:prefLabel "Reviewer Agent" .
 
-dwc:agentID a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/agentID> ;
+dwc:agentID a owl:DatatypeProperty,
+        owl:InverseFunctionalProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/agentID>,
+        ac:agentID ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
     rdfs:domain dcterms:Agent ;
     rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "An identifier for a [dcterms:Agent]." ;
+    rdfs:range rdfs:Literal,
+        xsd:string ;
+    skos:definition "An identifier for a [dcterms:Agent].",
+        "Yada yada ladidah."@en ;
     skos:prefLabel "Agent ID" .
 
 dwc:agentRemarks a owl:DatatypeProperty ;
@@ -1537,7 +1547,7 @@ mixs:0000001 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:00000001 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "The total amount or size (volume (ml), mass (g) or aread (m2)) of sample collected."@en ;
     skos:example "`5 liter`" ;
     skos:prefLabel "Amount Or Size Of Sample Collected" .
@@ -1546,7 +1556,7 @@ mixs:0000002 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:00000002 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "The device used to collect an environmental sample. This field accepts terms listed under environmental sampling device ([http://purl.obolibrary.org/obo/ENVO]). This field also accepts terms listed under specimen collection device ([http://purl.obolibrary.org/obo/GENEPIO_0002094])."@en ;
     skos:prefLabel "Sample Collection Device" .
 
@@ -1554,16 +1564,18 @@ mixs:0000003 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:00000003 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "Publication reference in the form of pubmed ID (pmid), digital object identifier (doi) or url for isolation and growth condition specifications of the organism/material."@en ;
     skos:example "`doi:10.1016/j.syapm.2018.01.009`" ;
     skos:prefLabel "Isolation And Growth Condition" .
 
 mixs:0000005 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:00000005 ;
+    rdfs:comment "This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/ContamScreenInputEnum/]."@en ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:oneOf ( "contigs" "reads" ) ] ;
     skos:definition "The type of sequence data used as input."@en ;
     skos:example "`contigs`" ;
     skos:prefLabel "Contamination Screening Input" .
@@ -1572,7 +1584,7 @@ mixs:0000006 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:00000006 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "Kit used to amplify genomic DNA in preparation for sequencing."@en ;
     skos:example "`qiagen repli-g`" ;
     skos:prefLabel "WGA Amplification Kit" .
@@ -1582,7 +1594,7 @@ mixs:0000008 a owl:DatatypeProperty ;
     rdfs:comment "For a browser of [efo:] (v 2.95) terms, please see [http://purl.bioontology.org/ontology/EFO]; for a browser of [obi:] (v 2018-02-12) terms please see [http://purl.bioontology/ontology/OBI]."@en ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "Experimental factors are essentially the the variable aspects of an experiment design which can be used to describe an experiment, or set of experiments, in an increasingly detailed manner. This field accepts ontology terms from Experimental Factor Ontology ([efo:]) and/or Ontology for Biomedical Investigations ([obi:])."@en ;
     skos:prefLabel "Experimental Factor" .
 
@@ -1590,36 +1602,18 @@ mixs:0000014 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000014 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
     skos:example "`ocean water [ENVO:00002151]`; `pond water [ENVO:00002228]|air ENVO_00002005`" ;
     skos:prefLabel "Environmental Medium" .
-
-mixs:0000016 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000016 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed."@en ;
-    skos:example "`filtering of seawater, storing samples in ethanol`" ;
-    skos:prefLabel "Sample Material Processing" .
-
-mixs:0000020 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000020 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "This should provide further information about the genetic distinctness of the sequenced organism by recording additional information e.g. serovar, serotype, biotype, ecotype, or any relevant genetic typing schemes like Group I plasmid. It can also contain alternative taxonomic information. It should contain both the lineage name, and the lineage rank, i.e. `biovar:abc123`."@en ;
-    skos:example "`biovar:abc123`" ;
-    skos:prefLabel "Subspecific Genetic Lineage" .
 
 mixs:0000021 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000021 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "The ploidy level of the genome (e.g. `allopolyploid`, `haploid`, `diploid`, `triploid`, `tetraploid`). It has implications for the downstream study of duplicated gene and regions of the genomes (and perhaps for difficulties in assembly). For terms, please select terms listed under class ploidy ([pato:001374]) of Phenotypic Quality Ontology ([pato:]), and for a browser of PATO (v 2018-03-27) please refer to [http://purl.bioontology.org/ontology/PATO]."@en ;
-    skos:example "`allopolyploid`; `haploid`; `diploid`; `triploid`; `tetraploid`" ;
+    skos:example "`allopolyploidy [PATO:0001379]`" ;
     skos:prefLabel "Ploidy" .
 
 mixs:0000022 a owl:DatatypeProperty ;
@@ -1628,22 +1622,25 @@ mixs:0000022 a owl:DatatypeProperty ;
     rdfs:isDefinedBy mixs: ;
     rdfs:range xsd:integer ;
     skos:definition "Reports the number of replicons in a nuclear genome of eukaryotes, in the genome of a bacterium or archaea or the number of segments in a segmented virus. Always applied to the haploid chromosome count of a eukaryote."@en ;
+    skos:example 2 ;
     skos:prefLabel "Number Of Replicons" .
 
 mixs:0000023 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000023 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:integer ;
     skos:definition "Do plasmids exist of significant phenotypic consequence (e.g. ones that determine virulence or antibiotic resistance). Megaplasmids? Other plasmids (borrelia has 15+ plasmids)."@en ;
+    skos:example 5 ;
     skos:prefLabel "Extrachromosomal Elements" .
 
 mixs:0000024 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000024 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "The estimated size of the genome prior to sequencing. Of particular importance in the sequencing of (eukaryotic) genome which could remain in draft form for a long or unspecified period."@en ;
+    skos:example "`300000 bp`" ;
     skos:prefLabel "Estimated size" .
 
 mixs:0001321 a owl:DatatypeProperty ;
@@ -1686,7 +1683,7 @@ mixs:0000012 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000012 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "In this field, report which major environmental system your sample or specimen came from. The systems identified should have a coarse spatial grain, to provide the general environmental context of where the sampling was done (e.g. were you in the desert or a rainforest?). We recommend using subclasses of ENVO’s biome class: [http://purl.obolibrary.org/obo/ENVO_00000428]. Format (one term): termLabel [termID], Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a water sample from the photic zone in middle of the Atlantic Ocean, consider: oceanic epipelagic zone biome [ENVO:01000033]. Example: Annotating a sample from the Amazon rainforest consider: tropical moist broadleaf forest biome [ENVO:01000228]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
     skos:example "`oceanic epipelagic zone biome [ENVO:01000033]`; `tropical moist broadleaf forest biome [ENVO:01000228]`" ;
     skos:prefLabel "Broad-scale Environmental Context" .
@@ -1695,7 +1692,7 @@ mixs:0000013 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000013 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
     skos:example "`canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]`" ;
     skos:prefLabel "Local Environmental Context" .
@@ -1711,14 +1708,32 @@ mixs:0000015 a owl:DatatypeProperty ;
     skos:example "`aerobe`" ;
     skos:prefLabel "Relation To Oxygen" .
 
+mixs:0000016 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:0000016 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range xsd:string ;
+    skos:definition "A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed."@en ;
+    skos:example "`filtering of seawater, storing samples in ethanol`" ;
+    skos:prefLabel "Sample Material Processing" .
+
 mixs:0000017 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000017 ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range xsd:string ;
     skos:definition "Filtering pore size used in sample preparation."@en ;
     skos:example "`0-0.22 micrometer`" ;
     skos:prefLabel "Size Fraction Selected" .
+
+mixs:0000020 a owl:DatatypeProperty ;
+    dcterms:isVersionOf mixs:0000020 ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy mixs: ;
+    rdfs:range xsd:string ;
+    skos:definition "This should provide further information about the genetic distinctness of the sequenced organism by recording additional information e.g. serovar, serotype, biotype, ecotype, or any relevant genetic typing schemes like Group I plasmid. It can also contain alternative taxonomic information. It should contain both the lineage name, and the lineage rank, i.e. `biovar:abc123`."@en ;
+    skos:example "`serovar:Newport`" ;
+    skos:prefLabel "Subspecific Genetic Lineage" .
 
 mixs:0000092 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000092 ;
@@ -1850,7 +1865,7 @@ chrono:ChronometricAge a owl:Class ;
     rdfs:comment "The age of a [dwc:MaterialEntity] and how this age is known, whether by a dating assay, or a relative association with dated material, or legacy collection information."@en ;
     rdfs:isDefinedBy chrono: ;
     skos:definition "An approximation of temporal position (in the sense conveyed by [https://www.w3.org/TR/owl-time/#time:TemporalPosition]) that is supported by evidence."@en ;
-    skos:example "`an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum`; `an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum`; `a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen`; `an age range of a specimen based on its biostratigraphic content`; `an age of a specimen based on what is reported in legacy collections data`" ;
+    skos:example "an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum; an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum; a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen; an age range of a specimen based on its biostratigraphic content; an age of a specimen based on what is reported in legacy collections data" ;
     skos:prefLabel "Chronometric Age" .
 
 eco:SurveyTarget a owl:Class ;
@@ -1936,7 +1951,7 @@ dcterms:Agent a owl:Class ;
     rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
     rdfs:isDefinedBy dcterms: ;
     skos:definition "A resource that acts or has the power to act."@en ;
-    skos:example "`Carl Linnaeus`; `The Terra Nova Expedition`; `The National Science Foundation`; `The El Yunque National Forest ARBIMON System`; `ChatGPT`" ;
+    skos:example "Carl Linnaeus; The Terra Nova Expedition; The National Science Foundation; The El Yunque National Forest ARBIMON System; ChatGPT" ;
     skos:prefLabel "Agent" .
 
 ac:Media a owl:Class ;
@@ -1975,7 +1990,11 @@ dwc:MolecularProtocol a owl:Class ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty mixs:0000015 ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000016 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty mixs:0000017 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000020 ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty mixs:0000092 ] [ a owl:Restriction ;
                         owl:maxCardinality "1"^^xsd:nonNegativeInteger ;

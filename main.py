@@ -88,7 +88,8 @@ createOC(
     pref_label=Literal("Agent"),
     definition=Literal("A resource that acts or has the power to act.", lang="en"),
     comments=Literal("A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious.", lang="en"),
-    examples=Literal("`Carl Linnaeus`; `The Terra Nova Expedition`; `The National Science Foundation`; `The El Yunque National Forest ARBIMON System`; `ChatGPT`"),
+    examples=Literal("Carl Linnaeus; The Terra Nova Expedition; The National Science Foundation; The El Yunque National Forest ARBIMON System; ChatGPT"),
+#    examples=Literal("`Carl Linnaeus`; `The Terra Nova Expedition`; `The National Science Foundation`; `The El Yunque National Forest ARBIMON System`; `ChatGPT`"),
     # card1_restrictions=[DWC["agentID"], DWC["agentType"]],
     # card01_restrictions=[DWC["agentRemarks"], DWC["preferredAgentName"]],
     version_of_s="http://purl.org/dc/terms/Agent",
@@ -121,7 +122,8 @@ createOC(
     pref_label=Literal("Chronometric Age"),
     definition=Literal("An approximation of temporal position (in the sense conveyed by [https://www.w3.org/TR/owl-time/#time:TemporalPosition]) that is supported by evidence.", lang="en"),
     comments=Literal("The age of a [dwc:MaterialEntity] and how this age is known, whether by a dating assay, or a relative association with dated material, or legacy collection information.", lang="en"),
-    examples=Literal("`an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum`; `an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum`; `a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen`; `an age range of a specimen based on its biostratigraphic content`; `an age of a specimen based on what is reported in legacy collections data`"),
+    examples=Literal("an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum; an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum; a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen; an age range of a specimen based on its biostratigraphic content; an age of a specimen based on what is reported in legacy collections data"),
+    # examples=Literal("`an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum`; `an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum`; `a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen`; `an age range of a specimen based on its biostratigraphic content`; `an age of a specimen based on what is reported in legacy collections data`"),
     version_of_s="http://rs.tdwg.org/chrono/terms/ChronometricAge",
     references_s="http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21",
 )
@@ -623,9 +625,9 @@ createCTOP(
     card1_restrictions=[DWC["molecularProtocolID"]],
     maxcard1_restrictions=[DWC["assayType"],
                            MIXS["0000001"], MIXS["0000002"], MIXS["0000003"], MIXS["0000005"], MIXS["0000006"], MIXS["0000008"],
-                           MIXS["0000012"], MIXS["0000013"], MIXS["0000015"],
+                           MIXS["0000012"], MIXS["0000013"], MIXS["0000015"], MIXS["0000016"], MIXS["0000017"], MIXS["0000020"],
                            
-                        MIXS["0000017"], MIXS["0000092"], MIXS["0001107"], MIXS["0001320"]]
+                           MIXS["0000092"], MIXS["0001107"], MIXS["0001320"]]
 )
 
 ##############################################
@@ -2384,7 +2386,7 @@ createDP(
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Amount Or Size Of Sample Collected"),
     definition=Literal("The total amount or size (volume (ml), mass (g) or aread (m2)) of sample collected.", lang="en"),
     examples=Literal("`5 liter`"),
@@ -2396,7 +2398,7 @@ createDP(
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Sample Collection Device"),
     definition=Literal("The device used to collect an environmental sample. This field accepts terms listed under environmental sampling device ([http://purl.obolibrary.org/obo/ENVO]). This field also accepts terms listed under specimen collection device ([http://purl.obolibrary.org/obo/GENEPIO_0002094]).", lang="en"),
     version_of_s="https://w3id.org/mixs/00000002",
@@ -2407,21 +2409,22 @@ createDP(
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Isolation And Growth Condition"),
     definition=Literal("Publication reference in the form of pubmed ID (pmid), digital object identifier (doi) or url for isolation and growth condition specifications of the organism/material.", lang="en"),
     examples=Literal("`doi:10.1016/j.syapm.2018.01.009`"),
     version_of_s="https://w3id.org/mixs/00000003",
 )
 
-createDP(
+createEDP(
     name="0000005",
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    oneOf_list=[Literal("contigs"), Literal("reads")],
     pref_label=Literal("Contamination Screening Input"),
     definition=Literal("The type of sequence data used as input.", lang="en"),
+    comments=Literal("This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/ContamScreenInputEnum/].", lang="en"),
     examples=Literal("`contigs`"),
     version_of_s="https://w3id.org/mixs/00000005",
 )
@@ -2431,64 +2434,56 @@ createDP(
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("WGA Amplification Kit"),
     definition=Literal("Kit used to amplify genomic DNA in preparation for sequencing.", lang="en"),
     examples=Literal("`qiagen repli-g`"),
     version_of_s="https://w3id.org/mixs/00000006",
 )
 
-
-# NOTE: Double check if accepts Literal or not.
 # NOTE: I felt that the browser comment is better suited for a comment.
 createDP(
     name="0000008",
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Experimental Factor"),
     definition=Literal("Experimental factors are essentially the the variable aspects of an experiment design which can be used to describe an experiment, or set of experiments, in an increasingly detailed manner. This field accepts ontology terms from Experimental Factor Ontology ([efo:]) and/or Ontology for Biomedical Investigations ([obi:]).", lang="en"),
     comments=Literal("For a browser of [efo:] (v 2.95) terms, please see [http://purl.bioontology.org/ontology/EFO]; for a browser of [obi:] (v 2018-02-12) terms please see [http://purl.bioontology/ontology/OBI].", lang="en"),
     version_of_s="https://w3id.org/mixs/00000008",
 )
 
-# NOTE: Double check if accepts Literal or not.
-# NOTE: I copied the example from definition to the example section.
 createDP(
     name="0000012",
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Broad-scale Environmental Context"),
     definition=Literal("In this field, report which major environmental system your sample or specimen came from. The systems identified should have a coarse spatial grain, to provide the general environmental context of where the sampling was done (e.g. were you in the desert or a rainforest?). We recommend using subclasses of ENVO’s biome class: [http://purl.obolibrary.org/obo/ENVO_00000428]. Format (one term): termLabel [termID], Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a water sample from the photic zone in middle of the Atlantic Ocean, consider: oceanic epipelagic zone biome [ENVO:01000033]. Example: Annotating a sample from the Amazon rainforest consider: tropical moist broadleaf forest biome [ENVO:01000228]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
     examples=Literal("`oceanic epipelagic zone biome [ENVO:01000033]`; `tropical moist broadleaf forest biome [ENVO:01000228]`"),
     version_of_s="https://w3id.org/mixs/0000012",
 )
 
-# NOTE: Double check if accepts Literal or not.
-# NOTE: I copied the example from definition to the example section.
 createDP(
     name="0000013",
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Local Environmental Context"),
     definition=Literal("In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
     examples=Literal("`canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]`"),
     version_of_s="https://w3id.org/mixs/0000013",
 )
 
-# NOTE: Double check if accepts Literal or not.
-# NOTE: I copied the example from definition to the example section.
 createDP(
     name="0000014",
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Environmental Medium"),
     definition=Literal("In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
     examples=Literal("`ocean water [ENVO:00002151]`; `pond water [ENVO:00002228]|air ENVO_00002005`"),
@@ -2525,7 +2520,7 @@ createDP(
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Sample Material Processing"),
     definition=Literal("A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed.", lang="en"),
     examples=Literal("`filtering of seawater, storing samples in ethanol`"),
@@ -2537,41 +2532,38 @@ createDP(
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Size Fraction Selected"),
     definition=Literal("Filtering pore size used in sample preparation.", lang="en"),
     examples=Literal("`0-0.22 micrometer`"),
     version_of_s="https://w3id.org/mixs/0000017",
 )
 
-
-
-
-
-
-# NOTE: I copied the example from definition to the example section.
 createDP(
     name="0000020",
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Subspecific Genetic Lineage"),
     definition=Literal("This should provide further information about the genetic distinctness of the sequenced organism by recording additional information e.g. serovar, serotype, biotype, ecotype, or any relevant genetic typing schemes like Group I plasmid. It can also contain alternative taxonomic information. It should contain both the lineage name, and the lineage rank, i.e. `biovar:abc123`.", lang="en"),
-    examples=Literal("`biovar:abc123`"),
+    examples=Literal("`serovar:Newport`"),
     version_of_s="https://w3id.org/mixs/0000020",
 )
 
-# NOTE: I copied the example from definition to the example section.
+
+
+
+
 createDP(
     name="0000021",
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Ploidy"),
     definition=Literal("The ploidy level of the genome (e.g. `allopolyploid`, `haploid`, `diploid`, `triploid`, `tetraploid`). It has implications for the downstream study of duplicated gene and regions of the genomes (and perhaps for difficulties in assembly). For terms, please select terms listed under class ploidy ([pato:001374]) of Phenotypic Quality Ontology ([pato:]), and for a browser of PATO (v 2018-03-27) please refer to [http://purl.bioontology.org/ontology/PATO].", lang="en"),
-    examples=Literal("`allopolyploid`; `haploid`; `diploid`; `triploid`; `tetraploid`"),
+    examples=Literal("`allopolyploidy [PATO:0001379]`"),
     version_of_s="https://w3id.org/mixs/0000021",
 )
 
@@ -2583,6 +2575,7 @@ createDP(
     range_list=[XSD["integer"]],
     pref_label=Literal("Number Of Replicons"),
     definition=Literal("Reports the number of replicons in a nuclear genome of eukaryotes, in the genome of a bacterium or archaea or the number of segments in a segmented virus. Always applied to the haploid chromosome count of a eukaryote.", lang="en"),
+    examples=Literal("2", datatype=XSD["integer"]),
     version_of_s="https://w3id.org/mixs/0000022",
 )
 
@@ -2591,9 +2584,10 @@ createDP(
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["integer"]],
     pref_label=Literal("Extrachromosomal Elements"),
     definition=Literal("Do plasmids exist of significant phenotypic consequence (e.g. ones that determine virulence or antibiotic resistance). Megaplasmids? Other plasmids (borrelia has 15+ plasmids).", lang="en"),
+    examples=Literal("5", datatype=XSD["integer"]),
     version_of_s="https://w3id.org/mixs/0000023",
 )
 
@@ -2602,11 +2596,19 @@ createDP(
     namespace=MIXS,
     graph=g,
     domain_list=[DWC["MolecularProtocol"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Estimated size"),
     definition=Literal("The estimated size of the genome prior to sequencing. Of particular importance in the sequencing of (eukaryotic) genome which could remain in draft form for a long or unspecified period.", lang="en"),
+    examples=Literal("`300000 bp`"),
     version_of_s="https://w3id.org/mixs/0000024",
 )
+
+
+
+
+
+
+
 
 createDP(
     name="0000092",
@@ -2709,6 +2711,27 @@ createDP(
 # g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingToID"], BB["Joey366"]))
 
 
+
+
+# TEST: agentID as an inverse functional property
+# A dummy property for now
+createDP(
+    name="agentID",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DCTERMS["Agent"]],
+    range_list=[XSD["string"]],
+    additional_list=[OWL["InverseFunctionalProperty"]],
+    pref_label=Literal("Agent ID"),
+    definition=Literal("Yada yada ladidah.", lang="en"),
+    version_of_s="http://rs.tdwg.org/ac/terms/agentID",
+)
+
+# Three dcterms:Agent have the same dwc:agentID entry
+# The reasoner will infer they are the same individual
+g.add((BB["Mikey"], DWC["agentID"], Literal("0000-0002-1234-567X")))
+g.add((BB["Michael"], DWC["agentID"], Literal("0000-0002-1234-567X")))
+g.add((BB["MichaelRathboneIII"], DWC["agentID"], Literal("0000-0002-1234-567X")))
 
 
 
