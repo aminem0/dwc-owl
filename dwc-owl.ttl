@@ -50,7 +50,7 @@ bb:Mato1 a dwc:MaterialEntity ;
 
 bb:Michael dwc:agentID "0000-0002-1234-567X" .
 
-bb:MichaelRathbone dwc:agentID "0000-0002-1234-567X" .
+bb:MichaelRathboneIII dwc:agentID "0000-0002-1234-567X" .
 
 bb:Midio dwcdp:isMediaOf bb:Occurro .
 
@@ -1925,7 +1925,7 @@ dwc:GeologicalContext a owl:Class ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
     rdfs:isDefinedBy dwc: ;
     skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
-    skos:example "`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`"@en ;
+    skos:example "`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`" ;
     skos:prefLabel "Geological Context" .
 
 dwc:Assertion a owl:Class ;
@@ -1956,10 +1956,12 @@ dcterms:Agent a owl:Class ;
 
 ac:Media a owl:Class ;
     dcterms:isVersionOf ac:Media ;
-    rdfs:comment "An instance of digital textual media may be better represented as a [dcterms:BibliographicResource]."@en ;
+    rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
     rdfs:isDefinedBy ac: ;
-    skos:definition "A [dcmi:MediaType] or other media type with other entities as subject matter."@en ;
-    skos:example "`dcmi:Sound`; `dcmi:StillImage`; `dcmi:MovingImage`" ;
+    skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
+    skos:example "dcmi:MovingImage",
+        "dcmi:Sound",
+        "dcmi:StillImage" ;
     skos:prefLabel "Media" .
 
 dwc:MolecularProtocol a owl:Class ;

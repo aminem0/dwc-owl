@@ -2018,10 +2018,12 @@ dcterms:Location rdf:type owl:Class ;
 ###  http://rs.tdwg.org/ac/terms/Media
 ac:Media rdf:type owl:Class ;
          dcterms:isVersionOf ac:Media ;
-         rdfs:comment "An instance of digital textual media may be better represented as a [dcterms:BibliographicResource]."@en ;
+         rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
          rdfs:isDefinedBy ac: ;
-         skos:definition "A [dcmi:MediaType] or other media type with other entities as subject matter."@en ;
-         skos:example "`dcmi:Sound`; `dcmi:StillImage`; `dcmi:MovingImage`" ;
+         skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
+         skos:example "dcmi:MovingImage" ,
+                      "dcmi:Sound" ,
+                      "dcmi:StillImage" ;
          skos:prefLabel "Media" .
 
 
@@ -2209,7 +2211,7 @@ dwc:GeologicalContext rdf:type owl:Class ;
                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
                       rdfs:isDefinedBy dwc: ;
                       skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
-                      skos:example "`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`"@en ;
+                      skos:example "`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`" ;
                       skos:prefLabel "Geological Context" .
 
 
@@ -2725,9 +2727,9 @@ bb:Michael rdf:type owl:NamedIndividual ;
            dwc:agentID "0000-0002-1234-567X" .
 
 
-###  http://bioboum.ca/MichaelRathbone
-bb:MichaelRathbone rdf:type owl:NamedIndividual ;
-                   dwc:agentID "0000-0002-1234-567X" .
+###  http://bioboum.ca/MichaelRathboneIII
+bb:MichaelRathboneIII rdf:type owl:NamedIndividual ;
+                      dwc:agentID "0000-0002-1234-567X" .
 
 
 ###  http://bioboum.ca/Midio
