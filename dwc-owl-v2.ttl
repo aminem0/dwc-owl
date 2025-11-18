@@ -1994,7 +1994,11 @@ dcterms:Agent rdf:type owl:Class ;
               rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
               rdfs:isDefinedBy dcterms: ;
               skos:definition "A resource that acts or has the power to act."@en ;
-              skos:example "Carl Linnaeus; The Terra Nova Expedition; The National Science Foundation; The El Yunque National Forest ARBIMON System; ChatGPT" ;
+              skos:example "Carl Linnaeus" ,
+                           "ChatGPT" ,
+                           "The El Yunque National Forest ARBIMON System" ,
+                           "The National Science Foundation" ,
+                           "The Terra Nova Expedition" ;
               skos:prefLabel "Agent" .
 
 
@@ -2011,7 +2015,8 @@ dcterms:Location rdf:type owl:Class ;
                  dcterms:isVersionOf dcterms:Location ;
                  rdfs:isDefinedBy dcterms: ;
                  skos:definition "A spatial region or named place."@en ;
-                 skos:example "`the municipality of San Carlos de Bariloche, Río Negro, Argentina`; `the place defined by a georeference`" ;
+                 skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina" ,
+                              "the place defined by a georeference" ;
                  skos:prefLabel "Location" .
 
 
@@ -2034,7 +2039,11 @@ chrono:ChronometricAge rdf:type owl:Class ;
                        rdfs:comment "The age of a [dwc:MaterialEntity] and how this age is known, whether by a dating assay, or a relative association with dated material, or legacy collection information."@en ;
                        rdfs:isDefinedBy chrono: ;
                        skos:definition "An approximation of temporal position (in the sense conveyed by [https://www.w3.org/TR/owl-time/#time:TemporalPosition]) that is supported by evidence."@en ;
-                       skos:example "an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum; an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum; a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen; an age range of a specimen based on its biostratigraphic content; an age of a specimen based on what is reported in legacy collections data" ;
+                       skos:example "a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen" ,
+                                    "an age of a specimen based on what is reported in legacy collections data" ,
+                                    "an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum" ,
+                                    "an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum" ,
+                                    "an age range of a specimen based on its biostratigraphic content" ;
                        skos:prefLabel "Chronometric Age" .
 
 
@@ -2163,7 +2172,11 @@ dwc:Event rdf:type owl:Class ;
           dcterms:references <http://rs.tdwg.org/dwc/terms/version/Event-2023-09-18> ;
           rdfs:isDefinedBy dwc: ;
           skos:definition "An action, process, or set of circumstances occurring at a [dcterms:Location] during a period of time."@en ;
-          skos:example "`a material collecting event`; `a bird observation`; `a camera trap image capture`; `an organism occurrence`; `a biotic survey`" ;
+          skos:example "a biotic survey" ,
+                       "a bird observation" ,
+                       "a camera trap image capture" ,
+                       "a material collecting event" ,
+                       "an organism occurrence" ;
           skos:prefLabel "Event" .
 
 
@@ -2211,7 +2224,8 @@ dwc:GeologicalContext rdf:type owl:Class ;
                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
                       rdfs:isDefinedBy dwc: ;
                       skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
-                      skos:example "`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`" ;
+                      skos:example "a particular lithostratigraphic layer" ,
+                                   "a specific chronostratigraphic unit" ;
                       skos:prefLabel "Geological Context" .
 
 
@@ -2260,7 +2274,8 @@ dwc:Identification rdf:type owl:Class ;
                    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
                    rdfs:isDefinedBy dwc: ;
                    skos:definition "A classification of a resource according to a classification scheme."@en ;
-                   skos:example "`a subspecies determination of an organism`; `a nomenclatural act designating a specimen as a holotype`" ;
+                   skos:example "a nomenclatural act designating a specimen as a holotype" ,
+                                "a subspecies determination of an organism" ;
                    skos:prefLabel "Identification" .
 
 
@@ -2289,7 +2304,16 @@ dwc:MaterialEntity rdf:type owl:Class ;
                    rdfs:comment "The term is defined at the most general level to admit descriptions of any subtype of material entity within the scope of Darwin Core. In particular, any kind of material sample, preserved specimen, fossil, or exemplar from living collections is intended to be subsumed under this term."@en ;
                    rdfs:isDefinedBy dwc: ;
                    skos:definition "An entity that can be identified, exist for some period of time, and consist in whole or in part of physical matter while it exists."@en ;
-                   skos:example "`the entire contents of a trawl`; `a subset of the contents of a trawl`; `the body of a fish`; `the stomach contents of a fish`; `a rock containing fossils`; `a fossil within a rock`; `an herbarium sheet with its attached plant speciment`; `a flower on a plant specimen`; `a pollen grain`; `a specific water sample`; `an isolated molecule of DNA`" ;
+                   skos:example "a flower on a plant specimen" ,
+                                "a fossil within a rock" ,
+                                "a rock containing fossils" ,
+                                "a specific water sample" ,
+                                "a subset of the contents of a trawl" ,
+                                "an herbarium sheet with its attached plant specimen" ,
+                                "an isolated molecule of DNA" ,
+                                "the body of a fish" ,
+                                "the entire contents of a trawl" ,
+                                "the stomach contents of a fish" ;
                    skos:prefLabel "Material Entity" .
 
 
@@ -2448,7 +2472,9 @@ dwc:Occurrence rdf:type owl:Class ;
                dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
                rdfs:isDefinedBy dwc: ;
                skos:definition "A state of a [dwc:Organism] in a [dwc:Event]."@en ;
-               skos:example "`a wolf pack on the shore of Kluane Lake in 1988`; `a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23`; `a fungus in Central Park in the summer of 1929`" ;
+               skos:example "a fungus in Central Park in the summer of 1929" ,
+                            "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23" ,
+                            "a wolf pack on the shore of Kluane Lake in 1988" ;
                skos:prefLabel "Occurrence" .
 
 
@@ -2483,7 +2509,9 @@ dwc:Organism rdf:type owl:Class ;
              rdfs:comment "Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class."@en ;
              rdfs:isDefinedBy dwc: ;
              skos:definition "A particular organism or defined group of organisms considered to be taxonomically homogeneous."@en ;
-             skos:example "`a specific bird`; `a specific wolf pack`; `a specific instance of a bacterial culture`" ;
+             skos:example "a specific bird" ,
+                          "a specific instance of a bacterial culture" ,
+                          "a specific wolf pack" ;
              skos:prefLabel "Organism" .
 
 
@@ -2505,7 +2533,13 @@ dwc:OrganismInteraction rdf:type owl:Class ;
                         rdfs:comment "Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s."@en ;
                         rdfs:isDefinedBy dwc: ;
                         skos:definition "An interaction between two [dwc:Organism]s during a [dwc:Event]."@en ;
-                        skos:example "`a bee visiting a flower`; `a *Mallophora ruficauda* hunting an *Apis mellifera* in flight`; `a viral infection in a plant`; `a female spider mating with a male spider`; `a lion cub nursing from its mother`; `a mosquito sucking blood from a chimpanzee's arm`; `a slug eating a fungus growing on a decomposing stump` (2 interactions)" ;
+                        skos:example "a Mallophora ruficauda hunting an Apis mellifera in flight" ,
+                                     "a bee visiting a flower" ,
+                                     "a female spider mating with a male spider" ,
+                                     "a lion cub nursing from its mother" ,
+                                     "a mosquito sucking blood from a chimpanzee's arm" ,
+                                     "a slug eating a fungus growing on a decomposing stump (2 interactions)" ,
+                                     "a viral infection in a plant" ;
                         skos:prefLabel "Organism Interaction" .
 
 
@@ -2531,7 +2565,10 @@ dwc:Protocol rdf:type owl:Class ;
              dcterms:isVersionOf dwc:Protocol ;
              rdfs:isDefinedBy dwc: ;
              skos:definition "A method used during an action."@en ;
-             skos:example "`a pitfall method for sampling ground-dwelling arthropods`; `a point-radius georeferencing method`; `a linear regression model to estimate body mass from skeletal measurements`; `a Bayesian phylogenetic inference method`" ;
+             skos:example "a Bayesian phylogenetic inference method" ,
+                          "a linear regression model to estimate body mass from skeletal measurements" ,
+                          "a pitfall method for sampling ground-dwelling arthropods" ,
+                          "a point-radius georeferencing method" ;
              skos:prefLabel "Protocol" .
 
 
@@ -2560,7 +2597,9 @@ dwc:ResourceRelationship rdf:type owl:Class ;
                          rdfs:comment "Resources can be thought of as identifiable records or instances of classes and may include, but need not be limited to instances of [dwc:Occurrence], [dwc:Organism], [dwc:MaterialEntity], [dwc:Event], [dcterms:Location], [dwc:GeologicalContext], [dwc:Identification], or [dwc:Taxon.]"@en ;
                          rdfs:isDefinedBy dwc: ;
                          skos:definition "A relationship of one [rdfs:Resource] ([http://www.w3.org/2000/01/rdf-schema#Resource]) to another."@en ;
-                         skos:example "`an instance of a [dwc:Organism] is the mother of another instance of a [dwc:Organism]`; `a uniquely identified [dwc:Occurrence] represents the same [dwc:Occurrence] as another uniquely identified [dwc:Occurrence]`; `a [dwc:MaterialEntity] is a subsample of another [dwc:MaterialEntity]`" ;
+                         skos:example "a dwc:MaterialEntity is a subsample of another dwc:MaterialEntity" ,
+                                      "a uniquely identified dwc:Occurrence represents the same dwc:Occurrence as another uniquely identified dwc:Occurrence" ,
+                                      "an instance of a dwc:Organism is the mother of another instance of a dwc:Organism" ;
                          skos:prefLabel "Resource Relationship" .
 
 
@@ -2621,7 +2660,15 @@ eco:Survey rdf:type owl:Class ;
            rdfs:comment "This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget]."@en ;
            rdfs:isDefinedBy eco: ;
            skos:definition "A biotic survey or inventory."@en ;
-           skos:example "`a botanical survey of a protected area to assess native and invasive plant species`; `a wetland vegetation mapping`; `a camera trap deployment in a rainforest to monito large mammals`; `a frog call survey in wetlands across breeding seasons`; `a coverboard survey for reptiles in forested environments`; `a pollinator survey in an agricultural landscape`; `a macroinvertebrate sampling in a freshwater stream to assess water quality`; `a habitat- or ecosystem-level survey` (e.g. `coral reef health assessment`, `forest biodiversity assessment`); `an environmental impact assessment` (e.g. `pre-construction baseline survey for a wind farm project`)" ;
+           skos:example "a botanical survey of a protected area to assess native and invasive plant species" ,
+                        "a camera trap deployment in a rainforest to monitor large mammals" ,
+                        "a coverboard survey for reptiles in forested environments" ,
+                        "a frog call survey in wetlands across breeding seasons" ,
+                        "a habitat- or ecosystem-level survey (e.g. coral reef health assessment, forest biodiversity assessment)" ,
+                        "a macroinvertebrate sampling in a freshwater stream to assess water quality" ,
+                        "a pollinator survey in an agricultural landscape" ,
+                        "a wetland vegetation mapping" ,
+                        "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
            skos:prefLabel "Survey" .
 
 
@@ -2630,7 +2677,11 @@ eco:SurveyTarget rdf:type owl:Class ;
                  dcterms:isVersionOf eco:SurveyTarget ;
                  rdfs:isDefinedBy eco: ;
                  skos:definition "An intended scope for [dwc:Occurrence]s in a [eco:Survey]."@en ;
-                 skos:example "`all bird species`; `all bird species except *Larus* gulls, fulmars and kittiwakes`; reproductive female *Ctenomys sociabilis* (only)`; `*Oncorhynchus mykiss* and *Oncorhynchus clarkii* (only)`; `all total lengths except < 12 inches`" ;
+                 skos:example "Oncorhynchus mykiss and Oncorhynchus clarkii (only)" ,
+                              "all bird species" ,
+                              "all bird species except Larus gulls, fulmars and kittiwakes" ,
+                              "all total lengths except < 12 inches" ,
+                              "reproductive female Ctenomys sociabilis (only)" ;
                  skos:prefLabel "Survey Target" .
 
 

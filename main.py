@@ -92,7 +92,13 @@ createOC(
     pref_label=Literal("Agent"),
     definition=Literal("A resource that acts or has the power to act.", lang="en"),
     comments=Literal("A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious.", lang="en"),
-    examples_list=[Literal("Carl Linnaeus; The Terra Nova Expedition; The National Science Foundation; The El Yunque National Forest ARBIMON System; ChatGPT")],
+    examples_list=[
+        Literal("Carl Linnaeus"),
+        Literal("The Terra Nova Expedition"),
+        Literal("The National Science Foundation"),
+        Literal("The El Yunque National Forest ARBIMON System"),
+        Literal("ChatGPT"),
+        ],
 #    examples=Literal("`Carl Linnaeus`; `The Terra Nova Expedition`; `The National Science Foundation`; `The El Yunque National Forest ARBIMON System`; `ChatGPT`"),
     # card1_restrictions=[DWC["agentID"], DWC["agentType"]],
     # card01_restrictions=[DWC["agentRemarks"], DWC["preferredAgentName"]],
@@ -126,8 +132,13 @@ createOC(
     pref_label=Literal("Chronometric Age"),
     definition=Literal("An approximation of temporal position (in the sense conveyed by [https://www.w3.org/TR/owl-time/#time:TemporalPosition]) that is supported by evidence.", lang="en"),
     comments=Literal("The age of a [dwc:MaterialEntity] and how this age is known, whether by a dating assay, or a relative association with dated material, or legacy collection information.", lang="en"),
-    examples_list=[Literal("an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum; an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum; a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen; an age range of a specimen based on its biostratigraphic content; an age of a specimen based on what is reported in legacy collections data")],
-    # examples=Literal("`an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum`; `an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum`; `a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen`; `an age range of a specimen based on its biostratigraphic content`; `an age of a specimen based on what is reported in legacy collections data`"),
+    examples_list=[
+        Literal("an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum"),
+        Literal("an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum"),
+        Literal("a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen"),
+        Literal("an age range of a specimen based on its biostratigraphic content"),
+        Literal("an age of a specimen based on what is reported in legacy collections data"),
+        ],
     version_of_s="http://rs.tdwg.org/chrono/terms/ChronometricAge",
     references_s="http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21",
 )
@@ -139,7 +150,13 @@ createOC(
     graph=g,
     pref_label=Literal("Event"),
     definition=Literal("An action, process, or set of circumstances occurring at a [dcterms:Location] during a period of time.", lang="en"),
-    examples_list=[Literal("`a material collecting event`; `a bird observation`; `a camera trap image capture`; `an organism occurrence`; `a biotic survey`")],
+    examples_list=[
+        Literal("a material collecting event"),
+        Literal("a bird observation"),
+        Literal("a camera trap image capture"),
+        Literal("an organism occurrence"),
+        Literal("a biotic survey"),
+        ],
     # card1_restrictions=[DWC["eventID"]],
     # card0_restrictions=[DWCDP["happenedDuring"]],
     # card01_restrictions=[DWC["preferredEventName"]],
@@ -153,7 +170,10 @@ createOC(
     graph=g,
     pref_label=Literal("Geological Context"),
     definition=Literal("A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location].", lang="en"),
-    examples_list=[Literal("`a particular lithostratigraphic layer`; `a specific chronostratigraphic unit`")],
+    examples_list=[
+        Literal("a particular lithostratigraphic layer"),
+        Literal("a specific chronostratigraphic unit")
+        ],
     # card1_restrictions=[DWC["geologicalContextID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/GeologicalContext",
     references_s="http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18",
@@ -166,7 +186,10 @@ createOC(
     pref_label=Literal("Identification"),
     definition=Literal("A classification of a resource according to a classification scheme.", lang="en"),
     comments=Literal("For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism].", lang="en"),
-    examples_list=[Literal("`a subspecies determination of an organism`; `a nomenclatural act designating a specimen as a holotype`")],
+    examples_list=[
+        Literal("a subspecies determination of an organism"),
+        Literal("a nomenclatural act designating a specimen as a holotype"),
+        ],
     version_of_s="http://rs.tdwg.org/dwc/terms/Identification",
     references_s="http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18",
 )
@@ -177,7 +200,10 @@ createOC(
     graph=g,
     pref_label=Literal("Location"),
     definition=Literal("A spatial region or named place.", lang="en"),
-    examples_list=[Literal("`the municipality of San Carlos de Bariloche, Río Negro, Argentina`; `the place defined by a georeference`")],
+    examples_list=[
+        Literal("the municipality of San Carlos de Bariloche, Río Negro, Argentina"),
+        Literal("the place defined by a georeference")
+        ],
     version_of_s="http://purl.org/dc/terms/Location",
 )
 
@@ -188,7 +214,18 @@ createOC(
     pref_label=Literal("Material Entity"),
     definition=Literal("An entity that can be identified, exist for some period of time, and consist in whole or in part of physical matter while it exists.", lang="en"),
     comments=Literal("The term is defined at the most general level to admit descriptions of any subtype of material entity within the scope of Darwin Core. In particular, any kind of material sample, preserved specimen, fossil, or exemplar from living collections is intended to be subsumed under this term.", lang="en"),
-    examples_list=[Literal("`the entire contents of a trawl`; `a subset of the contents of a trawl`; `the body of a fish`; `the stomach contents of a fish`; `a rock containing fossils`; `a fossil within a rock`; `an herbarium sheet with its attached plant speciment`; `a flower on a plant specimen`; `a pollen grain`; `a specific water sample`; `an isolated molecule of DNA`")],
+    examples_list=[
+        Literal("the entire contents of a trawl"),
+        Literal("a subset of the contents of a trawl"),
+        Literal("the body of a fish"),
+        Literal("the stomach contents of a fish"),
+        Literal("a rock containing fossils"),
+        Literal("a fossil within a rock"),
+        Literal("an herbarium sheet with its attached plant specimen"),
+        Literal("a flower on a plant specimen"),
+        Literal("a specific water sample"),
+        Literal("an isolated molecule of DNA"),
+        ],
     version_of_s="http://rs.tdwg.org/dwc/terms/MaterialEntity",
     references_s="http://rs.tdwg.org/dwc/terms/version/MaterialEntity-2023-09-13",
 )
@@ -230,7 +267,11 @@ createOC(
     graph=g,
     pref_label=Literal("Occurrence"),
     definition=Literal("A state of a [dwc:Organism] in a [dwc:Event].", lang="en"),
-    examples_list=[Literal("`a wolf pack on the shore of Kluane Lake in 1988`; `a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23`; `a fungus in Central Park in the summer of 1929`")],
+    examples_list=[
+        Literal("a wolf pack on the shore of Kluane Lake in 1988"),
+        Literal("a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23"),
+        Literal("a fungus in Central Park in the summer of 1929"),
+        ],
     version_of_s="http://rs.tdwg.org/dwc/terms/Occurrence",
     references_s="http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18",
 )
@@ -242,7 +283,11 @@ createOC(
     pref_label=Literal("Organism"),
     definition=Literal("A particular organism or defined group of organisms considered to be taxonomically homogeneous.", lang="en"),
     comments=Literal("Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class.", lang="en"),
-    examples_list=[Literal("`a specific bird`; `a specific wolf pack`; `a specific instance of a bacterial culture`")],
+    examples_list=[
+        Literal("a specific bird"),
+        Literal("a specific wolf pack"),
+        Literal("a specific instance of a bacterial culture"),
+        ],
     # card1_restrictions=[DWC["organismID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/Organism",
     references_s="http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18",
@@ -256,7 +301,15 @@ createOC(
     pref_label=Literal("Organism Interaction"),
     definition=Literal("An interaction between two [dwc:Organism]s during a [dwc:Event].", lang="en"),
     comments=Literal("Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s.", lang="en"),
-    examples_list=[Literal("`a bee visiting a flower`; `a *Mallophora ruficauda* hunting an *Apis mellifera* in flight`; `a viral infection in a plant`; `a female spider mating with a male spider`; `a lion cub nursing from its mother`; `a mosquito sucking blood from a chimpanzee's arm`; `a slug eating a fungus growing on a decomposing stump` (2 interactions)")],
+    examples_list=[
+        Literal("a bee visiting a flower"),
+        Literal("a Mallophora ruficauda hunting an Apis mellifera in flight"),
+        Literal("a viral infection in a plant"),
+        Literal("a female spider mating with a male spider"),
+        Literal("a lion cub nursing from its mother"),
+        Literal("a mosquito sucking blood from a chimpanzee's arm"),
+        Literal("a slug eating a fungus growing on a decomposing stump (2 interactions)"),
+        ],
     # card1_restrictions=[DWC["organismInteractionID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/OrganismInteraction",
 )
@@ -267,7 +320,12 @@ createOC(
     graph=g,
     pref_label=Literal("Protocol"),
     definition=Literal("A method used during an action.", lang="en"),
-    examples_list=[Literal("`a pitfall method for sampling ground-dwelling arthropods`; `a point-radius georeferencing method`; `a linear regression model to estimate body mass from skeletal measurements`; `a Bayesian phylogenetic inference method`")],
+    examples_list=[
+        Literal("a pitfall method for sampling ground-dwelling arthropods"),
+        Literal("a point-radius georeferencing method"),
+        Literal("a linear regression model to estimate body mass from skeletal measurements"),
+        Literal("a Bayesian phylogenetic inference method"),
+        ],
     version_of_s="http://rs.tdwg.org/dwc/terms/Protocol",
 )
 
@@ -281,7 +339,11 @@ createOC(
     pref_label=Literal("Resource Relationship"),
     definition=Literal("A relationship of one [rdfs:Resource] ([http://www.w3.org/2000/01/rdf-schema#Resource]) to another.", lang="en"),
     comments=Literal("Resources can be thought of as identifiable records or instances of classes and may include, but need not be limited to instances of [dwc:Occurrence], [dwc:Organism], [dwc:MaterialEntity], [dwc:Event], [dcterms:Location], [dwc:GeologicalContext], [dwc:Identification], or [dwc:Taxon.]", lang="en"),
-    examples_list=[Literal("`an instance of a [dwc:Organism] is the mother of another instance of a [dwc:Organism]`; `a uniquely identified [dwc:Occurrence] represents the same [dwc:Occurrence] as another uniquely identified [dwc:Occurrence]`; `a [dwc:MaterialEntity] is a subsample of another [dwc:MaterialEntity]`")],
+    examples_list=[
+        Literal("an instance of a dwc:Organism is the mother of another instance of a dwc:Organism"),
+        Literal("a uniquely identified dwc:Occurrence represents the same dwc:Occurrence as another uniquely identified dwc:Occurrence"),
+        Literal("a dwc:MaterialEntity is a subsample of another dwc:MaterialEntity"),
+        ],
     version_of_s="http://rs.tdwg.org/dwc/terms/ResourceRelationship",
     references_s="http://rs.tdwg.org/dwc/terms/version/ResourceRelationship-2023-09-13",
 )
@@ -305,7 +367,17 @@ createOC(
     pref_label=Literal("Survey"),
     definition=Literal("A biotic survey or inventory.", lang="en"),
     comments=Literal("This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget].", lang="en"),
-    examples_list=[Literal("`a botanical survey of a protected area to assess native and invasive plant species`; `a wetland vegetation mapping`; `a camera trap deployment in a rainforest to monito large mammals`; `a frog call survey in wetlands across breeding seasons`; `a coverboard survey for reptiles in forested environments`; `a pollinator survey in an agricultural landscape`; `a macroinvertebrate sampling in a freshwater stream to assess water quality`; `a habitat- or ecosystem-level survey` (e.g. `coral reef health assessment`, `forest biodiversity assessment`); `an environmental impact assessment` (e.g. `pre-construction baseline survey for a wind farm project`)")],
+    examples_list=[
+        Literal("a botanical survey of a protected area to assess native and invasive plant species"),
+        Literal("a wetland vegetation mapping"),
+        Literal("a camera trap deployment in a rainforest to monitor large mammals"),
+        Literal("a frog call survey in wetlands across breeding seasons"),
+        Literal("a coverboard survey for reptiles in forested environments"),
+        Literal("a pollinator survey in an agricultural landscape"),
+        Literal("a macroinvertebrate sampling in a freshwater stream to assess water quality"),
+        Literal("a habitat- or ecosystem-level survey (e.g. coral reef health assessment, forest biodiversity assessment)"),
+        Literal("an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)"),
+        ],
     # card1_restrictions=[DWC["eventID"], DWC["surveyID"]],
     version_of_s="http://rs.tdwg.org/eco/terms/Survey",
 )
@@ -316,7 +388,13 @@ createOC(
     graph=g,
     pref_label=Literal("Survey Target"),
     definition=Literal("An intended scope for [dwc:Occurrence]s in a [eco:Survey].", lang="en"),
-    examples_list=[Literal("`all bird species`; `all bird species except *Larus* gulls, fulmars and kittiwakes`; reproductive female *Ctenomys sociabilis* (only)`; `*Oncorhynchus mykiss* and *Oncorhynchus clarkii* (only)`; `all total lengths except < 12 inches`")],
+    examples_list=[
+        Literal("all bird species"),
+        Literal("all bird species except Larus gulls, fulmars and kittiwakes"),
+        Literal("reproductive female Ctenomys sociabilis (only)"),
+        Literal("Oncorhynchus mykiss and Oncorhynchus clarkii (only)"),
+        Literal("all total lengths except < 12 inches"),
+        ],
     # card1_restrictions=[DWC["surveyID"], DWC["surveyTargetID"]],
     version_of_s="http://rs.tdwg.org/eco/terms/SurveyTarget",
 )
