@@ -984,6 +984,60 @@ dwc:earliestAgeOrLowestStage rdf:type owl:DatatypeProperty ;
                              skos:prefLabel "Earliest Age Or Lowest Stage" .
 
 
+###  http://rs.tdwg.org/dwc/terms/earliestEonOrLowestEonothem
+dwc:earliestEonOrLowestEonothem rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:GeologicalContext ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf dwc:earliestEonOrLowestEonothem ;
+                                dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestEonOrLowestEonothem-2023-09-13> ;
+                                rdfs:isDefinedBy dwc: ;
+                                skos:definition "The full name of the earliest possible geochronologic eon or lowest chronostratigraphic eonothem or the informal name (`Precambrian`) attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                                skos:example "Phanerozoic" ,
+                                             "Proterozoic" ;
+                                skos:prefLabel "Earliest Eon Or Lowest Eonothem" .
+
+
+###  http://rs.tdwg.org/dwc/terms/earliestEpochOrLowestSeries
+dwc:earliestEpochOrLowestSeries rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:GeologicalContext ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf dwc:earliestEpochOrLowestSeries ;
+                                dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestEpochOrLowestSeries-2023-09-13> ;
+                                rdfs:isDefinedBy dwc: ;
+                                skos:definition "The full name of the earliest possible geochronologic epoch or lowest chronostratigraphic series attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                                skos:example "Holocene" ,
+                                             "Ibexian Series" ,
+                                             "Pleistocene" ;
+                                skos:prefLabel "Earliest Epoch Or Lowest Series" .
+
+
+###  http://rs.tdwg.org/dwc/terms/earliestEraOrLowestErathem
+dwc:earliestEraOrLowestErathem rdf:type owl:DatatypeProperty ;
+                               rdfs:domain dwc:GeologicalContext ;
+                               rdfs:range rdfs:Literal ;
+                               dcterms:isVersionOf dwc:earliestEraOrLowestErathem ;
+                               dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestEraOrLowestErathem-2023-09-13> ;
+                               rdfs:isDefinedBy dwc: ;
+                               skos:definition "The full name of the earliest possible geochronologic era or lowest chronostratigraphic erathem attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                               skos:example "Cenozoic" ,
+                                            "Mesozoic" ;
+                               skos:prefLabel "Earliest Era Or Lowest Erathem" .
+
+
+###  http://rs.tdwg.org/dwc/terms/earliestPeriodOrLowestSystem
+dwc:earliestPeriodOrLowestSystem rdf:type owl:DatatypeProperty ;
+                                 rdfs:domain dwc:GeologicalContext ;
+                                 rdfs:range rdfs:Literal ;
+                                 dcterms:isVersionOf dwc:earliestPeriodOrLowestSystem ;
+                                 dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestPeriodOrLowestSystem-2023-09-13> ;
+                                 rdfs:isDefinedBy dwc: ;
+                                 skos:definition "The full name of the earliest possible geochronologic period or lowest chronostratigraphic system attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                                 skos:example "Neogene" ,
+                                              "Quaternary" ,
+                                              "Tertiary" ;
+                                 skos:prefLabel "Earliest Period Or Lowest System" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/eventID
 dwc:eventID rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf dcterms:identifier ;
@@ -996,6 +1050,20 @@ dwc:eventID rdf:type owl:DatatypeProperty ;
             skos:definition "An identifier for a [dwc:Event]." ;
             skos:example "INBO:VIS:Ev:00009375" ;
             skos:prefLabel "Event ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/formation
+dwc:formation rdf:type owl:DatatypeProperty ;
+              rdfs:domain dwc:GeologicalContext ;
+              rdfs:range rdfs:Literal ;
+              dcterms:isVersionOf dwc:formation ;
+              dcterms:references <http://rs.tdwg.org/dwc/terms/version/formation-2023-09-13> ;
+              rdfs:isDefinedBy dwc: ;
+              skos:definition "The full name of the lithostratigraphic formation from which the [dwc:MaterialEntity] was collected."@en ;
+              skos:example "Fillmore Formation" ,
+                           "House Limestone" ,
+                           "Notch Peak Formation" ;
+              skos:prefLabel "Formation" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/geologicalContextID
@@ -1012,6 +1080,123 @@ dwc:geologicalContextID rdf:type owl:DatatypeProperty ;
                         skos:prefLabel "Geological Context ID" .
 
 
+###  http://rs.tdwg.org/dwc/terms/group
+dwc:group rdf:type owl:DatatypeProperty ;
+          rdfs:domain dwc:GeologicalContext ;
+          rdfs:range rdfs:Literal ;
+          dcterms:isVersionOf dwc:group ;
+          dcterms:references <http://rs.tdwg.org/dwc/terms/version/group-2023-09-13> ;
+          rdfs:isDefinedBy dwc: ;
+          skos:definition "The full name of the lithostratigraphic group from which the [dwc:MaterialEntity] was collected."@en ;
+          skos:example "Bathurst" ,
+                       "Lower Wealden" ;
+          skos:prefLabel "Group" .
+
+
+###  http://rs.tdwg.org/dwc/terms/highestBiostratigraphicZone
+dwc:highestBiostratigraphicZone rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:GeologicalContext ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf dwc:highestBiostratigraphicZone ;
+                                dcterms:references <http://rs.tdwg.org/dwc/terms/version/highestBiostratigraphicZone-2023-09-13> ;
+                                rdfs:isDefinedBy dwc: ;
+                                skos:definition "The full name of the highest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                                skos:example "Blancan" ;
+                                skos:prefLabel "Highest Biostratigraphic Zone" .
+
+
+###  http://rs.tdwg.org/dwc/terms/latestAgeOrHighestStage
+dwc:latestAgeOrHighestStage rdf:type owl:DatatypeProperty ;
+                            rdfs:domain dwc:GeologicalContext ;
+                            rdfs:range rdfs:Literal ;
+                            dcterms:isVersionOf dwc:latestAgeOrHighestStage ;
+                            dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestAgeOrHighestStage-2023-09-13> ;
+                            rdfs:isDefinedBy dwc: ;
+                            skos:definition "The full name of the latest possible geochronologic age or highest chronostratigraphic stage attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                            skos:example "Atlantic" ,
+                                         "Boreal" ,
+                                         "Skullrockian" ;
+                            skos:prefLabel "Latest Age Or Highest Stage" .
+
+
+###  http://rs.tdwg.org/dwc/terms/latestEonOrHighestEonothem
+dwc:latestEonOrHighestEonothem rdf:type owl:DatatypeProperty ;
+                               rdfs:domain dwc:GeologicalContext ;
+                               rdfs:range rdfs:Literal ;
+                               dcterms:isVersionOf dwc:latestEonOrHighestEonothem ;
+                               dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestEonOrHighestEonothem-2025-06-12> ;
+                               rdfs:isDefinedBy dwc: ;
+                               skos:definition "The full name of the latest possible geochronologic eon or highest chronostratigraphic eonothem or the informal name (`Precambrian`) attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                               skos:example "Phanerozoic" ,
+                                            "Proterozoic" ;
+                               skos:prefLabel "Latest Eon Or Highest Eonothem" .
+
+
+###  http://rs.tdwg.org/dwc/terms/latestEpochOrHighestSeries
+dwc:latestEpochOrHighestSeries rdf:type owl:DatatypeProperty ;
+                               rdfs:domain dwc:GeologicalContext ;
+                               rdfs:range rdfs:Literal ;
+                               dcterms:isVersionOf dwc:latestEpochOrHighestSeries ;
+                               dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestEpochOrHighestSeries-2023-09-13> ;
+                               rdfs:isDefinedBy dwc: ;
+                               skos:definition "The full name of the latest possible geochronologic epoch or highest chronostratigraphic series attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                               skos:example "Holocene" ,
+                                            "Ibexian Series" ,
+                                            "Pleistocene" ;
+                               skos:prefLabel "Latest Epoch Or Highest Series" .
+
+
+###  http://rs.tdwg.org/dwc/terms/latestEraOrHighestErathem
+dwc:latestEraOrHighestErathem rdf:type owl:DatatypeProperty ;
+                              rdfs:domain dwc:GeologicalContext ;
+                              rdfs:range rdfs:Literal ;
+                              dcterms:isVersionOf dwc:latestEraOrHighestErathem ;
+                              dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestEraOrHighestErathem-2023-09-13> ;
+                              rdfs:isDefinedBy dwc: ;
+                              skos:definition "The full name of the latest possible geochronologic era or highest chronostratigraphic erathem attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                              skos:example "Cenozoic" ,
+                                           "Mesozoic" ;
+                              skos:prefLabel "Latest Era Or Highest Erathem" .
+
+
+###  http://rs.tdwg.org/dwc/terms/latestPeriodOrHighestSystem
+dwc:latestPeriodOrHighestSystem rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:GeologicalContext ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf dwc:latestPeriodOrHighestSystem ;
+                                dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestPeriodOrHighestSystem-2023-09-13> ;
+                                rdfs:isDefinedBy dwc: ;
+                                skos:definition "The full name of the latest possible geochronologic period or highest chronostratigraphic system attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                                skos:example "Neogene" ,
+                                             "Quaternary" ,
+                                             "Tertiary" ;
+                                skos:prefLabel "Latest Period Or Highest System" .
+
+
+###  http://rs.tdwg.org/dwc/terms/lithostratigraphicTerms
+dwc:lithostratigraphicTerms rdf:type owl:DatatypeProperty ;
+                            rdfs:domain dwc:GeologicalContext ;
+                            rdfs:range rdfs:Literal ;
+                            dcterms:isVersionOf dwc:lithostratigraphicTerms ;
+                            dcterms:references <http://rs.tdwg.org/dwc/terms/version/lithostratigraphicTerms-2025-06-12> ;
+                            rdfs:isDefinedBy dwc: ;
+                            skos:definition "The combination of all lithostratigraphic names for the rock from which the [dwc:MaterialEntity] was collected."@en ;
+                            skos:example "Pleistocene-Weichselien" ;
+                            skos:prefLabel "Lithostratigraphic Terms" .
+
+
+###  http://rs.tdwg.org/dwc/terms/lowestBiostratigraphicZone
+dwc:lowestBiostratigraphicZone rdf:type owl:DatatypeProperty ;
+                               rdfs:domain dwc:GeologicalContext ;
+                               rdfs:range rdfs:Literal ;
+                               dcterms:isVersionOf dwc:lowestBiostratigraphicZone ;
+                               dcterms:references <http://rs.tdwg.org/dwc/terms/version/lowestBiostratigraphicZone-2023-09-13> ;
+                               rdfs:isDefinedBy dwc: ;
+                               skos:definition "The full name of the lowest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
+                               skos:example "Maastrichtian" ;
+                               skos:prefLabel "Lowest Biostratigraphic Zone" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/materialEntityID
 dwc:materialEntityID rdf:type owl:DatatypeProperty ;
                      rdfs:subPropertyOf dcterms:identifier ;
@@ -1019,9 +1204,9 @@ dwc:materialEntityID rdf:type owl:DatatypeProperty ;
                      rdfs:range rdfs:Literal ;
                      dcterms:isVersionOf dwc:materialEntityID ;
                      dcterms:references <http://rs.tdwg.org/dwc/terms/version/materialEntityID-2023-09-13> ;
-                     rdfs:comment "Values of [dwc:materialEntityID] are intended to uniquely and persistently identify a particular [dwc:MaterialEntity] within some context. Examples of context include a particular sample collection, an organization, or the worldwide scale. Recommended best practice is to use a persistent, globally unique identifier. The identifier is bound to a physical object (a [dwc:MaterialEntity]) as opposed to a particular digital record (representation) of that physical object." ;
+                     rdfs:comment "Values of [dwc:materialEntityID] are intended to uniquely and persistently identify a particular [dwc:MaterialEntity] within some context. Examples of context include a particular sample collection, an organization, or the worldwide scale. Recommended best practice is to use a persistent, globally unique identifier. The identifier is bound to a physical object (a [dwc:MaterialEntity]) as opposed to a particular digital record (representation) of that physical object."@en ;
                      rdfs:isDefinedBy dwc: ;
-                     skos:definition "An identifier for a [dwc:MaterialEntity]." ;
+                     skos:definition "An identifier for a [dwc:MaterialEntity]."@en ;
                      skos:example "06809dc5-f143-459a-be1a-6f03e63fc083" ;
                      skos:prefLabel "Material Entity ID" .
 
@@ -1032,10 +1217,23 @@ dwc:mediaID rdf:type owl:DatatypeProperty ;
             rdfs:domain ac:Media ;
             rdfs:range rdfs:Literal ;
             dcterms:isVersionOf <http://example.com/term-pending/dwc/mediaID> ;
-            rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+            rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
             rdfs:isDefinedBy dwc: ;
-            skos:definition "An identifier for an [ac:Media] resource." ;
+            skos:definition "An identifier for an [ac:Media] resource."@en ;
             skos:prefLabel "Media ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/member
+dwc:member rdf:type owl:DatatypeProperty ;
+           rdfs:domain dwc:GeologicalContext ;
+           rdfs:range rdfs:Literal ;
+           dcterms:isVersionOf dwc:member ;
+           dcterms:references <http://rs.tdwg.org/dwc/terms/version/member-2023-09-13> ;
+           rdfs:isDefinedBy dwc: ;
+           skos:definition "The full name of the lithostratigraphic member from which the [dwc:MaterialEntity] was collected."@en ;
+           skos:example "Hellnmaria Member" ,
+                        "Lava Dam Member" ;
+           skos:prefLabel "Member" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/molecularProtocolID
@@ -1044,9 +1242,9 @@ dwc:molecularProtocolID rdf:type owl:DatatypeProperty ;
                         rdfs:domain dwc:MolecularProtocol ;
                         rdfs:range rdfs:Literal ;
                         dcterms:isVersionOf <http://example.com/term-pending/dwc/molecularProtocolID> ;
-                        rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+                        rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
                         rdfs:isDefinedBy dwc: ;
-                        skos:definition "An identifier for a [dwc:MolecularProtocol]." ;
+                        skos:definition "An identifier for a [dwc:MolecularProtocol]."@en ;
                         skos:prefLabel "Molecular Protocol ID" .
 
 
@@ -1056,9 +1254,9 @@ dwc:nucleotideAnalysisID rdf:type owl:DatatypeProperty ;
                          rdfs:domain dwc:NucleotideAnalysis ;
                          rdfs:range rdfs:Literal ;
                          dcterms:isVersionOf <http://example.com/term-pending/dwc/nucleotideAnalysisID> ;
-                         rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+                         rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
                          rdfs:isDefinedBy dwc: ;
-                         skos:definition "An identifier for a [dwc:NucleotideAnalysis]." ;
+                         skos:definition "An identifier for a [dwc:NucleotideAnalysis]."@en ;
                          skos:prefLabel "Nucleotide Analysis ID" .
 
 
@@ -1068,10 +1266,20 @@ dwc:nucleotideSequenceID rdf:type owl:DatatypeProperty ;
                          rdfs:domain dwc:NucleotideSequence ;
                          rdfs:range rdfs:Literal ;
                          dcterms:isVersionOf <http://example.com/term-pending/dwc/molecularProtocolID> ;
-                         rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+                         rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
                          rdfs:isDefinedBy dwc: ;
-                         skos:definition "An identifier for a [dwc:NucleotideSequence]." ;
+                         skos:definition "An identifier for a [dwc:NucleotideSequence]."@en ;
                          skos:prefLabel "Nucleotide Sequence ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/nucleotideSequenceRemarks
+dwc:nucleotideSequenceRemarks rdf:type owl:DatatypeProperty ;
+                              rdfs:domain dwc:NucleotideSequence ;
+                              rdfs:range rdfs:Literal ;
+                              dcterms:isVersionOf <http://example.com/term-pending/dwc/nucleotideSequenceRemarks> ;
+                              rdfs:isDefinedBy dwc: ;
+                              skos:definition "Comments or notes about a [dwc:NucleotideSequence]."@en ;
+                              skos:prefLabel "Nucleotide Sequence Remarks" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/organismID
@@ -1081,9 +1289,9 @@ dwc:organismID rdf:type owl:DatatypeProperty ;
                rdfs:range rdfs:Literal ;
                dcterms:isVersionOf dwc:organismID ;
                dcterms:references <http://rs.tdwg.org/dwc/terms/version/organismID-2023-06-28> ;
-               rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+               rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
                rdfs:isDefinedBy dwc: ;
-               skos:definition "An identifier for a [dwc:Organism]." ;
+               skos:definition "An identifier for a [dwc:Organism]."@en ;
                skos:prefLabel "Organism ID" .
 
 
@@ -1093,9 +1301,9 @@ dwc:organismInteractionID rdf:type owl:DatatypeProperty ;
                           rdfs:domain dwc:OrganismInteraction ;
                           rdfs:range rdfs:Literal ;
                           dcterms:isVersionOf dwc:organismID ;
-                          rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+                          rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
                           rdfs:isDefinedBy dwc: ;
-                          skos:definition "An identifier for a [dwc:OrganismInteraction]." ;
+                          skos:definition "An identifier for a [dwc:OrganismInteraction]."@en ;
                           skos:prefLabel "Organism Interaction ID" .
 
 
@@ -1106,8 +1314,39 @@ dwc:preferredAgentName rdf:type owl:DatatypeProperty ;
                        rdfs:range rdfs:Literal ;
                        dcterms:isVersionOf dcterms:title ;
                        rdfs:isDefinedBy dwc: ;
-                       skos:definition "A name of a [dcterms:Agent] preferred in searches and results." ;
+                       skos:definition "A name of a [dcterms:Agent] preferred in searches and results."@en ;
                        skos:prefLabel "Preferred Agent Name" .
+
+
+###  http://rs.tdwg.org/dwc/terms/preferredEventName
+dwc:preferredEventName rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf dcterms:title ;
+                       rdfs:domain dwc:Event ;
+                       rdfs:range rdfs:Literal ;
+                       dcterms:isVersionOf dcterms:title ;
+                       rdfs:isDefinedBy dwc: ;
+                       skos:definition "The name of a [dwc:Event] preferred in searches and results."@en ;
+                       skos:prefLabel "Preferred Event Name" .
+
+
+###  http://rs.tdwg.org/dwc/terms/readCount
+dwc:readCount rdf:type owl:DatatypeProperty ;
+              rdfs:domain dwc:NucleotideAnalysis ;
+              rdfs:range xsd:integer ;
+              dcterms:isVersionOf <http://example.com/term-pending/dwc/readCount> ;
+              rdfs:isDefinedBy dwc: ;
+              skos:definition "A number of reads for a [dwc:NucleotideSequence] in a [dwc:NucleotideAnalysis]."@en ;
+              skos:prefLabel "Read Count" .
+
+
+###  http://rs.tdwg.org/dwc/terms/sequence
+dwc:sequence rdf:type owl:DatatypeProperty ;
+             rdfs:domain dwc:NucleotideSequence ;
+             rdfs:range xsd:string ;
+             dcterms:isVersionOf <http://example.com/term-pending/dwc/sequence> ;
+             rdfs:isDefinedBy dwc: ;
+             skos:definition "A string representing nucleotide base pairs."@en ;
+             skos:prefLabel "Sequence" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/surveyID
@@ -1116,9 +1355,9 @@ dwc:surveyID rdf:type owl:DatatypeProperty ;
              rdfs:domain eco:Survey ;
              rdfs:range xsd:string ;
              dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyID> ;
-             rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+             rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
              rdfs:isDefinedBy dwc: ;
-             skos:definition "An identifier for a [eco:Survey]." ;
+             skos:definition "An identifier for a [eco:Survey]."@en ;
              skos:prefLabel "Survey ID" .
 
 
@@ -1128,10 +1367,49 @@ dwc:surveyTargetID rdf:type owl:DatatypeProperty ;
                    rdfs:domain eco:SurveyTarget ;
                    rdfs:range xsd:string ;
                    dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyTargetID> ;
-                   rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+                   rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
                    rdfs:isDefinedBy dwc: ;
-                   skos:definition "An identifier for a [eco:SurveyTarget]." ;
+                   skos:definition "An identifier for a [eco:SurveyTarget]."@en ;
                    skos:prefLabel "Survey Target ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/surveyTargetType
+dwc:surveyTargetType rdf:type owl:DatatypeProperty ;
+                     rdfs:domain eco:SurveyTarget ;
+                     rdfs:range rdfs:Literal ;
+                     dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyTargetType> ;
+                     rdfs:comment "Recommended best practice is to use a controlled vocabulary."@en ;
+                     rdfs:isDefinedBy dwc: ;
+                     skos:definition "A scope a [eco:SurveyTarget] describes."@en ;
+                     skos:example "establishmentMeans" ,
+                                  "growthForm" ,
+                                  "habitat" ,
+                                  "lifeStage" ,
+                                  "minimum length" ,
+                                  "sex" ,
+                                  "taxon" ;
+                     skos:prefLabel "Survey Target Type" .
+
+
+###  http://rs.tdwg.org/dwc/terms/surveyTargetTypeSource
+dwc:surveyTargetTypeSource rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf dc:source ;
+                           rdfs:domain eco:SurveyTarget ;
+                           rdfs:range xsd:string ;
+                           dcterms:isVersionOf dc:source ;
+                           rdfs:isDefinedBy dwc: ;
+                           skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
+                           skos:prefLabel "Survey Target Type Source" .
+
+
+###  http://rs.tdwg.org/dwc/terms/totalReadCount
+dwc:totalReadCount rdf:type owl:DatatypeProperty ;
+                   rdfs:domain dwc:NucleotideAnalysis ;
+                   rdfs:range xsd:integer ;
+                   dcterms:isVersionOf <http://example.com/term-pending/dwc/totalReadCount> ;
+                   rdfs:isDefinedBy dwc: ;
+                   skos:definition "A total number of reads in a [dwc:NucleotideAnalysis]."@en ;
+                   skos:prefLabel "Total Read Count" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/usagePolicyID
@@ -1140,7 +1418,7 @@ dwc:usagePolicyID rdf:type owl:DatatypeProperty ;
                   rdfs:domain dwc:UsagePolicy ;
                   rdfs:range xsd:string ;
                   dcterms:isVersionOf <http://example.com/term-pending/dwc/usagePolicyID> ;
-                  rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+                  rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
                   rdfs:isDefinedBy dwc: ;
                   skos:definition "An identifier for a [dwc:UsagePolicy]." ;
                   skos:prefLabel "Usage Policy ID" .
