@@ -6,18 +6,13 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
-@prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
 @prefix eco: <http://rs.tdwg.org/eco/terms/> .
-@prefix gbif: <http://rs.gbif.org/terms/> .
-@prefix ggbn: <http://data.ggbn.org/schemas/ggbn/terms/> .
-@prefix miqe: <http://rs.gbif.org/terms/miqe/> .
 @prefix mixs: <https://w3id.org/mixs/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
-@prefix xmp: <http://ns.adobe.com/xap/1.0/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bb:BearLowerJaw123 dwcdp:basedOn bb:PieceOfRock456 .
@@ -37,8 +32,6 @@ bb:Butterfly123EatenBySpider456 a dwc:ResourceRelationship,
     rdf:predicate <https://www.inaturalist.org/observation_fields/879> ;
     rdf:subject bb:Butterfly123 .
 
-bb:Datato a rdfs:Datatype .
-
 bb:Idi a dwc:Identification ;
     dwcdp:basedOn bb:Bobo .
 
@@ -48,18 +41,7 @@ bb:Mato a dwc:MaterialEntity ;
 bb:Mato1 a dwc:MaterialEntity ;
     dwcdp:isDerivedFrom bb:Mato2 .
 
-bb:Michael dwc:agentID "0000-0002-1234-567X" .
-
-bb:MichaelRathboneIII dwc:agentID "0000-0002-1234-567X" .
-
 bb:Midio dwcdp:isMediaOf bb:Occurro .
-
-bb:Mikey dwc:agentID "0000-0002-1234-567X" .
-
-bb:Moleco1 a dwc:MolecularProtocol ;
-    mixs:0000015 "aerobe" .
-
-bb:Moleco2 a dwc:MolecularProtocol .
 
 bb:PictureOfPeter123CatchingSunfish456FromSeineNet789 dwcdp:isMediaOf bb:Peter123,
         bb:SeineNet789,
@@ -80,99 +62,6 @@ dcterms:spatial a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."@en ;
     skos:example "bb:event123 dcterms:spatial bb:location456 ." ;
     skos:prefLabel "Spatial Coverage" .
-
-gbif:dna_sequence a owl:DatatypeProperty ;
-    dcterms:isVersionOf <https://rs.gbif/org/terms/dna_sequence> ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy gbif: ;
-    rdfs:range xsd:string ;
-    skos:definition "The DNA sequence."@en ;
-    skos:example "`TCTATCCTCAATTATAGGTCATAATTCACCATCAGTAGATTTAGGAATTTTCTCTATTCATATTGCAGGTGTATCATCAATTATAGGATCAATTAATTTTATTGTAACAATTTTAAATATACATACAAAAACTCATTCATTAAACTTTTTACCATTATTTTCATGATCAGTTCTAGTTACAGCAATTCTCCTTTTATTATCATTA`" ;
-    skos:prefLabel "DNA Sequence" .
-
-gbif:pcr_primer_forward a owl:DatatypeProperty ;
-    dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_forward> ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy gbif: ;
-    rdfs:range xsd:string ;
-    skos:definition "Forward PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]. The primer sequence should be reported in uppercase letters."@en ;
-    skos:example "`GGACTACHVGGGTWTCTAAT`" ;
-    skos:prefLabel "Forward PCR Primer" .
-
-gbif:pcr_primer_name_forward a owl:DatatypeProperty ;
-    dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_name_forward> ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy gbif: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Name of the forward PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]."@en ;
-    skos:example "`jgLCO1490`" ;
-    skos:prefLabel "Forward PCR Primer Name" .
-
-gbif:pcr_primer_name_reverse a owl:DatatypeProperty ;
-    dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_name_reverse> ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy gbif: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Name of the reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]."@en ;
-    skos:example "`jgHCO2198`" ;
-    skos:prefLabel "Reverse PCR Primer Name" .
-
-gbif:pcr_primer_reference a owl:DatatypeProperty ;
-    dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_reference> ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy gbif: ;
-    rdfs:range [ a rdfs:Datatype ;
-            owl:unionOf ( rdfs:Literal xsd:anyURI ) ] ;
-    skos:definition "Reference for the PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment."@en ;
-    skos:example "`https:doi.org/10.11861742-9994-10-31`" ;
-    skos:prefLabel "PCR Primer Reference" .
-
-gbif:pcr_primer_reverse a owl:DatatypeProperty ;
-    dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_reverse> ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy gbif: ;
-    rdfs:range xsd:string ;
-    skos:definition "Reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]. The primer sequence should be reported in uppercase letters."@en ;
-    skos:example "`GGACTACHVGGGTWTCTAAT`" ;
-    skos:prefLabel "Reverse PCR Primer" .
-
-dwciri:assertionTypeIRI a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
-    rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
-    rdfs:domain dwc:Assertion ;
-    rdfs:isDefinedBy dwciri: ;
-    rdfs:range xsd:anyURI ;
-    skos:definition "An IRI of a controlled vocabulary value for a type of [dwc:Assertion]."@en ;
-    skos:prefLabel "Assertion Type (IRI)" .
-
-dwciri:assertionValueIRI a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionValueIRI> ;
-    rdfs:domain dwc:Assertion ;
-    rdfs:isDefinedBy dwciri: ;
-    rdfs:range xsd:anyURI ;
-    skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
-    skos:example "`http://purl.obolibrary.org/obo/OBA_VT0000047`" ;
-    skos:prefLabel "Assertion Value (IRI)" .
-
-dwciri:surveyTargetTypeIRI a owl:DatatypeProperty ;
-    dcterms:isVersionOf dcterms:type ;
-    rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
-    rdfs:domain eco:SurveyTarget ;
-    rdfs:isDefinedBy dwciri: ;
-    rdfs:range xsd:anyURI ;
-    rdfs:subPropertyOf dcterms:type ;
-    skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given."@en ;
-    skos:prefLabel "Survey Target Type IRI" .
-
-dwciri:surveyTargetTypeSourceIRI a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
-    rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
-    rdfs:domain eco:SurveyTarget ;
-    rdfs:isDefinedBy dwciri: ;
-    rdfs:range xsd:anyURI ;
-    rdfs:subPropertyOf dcterms:source ;
-    skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
-    skos:prefLabel "Survey Target Type Source IRI" .
 
 dwc:AgentMedia a owl:Class ;
     rdfs:isDefinedBy dwc: ;
@@ -256,6 +145,15 @@ dwc:EditorAgent a owl:Class ;
             owl:someValuesFrom dcterms:BibliographicResource ] ;
     skos:definition "An instance of a [dcterms:Agent] that has edited a [dcterms:BibliographicResource]."@en ;
     skos:prefLabel "Editor Agent" .
+
+dwc:EventAssertion a owl:Class ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf dwc:Assertion ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty dwcdp:about ;
+            owl:someValuesFrom dwc:Event ] ;
+    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Event]." ;
+    skos:prefLabel "Event Assertion" .
 
 dwc:EventMedia a owl:Class ;
     rdfs:isDefinedBy dwc: ;
@@ -384,10 +282,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -415,17 +313,14 @@ dwc:ReviewerAgent a owl:Class ;
     skos:definition "An instance of a [dcterms:Agent] that has reviewed a [dwc:Media]." ;
     skos:prefLabel "Reviewer Agent" .
 
-dwc:agentID a owl:DatatypeProperty,
-        owl:InverseFunctionalProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/agentID>,
-        ac:agentID ;
+dwc:agentID a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/agentID> ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
     rdfs:domain dcterms:Agent ;
     rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal,
-        xsd:string ;
-    skos:definition "An identifier for a [dcterms:Agent].",
-        "Yada yada ladidah."@en ;
+    rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    skos:definition "An identifier for a [dcterms:Agent]." ;
     skos:prefLabel "Agent ID" .
 
 dwc:agentRemarks a owl:DatatypeProperty ;
@@ -443,7 +338,10 @@ dwc:agentType a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     skos:definition "A category that best matches the nature of a [dcterms:Agent]." ;
-    skos:example "`person`; `group`; `organization`; `camera`" ;
+    skos:example "camera",
+        "group",
+        "organization",
+        "person" ;
     skos:prefLabel "Agent Type" .
 
 dwc:assertionEffectiveDate a owl:DatatypeProperty ;
@@ -453,7 +351,15 @@ dwc:assertionEffectiveDate a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     skos:definition "A date on which a state or measurement of a [dwc:Assertion] was deemed to first be in effect." ;
-    skos:example "`1963-04-08T14:07-06:00` (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC); `2009-02-20T08:40Z` (20 February 2009 at or after 8:40am and before 8:41 UTC); `2018-08-29T15:19` (29 August 2018 at or after 3:19pm and before 3:20pm local time); `1809-02-12` (within the day 12 February 1809); `1906-06` (in the month of June 1906); `1971` (in the year 1971); `2007-03-01T13:00:00Z/2008-05-11T15:30:00Z` (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC); `1900/1909` (some time within the interval between the beginning of the year 1900 and before the year 1909); `2007-11-13/15` (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)" ;
+    skos:example "1809-02-12 (within the day 12 February 1809)",
+        "1900/1909 (some time within the interval between the beginning of the year 1900 and before the year 1909)",
+        "1906-06 (in the month of June 1906)",
+        "1963-04-08T14:07-06:00 (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC)",
+        "1971 (in the year 1971)",
+        "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC)",
+        "2007-11-13/15 (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)",
+        "2009-02-20T08:40Z (20 February 2009 at or after 8:40am and before 8:41 UTC)",
+        "2018-08-29T15:19 (29 August 2018 at or after 3:19pm and before 3:20pm local time)" ;
     skos:prefLabel "Assertion Effective Date" .
 
 dwc:assertionID a owl:DatatypeProperty ;
@@ -462,6 +368,7 @@ dwc:assertionID a owl:DatatypeProperty ;
     rdfs:domain dwc:Assertion ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:Assertion]." ;
     skos:prefLabel "Assertion ID" .
 
@@ -472,7 +379,15 @@ dwc:assertionMadeDate a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     skos:definition "A date on which a [dwc:Assertion] was created." ;
-    skos:example "`1963-04-08T14:07-06:00` (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC); `2009-02-20T08:40Z` (20 February 2009 at or after 8:40am and before 8:41 UTC); `2018-08-29T15:19` (29 August 2018 at or after 3:19pm and before 3:20pm local time); `1809-02-12` (within the day 12 February 1809); `1906-06` (in the month of June 1906); `1971` (in the year 1971); `2007-03-01T13:00:00Z/2008-05-11T15:30:00Z` (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC); `1900/1909` (some time within the interval between the beginning of the year 1900 and before the year 1909); `2007-11-13/15` (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)" ;
+    skos:example "1809-02-12 (within the day 12 February 1809)",
+        "1900/1909 (some time within the interval between the beginning of the year 1900 and before the year 1909)",
+        "1906-06 (in the month of June 1906)",
+        "1963-04-08T14:07-06:00 (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC)",
+        "1971 (in the year 1971)",
+        "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC)",
+        "2007-11-13/15 (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)",
+        "2009-02-20T08:40Z (20 February 2009 at or after 8:40am and before 8:41 UTC)",
+        "2018-08-29T15:19 (29 August 2018 at or after 3:19pm and before 3:20pm local time)" ;
     skos:prefLabel "Assertion Made Date" .
 
 dwc:assertionType a owl:DatatypeProperty ;
@@ -482,7 +397,11 @@ dwc:assertionType a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     skos:definition "A category that best matches the nature of a [dwc:Assertion]." ;
-    skos:example "`tail length`; `temperature`; `trap line length`; `survey area`; `trap type`" ;
+    skos:example "survey area",
+        "tail length",
+        "temperature",
+        "trap line length",
+        "trap type" ;
     skos:prefLabel "Assertion Type" .
 
 dwc:assertionTypeSource a owl:DatatypeProperty ;
@@ -525,6 +444,7 @@ dwc:derivedFromMediaID a owl:DatatypeProperty ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part." ;
     skos:prefLabel "Derived From Media ID" .
 
@@ -534,6 +454,7 @@ dwc:mediaID a owl:DatatypeProperty ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for an [ac:Media] resource." ;
     skos:prefLabel "Media ID" .
 
@@ -543,34 +464,27 @@ dwc:nucleotideAnalysisID a owl:DatatypeProperty ;
     rdfs:domain dwc:NucleotideAnalysis ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:NucleotideAnalysis]." ;
     skos:prefLabel "Nucleotide Analysis ID" .
 
 dwc:nucleotideSequenceID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/molecularProtocolID> ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
-    rdfs:domain [ a owl:DataRange ;
-            owl:unionOf ( dwc:NucleotideAnalysis dwc:NucleotideSequence ) ] ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "An identifier for a [dwc:NucleotideSequence]." ;
-    skos:prefLabel "Nucleotide Sequence ID" .
-
-dwc:nucleotideSequenceRemarks a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/nucleotideSequenceRemarks> ;
     rdfs:domain dwc:NucleotideSequence ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
-    skos:definition "Comments or notes about a [dwc:NucleotideSequence]." ;
-    skos:prefLabel "Nucleotide Sequence Remarks" .
+    rdfs:subPropertyOf dcterms:identifier ;
+    skos:definition "An identifier for a [dwc:NucleotideSequence]." ;
+    skos:prefLabel "Nucleotide Sequence ID" .
 
 dwc:organismInteractionID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:organismID ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
-    rdfs:domain [ a owl:DataRange ;
-            owl:unionOf ( dwc:Organism dwc:OrganismInteraction ) ] ;
+    rdfs:domain dwc:OrganismInteraction ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:OrganismInteraction]." ;
     skos:prefLabel "Organism Interaction ID" .
 
@@ -583,38 +497,13 @@ dwc:preferredAgentName a owl:DatatypeProperty ;
     skos:definition "A name of a [dcterms:Agent] preferred in searches and results." ;
     skos:prefLabel "Preferred Agent Name" .
 
-dwc:preferredEventName a owl:DatatypeProperty ;
-    dcterms:isVersionOf dcterms:title ;
-    rdfs:domain dwc:Event ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    rdfs:subPropertyOf dcterms:title ;
-    skos:definition "The name of a [dwc:Event] preferred in searches and results." ;
-    skos:prefLabel "Preferred Event Name" .
-
-dwc:readCount a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/readCount> ;
-    rdfs:domain dwc:NucleotideAnalysis ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range xsd:integer ;
-    skos:definition "A number of reads for a [dwc:NucleotideSequence] in a [dwc:NucleotideAnalysis]." ;
-    skos:prefLabel "Read Count" .
-
-dwc:sequence a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/sequence> ;
-    rdfs:domain dwc:NucleotideSequence ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range xsd:string ;
-    skos:definition "A string representing nucleotide base pairs." ;
-    skos:prefLabel "Sequence" .
-
 dwc:surveyID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyID> ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
-    rdfs:domain [ a owl:DataRange ;
-            owl:unionOf ( eco:Survey eco:SurveyTarget ) ] ;
+    rdfs:domain eco:Survey ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [eco:Survey]." ;
     skos:prefLabel "Survey ID" .
 
@@ -624,35 +513,9 @@ dwc:surveyTargetID a owl:DatatypeProperty ;
     rdfs:domain eco:SurveyTarget ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [eco:SurveyTarget]." ;
     skos:prefLabel "Survey Target ID" .
-
-dwc:surveyTargetType a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyTargetType> ;
-    rdfs:comment "Recommended best practice is to use a controlled vocabulary." ;
-    rdfs:domain eco:SurveyTarget ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "A scope a [eco:SurveyTarget] describes." ;
-    skos:example "`taxon`; `habitat`; `establishmentMeans`; `growthForm`; `sex`; `lifeStage`; `minimum length`" ;
-    skos:prefLabel "Survey Target Type" .
-
-dwc:surveyTargetTypeSource a owl:DatatypeProperty ;
-    dcterms:isVersionOf dc:source ;
-    rdfs:domain eco:SurveyTarget ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range xsd:string ;
-    rdfs:subPropertyOf dc:source ;
-    skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given." ;
-    skos:prefLabel "Survey Target Type Source" .
-
-dwc:totalReadCount a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/totalReadCount> ;
-    rdfs:domain dwc:NucleotideAnalysis ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range xsd:integer ;
-    skos:definition "A total number of reads in a [dwc:NucleotideAnalysis]." ;
-    skos:prefLabel "Total Read Count" .
 
 dwc:usagePolicyID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/usagePolicyID> ;
@@ -660,18 +523,9 @@ dwc:usagePolicyID a owl:DatatypeProperty ;
     rdfs:domain dwc:UsagePolicy ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:UsagePolicy]." ;
     skos:prefLabel "Usage Policy ID" .
-
-dwc:verbatimAssertionType a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/verbatimAssertionType> ;
-    rdfs:comment "This term is meant to allow the capture of an unaltered original name for a [dwc:assertionType]. This term is meant to be used in addition to [dwc:assertionType], not instead of it."@en ;
-    rdfs:domain dwc:Assertion ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "A string representing the type of [dwc:Assertion] as it appeared in the original record."@en ;
-    skos:example "`water_temp`; `Fish biomass`; `sampling net mesh size`" ;
-    skos:prefLabel "Verbatim Assertion Type" .
 
 dwcdp:AssertionProtocol a owl:Class ;
     rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Assertion]." ;
@@ -836,60 +690,6 @@ bb:Spider456 a dwc:Organism .
 
 bb:Sunfish456 a dwc:Occurrence .
 
-ggbn:concentration a owl:DatatypeProperty ;
-    dcterms:isVersionOf ggbn:concentration ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy ggbn: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "Concentration of DNA (weight ng/volume µL)."@en ;
-    skos:example "`67.5`" ;
-    skos:prefLabel "DNA Concentration" .
-
-ggbn:concentrationUnit a owl:DatatypeProperty ;
-    dcterms:isVersionOf ggbn:concentrationUnit ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy ggbn: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Unit used for [ggbn:concentration] measurement."@en ;
-    skos:example "`ng/µL`" ;
-    skos:prefLabel "DNA Concentration Unit" .
-
-ggbn:methodDeterminationConcentrationAndRatios a owl:DatatypeProperty ;
-    dcterms:isVersionOf ggbn:methodDeterminationConcentrationAndRatios ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy ggbn: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Description of method used for [ggbn:concentration] measurement."@en ;
-    skos:example "`Nanodrop`; `Qubit`" ;
-    skos:prefLabel "Method For Concentration Measurement" .
-
-ggbn:ratioOfAbsorbance260_230 a owl:DatatypeProperty ;
-    dcterms:isVersionOf ggbn:ratioOfAbsorbance260_230 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy ggbn: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "Ratio of absorbance at 260 nm and 230 nm assessing DNA purity (mostly secondary measure, indicates mainly EDTA, carbohydrates, phenol), (DNA samples only)."@en ;
-    skos:example "`1.89`" ;
-    skos:prefLabel "Ratio Of Absorbance At 260 nm and 230 nm" .
-
-ggbn:ratioOfAbsorbance260_280 a owl:DatatypeProperty ;
-    dcterms:isVersionOf ggbn:ratioOfAbsorbance260_280 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy ggbn: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "Ratio of absorbance at 260 nm and 280 nm assessing DNA purity (mostly secondary measure, indicates mainly EDTA, carbohydrates, phenol), (DNA samples only)."@en ;
-    skos:example "`1.91`" ;
-    skos:prefLabel "Ratio Of Absorbance At 260 nm and 280 nm" .
-
-xmp:CreateDate a owl:DatatypeProperty ;
-    dcterms:isVersionOf xmp:CreateDate ;
-    rdfs:comment "The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples."@en ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy xmp: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different."@en ;
-    skos:prefLabel "Original Date and Time" .
-
 dc:rights a owl:DatatypeProperty ;
     dcterms:isVersionOf dc:rights ;
     rdfs:domain dwc:UsagePolicy ;
@@ -897,7 +697,8 @@ dc:rights a owl:DatatypeProperty ;
     rdfs:range [ a rdfs:Datatype ;
             owl:unionOf ( xsd:anyURI xsd:string ) ] ;
     skos:definition "Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions." ;
-    skos:example "`Copyright 2014 Ron Thomas`; `http://creativecommons.org/licenses/by/3.0/legalcode`" ;
+    skos:example "Copyright 2014 Ron Thomas",
+        "http://creativecommons.org/licenses/by/3.0/legalcode" ;
     skos:prefLabel "Rights (DC)" .
 
 dcterms:description a owl:DatatypeProperty ;
@@ -916,8 +717,33 @@ dcterms:rights a owl:DatatypeProperty ;
     rdfs:isDefinedBy dcterms: ;
     rdfs:range xsd:anyURI ;
     skos:definition "A URI pointing to structured information about rights held in and over the resource." ;
-    skos:example "`http://creativecommons.org/licenses/by/3.0/legalcode`; `http://creativecommons.org/publicdomain/zero/1.0`" ;
+    skos:example "http://creativecommons.org/licenses/by/3.0/legalcode",
+        "http://creativecommons.org/publicdomain/zero/1.0" ;
     skos:prefLabel "Rights (DCTERMS)" .
+
+dcterms:source a owl:DatatypeProperty ;
+    dcterms:isVersionOf dcterms:source ;
+    rdfs:comment "This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or string conforming to a formal identification system."@en ;
+    rdfs:domain dwc:UsagePolicy ;
+    rdfs:isDefinedBy dcterms: ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:unionOf ( xsd:anyURI xsd:string ) ] ;
+    skos:definition "A related resource from which the described resource is derived"@en ;
+    skos:prefLabel "Source (DCTERMS)" .
+
+dcterms:type a owl:DatatypeProperty ;
+    dcterms:isVersionOf dcterms:type ;
+    rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy dcterms: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A category that best matches the nature of an [ac:Media] resource." ;
+    skos:example "InteractiveResource",
+        "MovingImage",
+        "Sound",
+        "StillImage",
+        "Text" ;
+    skos:prefLabel "Media Type" .
 
 bibo:editor a owl:ObjectProperty ;
     rdfs:comment "A person having managerial and sometimes policy-making responsibility for the editorial part of a publishing firm or of a newspaper, magazine, or other publication."@en ;
@@ -927,78 +753,6 @@ bibo:editor a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it."@en ;
     skos:example "bb:bibliographicResource123 bibo:editor bb:agent456 ." ;
     skos:prefLabel "Edited By" .
-
-miqe:ampliconSize a owl:DatatypeProperty ;
-    dcterms:isVersionOf miqe:ampliconSize ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy miqe: ;
-    rdfs:range xsd:integer ;
-    skos:definition "The length of the amplicon in basepairs."@en ;
-    skos:example "`83`" ;
-    skos:prefLabel "Amplicon Size" .
-
-miqe:annealingTemp a owl:DatatypeProperty ;
-    dcterms:isVersionOf miqe:annealingTemp ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy miqe: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "The reaction temperature during the annealing phase of PCR."@en ;
-    skos:example "`60`" ;
-    skos:prefLabel "Annealing Phase Temperature" .
-
-miqe:annealingTempUnit a owl:DatatypeProperty ;
-    dcterms:isVersionOf miqe:annealingTempUnit ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy miqe: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Measurement Unit of the reaction temperature during the annealing phase of PCR."@en ;
-    skos:example "`60`" ;
-    skos:prefLabel "Annealing Phase Temperature Unit" .
-
-miqe:baselineValue a owl:DatatypeProperty ;
-    dcterms:isVersionOf miqe:baselineValue ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy miqe: ;
-    rdfs:range xsd:integer ;
-    skos:definition "The number of cycles when fluorescence signal from the target amplification is below background fluorescence not originated from the real target amplification."@en ;
-    skos:example "`15`" ;
-    skos:prefLabel "Fluorescence Baseline Value" .
-
-miqe:probeQuencher a owl:DatatypeProperty ;
-    dcterms:isVersionOf miqe:probeQuencher ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy miqe: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Type of quencher used. The quencher molecule quenches the fluorescence emitted by the fluorophore when excited by the cycler's light source. As long as fluorophore and the quencher are in proximity, quenching inhibits any fluorescence signals."@en ;
-    skos:example "`NFQ-MGB`" ;
-    skos:prefLabel "Probe Quencher" .
-
-miqe:probeReporter a owl:DatatypeProperty ;
-    dcterms:isVersionOf miqe:probeReporter ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy miqe: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Type of fluorophore (reporter) used. Probe anneals within amplified target DNA. Polymerase activity degrades the probe that has annealed to the template, and the probe releases the fluorophore from it and breaks the proximity to the quencher, thus allowing fluorescence in the fluorophore."@en ;
-    skos:example "`FAM`" ;
-    skos:prefLabel "Probe Reporter" .
-
-miqe:quantificationCycle a owl:DatatypeProperty ;
-    dcterms:isVersionOf miqe:quantificationCycle ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy miqe: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "The number of cycles required for the fluorescent signal to cross a given value threshold above the baseline. Quantification cycle (Cq), threshold cycle (Ct), crossing point (Cp), and take-off point (TOP) refer to the same value from the real-time instrument. Use of quantification cycle (Cq), is preferable according to the RDML (Real-Time PCR Data Markup Language) data standard ([http://www.rdml.org])."@en ;
-    skos:example "`37.9450950622558`" ;
-    skos:prefLabel "Quantification Cycle Number" .
-
-miqe:thresholdQuantificationCycle a owl:DatatypeProperty ;
-    dcterms:isVersionOf miqe:thresholdQuantificationCycle ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy miqe: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "Threshold for change in fluorescence signal between cycles."@en ;
-    skos:example "`0.3`" ;
-    skos:prefLabel "Fluorescence Cycle Threshold" .
 
 ac:caption a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:caption ;
@@ -1018,7 +772,7 @@ ac:freqHigh a owl:DatatypeProperty ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
     skos:definition "The highest frequency of the phenomena reflected in the multimedia item or Region of Interest." ;
-    skos:example "`60`" ;
+    skos:example 60.0 ;
     skos:prefLabel "Upper frequency bound" .
 
 ac:freqLow a owl:DatatypeProperty ;
@@ -1029,7 +783,7 @@ ac:freqLow a owl:DatatypeProperty ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
     skos:definition "The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest." ;
-    skos:example "`60`" ;
+    skos:example 60.0 ;
     skos:prefLabel "Lower frequency bound" .
 
 ac:heightFrac a owl:DatatypeProperty ;
@@ -1040,7 +794,8 @@ ac:heightFrac a owl:DatatypeProperty ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
     skos:definition "The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource." ;
-    skos:example "`0.5`; `1`" ;
+    skos:example 0.5,
+        1.0 ;
     skos:prefLabel "Fractional Height" .
 
 ac:isROIOf a owl:DatatypeProperty ;
@@ -1061,7 +816,7 @@ ac:radius a owl:DatatypeProperty ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:integer ;
     skos:definition "The radius of a bounding circle or arc, expressed as a fraction of the width of a [dwc:Media] resource." ;
-    skos:example "`100`" ;
+    skos:example 100 ;
     skos:prefLabel "Radius" .
 
 ac:subtypeLiteral a owl:DatatypeProperty ;
@@ -1082,7 +837,8 @@ ac:widthFrac a owl:DatatypeProperty ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
     skos:definition "The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource." ;
-    skos:example "`0.5`; `1`" ;
+    skos:example 0.5,
+        1.0 ;
     skos:prefLabel "Fractional Width" .
 
 ac:xFrac a owl:DatatypeProperty ;
@@ -1093,7 +849,8 @@ ac:xFrac a owl:DatatypeProperty ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
     skos:definition "The horizontal position of a reference point, measured from the left side of a [dwc:Media] resource and expressed as a decimal fraction of the width of a [dwc:Media] resource." ;
-    skos:example "`0.5`; `1`" ;
+    skos:example 0.5,
+        1.0 ;
     skos:prefLabel "Fractional X" .
 
 ac:yFrac a owl:DatatypeProperty ;
@@ -1104,17 +861,9 @@ ac:yFrac a owl:DatatypeProperty ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
     skos:definition "The vertical position of a reference point, measured from the top of a [dwc:Media] resource and expressed as a decimal fraction of the height of a [dwc:Media] resource." ;
-    skos:example "`0.5`; `1`" ;
+    skos:example 0.5,
+        1.0 ;
     skos:prefLabel "Fractional Y" .
-
-dwc:EventAssertion a owl:Class ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf dwc:Assertion ;
-    owl:equivalentClass [ a owl:Restriction ;
-            owl:onProperty dwcdp:about ;
-            owl:someValuesFrom dwc:Event ] ;
-    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Event]." ;
-    skos:prefLabel "Event Assertion" .
 
 dwc:assayType a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/assayType> ;
@@ -1123,7 +872,9 @@ dwc:assayType a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     skos:definition "A method used in the study to detect taxon/taxa of interest in the sample" ;
-    skos:example "`targeted`; `metabarcoding`; `other`" ;
+    skos:example "metabarcoding",
+        "other",
+        "targeted" ;
     skos:prefLabel "Assay Type" .
 
 dwc:bed a owl:DatatypeProperty ;
@@ -1133,7 +884,7 @@ dwc:bed a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     skos:definition "The full name of the lithostratigraphic bed from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Harlem coal`" ;
+    skos:example "Harlem coal" ;
     skos:prefLabel "Bed" .
 
 dwc:earliestAgeOrLowestStage a owl:DatatypeProperty ;
@@ -1143,69 +894,22 @@ dwc:earliestAgeOrLowestStage a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     skos:definition "The full name of the earliest possible geochronologic age or lowest chronostratigraphic stage attributable to the stratigraphic horizon from which the dwc:MaterialEntity was collected."@en ;
-    skos:example "`Atlantic`; `Boreal`; `Skullrockian`" ;
+    skos:example "Atlantic",
+        "Boreal",
+        "Skullrockian" ;
     skos:prefLabel "Earliest Age Or Lowest Stage" .
-
-dwc:earliestEonOrLowestEonothem a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:earliestEonOrLowestEonothem ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestEonOrLowestEonothem-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the earliest possible geochronologic eon or lowest chronostratigraphic eonothem or the informal name (`Precambrian`) attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Phanerozoic`; `Proterozoic`" ;
-    skos:prefLabel "Earliest Eon Or Lowest Eonothem" .
-
-dwc:earliestEpochOrLowestSeries a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:earliestEpochOrLowestSeries ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestEpochOrLowestSeries-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the earliest possible geochronologic epoch or lowest chronostratigraphic series attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Holocene`; `Pleistocene`; `Ibexian Series`" ;
-    skos:prefLabel "Earliest Epoch Or Lowest Series" .
-
-dwc:earliestEraOrLowestErathem a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:earliestEraOrLowestErathem ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestEraOrLowestErathem-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the earliest possible geochronologic era or lowest chronostratigraphic erathem attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Cenozoic`; `Mesozoic`" ;
-    skos:prefLabel "Earliest Era Or Lowest Erathem" .
-
-dwc:earliestPeriodOrLowestSystem a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:earliestPeriodOrLowestSystem ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/earliestPeriodOrLowestSystem-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the earliest possible geochronologic period or lowest chronostratigraphic system attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Neogene`; `Tertiary`; `Quaternary`" ;
-    skos:prefLabel "Earliest Period Or Lowest System" .
 
 dwc:eventID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:eventID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/eventID-2023-06-28> ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
-    rdfs:domain [ a owl:DataRange ;
-            owl:unionOf ( dwc:Event dwc:EventAssertion dwc:NucleotideAnalysis eco:Survey ) ] ;
+    rdfs:domain dwc:Event ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:Event]." ;
+    skos:example "INBO:VIS:Ev:00009375" ;
     skos:prefLabel "Event ID" .
-
-dwc:formation a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:formation ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/formation-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the lithostratigraphic formation from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Notch Peak Formation`; `House Limestone`; `Fillmore Formation`" ;
-    skos:prefLabel "Formation" .
 
 dwc:geologicalContextID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:geologicalContextID ;
@@ -1214,148 +918,32 @@ dwc:geologicalContextID a owl:DatatypeProperty ;
     rdfs:domain dwc:GeologicalContext ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:GeologicalContext]." ;
+    skos:example "https://opencontext.org/subjects/e54377f7-4452-4315-b676-40679b10c4d9" ;
     skos:prefLabel "Geological Context ID" .
-
-dwc:group a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:group ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/group-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the lithostratigraphic group from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Bathurst`; `Lower Wealden`" ;
-    skos:prefLabel "Group" .
-
-dwc:highestBiostratigraphicZone a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:highestBiostratigraphicZone ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/highestBiostratigraphicZone-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the highest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Blancan`" ;
-    skos:prefLabel "Highest Biostratigraphic Zone" .
-
-dwc:latestAgeOrHighestStage a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:latestAgeOrHighestStage ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestAgeOrHighestStage-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the latest possible geochronologic age or highest chronostratigraphic stage attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Atlantic`; `Boreal`; `Skullrockian`" ;
-    skos:prefLabel "Latest Age Or Highest Stage" .
-
-dwc:latestEonOrHighestEonothem a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:latestEonOrHighestEonothem ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestEonOrHighestEonothem-2025-06-12> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the latest possible geochronologic eon or highest chronostratigraphic eonothem or the informal name (`Precambrian`) attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Phanerozoic`; `Proterozoic`" ;
-    skos:prefLabel "Latest Eon Or Highest Eonothem" .
-
-dwc:latestEpochOrHighestSeries a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:latestEpochOrHighestSeries ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestEpochOrHighestSeries-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the latest possible geochronologic epoch or highest chronostratigraphic series attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Holocene`; `Pleistocene`; `Ibexian Series`" ;
-    skos:prefLabel "Latest Epoch Or Highest Series" .
-
-dwc:latestEraOrHighestErathem a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:latestEraOrHighestErathem ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestEraOrHighestErathem-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the latest possible geochronologic era or highest chronostratigraphic erathem attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Cenozoic`; `Mesozoic`" ;
-    skos:prefLabel "Latest Era Or Highest Erathem" .
-
-dwc:latestPeriodOrHighestSystem a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:latestPeriodOrHighestSystem ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/latestPeriodOrHighestSystem-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the latest possible geochronologic period or highest chronostratigraphic system attributable to the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Neogene`; `Tertiary`; `Quaternary`" ;
-    skos:prefLabel "Latest Period Or Highest System" .
-
-dwc:lithostratigraphicTerms a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:lithostratigraphicTerms ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/lithostratigraphicTerms-2025-06-12> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The combination of all lithostratigraphic names for the rock from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Pleistocene-Weichselien`" ;
-    skos:prefLabel "Lithostratigraphic Terms" .
-
-dwc:lowestBiostratigraphicZone a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:lowestBiostratigraphicZone ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/lowestBiostratigraphicZone-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the lowest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Maastrichtian`" ;
-    skos:prefLabel "Lowest Biostratigraphic Zone" .
 
 dwc:materialEntityID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:materialEntityID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/materialEntityID-2023-09-13> ;
     rdfs:comment "Values of [dwc:materialEntityID] are intended to uniquely and persistently identify a particular [dwc:MaterialEntity] within some context. Examples of context include a particular sample collection, an organization, or the worldwide scale. Recommended best practice is to use a persistent, globally unique identifier. The identifier is bound to a physical object (a [dwc:MaterialEntity]) as opposed to a particular digital record (representation) of that physical object." ;
-    rdfs:domain [ a owl:DataRange ;
-            owl:unionOf ( dwc:MaterialEntity dwc:NucleotideAnalysis ) ] ;
+    rdfs:domain dwc:MaterialEntity ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:MaterialEntity]." ;
+    skos:example "06809dc5-f143-459a-be1a-6f03e63fc083" ;
     skos:prefLabel "Material Entity ID" .
-
-dwc:member a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:member ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/member-2023-09-13> ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The full name of the lithostratigraphic member from which the [dwc:MaterialEntity] was collected."@en ;
-    skos:example "`Lava Dam Member`; `Hellnmaria Member`" ;
-    skos:prefLabel "Member" .
 
 dwc:molecularProtocolID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/molecularProtocolID> ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
-    rdfs:domain [ a owl:DataRange ;
-            owl:unionOf ( dwc:MolecularProtocol dwc:NucleotideAnalysis ) ] ;
+    rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:MolecularProtocol]." ;
     skos:prefLabel "Molecular Protocol ID" .
-
-dwc:relationshipEstablishedDate a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:relationshipEstablishedDate ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/relationshipEstablishedDate-2025-06-12> ;
-    rdfs:comment "Recommended best practice is to use a date that conforms to ISO 8601-1:2019."@en ;
-    rdfs:domain dwc:ResourceRelationship ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "A date on which a [dwc:ResourceRelationship] was established."@en ;
-    skos:prefLabel "Relationship Established Date" .
-
-dwc:relationshipRemarks a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:relationshipRemarks ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/relationshipRemarks-2023-06-28> ;
-    rdfs:domain dwc:ResourceRelationship ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Comments or notes about a [dwc:ResourceRelationship]."@en ;
-    skos:prefLabel "Relationship Remarks" .
 
 dwcdp:assertedBy a owl:ObjectProperty ;
     rdfs:domain dwc:Assertion ;
@@ -1499,175 +1087,52 @@ dwcdp:reviewedBy a owl:ObjectProperty ;
     skos:example "bb:event123 dwcdp:reviewedBy bb:agent456 ." ;
     skos:prefLabel "Reviewed By" .
 
-eco:siteCount a owl:DatatypeProperty ;
-    dcterms:isVersionOf eco:siteCount ;
-    dcterms:references <http://rs.tdwg.org/eco/terms/version/siteCount-2024-02-28> ;
-    rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy."@en ;
-    rdfs:domain eco:Survey ;
-    rdfs:isDefinedBy eco: ;
-    rdfs:range xsd:integer ;
-    skos:definition "Total number of sites surveyed during a [dwc:Event]."@en ;
-    skos:example "`1`; `15`" ;
-    skos:prefLabel "Site Count" .
-
-eco:siteNestingDescription a owl:DatatypeProperty ;
-    dcterms:isVersionOf eco:siteNestingDescription ;
-    dcterms:references <http://rs.tdwg.org/eco/terms/version/siteNestingDescription-2024-02-28> ;
-    rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy."@en ;
-    rdfs:domain eco:Survey ;
-    rdfs:isDefinedBy eco: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Textual description of a hierarchical sampling design."@en ;
-    skos:example "`5 sampling sites of 3-5 plots each`" ;
-    skos:prefLabel "Site Nesting Description" .
-
-eco:verbatimSiteDescriptions a owl:DatatypeProperty ;
-    dcterms:isVersionOf eco:verbatimSiteDescriptions ;
-    dcterms:references <http://rs.tdwg.org/eco/terms/version/verbatimSiteDescriptions-2024-02-28> ;
-    rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
-    rdfs:domain eco:Survey ;
-    rdfs:isDefinedBy eco: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Original textual description of site(s)."@en ;
-    skos:example "`Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick *Andropogon* spp., *Sporobolus floridanus*, *Vaccinium* spp., *Rhynchospora* spp., *Centella erecta*, *Panicum rigidulum*`" ;
-    skos:prefLabel "Verbatim Site Description" .
-
-eco:verbatimSiteNames a owl:DatatypeProperty ;
-    dcterms:isVersionOf eco:verbatimSiteNames ;
-    dcterms:references <http://rs.tdwg.org/eco/terms/version/verbatimSiteNames-2024-02-28> ;
-    rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
-    rdfs:domain eco:Survey ;
-    rdfs:isDefinedBy eco: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "A list (concatenated and separated) of original site names."@en ;
-    skos:example "`East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1`" ;
-    skos:prefLabel "Verbatim Site Names" .
-
-mixs:0000001 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:00000001 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "The total amount or size (volume (ml), mass (g) or aread (m2)) of sample collected."@en ;
-    skos:example "`5 liter`" ;
-    skos:prefLabel "Amount Or Size Of Sample Collected" .
-
-mixs:0000002 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:00000002 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "The device used to collect an environmental sample. This field accepts terms listed under environmental sampling device ([http://purl.obolibrary.org/obo/ENVO]). This field also accepts terms listed under specimen collection device ([http://purl.obolibrary.org/obo/GENEPIO_0002094])."@en ;
-    skos:prefLabel "Sample Collection Device" .
-
-mixs:0000003 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:00000003 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "Publication reference in the form of pubmed ID (pmid), digital object identifier (doi) or url for isolation and growth condition specifications of the organism/material."@en ;
-    skos:example "`doi:10.1016/j.syapm.2018.01.009`" ;
-    skos:prefLabel "Isolation And Growth Condition" .
-
-mixs:0000005 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:00000005 ;
-    rdfs:comment "This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/ContamScreenInputEnum/]."@en ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range [ a rdfs:Datatype ;
-            owl:oneOf ( "contigs" "reads" ) ] ;
-    skos:definition "The type of sequence data used as input."@en ;
-    skos:example "`contigs`" ;
-    skos:prefLabel "Contamination Screening Input" .
-
-mixs:0000006 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:00000006 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "Kit used to amplify genomic DNA in preparation for sequencing."@en ;
-    skos:example "`qiagen repli-g`" ;
-    skos:prefLabel "WGA Amplification Kit" .
-
-mixs:0000008 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:00000008 ;
-    rdfs:comment "For a browser of [efo:] (v 2.95) terms, please see [http://purl.bioontology.org/ontology/EFO]; for a browser of [obi:] (v 2018-02-12) terms please see [http://purl.bioontology/ontology/OBI]."@en ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "Experimental factors are essentially the the variable aspects of an experiment design which can be used to describe an experiment, or set of experiments, in an increasingly detailed manner. This field accepts ontology terms from Experimental Factor Ontology ([efo:]) and/or Ontology for Biomedical Investigations ([obi:])."@en ;
-    skos:prefLabel "Experimental Factor" .
-
-mixs:0000014 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000014 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
-    skos:example "`ocean water [ENVO:00002151]`; `pond water [ENVO:00002228]|air ENVO_00002005`" ;
-    skos:prefLabel "Environmental Medium" .
-
-mixs:0000021 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000021 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "The ploidy level of the genome (e.g. `allopolyploid`, `haploid`, `diploid`, `triploid`, `tetraploid`). It has implications for the downstream study of duplicated gene and regions of the genomes (and perhaps for difficulties in assembly). For terms, please select terms listed under class ploidy ([pato:001374]) of Phenotypic Quality Ontology ([pato:]), and for a browser of PATO (v 2018-03-27) please refer to [http://purl.bioontology.org/ontology/PATO]."@en ;
-    skos:example "`allopolyploidy [PATO:0001379]`" ;
-    skos:prefLabel "Ploidy" .
-
-mixs:0000022 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000022 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:integer ;
-    skos:definition "Reports the number of replicons in a nuclear genome of eukaryotes, in the genome of a bacterium or archaea or the number of segments in a segmented virus. Always applied to the haploid chromosome count of a eukaryote."@en ;
-    skos:example 2 ;
-    skos:prefLabel "Number Of Replicons" .
-
-mixs:0000023 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000023 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:integer ;
-    skos:definition "Do plasmids exist of significant phenotypic consequence (e.g. ones that determine virulence or antibiotic resistance). Megaplasmids? Other plasmids (borrelia has 15+ plasmids)."@en ;
-    skos:example 5 ;
-    skos:prefLabel "Extrachromosomal Elements" .
-
-mixs:0000024 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000024 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "The estimated size of the genome prior to sequencing. Of particular importance in the sequencing of (eukaryotic) genome which could remain in draft form for a long or unspecified period."@en ;
-    skos:example "`300000 bp`" ;
-    skos:prefLabel "Estimated size" .
-
-mixs:0001321 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0001321 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The substance or equipment used as a negative control in an investigation."@en ;
-    skos:prefLabel "Negative Control Type" .
-
-mixs:0001322 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0001322 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The substance, mixture, product, or apparatus used to verify that a process which is part of an investigation delivers a true positive."@en ;
-    skos:prefLabel "Positive Control Type" .
-
-dcterms:source a owl:DatatypeProperty ;
-    dcterms:isVersionOf dcterms:source ;
-    rdfs:comment "This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or string conforming to a formal identification system."@en ;
-    rdfs:domain dwc:UsagePolicy ;
-    rdfs:isDefinedBy dcterms: ;
-    rdfs:range [ a rdfs:Datatype ;
-            owl:unionOf ( xsd:anyURI xsd:string ) ] ;
-    skos:definition "A related resource from which the described resource is derived"@en ;
-    skos:prefLabel "Source (DCTERMS)" .
+dwc:MolecularProtocol a owl:Class ;
+    rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]." ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dwc:molecularProtocolID ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dwc:assayType ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000001 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000002 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000003 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000005 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000006 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000008 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000012 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000013 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000015 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000016 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000017 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000020 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0000092 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0001107 ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty mixs:0001320 ] ) ],
+        dwc:Protocol ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty [ a owl:ObjectProperty ;
+                    owl:inverseOf dwcdp:followed ] ;
+            owl:someValuesFrom dwc:NucleotideAnalysis ] ;
+    skos:definition "A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]." ;
+    skos:prefLabel "Molecular Protocol" .
 
 dwc:organismID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:organismID ;
@@ -1676,88 +1141,9 @@ dwc:organismID a owl:DatatypeProperty ;
     rdfs:domain dwc:Organism ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:Organism]." ;
     skos:prefLabel "Organism ID" .
-
-mixs:0000012 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000012 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "In this field, report which major environmental system your sample or specimen came from. The systems identified should have a coarse spatial grain, to provide the general environmental context of where the sampling was done (e.g. were you in the desert or a rainforest?). We recommend using subclasses of ENVO’s biome class: [http://purl.obolibrary.org/obo/ENVO_00000428]. Format (one term): termLabel [termID], Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a water sample from the photic zone in middle of the Atlantic Ocean, consider: oceanic epipelagic zone biome [ENVO:01000033]. Example: Annotating a sample from the Amazon rainforest consider: tropical moist broadleaf forest biome [ENVO:01000228]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
-    skos:example "`oceanic epipelagic zone biome [ENVO:01000033]`; `tropical moist broadleaf forest biome [ENVO:01000228]`" ;
-    skos:prefLabel "Broad-scale Environmental Context" .
-
-mixs:0000013 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000013 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
-    skos:example "`canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]`" ;
-    skos:prefLabel "Local Environmental Context" .
-
-mixs:0000015 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000015 ;
-    rdfs:comment "This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/]"@en ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range [ a rdfs:Datatype ;
-            owl:oneOf ( "aerobe" "anaerobe" "facultative" "microaerophilic" "microanaerobe" "obligate aerobe" "obligate anaerobe" ) ] ;
-    skos:definition "Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments."@en ;
-    skos:example "`aerobe`" ;
-    skos:prefLabel "Relation To Oxygen" .
-
-mixs:0000016 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000016 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed."@en ;
-    skos:example "`filtering of seawater, storing samples in ethanol`" ;
-    skos:prefLabel "Sample Material Processing" .
-
-mixs:0000017 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000017 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "Filtering pore size used in sample preparation."@en ;
-    skos:example "`0-0.22 micrometer`" ;
-    skos:prefLabel "Size Fraction Selected" .
-
-mixs:0000020 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000020 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
-    skos:definition "This should provide further information about the genetic distinctness of the sequenced organism by recording additional information e.g. serovar, serotype, biotype, ecotype, or any relevant genetic typing schemes like Group I plasmid. It can also contain alternative taxonomic information. It should contain both the lineage name, and the lineage rank, i.e. `biovar:abc123`."@en ;
-    skos:example "`serovar:Newport`" ;
-    skos:prefLabel "Subspecific Genetic Lineage" .
-
-mixs:0000092 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0000092 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Name of the project within which the sequencing was organized."@en ;
-    skos:prefLabel "Project Name" .
-
-mixs:0001107 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0001107 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "Sample Name is a name that you choose for the sample. It can have any format, but we suggest that you make it concise, unique and consistent within your lab, and as informative as possible. Every Sample Name from a single Submitter must be unique."@en ;
-    skos:prefLabel "Sample Name" .
-
-mixs:0001320 a owl:DatatypeProperty ;
-    dcterms:isVersionOf mixs:0001320 ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy mixs: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "NCBI taxon ID of the sample. May be a single taxon or mixed taxa sample. Use \"synthetic metagenome\" for mock community positive controls, or \"blank sample\" for negative controls."@en ;
-    skos:prefLabel "Taxonomy ID Of DNA Sample" .
 
 dcterms:Location a owl:Class ;
     dcterms:isVersionOf dcterms:Location ;
@@ -1767,25 +1153,6 @@ dcterms:Location a owl:Class ;
         "the place defined by a georeference" ;
     skos:prefLabel "Location" .
 
-dcterms:type a owl:DatatypeProperty ;
-    dcterms:isVersionOf dcterms:type ;
-    rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy dcterms: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "A category that best matches the nature of an [ac:Media] resource." ;
-    skos:example "`Sound`; `StillImage`; `MovingImage`; `InteractiveResource`; `Text`" ;
-    skos:prefLabel "Media Type" .
-
-dwcdp:followed a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( chrono:ChronometricAge dwc:Assertion dwc:Event dwc:NucleotideAnalysis dwc:MaterialEntity dwc:Occurrence eco:Survey ) ] ;
-    rdfs:isDefinedBy dwcdp: ;
-    rdfs:range dwc:Protocol ;
-    skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
-    skos:example "bb:event123 dwcdp:followed bb:protocol456 ." ;
-    skos:prefLabel "Followed" .
-
 dcterms:title a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:title ;
     rdfs:comment "Concise title, name, or brief descriptive label of institution, resource collection, or individual resource. This field SHOULD include the complete title with all the subtitles, if any. It is strongly suggested to provide a title. The title facilitates interactions with humans: e.g, it could be used as display text of hyperlinks or to provide a choice of images in a pick list. The title is therefore highly useful and an effort should be made to provide it where it is not already available. When the resource is a collection without an institutional or official name, but with a thematic content, a descriptive title, e.g. \"Urban Ants of New England\", would be suitable. In individual media resources depicting taxa, the scientific name or names of taxa are often a good title. Common names, in addition to or instead of scientific names are also acceptable. Indications of action or roles captured by the media resource, such as predatory acts, are desireable (\"Rattlesnake eating deer mouse\", \"Pollinators of California Native Plants\")." ;
@@ -1794,16 +1161,6 @@ dcterms:title a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "A name given to a resource." ;
     skos:prefLabel "Title" .
-
-dwc:Identification a owl:Class ;
-    dcterms:isVersionOf dwc:Identification ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18> ;
-    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A classification of a resource according to a classification scheme."@en ;
-    skos:example "a nomenclatural act designating a specimen as a holotype",
-        "a subspecies determination of an organism" ;
-    skos:prefLabel "Identification" .
 
 dwc:ResourceRelationship a owl:Class ;
     dcterms:isVersionOf dwc:ResourceRelationship ;
@@ -1815,6 +1172,26 @@ dwc:ResourceRelationship a owl:Class ;
         "a uniquely identified dwc:Occurrence represents the same dwc:Occurrence as another uniquely identified dwc:Occurrence",
         "an instance of a dwc:Organism is the mother of another instance of a dwc:Organism" ;
     skos:prefLabel "Resource Relationship" .
+
+dwcdp:followed a owl:ObjectProperty ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( chrono:ChronometricAge dwc:Assertion dwc:Event dwc:NucleotideAnalysis dwc:MaterialEntity dwc:Occurrence eco:Survey ) ] ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dwc:Protocol ;
+    skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
+    skos:example "bb:event123 dwcdp:followed bb:protocol456 ." ;
+    skos:prefLabel "Followed" .
+
+eco:SurveyTarget a owl:Class ;
+    dcterms:isVersionOf eco:SurveyTarget ;
+    rdfs:isDefinedBy eco: ;
+    skos:definition "An intended scope for [dwc:Occurrence]s in a [eco:Survey]."@en ;
+    skos:example "Oncorhynchus mykiss and Oncorhynchus clarkii (only)",
+        "all bird species",
+        "all bird species except Larus gulls, fulmars and kittiwakes",
+        "all total lengths except < 12 inches",
+        "reproductive female Ctenomys sociabilis (only)" ;
+    skos:prefLabel "Survey Target" .
 
 dc:source a owl:DatatypeProperty ;
     dcterms:isVersionOf dc:source ;
@@ -1831,6 +1208,16 @@ dwc:NucleotideSequence a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
     skos:prefLabel "Nucleotide Sequence" .
+
+dwc:Identification a owl:Class ;
+    dcterms:isVersionOf dwc:Identification ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18> ;
+    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A classification of a resource according to a classification scheme."@en ;
+    skos:example "a nomenclatural act designating a specimen as a holotype",
+        "a subspecies determination of an organism" ;
+    skos:prefLabel "Identification" .
 
 dwc:Protocol a owl:Class ;
     dcterms:isVersionOf dwc:Protocol ;
@@ -1850,6 +1237,15 @@ dwcdp:about a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism]."@en ;
     skos:example "bb:assertion123 dwcdp:about bb:event456 ." ;
     skos:prefLabel "About" .
+
+dwc:GeologicalContext a owl:Class ;
+    dcterms:isVersionOf dwc:GeologicalContext ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
+    skos:example "a particular lithostratigraphic layer",
+        "a specific chronostratigraphic unit" ;
+    skos:prefLabel "Geological Context" .
 
 dwc:OrganismInteraction a owl:Class ;
     dcterms:isVersionOf dwc:OrganismInteraction ;
@@ -1872,47 +1268,6 @@ dwc:UsagePolicy a owl:Class ;
     skos:definition "Information about rights, usage, and attribution statements applicable to an entity."@en ;
     skos:prefLabel "Usage Policy" .
 
-chrono:ChronometricAge a owl:Class ;
-    dcterms:isVersionOf chrono:ChronometricAge ;
-    dcterms:references <http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21> ;
-    rdfs:comment "The age of a [dwc:MaterialEntity] and how this age is known, whether by a dating assay, or a relative association with dated material, or legacy collection information."@en ;
-    rdfs:isDefinedBy chrono: ;
-    skos:definition "An approximation of temporal position (in the sense conveyed by [https://www.w3.org/TR/owl-time/#time:TemporalPosition]) that is supported by evidence."@en ;
-    skos:example "a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen",
-        "an age of a specimen based on what is reported in legacy collections data",
-        "an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum",
-        "an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum",
-        "an age range of a specimen based on its biostratigraphic content" ;
-    skos:prefLabel "Chronometric Age" .
-
-eco:SurveyTarget a owl:Class ;
-    dcterms:isVersionOf eco:SurveyTarget ;
-    rdfs:isDefinedBy eco: ;
-    skos:definition "An intended scope for [dwc:Occurrence]s in a [eco:Survey]."@en ;
-    skos:example "Oncorhynchus mykiss and Oncorhynchus clarkii (only)",
-        "all bird species",
-        "all bird species except Larus gulls, fulmars and kittiwakes",
-        "all total lengths except < 12 inches",
-        "reproductive female Ctenomys sociabilis (only)" ;
-    skos:prefLabel "Survey Target" .
-
-dcterms:BibliographicResource a owl:Class ;
-    dcterms:isVersionOf dcterms:BibliographicResource ;
-    rdfs:isDefinedBy dcterms: ;
-    skos:definition "A book, article, or other documentary resource."@en ;
-    skos:prefLabel "Bibliographic Resource" .
-
-dwc:Organism a owl:Class ;
-    dcterms:isVersionOf dwc:Organism ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18> ;
-    rdfs:comment "Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A particular organism or defined group of organisms considered to be taxonomically homogeneous."@en ;
-    skos:example "a specific bird",
-        "a specific instance of a bacterial culture",
-        "a specific wolf pack" ;
-    skos:prefLabel "Organism" .
-
 eco:Survey a owl:Class ;
     dcterms:isVersionOf eco:Survey ;
     rdfs:comment "This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget]."@en ;
@@ -1929,6 +1284,42 @@ eco:Survey a owl:Class ;
         "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
     skos:prefLabel "Survey" .
 
+chrono:ChronometricAge a owl:Class ;
+    dcterms:isVersionOf chrono:ChronometricAge ;
+    dcterms:references <http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21> ;
+    rdfs:comment "The age of a [dwc:MaterialEntity] and how this age is known, whether by a dating assay, or a relative association with dated material, or legacy collection information."@en ;
+    rdfs:isDefinedBy chrono: ;
+    skos:definition "An approximation of temporal position (in the sense conveyed by [https://www.w3.org/TR/owl-time/#time:TemporalPosition]) that is supported by evidence."@en ;
+    skos:example "a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen",
+        "an age of a specimen based on what is reported in legacy collections data",
+        "an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum",
+        "an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum",
+        "an age range of a specimen based on its biostratigraphic content" ;
+    skos:prefLabel "Chronometric Age" .
+
+dcterms:BibliographicResource a owl:Class ;
+    dcterms:isVersionOf dcterms:BibliographicResource ;
+    rdfs:isDefinedBy dcterms: ;
+    skos:definition "A book, article, or other documentary resource."@en ;
+    skos:prefLabel "Bibliographic Resource" .
+
+dwc:NucleotideAnalysis a owl:Class ;
+    dcterms:isVersionOf dwc:NucleotideAnalysis ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
+    skos:prefLabel "Nucleotide Analysis" .
+
+dwc:Organism a owl:Class ;
+    dcterms:isVersionOf dwc:Organism ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18> ;
+    rdfs:comment "Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A particular organism or defined group of organisms considered to be taxonomically homogeneous."@en ;
+    skos:example "a specific bird",
+        "a specific instance of a bacterial culture",
+        "a specific wolf pack" ;
+    skos:prefLabel "Organism" .
+
 dwc:Occurrence a owl:Class ;
     dcterms:isVersionOf dwc:Occurrence ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
@@ -1939,11 +1330,14 @@ dwc:Occurrence a owl:Class ;
         "a wolf pack on the shore of Kluane Lake in 1988" ;
     skos:prefLabel "Occurrence" .
 
-dwc:NucleotideAnalysis a owl:Class ;
-    dcterms:isVersionOf dwc:NucleotideAnalysis ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
-    skos:prefLabel "Nucleotide Analysis" .
+dcterms:identifier a owl:DatatypeProperty ;
+    dcterms:isVersionOf dcterms:identifier ;
+    rdfs:comment "Recommended practice is to identify the resource by means of a string conforming to an identification system. Examples include International Standard Book Number (ISBN), Digital Object Identifier (DOI), and Uniform Resource Name (URN). Persistent identifiers should be provided as HTTP URIs." ;
+    rdfs:domain owl:Thing ;
+    rdfs:isDefinedBy dcterms: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "An unambiguous reference to the resource within a given context." ;
+    skos:prefLabel "Identifier" .
 
 dwc:Event a owl:Class ;
     dcterms:isVersionOf dwc:Event ;
@@ -1956,15 +1350,6 @@ dwc:Event a owl:Class ;
         "a material collecting event",
         "an organism occurrence" ;
     skos:prefLabel "Event" .
-
-dwc:GeologicalContext a owl:Class ;
-    dcterms:isVersionOf dwc:GeologicalContext ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
-    skos:example "a particular lithostratigraphic layer",
-        "a specific chronostratigraphic unit" ;
-    skos:prefLabel "Geological Context" .
 
 dwc:Assertion a owl:Class ;
     dcterms:isVersionOf dwc:MeasurementOrFact ;
@@ -2014,53 +1399,6 @@ ac:Media a owl:Class ;
         "dcmi:Sound",
         "dcmi:StillImage" ;
     skos:prefLabel "Media" .
-
-dwc:MolecularProtocol a owl:Class ;
-    rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]." ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:cardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty dwc:molecularProtocolID ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty dwc:assayType ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000001 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000002 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000003 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000005 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000006 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000008 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000012 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000013 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000015 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000016 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000017 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000020 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0000092 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0001107 ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty mixs:0001320 ] ) ],
-        dwc:Protocol ;
-    owl:equivalentClass [ a owl:Restriction ;
-            owl:onProperty [ a owl:ObjectProperty ;
-                    owl:inverseOf dwcdp:followed ] ;
-            owl:someValuesFrom dwc:NucleotideAnalysis ] ;
-    skos:definition "A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]." ;
-    skos:prefLabel "Molecular Protocol" .
 
 [] a owl:AllDisjointClasses ;
     owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .
