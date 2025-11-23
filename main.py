@@ -2269,669 +2269,746 @@ createDP(
     version_of_s="http://example.com/term-pending/dwc/verbatimAssertionType",
 )
 
-# createDP(
-#     name="assertionTypeIRI",
-#     namespace=DWCIRI,
-#     graph=g,
-#     domain_list=[DWC["Assertion"]],
-#     range_list=[XSD["anyURI"]],
-#     pref_label=Literal("Assertion Type (IRI)"),
-#     definition=Literal("An IRI of a controlled vocabulary value for a type of [dwc:Assertion].", lang="en"),
-#     comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
-#     version_of_s="http://example.com/term-pending/dwciri/assertionTypeIRI",
-# )
-
-# # NOTE: I added the example IRI
-# createDP(
-#     name="assertionValueIRI",
-#     namespace=DWCIRI,
-#     graph=g,
-#     domain_list=[DWC["Assertion"]],
-#     range_list=[XSD["anyURI"]],
-#     pref_label=Literal("Assertion Value (IRI)"),
-#     definition=Literal("An IRI of the controlled vocabulary value for a value of a [dwc:Assertion].", lang="en"),
-#     examples=Literal("`http://purl.obolibrary.org/obo/OBA_VT0000047`"),
-#     version_of_s="http://example.com/term-pending/dwciri/assertionValueIRI",
-# )
-
-# # NOTE: Comment in JSON file says dwc:SurveyTargetType?
-# createDP(
-#     name="surveyTargetTypeIRI",
-#     namespace=DWCIRI,
-#     graph=g,
-#     domain_list=[ECO["SurveyTarget"]],
-#     range_list=[XSD["anyURI"]],
-#     pref_label=Literal("Survey Target Type IRI"),
-#     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given.", lang="en"),
-#     comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
-#     subproperty_list=[DCTERMS["type"]],
-#     version_of_s="http://purl.org/dc/terms/type",
-# )
-
-# # NOTE: Property I created. I do not see why there is not a dwciri: analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
-# createDP(
-#     name="surveyTargetTypeSourceIRI",
-#     namespace=DWCIRI,
-#     graph=g,
-#     domain_list=[ECO["SurveyTarget"]],
-#     range_list=[XSD["anyURI"]],
-#     pref_label=Literal("Survey Target Type Source IRI"),
-#     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
-#     comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
-#     subproperty_list=[DCTERMS["source"]],
-#     version_of_s="http://purl.org/dc/elements/terms/source",
-# )
-
-# # NOTE: Definition uses term dwc:Event, but we want to consider dwc:Survey. Should clarify difference or allow cases where an entity can be both a dwc:Event and a eco:Survey.
-# createDP(
-#     name="siteCount",
-#     namespace=ECO,
-#     graph=g,
-#     domain_list=[ECO["Survey"]],
-#     range_list=[XSD["integer"]],
-#     pref_label=Literal("Site Count"),
-#     definition=Literal("Total number of sites surveyed during a [dwc:Event].", lang="en"),
-#     comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy.", lang="en"),
-#     examples=Literal("`1`; `15`"),
-#     version_of_s="http://rs.tdwg.org/eco/terms/siteCount",
-#     references_s="http://rs.tdwg.org/eco/terms/version/siteCount-2024-02-28",
-# )
-
-# createDP(
-#     name="siteNestingDescription",
-#     namespace=ECO,
-#     graph=g,
-#     domain_list=[ECO["Survey"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Site Nesting Description"),
-#     definition=Literal("Textual description of a hierarchical sampling design.", lang="en"),
-#     comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy.", lang="en"),
-#     examples=Literal("`5 sampling sites of 3-5 plots each`"),
-#     version_of_s="http://rs.tdwg.org/eco/terms/siteNestingDescription",
-#     references_s="http://rs.tdwg.org/eco/terms/version/siteNestingDescription-2024-02-28",
-# )
-
-# createDP(
-#     name="verbatimSiteDescriptions",
-#     namespace=ECO,
-#     graph=g,
-#     domain_list=[ECO["Survey"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Verbatim Site Description"),
-#     definition=Literal("Original textual description of site(s).", lang="en"),
-#     comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `).", lang="en"),
-#     examples=Literal("`Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick *Andropogon* spp., *Sporobolus floridanus*, *Vaccinium* spp., *Rhynchospora* spp., *Centella erecta*, *Panicum rigidulum*`"),
-#     version_of_s="http://rs.tdwg.org/eco/terms/verbatimSiteDescriptions",
-#     references_s="http://rs.tdwg.org/eco/terms/version/verbatimSiteDescriptions-2024-02-28",
-# )
-
-# createDP(
-#     name="verbatimSiteNames",
-#     namespace=ECO,
-#     graph=g,
-#     domain_list=[ECO["Survey"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Verbatim Site Names"),
-#     definition=Literal("A list (concatenated and separated) of original site names.", lang="en"),
-#     comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `).", lang="en"),
-#     examples=Literal("`East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1`"),
-#     version_of_s="http://rs.tdwg.org/eco/terms/verbatimSiteNames",
-#     references_s="http://rs.tdwg.org/eco/terms/version/verbatimSiteNames-2024-02-28",
-# )
-
-# # NOTE: I do not quite see why this property is here. If we are modeling the sequence as a separate entity dwc:NucleotideSequence, shouldn't this be a property for dwc:NucleotideSequence? Also, the newly proposed term dwc:sequence does that, making this term somewhat useless unless for backwards compatibility with datasets that had the DNA extension.
-# createDP(
-#     name="dna_sequence",
-#     namespace=GBIF,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("DNA Sequence"),
-#     definition=Literal("The DNA sequence.", lang="en"),
-#     examples=Literal("`TCTATCCTCAATTATAGGTCATAATTCACCATCAGTAGATTTAGGAATTTTCTCTATTCATATTGCAGGTGTATCATCAATTATAGGATCAATTAATTTTATTGTAACAATTTTAAATATACATACAAAAACTCATTCATTAAACTTTTTACCATTATTTTCATGATCAGTTCTAGTTACAGCAATTCTCCTTTTATTATCATTA`"),
-#     version_of_s="https://rs.gbif/org/terms/dna_sequence",
-# )
-
-
-# # NOTE: Used xsd:string because I couldn't see a use for rdfs:Literal in this case.
-# createDP(
-#     name="pcr_primer_forward",
-#     namespace=GBIF,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Forward PCR Primer"),
-#     definition=Literal("Forward PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]. The primer sequence should be reported in uppercase letters.", lang="en"),
-#     examples=Literal("`GGACTACHVGGGTWTCTAAT`"),
-#     version_of_s="https://rs.gbif/org/terms/pcr_primer_forward",
-# )
-
-# createDP(
-#     name="pcr_primer_name_forward",
-#     namespace=GBIF,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Forward PCR Primer Name"),
-#     definition=Literal("Name of the forward PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence].", lang="en"),
-#     examples=Literal("`jgLCO1490`"),
-#     version_of_s="https://rs.gbif/org/terms/pcr_primer_name_forward",
-# )
-
-# createDP(
-#     name="pcr_primer_name_reverse",
-#     namespace=GBIF,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Reverse PCR Primer Name"),
-#     definition=Literal("Name of the reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence].", lang="en"),
-#     examples=Literal("`jgHCO2198`"),
-#     version_of_s="https://rs.gbif/org/terms/pcr_primer_name_reverse",
-# )
-
-# createDP(
-#     name="pcr_primer_reference",
-#     namespace=GBIF,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"], XSD["anyURI"]],
-#     pref_label=Literal("PCR Primer Reference"),
-#     definition=Literal("Reference for the PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment.", lang="en"),
-#     examples=Literal("`https:doi.org/10.11861742-9994-10-31`"),
-#     version_of_s="https://rs.gbif/org/terms/pcr_primer_reference",
-# )
-
-# # NOTE: Used xsd:string because I couldn't see a use for rdfs:Literal in this case.
-# createDP(
-#     name="pcr_primer_reverse",
-#     namespace=GBIF,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Reverse PCR Primer"),
-#     definition=Literal("Reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]. The primer sequence should be reported in uppercase letters.", lang="en"),
-#     examples=Literal("`GGACTACHVGGGTWTCTAAT`"),
-#     version_of_s="https://rs.gbif/org/terms/pcr_primer_reverse",
-# )
-
-# createDP(
-#     name="concentration",
-#     namespace=GGBN,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["decimal"]],
-#     pref_label=Literal("DNA Concentration"),
-#     definition=Literal("Concentration of DNA (weight ng/volume µL).", lang="en"),
-#     examples=Literal("`67.5`"),
-#     version_of_s="http://data.ggbn.org/schemas/ggbn/terms/concentration",
-# )
-
-# createDP(
-#     name="concentrationUnit",
-#     namespace=GGBN,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("DNA Concentration Unit"),
-#     definition=Literal("Unit used for [ggbn:concentration] measurement.", lang="en"),
-#     examples=Literal("`ng/µL`"),
-#     version_of_s="http://data.ggbn.org/schemas/ggbn/terms/concentrationUnit",
-# )
-
-# createDP(
-#     name="methodDeterminationConcentrationAndRatios",
-#     namespace=GGBN,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Method For Concentration Measurement"),
-#     definition=Literal("Description of method used for [ggbn:concentration] measurement.", lang="en"),
-#     examples=Literal("`Nanodrop`; `Qubit`"),
-#     version_of_s="http://data.ggbn.org/schemas/ggbn/terms/methodDeterminationConcentrationAndRatios",
-# )
-
-# createDP(
-#     name="ratioOfAbsorbance260_230",
-#     namespace=GGBN,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["decimal"]],
-#     pref_label=Literal("Ratio Of Absorbance At 260 nm and 230 nm"),
-#     definition=Literal("Ratio of absorbance at 260 nm and 230 nm assessing DNA purity (mostly secondary measure, indicates mainly EDTA, carbohydrates, phenol), (DNA samples only).", lang="en"),
-#     examples=Literal("`1.89`"),
-#     version_of_s="http://data.ggbn.org/schemas/ggbn/terms/ratioOfAbsorbance260_230",
-# )
-
-# createDP(
-#     name="ratioOfAbsorbance260_280",
-#     namespace=GGBN,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["decimal"]],
-#     pref_label=Literal("Ratio Of Absorbance At 260 nm and 280 nm"),
-#     definition=Literal("Ratio of absorbance at 260 nm and 280 nm assessing DNA purity (mostly secondary measure, indicates mainly EDTA, carbohydrates, phenol), (DNA samples only).", lang="en"),
-#     examples=Literal("`1.91`"),
-#     version_of_s="http://data.ggbn.org/schemas/ggbn/terms/ratioOfAbsorbance260_280",
-# )
-
-# createDP(
-#     name="ampliconSize",
-#     namespace=MIQE,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["integer"]],
-#     pref_label=Literal("Amplicon Size"),
-#     definition=Literal("The length of the amplicon in basepairs.", lang="en"),
-#     examples=Literal("`83`"),
-#     version_of_s="http://rs.gbif.org/terms/miqe/ampliconSize",
-# )
-
-# createDP(
-#     name="annealingTemp",
-#     namespace=MIQE,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["decimal"]],
-#     pref_label=Literal("Annealing Phase Temperature"),
-#     definition=Literal("The reaction temperature during the annealing phase of PCR.", lang="en"),
-#     examples=Literal("`60`"),
-#     version_of_s="http://rs.gbif.org/terms/miqe/annealingTemp",
-# )
-
-# createDP(
-#     name="annealingTempUnit",
-#     namespace=MIQE,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Annealing Phase Temperature Unit"),
-#     definition=Literal("Measurement Unit of the reaction temperature during the annealing phase of PCR.", lang="en"),
-#     examples=Literal("`60`"),
-#     version_of_s="http://rs.gbif.org/terms/miqe/annealingTempUnit",
-# )
-
-# createDP(
-#     name="baselineValue",
-#     namespace=MIQE,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["integer"]],
-#     pref_label=Literal("Fluorescence Baseline Value"),
-#     definition=Literal("The number of cycles when fluorescence signal from the target amplification is below background fluorescence not originated from the real target amplification.", lang="en"),
-#     examples=Literal("`15`"),
-#     version_of_s="http://rs.gbif.org/terms/miqe/baselineValue",
-# )
-
-# createDP(
-#     name="probeReporter",
-#     namespace=MIQE,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Probe Reporter"),
-#     definition=Literal("Type of fluorophore (reporter) used. Probe anneals within amplified target DNA. Polymerase activity degrades the probe that has annealed to the template, and the probe releases the fluorophore from it and breaks the proximity to the quencher, thus allowing fluorescence in the fluorophore.", lang="en"),
-#     examples=Literal("`FAM`"),
-#     version_of_s="http://rs.gbif.org/terms/miqe/probeReporter",
-# )
-
-# # NOTE: Think a period was missing in the description.
-# createDP(
-#     name="probeQuencher",
-#     namespace=MIQE,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Probe Quencher"),
-#     definition=Literal("Type of quencher used. The quencher molecule quenches the fluorescence emitted by the fluorophore when excited by the cycler's light source. As long as fluorophore and the quencher are in proximity, quenching inhibits any fluorescence signals.", lang="en"),
-#     examples=Literal("`NFQ-MGB`"),
-#     version_of_s="http://rs.gbif.org/terms/miqe/probeQuencher",
-# )
-
-# createDP(
-#     name="quantificationCycle",
-#     namespace=MIQE,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["decimal"]],
-#     pref_label=Literal("Quantification Cycle Number"),
-#     definition=Literal("The number of cycles required for the fluorescent signal to cross a given value threshold above the baseline. Quantification cycle (Cq), threshold cycle (Ct), crossing point (Cp), and take-off point (TOP) refer to the same value from the real-time instrument. Use of quantification cycle (Cq), is preferable according to the RDML (Real-Time PCR Data Markup Language) data standard ([http://www.rdml.org]).", lang="en"),
-#     examples=Literal("`37.9450950622558`"),
-#     version_of_s="http://rs.gbif.org/terms/miqe/quantificationCycle",
-# )
-
-# createDP(
-#     name="thresholdQuantificationCycle",
-#     namespace=MIQE,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["decimal"]],
-#     pref_label=Literal("Fluorescence Cycle Threshold"),
-#     definition=Literal("Threshold for change in fluorescence signal between cycles.", lang="en"),
-#     examples=Literal("`0.3`"),
-#     version_of_s="http://rs.gbif.org/terms/miqe/thresholdQuantificationCycle",
-# )
-
-# createDP(
-#     name="0000001",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Amount Or Size Of Sample Collected"),
-#     definition=Literal("The total amount or size (volume (ml), mass (g) or aread (m2)) of sample collected.", lang="en"),
-#     examples=Literal("`5 liter`"),
-#     version_of_s="https://w3id.org/mixs/00000001",
-# )
-
-# createDP(
-#     name="0000002",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Sample Collection Device"),
-#     definition=Literal("The device used to collect an environmental sample. This field accepts terms listed under environmental sampling device ([http://purl.obolibrary.org/obo/ENVO]). This field also accepts terms listed under specimen collection device ([http://purl.obolibrary.org/obo/GENEPIO_0002094]).", lang="en"),
-#     version_of_s="https://w3id.org/mixs/00000002",
-# )
-
-# createDP(
-#     name="0000003",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Isolation And Growth Condition"),
-#     definition=Literal("Publication reference in the form of pubmed ID (pmid), digital object identifier (doi) or url for isolation and growth condition specifications of the organism/material.", lang="en"),
-#     examples=Literal("`doi:10.1016/j.syapm.2018.01.009`"),
-#     version_of_s="https://w3id.org/mixs/00000003",
-# )
-
-# createEDP(
-#     name="0000005",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     oneOf_list=[Literal("contigs"), Literal("reads")],
-#     pref_label=Literal("Contamination Screening Input"),
-#     definition=Literal("The type of sequence data used as input.", lang="en"),
-#     comments=Literal("This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/ContamScreenInputEnum/].", lang="en"),
-#     examples=Literal("`contigs`"),
-#     version_of_s="https://w3id.org/mixs/00000005",
-# )
-
-# createDP(
-#     name="0000006",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("WGA Amplification Kit"),
-#     definition=Literal("Kit used to amplify genomic DNA in preparation for sequencing.", lang="en"),
-#     examples=Literal("`qiagen repli-g`"),
-#     version_of_s="https://w3id.org/mixs/00000006",
-# )
-
-# # NOTE: I felt that the browser comment is better suited for a comment.
-# createDP(
-#     name="0000008",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Experimental Factor"),
-#     definition=Literal("Experimental factors are essentially the the variable aspects of an experiment design which can be used to describe an experiment, or set of experiments, in an increasingly detailed manner. This field accepts ontology terms from Experimental Factor Ontology ([efo:]) and/or Ontology for Biomedical Investigations ([obi:]).", lang="en"),
-#     comments=Literal("For a browser of [efo:] (v 2.95) terms, please see [http://purl.bioontology.org/ontology/EFO]; for a browser of [obi:] (v 2018-02-12) terms please see [http://purl.bioontology/ontology/OBI].", lang="en"),
-#     version_of_s="https://w3id.org/mixs/00000008",
-# )
-
-# createDP(
-#     name="0000012",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Broad-scale Environmental Context"),
-#     definition=Literal("In this field, report which major environmental system your sample or specimen came from. The systems identified should have a coarse spatial grain, to provide the general environmental context of where the sampling was done (e.g. were you in the desert or a rainforest?). We recommend using subclasses of ENVO’s biome class: [http://purl.obolibrary.org/obo/ENVO_00000428]. Format (one term): termLabel [termID], Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a water sample from the photic zone in middle of the Atlantic Ocean, consider: oceanic epipelagic zone biome [ENVO:01000033]. Example: Annotating a sample from the Amazon rainforest consider: tropical moist broadleaf forest biome [ENVO:01000228]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
-#     examples=Literal("`oceanic epipelagic zone biome [ENVO:01000033]`; `tropical moist broadleaf forest biome [ENVO:01000228]`"),
-#     version_of_s="https://w3id.org/mixs/0000012",
-# )
-
-# createDP(
-#     name="0000013",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Local Environmental Context"),
-#     definition=Literal("In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
-#     examples=Literal("`canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]`"),
-#     version_of_s="https://w3id.org/mixs/0000013",
-# )
-
-# createDP(
-#     name="0000014",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Environmental Medium"),
-#     definition=Literal("In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
-#     examples=Literal("`ocean water [ENVO:00002151]`; `pond water [ENVO:00002228]|air ENVO_00002005`"),
-#     version_of_s="https://w3id.org/mixs/0000014",
-# )
-
-# # WARN: I added the comment to be clearer
-# createEDP(
-#     name="0000015",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     oneOf_list=[Literal("aerobe"), Literal("anaerobe"), Literal("facultative"), Literal("microaerophilic"), Literal("microanaerobe"), Literal("obligate aerobe"), Literal("obligate anaerobe")],
-#     pref_label=Literal("Relation To Oxygen"),
-#     definition=Literal("Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments.", lang="en"),
-#     comments=Literal("This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/]", lang="en"),
-#     examples=Literal("`aerobe`"),
-#     version_of_s="https://w3id.org/mixs/0000015",
-# )
-
-# # TEST: Small triple just to see if OntPub catches it
-# g.add((BB["Datato"], RDF["type"], RDFS["Datatype"]))
-
-# # TEST: Small instances
-# g.add((BB["Moleco1"], RDF["type"], DWC["MolecularProtocol"]))
-# g.add((BB["Moleco1"], MIXS["0000015"], Literal("aerobe")))
-# #
-# g.add((BB["Moleco2"], RDF["type"], DWC["MolecularProtocol"]))
-# # g.add((BB["Moleco2"], MIXS["0000015"], Literal("jumpluff")))
-
-# # WARN: MiXS page has no mention of OBI.
-# createDP(
-#     name="0000016",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Sample Material Processing"),
-#     definition=Literal("A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed.", lang="en"),
-#     examples=Literal("`filtering of seawater, storing samples in ethanol`"),
-#     version_of_s="https://w3id.org/mixs/0000016",
-# )
-
-# createDP(
-#     name="0000017",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Size Fraction Selected"),
-#     definition=Literal("Filtering pore size used in sample preparation.", lang="en"),
-#     examples=Literal("`0-0.22 micrometer`"),
-#     version_of_s="https://w3id.org/mixs/0000017",
-# )
-
-# createDP(
-#     name="0000020",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Subspecific Genetic Lineage"),
-#     definition=Literal("This should provide further information about the genetic distinctness of the sequenced organism by recording additional information e.g. serovar, serotype, biotype, ecotype, or any relevant genetic typing schemes like Group I plasmid. It can also contain alternative taxonomic information. It should contain both the lineage name, and the lineage rank, i.e. `biovar:abc123`.", lang="en"),
-#     examples=Literal("`serovar:Newport`"),
-#     version_of_s="https://w3id.org/mixs/0000020",
-# )
-
-
-
-
-
-# createDP(
-#     name="0000021",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Ploidy"),
-#     definition=Literal("The ploidy level of the genome (e.g. `allopolyploid`, `haploid`, `diploid`, `triploid`, `tetraploid`). It has implications for the downstream study of duplicated gene and regions of the genomes (and perhaps for difficulties in assembly). For terms, please select terms listed under class ploidy ([pato:001374]) of Phenotypic Quality Ontology ([pato:]), and for a browser of PATO (v 2018-03-27) please refer to [http://purl.bioontology.org/ontology/PATO].", lang="en"),
-#     examples=Literal("`allopolyploidy [PATO:0001379]`"),
-#     version_of_s="https://w3id.org/mixs/0000021",
-# )
-
-# createDP(
-#     name="0000022",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["integer"]],
-#     pref_label=Literal("Number Of Replicons"),
-#     definition=Literal("Reports the number of replicons in a nuclear genome of eukaryotes, in the genome of a bacterium or archaea or the number of segments in a segmented virus. Always applied to the haploid chromosome count of a eukaryote.", lang="en"),
-#     examples=Literal("2", datatype=XSD["integer"]),
-#     version_of_s="https://w3id.org/mixs/0000022",
-# )
-
-# createDP(
-#     name="0000023",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["integer"]],
-#     pref_label=Literal("Extrachromosomal Elements"),
-#     definition=Literal("Do plasmids exist of significant phenotypic consequence (e.g. ones that determine virulence or antibiotic resistance). Megaplasmids? Other plasmids (borrelia has 15+ plasmids).", lang="en"),
-#     examples=Literal("5", datatype=XSD["integer"]),
-#     version_of_s="https://w3id.org/mixs/0000023",
-# )
-
-# createDP(
-#     name="0000024",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[XSD["string"]],
-#     pref_label=Literal("Estimated size"),
-#     definition=Literal("The estimated size of the genome prior to sequencing. Of particular importance in the sequencing of (eukaryotic) genome which could remain in draft form for a long or unspecified period.", lang="en"),
-#     examples=Literal("`300000 bp`"),
-#     version_of_s="https://w3id.org/mixs/0000024",
-# )
-
-
-
-
-
-
-
-
-# createDP(
-#     name="0000092",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Project Name"),
-#     definition=Literal("Name of the project within which the sequencing was organized.", lang="en"),
-#     version_of_s="https://w3id.org/mixs/0000092",
-# )
-
-# createDP(
-#     name="0001107",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Sample Name"),
-#     definition=Literal("Sample Name is a name that you choose for the sample. It can have any format, but we suggest that you make it concise, unique and consistent within your lab, and as informative as possible. Every Sample Name from a single Submitter must be unique.", lang="en"),
-#     version_of_s="https://w3id.org/mixs/0001107",
-# )
-
-# createDP(
-#     name="0001320",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Taxonomy ID Of DNA Sample"),
-#     definition=Literal("NCBI taxon ID of the sample. May be a single taxon or mixed taxa sample. Use \"synthetic metagenome\" for mock community positive controls, or \"blank sample\" for negative controls.", lang="en"),
-#     version_of_s="https://w3id.org/mixs/0001320",
-# )
-
-# createDP(
-#     name="0001321",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Negative Control Type"),
-#     definition=Literal("The substance or equipment used as a negative control in an investigation.", lang="en"),
-#     version_of_s="https://w3id.org/mixs/0001321",
-# )
-
-# createDP(
-#     name="0001322",
-#     namespace=MIXS,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Positive Control Type"),
-#     definition=Literal("The substance, mixture, product, or apparatus used to verify that a process which is part of an investigation delivers a true positive.", lang="en"),
-#     version_of_s="https://w3id.org/mixs/0001322",
-# )
-
-# createDP(
-#     name="CreateDate",
-#     namespace=XMP,
-#     graph=g,
-#     domain_list=[DWC["MolecularProtocol"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Original Date and Time"),
-#     definition=Literal("The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different.", lang="en"),
-#     comments=Literal("The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples.", lang="en"),
-#     version_of_s="http://ns.adobe.com/xap/1.0/CreateDate",
-# )
-
-# createDP(
-#     name="relationshipEstablishedDate",
-#     namespace=DWC,
-#     graph=g,
-#     domain_list=[DWC["ResourceRelationship"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Relationship Established Date"),
-#     definition=Literal("A date on which a [dwc:ResourceRelationship] was established.", lang="en"),
-#     comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
-#     version_of_s="http://rs.tdwg.org/dwc/terms/relationshipEstablishedDate",
-#     references_s="http://rs.tdwg.org/dwc/terms/version/relationshipEstablishedDate-2025-06-12",
-# )
-
-# createDP(
-#     name="relationshipRemarks",
-#     namespace=DWC,
-#     graph=g,
-#     domain_list=[DWC["ResourceRelationship"]],
-#     range_list=[RDFS["Literal"]],
-#     pref_label=Literal("Relationship Remarks"),
-#     definition=Literal("Comments or notes about a [dwc:ResourceRelationship].", lang="en"),
-#     version_of_s="http://rs.tdwg.org/dwc/terms/relationshipRemarks",
-#     references_s="http://rs.tdwg.org/dwc/terms/version/relationshipRemarks-2023-06-28",
-# )
+createDP(
+    name="assertionTypeIRI",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["Assertion"]],
+    range_list=[XSD["anyURI"]],
+    pref_label=Literal("Assertion Type (IRI)"),
+    definition=Literal("An IRI of a controlled vocabulary value for a type of [dwc:Assertion].", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
+    version_of_s="http://example.com/term-pending/dwciri/assertionTypeIRI",
+)
+
+# NOTE: I added the example IRI
+createDP(
+    name="assertionValueIRI",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["Assertion"]],
+    range_list=[XSD["anyURI"]],
+    pref_label=Literal("Assertion Value (IRI)"),
+    definition=Literal("An IRI of the controlled vocabulary value for a value of a [dwc:Assertion].", lang="en"),
+    examples_list=[Literal("`http://purl.obolibrary.org/obo/OBA_VT0000047`"),],
+    version_of_s="http://example.com/term-pending/dwciri/assertionValueIRI",
+)
+
+# NOTE: Comment in JSON file says dwc:SurveyTargetType?
+createDP(
+    name="surveyTargetTypeIRI",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[ECO["SurveyTarget"]],
+    range_list=[XSD["anyURI"]],
+    pref_label=Literal("Survey Target Type IRI"),
+    definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
+    subproperty_list=[DCTERMS["type"]],
+    version_of_s="http://purl.org/dc/terms/type",
+)
+
+# NOTE: Property I created. I do not see why there is not a dwciri: analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
+createDP(
+    name="surveyTargetTypeSourceIRI",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[ECO["SurveyTarget"]],
+    range_list=[XSD["anyURI"]],
+    pref_label=Literal("Survey Target Type Source IRI"),
+    definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
+    subproperty_list=[DCTERMS["source"]],
+    version_of_s="http://purl.org/dc/elements/terms/source",
+)
+
+# NOTE: Definition uses term dwc:Event, but we want to consider dwc:Survey. Should clarify difference or allow cases where an entity can be both a dwc:Event and a eco:Survey.
+createDP(
+    name="siteCount",
+    namespace=ECO,
+    graph=g,
+    domain_list=[ECO["Survey"]],
+    range_list=[XSD["integer"]],
+    pref_label=Literal("Site Count"),
+    definition=Literal("Total number of sites surveyed during a [dwc:Event].", lang="en"),
+    comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy.", lang="en"),
+    examples_list=[
+        Literal("1", datatype=XSD["integer"]),
+        Literal("15", datatype=XSD["integer"]),
+    ],  
+    version_of_s="http://rs.tdwg.org/eco/terms/siteCount",
+    references_s="http://rs.tdwg.org/eco/terms/version/siteCount-2024-02-28",
+)
+
+createDP(
+    name="siteNestingDescription",
+    namespace=ECO,
+    graph=g,
+    domain_list=[ECO["Survey"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Site Nesting Description"),
+    definition=Literal("Textual description of a hierarchical sampling design.", lang="en"),
+    comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy.", lang="en"),
+    examples_list=[
+        Literal("`5 sampling sites of 3-5 plots each`"),
+    ],
+    version_of_s="http://rs.tdwg.org/eco/terms/siteNestingDescription",
+    references_s="http://rs.tdwg.org/eco/terms/version/siteNestingDescription-2024-02-28",
+)
+
+createDP(
+    name="verbatimSiteDescriptions",
+    namespace=ECO,
+    graph=g,
+    domain_list=[ECO["Survey"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Verbatim Site Description"),
+    definition=Literal("Original textual description of site(s).", lang="en"),
+    comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `).", lang="en"),
+    examples_list=[
+        Literal("Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick *Andropogon* spp., *Sporobolus floridanus*, *Vaccinium* spp., *Rhynchospora* spp., *Centella erecta*, *Panicum rigidulum*"),
+    ],
+    version_of_s="http://rs.tdwg.org/eco/terms/verbatimSiteDescriptions",
+    references_s="http://rs.tdwg.org/eco/terms/version/verbatimSiteDescriptions-2024-02-28",
+)
+
+createDP(
+    name="verbatimSiteNames",
+    namespace=ECO,
+    graph=g,
+    domain_list=[ECO["Survey"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Verbatim Site Names"),
+    definition=Literal("A list (concatenated and separated) of original site names.", lang="en"),
+    comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `).", lang="en"),
+    examples_list=[
+        Literal("East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1"),
+    ],
+    version_of_s="http://rs.tdwg.org/eco/terms/verbatimSiteNames",
+    references_s="http://rs.tdwg.org/eco/terms/version/verbatimSiteNames-2024-02-28",
+)
+
+# NOTE: I do not quite see why this property is here. If we are modeling the sequence as a separate entity dwc:NucleotideSequence, shouldn't this be a property for dwc:NucleotideSequence? Also, the newly proposed term dwc:sequence does that, making this term somewhat useless unless for backwards compatibility with datasets that had the DNA extension.
+createDP(
+    name="dna_sequence",
+    namespace=GBIF,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("DNA Sequence"),
+    definition=Literal("The DNA sequence.", lang="en"),
+    examples_list=[
+        Literal("TCTATCCTCAATTATAGGTCATAATTCACCATCAGTAGATTTAGGAATTTTCTCTATTCATATTGCAGGTGTATCATCAATTATAGGATCAATTAATTTTATTGTAACAATTTTAAATATACATACAAAAACTCATTCATTAAACTTTTTACCATTATTTTCATGATCAGTTCTAGTTACAGCAATTCTCCTTTTATTATCATTA"),
+    ],
+    version_of_s="https://rs.gbif/org/terms/dna_sequence",
+)
+
+
+# NOTE: Used xsd:string because I couldn't see a use for rdfs:Literal in this case.
+createDP(
+    name="pcr_primer_forward",
+    namespace=GBIF,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Forward PCR Primer"),
+    definition=Literal("Forward PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]. The primer sequence should be reported in uppercase letters.", lang="en"),
+    examples_list=[
+        Literal("GGACTACHVGGGTWTCTAAT"),
+    ],
+    version_of_s="https://rs.gbif/org/terms/pcr_primer_forward",
+)
+
+createDP(
+    name="pcr_primer_name_forward",
+    namespace=GBIF,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Forward PCR Primer Name"),
+    definition=Literal("Name of the forward PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence].", lang="en"),
+    examples_list=[
+        Literal("jgLCO1490"),
+    ],
+    version_of_s="https://rs.gbif/org/terms/pcr_primer_name_forward",
+)
+
+createDP(
+    name="pcr_primer_name_reverse",
+    namespace=GBIF,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Reverse PCR Primer Name"),
+    definition=Literal("Name of the reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence].", lang="en"),
+    examples_list=[
+        Literal("jgHCO2198"),
+    ],
+    version_of_s="https://rs.gbif/org/terms/pcr_primer_name_reverse",
+)
+
+createDP(
+    name="pcr_primer_reference",
+    namespace=GBIF,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"], XSD["anyURI"]],
+    pref_label=Literal("PCR Primer Reference"),
+    definition=Literal("Reference for the PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment.", lang="en"),
+    examples_list=[
+        Literal("https:doi.org/10.11861742-9994-10-31"),
+    ],
+    version_of_s="https://rs.gbif/org/terms/pcr_primer_reference",
+)
+
+# NOTE: Used xsd:string because I couldn't see a use for rdfs:Literal in this case.
+createDP(
+    name="pcr_primer_reverse",
+    namespace=GBIF,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Reverse PCR Primer"),
+    definition=Literal("Reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]. The primer sequence should be reported in uppercase letters.", lang="en"),
+    examples_list=[
+        Literal("GGACTACHVGGGTWTCTAAT"),
+    ],
+    version_of_s="https://rs.gbif/org/terms/pcr_primer_reverse",
+)
+
+createDP(
+    name="concentration",
+    namespace=GGBN,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["decimal"]],
+    pref_label=Literal("DNA Concentration"),
+    definition=Literal("Concentration of DNA (weight ng/volume µL).", lang="en"),
+    examples_list=[
+        Literal("67.5", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://data.ggbn.org/schemas/ggbn/terms/concentration",
+)
+
+createDP(
+    name="concentrationUnit",
+    namespace=GGBN,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("DNA Concentration Unit"),
+    definition=Literal("Unit used for [ggbn:concentration] measurement.", lang="en"),
+    examples_list=[
+        Literal("ng/µL"),
+    ],
+    version_of_s="http://data.ggbn.org/schemas/ggbn/terms/concentrationUnit",
+)
+
+createDP(
+    name="methodDeterminationConcentrationAndRatios",
+    namespace=GGBN,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Method For Concentration Measurement"),
+    definition=Literal("Description of method used for [ggbn:concentration] measurement.", lang="en"),
+    examples_list=[
+        Literal("Nanodrop"),
+        Literal("Qubit"),
+    ],
+    version_of_s="http://data.ggbn.org/schemas/ggbn/terms/methodDeterminationConcentrationAndRatios",
+)
+
+createDP(
+    name="ratioOfAbsorbance260_230",
+    namespace=GGBN,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["decimal"]],
+    pref_label=Literal("Ratio Of Absorbance At 260 nm and 230 nm"),
+    definition=Literal("Ratio of absorbance at 260 nm and 230 nm assessing DNA purity (mostly secondary measure, indicates mainly EDTA, carbohydrates, phenol), (DNA samples only).", lang="en"),
+    examples_list=[
+        Literal("1.89", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://data.ggbn.org/schemas/ggbn/terms/ratioOfAbsorbance260_230",
+)
+
+createDP(
+    name="ratioOfAbsorbance260_280",
+    namespace=GGBN,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["decimal"]],
+    pref_label=Literal("Ratio Of Absorbance At 260 nm and 280 nm"),
+    definition=Literal("Ratio of absorbance at 260 nm and 280 nm assessing DNA purity (mostly secondary measure, indicates mainly EDTA, carbohydrates, phenol), (DNA samples only).", lang="en"),
+    examples_list=[
+        Literal("1.91", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://data.ggbn.org/schemas/ggbn/terms/ratioOfAbsorbance260_280",
+)
+
+createDP(
+    name="ampliconSize",
+    namespace=MIQE,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["integer"]],
+    pref_label=Literal("Amplicon Size"),
+    definition=Literal("The length of the amplicon in basepairs.", lang="en"),
+    examples_list=[
+        Literal("83", datatype=XSD["integer"]),
+    ],
+    version_of_s="http://rs.gbif.org/terms/miqe/ampliconSize",
+)
+
+createDP(
+    name="annealingTemp",
+    namespace=MIQE,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["decimal"]],
+    pref_label=Literal("Annealing Phase Temperature"),
+    definition=Literal("The reaction temperature during the annealing phase of PCR.", lang="en"),
+    examples_list=[
+        Literal("60", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.gbif.org/terms/miqe/annealingTemp",
+)
+
+createDP(
+    name="annealingTempUnit",
+    namespace=MIQE,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Annealing Phase Temperature Unit"),
+    definition=Literal("Measurement Unit of the reaction temperature during the annealing phase of PCR.", lang="en"),
+    examples_list=[
+        Literal("60", datatype=XSD["decimal"])
+    ],
+    version_of_s="http://rs.gbif.org/terms/miqe/annealingTempUnit",
+)
+
+createDP(
+    name="baselineValue",
+    namespace=MIQE,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["integer"]],
+    pref_label=Literal("Fluorescence Baseline Value"),
+    definition=Literal("The number of cycles when fluorescence signal from the target amplification is below background fluorescence not originated from the real target amplification.", lang="en"),
+    examples_list=[
+        Literal("15", datatype=XSD["integer"]),
+    ],
+    version_of_s="http://rs.gbif.org/terms/miqe/baselineValue",
+)
+
+createDP(
+    name="probeReporter",
+    namespace=MIQE,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Probe Reporter"),
+    definition=Literal("Type of fluorophore (reporter) used. Probe anneals within amplified target DNA. Polymerase activity degrades the probe that has annealed to the template, and the probe releases the fluorophore from it and breaks the proximity to the quencher, thus allowing fluorescence in the fluorophore.", lang="en"),
+    examples_list=[
+        Literal("FAM"),
+    ],
+    version_of_s="http://rs.gbif.org/terms/miqe/probeReporter",
+)
+
+# NOTE: Think a period was missing in the description.
+createDP(
+    name="probeQuencher",
+    namespace=MIQE,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Probe Quencher"),
+    definition=Literal("Type of quencher used. The quencher molecule quenches the fluorescence emitted by the fluorophore when excited by the cycler's light source. As long as fluorophore and the quencher are in proximity, quenching inhibits any fluorescence signals.", lang="en"),
+    examples_list=[
+        Literal("NFQ-MGB"),
+    ],
+    version_of_s="http://rs.gbif.org/terms/miqe/probeQuencher",
+)
+
+createDP(
+    name="quantificationCycle",
+    namespace=MIQE,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["decimal"]],
+    pref_label=Literal("Quantification Cycle Number"),
+    definition=Literal("The number of cycles required for the fluorescent signal to cross a given value threshold above the baseline. Quantification cycle (Cq), threshold cycle (Ct), crossing point (Cp), and take-off point (TOP) refer to the same value from the real-time instrument. Use of quantification cycle (Cq), is preferable according to the RDML (Real-Time PCR Data Markup Language) data standard ([http://www.rdml.org]).", lang="en"),
+    examples_list=[
+        Literal("37.9450950622558", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.gbif.org/terms/miqe/quantificationCycle",
+)
+
+createDP(
+    name="thresholdQuantificationCycle",
+    namespace=MIQE,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["decimal"]],
+    pref_label=Literal("Fluorescence Cycle Threshold"),
+    definition=Literal("Threshold for change in fluorescence signal between cycles.", lang="en"),
+    examples_list=[
+        Literal("0.3", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.gbif.org/terms/miqe/thresholdQuantificationCycle",
+)
+
+createDP(
+    name="0000001",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Amount Or Size Of Sample Collected"),
+    definition=Literal("The total amount or size (volume (ml), mass (g) or aread (m2)) of sample collected.", lang="en"),
+    examples_list=[
+        Literal("5 liter"),
+    ],
+    version_of_s="https://w3id.org/mixs/00000001",
+)
+
+createDP(
+    name="0000002",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Sample Collection Device"),
+    definition=Literal("The device used to collect an environmental sample. This field accepts terms listed under environmental sampling device ([http://purl.obolibrary.org/obo/ENVO]). This field also accepts terms listed under specimen collection device ([http://purl.obolibrary.org/obo/GENEPIO_0002094]).", lang="en"),
+    version_of_s="https://w3id.org/mixs/00000002",
+)
+
+createDP(
+    name="0000003",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Isolation And Growth Condition"),
+    definition=Literal("Publication reference in the form of pubmed ID (pmid), digital object identifier (doi) or url for isolation and growth condition specifications of the organism/material.", lang="en"),
+    examples_list=[
+        Literal("doi:10.1016/j.syapm.2018.01.009"),
+    ],
+    version_of_s="https://w3id.org/mixs/00000003",
+)
+
+createEDP(
+    name="0000005",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    oneOf_list=[Literal("contigs"), Literal("reads")],
+    pref_label=Literal("Contamination Screening Input"),
+    definition=Literal("The type of sequence data used as input.", lang="en"),
+    comments=Literal("This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/ContamScreenInputEnum/].", lang="en"),
+    examples=Literal("contigs"),
+    version_of_s="https://w3id.org/mixs/00000005",
+)
+
+createDP(
+    name="0000006",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("WGA Amplification Kit"),
+    definition=Literal("Kit used to amplify genomic DNA in preparation for sequencing.", lang="en"),
+    examples_list=[
+        Literal("qiagen repli-g"),
+    ],
+    version_of_s="https://w3id.org/mixs/00000006",
+)
+
+# NOTE: I felt that the browser comment is better suited for a comment.
+createDP(
+    name="0000008",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Experimental Factor"),
+    definition=Literal("Experimental factors are essentially the the variable aspects of an experiment design which can be used to describe an experiment, or set of experiments, in an increasingly detailed manner. This field accepts ontology terms from Experimental Factor Ontology ([efo:]) and/or Ontology for Biomedical Investigations ([obi:]).", lang="en"),
+    comments=Literal("For a browser of [efo:] (v 2.95) terms, please see [http://purl.bioontology.org/ontology/EFO]; for a browser of [obi:] (v 2018-02-12) terms please see [http://purl.bioontology/ontology/OBI].", lang="en"),
+    version_of_s="https://w3id.org/mixs/00000008",
+)
+
+createDP(
+    name="0000012",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Broad-scale Environmental Context"),
+    definition=Literal("In this field, report which major environmental system your sample or specimen came from. The systems identified should have a coarse spatial grain, to provide the general environmental context of where the sampling was done (e.g. were you in the desert or a rainforest?). We recommend using subclasses of ENVO’s biome class: [http://purl.obolibrary.org/obo/ENVO_00000428]. Format (one term): termLabel [termID], Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a water sample from the photic zone in middle of the Atlantic Ocean, consider: oceanic epipelagic zone biome [ENVO:01000033]. Example: Annotating a sample from the Amazon rainforest consider: tropical moist broadleaf forest biome [ENVO:01000228]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
+    examples_list=[
+        Literal("oceanic epipelagic zone biome [ENVO:01000033]"),
+        Literal("tropical moist broadleaf forest biome [ENVO:01000228]"),
+    ],
+    version_of_s="https://w3id.org/mixs/0000012",
+)
+
+createDP(
+    name="0000013",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Local Environmental Context"),
+    definition=Literal("In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
+    examples_list=[
+        Literal("canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]"),
+    ],
+    version_of_s="https://w3id.org/mixs/0000013",
+)
+
+createDP(
+    name="0000014",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Environmental Medium"),
+    definition=Literal("In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
+    examples_list=[
+        Literal("ocean water [ENVO:00002151]"),
+        Literal("pond water [ENVO:00002228]|air ENVO_00002005"),
+    ],
+    version_of_s="https://w3id.org/mixs/0000014",
+)
+
+# WARN: I added the comment to be clearer
+createEDP(
+    name="0000015",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    oneOf_list=[Literal("aerobe"), Literal("anaerobe"), Literal("facultative"), Literal("microaerophilic"), Literal("microanaerobe"), Literal("obligate aerobe"), Literal("obligate anaerobe")],
+    pref_label=Literal("Relation To Oxygen"),
+    definition=Literal("Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments.", lang="en"),
+    comments=Literal("This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/]", lang="en"),
+    examples=Literal("aerobe"),
+    version_of_s="https://w3id.org/mixs/0000015",
+)
+
+# TEST: Small triple just to see if OntPub catches it
+g.add((BB["Datato"], RDF["type"], RDFS["Datatype"]))
+
+# TEST: Small instances
+g.add((BB["Moleco1"], RDF["type"], DWC["MolecularProtocol"]))
+g.add((BB["Moleco1"], MIXS["0000015"], Literal("aerobe")))
+#
+g.add((BB["Moleco2"], RDF["type"], DWC["MolecularProtocol"]))
+# g.add((BB["Moleco2"], MIXS["0000015"], Literal("jumpluff")))
+
+# WARN: MiXS page has no mention of OBI.
+createDP(
+    name="0000016",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Sample Material Processing"),
+    definition=Literal("A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed.", lang="en"),
+    examples_list=[
+        Literal("filtering of seawater, storing samples in ethanol"),
+    ],
+    version_of_s="https://w3id.org/mixs/0000016",
+)
+
+createDP(
+    name="0000017",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Size Fraction Selected"),
+    definition=Literal("Filtering pore size used in sample preparation.", lang="en"),
+    examples_list=[
+        Literal("0-0.22 micrometer"),
+    ],
+    version_of_s="https://w3id.org/mixs/0000017",
+)
+
+createDP(
+    name="0000020",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Subspecific Genetic Lineage"),
+    definition=Literal("This should provide further information about the genetic distinctness of the sequenced organism by recording additional information e.g. serovar, serotype, biotype, ecotype, or any relevant genetic typing schemes like Group I plasmid. It can also contain alternative taxonomic information. It should contain both the lineage name, and the lineage rank, i.e. `biovar:abc123`.", lang="en"),
+    examples_list=[
+        Literal("serovar:Newport"),
+    ],
+    version_of_s="https://w3id.org/mixs/0000020",
+)
+
+
+
+
+
+
+createDP(
+    name="0000021",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Ploidy"),
+    definition=Literal("The ploidy level of the genome (e.g. `allopolyploid`, `haploid`, `diploid`, `triploid`, `tetraploid`). It has implications for the downstream study of duplicated gene and regions of the genomes (and perhaps for difficulties in assembly). For terms, please select terms listed under class ploidy ([pato:001374]) of Phenotypic Quality Ontology ([pato:]), and for a browser of PATO (v 2018-03-27) please refer to [http://purl.bioontology.org/ontology/PATO].", lang="en"),
+    examples_list=[
+        Literal("allopolyploidy [PATO:0001379]"),
+    ],
+    version_of_s="https://w3id.org/mixs/0000021",
+)
+
+createDP(
+    name="0000022",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["integer"]],
+    pref_label=Literal("Number Of Replicons"),
+    definition=Literal("Reports the number of replicons in a nuclear genome of eukaryotes, in the genome of a bacterium or archaea or the number of segments in a segmented virus. Always applied to the haploid chromosome count of a eukaryote.", lang="en"),
+    examples_list=[
+        Literal("2", datatype=XSD["integer"]),
+    ],
+    version_of_s="https://w3id.org/mixs/0000022",
+)
+
+createDP(
+    name="0000023",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["integer"]],
+    pref_label=Literal("Extrachromosomal Elements"),
+    definition=Literal("Do plasmids exist of significant phenotypic consequence (e.g. ones that determine virulence or antibiotic resistance). Megaplasmids? Other plasmids (borrelia has 15+ plasmids).", lang="en"),
+    examples_list=[
+        Literal("5", datatype=XSD["integer"]),
+    ],
+    version_of_s="https://w3id.org/mixs/0000023",
+)
+
+createDP(
+    name="0000024",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Estimated size"),
+    definition=Literal("The estimated size of the genome prior to sequencing. Of particular importance in the sequencing of (eukaryotic) genome which could remain in draft form for a long or unspecified period.", lang="en"),
+    examples_list=[
+        Literal("300000 bp"),
+    ],
+    version_of_s="https://w3id.org/mixs/0000024",
+)
+
+
+
+
+
+
+
+
+createDP(
+    name="0000092",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Project Name"),
+    definition=Literal("Name of the project within which the sequencing was organized.", lang="en"),
+    version_of_s="https://w3id.org/mixs/0000092",
+)
+
+createDP(
+    name="0001107",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Sample Name"),
+    definition=Literal("Sample Name is a name that you choose for the sample. It can have any format, but we suggest that you make it concise, unique and consistent within your lab, and as informative as possible. Every Sample Name from a single Submitter must be unique.", lang="en"),
+    version_of_s="https://w3id.org/mixs/0001107",
+)
+
+createDP(
+    name="0001320",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Taxonomy ID Of DNA Sample"),
+    definition=Literal("NCBI taxon ID of the sample. May be a single taxon or mixed taxa sample. Use \"synthetic metagenome\" for mock community positive controls, or \"blank sample\" for negative controls.", lang="en"),
+    version_of_s="https://w3id.org/mixs/0001320",
+)
+
+createDP(
+    name="0001321",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Negative Control Type"),
+    definition=Literal("The substance or equipment used as a negative control in an investigation.", lang="en"),
+    version_of_s="https://w3id.org/mixs/0001321",
+)
+
+createDP(
+    name="0001322",
+    namespace=MIXS,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Positive Control Type"),
+    definition=Literal("The substance, mixture, product, or apparatus used to verify that a process which is part of an investigation delivers a true positive.", lang="en"),
+    version_of_s="https://w3id.org/mixs/0001322",
+)
+
+createDP(
+    name="CreateDate",
+    namespace=XMP,
+    graph=g,
+    domain_list=[DWC["MolecularProtocol"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Original Date and Time"),
+    definition=Literal("The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different.", lang="en"),
+    comments=Literal("The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples.", lang="en"),
+    version_of_s="http://ns.adobe.com/xap/1.0/CreateDate",
+)
+
+createDP(
+    name="relationshipEstablishedDate",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["ResourceRelationship"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Relationship Established Date"),
+    definition=Literal("A date on which a [dwc:ResourceRelationship] was established.", lang="en"),
+    comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/relationshipEstablishedDate",
+    references_s="http://rs.tdwg.org/dwc/terms/version/relationshipEstablishedDate-2025-06-12",
+)
+
+createDP(
+    name="relationshipRemarks",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["ResourceRelationship"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Relationship Remarks"),
+    definition=Literal("Comments or notes about a [dwc:ResourceRelationship].", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/relationshipRemarks",
+    references_s="http://rs.tdwg.org/dwc/terms/version/relationshipRemarks-2023-06-28",
+)
 
 
 

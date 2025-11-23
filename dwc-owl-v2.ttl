@@ -10,12 +10,16 @@
 @prefix xmp: <http://ns.adobe.com/xap/1.0/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix gbif: <http://rs.gbif.org/terms/> .
+@prefix ggbn: <http://data.ggbn.org/schemas/ggbn/terms/> .
+@prefix miqe: <http://rs.gbif.org/terms/miqe/> .
 @prefix mixs: <https://w3id.org/mixs/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
 @prefix chrono: <http://rs.tdwg.org/chrono/terms/> .
+@prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @base <http://bioboum.ca/dwc-owl.owl> .
 
@@ -67,14 +71,6 @@ dwc:relationshipAccordingTo rdf:type owl:AnnotationProperty .
 dwc:relationshipAccordingToID rdf:type owl:AnnotationProperty .
 
 
-###  http://rs.tdwg.org/dwc/terms/relationshipEstablishedDate
-dwc:relationshipEstablishedDate rdf:type owl:AnnotationProperty .
-
-
-###  http://rs.tdwg.org/dwc/terms/relationshipRemarks
-dwc:relationshipRemarks rdf:type owl:AnnotationProperty .
-
-
 ###  http://www.w3.org/2002/07/owl#maxCardinality
 owl:maxCardinality rdf:type owl:AnnotationProperty .
 
@@ -94,6 +90,10 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 #################################################################
 #    Datatypes
 #################################################################
+
+###  http://bioboum.ca/Datato
+bb:Datato rdf:type rdfs:Datatype .
+
 
 ###  http://www.w3.org/2001/XMLSchema#date
 xsd:date rdf:type rdfs:Datatype .
@@ -547,6 +547,73 @@ dwcdp:usedFor rdf:type owl:ObjectProperty .
 #    Data properties
 #################################################################
 
+###  http://data.ggbn.org/schemas/ggbn/terms/concentration
+ggbn:concentration rdf:type owl:DatatypeProperty ;
+                   rdfs:domain dwc:MolecularProtocol ;
+                   rdfs:range xsd:decimal ;
+                   dcterms:isVersionOf ggbn:concentration ;
+                   rdfs:isDefinedBy ggbn: ;
+                   skos:definition "Concentration of DNA (weight ng/volume µL)."@en ;
+                   skos:example 67.5 ;
+                   skos:prefLabel "DNA Concentration" .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/concentrationUnit
+ggbn:concentrationUnit rdf:type owl:DatatypeProperty ;
+                       rdfs:domain dwc:MolecularProtocol ;
+                       rdfs:range rdfs:Literal ;
+                       dcterms:isVersionOf ggbn:concentrationUnit ;
+                       rdfs:isDefinedBy ggbn: ;
+                       skos:definition "Unit used for [ggbn:concentration] measurement."@en ;
+                       skos:example "ng/µL" ;
+                       skos:prefLabel "DNA Concentration Unit" .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/methodDeterminationConcentrationAndRatios
+ggbn:methodDeterminationConcentrationAndRatios rdf:type owl:DatatypeProperty ;
+                                               rdfs:domain dwc:MolecularProtocol ;
+                                               rdfs:range rdfs:Literal ;
+                                               dcterms:isVersionOf ggbn:methodDeterminationConcentrationAndRatios ;
+                                               rdfs:isDefinedBy ggbn: ;
+                                               skos:definition "Description of method used for [ggbn:concentration] measurement."@en ;
+                                               skos:example "Nanodrop" ,
+                                                            "Qubit" ;
+                                               skos:prefLabel "Method For Concentration Measurement" .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/ratioOfAbsorbance260_230
+ggbn:ratioOfAbsorbance260_230 rdf:type owl:DatatypeProperty ;
+                              rdfs:domain dwc:MolecularProtocol ;
+                              rdfs:range xsd:decimal ;
+                              dcterms:isVersionOf ggbn:ratioOfAbsorbance260_230 ;
+                              rdfs:isDefinedBy ggbn: ;
+                              skos:definition "Ratio of absorbance at 260 nm and 230 nm assessing DNA purity (mostly secondary measure, indicates mainly EDTA, carbohydrates, phenol), (DNA samples only)."@en ;
+                              skos:example 1.89 ;
+                              skos:prefLabel "Ratio Of Absorbance At 260 nm and 230 nm" .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/ratioOfAbsorbance260_280
+ggbn:ratioOfAbsorbance260_280 rdf:type owl:DatatypeProperty ;
+                              rdfs:domain dwc:MolecularProtocol ;
+                              rdfs:range xsd:decimal ;
+                              dcterms:isVersionOf ggbn:ratioOfAbsorbance260_280 ;
+                              rdfs:isDefinedBy ggbn: ;
+                              skos:definition "Ratio of absorbance at 260 nm and 280 nm assessing DNA purity (mostly secondary measure, indicates mainly EDTA, carbohydrates, phenol), (DNA samples only)."@en ;
+                              skos:example 1.91 ;
+                              skos:prefLabel "Ratio Of Absorbance At 260 nm and 280 nm" .
+
+
+###  http://ns.adobe.com/xap/1.0/CreateDate
+xmp:CreateDate rdf:type owl:DatatypeProperty ;
+               rdfs:domain dwc:MolecularProtocol ;
+               rdfs:range rdfs:Literal ;
+               dcterms:isVersionOf xmp:CreateDate ;
+               rdfs:comment "The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples."@en ;
+               rdfs:isDefinedBy xmp: ;
+               skos:definition "The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different."@en ;
+               skos:prefLabel "Original Date and Time" .
+
+
 ###  http://purl.org/dc/elements/1.1/rights
 dc:rights rdf:type owl:DatatypeProperty ;
           rdfs:domain dwc:UsagePolicy ;
@@ -653,6 +720,164 @@ dcterms:type rdf:type owl:DatatypeProperty ;
                           "StillImage" ,
                           "Text" ;
              skos:prefLabel "Media Type" .
+
+
+###  http://rs.gbif.org/terms/dna_sequence
+gbif:dna_sequence rdf:type owl:DatatypeProperty ;
+                  rdfs:domain dwc:MolecularProtocol ;
+                  rdfs:range xsd:string ;
+                  dcterms:isVersionOf <https://rs.gbif/org/terms/dna_sequence> ;
+                  rdfs:isDefinedBy gbif: ;
+                  skos:definition "The DNA sequence."@en ;
+                  skos:example "TCTATCCTCAATTATAGGTCATAATTCACCATCAGTAGATTTAGGAATTTTCTCTATTCATATTGCAGGTGTATCATCAATTATAGGATCAATTAATTTTATTGTAACAATTTTAAATATACATACAAAAACTCATTCATTAAACTTTTTACCATTATTTTCATGATCAGTTCTAGTTACAGCAATTCTCCTTTTATTATCATTA" ;
+                  skos:prefLabel "DNA Sequence" .
+
+
+###  http://rs.gbif.org/terms/pcr_primer_forward
+gbif:pcr_primer_forward rdf:type owl:DatatypeProperty ;
+                        rdfs:domain dwc:MolecularProtocol ;
+                        rdfs:range xsd:string ;
+                        dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_forward> ;
+                        rdfs:isDefinedBy gbif: ;
+                        skos:definition "Forward PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]. The primer sequence should be reported in uppercase letters."@en ;
+                        skos:example "GGACTACHVGGGTWTCTAAT" ;
+                        skos:prefLabel "Forward PCR Primer" .
+
+
+###  http://rs.gbif.org/terms/pcr_primer_name_forward
+gbif:pcr_primer_name_forward rdf:type owl:DatatypeProperty ;
+                             rdfs:domain dwc:MolecularProtocol ;
+                             rdfs:range rdfs:Literal ;
+                             dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_name_forward> ;
+                             rdfs:isDefinedBy gbif: ;
+                             skos:definition "Name of the forward PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]."@en ;
+                             skos:example "jgLCO1490" ;
+                             skos:prefLabel "Forward PCR Primer Name" .
+
+
+###  http://rs.gbif.org/terms/pcr_primer_name_reverse
+gbif:pcr_primer_name_reverse rdf:type owl:DatatypeProperty ;
+                             rdfs:domain dwc:MolecularProtocol ;
+                             rdfs:range rdfs:Literal ;
+                             dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_name_reverse> ;
+                             rdfs:isDefinedBy gbif: ;
+                             skos:definition "Name of the reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]."@en ;
+                             skos:example "jgHCO2198" ;
+                             skos:prefLabel "Reverse PCR Primer Name" .
+
+
+###  http://rs.gbif.org/terms/pcr_primer_reference
+gbif:pcr_primer_reference rdf:type owl:DatatypeProperty ;
+                          rdfs:domain dwc:MolecularProtocol ;
+                          rdfs:range [ rdf:type rdfs:Datatype ;
+                                       owl:unionOf ( rdfs:Literal
+                                                     xsd:anyURI
+                                                   )
+                                     ] ;
+                          dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_reference> ;
+                          rdfs:isDefinedBy gbif: ;
+                          skos:definition "Reference for the PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment."@en ;
+                          skos:example "https:doi.org/10.11861742-9994-10-31" ;
+                          skos:prefLabel "PCR Primer Reference" .
+
+
+###  http://rs.gbif.org/terms/pcr_primer_reverse
+gbif:pcr_primer_reverse rdf:type owl:DatatypeProperty ;
+                        rdfs:domain dwc:MolecularProtocol ;
+                        rdfs:range xsd:string ;
+                        dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_reverse> ;
+                        rdfs:isDefinedBy gbif: ;
+                        skos:definition "Reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]. The primer sequence should be reported in uppercase letters."@en ;
+                        skos:example "GGACTACHVGGGTWTCTAAT" ;
+                        skos:prefLabel "Reverse PCR Primer" .
+
+
+###  http://rs.gbif.org/terms/miqe/ampliconSize
+miqe:ampliconSize rdf:type owl:DatatypeProperty ;
+                  rdfs:domain dwc:MolecularProtocol ;
+                  rdfs:range xsd:integer ;
+                  dcterms:isVersionOf miqe:ampliconSize ;
+                  rdfs:isDefinedBy miqe: ;
+                  skos:definition "The length of the amplicon in basepairs."@en ;
+                  skos:example 83 ;
+                  skos:prefLabel "Amplicon Size" .
+
+
+###  http://rs.gbif.org/terms/miqe/annealingTemp
+miqe:annealingTemp rdf:type owl:DatatypeProperty ;
+                   rdfs:domain dwc:MolecularProtocol ;
+                   rdfs:range xsd:decimal ;
+                   dcterms:isVersionOf miqe:annealingTemp ;
+                   rdfs:isDefinedBy miqe: ;
+                   skos:definition "The reaction temperature during the annealing phase of PCR."@en ;
+                   skos:example 60.0 ;
+                   skos:prefLabel "Annealing Phase Temperature" .
+
+
+###  http://rs.gbif.org/terms/miqe/annealingTempUnit
+miqe:annealingTempUnit rdf:type owl:DatatypeProperty ;
+                       rdfs:domain dwc:MolecularProtocol ;
+                       rdfs:range rdfs:Literal ;
+                       dcterms:isVersionOf miqe:annealingTempUnit ;
+                       rdfs:isDefinedBy miqe: ;
+                       skos:definition "Measurement Unit of the reaction temperature during the annealing phase of PCR."@en ;
+                       skos:example 60.0 ;
+                       skos:prefLabel "Annealing Phase Temperature Unit" .
+
+
+###  http://rs.gbif.org/terms/miqe/baselineValue
+miqe:baselineValue rdf:type owl:DatatypeProperty ;
+                   rdfs:domain dwc:MolecularProtocol ;
+                   rdfs:range xsd:integer ;
+                   dcterms:isVersionOf miqe:baselineValue ;
+                   rdfs:isDefinedBy miqe: ;
+                   skos:definition "The number of cycles when fluorescence signal from the target amplification is below background fluorescence not originated from the real target amplification."@en ;
+                   skos:example 15 ;
+                   skos:prefLabel "Fluorescence Baseline Value" .
+
+
+###  http://rs.gbif.org/terms/miqe/probeQuencher
+miqe:probeQuencher rdf:type owl:DatatypeProperty ;
+                   rdfs:domain dwc:MolecularProtocol ;
+                   rdfs:range rdfs:Literal ;
+                   dcterms:isVersionOf miqe:probeQuencher ;
+                   rdfs:isDefinedBy miqe: ;
+                   skos:definition "Type of quencher used. The quencher molecule quenches the fluorescence emitted by the fluorophore when excited by the cycler's light source. As long as fluorophore and the quencher are in proximity, quenching inhibits any fluorescence signals."@en ;
+                   skos:example "NFQ-MGB" ;
+                   skos:prefLabel "Probe Quencher" .
+
+
+###  http://rs.gbif.org/terms/miqe/probeReporter
+miqe:probeReporter rdf:type owl:DatatypeProperty ;
+                   rdfs:domain dwc:MolecularProtocol ;
+                   rdfs:range rdfs:Literal ;
+                   dcterms:isVersionOf miqe:probeReporter ;
+                   rdfs:isDefinedBy miqe: ;
+                   skos:definition "Type of fluorophore (reporter) used. Probe anneals within amplified target DNA. Polymerase activity degrades the probe that has annealed to the template, and the probe releases the fluorophore from it and breaks the proximity to the quencher, thus allowing fluorescence in the fluorophore."@en ;
+                   skos:example "FAM" ;
+                   skos:prefLabel "Probe Reporter" .
+
+
+###  http://rs.gbif.org/terms/miqe/quantificationCycle
+miqe:quantificationCycle rdf:type owl:DatatypeProperty ;
+                         rdfs:domain dwc:MolecularProtocol ;
+                         rdfs:range xsd:decimal ;
+                         dcterms:isVersionOf miqe:quantificationCycle ;
+                         rdfs:isDefinedBy miqe: ;
+                         skos:definition "The number of cycles required for the fluorescent signal to cross a given value threshold above the baseline. Quantification cycle (Cq), threshold cycle (Ct), crossing point (Cp), and take-off point (TOP) refer to the same value from the real-time instrument. Use of quantification cycle (Cq), is preferable according to the RDML (Real-Time PCR Data Markup Language) data standard ([http://www.rdml.org])."@en ;
+                         skos:example 37.9450950622558 ;
+                         skos:prefLabel "Quantification Cycle Number" .
+
+
+###  http://rs.gbif.org/terms/miqe/thresholdQuantificationCycle
+miqe:thresholdQuantificationCycle rdf:type owl:DatatypeProperty ;
+                                  rdfs:domain dwc:MolecularProtocol ;
+                                  rdfs:range xsd:decimal ;
+                                  dcterms:isVersionOf miqe:thresholdQuantificationCycle ;
+                                  rdfs:isDefinedBy miqe: ;
+                                  skos:definition "Threshold for change in fluorescence signal between cycles."@en ;
+                                  skos:example 0.3 ;
+                                  skos:prefLabel "Fluorescence Cycle Threshold" .
 
 
 ###  http://rs.tdwg.org/ac/terms/caption
@@ -784,6 +1009,52 @@ ac:yFrac rdf:type owl:DatatypeProperty ;
          skos:example 0.5 ,
                       1.0 ;
          skos:prefLabel "Fractional Y" .
+
+
+###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
+dwciri:assertionTypeIRI rdf:type owl:DatatypeProperty ;
+                        rdfs:domain dwc:Assertion ;
+                        rdfs:range xsd:anyURI ;
+                        dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
+                        rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
+                        rdfs:isDefinedBy dwciri: ;
+                        skos:definition "An IRI of a controlled vocabulary value for a type of [dwc:Assertion]."@en ;
+                        skos:prefLabel "Assertion Type (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/iri/assertionValueIRI
+dwciri:assertionValueIRI rdf:type owl:DatatypeProperty ;
+                         rdfs:domain dwc:Assertion ;
+                         rdfs:range xsd:anyURI ;
+                         dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionValueIRI> ;
+                         rdfs:isDefinedBy dwciri: ;
+                         skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
+                         skos:example "`http://purl.obolibrary.org/obo/OBA_VT0000047`" ;
+                         skos:prefLabel "Assertion Value (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeIRI
+dwciri:surveyTargetTypeIRI rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf dcterms:type ;
+                           rdfs:domain eco:SurveyTarget ;
+                           rdfs:range xsd:anyURI ;
+                           dcterms:isVersionOf dcterms:type ;
+                           rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
+                           rdfs:isDefinedBy dwciri: ;
+                           skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given."@en ;
+                           skos:prefLabel "Survey Target Type IRI" .
+
+
+###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeSourceIRI
+dwciri:surveyTargetTypeSourceIRI rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf dcterms:source ;
+                                 rdfs:domain eco:SurveyTarget ;
+                                 rdfs:range xsd:anyURI ;
+                                 dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
+                                 rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
+                                 rdfs:isDefinedBy dwciri: ;
+                                 skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
+                                 skos:prefLabel "Survey Target Type Source IRI" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/agentID
@@ -1340,6 +1611,29 @@ dwc:readCount rdf:type owl:DatatypeProperty ;
               skos:prefLabel "Read Count" .
 
 
+###  http://rs.tdwg.org/dwc/terms/relationshipEstablishedDate
+dwc:relationshipEstablishedDate rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:ResourceRelationship ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf dwc:relationshipEstablishedDate ;
+                                dcterms:references <http://rs.tdwg.org/dwc/terms/version/relationshipEstablishedDate-2025-06-12> ;
+                                rdfs:comment "Recommended best practice is to use a date that conforms to ISO 8601-1:2019."@en ;
+                                rdfs:isDefinedBy dwc: ;
+                                skos:definition "A date on which a [dwc:ResourceRelationship] was established."@en ;
+                                skos:prefLabel "Relationship Established Date" .
+
+
+###  http://rs.tdwg.org/dwc/terms/relationshipRemarks
+dwc:relationshipRemarks rdf:type owl:DatatypeProperty ;
+                        rdfs:domain dwc:ResourceRelationship ;
+                        rdfs:range rdfs:Literal ;
+                        dcterms:isVersionOf dwc:relationshipRemarks ;
+                        dcterms:references <http://rs.tdwg.org/dwc/terms/version/relationshipRemarks-2023-06-28> ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "Comments or notes about a [dwc:ResourceRelationship]."@en ;
+                        skos:prefLabel "Relationship Remarks" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/sequence
 dwc:sequence rdf:type owl:DatatypeProperty ;
              rdfs:domain dwc:NucleotideSequence ;
@@ -1439,6 +1733,330 @@ dwc:verbatimAssertionType rdf:type owl:DatatypeProperty ;
                           skos:prefLabel "Verbatim Assertion Type" .
 
 
+###  http://rs.tdwg.org/eco/terms/siteCount
+eco:siteCount rdf:type owl:DatatypeProperty ;
+              rdfs:domain eco:Survey ;
+              rdfs:range xsd:integer ;
+              dcterms:isVersionOf eco:siteCount ;
+              dcterms:references <http://rs.tdwg.org/eco/terms/version/siteCount-2024-02-28> ;
+              rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy."@en ;
+              rdfs:isDefinedBy eco: ;
+              skos:definition "Total number of sites surveyed during a [dwc:Event]."@en ;
+              skos:example 1 ,
+                           15 ;
+              skos:prefLabel "Site Count" .
+
+
+###  http://rs.tdwg.org/eco/terms/siteNestingDescription
+eco:siteNestingDescription rdf:type owl:DatatypeProperty ;
+                           rdfs:domain eco:Survey ;
+                           rdfs:range rdfs:Literal ;
+                           dcterms:isVersionOf eco:siteNestingDescription ;
+                           dcterms:references <http://rs.tdwg.org/eco/terms/version/siteNestingDescription-2024-02-28> ;
+                           rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy."@en ;
+                           rdfs:isDefinedBy eco: ;
+                           skos:definition "Textual description of a hierarchical sampling design."@en ;
+                           skos:example "`5 sampling sites of 3-5 plots each`" ;
+                           skos:prefLabel "Site Nesting Description" .
+
+
+###  http://rs.tdwg.org/eco/terms/verbatimSiteDescriptions
+eco:verbatimSiteDescriptions rdf:type owl:DatatypeProperty ;
+                             rdfs:domain eco:Survey ;
+                             rdfs:range rdfs:Literal ;
+                             dcterms:isVersionOf eco:verbatimSiteDescriptions ;
+                             dcterms:references <http://rs.tdwg.org/eco/terms/version/verbatimSiteDescriptions-2024-02-28> ;
+                             rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
+                             rdfs:isDefinedBy eco: ;
+                             skos:definition "Original textual description of site(s)."@en ;
+                             skos:example "Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick *Andropogon* spp., *Sporobolus floridanus*, *Vaccinium* spp., *Rhynchospora* spp., *Centella erecta*, *Panicum rigidulum*" ;
+                             skos:prefLabel "Verbatim Site Description" .
+
+
+###  http://rs.tdwg.org/eco/terms/verbatimSiteNames
+eco:verbatimSiteNames rdf:type owl:DatatypeProperty ;
+                      rdfs:domain eco:Survey ;
+                      rdfs:range rdfs:Literal ;
+                      dcterms:isVersionOf eco:verbatimSiteNames ;
+                      dcterms:references <http://rs.tdwg.org/eco/terms/version/verbatimSiteNames-2024-02-28> ;
+                      rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
+                      rdfs:isDefinedBy eco: ;
+                      skos:definition "A list (concatenated and separated) of original site names."@en ;
+                      skos:example "East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1" ;
+                      skos:prefLabel "Verbatim Site Names" .
+
+
+###  https://w3id.org/mixs/0000001
+<https://w3id.org/mixs/0000001> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000001> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "The total amount or size (volume (ml), mass (g) or aread (m2)) of sample collected."@en ;
+                                skos:example "5 liter" ;
+                                skos:prefLabel "Amount Or Size Of Sample Collected" .
+
+
+###  https://w3id.org/mixs/0000002
+<https://w3id.org/mixs/0000002> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000002> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "The device used to collect an environmental sample. This field accepts terms listed under environmental sampling device ([http://purl.obolibrary.org/obo/ENVO]). This field also accepts terms listed under specimen collection device ([http://purl.obolibrary.org/obo/GENEPIO_0002094])."@en ;
+                                skos:prefLabel "Sample Collection Device" .
+
+
+###  https://w3id.org/mixs/0000003
+<https://w3id.org/mixs/0000003> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000003> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Publication reference in the form of pubmed ID (pmid), digital object identifier (doi) or url for isolation and growth condition specifications of the organism/material."@en ;
+                                skos:example "doi:10.1016/j.syapm.2018.01.009" ;
+                                skos:prefLabel "Isolation And Growth Condition" .
+
+
+###  https://w3id.org/mixs/0000005
+<https://w3id.org/mixs/0000005> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range [ rdf:type rdfs:Datatype ;
+                                             owl:oneOf [ rdf:type rdf:List ;
+                                                         rdf:first "contigs" ;
+                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                    rdf:first "reads" ;
+                                                                    rdf:rest rdf:nil
+                                                                  ]
+                                                       ]
+                                           ] ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000005> ;
+                                rdfs:comment "This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/ContamScreenInputEnum/]."@en ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "The type of sequence data used as input."@en ;
+                                skos:example "contigs" ;
+                                skos:prefLabel "Contamination Screening Input" .
+
+
+###  https://w3id.org/mixs/0000006
+<https://w3id.org/mixs/0000006> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000006> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Kit used to amplify genomic DNA in preparation for sequencing."@en ;
+                                skos:example "qiagen repli-g" ;
+                                skos:prefLabel "WGA Amplification Kit" .
+
+
+###  https://w3id.org/mixs/0000008
+<https://w3id.org/mixs/0000008> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/00000008> ;
+                                rdfs:comment "For a browser of [efo:] (v 2.95) terms, please see [http://purl.bioontology.org/ontology/EFO]; for a browser of [obi:] (v 2018-02-12) terms please see [http://purl.bioontology/ontology/OBI]."@en ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Experimental factors are essentially the the variable aspects of an experiment design which can be used to describe an experiment, or set of experiments, in an increasingly detailed manner. This field accepts ontology terms from Experimental Factor Ontology ([efo:]) and/or Ontology for Biomedical Investigations ([obi:])."@en ;
+                                skos:prefLabel "Experimental Factor" .
+
+
+###  https://w3id.org/mixs/0000012
+<https://w3id.org/mixs/0000012> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000012> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "In this field, report which major environmental system your sample or specimen came from. The systems identified should have a coarse spatial grain, to provide the general environmental context of where the sampling was done (e.g. were you in the desert or a rainforest?). We recommend using subclasses of ENVO’s biome class: [http://purl.obolibrary.org/obo/ENVO_00000428]. Format (one term): termLabel [termID], Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a water sample from the photic zone in middle of the Atlantic Ocean, consider: oceanic epipelagic zone biome [ENVO:01000033]. Example: Annotating a sample from the Amazon rainforest consider: tropical moist broadleaf forest biome [ENVO:01000228]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
+                                skos:example "oceanic epipelagic zone biome [ENVO:01000033]" ,
+                                             "tropical moist broadleaf forest biome [ENVO:01000228]" ;
+                                skos:prefLabel "Broad-scale Environmental Context" .
+
+
+###  https://w3id.org/mixs/0000013
+<https://w3id.org/mixs/0000013> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000013> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
+                                skos:example "canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]" ;
+                                skos:prefLabel "Local Environmental Context" .
+
+
+###  https://w3id.org/mixs/0000014
+<https://w3id.org/mixs/0000014> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000014> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
+                                skos:example "ocean water [ENVO:00002151]" ,
+                                             "pond water [ENVO:00002228]|air ENVO_00002005" ;
+                                skos:prefLabel "Environmental Medium" .
+
+
+###  https://w3id.org/mixs/0000015
+<https://w3id.org/mixs/0000015> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range [ rdf:type rdfs:Datatype ;
+                                             owl:oneOf [ rdf:type rdf:List ;
+                                                         rdf:first "aerobe" ;
+                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                    rdf:first "anaerobe" ;
+                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                               rdf:first "facultative" ;
+                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                          rdf:first "microaerophilic" ;
+                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                     rdf:first "microanaerobe" ;
+                                                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                                                rdf:first "obligate aerobe" ;
+                                                                                                                rdf:rest [ rdf:type rdf:List ;
+                                                                                                                           rdf:first "obligate anaerobe" ;
+                                                                                                                           rdf:rest rdf:nil
+                                                                                                                         ]
+                                                                                                              ]
+                                                                                                   ]
+                                                                                        ]
+                                                                             ]
+                                                                  ]
+                                                       ]
+                                           ] ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000015> ;
+                                rdfs:comment "This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/]"@en ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments."@en ;
+                                skos:example "aerobe" ;
+                                skos:prefLabel "Relation To Oxygen" .
+
+
+###  https://w3id.org/mixs/0000016
+<https://w3id.org/mixs/0000016> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000016> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "A brief description of any processing applied to the sample during or after retrieving the sample from environment, or a link to the relevant protocol(s) performed."@en ;
+                                skos:example "filtering of seawater, storing samples in ethanol" ;
+                                skos:prefLabel "Sample Material Processing" .
+
+
+###  https://w3id.org/mixs/0000017
+<https://w3id.org/mixs/0000017> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000017> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Filtering pore size used in sample preparation."@en ;
+                                skos:example "0-0.22 micrometer" ;
+                                skos:prefLabel "Size Fraction Selected" .
+
+
+###  https://w3id.org/mixs/0000020
+<https://w3id.org/mixs/0000020> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000020> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "This should provide further information about the genetic distinctness of the sequenced organism by recording additional information e.g. serovar, serotype, biotype, ecotype, or any relevant genetic typing schemes like Group I plasmid. It can also contain alternative taxonomic information. It should contain both the lineage name, and the lineage rank, i.e. `biovar:abc123`."@en ;
+                                skos:example "serovar:Newport" ;
+                                skos:prefLabel "Subspecific Genetic Lineage" .
+
+
+###  https://w3id.org/mixs/0000021
+<https://w3id.org/mixs/0000021> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000021> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "The ploidy level of the genome (e.g. `allopolyploid`, `haploid`, `diploid`, `triploid`, `tetraploid`). It has implications for the downstream study of duplicated gene and regions of the genomes (and perhaps for difficulties in assembly). For terms, please select terms listed under class ploidy ([pato:001374]) of Phenotypic Quality Ontology ([pato:]), and for a browser of PATO (v 2018-03-27) please refer to [http://purl.bioontology.org/ontology/PATO]."@en ;
+                                skos:example "allopolyploidy [PATO:0001379]" ;
+                                skos:prefLabel "Ploidy" .
+
+
+###  https://w3id.org/mixs/0000022
+<https://w3id.org/mixs/0000022> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:integer ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000022> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Reports the number of replicons in a nuclear genome of eukaryotes, in the genome of a bacterium or archaea or the number of segments in a segmented virus. Always applied to the haploid chromosome count of a eukaryote."@en ;
+                                skos:example 2 ;
+                                skos:prefLabel "Number Of Replicons" .
+
+
+###  https://w3id.org/mixs/0000023
+<https://w3id.org/mixs/0000023> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:integer ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000023> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Do plasmids exist of significant phenotypic consequence (e.g. ones that determine virulence or antibiotic resistance). Megaplasmids? Other plasmids (borrelia has 15+ plasmids)."@en ;
+                                skos:example 5 ;
+                                skos:prefLabel "Extrachromosomal Elements" .
+
+
+###  https://w3id.org/mixs/0000024
+<https://w3id.org/mixs/0000024> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range xsd:string ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000024> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "The estimated size of the genome prior to sequencing. Of particular importance in the sequencing of (eukaryotic) genome which could remain in draft form for a long or unspecified period."@en ;
+                                skos:example "300000 bp" ;
+                                skos:prefLabel "Estimated size" .
+
+
+###  https://w3id.org/mixs/0000092
+<https://w3id.org/mixs/0000092> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000092> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Name of the project within which the sequencing was organized."@en ;
+                                skos:prefLabel "Project Name" .
+
+
+###  https://w3id.org/mixs/0001107
+<https://w3id.org/mixs/0001107> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0001107> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "Sample Name is a name that you choose for the sample. It can have any format, but we suggest that you make it concise, unique and consistent within your lab, and as informative as possible. Every Sample Name from a single Submitter must be unique."@en ;
+                                skos:prefLabel "Sample Name" .
+
+
+###  https://w3id.org/mixs/0001320
+<https://w3id.org/mixs/0001320> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0001320> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "NCBI taxon ID of the sample. May be a single taxon or mixed taxa sample. Use \"synthetic metagenome\" for mock community positive controls, or \"blank sample\" for negative controls."@en ;
+                                skos:prefLabel "Taxonomy ID Of DNA Sample" .
+
+
+###  https://w3id.org/mixs/0001321
+<https://w3id.org/mixs/0001321> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0001321> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "The substance or equipment used as a negative control in an investigation."@en ;
+                                skos:prefLabel "Negative Control Type" .
+
+
+###  https://w3id.org/mixs/0001322
+<https://w3id.org/mixs/0001322> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain dwc:MolecularProtocol ;
+                                rdfs:range rdfs:Literal ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0001322> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "The substance, mixture, product, or apparatus used to verify that a process which is part of an investigation delivers a true positive."@en ;
+                                skos:prefLabel "Positive Control Type" .
+
+
 #################################################################
 #    Classes
 #################################################################
@@ -1447,76 +2065,12 @@ dwc:verbatimAssertionType rdf:type owl:DatatypeProperty ;
 <http://org.semanticweb.owlapi/error#Error1> rdf:type owl:Class .
 
 
-###  http://org.semanticweb.owlapi/error#Error10
-<http://org.semanticweb.owlapi/error#Error10> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error11
-<http://org.semanticweb.owlapi/error#Error11> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error12
-<http://org.semanticweb.owlapi/error#Error12> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error13
-<http://org.semanticweb.owlapi/error#Error13> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error14
-<http://org.semanticweb.owlapi/error#Error14> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error15
-<http://org.semanticweb.owlapi/error#Error15> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error16
-<http://org.semanticweb.owlapi/error#Error16> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error17
-<http://org.semanticweb.owlapi/error#Error17> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error18
-<http://org.semanticweb.owlapi/error#Error18> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error19
-<http://org.semanticweb.owlapi/error#Error19> rdf:type owl:Class .
-
-
 ###  http://org.semanticweb.owlapi/error#Error2
 <http://org.semanticweb.owlapi/error#Error2> rdf:type owl:Class .
 
 
 ###  http://org.semanticweb.owlapi/error#Error3
 <http://org.semanticweb.owlapi/error#Error3> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error4
-<http://org.semanticweb.owlapi/error#Error4> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error5
-<http://org.semanticweb.owlapi/error#Error5> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error6
-<http://org.semanticweb.owlapi/error#Error6> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error7
-<http://org.semanticweb.owlapi/error#Error7> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error8
-<http://org.semanticweb.owlapi/error#Error8> rdf:type owl:Class .
-
-
-###  http://org.semanticweb.owlapi/error#Error9
-<http://org.semanticweb.owlapi/error#Error9> rdf:type owl:Class .
 
 
 ###  http://purl.org/dc/terms/Agent
@@ -1560,10 +2114,13 @@ dcterms:Location rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/ac/terms/Media
 ac:Media rdf:type owl:Class ;
-         rdfs:subClassOf [ owl:intersectionOf ( <http://org.semanticweb.owlapi/error#Error16>
-                                                <http://org.semanticweb.owlapi/error#Error17>
-                                                <http://org.semanticweb.owlapi/error#Error18>
-                                                <http://org.semanticweb.owlapi/error#Error19>
+         rdfs:subClassOf [ owl:intersectionOf ( <http://org.semanticweb.owlapi/error#Error1>
+                                                <http://org.semanticweb.owlapi/error#Error2>
+                                                <http://org.semanticweb.owlapi/error#Error3>
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty xmp:CreateDate ;
+                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                ]
                                                 [ rdf:type owl:Restriction ;
                                                   owl:onProperty ac:heightFrac ;
                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
@@ -1921,27 +2478,72 @@ dwc:MolecularProtocol rdf:type owl:Class ;
                                             owl:someValuesFrom dwc:NucleotideAnalysis
                                           ] ;
                       rdfs:subClassOf dwc:Protocol ,
-                                      [ owl:intersectionOf ( <http://org.semanticweb.owlapi/error#Error1>
-                                                             <http://org.semanticweb.owlapi/error#Error10>
-                                                             <http://org.semanticweb.owlapi/error#Error11>
-                                                             <http://org.semanticweb.owlapi/error#Error12>
-                                                             <http://org.semanticweb.owlapi/error#Error13>
-                                                             <http://org.semanticweb.owlapi/error#Error14>
-                                                             <http://org.semanticweb.owlapi/error#Error15>
-                                                             <http://org.semanticweb.owlapi/error#Error2>
-                                                             <http://org.semanticweb.owlapi/error#Error3>
-                                                             <http://org.semanticweb.owlapi/error#Error4>
-                                                             <http://org.semanticweb.owlapi/error#Error5>
-                                                             <http://org.semanticweb.owlapi/error#Error6>
-                                                             <http://org.semanticweb.owlapi/error#Error7>
-                                                             <http://org.semanticweb.owlapi/error#Error8>
-                                                             <http://org.semanticweb.owlapi/error#Error9>
-                                                             [ rdf:type owl:Restriction ;
+                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
                                                                owl:onProperty dwc:molecularProtocolID ;
                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
                                                              ]
                                                              [ rdf:type owl:Restriction ;
                                                                owl:onProperty dwc:assayType ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000001> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000002> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000003> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000005> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000006> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000008> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000012> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000013> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000015> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000016> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000017> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000020> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0000092> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0001107> ;
+                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/mixs/0001320> ;
                                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                                              ]
                                                            ) ;
@@ -2245,10 +2847,10 @@ bb:Butterfly123 rdf:type owl:NamedIndividual ,
 bb:Butterfly123EatenBySpider456 rdf:type owl:NamedIndividual ,
                                          dwc:ResourceRelationship ,
                                          rdf:Statement ;
-                                dwc:relationshipAccordingTo "Joey Saucedo" ;
-                                dwc:relationshipAccordingToID bb:Joey366 ;
                                 dwc:relationshipEstablishedDate "15-06-2025" ;
-                                dwc:relationshipRemarks "The butterfly was a dead adult."@en .
+                                dwc:relationshipRemarks "The butterfly was a dead adult."@en ;
+                                dwc:relationshipAccordingTo "Joey Saucedo" ;
+                                dwc:relationshipAccordingToID bb:Joey366 .
 
 
 ###  http://bioboum.ca/Idi
@@ -2291,6 +2893,17 @@ bb:Mato4 rdf:type owl:NamedIndividual .
 ###  http://bioboum.ca/Midio
 bb:Midio rdf:type owl:NamedIndividual ;
          dwcdp:isMediaOf bb:Occurro .
+
+
+###  http://bioboum.ca/Moleco1
+bb:Moleco1 rdf:type owl:NamedIndividual ,
+                    dwc:MolecularProtocol ;
+           <https://w3id.org/mixs/0000015> "aerobe" .
+
+
+###  http://bioboum.ca/Moleco2
+bb:Moleco2 rdf:type owl:NamedIndividual ,
+                    dwc:MolecularProtocol .
 
 
 ###  http://bioboum.ca/Occurro
@@ -2344,54 +2957,6 @@ bb:Sunfish456 rdf:type owl:NamedIndividual ,
 
 [ owl:maxCardinality "1"^^xsd:nonNegativeInteger
 ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
 
 [ owl:maxCardinality "1"^^xsd:nonNegativeInteger
  ] .
