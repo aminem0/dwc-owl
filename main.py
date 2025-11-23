@@ -81,7 +81,7 @@ createOC(
         Literal("dcmi:StillImage"),
         Literal("dcmi:MovingImage"),
     ],
-    # card01_restrictions=[AC["captureDevice"], AC["digitizationDate"], AC["frameRate"], AC["heightFrac"], AC["widthFrac"], XMP["CreateDate"]],
+    maxcard1_restrictions=[AC["captureDevice"], AC["digitizationDate"], AC["frameRate"], AC["heightFrac"], AC["widthFrac"], XMP["CreateDate"]],
     #card0_restrictions=[AC["radius"]],
     version_of_s="http://rs.tdwg.org/ac/terms/Media",
 )
@@ -102,7 +102,7 @@ createOC(
         ],
 #    examples=Literal("`Carl Linnaeus`; `The Terra Nova Expedition`; `The National Science Foundation`; `The El Yunque National Forest ARBIMON System`; `ChatGPT`"),
     # card1_restrictions=[DWC["agentID"], DWC["agentType"]],
-    # card01_restrictions=[DWC["agentRemarks"], DWC["preferredAgentName"]],
+    maxcard1_restrictions=[DWC["preferredAgentName"]],
     version_of_s="http://purl.org/dc/terms/Agent",
 )
 
@@ -160,7 +160,7 @@ createOC(
         ],
     # card1_restrictions=[DWC["eventID"]],
     # card0_restrictions=[DWCDP["happenedDuring"]],
-    # card01_restrictions=[DWC["preferredEventName"]],
+    maxcard1_restrictions=[DWC["preferredEventName"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/Event",
     references_s="http://rs.tdwg.org/dwc/terms/version/Event-2023-09-18",
 )
@@ -936,7 +936,7 @@ createOP(
 #     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it."),
 #     examples=Literal("bb:bibliographicResource123 dwcdp:editedBy bb:agent456 .")
 # )
-#
+
 createOP(
     name="editor",
     namespace=BIBO,

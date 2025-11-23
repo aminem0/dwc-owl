@@ -13,6 +13,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xmp: <http://ns.adobe.com/xap/1.0/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bb:BearLowerJaw123 dwcdp:basedOn bb:PieceOfRock456 .
@@ -496,24 +497,6 @@ dwc:organismInteractionID a owl:DatatypeProperty ;
     skos:definition "An identifier for a [dwc:OrganismInteraction]."@en ;
     skos:prefLabel "Organism Interaction ID" .
 
-dwc:preferredAgentName a owl:DatatypeProperty ;
-    dcterms:isVersionOf dcterms:title ;
-    rdfs:domain dcterms:Agent ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    rdfs:subPropertyOf dcterms:title ;
-    skos:definition "A name of a [dcterms:Agent] preferred in searches and results."@en ;
-    skos:prefLabel "Preferred Agent Name" .
-
-dwc:preferredEventName a owl:DatatypeProperty ;
-    dcterms:isVersionOf dcterms:title ;
-    rdfs:domain dwc:Event ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    rdfs:subPropertyOf dcterms:title ;
-    skos:definition "The name of a [dwc:Event] preferred in searches and results."@en ;
-    skos:prefLabel "Preferred Event Name" .
-
 dwc:readCount a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/readCount> ;
     rdfs:domain dwc:NucleotideAnalysis ;
@@ -592,6 +575,18 @@ dwc:usagePolicyID a owl:DatatypeProperty ;
     rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:UsagePolicy]." ;
     skos:prefLabel "Usage Policy ID" .
+
+dwc:verbatimAssertionType a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/verbatimAssertionType> ;
+    rdfs:comment "This term is meant to allow the capture of an unaltered original name for a [dwc:assertionType]. This term is meant to be used in addition to [dwc:assertionType], not instead of it."@en ;
+    rdfs:domain dwc:Assertion ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A string representing the type of [dwc:Assertion] as it appeared in the original record."@en ;
+    skos:example "Fish biomass",
+        "sampling net mesh size",
+        "water_temp" ;
+    skos:prefLabel "Verbatim Assertion Type" .
 
 dwcdp:AssertionProtocol a owl:Class ;
     rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Assertion]." ;
@@ -839,7 +834,7 @@ ac:freqHigh a owl:DatatypeProperty ;
     rdfs:range xsd:decimal ;
     skos:definition "The highest frequency of the phenomena reflected in the multimedia item or Region of Interest." ;
     skos:example 60.0 ;
-    skos:prefLabel "Upper frequency bound" .
+    skos:prefLabel "Upper Frequency Bound" .
 
 ac:freqLow a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:freqLow ;
@@ -850,19 +845,7 @@ ac:freqLow a owl:DatatypeProperty ;
     rdfs:range xsd:decimal ;
     skos:definition "The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest." ;
     skos:example 60.0 ;
-    skos:prefLabel "Lower frequency bound" .
-
-ac:heightFrac a owl:DatatypeProperty ;
-    dcterms:isVersionOf ac:heightFrac ;
-    dcterms:references <http://rs.tdwg.org/ac/terms/version/heightFrac-2021-10-05> ;
-    rdfs:comment "The sum of a valid value plus [ac:yFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:heightFrac] and [ac:yFrac] are used with the [exif:PixelYDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy ac: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource." ;
-    skos:example 0.5,
-        1.0 ;
-    skos:prefLabel "Fractional Height" .
+    skos:prefLabel "Lower Frequency Bound" .
 
 ac:isROIOf a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:isROIOf ;
@@ -894,18 +877,6 @@ ac:subtypeLiteral a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "A subcategory that allows further specialization of a [dwc:Media] resource type than [mediaType]." ;
     skos:prefLabel "Subtype Literal" .
-
-ac:widthFrac a owl:DatatypeProperty ;
-    dcterms:isVersionOf ac:widthFrac ;
-    dcterms:references <http://rs.tdwg.org/ac/terms/version/widthFrac-2021-10-05> ;
-    rdfs:comment "The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy ac: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource." ;
-    skos:example 0.5,
-        1.0 ;
-    skos:prefLabel "Fractional Width" .
 
 ac:xFrac a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:xFrac ;
@@ -1179,6 +1150,24 @@ dwc:molecularProtocolID a owl:DatatypeProperty ;
     skos:definition "An identifier for a [dwc:MolecularProtocol]."@en ;
     skos:prefLabel "Molecular Protocol ID" .
 
+dwc:preferredAgentName a owl:DatatypeProperty ;
+    dcterms:isVersionOf dcterms:title ;
+    rdfs:domain dcterms:Agent ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:title ;
+    skos:definition "A name of a [dcterms:Agent] preferred in searches and results."@en ;
+    skos:prefLabel "Preferred Agent Name" .
+
+dwc:preferredEventName a owl:DatatypeProperty ;
+    dcterms:isVersionOf dcterms:title ;
+    rdfs:domain dwc:Event ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:title ;
+    skos:definition "The name of a [dwc:Event] preferred in searches and results."@en ;
+    skos:prefLabel "Preferred Event Name" .
+
 dwcdp:assertedBy a owl:ObjectProperty ;
     rdfs:domain dwc:Assertion ;
     rdfs:isDefinedBy dwcdp: ;
@@ -1320,6 +1309,30 @@ dwcdp:reviewedBy a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that reviewed it."@en ;
     skos:example "bb:event123 dwcdp:reviewedBy bb:agent456 ." ;
     skos:prefLabel "Reviewed By" .
+
+ac:heightFrac a owl:DatatypeProperty ;
+    dcterms:isVersionOf ac:heightFrac ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/heightFrac-2021-10-05> ;
+    rdfs:comment "The sum of a valid value plus [ac:yFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:heightFrac] and [ac:yFrac] are used with the [exif:PixelYDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource." ;
+    skos:example 0.5,
+        1.0 ;
+    skos:prefLabel "Fractional Height" .
+
+ac:widthFrac a owl:DatatypeProperty ;
+    dcterms:isVersionOf ac:widthFrac ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/widthFrac-2021-10-05> ;
+    rdfs:comment "The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource." ;
+    skos:example 0.5,
+        1.0 ;
+    skos:prefLabel "Fractional Width" .
 
 dwc:MolecularProtocol a owl:Class ;
     rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]." ;
@@ -1564,16 +1577,14 @@ dcterms:identifier a owl:DatatypeProperty ;
     skos:definition "An unambiguous reference to the resource within a given context." ;
     skos:prefLabel "Identifier" .
 
-dwc:Assertion a owl:Class ;
-    dcterms:isVersionOf dwc:MeasurementOrFact ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
-    rdfs:isDefinedBy dwc: ;
-    skos:prefLabel "Assertion" .
-
 dwc:Event a owl:Class ;
     dcterms:isVersionOf dwc:Event ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/Event-2023-09-18> ;
     rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dwc:preferredEventName ] ) ] ;
     skos:definition "An action, process, or set of circumstances occurring at a [dcterms:Location] during a period of time."@en ;
     skos:example "a biotic survey",
         "a bird observation",
@@ -1581,6 +1592,12 @@ dwc:Event a owl:Class ;
         "a material collecting event",
         "an organism occurrence" ;
     skos:prefLabel "Event" .
+
+dwc:Assertion a owl:Class ;
+    dcterms:isVersionOf dwc:MeasurementOrFact ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
+    rdfs:isDefinedBy dwc: ;
+    skos:prefLabel "Assertion" .
 
 dwc:GeologicalContext a owl:Class ;
     dcterms:isVersionOf dwc:GeologicalContext ;
@@ -1616,6 +1633,10 @@ dcterms:Agent a owl:Class ;
     dcterms:isVersionOf dcterms:Agent ;
     rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
     rdfs:isDefinedBy dcterms: ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dwc:preferredAgentName ] ) ] ;
     skos:definition "A resource that acts or has the power to act."@en ;
     skos:example "Carl Linnaeus",
         "ChatGPT",
@@ -1628,6 +1649,20 @@ ac:Media a owl:Class ;
     dcterms:isVersionOf ac:Media ;
     rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
     rdfs:isDefinedBy ac: ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty ac:captureDevice ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty ac:digitizationDate ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty ac:frameRate ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty ac:heightFrac ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty ac:widthFrac ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty xmp:CreateDate ] ) ] ;
     skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
     skos:example "dcmi:MovingImage",
         "dcmi:Sound",

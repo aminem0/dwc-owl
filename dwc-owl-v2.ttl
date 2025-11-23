@@ -7,6 +7,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xmp: <http://ns.adobe.com/xap/1.0/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix mixs: <https://w3id.org/mixs/> .
@@ -676,7 +677,7 @@ ac:freqHigh rdf:type owl:DatatypeProperty ;
             rdfs:isDefinedBy ac: ;
             skos:definition "The highest frequency of the phenomena reflected in the multimedia item or Region of Interest." ;
             skos:example 60.0 ;
-            skos:prefLabel "Upper frequency bound" .
+            skos:prefLabel "Upper Frequency Bound" .
 
 
 ###  http://rs.tdwg.org/ac/terms/freqLow
@@ -689,7 +690,7 @@ ac:freqLow rdf:type owl:DatatypeProperty ;
            rdfs:isDefinedBy ac: ;
            skos:definition "The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest." ;
            skos:example 60.0 ;
-           skos:prefLabel "Lower frequency bound" .
+           skos:prefLabel "Lower Frequency Bound" .
 
 
 ###  http://rs.tdwg.org/ac/terms/heightFrac
@@ -1424,6 +1425,20 @@ dwc:usagePolicyID rdf:type owl:DatatypeProperty ;
                   skos:prefLabel "Usage Policy ID" .
 
 
+###  http://rs.tdwg.org/dwc/terms/verbatimAssertionType
+dwc:verbatimAssertionType rdf:type owl:DatatypeProperty ;
+                          rdfs:domain dwc:Assertion ;
+                          rdfs:range rdfs:Literal ;
+                          dcterms:isVersionOf <http://example.com/term-pending/dwc/verbatimAssertionType> ;
+                          rdfs:comment "This term is meant to allow the capture of an unaltered original name for a [dwc:assertionType]. This term is meant to be used in addition to [dwc:assertionType], not instead of it."@en ;
+                          rdfs:isDefinedBy dwc: ;
+                          skos:definition "A string representing the type of [dwc:Assertion] as it appeared in the original record."@en ;
+                          skos:example "Fish biomass" ,
+                                       "sampling net mesh size" ,
+                                       "water_temp" ;
+                          skos:prefLabel "Verbatim Assertion Type" .
+
+
 #################################################################
 #    Classes
 #################################################################
@@ -1454,6 +1469,22 @@ dwc:usagePolicyID rdf:type owl:DatatypeProperty ;
 
 ###  http://org.semanticweb.owlapi/error#Error15
 <http://org.semanticweb.owlapi/error#Error15> rdf:type owl:Class .
+
+
+###  http://org.semanticweb.owlapi/error#Error16
+<http://org.semanticweb.owlapi/error#Error16> rdf:type owl:Class .
+
+
+###  http://org.semanticweb.owlapi/error#Error17
+<http://org.semanticweb.owlapi/error#Error17> rdf:type owl:Class .
+
+
+###  http://org.semanticweb.owlapi/error#Error18
+<http://org.semanticweb.owlapi/error#Error18> rdf:type owl:Class .
+
+
+###  http://org.semanticweb.owlapi/error#Error19
+<http://org.semanticweb.owlapi/error#Error19> rdf:type owl:Class .
 
 
 ###  http://org.semanticweb.owlapi/error#Error2
@@ -1490,6 +1521,13 @@ dwc:usagePolicyID rdf:type owl:DatatypeProperty ;
 
 ###  http://purl.org/dc/terms/Agent
 dcterms:Agent rdf:type owl:Class ;
+              rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                       owl:onProperty dwc:preferredAgentName ;
+                                                       owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
               dcterms:isVersionOf dcterms:Agent ;
               rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
               rdfs:isDefinedBy dcterms: ;
@@ -1522,6 +1560,21 @@ dcterms:Location rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/ac/terms/Media
 ac:Media rdf:type owl:Class ;
+         rdfs:subClassOf [ owl:intersectionOf ( <http://org.semanticweb.owlapi/error#Error16>
+                                                <http://org.semanticweb.owlapi/error#Error17>
+                                                <http://org.semanticweb.owlapi/error#Error18>
+                                                <http://org.semanticweb.owlapi/error#Error19>
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty ac:heightFrac ;
+                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                ]
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty ac:widthFrac ;
+                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                ]
+                                              ) ;
+                           rdf:type owl:Class
+                         ] ;
          dcterms:isVersionOf ac:Media ;
          rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
          rdfs:isDefinedBy ac: ;
@@ -1668,6 +1721,13 @@ dwc:EditorAgent rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/Event
 dwc:Event rdf:type owl:Class ;
+          rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                   owl:onProperty dwc:preferredEventName ;
+                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                 ]
+                                               ) ;
+                            rdf:type owl:Class
+                          ] ;
           dcterms:isVersionOf dwc:Event ;
           dcterms:references <http://rs.tdwg.org/dwc/terms/version/Event-2023-09-18> ;
           rdfs:isDefinedBy dwc: ;
@@ -2284,6 +2344,18 @@ bb:Sunfish456 rdf:type owl:NamedIndividual ,
 
 [ owl:maxCardinality "1"^^xsd:nonNegativeInteger
 ] .
+
+[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
+ ] .
+
+[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
+ ] .
 
 [ owl:maxCardinality "1"^^xsd:nonNegativeInteger
  ] .
