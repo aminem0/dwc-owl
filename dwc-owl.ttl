@@ -387,10 +387,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -901,6 +901,15 @@ ggbn:ratioOfAbsorbance260_280 a owl:DatatypeProperty ;
     skos:example 1.91 ;
     skos:prefLabel "Ratio Of Absorbance At 260 nm and 280 nm" .
 
+xmp:CreateDate a owl:DatatypeProperty ;
+    dcterms:isVersionOf xmp:CreateDate ;
+    rdfs:comment "The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples."@en ;
+    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:isDefinedBy xmp: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different."@en ;
+    skos:prefLabel "Original Date and Time" .
+
 dc:rights a owl:DatatypeProperty ;
     dcterms:isVersionOf dc:rights ;
     rdfs:domain dwc:UsagePolicy ;
@@ -1045,6 +1054,18 @@ ac:freqLow a owl:DatatypeProperty ;
     skos:example 60.0 ;
     skos:prefLabel "Lower Frequency Bound" .
 
+ac:heightFrac a owl:DatatypeProperty ;
+    dcterms:isVersionOf ac:heightFrac ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/heightFrac-2021-10-05> ;
+    rdfs:comment "The sum of a valid value plus [ac:yFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:heightFrac] and [ac:yFrac] are used with the [exif:PixelYDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource." ;
+    skos:example 0.5,
+        1.0 ;
+    skos:prefLabel "Fractional Height" .
+
 ac:isROIOf a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:isROIOf ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/isROIOf-2021-10-05> ;
@@ -1075,6 +1096,18 @@ ac:subtypeLiteral a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "A subcategory that allows further specialization of a [dwc:Media] resource type than [mediaType]." ;
     skos:prefLabel "Subtype Literal" .
+
+ac:widthFrac a owl:DatatypeProperty ;
+    dcterms:isVersionOf ac:widthFrac ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/widthFrac-2021-10-05> ;
+    rdfs:comment "The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource." ;
+    skos:example 0.5,
+        1.0 ;
+    skos:prefLabel "Fractional Width" .
 
 ac:xFrac a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:xFrac ;
@@ -1689,15 +1722,6 @@ mixs:0001322 a owl:DatatypeProperty ;
     skos:definition "The substance, mixture, product, or apparatus used to verify that a process which is part of an investigation delivers a true positive."@en ;
     skos:prefLabel "Positive Control Type" .
 
-xmp:CreateDate a owl:DatatypeProperty ;
-    dcterms:isVersionOf xmp:CreateDate ;
-    rdfs:comment "The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples."@en ;
-    rdfs:domain dwc:MolecularProtocol ;
-    rdfs:isDefinedBy xmp: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different."@en ;
-    skos:prefLabel "Original Date and Time" .
-
 dcterms:source a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:source ;
     rdfs:comment "This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or string conforming to a formal identification system."@en ;
@@ -1707,30 +1731,6 @@ dcterms:source a owl:DatatypeProperty ;
             owl:unionOf ( xsd:anyURI xsd:string ) ] ;
     skos:definition "A related resource from which the described resource is derived"@en ;
     skos:prefLabel "Source (DCTERMS)" .
-
-ac:heightFrac a owl:DatatypeProperty ;
-    dcterms:isVersionOf ac:heightFrac ;
-    dcterms:references <http://rs.tdwg.org/ac/terms/version/heightFrac-2021-10-05> ;
-    rdfs:comment "The sum of a valid value plus [ac:yFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:heightFrac] and [ac:yFrac] are used with the [exif:PixelYDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy ac: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource." ;
-    skos:example 0.5,
-        1.0 ;
-    skos:prefLabel "Fractional Height" .
-
-ac:widthFrac a owl:DatatypeProperty ;
-    dcterms:isVersionOf ac:widthFrac ;
-    dcterms:references <http://rs.tdwg.org/ac/terms/version/widthFrac-2021-10-05> ;
-    rdfs:comment "The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy ac: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource." ;
-    skos:example 0.5,
-        1.0 ;
-    skos:prefLabel "Fractional Width" .
 
 dwc:organismID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:organismID ;
@@ -2095,20 +2095,6 @@ ac:Media a owl:Class ;
     dcterms:isVersionOf ac:Media ;
     rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
     rdfs:isDefinedBy ac: ;
-    rdfs:subClassOf [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty ac:captureDevice ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty ac:digitizationDate ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty ac:frameRate ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty ac:heightFrac ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty ac:widthFrac ] [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty xmp:CreateDate ] ) ] ;
     skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
     skos:example "dcmi:MovingImage",
         "dcmi:Sound",

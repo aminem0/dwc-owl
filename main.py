@@ -81,7 +81,7 @@ createOC(
         Literal("dcmi:StillImage"),
         Literal("dcmi:MovingImage"),
     ],
-    maxcard1_restrictions=[AC["captureDevice"], AC["digitizationDate"], AC["frameRate"], AC["heightFrac"], AC["widthFrac"], XMP["CreateDate"]],
+    # maxcard1_restrictions=[AC["captureDevice"], AC["digitizationDate"], AC["frameRate"], AC["heightFrac"], AC["widthFrac"], XMP["CreateDate"]],
     #card0_restrictions=[AC["radius"]],
     version_of_s="http://rs.tdwg.org/ac/terms/Media",
 )
