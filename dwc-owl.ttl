@@ -145,7 +145,7 @@ dwciri:assertionValueIRI a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwciri: ;
     rdfs:range xsd:anyURI ;
     skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
-    skos:example "`http://purl.obolibrary.org/obo/OBA_VT0000047`" ;
+    skos:example "http://purl.obolibrary.org/obo/OBA_VT0000047" ;
     skos:prefLabel "Assertion Value (IRI)" .
 
 dwciri:surveyTargetTypeIRI a owl:DatatypeProperty ;
@@ -387,10 +387,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -573,16 +573,6 @@ dwc:nucleotideAnalysisID a owl:DatatypeProperty ;
     skos:definition "An identifier for a [dwc:NucleotideAnalysis]."@en ;
     skos:prefLabel "Nucleotide Analysis ID" .
 
-dwc:nucleotideSequenceID a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/molecularProtocolID> ;
-    rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
-    rdfs:domain dwc:NucleotideSequence ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    rdfs:subPropertyOf dcterms:identifier ;
-    skos:definition "An identifier for a [dwc:NucleotideSequence]."@en ;
-    skos:prefLabel "Nucleotide Sequence ID" .
-
 dwc:nucleotideSequenceRemarks a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/nucleotideSequenceRemarks> ;
     rdfs:domain dwc:NucleotideSequence ;
@@ -608,14 +598,6 @@ dwc:readCount a owl:DatatypeProperty ;
     rdfs:range xsd:integer ;
     skos:definition "A number of reads for a [dwc:NucleotideSequence] in a [dwc:NucleotideAnalysis]."@en ;
     skos:prefLabel "Read Count" .
-
-dwc:sequence a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/sequence> ;
-    rdfs:domain dwc:NucleotideSequence ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range xsd:string ;
-    skos:definition "A string representing nucleotide base pairs."@en ;
-    skos:prefLabel "Sequence" .
 
 dwc:surveyID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyID> ;
@@ -1254,18 +1236,6 @@ dwc:formation a owl:DatatypeProperty ;
         "Notch Peak Formation" ;
     skos:prefLabel "Formation" .
 
-dwc:geologicalContextID a owl:DatatypeProperty ;
-    dcterms:isVersionOf dwc:geologicalContextID ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/geologicalContextID-2023-06-28> ;
-    rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
-    rdfs:domain dwc:GeologicalContext ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    rdfs:subPropertyOf dcterms:identifier ;
-    skos:definition "An identifier for a [dwc:GeologicalContext]." ;
-    skos:example "https://opencontext.org/subjects/e54377f7-4452-4315-b676-40679b10c4d9" ;
-    skos:prefLabel "Geological Context ID" .
-
 dwc:group a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:group ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/group-2023-09-13> ;
@@ -1398,6 +1368,16 @@ dwc:molecularProtocolID a owl:DatatypeProperty ;
     skos:definition "An identifier for a [dwc:MolecularProtocol]."@en ;
     skos:prefLabel "Molecular Protocol ID" .
 
+dwc:nucleotideSequenceID a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/molecularProtocolID> ;
+    rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
+    rdfs:domain dwc:NucleotideSequence ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    skos:definition "An identifier for a [dwc:NucleotideSequence]."@en ;
+    skos:prefLabel "Nucleotide Sequence ID" .
+
 dwc:preferredAgentName a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:title ;
     rdfs:domain dcterms:Agent ;
@@ -1434,6 +1414,14 @@ dwc:relationshipRemarks a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "Comments or notes about a [dwc:ResourceRelationship]."@en ;
     skos:prefLabel "Relationship Remarks" .
+
+dwc:sequence a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/sequence> ;
+    rdfs:domain dwc:NucleotideSequence ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "A string representing nucleotide base pairs."@en ;
+    skos:prefLabel "Sequence" .
 
 dwcdp:assertedBy a owl:ObjectProperty ;
     rdfs:domain dwc:Assertion ;
@@ -1577,6 +1565,29 @@ dwcdp:reviewedBy a owl:ObjectProperty ;
     skos:example "bb:event123 dwcdp:reviewedBy bb:agent456 ." ;
     skos:prefLabel "Reviewed By" .
 
+eco:includeOrExclude a owl:DatatypeProperty ;
+    dcterms:isVersionOf eco:includeOrExclude ;
+    rdfs:comment "Combinations of dwc:SurveyTarget records of inclusions and exclusions can define complex scopes such as all flying adult Aves except Passeriformes. Recommended best practice is to use a controlled vocabulary consisting of `include` and `exclude` only."@en ;
+    rdfs:domain eco:SurveyTarget ;
+    rdfs:isDefinedBy eco: ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:oneOf ( "include" "exclude" ) ] ;
+    skos:definition "Whether the combination of dwc:surveyTargetType and dwc:surveyTargetValue is included or excluded in a dwc:SurveyTarget."@en ;
+    skos:example "exclude",
+        "include" ;
+    skos:prefLabel "Include Or Exclude" .
+
+eco:isSurveyTargetFullyReported a owl:DatatypeProperty ;
+    dcterms:isVersionOf eco:isSurveyTargetFullyReported ;
+    rdfs:comment "If true (the survey target is fully reported - nothing was left unreported), then this enables inference of absence of detection for everything in that dwc:SurveyTarget that is included but that does not appear in the counts (absent counts signify absence of detection)."@en ;
+    rdfs:domain eco:Survey ;
+    rdfs:isDefinedBy eco: ;
+    rdfs:range xsd:boolean ;
+    skos:definition "A declaration of whether the counts for an instance of the dwc:SurveyTarget report everything that matches the declared dwc:SurveyTarget."@en ;
+    skos:example false,
+        true ;
+    skos:prefLabel "Is Survey Target Fully Reported" .
+
 eco:siteCount a owl:DatatypeProperty ;
     dcterms:isVersionOf eco:siteCount ;
     dcterms:references <http://rs.tdwg.org/eco/terms/version/siteCount-2024-02-28> ;
@@ -1608,7 +1619,7 @@ eco:verbatimSiteDescriptions a owl:DatatypeProperty ;
     rdfs:isDefinedBy eco: ;
     rdfs:range rdfs:Literal ;
     skos:definition "Original textual description of site(s)."@en ;
-    skos:example "Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick *Andropogon* spp., *Sporobolus floridanus*, *Vaccinium* spp., *Rhynchospora* spp., *Centella erecta*, *Panicum rigidulum*" ;
+    skos:example "Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick Andropogon spp., Sporobolus floridanus, Vaccinium spp., Rhynchospora spp., Centella erecta, Panicum rigidulum" ;
     skos:prefLabel "Verbatim Site Description" .
 
 eco:verbatimSiteNames a owl:DatatypeProperty ;
@@ -1619,7 +1630,8 @@ eco:verbatimSiteNames a owl:DatatypeProperty ;
     rdfs:isDefinedBy eco: ;
     rdfs:range rdfs:Literal ;
     skos:definition "A list (concatenated and separated) of original site names."@en ;
-    skos:example "East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1" ;
+    skos:example "East Coastal Fringe | St. Marks Wildlife Management Area",
+        "S1 | S2 | C1 | C2 | R14 | R22 | W1" ;
     skos:prefLabel "Verbatim Site Names" .
 
 mixs:0000001 a owl:DatatypeProperty ;
@@ -1749,6 +1761,18 @@ dcterms:source a owl:DatatypeProperty ;
     skos:definition "A related resource from which the described resource is derived"@en ;
     skos:prefLabel "Source (DCTERMS)" .
 
+dwc:geologicalContextID a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:geologicalContextID ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/geologicalContextID-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+    rdfs:domain dwc:GeologicalContext ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    skos:definition "An identifier for a [dwc:GeologicalContext]." ;
+    skos:example "https://opencontext.org/subjects/e54377f7-4452-4315-b676-40679b10c4d9" ;
+    skos:prefLabel "Geological Context ID" .
+
 dwc:organismID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:organismID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/organismID-2023-06-28> ;
@@ -1775,7 +1799,7 @@ mixs:0000013 a owl:DatatypeProperty ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
     rdfs:range xsd:string ;
-    skos:definition "In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
+    skos:definition "In this field, report the entity or entities which are in your sample or specimen's local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
     skos:example "canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]" ;
     skos:prefLabel "Local Environmental Context" .
 
@@ -1922,6 +1946,12 @@ dc:source a owl:DatatypeProperty ;
 dwc:NucleotideSequence a owl:Class ;
     dcterms:isVersionOf dwc:NucleotideSequence ;
     rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dwc:nucleotideSequenceID ] [ a owl:Restriction ;
+                        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dwc:sequence ] ) ] ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
     skos:prefLabel "Nucleotide Sequence" .
 
@@ -1965,17 +1995,6 @@ dwc:UsagePolicy a owl:Class ;
     skos:definition "Information about rights, usage, and attribution statements applicable to an entity."@en ;
     skos:prefLabel "Usage Policy" .
 
-eco:SurveyTarget a owl:Class ;
-    dcterms:isVersionOf eco:SurveyTarget ;
-    rdfs:isDefinedBy eco: ;
-    skos:definition "An intended scope for [dwc:Occurrence]s in a [eco:Survey]."@en ;
-    skos:example "Oncorhynchus mykiss and Oncorhynchus clarkii (only)",
-        "all bird species",
-        "all bird species except Larus gulls, fulmars and kittiwakes",
-        "all total lengths except < 12 inches",
-        "reproductive female Ctenomys sociabilis (only)" ;
-    skos:prefLabel "Survey Target" .
-
 chrono:ChronometricAge a owl:Class ;
     dcterms:isVersionOf chrono:ChronometricAge ;
     dcterms:references <http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21> ;
@@ -1988,6 +2007,17 @@ chrono:ChronometricAge a owl:Class ;
         "an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum",
         "an age range of a specimen based on its biostratigraphic content" ;
     skos:prefLabel "Chronometric Age" .
+
+eco:SurveyTarget a owl:Class ;
+    dcterms:isVersionOf eco:SurveyTarget ;
+    rdfs:isDefinedBy eco: ;
+    skos:definition "An intended scope for [dwc:Occurrence]s in a [eco:Survey]."@en ;
+    skos:example "Oncorhynchus mykiss and Oncorhynchus clarkii (only)",
+        "all bird species",
+        "all bird species except Larus gulls, fulmars and kittiwakes",
+        "all total lengths except < 12 inches",
+        "reproductive female Ctenomys sociabilis (only)" ;
+    skos:prefLabel "Survey Target" .
 
 dcterms:BibliographicResource a owl:Class ;
     dcterms:isVersionOf dcterms:BibliographicResource ;
@@ -2006,22 +2036,6 @@ dwc:Organism a owl:Class ;
         "a specific wolf pack" ;
     skos:prefLabel "Organism" .
 
-eco:Survey a owl:Class ;
-    dcterms:isVersionOf eco:Survey ;
-    rdfs:comment "This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget]."@en ;
-    rdfs:isDefinedBy eco: ;
-    skos:definition "A biotic survey or inventory."@en ;
-    skos:example "a botanical survey of a protected area to assess native and invasive plant species",
-        "a camera trap deployment in a rainforest to monitor large mammals",
-        "a coverboard survey for reptiles in forested environments",
-        "a frog call survey in wetlands across breeding seasons",
-        "a habitat- or ecosystem-level survey (e.g. coral reef health assessment, forest biodiversity assessment)",
-        "a macroinvertebrate sampling in a freshwater stream to assess water quality",
-        "a pollinator survey in an agricultural landscape",
-        "a wetland vegetation mapping",
-        "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
-    skos:prefLabel "Survey" .
-
 dwc:NucleotideAnalysis a owl:Class ;
     dcterms:isVersionOf dwc:NucleotideAnalysis ;
     rdfs:isDefinedBy dwc: ;
@@ -2037,6 +2051,22 @@ dwc:Occurrence a owl:Class ;
         "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23",
         "a wolf pack on the shore of Kluane Lake in 1988" ;
     skos:prefLabel "Occurrence" .
+
+eco:Survey a owl:Class ;
+    dcterms:isVersionOf eco:Survey ;
+    rdfs:comment "This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget]."@en ;
+    rdfs:isDefinedBy eco: ;
+    skos:definition "A biotic survey or inventory."@en ;
+    skos:example "a botanical survey of a protected area to assess native and invasive plant species",
+        "a camera trap deployment in a rainforest to monitor large mammals",
+        "a coverboard survey for reptiles in forested environments",
+        "a frog call survey in wetlands across breeding seasons",
+        "a habitat- or ecosystem-level survey (e.g. coral reef health assessment, forest biodiversity assessment)",
+        "a macroinvertebrate sampling in a freshwater stream to assess water quality",
+        "a pollinator survey in an agricultural landscape",
+        "a wetland vegetation mapping",
+        "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
+    skos:prefLabel "Survey" .
 
 dcterms:identifier a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:identifier ;
@@ -2073,6 +2103,10 @@ dwc:GeologicalContext a owl:Class ;
     dcterms:isVersionOf dwc:GeologicalContext ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
     rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dwc:geologicalContextID ] ) ] ;
     skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
     skos:example "a particular lithostratigraphic layer",
         "a specific chronostratigraphic unit" ;

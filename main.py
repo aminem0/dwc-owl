@@ -33,10 +33,10 @@ MIXS = Namespace("https://w3id.org/mixs/")
 VANN = Namespace("http://purl.org/vocab/vann/")
 XMP = Namespace("http://ns.adobe.com/xap/1.0/")
 
-#
+# Create an instance of a Graph object
 g = Graph()
 
-#
+# Bind the prefixes to the previously defined namespaces
 g.bind("ac", AC)
 g.bind("adms", ADMS)
 g.bind("bb", BB)
@@ -102,8 +102,7 @@ createOC(
         Literal("The National Science Foundation"),
         Literal("The El Yunque National Forest ARBIMON System"),
         Literal("ChatGPT"),
-        ],
-#    examples=Literal("`Carl Linnaeus`; `The Terra Nova Expedition`; `The National Science Foundation`; `The El Yunque National Forest ARBIMON System`; `ChatGPT`"),
+    ],
     # card1_restrictions=[DWC["agentID"], DWC["agentType"]],
     maxcard1_restrictions=[DWC["preferredAgentName"]],
     version_of_s="http://purl.org/dc/terms/Agent",
@@ -142,7 +141,7 @@ createOC(
         Literal("a maximum age associated with a specimen derived from K-Ar dating applied to a proximal volcanic tuff found stratigraphically below the specimen"),
         Literal("an age range of a specimen based on its biostratigraphic content"),
         Literal("an age of a specimen based on what is reported in legacy collections data"),
-        ],
+    ],
     version_of_s="http://rs.tdwg.org/chrono/terms/ChronometricAge",
     references_s="http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21",
 )
@@ -160,7 +159,7 @@ createOC(
         Literal("a camera trap image capture"),
         Literal("an organism occurrence"),
         Literal("a biotic survey"),
-        ],
+    ],
     # card1_restrictions=[DWC["eventID"]],
     # card0_restrictions=[DWCDP["happenedDuring"]],
     maxcard1_restrictions=[DWC["preferredEventName"]],
@@ -177,8 +176,8 @@ createOC(
     examples_list=[
         Literal("a particular lithostratigraphic layer"),
         Literal("a specific chronostratigraphic unit")
-        ],
-    # card1_restrictions=[DWC["geologicalContextID"]],
+    ],
+    card1_restrictions=[DWC["geologicalContextID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/GeologicalContext",
     references_s="http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18",
 )
@@ -193,7 +192,7 @@ createOC(
     examples_list=[
         Literal("a subspecies determination of an organism"),
         Literal("a nomenclatural act designating a specimen as a holotype"),
-        ],
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/Identification",
     references_s="http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18",
 )
@@ -207,7 +206,7 @@ createOC(
     examples_list=[
         Literal("the municipality of San Carlos de Bariloche, Río Negro, Argentina"),
         Literal("the place defined by a georeference")
-        ],
+    ],
     version_of_s="http://purl.org/dc/terms/Location",
 )
 
@@ -229,7 +228,7 @@ createOC(
         Literal("a flower on a plant specimen"),
         Literal("a specific water sample"),
         Literal("an isolated molecule of DNA"),
-        ],
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/MaterialEntity",
     references_s="http://rs.tdwg.org/dwc/terms/version/MaterialEntity-2023-09-13",
 )
@@ -260,8 +259,7 @@ createOC(
     graph=g,
     pref_label=Literal("Nucleotide Sequence"),
     definition=Literal("A digital representation of a nucleotide sequence.", lang="en"),
-    # card1_restrictions=[DWC["nucleotideSequenceID"], DWC["sequence"]],
-    # card0_restrictions=[DWC["nucleotideSequenceRemarks"]],
+    card1_restrictions=[DWC["nucleotideSequenceID"], DWC["sequence"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/NucleotideSequence",
 )
 
@@ -275,7 +273,7 @@ createOC(
         Literal("a wolf pack on the shore of Kluane Lake in 1988"),
         Literal("a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23"),
         Literal("a fungus in Central Park in the summer of 1929"),
-        ],
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/Occurrence",
     references_s="http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18",
 )
@@ -291,7 +289,7 @@ createOC(
         Literal("a specific bird"),
         Literal("a specific wolf pack"),
         Literal("a specific instance of a bacterial culture"),
-        ],
+    ],
     # card1_restrictions=[DWC["organismID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/Organism",
     references_s="http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18",
@@ -313,7 +311,7 @@ createOC(
         Literal("a lion cub nursing from its mother"),
         Literal("a mosquito sucking blood from a chimpanzee's arm"),
         Literal("a slug eating a fungus growing on a decomposing stump (2 interactions)"),
-        ],
+    ],
     # card1_restrictions=[DWC["organismInteractionID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/OrganismInteraction",
 )
@@ -343,7 +341,7 @@ createOC(
         Literal("a point-radius georeferencing method"),
         Literal("a linear regression model to estimate body mass from skeletal measurements"),
         Literal("a Bayesian phylogenetic inference method"),
-        ],
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/Protocol",
 )
 
@@ -361,7 +359,7 @@ createOC(
         Literal("an instance of a dwc:Organism is the mother of another instance of a dwc:Organism"),
         Literal("a uniquely identified dwc:Occurrence represents the same dwc:Occurrence as another uniquely identified dwc:Occurrence"),
         Literal("a dwc:MaterialEntity is a subsample of another dwc:MaterialEntity"),
-        ],
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/ResourceRelationship",
     references_s="http://rs.tdwg.org/dwc/terms/version/ResourceRelationship-2023-09-13",
 )
@@ -395,7 +393,7 @@ createOC(
         Literal("a macroinvertebrate sampling in a freshwater stream to assess water quality"),
         Literal("a habitat- or ecosystem-level survey (e.g. coral reef health assessment, forest biodiversity assessment)"),
         Literal("an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)"),
-        ],
+    ],
     # card1_restrictions=[DWC["eventID"], DWC["surveyID"]],
     version_of_s="http://rs.tdwg.org/eco/terms/Survey",
 )
@@ -412,7 +410,7 @@ createOC(
         Literal("reproductive female Ctenomys sociabilis (only)"),
         Literal("Oncorhynchus mykiss and Oncorhynchus clarkii (only)"),
         Literal("all total lengths except < 12 inches"),
-        ],
+    ],
     # card1_restrictions=[DWC["surveyID"], DWC["surveyTargetID"]],
     version_of_s="http://rs.tdwg.org/eco/terms/SurveyTarget",
 )
@@ -1309,7 +1307,9 @@ createDP(
     pref_label=Literal("Upper Frequency Bound"),
     definition=Literal("The highest frequency of the phenomena reflected in the multimedia item or Region of Interest."),
     comments=Literal("Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible."),
-    examples_list=[Literal("60", datatype=XSD["decimal"]),],
+    examples_list=[
+        Literal("60", datatype=XSD["decimal"]),
+    ],
     version_of_s="http://rs.tdwg.org/ac/terms/freqHigh",
     references_s="http://rs.tdwg.org/ac/terms/version/freqHigh-2021-10-05",
 )
@@ -1323,7 +1323,9 @@ createDP(
     pref_label=Literal("Lower Frequency Bound"),
     definition=Literal("The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest."),
     comments=Literal("Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible."),
-    examples_list=[Literal("60", datatype=XSD["decimal"]),],
+    examples_list=[
+        Literal("60", datatype=XSD["decimal"]),
+    ],
     version_of_s="http://rs.tdwg.org/ac/terms/freqLow",
     references_s="http://rs.tdwg.org/ac/terms/version/freqLow-2021-10-05",
 )
@@ -1340,7 +1342,7 @@ createDP(
     examples_list=[
         Literal("0.5", datatype=XSD["decimal"]),
         Literal("1", datatype=XSD["decimal"])
-        ],
+    ],
     version_of_s="http://rs.tdwg.org/ac/terms/heightFrac",
     references_s="http://rs.tdwg.org/ac/terms/version/heightFrac-2021-10-05",
 )
@@ -1369,7 +1371,9 @@ createDP(
     pref_label=Literal("Radius"),
     definition=Literal("The radius of a bounding circle or arc, expressed as a fraction of the width of a [dwc:Media] resource."),
     comments=Literal("A valid value MUST be greater than or equal to zero. A valid value MAY cause the designated circle to extend beyond the bounds of a [dwc:Media] resource. In that case, the arc within a [dwc:Media] resource plus the bounds of a [dwc:Media] resource specify the region of interest. This term MUST NOT be used with [ac:widthFrac] or [ac:heightFrac] to define a region of interest. This term may be used with [ac:xFrac] and [ac:yFrac] to define a point. In that case, the implication is that the point falls on some object of interest within a [dwc:Media] resource, but nothing more can be assumed about the bounds of that object."),
-    examples_list=[Literal("100", datatype=XSD["integer"]),],
+    examples_list=[
+        Literal("100", datatype=XSD["integer"]),
+    ],
     version_of_s="http://rs.tdwg.org/ac/terms/radius",
     references_s="http://rs.tdwg.org/ac/terms/version/radius-2021-10-05",
 )
@@ -1400,7 +1404,7 @@ createDP(
     examples_list=[
         Literal("0.5", datatype=XSD["decimal"]),
         Literal("1", datatype=XSD["decimal"]),
-        ],
+    ],
     version_of_s="http://rs.tdwg.org/ac/terms/widthFrac",
     references_s="http://rs.tdwg.org/ac/terms/version/widthFrac-2021-10-05",
 )
@@ -1417,7 +1421,7 @@ createDP(
     examples_list=[
         Literal("0.5", datatype=XSD["decimal"]),
         Literal("1", datatype=XSD["decimal"]),
-        ],
+    ],
     version_of_s="http://rs.tdwg.org/ac/terms/xFrac",
     references_s="http://rs.tdwg.org/ac/terms/version/xFrac-2021-10-05",
 )
@@ -1434,7 +1438,7 @@ createDP(
     examples_list=[
         Literal("0.5", datatype=XSD["decimal"]),
         Literal("1", datatype=XSD["decimal"]),
-        ],
+    ],
     version_of_s="http://rs.tdwg.org/ac/terms/yFrac",
     references_s="http://rs.tdwg.org/ac/terms/version/yFrac-2021-10-05",
 )
@@ -1451,7 +1455,7 @@ createDP(
     examples_list=[
         Literal("Copyright 2014 Ron Thomas"),
         Literal("http://creativecommons.org/licenses/by/3.0/legalcode"),
-        ],
+    ],
     version_of_s="http://purl.org/dc/elements/1.1/rights",
 )
 
@@ -1753,7 +1757,9 @@ createDP(
     range_list=[RDFS["Literal"]],
     pref_label=Literal("Bed"),
     definition=Literal("The full name of the lithostratigraphic bed from which the [dwc:MaterialEntity] was collected.", lang="en"),
-    examples_list=[Literal("Harlem coal"),],
+    examples_list=[
+        Literal("Harlem coal"),
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/bed",
     references_s="http://rs.tdwg.org/dwc/terms/version/bed-2023-09-13",
 )
@@ -1863,7 +1869,9 @@ createDP(
     pref_label=Literal("Event ID"),
     definition=Literal("An identifier for a [dwc:Event]."),
     comments=Literal("Recommended best practice is to use a globally unique identifier."),
-    examples_list=[Literal("INBO:VIS:Ev:00009375"),],
+    examples_list=[
+        Literal("INBO:VIS:Ev:00009375"),
+    ],
     subproperty_list=[DCTERMS["identifier"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/eventID",
     references_s="http://rs.tdwg.org/dwc/terms/version/eventID-2023-06-28"
@@ -1895,7 +1903,9 @@ createDP(
     pref_label=Literal("Geological Context ID"),
     definition=Literal("An identifier for a [dwc:GeologicalContext]."),
     comments=Literal("Recommended best practice is to use a globally unique identifier."),
-    examples_list=[Literal("https://opencontext.org/subjects/e54377f7-4452-4315-b676-40679b10c4d9"),],
+    examples_list=[
+        Literal("https://opencontext.org/subjects/e54377f7-4452-4315-b676-40679b10c4d9"),
+    ],
     subproperty_list=[DCTERMS["identifier"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/geologicalContextID",
     references_s="http://rs.tdwg.org/dwc/terms/version/geologicalContextID-2023-06-28"
@@ -1925,7 +1935,9 @@ createDP(
     range_list=[RDFS["Literal"]],
     pref_label=Literal("Highest Biostratigraphic Zone"),
     definition=Literal("The full name of the highest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
-    examples_list=[Literal("Blancan"),],
+    examples_list=[
+        Literal("Blancan"),
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/highestBiostratigraphicZone",
     references_s="http://rs.tdwg.org/dwc/terms/version/highestBiostratigraphicZone-2023-09-13",
 )
@@ -2021,7 +2033,9 @@ createDP(
     range_list=[RDFS["Literal"]],
     pref_label=Literal("Lithostratigraphic Terms"),
     definition=Literal("The combination of all lithostratigraphic names for the rock from which the [dwc:MaterialEntity] was collected.", lang="en"),
-    examples_list=[Literal("Pleistocene-Weichselien"),],
+    examples_list=[
+        Literal("Pleistocene-Weichselien"),
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/lithostratigraphicTerms",
     references_s="http://rs.tdwg.org/dwc/terms/version/lithostratigraphicTerms-2025-06-12",
 )
@@ -2034,7 +2048,9 @@ createDP(
     range_list=[RDFS["Literal"]],
     pref_label=Literal("Lowest Biostratigraphic Zone"),
     definition=Literal("The full name of the lowest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected.", lang="en"),
-    examples_list=[Literal("Maastrichtian"),],
+    examples_list=[
+        Literal("Maastrichtian"),
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/lowestBiostratigraphicZone",
     references_s="http://rs.tdwg.org/dwc/terms/version/lowestBiostratigraphicZone-2023-09-13",
 )
@@ -2048,7 +2064,9 @@ createDP(
     pref_label=Literal("Material Entity ID"),
     definition=Literal("An identifier for a [dwc:MaterialEntity].", lang="en"),
     comments=Literal("Values of [dwc:materialEntityID] are intended to uniquely and persistently identify a particular [dwc:MaterialEntity] within some context. Examples of context include a particular sample collection, an organization, or the worldwide scale. Recommended best practice is to use a persistent, globally unique identifier. The identifier is bound to a physical object (a [dwc:MaterialEntity]) as opposed to a particular digital record (representation) of that physical object.", lang="en"),
-    examples_list=[Literal("06809dc5-f143-459a-be1a-6f03e63fc083"),],
+    examples_list=[
+        Literal("06809dc5-f143-459a-be1a-6f03e63fc083"),
+    ],
     subproperty_list=[DCTERMS["identifier"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/materialEntityID",
     references_s="http://rs.tdwg.org/dwc/terms/version/materialEntityID-2023-09-13"
@@ -2115,7 +2133,7 @@ createDP(
     namespace=DWC,
     graph=g,
     domain_list=[DWC["NucleotideSequence"]],
-    range_list=[RDFS["Literal"]],
+    range_list=[XSD["string"]],
     pref_label=Literal("Nucleotide Sequence ID"),
     subproperty_list=[DCTERMS["identifier"]],
     definition=Literal("An identifier for a [dwc:NucleotideSequence].", lang="en"),
@@ -2331,7 +2349,9 @@ createDP(
     range_list=[XSD["anyURI"]],
     pref_label=Literal("Assertion Value (IRI)"),
     definition=Literal("An IRI of the controlled vocabulary value for a value of a [dwc:Assertion].", lang="en"),
-    examples_list=[Literal("`http://purl.obolibrary.org/obo/OBA_VT0000047`"),],
+    examples_list=[
+        Literal("http://purl.obolibrary.org/obo/OBA_VT0000047"),
+    ],
     version_of_s="http://example.com/term-pending/dwciri/assertionValueIRI",
 )
 
@@ -2361,6 +2381,42 @@ createDP(
     comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
     subproperty_list=[DCTERMS["source"]],
     version_of_s="http://purl.org/dc/elements/terms/source",
+)
+
+# WARN: I added the comment to be clearer
+createEDP(
+    name="includeOrExclude",
+    namespace=ECO,
+    graph=g,
+    domain_list=[ECO["SurveyTarget"]],
+    oneOf_list=[Literal("include"), Literal("exclude")],
+    pref_label=Literal("Include Or Exclude"),
+    definition=Literal("Whether the combination of dwc:surveyTargetType and dwc:surveyTargetValue is included or excluded in a dwc:SurveyTarget.", lang="en"),
+    comments=Literal("Combinations of dwc:SurveyTarget records of inclusions and exclusions can define complex scopes such as all flying adult Aves except Passeriformes. Recommended best practice is to use a controlled vocabulary consisting of `include` and `exclude` only.", lang="en"),
+    examples_list=[
+        Literal("include"),
+        Literal("exclude"),
+    ],
+    version_of_s="http://rs.tdwg.org/eco/terms/includeOrExclude",
+)
+
+
+
+# NOTE: Definition uses term dwc:Event, but we want to consider dwc:Survey. Should clarify difference or allow cases where an entity can be both a dwc:Event and a eco:Survey.
+createDP(
+    name="isSurveyTargetFullyReported",
+    namespace=ECO,
+    graph=g,
+    domain_list=[ECO["Survey"]],
+    range_list=[XSD["boolean"]],
+    pref_label=Literal("Is Survey Target Fully Reported"),
+    definition=Literal("A declaration of whether the counts for an instance of the dwc:SurveyTarget report everything that matches the declared dwc:SurveyTarget.", lang="en"),
+    comments=Literal("If true (the survey target is fully reported - nothing was left unreported), then this enables inference of absence of detection for everything in that dwc:SurveyTarget that is included but that does not appear in the counts (absent counts signify absence of detection).", lang="en"),
+    examples_list=[
+        Literal("true", datatype=XSD["boolean"]),
+        Literal("false", datatype=XSD["boolean"]),
+    ],  
+    version_of_s="http://rs.tdwg.org/eco/terms/isSurveyTargetFullyReported",
 )
 
 # NOTE: Definition uses term dwc:Event, but we want to consider dwc:Survey. Should clarify difference or allow cases where an entity can be both a dwc:Event and a eco:Survey.
@@ -2407,7 +2463,7 @@ createDP(
     definition=Literal("Original textual description of site(s).", lang="en"),
     comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `).", lang="en"),
     examples_list=[
-        Literal("Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick *Andropogon* spp., *Sporobolus floridanus*, *Vaccinium* spp., *Rhynchospora* spp., *Centella erecta*, *Panicum rigidulum*"),
+        Literal("Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick Andropogon spp., Sporobolus floridanus, Vaccinium spp., Rhynchospora spp., Centella erecta, Panicum rigidulum"),
     ],
     version_of_s="http://rs.tdwg.org/eco/terms/verbatimSiteDescriptions",
     references_s="http://rs.tdwg.org/eco/terms/version/verbatimSiteDescriptions-2024-02-28",
@@ -2423,7 +2479,8 @@ createDP(
     definition=Literal("A list (concatenated and separated) of original site names.", lang="en"),
     comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `).", lang="en"),
     examples_list=[
-        Literal("East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1"),
+        Literal("East Coastal Fringe | St. Marks Wildlife Management Area"),
+        Literal("S1 | S2 | C1 | C2 | R14 | R22 | W1"),
     ],
     version_of_s="http://rs.tdwg.org/eco/terms/verbatimSiteNames",
     references_s="http://rs.tdwg.org/eco/terms/version/verbatimSiteNames-2024-02-28",
@@ -2749,7 +2806,9 @@ createEDP(
     pref_label=Literal("Contamination Screening Input"),
     definition=Literal("The type of sequence data used as input.", lang="en"),
     comments=Literal("This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/ContamScreenInputEnum/].", lang="en"),
-    examples=Literal("contigs"),
+    examples_list=[
+        Literal("contigs"),
+    ],
     version_of_s="https://w3id.org/mixs/00000005",
 )
 
@@ -2802,7 +2861,7 @@ createDP(
     domain_list=[DWC["MolecularProtocol"]],
     range_list=[XSD["string"]],
     pref_label=Literal("Local Environmental Context"),
-    definition=Literal("In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
+    definition=Literal("In this field, report the entity or entities which are in your sample or specimen's local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),
     examples_list=[
         Literal("canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]"),
     ],
@@ -2834,7 +2893,9 @@ createEDP(
     pref_label=Literal("Relation To Oxygen"),
     definition=Literal("Is this organism an aerobe, anaerobe? Please note that aerobic and anaerobic are valid descriptors for microbial environments.", lang="en"),
     comments=Literal("This property only takes a finite set of possible literal values. For more details, see: [https://genomicsstandardsconsortium.github.io/mixs/RelToOxygenEnum/]", lang="en"),
-    examples=Literal("aerobe"),
+    examples_list=[
+        Literal("aerobe"),
+    ],
     version_of_s="https://w3id.org/mixs/0000015",
 )
 

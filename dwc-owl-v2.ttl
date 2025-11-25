@@ -1050,7 +1050,7 @@ dwciri:assertionValueIRI rdf:type owl:DatatypeProperty ;
                          dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionValueIRI> ;
                          rdfs:isDefinedBy dwciri: ;
                          skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
-                         skos:example "`http://purl.obolibrary.org/obo/OBA_VT0000047`" ;
+                         skos:example "http://purl.obolibrary.org/obo/OBA_VT0000047" ;
                          skos:prefLabel "Assertion Value (IRI)" .
 
 
@@ -1557,7 +1557,7 @@ dwc:nucleotideAnalysisID rdf:type owl:DatatypeProperty ;
 dwc:nucleotideSequenceID rdf:type owl:DatatypeProperty ;
                          rdfs:subPropertyOf dcterms:identifier ;
                          rdfs:domain dwc:NucleotideSequence ;
-                         rdfs:range rdfs:Literal ;
+                         rdfs:range xsd:string ;
                          dcterms:isVersionOf <http://example.com/term-pending/dwc/molecularProtocolID> ;
                          rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
                          rdfs:isDefinedBy dwc: ;
@@ -1754,6 +1754,40 @@ dwc:verbatimAssertionType rdf:type owl:DatatypeProperty ;
                           skos:prefLabel "Verbatim Assertion Type" .
 
 
+###  http://rs.tdwg.org/eco/terms/includeOrExclude
+eco:includeOrExclude rdf:type owl:DatatypeProperty ;
+                     rdfs:domain eco:SurveyTarget ;
+                     rdfs:range [ rdf:type rdfs:Datatype ;
+                                  owl:oneOf [ rdf:type rdf:List ;
+                                              rdf:first "exclude" ;
+                                              rdf:rest [ rdf:type rdf:List ;
+                                                         rdf:first "include" ;
+                                                         rdf:rest rdf:nil
+                                                       ]
+                                            ]
+                                ] ;
+                     dcterms:isVersionOf eco:includeOrExclude ;
+                     rdfs:comment "Combinations of dwc:SurveyTarget records of inclusions and exclusions can define complex scopes such as all flying adult Aves except Passeriformes. Recommended best practice is to use a controlled vocabulary consisting of `include` and `exclude` only."@en ;
+                     rdfs:isDefinedBy eco: ;
+                     skos:definition "Whether the combination of dwc:surveyTargetType and dwc:surveyTargetValue is included or excluded in a dwc:SurveyTarget."@en ;
+                     skos:example "exclude" ,
+                                  "include" ;
+                     skos:prefLabel "Include Or Exclude" .
+
+
+###  http://rs.tdwg.org/eco/terms/isSurveyTargetFullyReported
+eco:isSurveyTargetFullyReported rdf:type owl:DatatypeProperty ;
+                                rdfs:domain eco:Survey ;
+                                rdfs:range xsd:boolean ;
+                                dcterms:isVersionOf eco:isSurveyTargetFullyReported ;
+                                rdfs:comment "If true (the survey target is fully reported - nothing was left unreported), then this enables inference of absence of detection for everything in that dwc:SurveyTarget that is included but that does not appear in the counts (absent counts signify absence of detection)."@en ;
+                                rdfs:isDefinedBy eco: ;
+                                skos:definition "A declaration of whether the counts for an instance of the dwc:SurveyTarget report everything that matches the declared dwc:SurveyTarget."@en ;
+                                skos:example "false"^^xsd:boolean ,
+                                             "true"^^xsd:boolean ;
+                                skos:prefLabel "Is Survey Target Fully Reported" .
+
+
 ###  http://rs.tdwg.org/eco/terms/siteCount
 eco:siteCount rdf:type owl:DatatypeProperty ;
               rdfs:domain eco:Survey ;
@@ -1790,7 +1824,7 @@ eco:verbatimSiteDescriptions rdf:type owl:DatatypeProperty ;
                              rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
                              rdfs:isDefinedBy eco: ;
                              skos:definition "Original textual description of site(s)."@en ;
-                             skos:example "Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick *Andropogon* spp., *Sporobolus floridanus*, *Vaccinium* spp., *Rhynchospora* spp., *Centella erecta*, *Panicum rigidulum*" ;
+                             skos:example "Wet flatwoods | Wet depression surrounded by mesic longleaf pine flatwoods | Ground cover of thick Andropogon spp., Sporobolus floridanus, Vaccinium spp., Rhynchospora spp., Centella erecta, Panicum rigidulum" ;
                              skos:prefLabel "Verbatim Site Description" .
 
 
@@ -1803,7 +1837,8 @@ eco:verbatimSiteNames rdf:type owl:DatatypeProperty ;
                       rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy. Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
                       rdfs:isDefinedBy eco: ;
                       skos:definition "A list (concatenated and separated) of original site names."@en ;
-                      skos:example "East Coastal Fringe | St. Marks Wildlife Management Area`; `S1 | S2 | C1 | C2 | R14 | R22 | W1" ;
+                      skos:example "East Coastal Fringe | St. Marks Wildlife Management Area" ,
+                                   "S1 | S2 | C1 | C2 | R14 | R22 | W1" ;
                       skos:prefLabel "Verbatim Site Names" .
 
 
@@ -1899,7 +1934,7 @@ eco:verbatimSiteNames rdf:type owl:DatatypeProperty ;
                                 rdfs:range xsd:string ;
                                 dcterms:isVersionOf <https://w3id.org/mixs/0000013> ;
                                 rdfs:isDefinedBy mixs: ;
-                                skos:definition "In this field, report the entity or entities which are in your sample or specimen’s local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
+                                skos:definition "In this field, report the entity or entities which are in your sample or specimen's local vicinity and which you believe have significant causal influences on your sample or specimen. Please use terms that are present in [envo:] and which are of smaller spatial grain than your entry for [mixs:env_broad_scale]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a pooled sample taken from various vegetation layers in a forest consider: canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
                                 skos:example "canopy [ENVO:00000047]|herb and fern layer [ENVO:01000337]|litter layer [ENVO:01000338]|understory [01000335]|shrub layer [ENVO:01000336]" ;
                                 skos:prefLabel "Local Environmental Context" .
 
@@ -2324,6 +2359,13 @@ dwc:FunderAgent rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/GeologicalContext
 dwc:GeologicalContext rdf:type owl:Class ;
+                      rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                               owl:onProperty dwc:geologicalContextID ;
+                                                               owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
                       dcterms:isVersionOf dwc:GeologicalContext ;
                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
                       rdfs:isDefinedBy dwc: ;
@@ -2564,6 +2606,17 @@ dwc:NucleotideAnalysisAssertion rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/NucleotideSequence
 dwc:NucleotideSequence rdf:type owl:Class ;
+                       rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                owl:onProperty dwc:nucleotideSequenceID ;
+                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                              ]
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty dwc:sequence ;
+                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ;
                        dcterms:isVersionOf dwc:NucleotideSequence ;
                        rdfs:isDefinedBy dwc: ;
                        skos:definition "A digital representation of a nucleotide sequence."@en ;

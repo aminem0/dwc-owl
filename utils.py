@@ -199,7 +199,8 @@ def createEDP(
         additional_list: list[Node] | None = None,
         definition: Literal | None = None,
         comments: Literal | None = None,
-       examples: Literal | None = None,
+        # examples: Literal | None = None,
+        examples_list: list[Literal] | None = None,
         references_s: str | None = None,
         ) -> None:
     # Create the owl:DatatypeProperty URI
@@ -220,8 +221,11 @@ def createEDP(
         graph.add((dp_uri, RDFS["comment"], comments))
 
     # Optionally add examples.
-    if examples:
-        graph.add((dp_uri, SKOS["example"], examples))
+    # if examples:
+    #     graph.add((dp_uri, SKOS["example"], examples))
+    if examples_list:
+        for example in examples_list:
+            graph.add((dp_uri, SKOS["example"], example))
 
     # Add version info.
     graph.add((dp_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
