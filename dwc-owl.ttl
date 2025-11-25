@@ -60,9 +60,9 @@ bb:PictureOfPeter123CatchingSunfish456FromSeineNet789 dwcdp:isMediaOf bb:Peter12
         bb:Sunfish456 .
 
 bb:dwc-owl.owl a owl:Ontology ;
-    dc:created "2025-04-03"^^xsd:date ;
     dc:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
     dc:title "Darwin Core OWL" ;
+    dcterms:created "2025-04-03"^^xsd:date ;
     vann:example <https://github.com/aminem0/dwc-owl-rdf> ;
     vann:preferredNamespacePrefix "dwcowl" ;
     owl:versionInfo "0.0.3" .
@@ -285,7 +285,7 @@ dwc:GeologicalContextMaterialEntity a owl:Class ;
     rdfs:subClassOf dwc:MaterialEntity ;
     owl:equivalentClass [ a owl:Restriction ;
             owl:onProperty dwcdp:happenedWithin ;
-            owl:someValuesFrom chrono:GeologicalContext ] ;
+            owl:someValuesFrom dwc:GeologicalContext ] ;
     skos:definition "An instance of a [dwc:MaterialEntity] that happened within a [dwc:GeologicalContext]."@en ;
     skos:prefLabel "Geological Context Material Entity" .
 
@@ -714,6 +714,15 @@ dwcdp:EventProtocol a owl:Class ;
     skos:definition "A [dwc:Protocol] followed by a [dcterms:Agent] for a [dwc:NucleotideAnalysis]." ;
     skos:prefLabel "Event Protocol" .
 
+dwcdp:allowsFor a owl:ObjectProperty ;
+    rdfs:domain dwc:Permit ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( dwc:Event dwc:NucleotideAnalysis eco:Survey ) ] ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the activities it allows for. These activities can be varied, and include [dwc:Event], [dwc:NucleotideAnalysis] and [eco:Survey]."@en ;
+    skos:example "bb:SamplingPermit123 dwcdp:allowsFor bb:SamplingEvent456 ." ;
+    skos:prefLabel "Allows For" .
+
 dwcdp:analysisOf a owl:ObjectProperty ;
     rdfs:domain dwc:NucleotideAnalysis ;
     rdfs:isDefinedBy dwcdp: ;
@@ -783,6 +792,14 @@ dwcdp:involves a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [dwc:Organism] it involves."@en ;
     skos:example "bb:occurrence123 dwcdp:involves bb:occurrence456 ." ;
     skos:prefLabel "Involves" .
+
+dwcdp:issuedBy a owl:ObjectProperty ;
+    rdfs:domain dwc:Permit ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dcterms:Agent ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the [dcterms:Agent] that issued it."@en ;
+    skos:example "bb:SamplingPermit123 dwcdp:issuedBy bb:GovernmentAgency456 ." ;
+    skos:prefLabel "Issued By" .
 
 dwcdp:materialCollectedDuring a owl:ObjectProperty ;
     rdfs:domain dwc:NucleotideAnalysis ;
@@ -1846,6 +1863,13 @@ dcterms:type a owl:DatatypeProperty ;
         "Text" ;
     skos:prefLabel "Media Type" .
 
+dwc:Permit a owl:Class ;
+    dcterms:isVersionOf dwc:Permit ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A document, allowing for the execution of certain activities."@en ;
+    skos:example "a license to put up mist-nets to sample for bird communities" ;
+    skos:prefLabel "Permit" .
+
 dwcdp:followed a owl:ObjectProperty ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( chrono:ChronometricAge dwc:Assertion dwc:Event dwc:NucleotideAnalysis dwc:MaterialEntity dwc:Occurrence eco:Survey ) ] ;
@@ -2039,6 +2063,12 @@ dwc:Event a owl:Class ;
         "an organism occurrence" ;
     skos:prefLabel "Event" .
 
+dwc:Assertion a owl:Class ;
+    dcterms:isVersionOf dwc:MeasurementOrFact ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
+    rdfs:isDefinedBy dwc: ;
+    skos:prefLabel "Assertion" .
+
 dwc:GeologicalContext a owl:Class ;
     dcterms:isVersionOf dwc:GeologicalContext ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
@@ -2047,12 +2077,6 @@ dwc:GeologicalContext a owl:Class ;
     skos:example "a particular lithostratigraphic layer",
         "a specific chronostratigraphic unit" ;
     skos:prefLabel "Geological Context" .
-
-dwc:Assertion a owl:Class ;
-    dcterms:isVersionOf dwc:MeasurementOrFact ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
-    rdfs:isDefinedBy dwc: ;
-    skos:prefLabel "Assertion" .
 
 dwc:MaterialEntity a owl:Class ;
     dcterms:isVersionOf dwc:MaterialEntity ;
@@ -2075,6 +2099,16 @@ dwc:MaterialEntity a owl:Class ;
         "the stomach contents of a fish" ;
     skos:prefLabel "Material Entity" .
 
+ac:Media a owl:Class ;
+    dcterms:isVersionOf ac:Media ;
+    rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
+    rdfs:isDefinedBy ac: ;
+    skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
+    skos:example "dcmi:MovingImage",
+        "dcmi:Sound",
+        "dcmi:StillImage" ;
+    skos:prefLabel "Media" .
+
 dcterms:Agent a owl:Class ;
     dcterms:isVersionOf dcterms:Agent ;
     rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
@@ -2090,16 +2124,6 @@ dcterms:Agent a owl:Class ;
         "The National Science Foundation",
         "The Terra Nova Expedition" ;
     skos:prefLabel "Agent" .
-
-ac:Media a owl:Class ;
-    dcterms:isVersionOf ac:Media ;
-    rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
-    rdfs:isDefinedBy ac: ;
-    skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
-    skos:example "dcmi:MovingImage",
-        "dcmi:Sound",
-        "dcmi:StillImage" ;
-    skos:prefLabel "Media" .
 
 dwc:MolecularProtocol a owl:Class ;
     rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]." ;

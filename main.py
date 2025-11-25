@@ -33,7 +33,10 @@ MIXS = Namespace("https://w3id.org/mixs/")
 VANN = Namespace("http://purl.org/vocab/vann/")
 XMP = Namespace("http://ns.adobe.com/xap/1.0/")
 
+#
 g = Graph()
+
+#
 g.bind("ac", AC)
 g.bind("adms", ADMS)
 g.bind("bb", BB)
@@ -62,7 +65,7 @@ g.add((ontology_uri, VANN["preferredNamespacePrefix"], Literal("dwcowl")))
 g.add((ontology_uri, VANN["example"], URIRef("https://github.com/aminem0/dwc-owl-rdf")))
 g.add((ontology_uri, DC["title"], Literal("Darwin Core OWL")))
 g.add((ontology_uri, DC["description"], Literal("Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation.", lang="en")))
-g.add((ontology_uri, DC["created"], Literal("2025-04-03", datatype=XSD["date"])))
+g.add((ontology_uri, DCTERMS["created"], Literal("2025-04-03", datatype=XSD["date"])))
 
 #####################################################################################################
 # BEGIN OWL CLASS DEFINITIONS
@@ -315,6 +318,20 @@ createOC(
     version_of_s="http://rs.tdwg.org/dwc/terms/OrganismInteraction",
 )
 
+# WARN: Not in original DwCDP definition, but I added it.
+# NOTE: Should it be a "legal" document. Maybe consider dcterms:LicenseDocument?
+createOC(
+    name="Permit",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Permit"),
+    definition=Literal("A document, allowing for the execution of certain activities.", lang="en"),
+    examples_list=[
+        Literal("a license to put up mist-nets to sample for bird communities"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/Permit",
+)
+
 createOC(
     name="Protocol",
     namespace=DWC,
@@ -513,7 +530,7 @@ createCTOP(
     subclass_list=[DWC["MaterialEntity"]],
     object_prop=DWCDP["happenedWithin"],
     use_inverse=False,
-    values_class=CHRONO["GeologicalContext"],
+    values_class=DWC["GeologicalContext"],
     definition=Literal("An instance of a [dwc:MaterialEntity] that happened within a [dwc:GeologicalContext].", lang="en"),
 )
 
@@ -846,6 +863,19 @@ createOP(
     examples=Literal("bb:assertion123 dwcdp:about bb:event456 .")
 )
 
+# NOTE: Consider the types of things a permit could allow for.
+# For now, dwc:Event, dwc:NucleotideAnalysis and eco:Survey make sense.
+createOP(
+    name="allowsFor",
+    namespace=DWCDP,
+    graph=g,
+    domain_list=[DWC["Permit"]],
+    range_list=[DWC["Event"], DWC["NucleotideAnalysis"], ECO["Survey"]],
+    pref_label=Literal("Allows For"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Permit] to the activities it allows for. These activities can be varied, and include [dwc:Event], [dwc:NucleotideAnalysis] and [eco:Survey].", lang="en"),
+    examples=Literal("bb:SamplingPermit123 dwcdp:allowsFor bb:SamplingEvent456 .")
+)
+
 createOP(
     name="analysisOf",
     namespace=DWCDP,
@@ -1081,6 +1111,17 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived.", lang="en"),
     comments=Literal("Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term.", lang="en"),
     examples=Literal("bb:material123 dwcdp:isPartOf bb:material456 ."),
+)
+
+createOP(
+    name="issuedBy",
+    namespace=DWCDP,
+    graph=g,
+    domain_list=[DWC["Permit"]],
+    range_list=[DCTERMS["Agent"]],
+    pref_label=Literal("Issued By"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Permit] to the [dcterms:Agent] that issued it.", lang="en"),
+    examples=Literal("bb:SamplingPermit123 dwcdp:issuedBy bb:GovernmentAgency456 .")
 )
 
 createOP(

@@ -24,9 +24,9 @@
 @base <http://bioboum.ca/dwc-owl.owl> .
 
 <http://bioboum.ca/dwc-owl.owl> rdf:type owl:Ontology ;
-                                 dc:created "2025-04-03"^^xsd:date ;
                                  dc:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
                                  dc:title "Darwin Core OWL" ;
+                                 dcterms:created "2025-04-03"^^xsd:date ;
                                  vann:example <https://github.com/aminem0/dwc-owl-rdf> ;
                                  vann:preferredNamespacePrefix "dwcowl" ;
                                  owl:versionInfo "0.0.3" .
@@ -35,16 +35,16 @@
 #    Annotation properties
 #################################################################
 
-###  http://purl.org/dc/elements/1.1/created
-dc:created rdf:type owl:AnnotationProperty .
-
-
 ###  http://purl.org/dc/elements/1.1/description
 dc:description rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/dc/elements/1.1/title
 dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/created
+dcterms:created rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/dc/terms/isVersionOf
@@ -137,6 +137,21 @@ dwcdp:about rdf:type owl:ObjectProperty ;
             skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism]."@en ;
             skos:example "bb:assertion123 dwcdp:about bb:event456 ." ;
             skos:prefLabel "About" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/allowsFor
+dwcdp:allowsFor rdf:type owl:ObjectProperty ;
+                rdfs:domain dwc:Permit ;
+                rdfs:range [ rdf:type owl:Class ;
+                             owl:unionOf ( dwc:Event
+                                           dwc:NucleotideAnalysis
+                                           eco:Survey
+                                         )
+                           ] ;
+                rdfs:isDefinedBy dwcdp: ;
+                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the activities it allows for. These activities can be varied, and include [dwc:Event], [dwc:NucleotideAnalysis] and [eco:Survey]."@en ;
+                skos:example "bb:SamplingPermit123 dwcdp:allowsFor bb:SamplingEvent456 ." ;
+                skos:prefLabel "Allows For" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/analysisOf
@@ -420,6 +435,16 @@ dwcdp:isPartOf rdf:type owl:ObjectProperty ;
                skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
                skos:example "bb:material123 dwcdp:isPartOf bb:material456 ." ;
                skos:prefLabel "Is Part Of" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/issuedBy
+dwcdp:issuedBy rdf:type owl:ObjectProperty ;
+               rdfs:domain dwc:Permit ;
+               rdfs:range dcterms:Agent ;
+               rdfs:isDefinedBy dwcdp: ;
+               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the [dcterms:Agent] that issued it."@en ;
+               skos:example "bb:SamplingPermit123 dwcdp:issuedBy bb:GovernmentAgency456 ." ;
+               skos:prefLabel "Issued By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/materialCollectedDuring
@@ -2123,10 +2148,6 @@ chrono:ChronometricAge rdf:type owl:Class ;
                        skos:prefLabel "Chronometric Age" .
 
 
-###  http://rs.tdwg.org/chrono/terms/GeologicalContext
-chrono:GeologicalContext rdf:type owl:Class .
-
-
 ###  http://rs.tdwg.org/dwc/terms/AgentMedia
 dwc:AgentMedia rdf:type owl:Class ;
                owl:equivalentClass [ rdf:type owl:Restriction ;
@@ -2316,7 +2337,7 @@ dwc:GeologicalContext rdf:type owl:Class ;
 dwc:GeologicalContextMaterialEntity rdf:type owl:Class ;
                                     owl:equivalentClass [ rdf:type owl:Restriction ;
                                                           owl:onProperty dwcdp:happenedWithin ;
-                                                          owl:someValuesFrom chrono:GeologicalContext
+                                                          owl:someValuesFrom dwc:GeologicalContext
                                                         ] ;
                                     rdfs:subClassOf dwc:MaterialEntity ;
                                     rdfs:isDefinedBy dwc: ;
@@ -2641,6 +2662,15 @@ dwc:OrganismRelationship rdf:type owl:Class ;
                          rdfs:isDefinedBy dwc: ;
                          skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
                          skos:prefLabel "Organism Relationship" .
+
+
+###  http://rs.tdwg.org/dwc/terms/Permit
+dwc:Permit rdf:type owl:Class ;
+           dcterms:isVersionOf dwc:Permit ;
+           rdfs:isDefinedBy dwc: ;
+           skos:definition "A document, allowing for the execution of certain activities."@en ;
+           skos:example "a license to put up mist-nets to sample for bird communities" ;
+           skos:prefLabel "Permit" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/Protocol
