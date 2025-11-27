@@ -99,6 +99,12 @@ xsd:date rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
+###  http://purl.org/dc/terms/source
+dcterms:source rdf:type owl:ObjectProperty ;
+               rdfs:domain owl:Thing ;
+               rdfs:range owl:Thing .
+
+
 ###  http://purl.org/dc/terms/spatial
 dcterms:spatial rdf:type owl:ObjectProperty ;
                 rdfs:domain dwc:Event ;
@@ -107,6 +113,17 @@ dcterms:spatial rdf:type owl:ObjectProperty ;
                 skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."@en ;
                 skos:example "bb:event123 dcterms:spatial bb:location456 ." ;
                 skos:prefLabel "Spatial Coverage" .
+
+
+###  http://purl.org/dc/terms/type
+dcterms:type rdf:type owl:ObjectProperty ;
+             rdfs:domain owl:Thing ;
+             rdfs:range owl:Thing ;
+             dcterms:isVersionOf dcterms:type ;
+             rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+             rdfs:isDefinedBy dcterms: ;
+             skos:definition "A category that best matches the nature of an [ac:Media] resource." ;
+             skos:prefLabel "Media Type" .
 
 
 ###  http://purl.org/ontology/bibo/editor
@@ -118,6 +135,24 @@ bibo:editor rdf:type owl:ObjectProperty ;
             skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it."@en ;
             skos:example "bb:bibliographicResource123 bibo:editor bb:agent456 ." ;
             skos:prefLabel "Edited By" .
+
+
+###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
+dwciri:assertionTypeIRI rdf:type owl:ObjectProperty ;
+                        rdfs:domain dwc:Assertion ;
+                        rdfs:range owl:Thing .
+
+
+###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeIRI
+dwciri:surveyTargetTypeIRI rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf dcterms:type ;
+                           rdfs:domain eco:SurveyTarget ;
+                           rdfs:range owl:Thing ;
+                           dcterms:isVersionOf dcterms:type ;
+                           rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
+                           rdfs:isDefinedBy dwciri: ;
+                           skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given."@en ;
+                           skos:prefLabel "Survey Target Type IRI" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/about
@@ -564,6 +599,18 @@ dwcdp:targetFor rdf:type owl:ObjectProperty ;
 dwcdp:usedFor rdf:type owl:ObjectProperty .
 
 
+###  http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI
+<http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI> rdf:type owl:ObjectProperty ;
+                                                       rdfs:subPropertyOf dcterms:source ;
+                                                       rdfs:domain eco:SurveyTarget ;
+                                                       rdfs:range owl:Thing ;
+                                                       dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
+                                                       rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
+                                                       rdfs:isDefinedBy <http://rs.tdwg.org/eco/iri/> ;
+                                                       skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
+                                                       skos:prefLabel "Survey Target Type Source IRI" .
+
+
 #################################################################
 #    Data properties
 #################################################################
@@ -653,12 +700,8 @@ dc:rights rdf:type owl:DatatypeProperty ;
 
 ###  http://purl.org/dc/elements/1.1/source
 dc:source rdf:type owl:DatatypeProperty ;
-          rdfs:domain dwc:UsagePolicy ;
-          rdfs:range [ rdf:type rdfs:Datatype ;
-                       owl:unionOf ( xsd:anyURI
-                                     xsd:string
-                                   )
-                     ] ;
+          rdfs:domain owl:Thing ;
+          rdfs:range rdfs:Literal ;
           dcterms:isVersionOf dc:source ;
           rdfs:comment "The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en ;
           rdfs:isDefinedBy dc: ;
@@ -702,18 +745,7 @@ dcterms:rights rdf:type owl:DatatypeProperty ;
 
 
 ###  http://purl.org/dc/terms/source
-dcterms:source rdf:type owl:DatatypeProperty ;
-               rdfs:domain dwc:UsagePolicy ;
-               rdfs:range [ rdf:type rdfs:Datatype ;
-                            owl:unionOf ( xsd:anyURI
-                                          xsd:string
-                                        )
-                          ] ;
-               dcterms:isVersionOf dcterms:source ;
-               rdfs:comment "This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or string conforming to a formal identification system."@en ;
-               rdfs:isDefinedBy dcterms: ;
-               skos:definition "A related resource from which the described resource is derived"@en ;
-               skos:prefLabel "Source (DCTERMS)" .
+dcterms:source rdf:type owl:DatatypeProperty .
 
 
 ###  http://purl.org/dc/terms/title
@@ -725,22 +757,6 @@ dcterms:title rdf:type owl:DatatypeProperty ;
               rdfs:isDefinedBy dcterms: ;
               skos:definition "A name given to a resource." ;
               skos:prefLabel "Title" .
-
-
-###  http://purl.org/dc/terms/type
-dcterms:type rdf:type owl:DatatypeProperty ;
-             rdfs:domain ac:Media ;
-             rdfs:range rdfs:Literal ;
-             dcterms:isVersionOf dcterms:type ;
-             rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
-             rdfs:isDefinedBy dcterms: ;
-             skos:definition "A category that best matches the nature of an [ac:Media] resource." ;
-             skos:example "InteractiveResource" ,
-                          "MovingImage" ,
-                          "Sound" ,
-                          "StillImage" ,
-                          "Text" ;
-             skos:prefLabel "Media Type" .
 
 
 ###  http://rs.gbif.org/terms/dna_sequence
@@ -1033,14 +1049,7 @@ ac:yFrac rdf:type owl:DatatypeProperty ;
 
 
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
-dwciri:assertionTypeIRI rdf:type owl:DatatypeProperty ;
-                        rdfs:domain dwc:Assertion ;
-                        rdfs:range xsd:anyURI ;
-                        dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
-                        rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
-                        rdfs:isDefinedBy dwciri: ;
-                        skos:definition "An IRI of a controlled vocabulary value for a type of [dwc:Assertion]."@en ;
-                        skos:prefLabel "Assertion Type (IRI)" .
+dwciri:assertionTypeIRI rdf:type owl:DatatypeProperty .
 
 
 ###  http://rs.tdwg.org/dwc/iri/assertionValueIRI
@@ -1052,30 +1061,6 @@ dwciri:assertionValueIRI rdf:type owl:DatatypeProperty ;
                          skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
                          skos:example "http://purl.obolibrary.org/obo/OBA_VT0000047" ;
                          skos:prefLabel "Assertion Value (IRI)" .
-
-
-###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeIRI
-dwciri:surveyTargetTypeIRI rdf:type owl:DatatypeProperty ;
-                           rdfs:subPropertyOf dcterms:type ;
-                           rdfs:domain eco:SurveyTarget ;
-                           rdfs:range xsd:anyURI ;
-                           dcterms:isVersionOf dcterms:type ;
-                           rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
-                           rdfs:isDefinedBy dwciri: ;
-                           skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given."@en ;
-                           skos:prefLabel "Survey Target Type IRI" .
-
-
-###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeSourceIRI
-dwciri:surveyTargetTypeSourceIRI rdf:type owl:DatatypeProperty ;
-                                 rdfs:subPropertyOf dcterms:source ;
-                                 rdfs:domain eco:SurveyTarget ;
-                                 rdfs:range xsd:anyURI ;
-                                 dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
-                                 rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
-                                 rdfs:isDefinedBy dwciri: ;
-                                 skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
-                                 skos:prefLabel "Survey Target Type Source IRI" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/agentID
@@ -3002,6 +2987,24 @@ bb:Spider456 rdf:type owl:NamedIndividual ,
 ###  http://bioboum.ca/Sunfish456
 bb:Sunfish456 rdf:type owl:NamedIndividual ,
                        dwc:Occurrence .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+dcterms:source dcterms:isVersionOf dcterms:source ;
+               rdfs:comment "This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or string conforming to a formal identification system."@en ;
+               rdfs:isDefinedBy dcterms: ;
+               skos:definition "A related resource from which the described resource is derived"@en ;
+               skos:prefLabel "Source (DCTERMS)" .
+
+
+dwciri:assertionTypeIRI dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
+                        rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
+                        rdfs:isDefinedBy dwciri: ;
+                        skos:definition "An IRI of a controlled vocabulary value for a type of [dwc:Assertion]."@en ;
+                        skos:prefLabel "Assertion Type (IRI)" .
 
 
 #################################################################

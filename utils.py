@@ -291,6 +291,8 @@ def createOP(
     domain_list: list[Node],
     range_list: list[Node],
     pref_label: Literal,
+    version_of_s: str | None = None,
+    subproperty_list: list[Node] | None = None,
     additional_list: list[Node] | None = None,
     definition: Literal | None = None,
     comments: Literal | None = None,
@@ -344,6 +346,10 @@ def createOP(
     # Add isDefinedBy
     graph.add((op_uri, RDFS["isDefinedBy"], URIRef(str(namespace))))
 
+    # Add version info.
+    if version_of_s:
+        graph.add((op_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
+
     # If there is only a single element in the list, take it as the range
     # otherwise consider a blank node that is the intersect
     # NOTE: Eventually, it would be best to have the function accept either
@@ -375,6 +381,11 @@ def createOP(
         graph.add((range_union_class, RDF["type"], OWL["Class"]))
         graph.add((range_union_class, OWL["unionOf"], range_bnode))
         graph.add((op_uri, RDFS["range"], range_union_class))
+
+    if subproperty_list:
+        # Technically not a unified list, so can add them all with a for loop
+        for property in subproperty_list:
+            graph.add((op_uri, RDFS["subPropertyOf"], property))
 
     # Add any additional property types.
     if additional_list:

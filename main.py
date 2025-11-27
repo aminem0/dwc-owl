@@ -2,6 +2,7 @@
 # BEGIN IMPORTS
 #####################################################################################################
 
+from pathlib import Path
 import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
@@ -1276,6 +1277,7 @@ createOP(
 )
 
 # TEST: Example to see how not considering owl:unionOf affects WebVOWL
+# BUG: Simply considering the domains separately considers the intersection
 g.add((DWCDP["hasUsagePolicy"], RDF["type"], OWL["ObjectProperty"]))
 g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], AC["Media"]))
 g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], DWC["MaterialEntity"]))
@@ -1460,12 +1462,15 @@ createDP(
 )
 
 # WARN: Verify domain
+# BUG: dc:source is source (heh) of inconsistency
 createDP(
     name="source",
     namespace=DC,
     graph=g,
-    domain_list=[DWC["UsagePolicy"]],
-    range_list=[XSD["anyURI"], XSD["string"]],
+    domain_list=[OWL["Thing"]],
+    # domain_list=[DWC["UsagePolicy"]],
+    range_list=[RDFS["Literal"]],
+    # range_list=[XSD["anyURI"], XSD["string"]],
     pref_label=Literal("Source (DC)"),
     definition=Literal("A related resource from which the described resource is derived", lang="en"),
     comments=Literal("The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.", lang="en"),
@@ -1516,12 +1521,15 @@ createDP(
 )
 
 # WARN: Verify domain
+# BUG: Object Property, so owl:Thing
 createDP(
     name="source",
     namespace=DCTERMS,
     graph=g,
-    domain_list=[DWC["UsagePolicy"]],
-    range_list=[XSD["anyURI"], XSD["string"]],
+    domain_list=[OWL["Thing"]],
+    range_list=[OWL["Thing"]],
+    # domain_list=[DWC["UsagePolicy"]],
+    # range_list=[XSD["anyURI"], XSD["string"]],
     pref_label=Literal("Source (DCTERMS)"),
     definition=Literal("A related resource from which the described resource is derived", lang="en"),
     comments=Literal("This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or string conforming to a formal identification system.", lang="en"),
@@ -1542,22 +1550,25 @@ createDP(
 )
 
 # NOTE: REVOIR COMMENTS. SHOULD READ CONTROLLED VOCABULARY
-createDP(
+# BUG: Was used for ac:Media, but should be general, also should be an OP
+createOP(
     name="type",
     namespace=DCTERMS,
     graph=g,
-    domain_list=[AC["Media"]],
-    range_list=[RDFS["Literal"]],
+    domain_list=[OWL["Thing"]],
+    # domain_list=[AC["Media"]],
+    # range_list=[RDFS["Literal"]],
+    range_list=[OWL["Thing"]],
     pref_label=Literal("Media Type"),
     definition=Literal("A category that best matches the nature of an [ac:Media] resource."),
     comments=Literal("Recommended best practice is to use a globally unique identifier."),
-    examples_list=[
-        Literal("Sound"),
-        Literal("StillImage"),
-        Literal("MovingImage"),
-        Literal("InteractiveResource"),
-        Literal("Text"),
-    ],
+    # examples_list=[
+    #     Literal("Sound"),
+    #     Literal("StillImage"),
+    #     Literal("MovingImage"),
+    #     Literal("InteractiveResource"),
+    #     Literal("Text"),
+    # ],
     version_of_s="http://purl.org/dc/terms/type",
 )
 
@@ -2328,12 +2339,14 @@ createDP(
     version_of_s="http://example.com/term-pending/dwc/verbatimAssertionType",
 )
 
+# BUG: To avoid inconsistencies, changed range list
 createDP(
     name="assertionTypeIRI",
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["Assertion"]],
-    range_list=[XSD["anyURI"]],
+    range_list=[OWL["Thing"]],
+    # range_list=[XSD["anyURI"]],
     pref_label=Literal("Assertion Type (IRI)"),
     definition=Literal("An IRI of a controlled vocabulary value for a type of [dwc:Assertion].", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
@@ -2356,12 +2369,13 @@ createDP(
 )
 
 # NOTE: Comment in JSON file says dwc:SurveyTargetType?
-createDP(
+createOP(
     name="surveyTargetTypeIRI",
     namespace=DWCIRI,
     graph=g,
     domain_list=[ECO["SurveyTarget"]],
-    range_list=[XSD["anyURI"]],
+    range_list=[OWL["Thing"]],
+    # range_list=[XSD["anyURI"]],
     pref_label=Literal("Survey Target Type IRI"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given.", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
@@ -2370,12 +2384,13 @@ createDP(
 )
 
 # NOTE: Property I created. I do not see why there is not a dwciri: analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
-createDP(
+# BUG: Change to an object property
+createOP(
     name="surveyTargetTypeSourceIRI",
-    namespace=DWCIRI,
+    namespace=ECOIRI,
     graph=g,
     domain_list=[ECO["SurveyTarget"]],
-    range_list=[XSD["anyURI"]],
+    range_list=[OWL["Thing"]],
     pref_label=Literal("Survey Target Type Source IRI"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
@@ -3252,7 +3267,50 @@ g.serialize(destination="dwc-owl.ttl", format="turtle")
 # NOTE: Use ROBOT to use the OWL API directly, better than having to go into Protege everytime.
 # Obtained with curl -L -o robot.jar https://github.com/ontodev/robot/releases/download/v1.9.8/robot.jar
 # Put in .gitgnore since it is borderline LFS.
-subprocess.run(["java", "-jar", "robot.jar", "convert", "--input", "dwc-owl.ttl", "--output", "dwc-owl-v2.ttl"])
+#
+subprocess.run(["java", "-jar", "jarfiles/robot.jar", "convert", "--input", "dwc-owl.ttl", "--output", "dwc-owl-v2.ttl"])
+
+#####################################################################################################
+# BEGIN HERMIT REASONER USAGE
+#####################################################################################################
+
+# HermiT expects a URI as input, so get that.
+#
+ontology_uri = (Path(__file__).parent /  "dwc-owl-v2.ttl").resolve().as_uri()
+# ontology_uri = (Path(__file__).parent /  "toto.ttl").resolve().as_uri()
+# Use HermiT as validation that there are no unsatisfiable things.
+#
+subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-c", ontology_uri], check=False)
+subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-O", ontology_uri], check=False)
+subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-D", ontology_uri], check=False)
+
+#
+# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:Nothing", ontology_uri], check=False)
+# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:bottomDataProperty", ontology_uri], check=False)
+# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:bottomObjectProperty", ontology_uri], check=False)
+
+# # TOO
+# print("totopart")
+# ontology_uri = (Path(__file__).parent /  "toto.ttl").resolve().as_uri()
+# print(ontology_uri)
+# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:Nothing", ontology_uri], check=False)
+# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:bottomDataProperty", ontology_uri], check=False)
+# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:bottomObjectProperty", ontology_uri], check=False)
+
+# subprocess.run(["java","-jar","jarfiles/HermiT.jar","--equivalents=http://example.org/ageInYears",ontology_uri])
+# subprocess.run(["java","-jar","jarfiles/HermiT.jar","--equivalents=http://example.org/hasAdultChild",ontology_uri])
+# subprocess.run(["java","-jar","jarfiles/HermiT.jar","--equivalents=http://example.org/ImpossiblePerson",ontology_uri])
+
+
+# # subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-oinferred.owl", ontology_uri], check=False)
+
+# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-oinferred.owl", ontology_uri], check=False)
+
+# print("doooko")
+# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-p", "owl=http://www.w3.org/2002/07/owl#", "--equivalents=owl:bottomObjectProperty", ontology_uri], check=False)
+
+# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--classifyOPs", ontology_uri], check=False)
+# "--classifyDPs"
 
 #####################################################################################################
 # BEGIN PYLODE DOCUMENTATION GENERATION
@@ -3262,5 +3320,6 @@ subprocess.run(["java", "-jar", "robot.jar", "convert", "--input", "dwc-owl.ttl"
 od = OntPub(ontology=g, sort_subjects=True)
 #od = OntPub(ontology=g, sort_subjects=False)
 
+# Write html documentation to docs directory
 #
 od.make_html(destination="docs/index.html", include_css=True)

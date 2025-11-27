@@ -135,7 +135,7 @@ dwciri:assertionTypeIRI a owl:DatatypeProperty ;
     rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
     rdfs:domain dwc:Assertion ;
     rdfs:isDefinedBy dwciri: ;
-    rdfs:range xsd:anyURI ;
+    rdfs:range owl:Thing ;
     skos:definition "An IRI of a controlled vocabulary value for a type of [dwc:Assertion]."@en ;
     skos:prefLabel "Assertion Type (IRI)" .
 
@@ -148,25 +148,15 @@ dwciri:assertionValueIRI a owl:DatatypeProperty ;
     skos:example "http://purl.obolibrary.org/obo/OBA_VT0000047" ;
     skos:prefLabel "Assertion Value (IRI)" .
 
-dwciri:surveyTargetTypeIRI a owl:DatatypeProperty ;
+dwciri:surveyTargetTypeIRI a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:type ;
     rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
     rdfs:domain eco:SurveyTarget ;
     rdfs:isDefinedBy dwciri: ;
-    rdfs:range xsd:anyURI ;
+    rdfs:range owl:Thing ;
     rdfs:subPropertyOf dcterms:type ;
     skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given."@en ;
     skos:prefLabel "Survey Target Type IRI" .
-
-dwciri:surveyTargetTypeSourceIRI a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
-    rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
-    rdfs:domain eco:SurveyTarget ;
-    rdfs:isDefinedBy dwciri: ;
-    rdfs:range xsd:anyURI ;
-    rdfs:subPropertyOf dcterms:source ;
-    skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
-    skos:prefLabel "Survey Target Type Source IRI" .
 
 dwc:AgentMedia a owl:Class ;
     rdfs:isDefinedBy dwc: ;
@@ -833,6 +823,16 @@ dwcdp:targetFor a owl:ObjectProperty ;
     skos:prefLabel "Target For" .
 
 dwcdp:usedFor owl:inverseOf dwcdp:followed .
+
+<http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI> a owl:ObjectProperty ;
+    dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
+    rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
+    rdfs:domain eco:SurveyTarget ;
+    rdfs:isDefinedBy <http://rs.tdwg.org/eco/iri/> ;
+    rdfs:range owl:Thing ;
+    rdfs:subPropertyOf dcterms:source ;
+    skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
+    skos:prefLabel "Survey Target Type Source IRI" .
 
 bb:Butterfly123 a dwc:Organism .
 
@@ -1754,10 +1754,9 @@ mixs:0001322 a owl:DatatypeProperty ;
 dcterms:source a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:source ;
     rdfs:comment "This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or string conforming to a formal identification system."@en ;
-    rdfs:domain dwc:UsagePolicy ;
+    rdfs:domain owl:Thing ;
     rdfs:isDefinedBy dcterms: ;
-    rdfs:range [ a rdfs:Datatype ;
-            owl:unionOf ( xsd:anyURI xsd:string ) ] ;
+    rdfs:range owl:Thing ;
     skos:definition "A related resource from which the described resource is derived"@en ;
     skos:prefLabel "Source (DCTERMS)" .
 
@@ -1873,18 +1872,13 @@ dcterms:Location a owl:Class ;
         "the place defined by a georeference" ;
     skos:prefLabel "Location" .
 
-dcterms:type a owl:DatatypeProperty ;
+dcterms:type a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:type ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
-    rdfs:domain ac:Media ;
+    rdfs:domain owl:Thing ;
     rdfs:isDefinedBy dcterms: ;
-    rdfs:range rdfs:Literal ;
+    rdfs:range owl:Thing ;
     skos:definition "A category that best matches the nature of an [ac:Media] resource." ;
-    skos:example "InteractiveResource",
-        "MovingImage",
-        "Sound",
-        "StillImage",
-        "Text" ;
     skos:prefLabel "Media Type" .
 
 dwc:Permit a owl:Class ;
@@ -1933,13 +1927,19 @@ dwc:ResourceRelationship a owl:Class ;
         "an instance of a dwc:Organism is the mother of another instance of a dwc:Organism" ;
     skos:prefLabel "Resource Relationship" .
 
+dwc:UsagePolicy a owl:Class ;
+    dcterms:isVersionOf dwc:UsagePolicy ;
+    rdfs:comment "This is a convenience class to group related properties."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "Information about rights, usage, and attribution statements applicable to an entity."@en ;
+    skos:prefLabel "Usage Policy" .
+
 dc:source a owl:DatatypeProperty ;
     dcterms:isVersionOf dc:source ;
     rdfs:comment "The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en ;
-    rdfs:domain dwc:UsagePolicy ;
+    rdfs:domain owl:Thing ;
     rdfs:isDefinedBy dc: ;
-    rdfs:range [ a rdfs:Datatype ;
-            owl:unionOf ( xsd:anyURI xsd:string ) ] ;
+    rdfs:range rdfs:Literal ;
     skos:definition "A related resource from which the described resource is derived"@en ;
     skos:prefLabel "Source (DC)" .
 
@@ -1987,13 +1987,6 @@ dwc:OrganismInteraction a owl:Class ;
         "a slug eating a fungus growing on a decomposing stump (2 interactions)",
         "a viral infection in a plant" ;
     skos:prefLabel "Organism Interaction" .
-
-dwc:UsagePolicy a owl:Class ;
-    dcterms:isVersionOf dwc:UsagePolicy ;
-    rdfs:comment "This is a convenience class to group related properties."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "Information about rights, usage, and attribution statements applicable to an entity."@en ;
-    skos:prefLabel "Usage Policy" .
 
 chrono:ChronometricAge a owl:Class ;
     dcterms:isVersionOf chrono:ChronometricAge ;
