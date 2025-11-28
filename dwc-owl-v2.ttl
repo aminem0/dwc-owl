@@ -159,7 +159,6 @@ dwciri:behavior rdf:type owl:ObjectProperty ;
                                             dwc:OrganismAssertion
                                           )
                             ] ;
-                rdfs:range owl:Thing ;
                 dcterms:isVersionOf dwciri:behavior ;
                 dcterms:references <http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10> ;
                 rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -175,7 +174,6 @@ dwciri:caste rdf:type owl:ObjectProperty ;
                                          dwc:OrganismAssertion
                                        )
                          ] ;
-             rdfs:range owl:Thing ;
              dcterms:isVersionOf dwciri:caste ;
              dcterms:references <http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10> ;
              rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -276,7 +274,6 @@ dwciri:fieldNotes rdf:type owl:ObjectProperty ;
 dwciri:surveyTargetTypeIRI rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf dcterms:type ;
                            rdfs:domain eco:SurveyTarget ;
-                           rdfs:range owl:Thing ;
                            dcterms:isVersionOf dcterms:type ;
                            rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
                            rdfs:isDefinedBy dwciri: ;

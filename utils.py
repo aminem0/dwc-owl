@@ -289,8 +289,8 @@ def createOP(
     name: str,
     namespace: Namespace,
     graph: Graph,
-    domain_list: list[Node],
-    range_list: list[Node],
+    domain_list: list[Node] | None,
+    range_list: list[Node] | None,
     pref_label: Literal,
     version_of_s: str | None = None,
     references_s: str | None = None,
@@ -370,15 +370,26 @@ def createOP(
     # otherwise consider a blank node that is the intersect
     # NOTE: Eventually, it would be best to have the function accept either
     # an Node or a list of Nodes.
-    if len(domain_list) == 1:
-        graph.add((op_uri, RDFS["domain"], domain_list[0]))
-    else:
-        domain_bnode = BNode()
-        Collection(graph, domain_bnode, domain_list)
-        domain_union_class = BNode()
-        graph.add((domain_union_class, RDF["type"], OWL["Class"]))
-        graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
-        graph.add((op_uri, RDFS["domain"], domain_union_class))
+    # if len(domain_list) == 1:
+    #     graph.add((op_uri, RDFS["domain"], domain_list[0]))
+    # else:
+    #     domain_bnode = BNode()
+    #     Collection(graph, domain_bnode, domain_list)
+    #     domain_union_class = BNode()
+    #     graph.add((domain_union_class, RDF["type"], OWL["Class"]))
+    #     graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
+    #     graph.add((op_uri, RDFS["domain"], domain_union_class))
+
+    if domain_list:
+        if len(domain_list) == 1:
+            graph.add((op_uri, RDFS["domain"], domain_list[0]))
+        else:
+            domain_bnode = BNode()
+            Collection(graph, domain_bnode, domain_list)
+            domain_union_class = BNode()
+            graph.add((domain_union_class, RDF["type"], OWL["Class"]))
+            graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
+            graph.add((op_uri, RDFS["domain"], domain_union_class))
 
     # TEST: Add all domains with a for loop.
     # for domain in domain_list:
@@ -388,15 +399,25 @@ def createOP(
     # otherwise consider a blank node that is the intersect
     # NOTE: Eventually, it would be best to have the function accept either
     # an Node or a list of Nodes.
-    if len(range_list) == 1:
-        graph.add((op_uri, RDFS["range"], range_list[0]))
-    else:
-        range_bnode = BNode()
-        Collection(graph, range_bnode, range_list)
-        range_union_class = BNode()
-        graph.add((range_union_class, RDF["type"], OWL["Class"]))
-        graph.add((range_union_class, OWL["unionOf"], range_bnode))
-        graph.add((op_uri, RDFS["range"], range_union_class))
+    # if len(range_list) == 1:
+    #     graph.add((op_uri, RDFS["range"], range_list[0]))
+    # else:
+    #     range_bnode = BNode()
+    #     Collection(graph, range_bnode, range_list)
+    #     range_union_class = BNode()
+    #     graph.add((range_union_class, RDF["type"], OWL["Class"]))
+    #     graph.add((range_union_class, OWL["unionOf"], range_bnode))
+    #     graph.add((op_uri, RDFS["range"], range_union_class))
+    if range_list:
+        if len(range_list) == 1:
+            graph.add((op_uri, RDFS["range"], range_list[0]))
+        else:
+            range_bnode = BNode()
+            Collection(graph, range_bnode, range_list)
+            range_union_class = BNode()
+            graph.add((range_union_class, RDF["type"], OWL["Class"]))
+            graph.add((range_union_class, OWL["unionOf"], range_bnode))
+            graph.add((op_uri, RDFS["range"], range_union_class))
 
     if subproperty_list:
         # Technically not a unified list, so can add them all with a for loop

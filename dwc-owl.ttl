@@ -152,7 +152,6 @@ dwciri:surveyTargetTypeIRI a owl:ObjectProperty ;
     rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
     rdfs:domain eco:SurveyTarget ;
     rdfs:isDefinedBy dwciri: ;
-    rdfs:range owl:Thing ;
     rdfs:subPropertyOf dcterms:type ;
     skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given."@en ;
     skos:prefLabel "Survey Target Type IRI" .
@@ -1335,7 +1334,6 @@ dwciri:behavior a owl:ObjectProperty ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
     rdfs:isDefinedBy dwciri: ;
-    rdfs:range owl:Thing ;
     skos:definition "A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded."@en ;
     skos:prefLabel "Behavior (IRI)" .
 
@@ -1346,7 +1344,6 @@ dwciri:caste a owl:ObjectProperty ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
     rdfs:isDefinedBy dwciri: ;
-    rdfs:range owl:Thing ;
     skos:definition "Categorisation of individuals for eusocial species (including some mammals and arthropods)."@en ;
     skos:prefLabel "Caste (IRI)" .
 
