@@ -29,6 +29,7 @@ ECOIRI = Namespace("http://rs.tdwg.org/eco/iri/")
 EXIF = Namespace("http://ns.adobe.com/exif/1.0/")
 GBIF = Namespace("http://rs.gbif.org/terms/")
 GGBN = Namespace("http://data.ggbn.org/schemas/ggbn/terms/")
+MINEXT = Namespace("http://rs.tdwg.org/mineralogy/terms/")
 MIQE = Namespace("http://rs.gbif.org/terms/miqe/")
 MIXS = Namespace("https://w3id.org/mixs/")
 VANN = Namespace("http://purl.org/vocab/vann/")
@@ -52,6 +53,7 @@ g.bind("eco", ECO)
 g.bind("exif", EXIF)
 g.bind("gbif", GBIF)
 g.bind("ggbn", GGBN)
+g.bind("minext", MINEXT)
 g.bind("miqe", MIQE)
 g.bind("mixs", MIXS)
 g.bind("vann", VANN)
@@ -2838,6 +2840,40 @@ createDP(
         Literal("1.91", datatype=XSD["decimal"]),
     ],
     version_of_s="http://data.ggbn.org/schemas/ggbn/terms/ratioOfAbsorbance260_280",
+)
+
+createDP(
+    name="geoClassificationCode",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntity"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Geo Classification Code"),
+    definition=Literal("Alphanumeric pattern that adheres to a defined encoding scheme that identifies a particular term in a classification scheme.", lang="en"),
+    comments=Literal("Classification codes are specific to a classification system and conform to a xkos:notationPattern.", lang="en"),
+    examples_list=[
+        Literal("71.02.02a.01"),
+        Literal("9.AD.25"),
+    ],
+    version_of_s="http://rs.tdwg.org/mineralogy/terms/classificationCode",
+)
+
+# NOTE: Confirm term name
+createDP(
+    name="geoName",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntity"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Geo Name"),
+    definition=Literal("A human-readable lexical label assigned to a mineral includes both informal (e.g., variety, synonym) and formal (classification) forms.", lang="en"),
+    examples_list=[
+        Literal("Garnet Group"),
+        Literal("Almandine"),
+        Literal("Plagioclase (Series)"),
+        Literal("Fluorite"),
+    ],
+    version_of_s="http://rs.tdwg.org/mineralogy/terms/name",
 )
 
 createDP(

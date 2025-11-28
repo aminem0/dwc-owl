@@ -10,6 +10,7 @@
 @prefix eco: <http://rs.tdwg.org/eco/terms/> .
 @prefix gbif: <http://rs.gbif.org/terms/> .
 @prefix ggbn: <http://data.ggbn.org/schemas/ggbn/terms/> .
+@prefix minext: <http://rs.tdwg.org/mineralogy/terms/> .
 @prefix miqe: <http://rs.gbif.org/terms/miqe/> .
 @prefix mixs: <https://w3id.org/mixs/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -839,6 +840,29 @@ dwcdp:usedFor owl:inverseOf dwcdp:followed .
     rdfs:subPropertyOf dcterms:source ;
     skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
     skos:prefLabel "Survey Target Type Source IRI" .
+
+minext:geoClassificationCode a owl:DatatypeProperty ;
+    dcterms:isVersionOf minext:classificationCode ;
+    rdfs:comment "Classification codes are specific to a classification system and conform to a xkos:notationPattern."@en ;
+    rdfs:domain dwc:MaterialEntity ;
+    rdfs:isDefinedBy minext: ;
+    rdfs:range xsd:string ;
+    skos:definition "Alphanumeric pattern that adheres to a defined encoding scheme that identifies a particular term in a classification scheme."@en ;
+    skos:example "71.02.02a.01",
+        "9.AD.25" ;
+    skos:prefLabel "Geo Classification Code" .
+
+minext:geoName a owl:DatatypeProperty ;
+    dcterms:isVersionOf minext:name ;
+    rdfs:domain dwc:MaterialEntity ;
+    rdfs:isDefinedBy minext: ;
+    rdfs:range xsd:string ;
+    skos:definition "A human-readable lexical label assigned to a mineral includes both informal (e.g., variety, synonym) and formal (classification) forms."@en ;
+    skos:example "Almandine",
+        "Fluorite",
+        "Garnet Group",
+        "Plagioclase (Series)" ;
+    skos:prefLabel "Geo Name" .
 
 bb:Butterfly123 a dwc:Organism .
 

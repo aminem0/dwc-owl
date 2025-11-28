@@ -20,6 +20,7 @@
 @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
 @prefix chrono: <http://rs.tdwg.org/chrono/terms/> .
 @prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
+@prefix minext: <http://rs.tdwg.org/mineralogy/terms/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @base <http://bioboum.ca/dwc-owl.owl> .
 
@@ -1937,6 +1938,33 @@ eco:verbatimSiteNames rdf:type owl:DatatypeProperty ;
                       skos:example "East Coastal Fringe | St. Marks Wildlife Management Area" ,
                                    "S1 | S2 | C1 | C2 | R14 | R22 | W1" ;
                       skos:prefLabel "Verbatim Site Names" .
+
+
+###  http://rs.tdwg.org/mineralogy/terms/geoClassificationCode
+minext:geoClassificationCode rdf:type owl:DatatypeProperty ;
+                             rdfs:domain dwc:MaterialEntity ;
+                             rdfs:range xsd:string ;
+                             dcterms:isVersionOf minext:classificationCode ;
+                             rdfs:comment "Classification codes are specific to a classification system and conform to a xkos:notationPattern."@en ;
+                             rdfs:isDefinedBy minext: ;
+                             skos:definition "Alphanumeric pattern that adheres to a defined encoding scheme that identifies a particular term in a classification scheme."@en ;
+                             skos:example "71.02.02a.01" ,
+                                          "9.AD.25" ;
+                             skos:prefLabel "Geo Classification Code" .
+
+
+###  http://rs.tdwg.org/mineralogy/terms/geoName
+minext:geoName rdf:type owl:DatatypeProperty ;
+               rdfs:domain dwc:MaterialEntity ;
+               rdfs:range xsd:string ;
+               dcterms:isVersionOf minext:name ;
+               rdfs:isDefinedBy minext: ;
+               skos:definition "A human-readable lexical label assigned to a mineral includes both informal (e.g., variety, synonym) and formal (classification) forms."@en ;
+               skos:example "Almandine" ,
+                            "Fluorite" ,
+                            "Garnet Group" ,
+                            "Plagioclase (Series)" ;
+               skos:prefLabel "Geo Name" .
 
 
 ###  https://w3id.org/mixs/0000001
