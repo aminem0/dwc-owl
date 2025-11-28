@@ -297,7 +297,8 @@ def createOP(
     additional_list: list[Node] | None = None,
     definition: Literal | None = None,
     comments: Literal | None = None,
-    examples: Literal | None = None
+    # examples_list: list[Literal] | None = None,
+    examples: URIRef | list[URIRef] | None = None,
 ) -> None:
     """
     Create an OWL ObjectProperty with proper domain, range, and annotations.
@@ -341,8 +342,18 @@ def createOP(
         graph.add((op_uri, SKOS["definition"], definition))
     if comments:
         graph.add((op_uri, RDFS["comment"], comments))
+    # if examples:
+    #     graph.add((op_uri, SKOS["example"], examples))
+    # if examples_list:
+    #     for example in examples_list:
+    #         graph.add((op_uri, SKOS["example"], example))
+
     if examples:
-        graph.add((op_uri, SKOS["example"], examples))
+        if isinstance(examples, URIRef):
+            graph.add((op_uri, SKOS["example"], examples))
+        elif isinstance(examples, list):
+            for example in examples:
+                graph.add((op_uri, SKOS["example"], example))
 
     # Add isDefinedBy
     graph.add((op_uri, RDFS["isDefinedBy"], URIRef(str(namespace))))
