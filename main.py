@@ -1283,6 +1283,85 @@ g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], AC["Media"]))
 g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], DWC["MaterialEntity"]))
 g.add((DWCDP["hasUsagePolicy"], RDFS["range"], DWC["UsagePolicy"]))
 
+
+
+
+
+# BUG: To avoid inconsistencies, changed range list
+createOP(
+    name="assertionTypeIRI",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["Assertion"]],
+    range_list=[OWL["Thing"]],
+    # range_list=[XSD["anyURI"]],
+    pref_label=Literal("Assertion Type (IRI)"),
+    definition=Literal("An IRI of a controlled vocabulary value for a type of [dwc:Assertion].", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
+    version_of_s="http://example.com/term-pending/dwciri/assertionTypeIRI",
+)
+
+# NOTE: I added the example IRI
+createOP(
+    name="assertionValueIRI",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["Assertion"]],
+    range_list=[XSD["anyURI"]],
+    pref_label=Literal("Assertion Value (IRI)"),
+    definition=Literal("An IRI of the controlled vocabulary value for a value of a [dwc:Assertion].", lang="en"),
+    # examples_list=[
+    #     Literal("http://purl.obolibrary.org/obo/OBA_VT0000047"),
+    # ],
+    version_of_s="http://example.com/term-pending/dwciri/assertionValueIRI",
+)
+
+# NOTE: Comment in JSON file says dwc:SurveyTargetType?
+createOP(
+    name="surveyTargetTypeIRI",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[ECO["SurveyTarget"]],
+    range_list=[OWL["Thing"]],
+    # range_list=[XSD["anyURI"]],
+    pref_label=Literal("Survey Target Type IRI"),
+    definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
+    subproperty_list=[DCTERMS["type"]],
+    version_of_s="http://purl.org/dc/terms/type",
+)
+
+createOP(
+    name="behavior",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["Occurrence"]],
+    range_list=[OWL["Thing"]],
+    # range_list=[XSD["anyURI"]],
+    pref_label=Literal("Behavior (IRI)"),
+    definition=Literal("A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="	http://rs.tdwg.org/dwc/iri/behavior",
+    references_s="http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10",
+)
+
+# NOTE: Property I created. I do not see why there is not a dwciri: analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
+# BUG: Change to an object property
+createOP(
+    name="surveyTargetTypeSourceIRI",
+    namespace=ECOIRI,
+    graph=g,
+    domain_list=[ECO["SurveyTarget"]],
+    range_list=[OWL["Thing"]],
+    pref_label=Literal("Survey Target Type Source IRI"),
+    definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
+    subproperty_list=[DCTERMS["source"]],
+    version_of_s="http://purl.org/dc/elements/terms/source",
+)
+
+
+
 #####################################################################################################
 # BEGIN DATATYPE PROPERTY DEFINITIONS
 #####################################################################################################
@@ -2339,65 +2418,6 @@ createDP(
     version_of_s="http://example.com/term-pending/dwc/verbatimAssertionType",
 )
 
-# BUG: To avoid inconsistencies, changed range list
-createDP(
-    name="assertionTypeIRI",
-    namespace=DWCIRI,
-    graph=g,
-    domain_list=[DWC["Assertion"]],
-    range_list=[OWL["Thing"]],
-    # range_list=[XSD["anyURI"]],
-    pref_label=Literal("Assertion Type (IRI)"),
-    definition=Literal("An IRI of a controlled vocabulary value for a type of [dwc:Assertion].", lang="en"),
-    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
-    version_of_s="http://example.com/term-pending/dwciri/assertionTypeIRI",
-)
-
-# NOTE: I added the example IRI
-createDP(
-    name="assertionValueIRI",
-    namespace=DWCIRI,
-    graph=g,
-    domain_list=[DWC["Assertion"]],
-    range_list=[XSD["anyURI"]],
-    pref_label=Literal("Assertion Value (IRI)"),
-    definition=Literal("An IRI of the controlled vocabulary value for a value of a [dwc:Assertion].", lang="en"),
-    examples_list=[
-        Literal("http://purl.obolibrary.org/obo/OBA_VT0000047"),
-    ],
-    version_of_s="http://example.com/term-pending/dwciri/assertionValueIRI",
-)
-
-# NOTE: Comment in JSON file says dwc:SurveyTargetType?
-createOP(
-    name="surveyTargetTypeIRI",
-    namespace=DWCIRI,
-    graph=g,
-    domain_list=[ECO["SurveyTarget"]],
-    range_list=[OWL["Thing"]],
-    # range_list=[XSD["anyURI"]],
-    pref_label=Literal("Survey Target Type IRI"),
-    definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given.", lang="en"),
-    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
-    subproperty_list=[DCTERMS["type"]],
-    version_of_s="http://purl.org/dc/terms/type",
-)
-
-# NOTE: Property I created. I do not see why there is not a dwciri: analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
-# BUG: Change to an object property
-createOP(
-    name="surveyTargetTypeSourceIRI",
-    namespace=ECOIRI,
-    graph=g,
-    domain_list=[ECO["SurveyTarget"]],
-    range_list=[OWL["Thing"]],
-    pref_label=Literal("Survey Target Type Source IRI"),
-    definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
-    comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
-    subproperty_list=[DCTERMS["source"]],
-    version_of_s="http://purl.org/dc/elements/terms/source",
-)
-
 # WARN: I added the comment to be clearer
 createEDP(
     name="includeOrExclude",
@@ -3269,48 +3289,6 @@ g.serialize(destination="dwc-owl.ttl", format="turtle")
 # Put in .gitgnore since it is borderline LFS.
 #
 subprocess.run(["java", "-jar", "jarfiles/robot.jar", "convert", "--input", "dwc-owl.ttl", "--output", "dwc-owl-v2.ttl"])
-
-#####################################################################################################
-# BEGIN HERMIT REASONER USAGE
-#####################################################################################################
-
-# HermiT expects a URI as input, so get that.
-#
-ontology_uri = (Path(__file__).parent /  "dwc-owl-v2.ttl").resolve().as_uri()
-# ontology_uri = (Path(__file__).parent /  "toto.ttl").resolve().as_uri()
-# Use HermiT as validation that there are no unsatisfiable things.
-#
-subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-c", ontology_uri], check=False)
-subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-O", ontology_uri], check=False)
-subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-D", ontology_uri], check=False)
-
-#
-# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:Nothing", ontology_uri], check=False)
-# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:bottomDataProperty", ontology_uri], check=False)
-# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:bottomObjectProperty", ontology_uri], check=False)
-
-# # TOO
-# print("totopart")
-# ontology_uri = (Path(__file__).parent /  "toto.ttl").resolve().as_uri()
-# print(ontology_uri)
-# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:Nothing", ontology_uri], check=False)
-# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:bottomDataProperty", ontology_uri], check=False)
-# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--equivalents=owl:bottomObjectProperty", ontology_uri], check=False)
-
-# subprocess.run(["java","-jar","jarfiles/HermiT.jar","--equivalents=http://example.org/ageInYears",ontology_uri])
-# subprocess.run(["java","-jar","jarfiles/HermiT.jar","--equivalents=http://example.org/hasAdultChild",ontology_uri])
-# subprocess.run(["java","-jar","jarfiles/HermiT.jar","--equivalents=http://example.org/ImpossiblePerson",ontology_uri])
-
-
-# # subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-oinferred.owl", ontology_uri], check=False)
-
-# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-oinferred.owl", ontology_uri], check=False)
-
-# print("doooko")
-# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-p", "owl=http://www.w3.org/2002/07/owl#", "--equivalents=owl:bottomObjectProperty", ontology_uri], check=False)
-
-# subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--classifyOPs", ontology_uri], check=False)
-# "--classifyDPs"
 
 #####################################################################################################
 # BEGIN PYLODE DOCUMENTATION GENERATION

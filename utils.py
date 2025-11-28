@@ -292,6 +292,7 @@ def createOP(
     range_list: list[Node],
     pref_label: Literal,
     version_of_s: str | None = None,
+    references_s: str | None = None,
     subproperty_list: list[Node] | None = None,
     additional_list: list[Node] | None = None,
     definition: Literal | None = None,
@@ -349,6 +350,9 @@ def createOP(
     # Add version info.
     if version_of_s:
         graph.add((op_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
+
+    if references_s:
+        graph.add((op_uri, DCTERMS["references"], URIRef(references_s)))
 
     # If there is only a single element in the list, take it as the range
     # otherwise consider a blank node that is the intersect

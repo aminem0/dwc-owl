@@ -140,7 +140,29 @@ bibo:editor rdf:type owl:ObjectProperty ;
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
 dwciri:assertionTypeIRI rdf:type owl:ObjectProperty ;
                         rdfs:domain dwc:Assertion ;
-                        rdfs:range owl:Thing .
+                        rdfs:range owl:Thing ;
+                        dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
+                        rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
+                        rdfs:isDefinedBy dwciri: ;
+                        skos:definition "An IRI of a controlled vocabulary value for a type of [dwc:Assertion]."@en ;
+                        skos:prefLabel "Assertion Type (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/iri/assertionValueIRI
+dwciri:assertionValueIRI rdf:type owl:ObjectProperty ;
+                         rdfs:domain dwc:Assertion .
+
+
+###  http://rs.tdwg.org/dwc/iri/behavior
+dwciri:behavior rdf:type owl:ObjectProperty ;
+                rdfs:domain dwc:Occurrence ;
+                rdfs:range owl:Thing ;
+                dcterms:isVersionOf dwciri:behavior ;
+                dcterms:references <http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10> ;
+                rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                rdfs:isDefinedBy dwciri: ;
+                skos:definition "A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded."@en ;
+                skos:prefLabel "Behavior (IRI)" .
 
 
 ###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeIRI
@@ -1048,19 +1070,9 @@ ac:yFrac rdf:type owl:DatatypeProperty ;
          skos:prefLabel "Fractional Y" .
 
 
-###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
-dwciri:assertionTypeIRI rdf:type owl:DatatypeProperty .
-
-
 ###  http://rs.tdwg.org/dwc/iri/assertionValueIRI
 dwciri:assertionValueIRI rdf:type owl:DatatypeProperty ;
-                         rdfs:domain dwc:Assertion ;
-                         rdfs:range xsd:anyURI ;
-                         dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionValueIRI> ;
-                         rdfs:isDefinedBy dwciri: ;
-                         skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
-                         skos:example "http://purl.obolibrary.org/obo/OBA_VT0000047" ;
-                         skos:prefLabel "Assertion Value (IRI)" .
+                         rdfs:range xsd:anyURI .
 
 
 ###  http://rs.tdwg.org/dwc/terms/agentID
@@ -3000,11 +3012,10 @@ dcterms:source dcterms:isVersionOf dcterms:source ;
                skos:prefLabel "Source (DCTERMS)" .
 
 
-dwciri:assertionTypeIRI dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
-                        rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
-                        rdfs:isDefinedBy dwciri: ;
-                        skos:definition "An IRI of a controlled vocabulary value for a type of [dwc:Assertion]."@en ;
-                        skos:prefLabel "Assertion Type (IRI)" .
+dwciri:assertionValueIRI dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionValueIRI> ;
+                         rdfs:isDefinedBy dwciri: ;
+                         skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
+                         skos:prefLabel "Assertion Value (IRI)" .
 
 
 #################################################################

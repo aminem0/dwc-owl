@@ -130,7 +130,7 @@ gbif:pcr_primer_reverse a owl:DatatypeProperty ;
     skos:example "GGACTACHVGGGTWTCTAAT" ;
     skos:prefLabel "Reverse PCR Primer" .
 
-dwciri:assertionTypeIRI a owl:DatatypeProperty ;
+dwciri:assertionTypeIRI a owl:ObjectProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
     rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
     rdfs:domain dwc:Assertion ;
@@ -139,14 +139,23 @@ dwciri:assertionTypeIRI a owl:DatatypeProperty ;
     skos:definition "An IRI of a controlled vocabulary value for a type of [dwc:Assertion]."@en ;
     skos:prefLabel "Assertion Type (IRI)" .
 
-dwciri:assertionValueIRI a owl:DatatypeProperty ;
+dwciri:assertionValueIRI a owl:ObjectProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionValueIRI> ;
     rdfs:domain dwc:Assertion ;
     rdfs:isDefinedBy dwciri: ;
     rdfs:range xsd:anyURI ;
     skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
-    skos:example "http://purl.obolibrary.org/obo/OBA_VT0000047" ;
     skos:prefLabel "Assertion Value (IRI)" .
+
+dwciri:behavior a owl:ObjectProperty ;
+    dcterms:isVersionOf <	http://rs.tdwg.org/dwc/iri/behavior> ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain dwc:Occurrence ;
+    rdfs:isDefinedBy dwciri: ;
+    rdfs:range owl:Thing ;
+    skos:definition "A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded."@en ;
+    skos:prefLabel "Behavior (IRI)" .
 
 dwciri:surveyTargetTypeIRI a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:type ;
@@ -377,10 +386,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -2035,16 +2044,6 @@ dwc:NucleotideAnalysis a owl:Class ;
     skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
     skos:prefLabel "Nucleotide Analysis" .
 
-dwc:Occurrence a owl:Class ;
-    dcterms:isVersionOf dwc:Occurrence ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A state of a [dwc:Organism] in a [dwc:Event]."@en ;
-    skos:example "a fungus in Central Park in the summer of 1929",
-        "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23",
-        "a wolf pack on the shore of Kluane Lake in 1988" ;
-    skos:prefLabel "Occurrence" .
-
 eco:Survey a owl:Class ;
     dcterms:isVersionOf eco:Survey ;
     rdfs:comment "This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget]."@en ;
@@ -2060,6 +2059,16 @@ eco:Survey a owl:Class ;
         "a wetland vegetation mapping",
         "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
     skos:prefLabel "Survey" .
+
+dwc:Occurrence a owl:Class ;
+    dcterms:isVersionOf dwc:Occurrence ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A state of a [dwc:Organism] in a [dwc:Event]."@en ;
+    skos:example "a fungus in Central Park in the summer of 1929",
+        "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23",
+        "a wolf pack on the shore of Kluane Lake in 1988" ;
+    skos:prefLabel "Occurrence" .
 
 dcterms:identifier a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:identifier ;
