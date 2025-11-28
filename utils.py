@@ -288,10 +288,10 @@ def createEDP(
 def createOP(
     name: str,
     namespace: Namespace,
-    graph: Graph,
-    domain_list: list[Node] | None,
-    range_list: list[Node] | None,
     pref_label: Literal,
+    graph: Graph,
+    domain_list: list[Node] | None = None,
+    range_list: list[Node] | None = None,
     version_of_s: str | None = None,
     references_s: str | None = None,
     subproperty_list: list[Node] | None = None,

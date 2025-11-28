@@ -1261,8 +1261,8 @@ createOP(
     name="relationshipOf",
     namespace=DWCDP,
     graph=g,
-    domain_list=[OWL["Thing"]],
-    range_list=[OWL["Thing"]],
+    # domain_list=[OWL["Thing"]],
+    # range_list=[OWL["Thing"]],
     pref_label=Literal("Relationship Of"),
     definition=Literal("An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves.", lang="en"),
     comments=Literal("To keep the interaction terms semantically correct and in order, the resource considered by this property should be the subject of the statement.", lang="en"),
@@ -1274,8 +1274,8 @@ createOP(
     name="relationshipTo",
     namespace=DWCDP,
     graph=g,
-    domain_list=[OWL["Thing"]],
-    range_list=[OWL["Thing"]],
+    # domain_list=[OWL["Thing"]],
+    # range_list=[OWL["Thing"]],
     pref_label=Literal("Relationship To"),
     definition=Literal("An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves.", lang="en"),
     comments=Literal("To keep the interaction terms semantically correct and in order, the resource considered by this property should be the object of the statement.", lang="en"),
@@ -1311,8 +1311,6 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["Assertion"]],
-    range_list=[OWL["Thing"]],
-    # range_list=[XSD["anyURI"]],
     pref_label=Literal("Assertion Type (IRI)"),
     definition=Literal("An IRI of a controlled vocabulary value for a type of [dwc:Assertion].", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
@@ -1325,12 +1323,11 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["Assertion"]],
-    range_list=[XSD["anyURI"]],
     pref_label=Literal("Assertion Value (IRI)"),
     definition=Literal("An IRI of the controlled vocabulary value for a value of a [dwc:Assertion].", lang="en"),
-    # examples_list=[
-    #     Literal("http://purl.obolibrary.org/obo/OBA_VT0000047"),
-    # ],
+    examples=[
+        URIRef("http://purl.obolibrary.org/obo/OBA_VT0000047"),
+    ],
     version_of_s="http://example.com/term-pending/dwciri/assertionValueIRI",
 )
 
@@ -1340,7 +1337,6 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[ECO["SurveyTarget"]],
-    range_list=None,
     pref_label=Literal("Survey Target Type IRI"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given.", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
@@ -1353,7 +1349,6 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
-    range_list=None,
     pref_label=Literal("Behavior (IRI)"),
     definition=Literal("A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -1366,8 +1361,6 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
-    # range_list=[OWL["Thing"]],
-    range_list=None,
     pref_label=Literal("Caste (IRI)"),
     definition=Literal("Categorisation of individuals for eusocial species (including some mammals and arthropods).", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -1375,14 +1368,11 @@ createOP(
     references_s="http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10",
 )
 
-# NOTE: Revoir domain
+# WARN: Revoir domain
 createOP(
     name="dataGeneralizations",
     namespace=DWCIRI,
     graph=g,
-    domain_list=[OWL["Thing"]],
-    range_list=[OWL["Thing"]],
-    # range_list=[XSD["anyURI"]],
     pref_label=Literal("Data Generalizations (IRI)"),
     definition=Literal("Actions taken to make the shared data less specific or complete than in its original form. Suggests that alternative data of higher quality may be available on request.", lang="en"),
     comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -1390,12 +1380,12 @@ createOP(
     references_s="http://rs.tdwg.org/dwc/iri/version/dataGeneralizations-2025-07-10",
 )
 
+# WARN: Verify if actually about dwc:Occurrence
 createOP(
     name="degreeOfEstablishment",
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["Occurrence"]],
-    range_list=[OWL["Thing"]],
     pref_label=Literal("Degree Of Establisment (IRI)"),
     definition=Literal("The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time.", lang="en"),
     comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -1407,13 +1397,12 @@ createOP(
     references_s="http://rs.tdwg.org/dwc/iri/version/degreeOfEstablishment-2025-07-10",
 )
 
-# NOTE: Revoir domain
+# WARN: Revoir domain
 createOP(
     name="discipline",
     namespace=DWCIRI,
     graph=g,
-    domain_list=[OWL["Thing"]],
-    range_list=[OWL["Thing"]],
+    # domain_list=[OWL["Thing"]],
     pref_label=Literal("Discipline (IRI)"),
     definition=Literal("The primary branch or branches of knowledge represented by the record.", lang="en"),
     comments=Literal("This term can be used to classify records according to branches of knowledge. Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -1426,7 +1415,6 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["MaterialEntity"]],
-    range_list=[OWL["Thing"]],
     pref_label=Literal("Disposition (IRI)"),
     definition=Literal("The current state of a specimen with respect to the collection identified in dwc:collectionCode or dwc:collectionID.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -1439,7 +1427,6 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["MaterialEntity"]],
-    range_list=[OWL["Thing"]],
     pref_label=Literal("Earliest Geochronological Era"),
     definition=Literal("Use to link a dwc:GeologicalContext instance to chronostratigraphic time periods at the lowest possible level in a standardized hierarchy. Use this property to point to the earliest possible geological time period from which the dwc:MaterialEntity was collected.", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI from a controlled vocabulary. A \"convenience property\" that replaces Darwin Core literal-value terms related to geological context. See Section 2.7.6 of the Darwin Core RDF Guide for details.", lang="en"),
@@ -1452,7 +1439,6 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["Occurrence"]],
-    range_list=[OWL["Thing"]],
     pref_label=Literal("Establishment Means (IRI)"),
     definition=Literal("Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans.", lang="en"),
     comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -1470,7 +1456,6 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["Event"]],
-    range_list=[OWL["Thing"]],
     pref_label=Literal("Establishment Means (IRI)"),
     definition=Literal("One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event.", lang="en"),
     comments=Literal("The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes.", lang="en"),
@@ -1483,7 +1468,6 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[DCTERMS["Location"]],
-    range_list=[OWL["Thing"]],
     pref_label=Literal("Vertical Datum (IRI)"),
     definition=Literal("The vertical datum used as the reference upon which the values in the elevation terms are based.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -1496,7 +1480,6 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
-    range_list=[OWL["Thing"]],
     pref_label=Literal("Vitality (IRI)"),
     definition=Literal("An indication of whether a dwc:Organism was alive or dead at the time of collection or observation.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -1515,7 +1498,6 @@ createOP(
     namespace=ECOIRI,
     graph=g,
     domain_list=[ECO["SurveyTarget"]],
-    range_list=[OWL["Thing"]],
     pref_label=Literal("Survey Target Type Source IRI"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
@@ -1797,10 +1779,10 @@ createOP(
     name="type",
     namespace=DCTERMS,
     graph=g,
-    domain_list=[OWL["Thing"]],
+    # domain_list=[OWL["Thing"]],
     # domain_list=[AC["Media"]],
     # range_list=[RDFS["Literal"]],
-    range_list=[OWL["Thing"]],
+    # range_list=[OWL["Thing"]],
     pref_label=Literal("Media Type"),
     definition=Literal("A category that best matches the nature of an [ac:Media] resource."),
     comments=Literal("Recommended best practice is to use a globally unique identifier."),
@@ -2648,10 +2630,34 @@ createDP(
 
 
 createDP(
+    name="vernacularName",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["Identification"], DWC["MaterialEntity"], DWC["Occurrence"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Vernacular Name"),
+    definition=Literal("A common or vernacular name.", lang="en"),
+    examples_list=[
+        Literal("Andean Condor"),
+        Literal("Condor Andino"),
+        Literal("American Eagle"),
+        Literal("Gänsegeier"),
+        Literal("death cap"),
+        Literal("rainbow trout"),
+        Literal("Smoky Quartz"),
+        Literal("Amethyst"),
+        Literal("Agate"),
+        Literal("Tiger's Eye"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/vernacularName",
+    references_s="http://rs.tdwg.org/dwc/terms/version/vernacularName-2023-06-28",
+)
+
+createDP(
     name="verticalDatum",
     namespace=DWC,
     graph=g,
-    domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
+    domain_list=[DCTERMS["Location"]],
     range_list=[XSD["string"]],
     pref_label=Literal("Vitality"),
     definition=Literal("The vertical datum used as the reference upon which the values in the elevation terms are based.", lang="en"),
