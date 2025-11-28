@@ -1464,6 +1464,21 @@ createOP(
     references_s="http://rs.tdwg.org/dwc/iri/version/establishmentMeans-2025-07-10",
 )
 
+# NOTE: Revoir domain
+createOP(
+    name="fieldNotes",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["Event"]],
+    range_list=[OWL["Thing"]],
+    pref_label=Literal("Establishment Means (IRI)"),
+    definition=Literal("One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event.", lang="en"),
+    comments=Literal("The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/fieldNotes",
+    references_s="http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28",
+)
+
+
 # NOTE: Property I created. I do not see why there is not a dwciri: analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
 # BUG: Change to an object property
 createOP(
@@ -2421,6 +2436,32 @@ createDP(
     pref_label=Literal("Read Count"),
     definition=Literal("A number of reads for a [dwc:NucleotideSequence] in a [dwc:NucleotideAnalysis].", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/readCount",
+)
+
+# NOTE: Check domain, can be more
+createDP(
+    name="scientificName",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["Identification"], DWC["MaterialEntity"], DWC["Occurrence"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Scientific Name"),
+    definition=Literal("The full scientific name, with authorship and date information if known. When forming part of a dwc:Identification, this should be the name in lowest level taxonomic rank that can be determined. This term should not contain identification qualifications, which should instead be supplied in the dwc:identificationQualifier term.", lang="en"),
+    comments=Literal("This term should not contain identification qualifications, which should instead be supplied in the IdentificationQualifier term. When applied to an Organism or Occurrence, this term should be used to represent the scientific name that was applied to the associated Organism in accordance with the Taxon to which it was or is currently identified. Names should be compliant to the most recent nomenclatural code. For example, names of hybrids for algae, fungi and plants should follow the rules of the International Code of Nomenclature for algae, fungi, and plants (Schenzhen Code Articles H.1, H.2 and H.3). Thus, use the multiplication sign × (Unicode U+00D7, HTML ×) to identify a hybrid, not x or X, if possible.", lang="en"),
+    examples_list=[
+        Literal("Coleoptera (order)"),
+        Literal("Vespertilionidae (family)"),
+        Literal("Manis (genus)"),
+        Literal("Ctenomys sociabilis (genus + specificEpithet)"),
+        Literal("Ambystoma tigrinum diaboli (genus + specificEpithet + infraspecificEpithet)"),
+        Literal("Roptrocerus typographi (Györfi, 1952) (genus + specificEpithet + scientificNameAuthorship)"),
+        Literal("Quercus agrifolia var. oxyadenia (Torr.) J.T. Howell (genus + specificEpithet + taxonRank + infraspecificEpithet + scientificNameAuthorship)"),
+        Literal("×Agropogon littoralis (Sm.) C. E. Hubb."),
+        Literal("Mentha × smithiana R. A. Graham"),
+        Literal("Agrostis stolonifera L. × Polypogon monspeliensis (L.) Desf."),
+    ],
+    version_of_s="http://example.com/term-pending/dwc/scientificName",
+    references_s="http://rs.tdwg.org/dwc/terms/version/scientificName-2023-06-28",
 )
 
 # NOTE: Chose xsd:string because I cannot see any use for rdfs:Literal in this case.

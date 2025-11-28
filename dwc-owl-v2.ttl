@@ -251,6 +251,18 @@ dwciri:establishmentMeans rdf:type owl:ObjectProperty ;
                           skos:prefLabel "Establishment Means (IRI)" .
 
 
+###  http://rs.tdwg.org/dwc/iri/fieldNotes
+dwciri:fieldNotes rdf:type owl:ObjectProperty ;
+                  rdfs:domain dwc:Event ;
+                  rdfs:range owl:Thing ;
+                  dcterms:isVersionOf dwciri:fieldNotes ;
+                  dcterms:references <http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28> ;
+                  rdfs:comment "The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes."@en ;
+                  rdfs:isDefinedBy dwciri: ;
+                  skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
+                  skos:prefLabel "Establishment Means (IRI)" .
+
+
 ###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeIRI
 dwciri:surveyTargetTypeIRI rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf dcterms:type ;
@@ -1711,6 +1723,33 @@ dwc:relationshipRemarks rdf:type owl:DatatypeProperty ;
                         rdfs:isDefinedBy dwc: ;
                         skos:definition "Comments or notes about a [dwc:ResourceRelationship]."@en ;
                         skos:prefLabel "Relationship Remarks" .
+
+
+###  http://rs.tdwg.org/dwc/terms/scientificName
+dwc:scientificName rdf:type owl:DatatypeProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( dwc:Identification
+                                               dwc:MaterialEntity
+                                               dwc:Occurrence
+                                             )
+                               ] ;
+                   rdfs:range xsd:string ;
+                   dcterms:isVersionOf <http://example.com/term-pending/dwc/scientificName> ;
+                   dcterms:references <http://rs.tdwg.org/dwc/terms/version/scientificName-2023-06-28> ;
+                   rdfs:comment "This term should not contain identification qualifications, which should instead be supplied in the IdentificationQualifier term. When applied to an Organism or Occurrence, this term should be used to represent the scientific name that was applied to the associated Organism in accordance with the Taxon to which it was or is currently identified. Names should be compliant to the most recent nomenclatural code. For example, names of hybrids for algae, fungi and plants should follow the rules of the International Code of Nomenclature for algae, fungi, and plants (Schenzhen Code Articles H.1, H.2 and H.3). Thus, use the multiplication sign × (Unicode U+00D7, HTML ×) to identify a hybrid, not x or X, if possible."@en ;
+                   rdfs:isDefinedBy dwc: ;
+                   skos:definition "The full scientific name, with authorship and date information if known. When forming part of a dwc:Identification, this should be the name in lowest level taxonomic rank that can be determined. This term should not contain identification qualifications, which should instead be supplied in the dwc:identificationQualifier term."@en ;
+                   skos:example "Agrostis stolonifera L. × Polypogon monspeliensis (L.) Desf." ,
+                                "Ambystoma tigrinum diaboli (genus + specificEpithet + infraspecificEpithet)" ,
+                                "Coleoptera (order)" ,
+                                "Ctenomys sociabilis (genus + specificEpithet)" ,
+                                "Manis (genus)" ,
+                                "Mentha × smithiana R. A. Graham" ,
+                                "Quercus agrifolia var. oxyadenia (Torr.) J.T. Howell (genus + specificEpithet + taxonRank + infraspecificEpithet + scientificNameAuthorship)" ,
+                                "Roptrocerus typographi (Györfi, 1952) (genus + specificEpithet + scientificNameAuthorship)" ,
+                                "Vespertilionidae (family)" ,
+                                "×Agropogon littoralis (Sm.) C. E. Hubb." ;
+                   skos:prefLabel "Scientific Name" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/sequence

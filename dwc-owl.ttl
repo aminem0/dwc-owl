@@ -375,10 +375,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -586,6 +586,27 @@ dwc:readCount a owl:DatatypeProperty ;
     rdfs:range xsd:integer ;
     skos:definition "A number of reads for a [dwc:NucleotideSequence] in a [dwc:NucleotideAnalysis]."@en ;
     skos:prefLabel "Read Count" .
+
+dwc:scientificName a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/scientificName> ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/scientificName-2023-06-28> ;
+    rdfs:comment "This term should not contain identification qualifications, which should instead be supplied in the IdentificationQualifier term. When applied to an Organism or Occurrence, this term should be used to represent the scientific name that was applied to the associated Organism in accordance with the Taxon to which it was or is currently identified. Names should be compliant to the most recent nomenclatural code. For example, names of hybrids for algae, fungi and plants should follow the rules of the International Code of Nomenclature for algae, fungi, and plants (Schenzhen Code Articles H.1, H.2 and H.3). Thus, use the multiplication sign × (Unicode U+00D7, HTML ×) to identify a hybrid, not x or X, if possible."@en ;
+    rdfs:domain [ a owl:DataRange ;
+            owl:unionOf ( dwc:Identification dwc:MaterialEntity dwc:Occurrence ) ] ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The full scientific name, with authorship and date information if known. When forming part of a dwc:Identification, this should be the name in lowest level taxonomic rank that can be determined. This term should not contain identification qualifications, which should instead be supplied in the dwc:identificationQualifier term."@en ;
+    skos:example "Agrostis stolonifera L. × Polypogon monspeliensis (L.) Desf.",
+        "Ambystoma tigrinum diaboli (genus + specificEpithet + infraspecificEpithet)",
+        "Coleoptera (order)",
+        "Ctenomys sociabilis (genus + specificEpithet)",
+        "Manis (genus)",
+        "Mentha × smithiana R. A. Graham",
+        "Quercus agrifolia var. oxyadenia (Torr.) J.T. Howell (genus + specificEpithet + taxonRank + infraspecificEpithet + scientificNameAuthorship)",
+        "Roptrocerus typographi (Györfi, 1952) (genus + specificEpithet + scientificNameAuthorship)",
+        "Vespertilionidae (family)",
+        "×Agropogon littoralis (Sm.) C. E. Hubb." ;
+    skos:prefLabel "Scientific Name" .
 
 dwc:surveyID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyID> ;
@@ -1198,6 +1219,16 @@ dwciri:establishmentMeans a owl:ObjectProperty ;
     skos:definition "Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans."@en ;
     skos:example <http://rs.tdwg.org/dwcem/values/e001>,
         <http://rs.tdwg.org/dwcem/values/e005> ;
+    skos:prefLabel "Establishment Means (IRI)" .
+
+dwciri:fieldNotes a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:fieldNotes ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28> ;
+    rdfs:comment "The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes."@en ;
+    rdfs:domain dwc:Event ;
+    rdfs:isDefinedBy dwciri: ;
+    rdfs:range owl:Thing ;
+    skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
     skos:prefLabel "Establishment Means (IRI)" .
 
 dwc:assayType a owl:DatatypeProperty ;
@@ -1962,16 +1993,6 @@ dcterms:title a owl:DatatypeProperty ;
     skos:definition "A name given to a resource." ;
     skos:prefLabel "Title" .
 
-dwc:Identification a owl:Class ;
-    dcterms:isVersionOf dwc:Identification ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18> ;
-    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A classification of a resource according to a classification scheme."@en ;
-    skos:example "a nomenclatural act designating a specimen as a holotype",
-        "a subspecies determination of an organism" ;
-    skos:prefLabel "Identification" .
-
 dwc:ResourceRelationship a owl:Class ;
     dcterms:isVersionOf dwc:ResourceRelationship ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/ResourceRelationship-2023-09-13> ;
@@ -1998,6 +2019,16 @@ dc:source a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "A related resource from which the described resource is derived"@en ;
     skos:prefLabel "Source (DC)" .
+
+dwc:Identification a owl:Class ;
+    dcterms:isVersionOf dwc:Identification ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18> ;
+    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A classification of a resource according to a classification scheme."@en ;
+    skos:example "a nomenclatural act designating a specimen as a holotype",
+        "a subspecies determination of an organism" ;
+    skos:prefLabel "Identification" .
 
 dwc:NucleotideSequence a owl:Class ;
     dcterms:isVersionOf dwc:NucleotideSequence ;
