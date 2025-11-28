@@ -367,10 +367,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -1035,7 +1035,7 @@ minext:specimenDescription a owl:DatatypeProperty ;
         "Historically valuable",
         "Showpiece",
         "Two generations of quartz" ;
-    skos:prefLabel "Mineral Description" .
+    skos:prefLabel "Specimen Description" .
 
 minext:twinningLaw a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://rs.tdwg.org/minext/terms/twinningLaw> ;

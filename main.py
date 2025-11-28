@@ -3146,7 +3146,7 @@ createDP(
     graph=g,
     domain_list=[DWC["MaterialEntityAssertion"]],
     range_list=[RDFS["Literal"]],
-    pref_label=Literal("Mineral Description"),
+    pref_label=Literal("Specimen Description"),
     definition=Literal("Comments or notes about the specimen (physical object) especially those that distinguish the specimen from similar materials in a collection.", lang="en"),
     comments=Literal("See broader concept [http://rs.tdwg.org/dwc/terms/occurrenceRemarks](http://rs.tdwg.org/dwc/terms/occurrenceRemarks) for additional usage notes.", lang="en"),
     examples_list=[

@@ -2178,7 +2178,7 @@ minext:specimenDescription rdf:type owl:DatatypeProperty ;
                                         "Historically valuable" ,
                                         "Showpiece" ,
                                         "Two generations of quartz" ;
-                           skos:prefLabel "Mineral Description" .
+                           skos:prefLabel "Specimen Description" .
 
 
 ###  http://rs.tdwg.org/mineralogy/terms/twinningLaw
