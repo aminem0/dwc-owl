@@ -1341,7 +1341,6 @@ createOP(
     graph=g,
     domain_list=[ECO["SurveyTarget"]],
     range_list=[OWL["Thing"]],
-    # range_list=[XSD["anyURI"]],
     pref_label=Literal("Survey Target Type IRI"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given.", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
@@ -1353,9 +1352,8 @@ createOP(
     name="behavior",
     namespace=DWCIRI,
     graph=g,
-    domain_list=[DWC["Occurrence"]],
+    domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
     range_list=[OWL["Thing"]],
-    # range_list=[XSD["anyURI"]],
     pref_label=Literal("Behavior (IRI)"),
     definition=Literal("A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -1367,14 +1365,13 @@ createOP(
     name="caste",
     namespace=DWCIRI,
     graph=g,
-    domain_list=[DWC["Occurrence"]],
+    domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
     range_list=[OWL["Thing"]],
-    # range_list=[XSD["anyURI"]],
     pref_label=Literal("Caste (IRI)"),
     definition=Literal("Categorisation of individuals for eusocial species (including some mammals and arthropods).", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
     version_of_s="http://rs.tdwg.org/dwc/iri/caste",
-    references_s="http://rs.tdwg.org/dwc/terms/version/behavior-2023-06-28",
+    references_s="http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10",
 )
 
 # NOTE: Revoir domain
@@ -1479,6 +1476,35 @@ createOP(
     version_of_s="http://rs.tdwg.org/dwc/iri/fieldNotes",
     references_s="http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28",
 )
+
+createOP(
+    name="verticalDatum",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DCTERMS["Location"]],
+    range_list=[OWL["Thing"]],
+    pref_label=Literal("Vertical Datum (IRI)"),
+    definition=Literal("The vertical datum used as the reference upon which the values in the elevation terms are based.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/verticalDatum",
+    references_s="http://rs.tdwg.org/dwc/iri/version/verticalDatum-2025-07-10",
+)
+
+createOP(
+    name="vitality",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
+    range_list=[OWL["Thing"]],
+    pref_label=Literal("Vitality (IRI)"),
+    definition=Literal("An indication of whether a dwc:Organism was alive or dead at the time of collection or observation.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/vitality",
+    references_s="http://rs.tdwg.org/dwc/iri/version/vitality-2025-07-10",
+)
+
+
+
 
 
 # NOTE: Property I created. I do not see why there is not a dwciri: analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
@@ -1991,6 +2017,27 @@ createDP(
 )
 
 createDP(
+    name="caste",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Caste"),
+    definition=Literal("Categorisation of individuals for eusocial species (including some mammals and arthropods).", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples_list=[
+        Literal("queen"),
+        Literal("male alate"),
+        Literal("intercaste"),
+        Literal("minor worker"),
+        Literal("soldier"),
+        Literal("ergatoid"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/caste",
+    references_s="http://rs.tdwg.org/dwc/terms/version/caste-2023-06-28",
+)
+
+createDP(
     name="derivedFromMediaID",
     namespace=DWC,
     graph=g,
@@ -2462,8 +2509,26 @@ createDP(
         Literal("Mentha × smithiana R. A. Graham"),
         Literal("Agrostis stolonifera L. × Polypogon monspeliensis (L.) Desf."),
     ],
-    version_of_s="http://example.com/term-pending/dwc/scientificName",
+    version_of_s="http://rs.tdwg.org/dwc/terms/scientificName",
     references_s="http://rs.tdwg.org/dwc/terms/version/scientificName-2023-06-28",
+)
+
+createDP(
+    name="sex",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Sex"),
+    definition=Literal("The sex of the biological individual(s) represented in the dwc:Occurrence.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples_list=[
+        Literal("female"),
+        Literal("male"),
+        Literal("hermaphrodite"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/sex",
+    references_s="http://rs.tdwg.org/dwc/terms/version/sex-2023-06-28",
 )
 
 # NOTE: Chose xsd:string because I cannot see any use for rdfs:Literal in this case.
@@ -2579,6 +2644,88 @@ createDP(
     ],
     version_of_s="http://example.com/term-pending/dwc/verbatimAssertionType",
 )
+
+
+createDP(
+    name="verticalDatum",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Vitality"),
+    definition=Literal("The vertical datum used as the reference upon which the values in the elevation terms are based.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples_list=[
+        Literal("EGM84"),
+        Literal("EGM96"),
+        Literal("EGM2008"),
+        Literal("PGM2000A"),
+        Literal("PGM2004"),
+        Literal("PGM2006"),
+        Literal("PGM2007"),
+        Literal("EPSG:7030"),
+        Literal("not recorded"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/verticalDatum",
+    references_s="http://rs.tdwg.org/dwc/terms/version/verticalDatum-2025-06-12",
+)
+
+createDP(
+    name="vitality",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["OccurrenceAssertion"], DWC["OrganismAssertion"]],
+    range_list=[XSD["string"]],
+    pref_label=Literal("Vitality"),
+    definition=Literal("An indication of whether a dwc:Organism was alive or dead at the time of collection or observation.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`,` MaterialSample`, or `HumanObservation`. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples_list=[
+        Literal("alive"),
+        Literal("dead"),
+        Literal("mixedLot"),
+        Literal("uncertain"),
+        Literal("notAssessed"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/vitality",
+    references_s="http://rs.tdwg.org/dwc/terms/version/vitality-2023-09-13",
+)
+
+createDP(
+    name="waterBody",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DCTERMS["Location"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Water Body"),
+    definition=Literal("The name of the water body in which the dcterms:Location occurs.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names.", lang="en"),
+    examples_list=[
+        Literal("Indian Ocean"),
+        Literal("Baltic Sea"),
+        Literal("Hudson River"),
+        Literal("Lago Nahuel Huapi"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/waterBody",
+    references_s="http://rs.tdwg.org/dwc/terms/version/waterBody-2023-06-28",
+)
+
+createDP(
+    name="year",
+    namespace=DWC,
+    graph=g,
+    domain_list=[DWC["Event"]],
+    range_list=[XSD["integer"]],
+    pref_label=Literal("Year"),
+    definition=Literal("The four-digit year in which the dwc:Event occurred, according to the Common Era Calendar.", lang="en"),
+    examples_list=[
+        Literal("1160", datatype=XSD["integer"]),
+        Literal("2008", datatype=XSD["integer"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/year",
+    references_s="http://rs.tdwg.org/dwc/terms/version/year-2023-06-28",
+)
+
+##############################################################################################################
 
 # WARN: I added the comment to be clearer
 createEDP(

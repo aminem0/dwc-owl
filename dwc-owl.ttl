@@ -336,15 +336,6 @@ dwc:NucleotideAnalysisAssertion a owl:Class ;
     skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:NucleotideAnalysis]." ;
     skos:prefLabel "Nucleotide Analysis Assertion" .
 
-dwc:OccurrenceAssertion a owl:Class ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf dwc:Assertion ;
-    owl:equivalentClass [ a owl:Restriction ;
-            owl:onProperty dwcdp:about ;
-            owl:someValuesFrom dwc:Occurrence ] ;
-    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]." ;
-    skos:prefLabel "Occurrence Assertion" .
-
 dwc:OccurrenceMedia a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf ac:Media ;
@@ -354,23 +345,14 @@ dwc:OccurrenceMedia a owl:Class ;
     skos:definition "A [ac:Media] about a [dwc:Occurrence]." ;
     skos:prefLabel "Occurrence Media" .
 
-dwc:OrganismAssertion a owl:Class ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf dwc:Assertion ;
-    owl:equivalentClass [ a owl:Restriction ;
-            owl:onProperty dwcdp:about ;
-            owl:someValuesFrom dwc:Organism ] ;
-    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]." ;
-    skos:prefLabel "Organism Assertion" .
-
 dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -578,27 +560,6 @@ dwc:readCount a owl:DatatypeProperty ;
     rdfs:range xsd:integer ;
     skos:definition "A number of reads for a [dwc:NucleotideSequence] in a [dwc:NucleotideAnalysis]."@en ;
     skos:prefLabel "Read Count" .
-
-dwc:scientificName a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/scientificName> ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/scientificName-2023-06-28> ;
-    rdfs:comment "This term should not contain identification qualifications, which should instead be supplied in the IdentificationQualifier term. When applied to an Organism or Occurrence, this term should be used to represent the scientific name that was applied to the associated Organism in accordance with the Taxon to which it was or is currently identified. Names should be compliant to the most recent nomenclatural code. For example, names of hybrids for algae, fungi and plants should follow the rules of the International Code of Nomenclature for algae, fungi, and plants (Schenzhen Code Articles H.1, H.2 and H.3). Thus, use the multiplication sign × (Unicode U+00D7, HTML ×) to identify a hybrid, not x or X, if possible."@en ;
-    rdfs:domain [ a owl:DataRange ;
-            owl:unionOf ( dwc:Identification dwc:MaterialEntity dwc:Occurrence ) ] ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range xsd:string ;
-    skos:definition "The full scientific name, with authorship and date information if known. When forming part of a dwc:Identification, this should be the name in lowest level taxonomic rank that can be determined. This term should not contain identification qualifications, which should instead be supplied in the dwc:identificationQualifier term."@en ;
-    skos:example "Agrostis stolonifera L. × Polypogon monspeliensis (L.) Desf.",
-        "Ambystoma tigrinum diaboli (genus + specificEpithet + infraspecificEpithet)",
-        "Coleoptera (order)",
-        "Ctenomys sociabilis (genus + specificEpithet)",
-        "Manis (genus)",
-        "Mentha × smithiana R. A. Graham",
-        "Quercus agrifolia var. oxyadenia (Torr.) J.T. Howell (genus + specificEpithet + taxonRank + infraspecificEpithet + scientificNameAuthorship)",
-        "Roptrocerus typographi (Györfi, 1952) (genus + specificEpithet + scientificNameAuthorship)",
-        "Vespertilionidae (family)",
-        "×Agropogon littoralis (Sm.) C. E. Hubb." ;
-    skos:prefLabel "Scientific Name" .
 
 dwc:surveyID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyID> ;
@@ -1371,7 +1332,8 @@ dwciri:behavior a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:behavior ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dwc:Occurrence ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
     rdfs:isDefinedBy dwciri: ;
     rdfs:range owl:Thing ;
     skos:definition "A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded."@en ;
@@ -1379,9 +1341,10 @@ dwciri:behavior a owl:ObjectProperty ;
 
 dwciri:caste a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:caste ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/behavior-2023-06-28> ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dwc:Occurrence ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
     rdfs:isDefinedBy dwciri: ;
     rdfs:range owl:Thing ;
     skos:definition "Categorisation of individuals for eusocial species (including some mammals and arthropods)."@en ;
@@ -1461,6 +1424,27 @@ dwciri:fieldNotes a owl:ObjectProperty ;
     skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
     skos:prefLabel "Establishment Means (IRI)" .
 
+dwciri:verticalDatum a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:verticalDatum ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/verticalDatum-2025-07-10> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwciri: ;
+    rdfs:range owl:Thing ;
+    skos:definition "The vertical datum used as the reference upon which the values in the elevation terms are based."@en ;
+    skos:prefLabel "Vertical Datum (IRI)" .
+
+dwciri:vitality a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:vitality ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/vitality-2025-07-10> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:isDefinedBy dwciri: ;
+    rdfs:range owl:Thing ;
+    skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
+    skos:prefLabel "Vitality (IRI)" .
+
 dwc:assayType a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/assayType> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary." ;
@@ -1482,6 +1466,23 @@ dwc:bed a owl:DatatypeProperty ;
     skos:definition "The full name of the lithostratigraphic bed from which the [dwc:MaterialEntity] was collected."@en ;
     skos:example "Harlem coal" ;
     skos:prefLabel "Bed" .
+
+dwc:caste a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:caste ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/caste-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "Categorisation of individuals for eusocial species (including some mammals and arthropods)."@en ;
+    skos:example "ergatoid",
+        "intercaste",
+        "male alate",
+        "minor worker",
+        "queen",
+        "soldier" ;
+    skos:prefLabel "Caste" .
 
 dwc:earliestAgeOrLowestStage a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:earliestAgeOrLowestStage ;
@@ -1744,6 +1745,27 @@ dwc:relationshipRemarks a owl:DatatypeProperty ;
     skos:definition "Comments or notes about a [dwc:ResourceRelationship]."@en ;
     skos:prefLabel "Relationship Remarks" .
 
+dwc:scientificName a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:scientificName ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/scientificName-2023-06-28> ;
+    rdfs:comment "This term should not contain identification qualifications, which should instead be supplied in the IdentificationQualifier term. When applied to an Organism or Occurrence, this term should be used to represent the scientific name that was applied to the associated Organism in accordance with the Taxon to which it was or is currently identified. Names should be compliant to the most recent nomenclatural code. For example, names of hybrids for algae, fungi and plants should follow the rules of the International Code of Nomenclature for algae, fungi, and plants (Schenzhen Code Articles H.1, H.2 and H.3). Thus, use the multiplication sign × (Unicode U+00D7, HTML ×) to identify a hybrid, not x or X, if possible."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dwc:Identification dwc:MaterialEntity dwc:Occurrence ) ] ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The full scientific name, with authorship and date information if known. When forming part of a dwc:Identification, this should be the name in lowest level taxonomic rank that can be determined. This term should not contain identification qualifications, which should instead be supplied in the dwc:identificationQualifier term."@en ;
+    skos:example "Agrostis stolonifera L. × Polypogon monspeliensis (L.) Desf.",
+        "Ambystoma tigrinum diaboli (genus + specificEpithet + infraspecificEpithet)",
+        "Coleoptera (order)",
+        "Ctenomys sociabilis (genus + specificEpithet)",
+        "Manis (genus)",
+        "Mentha × smithiana R. A. Graham",
+        "Quercus agrifolia var. oxyadenia (Torr.) J.T. Howell (genus + specificEpithet + taxonRank + infraspecificEpithet + scientificNameAuthorship)",
+        "Roptrocerus typographi (Györfi, 1952) (genus + specificEpithet + scientificNameAuthorship)",
+        "Vespertilionidae (family)",
+        "×Agropogon littoralis (Sm.) C. E. Hubb." ;
+    skos:prefLabel "Scientific Name" .
+
 dwc:sequence a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/sequence> ;
     rdfs:domain dwc:NucleotideSequence ;
@@ -1751,6 +1773,81 @@ dwc:sequence a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     skos:definition "A string representing nucleotide base pairs."@en ;
     skos:prefLabel "Sequence" .
+
+dwc:sex a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:sex ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/sex-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The sex of the biological individual(s) represented in the dwc:Occurrence."@en ;
+    skos:example "female",
+        "hermaphrodite",
+        "male" ;
+    skos:prefLabel "Sex" .
+
+dwc:verticalDatum a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verticalDatum ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verticalDatum-2025-06-12> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The vertical datum used as the reference upon which the values in the elevation terms are based."@en ;
+    skos:example "EGM2008",
+        "EGM84",
+        "EGM96",
+        "EPSG:7030",
+        "PGM2000A",
+        "PGM2004",
+        "PGM2006",
+        "PGM2007",
+        "not recorded" ;
+    skos:prefLabel "Vitality" .
+
+dwc:vitality a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:vitality ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/vitality-2023-09-13> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`,` MaterialSample`, or `HumanObservation`. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
+    skos:example "alive",
+        "dead",
+        "mixedLot",
+        "notAssessed",
+        "uncertain" ;
+    skos:prefLabel "Vitality" .
+
+dwc:waterBody a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:waterBody ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/waterBody-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "The name of the water body in which the dcterms:Location occurs."@en ;
+    skos:example "Baltic Sea",
+        "Hudson River",
+        "Indian Ocean",
+        "Lago Nahuel Huapi" ;
+    skos:prefLabel "Water Body" .
+
+dwc:year a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:year ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/year-2023-06-28> ;
+    rdfs:domain dwc:Event ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:integer ;
+    skos:definition "The four-digit year in which the dwc:Event occurred, according to the Common Era Calendar."@en ;
+    skos:example 1160,
+        2008 ;
+    skos:prefLabel "Year" .
 
 dwcdp:assertedBy a owl:ObjectProperty ;
     rdfs:domain dwc:Assertion ;
@@ -2182,14 +2279,6 @@ mixs:0001320 a owl:DatatypeProperty ;
     skos:definition "NCBI taxon ID of the sample. May be a single taxon or mixed taxa sample. Use \"synthetic metagenome\" for mock community positive controls, or \"blank sample\" for negative controls."@en ;
     skos:prefLabel "Taxonomy ID Of DNA Sample" .
 
-dcterms:Location a owl:Class ;
-    dcterms:isVersionOf dcterms:Location ;
-    rdfs:isDefinedBy dcterms: ;
-    skos:definition "A spatial region or named place."@en ;
-    skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
-        "the place defined by a georeference" ;
-    skos:prefLabel "Location" .
-
 dcterms:type a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:type ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
@@ -2213,6 +2302,14 @@ dwcdp:followed a owl:ObjectProperty ;
     rdfs:range dwc:Protocol ;
     skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
     skos:prefLabel "Followed" .
+
+dcterms:Location a owl:Class ;
+    dcterms:isVersionOf dcterms:Location ;
+    rdfs:isDefinedBy dcterms: ;
+    skos:definition "A spatial region or named place."@en ;
+    skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
+        "the place defined by a georeference" ;
+    skos:prefLabel "Location" .
 
 dcterms:title a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:title ;
@@ -2271,6 +2368,24 @@ dwc:NucleotideSequence a owl:Class ;
                         owl:onProperty dwc:sequence ] ) ] ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
     skos:prefLabel "Nucleotide Sequence" .
+
+dwc:OccurrenceAssertion a owl:Class ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf dwc:Assertion ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty dwcdp:about ;
+            owl:someValuesFrom dwc:Occurrence ] ;
+    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]." ;
+    skos:prefLabel "Occurrence Assertion" .
+
+dwc:OrganismAssertion a owl:Class ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf dwc:Assertion ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty dwcdp:about ;
+            owl:someValuesFrom dwc:Organism ] ;
+    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]." ;
+    skos:prefLabel "Organism Assertion" .
 
 dwc:Protocol a owl:Class ;
     dcterms:isVersionOf dwc:Protocol ;
@@ -2377,15 +2492,6 @@ dcterms:identifier a owl:DatatypeProperty ;
     skos:definition "An unambiguous reference to the resource within a given context." ;
     skos:prefLabel "Identifier" .
 
-dwc:MaterialEntityAssertion a owl:Class ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf dwc:Assertion ;
-    owl:equivalentClass [ a owl:Restriction ;
-            owl:onProperty dwcdp:about ;
-            owl:someValuesFrom dwc:MaterialEntity ] ;
-    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]." ;
-    skos:prefLabel "Material Entity Assertion" .
-
 dwc:Occurrence a owl:Class ;
     dcterms:isVersionOf dwc:Occurrence ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
@@ -2395,6 +2501,21 @@ dwc:Occurrence a owl:Class ;
         "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23",
         "a wolf pack on the shore of Kluane Lake in 1988" ;
     skos:prefLabel "Occurrence" .
+
+dwc:MaterialEntityAssertion a owl:Class ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf dwc:Assertion ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty dwcdp:about ;
+            owl:someValuesFrom dwc:MaterialEntity ] ;
+    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]." ;
+    skos:prefLabel "Material Entity Assertion" .
+
+dwc:Assertion a owl:Class ;
+    dcterms:isVersionOf dwc:MeasurementOrFact ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
+    rdfs:isDefinedBy dwc: ;
+    skos:prefLabel "Assertion" .
 
 dwc:Event a owl:Class ;
     dcterms:isVersionOf dwc:Event ;
@@ -2411,12 +2532,6 @@ dwc:Event a owl:Class ;
         "a material collecting event",
         "an organism occurrence" ;
     skos:prefLabel "Event" .
-
-dwc:Assertion a owl:Class ;
-    dcterms:isVersionOf dwc:MeasurementOrFact ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
-    rdfs:isDefinedBy dwc: ;
-    skos:prefLabel "Assertion" .
 
 dwc:GeologicalContext a owl:Class ;
     dcterms:isVersionOf dwc:GeologicalContext ;

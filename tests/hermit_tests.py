@@ -30,14 +30,14 @@ if owl_nothing_line:
     owl_nothing_uris = re.findall(r"<[^>]+>", owl_nothing_line)
     
     # Print number of URIs equivalent
-    print(f"Number of URIs equivalent to owl:Nothing: {len(owl_nothing_uris)}")
+    print(f"+ Number of URIs equivalent to owl:Nothing: {len(owl_nothing_uris)}")
 
     # Print out each URI
     for uri in owl_nothing_uris:
         print(f"- {uri}")
 else:
     # Print regular success message
-    print(f"No URIs in the ontology are equivalent to owl:Nothing")
+    print(f"+ No URIs in the ontology are equivalent to owl:Nothing")
 
 
 if owl_bottom_object_property_line:
@@ -45,14 +45,14 @@ if owl_bottom_object_property_line:
     owl_bottom_object_property_uris = re.findall(r"<[^>]+>", owl_bottom_object_property_line)
     
     # Print number of URIs equivalent
-    print(f"\nNumber of URIs equivalent to owl:bottomObjectProperty: {len(owl_bottom_object_property_uris)}")
+    print(f"\n+ Number of URIs equivalent to owl:bottomObjectProperty: {len(owl_bottom_object_property_uris)}")
 
     # Print out each URI
     for uri in owl_bottom_object_property_uris:
         print(f"- {uri}")
 else:
     # Print regular success message
-    print(f"\nNo URIs in the ontology are equivalent to owl:bottomObjectProperty")
+    print(f"\n+ No URIs in the ontology are equivalent to owl:bottomObjectProperty")
 
 
 if owl_bottom_data_property_line:
@@ -60,11 +60,11 @@ if owl_bottom_data_property_line:
     owl_bottom_data_property_uris = re.findall(r"<[^>]+>", owl_bottom_data_property_line)
     
     # Print number of URIs equivalent
-    print(f"\nNumber of URIs equivalent to owl:bottomDataProperty: {len(owl_bottom_data_property_uris)}")
+    print(f"\n+ Number of URIs equivalent to owl:bottomDataProperty: {len(owl_bottom_data_property_uris)}")
 
     # Print out each URI
     for uri in owl_bottom_data_property_uris:
         print(f"- {uri}")
 else:
     # Print regular success message
-    print(f"\nNo URIs in the ontology are equivalent to owl:bottomDataProperty")
+    print(f"\n+ No URIs in the ontology are equivalent to owl:bottomDataProperty")

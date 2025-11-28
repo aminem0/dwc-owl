@@ -149,7 +149,7 @@ def createDP(
 
         # Define the union of classes for the domain class
         domain_union_class = BNode()
-        graph.add((domain_union_class, RDF["type"], OWL["DataRange"]))
+        graph.add((domain_union_class, RDF["type"], OWL["Class"]))
         graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
 
         # Define the domain of the owl:DatatypeProperty
@@ -168,6 +168,7 @@ def createDP(
         Collection(graph, range_bnode, range_list)
 
         # Define the union of classes for the range datatype
+        # WARN: Verify RDFS term
         range_union_datatype = BNode()
         graph.add((range_union_datatype, RDF["type"], RDFS["Datatype"]))
         graph.add((range_union_datatype, OWL["unionOf"], range_bnode))

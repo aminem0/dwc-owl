@@ -154,7 +154,11 @@ dwciri:assertionValueIRI rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/behavior
 dwciri:behavior rdf:type owl:ObjectProperty ;
-                rdfs:domain dwc:Occurrence ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( dwc:OccurrenceAssertion
+                                            dwc:OrganismAssertion
+                                          )
+                            ] ;
                 rdfs:range owl:Thing ;
                 dcterms:isVersionOf dwciri:behavior ;
                 dcterms:references <http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10> ;
@@ -166,10 +170,14 @@ dwciri:behavior rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/caste
 dwciri:caste rdf:type owl:ObjectProperty ;
-             rdfs:domain dwc:Occurrence ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( dwc:OccurrenceAssertion
+                                         dwc:OrganismAssertion
+                                       )
+                         ] ;
              rdfs:range owl:Thing ;
              dcterms:isVersionOf dwciri:caste ;
-             dcterms:references <http://rs.tdwg.org/dwc/terms/version/behavior-2023-06-28> ;
+             dcterms:references <http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10> ;
              rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
              rdfs:isDefinedBy dwciri: ;
              skos:definition "Categorisation of individuals for eusocial species (including some mammals and arthropods)."@en ;
@@ -274,6 +282,34 @@ dwciri:surveyTargetTypeIRI rdf:type owl:ObjectProperty ;
                            rdfs:isDefinedBy dwciri: ;
                            skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given."@en ;
                            skos:prefLabel "Survey Target Type IRI" .
+
+
+###  http://rs.tdwg.org/dwc/iri/verticalDatum
+dwciri:verticalDatum rdf:type owl:ObjectProperty ;
+                     rdfs:domain dcterms:Location ;
+                     rdfs:range owl:Thing ;
+                     dcterms:isVersionOf dwciri:verticalDatum ;
+                     dcterms:references <http://rs.tdwg.org/dwc/iri/version/verticalDatum-2025-07-10> ;
+                     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                     rdfs:isDefinedBy dwciri: ;
+                     skos:definition "The vertical datum used as the reference upon which the values in the elevation terms are based."@en ;
+                     skos:prefLabel "Vertical Datum (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/iri/vitality
+dwciri:vitality rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( dwc:OccurrenceAssertion
+                                            dwc:OrganismAssertion
+                                          )
+                            ] ;
+                rdfs:range owl:Thing ;
+                dcterms:isVersionOf dwciri:vitality ;
+                dcterms:references <http://rs.tdwg.org/dwc/iri/version/vitality-2025-07-10> ;
+                rdfs:comment "Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                rdfs:isDefinedBy dwciri: ;
+                skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
+                skos:prefLabel "Vitality (IRI)" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/about
@@ -1322,6 +1358,28 @@ dwc:bed rdf:type owl:DatatypeProperty ;
         skos:prefLabel "Bed" .
 
 
+###  http://rs.tdwg.org/dwc/terms/caste
+dwc:caste rdf:type owl:DatatypeProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( dwc:OccurrenceAssertion
+                                      dwc:OrganismAssertion
+                                    )
+                      ] ;
+          rdfs:range xsd:string ;
+          dcterms:isVersionOf dwc:caste ;
+          dcterms:references <http://rs.tdwg.org/dwc/terms/version/caste-2023-06-28> ;
+          rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+          rdfs:isDefinedBy dwc: ;
+          skos:definition "Categorisation of individuals for eusocial species (including some mammals and arthropods)."@en ;
+          skos:example "ergatoid" ,
+                       "intercaste" ,
+                       "male alate" ,
+                       "minor worker" ,
+                       "queen" ,
+                       "soldier" ;
+          skos:prefLabel "Caste" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/derivedFromMediaID
 dwc:derivedFromMediaID rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf dcterms:identifier ;
@@ -1735,7 +1793,7 @@ dwc:scientificName rdf:type owl:DatatypeProperty ;
                                              )
                                ] ;
                    rdfs:range xsd:string ;
-                   dcterms:isVersionOf <http://example.com/term-pending/dwc/scientificName> ;
+                   dcterms:isVersionOf dwc:scientificName ;
                    dcterms:references <http://rs.tdwg.org/dwc/terms/version/scientificName-2023-06-28> ;
                    rdfs:comment "This term should not contain identification qualifications, which should instead be supplied in the IdentificationQualifier term. When applied to an Organism or Occurrence, this term should be used to represent the scientific name that was applied to the associated Organism in accordance with the Taxon to which it was or is currently identified. Names should be compliant to the most recent nomenclatural code. For example, names of hybrids for algae, fungi and plants should follow the rules of the International Code of Nomenclature for algae, fungi, and plants (Schenzhen Code Articles H.1, H.2 and H.3). Thus, use the multiplication sign × (Unicode U+00D7, HTML ×) to identify a hybrid, not x or X, if possible."@en ;
                    rdfs:isDefinedBy dwc: ;
@@ -1761,6 +1819,25 @@ dwc:sequence rdf:type owl:DatatypeProperty ;
              rdfs:isDefinedBy dwc: ;
              skos:definition "A string representing nucleotide base pairs."@en ;
              skos:prefLabel "Sequence" .
+
+
+###  http://rs.tdwg.org/dwc/terms/sex
+dwc:sex rdf:type owl:DatatypeProperty ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( dwc:OccurrenceAssertion
+                                    dwc:OrganismAssertion
+                                  )
+                    ] ;
+        rdfs:range xsd:string ;
+        dcterms:isVersionOf dwc:sex ;
+        dcterms:references <http://rs.tdwg.org/dwc/terms/version/sex-2023-06-28> ;
+        rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+        rdfs:isDefinedBy dwc: ;
+        skos:definition "The sex of the biological individual(s) represented in the dwc:Occurrence."@en ;
+        skos:example "female" ,
+                     "hermaphrodite" ,
+                     "male" ;
+        skos:prefLabel "Sex" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/surveyID
@@ -1850,6 +1927,81 @@ dwc:verbatimAssertionType rdf:type owl:DatatypeProperty ;
                                        "sampling net mesh size" ,
                                        "water_temp" ;
                           skos:prefLabel "Verbatim Assertion Type" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verticalDatum
+dwc:verticalDatum rdf:type owl:DatatypeProperty ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( dwc:OccurrenceAssertion
+                                              dwc:OrganismAssertion
+                                            )
+                              ] ;
+                  rdfs:range xsd:string ;
+                  dcterms:isVersionOf dwc:verticalDatum ;
+                  dcterms:references <http://rs.tdwg.org/dwc/terms/version/verticalDatum-2025-06-12> ;
+                  rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                  rdfs:isDefinedBy dwc: ;
+                  skos:definition "The vertical datum used as the reference upon which the values in the elevation terms are based."@en ;
+                  skos:example "EGM2008" ,
+                               "EGM84" ,
+                               "EGM96" ,
+                               "EPSG:7030" ,
+                               "PGM2000A" ,
+                               "PGM2004" ,
+                               "PGM2006" ,
+                               "PGM2007" ,
+                               "not recorded" ;
+                  skos:prefLabel "Vitality" .
+
+
+###  http://rs.tdwg.org/dwc/terms/vitality
+dwc:vitality rdf:type owl:DatatypeProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( dwc:OccurrenceAssertion
+                                         dwc:OrganismAssertion
+                                       )
+                         ] ;
+             rdfs:range xsd:string ;
+             dcterms:isVersionOf dwc:vitality ;
+             dcterms:references <http://rs.tdwg.org/dwc/terms/version/vitality-2023-09-13> ;
+             rdfs:comment "Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`,` MaterialSample`, or `HumanObservation`. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+             rdfs:isDefinedBy dwc: ;
+             skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
+             skos:example "alive" ,
+                          "dead" ,
+                          "mixedLot" ,
+                          "notAssessed" ,
+                          "uncertain" ;
+             skos:prefLabel "Vitality" .
+
+
+###  http://rs.tdwg.org/dwc/terms/waterBody
+dwc:waterBody rdf:type owl:DatatypeProperty ;
+              rdfs:domain dcterms:Location ;
+              rdfs:range rdfs:Literal ;
+              dcterms:isVersionOf dwc:waterBody ;
+              dcterms:references <http://rs.tdwg.org/dwc/terms/version/waterBody-2023-06-28> ;
+              rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names."@en ;
+              rdfs:isDefinedBy dwc: ;
+              skos:definition "The name of the water body in which the dcterms:Location occurs."@en ;
+              skos:example "Baltic Sea" ,
+                           "Hudson River" ,
+                           "Indian Ocean" ,
+                           "Lago Nahuel Huapi" ;
+              skos:prefLabel "Water Body" .
+
+
+###  http://rs.tdwg.org/dwc/terms/year
+dwc:year rdf:type owl:DatatypeProperty ;
+         rdfs:domain dwc:Event ;
+         rdfs:range xsd:integer ;
+         dcterms:isVersionOf dwc:year ;
+         dcterms:references <http://rs.tdwg.org/dwc/terms/version/year-2023-06-28> ;
+         rdfs:isDefinedBy dwc: ;
+         skos:definition "The four-digit year in which the dwc:Event occurred, according to the Common Era Calendar."@en ;
+         skos:example 1160 ,
+                      2008 ;
+         skos:prefLabel "Year" .
 
 
 ###  http://rs.tdwg.org/eco/terms/includeOrExclude
