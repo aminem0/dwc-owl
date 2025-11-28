@@ -859,7 +859,9 @@ createOP(
     range_list=[AC["Media"], CHRONO["ChronometricAge"], DWC["Event"], DWC["MaterialEntity"], DWC["NucleotideAnalysis"], DWC["Occurrence"], DWC["Organism"]],
     pref_label=Literal("About"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism].", lang="en"),
-    examples=Literal("bb:assertion123 dwcdp:about bb:event456 .")
+    examples=[
+        Literal("bb:assertion123 dwcdp:about bb:event456 ."),
+    ],
 )
 
 # NOTE: Consider the types of things a permit could allow for.
@@ -872,7 +874,9 @@ createOP(
     range_list=[DWC["Event"], DWC["NucleotideAnalysis"], ECO["Survey"]],
     pref_label=Literal("Allows For"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Permit] to the activities it allows for. These activities can be varied, and include [dwc:Event], [dwc:NucleotideAnalysis] and [eco:Survey].", lang="en"),
-    examples=Literal("bb:SamplingPermit123 dwcdp:allowsFor bb:SamplingEvent456 .")
+    examples=[
+        Literal("bb:SamplingPermit123 dwcdp:allowsFor bb:SamplingEvent456 ."),
+    ],
 )
 
 createOP(
@@ -883,7 +887,9 @@ createOP(
     range_list=[DWC["MaterialEntity"]],
     pref_label=Literal("Analysis Of"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:MaterialEntity] of which it is an analysis of.", lang="en"),
-    examples=Literal("bb:PcrChain123 dwcdp:analysisOf bb:BoneFragment456 ."),
+    examples=[
+        Literal("bb:PcrChain123 dwcdp:analysisOf bb:BoneFragment456 ."),
+    ],
 )
 
 createOP(
@@ -894,7 +900,9 @@ createOP(
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Asserted By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the [dcterms:Agent] that asserted it.", lang="en"),
-    examples=Literal("bb:assertion123 dwcdp:assertedBy bb:agent456 ."),
+    examples=[
+        Literal("bb:assertion123 dwcdp:assertedBy bb:agent456 ."),
+    ],
 )
 
 createOP(
@@ -905,7 +913,9 @@ createOP(
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Authored By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that authored it.", lang="en"),
-    examples=Literal("bb:bibliographicResource123 dwcdp:authoredBy bb:agent456 .")
+    examples=[
+        Literal("bb:bibliographicResource123 dwcdp:authoredBy bb:agent456 ."),
+    ],
 )
 
 # NOTE: Can an dwc:Identification be dwcdp:basedOn a dwc:NucleotideAnalysis? I thought it was logically possible through the dwc:NucleotideSequence it produced? If so, why not have the same for dwc:Event and dwc:Occurrence?
@@ -917,7 +927,9 @@ createOP(
     range_list=[AC["Media"], DWC["MaterialEntity"], DWC["NucleotideAnalysis"], DWC["NucleotideSequence"], DWC["Occurrence"]],
     pref_label=Literal("Based On"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the entity on which it is based. These entities include [ac:Media], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:NucleotideSequence] and [dwc:Occurrence].", lang="en"),
-    examples=Literal("bb:identification123 dwcdp:basedOn bb:nucleotideSequence456 ."),
+    examples=[
+        Literal("bb:identification123 dwcdp:basedOn bb:nucleotideSequence456 ."),
+    ],
 )
 
 
@@ -929,7 +941,9 @@ createOP(
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Commented By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that commented it.", lang="en"),
-    examples=Literal("bb:event123 dwcdp:commentedBy bb:agent456 .")
+    examples=[
+        Literal("bb:event123 dwcdp:commentedBy bb:agent456 ."),
+    ],
 )
 
 createOP(
@@ -940,7 +954,9 @@ createOP(
     range_list=[DCTERMS["Agent"]],
     pref_label=Literal("Conducted By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Agent] that conducted it.", lang="en"),
-    examples=Literal("bb:event123 dwcdp:conductedBy bb:agent456 .")
+    examples=[
+        Literal("bb:event123 dwcdp:conductedBy bb:agent456 ."),
+    ],
 )
 
 createOP(
@@ -1341,8 +1357,111 @@ createOP(
     pref_label=Literal("Behavior (IRI)"),
     definition=Literal("A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="	http://rs.tdwg.org/dwc/iri/behavior",
+    version_of_s="http://rs.tdwg.org/dwc/iri/behavior",
     references_s="http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10",
+)
+
+createOP(
+    name="caste",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["Occurrence"]],
+    range_list=[OWL["Thing"]],
+    # range_list=[XSD["anyURI"]],
+    pref_label=Literal("Caste (IRI)"),
+    definition=Literal("Categorisation of individuals for eusocial species (including some mammals and arthropods).", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/caste",
+    references_s="http://rs.tdwg.org/dwc/terms/version/behavior-2023-06-28",
+)
+
+# NOTE: Revoir domain
+createOP(
+    name="dataGeneralizations",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[OWL["Thing"]],
+    range_list=[OWL["Thing"]],
+    # range_list=[XSD["anyURI"]],
+    pref_label=Literal("Data Generalizations (IRI)"),
+    definition=Literal("Actions taken to make the shared data less specific or complete than in its original form. Suggests that alternative data of higher quality may be available on request.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/dataGeneralizations",
+    references_s="http://rs.tdwg.org/dwc/iri/version/dataGeneralizations-2025-07-10",
+)
+
+createOP(
+    name="degreeOfEstablishment",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["Occurrence"]],
+    range_list=[OWL["Thing"]],
+    pref_label=Literal("Degree Of Establisment (IRI)"),
+    definition=Literal("The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time.", lang="en"),
+    comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    examples=[
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d003"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d005"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/iri/degreeOfEstablishment",
+    references_s="http://rs.tdwg.org/dwc/iri/version/degreeOfEstablishment-2025-07-10",
+)
+
+# NOTE: Revoir domain
+createOP(
+    name="discipline",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[OWL["Thing"]],
+    range_list=[OWL["Thing"]],
+    pref_label=Literal("Discipline (IRI)"),
+    definition=Literal("The primary branch or branches of knowledge represented by the record.", lang="en"),
+    comments=Literal("This term can be used to classify records according to branches of knowledge. Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/discipline",
+    references_s="http://rs.tdwg.org/dwc/iri/version/discipline-2025-06-12",
+)
+
+createOP(
+    name="disposition",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["MaterialEntity"]],
+    range_list=[OWL["Thing"]],
+    pref_label=Literal("Disposition (IRI)"),
+    definition=Literal("The current state of a specimen with respect to the collection identified in dwc:collectionCode or dwc:collectionID.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/disposition",
+    references_s="http://rs.tdwg.org/dwc/iri/version/disposition-2025-07-10",
+)
+
+createOP(
+    name="earliestGeochronologicalEra",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["MaterialEntity"]],
+    range_list=[OWL["Thing"]],
+    pref_label=Literal("Earliest Geochronological Era"),
+    definition=Literal("Use to link a dwc:GeologicalContext instance to chronostratigraphic time periods at the lowest possible level in a standardized hierarchy. Use this property to point to the earliest possible geological time period from which the dwc:MaterialEntity was collected.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI from a controlled vocabulary. A \"convenience property\" that replaces Darwin Core literal-value terms related to geological context. See Section 2.7.6 of the Darwin Core RDF Guide for details.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/earliestGeochronologicalEra",
+    references_s="http://rs.tdwg.org/dwc/iri/version/earliestGeochronologicalEra-2023-09-13",
+)
+
+createOP(
+    name="establishmentMeans",
+    namespace=DWCIRI,
+    graph=g,
+    domain_list=[DWC["Occurrence"]],
+    range_list=[OWL["Thing"]],
+    pref_label=Literal("Establishment Means (IRI)"),
+    definition=Literal("Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans.", lang="en"),
+    comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    examples=[
+        URIRef("http://rs.tdwg.org/dwcem/values/e001"),
+        URIRef("http://rs.tdwg.org/dwcem/values/e005"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/iri/establishmentMeans",
+    references_s="http://rs.tdwg.org/dwc/iri/version/establishmentMeans-2025-07-10",
 )
 
 # NOTE: Property I created. I do not see why there is not a dwciri: analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
