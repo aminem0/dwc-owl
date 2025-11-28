@@ -2859,6 +2859,7 @@ createDP(
 )
 
 # NOTE: Confirm term name
+# Also maybe consider rdfs:Literal
 createDP(
     name="geoName",
     namespace=MINEXT,
@@ -2875,6 +2876,338 @@ createDP(
     ],
     version_of_s="http://rs.tdwg.org/mineralogy/terms/name",
 )
+
+###############################################################################
+
+createDP(
+    name="aggregateForm",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Aggregate Form"),
+    definition=Literal("Observable crystal shapes of an assemblage of minerals.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary.", lang="en"),
+    examples_list=[
+        Literal("radial"),
+        Literal("botryoidal"),
+        Literal("oolithic"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/aggregateForm",
+)
+
+createDP(
+    name="alterationDescription",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Alteration Description"),
+    definition=Literal("Observable crystal shapes of an assemblage of minerals.", lang="en"),
+    comments=Literal("A description of any observed changes in the composition of a mineral brought about by physical or chemical processes related to changes in the physical or chemical environment.", lang="en"),
+    examples_list=[
+        Literal("Dolomitization"),
+        Literal("Fenetization"),
+        Literal("Rodingitization"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/alterationDescription",
+)
+
+createDP(
+    name="associatedMinerals",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Associated Minerals"),
+    definition=Literal("Observable crystal shapes of an assemblage of minerals.", lang="en"),
+    examples_list=[
+        Literal("calcite"),
+        Literal("dolomite"),
+        Literal("baryte"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/associatedMinerals",
+)
+
+createDP(
+    name="cleavage",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Cleavage"),
+    definition=Literal("Types of breakages along a plane of weakness, especially those parallel to crystal faces.", lang="en"),
+    examples_list=[
+        Literal("Extraordinary well developped rectangular cleavage"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/cleavage",
+)
+
+createDP(
+    name="color",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Cleavage"),
+    definition=Literal("The intrinsic color of a mineral under natural light.", lang="en"),
+    comments=Literal("Here, color is caused by the absorption, or lack of absorption of different wavelengths of natural light by a particular mineral.", lang="en"),
+    examples_list=[
+        Literal("Blue"),
+        Literal("green"),
+        Literal("red"),
+        Literal("iridescent"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/color",
+)
+
+createDP(
+    name="color",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Color"),
+    definition=Literal("The intrinsic color of a mineral under natural light.", lang="en"),
+    comments=Literal("Here, color is caused by the absorption, or lack of absorption of different wavelengths of natural light by a particular mineral.", lang="en"),
+    examples_list=[
+        Literal("Blue"),
+        Literal("green"),
+        Literal("red"),
+        Literal("iridescent"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/color",
+)
+
+createDP(
+    name="crystalForm",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Crystal Form"),
+    definition=Literal("Geometric shape of a crystal.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary.", lang="en"),
+    examples_list=[
+        Literal("cube"),
+        Literal("ditrigonal pyramid"),
+        Literal("scalenohedron"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/crystalForm",
+)
+
+createDP(
+    name="crystalHabit",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Crystal Habit"),
+    definition=Literal("A general term for describing the outward appearance of a mineral.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. For a given type of crystal, the habit may vary from locality to locality depending on environment of growth.", lang="en"),
+    examples_list=[
+        Literal("isometric"),
+        Literal("tabular"),
+        Literal("fibrous"),
+        Literal("dogtooth"),
+        Literal("nailhead"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/crystalHabit",
+)
+
+createDP(
+    name="exsolutionTexture",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Exsolution Texture"),
+    definition=Literal("A brief description of textures formed by exsolution.", lang="en"),
+    examples_list=[
+        Literal("Ilemenite lamellae in olivine"),
+        Literal("Clinopyroxene lamellae around the (100) plane of the orthopyroxene"),
+        Literal("Antiperthite exsolution"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/exsolutionTexture",
+)
+
+createDP(
+    name="inclusions",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Inclusions"),
+    definition=Literal("Short description of any inclusions present within a mineral that includes the phase and physical characteristics.", lang="en"),
+    examples_list=[
+        Literal("Star-shaped rutile needles in quartz"),
+        Literal("Needles of tourmaline in quartz (blue quartz)"),
+        Literal("Fluid inclusions (liquid bubble and single crystal) in quartz"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/inclusions",
+)
+
+createDP(
+    name="luminescence",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Luminescence"),
+    definition=Literal("The type and nature of light emitted from the mineral upon receiving energy from an external source.", lang="en"),
+    comments=Literal("Includes all types of luminescence including fluorescence (all wavelengths) and phosphorescence. Recommended best practice is to use nomenclature in part based on the source of energy, or the trigger for luminescence.", lang="en"),
+    examples_list=[
+        Literal("Green fluorescence"),
+        Literal("Pink under short wave UV light"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/luminescence",
+)
+
+createDP(
+    name="luster",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Luster"),
+    definition=Literal("The reflection of light from the surface of a mineral, described by its quality and intensity.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary.", lang="en"),
+    examples_list=[
+        Literal("Metallic"),
+        Literal("Glassy"),
+        Literal("Waxy"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/luster",
+)
+
+createDP(
+    name="maxCrystalDimensionInMillimiters",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[XSD["decimal"]],
+    pref_label=Literal("Maximum Crystal Dimension In Millimiters"),
+    definition=Literal("Maximum axial dimension of largest crystal measured in millimeters.", lang="en"),
+    examples_list=[
+        Literal("30", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/maxCrystalDimensionInMillimiters",
+)
+
+createDP(
+    name="maxSpecimenDimensionInMillimeters",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[XSD["decimal"]],
+    pref_label=Literal("Maximum Specimen Dimension In Millimeters"),
+    definition=Literal("Maximum axial dimension of specimen measured in millimeters.", lang="en"),
+    examples_list=[
+        Literal("100", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/maxSpecimenDimensionInMillimeters",
+)
+
+createDP(
+    name="measuredMassInGrams",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[XSD["decimal"]],
+    pref_label=Literal("Measured Mass In Grams"),
+    definition=Literal("Mass of specimen measured in grams.", lang="en"),
+    examples_list=[
+        Literal("4994", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/measuredMassInGrams",
+)
+
+createDP(
+    name="mineralDescription",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Mineral Description"),
+    definition=Literal("Comments or notes about the mineral instance, especially those that distinguish the mineral from similar items in a collection.", lang="en"),
+    comments=Literal("The scope of this term is strictly to a mineral within the context of the specimen. Specimen level descriptions belong in the related term minext:specimenDescription. Sibling concept to [http://rs.tdwg.org/dwc/terms/occurrenceRemarks](http://rs.tdwg.org/dwc/terms/occurrenceRemarks).", lang="en"),
+    examples_list=[
+        Literal("Pink fluorite on quartz"),
+        Literal("Lengenbachite on sugar-stained dolomite"),
+        Literal("Epitaxial growth on kyanite"),
+        Literal("Doubly terminated quartz crystals"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/mineralDescription",
+)
+
+createDP(
+    name="specimenDescription",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Mineral Description"),
+    definition=Literal("Comments or notes about the specimen (physical object) especially those that distinguish the specimen from similar materials in a collection.", lang="en"),
+    comments=Literal("See broader concept [http://rs.tdwg.org/dwc/terms/occurrenceRemarks](http://rs.tdwg.org/dwc/terms/occurrenceRemarks) for additional usage notes.", lang="en"),
+    examples_list=[
+        Literal("Showpiece"),
+        Literal("Historically valuable"),
+        Literal("Extraordinary composition"),
+        Literal("Two generations of quartz"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/specimenDescription",
+)
+
+createDP(
+    name="twinningLaw",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Twinning Law"),
+    definition=Literal("Short description of any physically discernable twining.", lang="en"),
+    examples_list=[
+        Literal("Dauphiné twinning/Dauphiné Law"),
+        Literal("Japan twinning/Japan Law"),
+        Literal("Brazil twinning/Brazil Law"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/twinningLaw",
+)
+
+createDP(
+    name="verbatimMass",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Verbatim Mass"),
+    definition=Literal("The original reported verbatim mass includes original units of measurement.", lang="en"),
+    examples_list=[
+        Literal("11.01 Lbs"),
+        Literal("105.07 g"),
+        Literal("2.45 kg"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/verbatimMass",
+)
+
+createDP(
+    name="verbatimSize",
+    namespace=MINEXT,
+    graph=g,
+    domain_list=[DWC["MaterialEntityAssertion"]],
+    range_list=[RDFS["Literal"]],
+    pref_label=Literal("Verbatim Size"),
+    definition=Literal("The verbatim size of a specimen as originally described in primary source material.", lang="en"),
+    examples_list=[
+        Literal("10 cm x 5 cm X 5 cm"),
+        Literal("largest diameter 16 cm"),
+        Literal("width 3 inches"),
+    ],
+    version_of_s="http://rs.tdwg.org/minext/terms/verbatimSize",
+)
+
+####################################################################################################
+
 
 createDP(
     name="ampliconSize",
