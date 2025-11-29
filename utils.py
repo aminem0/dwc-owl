@@ -159,7 +159,7 @@ def createDP(
             range_bnode = BNode()
             Collection(graph, range_bnode, ranges)
             range_union_class = BNode()
-            graph.add((range_union_class, RDF["type"], OWL["Class"]))
+            graph.add((range_union_class, RDF["type"], RDFS["Datatype"]))
             graph.add((range_union_class, OWL["unionOf"], range_bnode))
             graph.add((dp_uri, RDFS["range"], range_union_class))
 
