@@ -179,9 +179,6 @@ dwc:AuthorAgent a owl:Class ;
     skos:definition "An instance of a [dcterms:Agent] that has authored a [dcterms:BibliographicResource]."@en ;
     skos:prefLabel "Author Agent" .
 
-dwc:BadEvent a dwc:Event ;
-    dwc:startDayOfYear "2"^^xsd:string .
-
 dwc:ChronometricAgeAssertion a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf dwc:Assertion ;

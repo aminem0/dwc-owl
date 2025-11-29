@@ -3751,12 +3751,6 @@ bb:Sunfish456 rdf:type owl:NamedIndividual ,
                        dwc:Occurrence .
 
 
-###  http://rs.tdwg.org/dwc/terms/BadEvent
-dwc:BadEvent rdf:type owl:NamedIndividual ,
-                      dwc:Event ;
-             dwc:startDayOfYear "2" .
-
-
 #################################################################
 #    Annotations
 #################################################################

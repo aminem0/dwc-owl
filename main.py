@@ -2598,8 +2598,8 @@ createDP(
 
 # WARN: On purpose left bad triple
 # Shows that tests using HermiT can silently fail if the ontology is 
-g.add((DWC["BadEvent"], RDF["type"], DWC["Event"]))
-g.add((DWC["BadEvent"], DWC["startDayOfYear"], Literal("2", datatype=XSD["string"])))
+# g.add((DWC["BadEvent"], RDF["type"], DWC["Event"]))
+# g.add((DWC["BadEvent"], DWC["startDayOfYear"], Literal("2", datatype=XSD["string"])))
 
 createDP(
     name="startDayOfYear",
