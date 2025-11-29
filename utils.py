@@ -271,6 +271,7 @@ def createRDP(
         namespace: Namespace,
         graph: Graph,
         pref_label: Literal,
+        range_s: str,
         restrictions: list[list[str, float, str]],
         domains: Node | list[Node] | None = None,        
         version_of_s: str | None = None,
@@ -353,11 +354,9 @@ def createRDP(
     # Create an rdf:List from the Python list of BlankNodes of restrictions
     Collection(graph, restriction_list, restriction_pylist)
  
-    # Add the datatype restriction: owl:onDatatype xsd:decimal for now
-    # Later maybe make it accept different types of datatypes
     # Attach the list to the datatype node
     graph.add((dp_uri, RDFS["range"], datatype_bnode))
-    graph.add((datatype_bnode, OWL["onDatatype"], XSD["decimal"]))
+    graph.add((datatype_bnode, OWL["onDatatype"], XSD[f"{range_s}"]))
     graph.add((datatype_bnode, OWL["withRestrictions"], restriction_list))
 
     if subproperty_list:

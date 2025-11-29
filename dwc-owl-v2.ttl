@@ -1866,19 +1866,6 @@ dwc:minimumElevationInMeters rdf:type owl:DatatypeProperty ;
                              skos:prefLabel "Minimum Elevation In Meters2" .
 
 
-###  http://rs.tdwg.org/dwc/terms/minimumElevationInMeters2
-dwc:minimumElevationInMeters2 rdf:type owl:DatatypeProperty ;
-                              rdfs:domain dcterms:Location ;
-                              rdfs:range xsd:decimal ;
-                              dcterms:isVersionOf dwc:minimumElevationInMeters ;
-                              dcterms:references <http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28> ;
-                              rdfs:isDefinedBy dwc: ;
-                              skos:definition "The lower limit of the range of elevation (altitude, usually above sea level), in meters."@en ;
-                              skos:example -100.0 ,
-                                           802.0 ;
-                              skos:prefLabel "Minimum Elevation In Meters" .
-
-
 ###  http://rs.tdwg.org/dwc/terms/molecularProtocolID
 dwc:molecularProtocolID rdf:type owl:DatatypeProperty ;
                         rdfs:subPropertyOf dcterms:identifier ;

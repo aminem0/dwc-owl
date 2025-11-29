@@ -2715,6 +2715,7 @@ createRDP(
     namespace=DWC,
     graph=g,
     domains=DCTERMS["Location"],
+    range_s="decimal",
     restrictions=[
         ["minInclusive", -430, "decimal"],
         ["maxInclusive", 8850, "decimal"],
@@ -2732,24 +2733,6 @@ createRDP(
 # TEST: Test of range restriction on dwc:minimumElevationInMeters
 g.add((BB["SomePoint"], RDF["type"], DCTERMS["Location"]))
 g.add((BB["SomePoint"], DWC["minimumElevationInMeters"], Literal("-430", datatype=XSD["decimal"])))
-
-# NOTE: No range restriction of dwc:minimumElevationInMeters
-# Will delete soon
-createDP(
-    name="minimumElevationInMeters2",
-    namespace=DWC,
-    graph=g,
-    domains=DCTERMS["Location"],
-    ranges=XSD["decimal"],
-    pref_label=Literal("Minimum Elevation In Meters"),
-    definition=Literal("The lower limit of the range of elevation (altitude, usually above sea level), in meters.", lang="en"),
-    examples=[
-        Literal("-100", datatype=XSD["decimal"]),
-        Literal("802", datatype=XSD["decimal"]),
-    ],
-    version_of_s="http://rs.tdwg.org/dwc/terms/minimumElevationInMeters",
-    references_s="http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28",
-)
 
 createDP(
     name="month",
