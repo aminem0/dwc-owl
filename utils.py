@@ -179,10 +179,10 @@ def createEDP(
         name: str,
         namespace: Namespace,
         graph: Graph,
-        domain_list: list[Node],
-        oneOf_list: list[Node],
         pref_label: Literal,
-        version_of_s: str,
+        one_of: list[Node],
+        domains: Node | list[Node] | None = None,        
+        version_of_s: str | None = None,
         subproperty_list: list[Node] | None = None,
         additional_list: list[Node] | None = None,
         definition: Literal | None = None,
@@ -224,37 +224,29 @@ def createEDP(
     # Declare it in the graph
     graph.add((dp_uri, RDF["type"], OWL["DatatypeProperty"]))
 
-    # If just one domain, take it and go.
-    if len(domain_list) == 1:
-        graph.add((dp_uri, RDFS["domain"], domain_list[0]))
-   
-    # Otherwise do the blank node process.
-    else:
-        # Create blank node to contain union list
-        domain_bnode = BNode()
-   
-        # Fill it with
-        Collection(graph, domain_bnode, domain_list)
-
-        # Define the union of classes for the domain class
-        domain_union_class = BNode()
-        graph.add((domain_union_class, RDF["type"], OWL["DataRange"]))
-        graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
-
-        # Define the domain of the owl:DatatypeProperty
-        graph.add((dp_uri, RDFS["domain"], domain_union_class))
-
+    # NOTE: New version using domain
+    if domains:
+        if isinstance(domains, URIRef):
+            graph.add((dp_uri, RDFS["domain"], domains))
+        elif isinstance(domains, list):
+            domain_bnode = BNode()
+            Collection(graph, domain_bnode, domains)
+            domain_union_class = BNode()
+            graph.add((domain_union_class, RDF["type"], OWL["Class"]))
+            graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
+            graph.add((dp_uri, RDFS["domain"], domain_union_class))
+    
     # WARN: Here goes a rewrite to consider an enumeration of all allowed datatypes
     # If enumerated literals are provided, build an OWL datatype with owl:oneOf and
     # a Collection of allowable litterals
-    if oneOf_list:
+    if one_of:
         # Create a blank node for the enumerated datatype
         enum_datatype = BNode()
         graph.add((enum_datatype, RDF["type"], RDFS["Datatype"]))
 
         # Create RDF list of the enumeration values
         enum_list_bnode = BNode()
-        Collection(graph, enum_list_bnode, oneOf_list)
+        Collection(graph, enum_list_bnode, one_of)
 
         # Attach owl:oneOf list to the datatype node
         graph.add((enum_datatype, OWL["oneOf"], enum_list_bnode))

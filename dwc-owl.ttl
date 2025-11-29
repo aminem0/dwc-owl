@@ -547,6 +547,28 @@ dwc:nucleotideSequenceRemarks a owl:DatatypeProperty ;
     skos:definition "Comments or notes about a [dwc:NucleotideSequence]."@en ;
     skos:prefLabel "Nucleotide Sequence Remarks" .
 
+dwc:objectQuantity a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/objectQuantity> ;
+    rdfs:comment "An dwc:objectQuantity must have a corresponding dwc:objectQuantityType."@en ;
+    rdfs:domain dwc:MaterialEntity ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:unionOf ( xsd:integer xsd:string ) ] ;
+    skos:definition "A number or enumeration value for the quantity of differentiable dwc:MaterialEntities comprising this dwc:MaterialEntity."@en ;
+    skos:example 27,
+        "many" ;
+    skos:prefLabel "Object Quantity" .
+
+dwc:objectQuantityType a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/objectQuantityType> ;
+    rdfs:comment "An dwc:objectQuantityType must have a corresponding dwc:objectQuantity."@en ;
+    rdfs:domain dwc:MaterialEntity ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "The type of quantification system used for the quantity of dwc:MaterialEntities."@en ;
+    skos:example "individuals" ;
+    skos:prefLabel "Object Quantity Type" .
+
 dwc:organismInteractionID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:organismID ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
@@ -1563,6 +1585,28 @@ dwc:caste a owl:DatatypeProperty ;
         "soldier" ;
     skos:prefLabel "Caste" .
 
+dwc:causeOfDeath a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:causeOfDeath ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/causeOfDeath-2025-06-12> ;
+    rdfs:comment "The cause may be due to natural causes (e.g., `disease`, `predation`), human-related activities (e.g., `roadkill`, `pollution`), or other environmental factors (e.g., `extreme weather events`)."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dwc:Occurrence dwc:Organism ) ] ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "An indication of the known or suspected cause of death of a dwc:Organism."@en ;
+    skos:example "burned",
+        "disease",
+        "drowned",
+        "herbicide`",
+        "infanticide",
+        "old age",
+        "poisoned",
+        "roadkill",
+        "shot",
+        "starved",
+        "trapped" ;
+    skos:prefLabel "Cause Of Death" .
+
 dwc:datasetID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:datasetID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/datasetID-2017-10-06> ;
@@ -1814,13 +1858,63 @@ dwc:nucleotideSequenceID a owl:DatatypeProperty ;
     skos:definition "An identifier for a [dwc:NucleotideSequence]."@en ;
     skos:prefLabel "Nucleotide Sequence ID" .
 
+dwc:occurrenceStatus a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:occurrenceStatus ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/occurrenceStatus-2023-06-28> ;
+    rdfs:comment "For dwc:Occurrences, the default vocabulary is recommended to consist of `detected` and `notDetected`, but can be extended by implementers with good justification. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain dwc:Occurrence ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:oneOf ( "absent" "detected" "not detected" "present" ) ] ;
+    skos:definition "A statement about the detection or non-detection of a dwc:Organism."@en ;
+    skos:example "detected",
+        "notDetected" ;
+    skos:prefLabel "Occurrence Status" .
+
+dwc:organismName a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:organismName ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/organismName-2023-06-28> ;
+    rdfs:domain dwc:Organism ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A textual name or label assigned to a dwc:Organism instance."@en ;
+    skos:example "Boab Prison Tree",
+        "Huberta",
+        "J pod" ;
+    skos:prefLabel "Organism Name" .
+
+dwc:organismRemarks a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:organismRemarks ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/organismRemarks-2023-06-28> ;
+    rdfs:domain dwc:Organism ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "Comments or notes about the dwc:Organism instance."@en ;
+    skos:example "One of a litter of six" ;
+    skos:prefLabel "Organism Remarks" .
+
+dwc:organismScope a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:organismScope ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/organismScope-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term is not intended to be used to specify a type of dwc:Taxon. To describe the kind of dwc:Organism using a URI object in RDF, use rdf:type ([http://www.w3.org/1999/02/22-rdf-syntax-ns#type](http://www.w3.org/1999/02/22-rdf-syntax-ns#type)) instead."@en ;
+    rdfs:domain dwc:Organism ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A description of the kind of dwc:Organism instance. Can be used to indicate whether the dwc:Organism instance represents a discrete organism or if it represents a particular type of aggregation."@en ;
+    skos:example "clone",
+        "colony",
+        "multicellular organism",
+        "pack",
+        "virus" ;
+    skos:prefLabel "Organism Scope" .
+
 dwc:ownerInstitutionCode a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:ownerInstitutionCode ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/ownerInstitutionCode-2023-06-28> ;
     rdfs:domain dwc:MaterialEntity ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
-    skos:definition "A name (or acronym) in use by an institution having ownership of a dwc:MaterialEntity." ;
+    skos:definition "A name (or acronym) in use by an institution having ownership of a dwc:MaterialEntity."@en ;
     skos:example "APN",
         "InBio",
         "NPS" ;
@@ -1834,7 +1928,7 @@ dwc:parentEventID a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     rdfs:subPropertyOf dcterms:identifier ;
-    skos:definition "An identifier for the broader dwc:Event that groups this and potentially other dwc:Events." ;
+    skos:definition "An identifier for the broader dwc:Event that groups this and potentially other dwc:Events."@en ;
     skos:example "A1" ;
     skos:prefLabel "Parent Event ID" .
 
@@ -2900,17 +2994,6 @@ dcterms:BibliographicResource a owl:Class ;
     skos:definition "A book, article, or other documentary resource."@en ;
     skos:prefLabel "Bibliographic Resource" .
 
-dwc:Organism a owl:Class ;
-    dcterms:isVersionOf dwc:Organism ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18> ;
-    rdfs:comment "Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A particular organism or defined group of organisms considered to be taxonomically homogeneous."@en ;
-    skos:example "a specific bird",
-        "a specific instance of a bacterial culture",
-        "a specific wolf pack" ;
-    skos:prefLabel "Organism" .
-
 dwc:NucleotideAnalysis a owl:Class ;
     dcterms:isVersionOf dwc:NucleotideAnalysis ;
     rdfs:isDefinedBy dwc: ;
@@ -2932,6 +3015,17 @@ eco:Survey a owl:Class ;
         "a wetland vegetation mapping",
         "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
     skos:prefLabel "Survey" .
+
+dwc:Organism a owl:Class ;
+    dcterms:isVersionOf dwc:Organism ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18> ;
+    rdfs:comment "Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A particular organism or defined group of organisms considered to be taxonomically homogeneous."@en ;
+    skos:example "a specific bird",
+        "a specific instance of a bacterial culture",
+        "a specific wolf pack" ;
+    skos:prefLabel "Organism" .
 
 dcterms:Location a owl:Class ;
     dcterms:isVersionOf dcterms:Location ;

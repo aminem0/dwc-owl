@@ -1499,6 +1499,33 @@ dwc:caste rdf:type owl:DatatypeProperty ;
           skos:prefLabel "Caste" .
 
 
+###  http://rs.tdwg.org/dwc/terms/causeOfDeath
+dwc:causeOfDeath rdf:type owl:DatatypeProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( dwc:Occurrence
+                                             dwc:Organism
+                                           )
+                             ] ;
+                 rdfs:range xsd:string ;
+                 dcterms:isVersionOf dwc:causeOfDeath ;
+                 dcterms:references <http://rs.tdwg.org/dwc/terms/version/causeOfDeath-2025-06-12> ;
+                 rdfs:comment "The cause may be due to natural causes (e.g., `disease`, `predation`), human-related activities (e.g., `roadkill`, `pollution`), or other environmental factors (e.g., `extreme weather events`)."@en ;
+                 rdfs:isDefinedBy dwc: ;
+                 skos:definition "An indication of the known or suspected cause of death of a dwc:Organism."@en ;
+                 skos:example "burned" ,
+                              "disease" ,
+                              "drowned" ,
+                              "herbicide`" ,
+                              "infanticide" ,
+                              "old age" ,
+                              "poisoned" ,
+                              "roadkill" ,
+                              "shot" ,
+                              "starved" ,
+                              "trapped" ;
+                 skos:prefLabel "Cause Of Death" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/datasetID
 dwc:datasetID rdf:type owl:DatatypeProperty ;
               rdfs:domain dwc:Provenance ;
@@ -1854,6 +1881,63 @@ dwc:nucleotideSequenceRemarks rdf:type owl:DatatypeProperty ;
                               skos:prefLabel "Nucleotide Sequence Remarks" .
 
 
+###  http://rs.tdwg.org/dwc/terms/objectQuantity
+dwc:objectQuantity rdf:type owl:DatatypeProperty ;
+                   rdfs:domain dwc:MaterialEntity ;
+                   rdfs:range [ rdf:type rdfs:Datatype ;
+                                owl:unionOf ( xsd:integer
+                                              xsd:string
+                                            )
+                              ] ;
+                   dcterms:isVersionOf <http://example.com/term-pending/dwc/objectQuantity> ;
+                   rdfs:comment "An dwc:objectQuantity must have a corresponding dwc:objectQuantityType."@en ;
+                   rdfs:isDefinedBy dwc: ;
+                   skos:definition "A number or enumeration value for the quantity of differentiable dwc:MaterialEntities comprising this dwc:MaterialEntity."@en ;
+                   skos:example 27 ,
+                                "many" ;
+                   skos:prefLabel "Object Quantity" .
+
+
+###  http://rs.tdwg.org/dwc/terms/objectQuantityType
+dwc:objectQuantityType rdf:type owl:DatatypeProperty ;
+                       rdfs:domain dwc:MaterialEntity ;
+                       rdfs:range rdfs:Literal ;
+                       dcterms:isVersionOf <http://example.com/term-pending/dwc/objectQuantityType> ;
+                       rdfs:comment "An dwc:objectQuantityType must have a corresponding dwc:objectQuantity."@en ;
+                       rdfs:isDefinedBy dwc: ;
+                       skos:definition "The type of quantification system used for the quantity of dwc:MaterialEntities."@en ;
+                       skos:example "individuals" ;
+                       skos:prefLabel "Object Quantity Type" .
+
+
+###  http://rs.tdwg.org/dwc/terms/occurrenceStatus
+dwc:occurrenceStatus rdf:type owl:DatatypeProperty ;
+                     rdfs:domain dwc:Occurrence ;
+                     rdfs:range [ rdf:type rdfs:Datatype ;
+                                  owl:oneOf [ rdf:type rdf:List ;
+                                              rdf:first "absent" ;
+                                              rdf:rest [ rdf:type rdf:List ;
+                                                         rdf:first "detected" ;
+                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                    rdf:first "not detected" ;
+                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                               rdf:first "present" ;
+                                                                               rdf:rest rdf:nil
+                                                                             ]
+                                                                  ]
+                                                       ]
+                                            ]
+                                ] ;
+                     dcterms:isVersionOf dwc:occurrenceStatus ;
+                     dcterms:references <http://rs.tdwg.org/dwc/terms/version/occurrenceStatus-2023-06-28> ;
+                     rdfs:comment "For dwc:Occurrences, the default vocabulary is recommended to consist of `detected` and `notDetected`, but can be extended by implementers with good justification. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                     rdfs:isDefinedBy dwc: ;
+                     skos:definition "A statement about the detection or non-detection of a dwc:Organism."@en ;
+                     skos:example "detected" ,
+                                  "notDetected" ;
+                     skos:prefLabel "Occurrence Status" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/organismID
 dwc:organismID rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf dcterms:identifier ;
@@ -1879,6 +1963,49 @@ dwc:organismInteractionID rdf:type owl:DatatypeProperty ;
                           skos:prefLabel "Organism Interaction ID" .
 
 
+###  http://rs.tdwg.org/dwc/terms/organismName
+dwc:organismName rdf:type owl:DatatypeProperty ;
+                 rdfs:domain dwc:Organism ;
+                 rdfs:range rdfs:Literal ;
+                 dcterms:isVersionOf dwc:organismName ;
+                 dcterms:references <http://rs.tdwg.org/dwc/terms/version/organismName-2023-06-28> ;
+                 rdfs:isDefinedBy dwc: ;
+                 skos:definition "A textual name or label assigned to a dwc:Organism instance."@en ;
+                 skos:example "Boab Prison Tree" ,
+                              "Huberta" ,
+                              "J pod" ;
+                 skos:prefLabel "Organism Name" .
+
+
+###  http://rs.tdwg.org/dwc/terms/organismRemarks
+dwc:organismRemarks rdf:type owl:DatatypeProperty ;
+                    rdfs:domain dwc:Organism ;
+                    rdfs:range rdfs:Literal ;
+                    dcterms:isVersionOf dwc:organismRemarks ;
+                    dcterms:references <http://rs.tdwg.org/dwc/terms/version/organismRemarks-2023-06-28> ;
+                    rdfs:isDefinedBy dwc: ;
+                    skos:definition "Comments or notes about the dwc:Organism instance."@en ;
+                    skos:example "One of a litter of six" ;
+                    skos:prefLabel "Organism Remarks" .
+
+
+###  http://rs.tdwg.org/dwc/terms/organismScope
+dwc:organismScope rdf:type owl:DatatypeProperty ;
+                  rdfs:domain dwc:Organism ;
+                  rdfs:range rdfs:Literal ;
+                  dcterms:isVersionOf dwc:organismScope ;
+                  dcterms:references <http://rs.tdwg.org/dwc/terms/version/organismScope-2023-06-28> ;
+                  rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term is not intended to be used to specify a type of dwc:Taxon. To describe the kind of dwc:Organism using a URI object in RDF, use rdf:type ([http://www.w3.org/1999/02/22-rdf-syntax-ns#type](http://www.w3.org/1999/02/22-rdf-syntax-ns#type)) instead."@en ;
+                  rdfs:isDefinedBy dwc: ;
+                  skos:definition "A description of the kind of dwc:Organism instance. Can be used to indicate whether the dwc:Organism instance represents a discrete organism or if it represents a particular type of aggregation."@en ;
+                  skos:example "clone" ,
+                               "colony" ,
+                               "multicellular organism" ,
+                               "pack" ,
+                               "virus" ;
+                  skos:prefLabel "Organism Scope" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/ownerInstitutionCode
 dwc:ownerInstitutionCode rdf:type owl:DatatypeProperty ;
                          rdfs:domain dwc:MaterialEntity ;
@@ -1886,7 +2013,7 @@ dwc:ownerInstitutionCode rdf:type owl:DatatypeProperty ;
                          dcterms:isVersionOf dwc:ownerInstitutionCode ;
                          dcterms:references <http://rs.tdwg.org/dwc/terms/version/ownerInstitutionCode-2023-06-28> ;
                          rdfs:isDefinedBy dwc: ;
-                         skos:definition "A name (or acronym) in use by an institution having ownership of a dwc:MaterialEntity." ;
+                         skos:definition "A name (or acronym) in use by an institution having ownership of a dwc:MaterialEntity."@en ;
                          skos:example "APN" ,
                                       "InBio" ,
                                       "NPS" ;
@@ -1902,7 +2029,7 @@ dwc:parentEventID rdf:type owl:DatatypeProperty ;
                   dcterms:references <http://rs.tdwg.org/dwc/terms/version/parentEventID-2023-06-28> ;
                   rdfs:comment "Use a globally unique identifier for a dwc:Event or an identifier for a dwc:Event that is specific to the data set." ;
                   rdfs:isDefinedBy dwc: ;
-                  skos:definition "An identifier for the broader dwc:Event that groups this and potentially other dwc:Events." ;
+                  skos:definition "An identifier for the broader dwc:Event that groups this and potentially other dwc:Events."@en ;
                   skos:example "A1" ;
                   skos:prefLabel "Parent Event ID" .
 

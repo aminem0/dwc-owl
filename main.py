@@ -2206,6 +2206,38 @@ createDP(
 )
 
 createDP(
+    name="causeOfDeath",
+    namespace=DWC,
+    graph=g,
+    domains=[
+        DWC["Occurrence"],
+        DWC["Organism"],
+    ],
+    ranges=XSD["string"],
+    pref_label=Literal("Cause Of Death"),
+    definition=Literal("An indication of the known or suspected cause of death of a dwc:Organism.", lang="en"),
+    comments=Literal("The cause may be due to natural causes (e.g., `disease`, `predation`), human-related activities (e.g., `roadkill`, `pollution`), or other environmental factors (e.g., `extreme weather events`).", lang="en"),
+    examples=[
+        Literal("trapped"),
+        Literal("poisoned"),
+        Literal("starved"),
+        Literal("drowned"),
+        Literal("shot"),
+        Literal("starved"),
+        Literal("drowned"),
+        Literal("shot"),
+        Literal("old age"),
+        Literal("roadkill"),
+        Literal("disease"),
+        Literal("herbicide`"),
+        Literal("burned"),
+        Literal("infanticide"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/causeOfDeath",
+    references_s="http://rs.tdwg.org/dwc/terms/version/causeOfDeath-2025-06-12",
+)
+
+createDP(
     name="datasetID",
     namespace=DWC,
     graph=g,
@@ -2631,6 +2663,64 @@ createDP(
 )
 
 createDP(
+    name="objectQuantity",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["MaterialEntity"],
+    ranges=[
+        XSD["integer"],
+        XSD["string"],
+    ],
+    pref_label=Literal("Object Quantity"),
+    definition=Literal("A number or enumeration value for the quantity of differentiable dwc:MaterialEntities comprising this dwc:MaterialEntity.", lang="en"),
+    comments=Literal("An dwc:objectQuantity must have a corresponding dwc:objectQuantityType.", lang="en"),
+    examples=[
+        Literal("27", datatype=XSD["integer"]),
+        Literal("many"),
+    ],
+    version_of_s="http://example.com/term-pending/dwc/objectQuantity",
+)
+
+createDP(
+    name="objectQuantityType",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["MaterialEntity"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Object Quantity Type"),
+    definition=Literal("The type of quantification system used for the quantity of dwc:MaterialEntities.", lang="en"),
+    comments=Literal("An dwc:objectQuantityType must have a corresponding dwc:objectQuantity.", lang="en"),
+    examples=[
+        Literal("individuals"),
+    ],
+    version_of_s="http://example.com/term-pending/dwc/objectQuantityType",
+)
+
+# WARN: Considered the enumerated terms from the DwCDP SQL schema.
+# It considers `not detected` and not `notDetected`
+createEDP(
+    name="occurrenceStatus",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Occurrence"],
+    pref_label=Literal("Occurrence Status"),
+    one_of=[
+        Literal("absent"),
+        Literal("detected"),
+        Literal("not detected"),
+        Literal("present"),
+    ],
+    definition=Literal("A statement about the detection or non-detection of a dwc:Organism.", lang="en"),
+    comments=Literal("For dwc:Occurrences, the default vocabulary is recommended to consist of `detected` and `notDetected`, but can be extended by implementers with good justification. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("detected"),
+        Literal("notDetected"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/occurrenceStatus",
+    references_s="http://rs.tdwg.org/dwc/terms/version/occurrenceStatus-2023-06-28"
+)
+
+createDP(
     name="organismID",
     namespace=DWC,
     graph=g,
@@ -2657,8 +2747,57 @@ createDP(
     version_of_s="http://rs.tdwg.org/dwc/terms/organismID",
 )
 
+createDP(
+    name="organismName",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Organism"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Organism Name"),
+    definition=Literal("A textual name or label assigned to a dwc:Organism instance.", lang="en"),
+    examples=[
+        Literal("Huberta"),
+        Literal("Boab Prison Tree"),
+        Literal("J pod"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/organismName",
+    references_s="http://rs.tdwg.org/dwc/terms/version/organismName-2023-06-28",
+)
 
+createDP(
+    name="organismRemarks",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Organism"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Organism Remarks"),
+    definition=Literal("Comments or notes about the dwc:Organism instance.", lang="en"),
+    examples=[
+        Literal("One of a litter of six"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/organismRemarks",
+    references_s="http://rs.tdwg.org/dwc/terms/version/organismRemarks-2023-06-28",
+)
 
+createDP(
+    name="organismScope",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Organism"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Organism Scope"),
+    definition=Literal("A description of the kind of dwc:Organism instance. Can be used to indicate whether the dwc:Organism instance represents a discrete organism or if it represents a particular type of aggregation.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. This term is not intended to be used to specify a type of dwc:Taxon. To describe the kind of dwc:Organism using a URI object in RDF, use rdf:type ([http://www.w3.org/1999/02/22-rdf-syntax-ns#type](http://www.w3.org/1999/02/22-rdf-syntax-ns#type)) instead.", lang="en"),
+    examples=[
+        Literal("multicellular organism"),
+        Literal("virus"),
+        Literal("clone"),
+        Literal("pack"),
+        Literal("colony"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/organismScope",
+    references_s="http://rs.tdwg.org/dwc/terms/version/organismScope-2023-06-28",
+)
 
 createDP(
     name="ownerInstitutionCode",
@@ -2667,14 +2806,14 @@ createDP(
     domains=DWC["MaterialEntity"],
     ranges=RDFS["Literal"],
     pref_label=Literal("Owner Institution Code"),
-    definition=Literal("A name (or acronym) in use by an institution having ownership of a dwc:MaterialEntity."),
+    definition=Literal("A name (or acronym) in use by an institution having ownership of a dwc:MaterialEntity.", lang="en"),
     examples=[
         Literal("NPS"),
         Literal("APN"),
         Literal("InBio"),
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/ownerInstitutionCode",
-    references_s="http://rs.tdwg.org/dwc/terms/version/ownerInstitutionCode-2023-06-28"
+    references_s="http://rs.tdwg.org/dwc/terms/version/ownerInstitutionCode-2023-06-28",
 )
 
 createDP(
@@ -2684,14 +2823,14 @@ createDP(
     domains=DWC["Event"],
     ranges=RDFS["Literal"],
     pref_label=Literal("Parent Event ID"),
-    definition=Literal("An identifier for the broader dwc:Event that groups this and potentially other dwc:Events."),
+    definition=Literal("An identifier for the broader dwc:Event that groups this and potentially other dwc:Events.", lang="en"),
     comments=Literal("Use a globally unique identifier for a dwc:Event or an identifier for a dwc:Event that is specific to the data set."),
     examples=[
         Literal("A1"),
     ],
     subproperty_list=[DCTERMS["identifier"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/parentEventID",
-    references_s="http://rs.tdwg.org/dwc/terms/version/parentEventID-2023-06-28"
+    references_s="http://rs.tdwg.org/dwc/terms/version/parentEventID-2023-06-28",
 )
 
 createDP(
@@ -3513,8 +3652,8 @@ createEDP(
     name="includeOrExclude",
     namespace=ECO,
     graph=g,
-    domain_list=[ECO["SurveyTarget"]],
-    oneOf_list=[
+    domains=ECO["SurveyTarget"],
+    one_of=[
         Literal("include"),
         Literal("exclude")
     ],
@@ -4298,8 +4437,8 @@ createEDP(
     name="0000005",
     namespace=MIXS,
     graph=g,
-    domain_list=[DWC["MolecularProtocol"]],
-    oneOf_list=[
+    domains=DWC["MolecularProtocol"],
+    one_of=[
         Literal("contigs"),
         Literal("reads"),
     ],
@@ -4388,8 +4527,8 @@ createEDP(
     name="0000015",
     namespace=MIXS,
     graph=g,
-    domain_list=[DWC["MolecularProtocol"]],
-    oneOf_list=[
+    domains=DWC["MolecularProtocol"],
+    one_of=[
         Literal("aerobe"),
         Literal("anaerobe"),
         Literal("facultative"),
