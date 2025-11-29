@@ -288,6 +288,28 @@ dwciri:surveyTargetTypeIRI rdf:type owl:ObjectProperty ;
                            skos:prefLabel "Survey Target Type IRI" .
 
 
+###  http://rs.tdwg.org/dwc/iri/verbatimCoordinateSystem
+dwciri:verbatimCoordinateSystem rdf:type owl:ObjectProperty ;
+                                rdfs:domain dcterms:Location ;
+                                dcterms:isVersionOf dwciri:verbatimCoordinateSystem ;
+                                dcterms:references <http://rs.tdwg.org/dwc/iri/version/verbatimCoordinateSystem-2025-07-10> ;
+                                rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                                rdfs:isDefinedBy dwciri: ;
+                                skos:definition "The spatial coordinate system for the dwc:verbatimLatitude and dwc:verbatimLongitude or the dwc:verbatimCoordinates of the dcterms:Location."@en ;
+                                skos:prefLabel "Verbatim Coordinate System (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/iri/verbatimSRS
+dwciri:verbatimSRS rdf:type owl:ObjectProperty ;
+                   rdfs:domain dcterms:Location ;
+                   dcterms:isVersionOf dwciri:verbatimSRS ;
+                   dcterms:references <http://rs.tdwg.org/dwc/iri/version/verbatimSRS-2025-06-12> ;
+                   rdfs:comment "Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary IRI for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary IRI for the name or code of the ellipsoid, if known. Otherwise use an IRI for the value corresponding to `not recorded`."@en ;
+                   rdfs:isDefinedBy dwciri: ;
+                   skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which coordinates given in dwc:verbatimLatitude and dwc:verbatimLongitude, or dwc:verbatimCoordinates are based."@en ;
+                   skos:prefLabel "Verbatim SRS (IRI)" .
+
+
 ###  http://rs.tdwg.org/dwc/iri/verticalDatum
 dwciri:verticalDatum rdf:type owl:ObjectProperty ;
                      rdfs:domain dcterms:Location ;
@@ -1839,6 +1861,35 @@ dwc:sex rdf:type owl:DatatypeProperty ;
         skos:prefLabel "Sex" .
 
 
+###  http://rs.tdwg.org/dwc/terms/startDayOfYear
+dwc:startDayOfYear rdf:type owl:DatatypeProperty ;
+                   rdfs:domain dwc:Event ;
+                   rdfs:range xsd:integer ;
+                   dcterms:isVersionOf dwc:startDayOfYear ;
+                   dcterms:references <http://rs.tdwg.org/dwc/terms/version/startDayOfYear-2023-06-28> ;
+                   rdfs:isDefinedBy dwc: ;
+                   skos:definition "The earliest integer day of the year on which the dwc:Event occurred (`1` for January 1, `365` for December 31, except in a leap year, in which case it is `366`)."@en ;
+                   skos:example 1 ,
+                                365 ,
+                                366 ;
+                   skos:prefLabel "Start Day Of Year" .
+
+
+###  http://rs.tdwg.org/dwc/terms/stateProvince
+dwc:stateProvince rdf:type owl:DatatypeProperty ;
+                  rdfs:domain dcterms:Location ;
+                  rdfs:range xsd:string ;
+                  dcterms:isVersionOf dwc:stateProvince ;
+                  dcterms:references <http://rs.tdwg.org/dwc/terms/version/stateProvince-2023-06-28> ;
+                  rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both."@en ;
+                  rdfs:isDefinedBy dwc: ;
+                  skos:definition "The name of the next smaller administrative region than country (state, province, canton, department, region, etc.) in which the dcterms:Location occurs."@en ;
+                  skos:example "Córdoba" ,
+                               "Minas Gerais" ,
+                               "Montana" ;
+                  skos:prefLabel "First Order Division" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/surveyID
 dwc:surveyID rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf dcterms:identifier ;
@@ -1928,6 +1979,159 @@ dwc:verbatimAssertionType rdf:type owl:DatatypeProperty ;
                           skos:prefLabel "Verbatim Assertion Type" .
 
 
+###  http://rs.tdwg.org/dwc/terms/verbatimCoordinateSystem
+dwc:verbatimCoordinateSystem rdf:type owl:DatatypeProperty ;
+                             rdfs:domain dcterms:Location ;
+                             rdfs:range xsd:string ;
+                             dcterms:isVersionOf dwc:verbatimCoordinateSystem ;
+                             dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimCoordinateSystem-2023-06-28> ;
+                             rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                             rdfs:isDefinedBy dwc: ;
+                             skos:definition "The coordinate format for the dwc:verbatimLatitude and dwc:verbatimLongitude or the dwc:verbatimCoordinates of the dcterms:Location."@en ;
+                             skos:example "UTM" ,
+                                          "decimal degrees" ,
+                                          "degrees decimal minutes" ,
+                                          "degrees minutes seconds" ;
+                             skos:prefLabel "Verbatim Coordinate System" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verbatimCoordinates
+dwc:verbatimCoordinates rdf:type owl:DatatypeProperty ;
+                        rdfs:domain dcterms:Location ;
+                        rdfs:range xsd:string ;
+                        dcterms:isVersionOf dwc:verbatimCoordinates ;
+                        dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimCoordinates-2023-06-28> ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "The verbatim original spatial coordinates of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem."@en ;
+                        skos:example "17T 630000 4833400" ,
+                                     "41 05 54S 121 05 34W" ;
+                        skos:prefLabel "Verbatim Coordinates" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verbatimDepth
+dwc:verbatimDepth rdf:type owl:DatatypeProperty ;
+                  rdfs:domain dcterms:Location ;
+                  rdfs:range xsd:string ;
+                  dcterms:isVersionOf dwc:verbatimDepth ;
+                  dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimDepth-2017-10-06> ;
+                  rdfs:isDefinedBy dwc: ;
+                  skos:definition "The original description of the depth below the local surface."@en ;
+                  skos:example "100-200 m" ;
+                  skos:prefLabel "Verbatim Depth" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verbatimElevation
+dwc:verbatimElevation rdf:type owl:DatatypeProperty ;
+                      rdfs:domain dcterms:Location ;
+                      rdfs:range xsd:string ;
+                      dcterms:isVersionOf dwc:verbatimElevation ;
+                      dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimElevation-2017-10-06> ;
+                      rdfs:isDefinedBy dwc: ;
+                      skos:definition "The original description of the elevation (altitude, usually above sea level) of the dcterms:Location."@en ;
+                      skos:example "100-200 m" ;
+                      skos:prefLabel "Verbatim Elevation" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verbatimEventDate
+dwc:verbatimEventDate rdf:type owl:DatatypeProperty ;
+                      rdfs:domain dwc:Event ;
+                      rdfs:range xsd:string ;
+                      dcterms:isVersionOf dwc:verbatimEventDate ;
+                      dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimEventDate-2023-06-28> ;
+                      rdfs:isDefinedBy dwc: ;
+                      skos:definition "The verbatim original representation of the date and time information for a dwc:Event."@en ;
+                      skos:example "17IV1934" ,
+                                   "1999-03-XX" ,
+                                   "Marzo 2002" ,
+                                   "spring 1910" ;
+                      skos:prefLabel "Verbatim EventDate" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verbatimIdentification
+dwc:verbatimIdentification rdf:type owl:DatatypeProperty ;
+                           rdfs:domain dwc:Identification ;
+                           rdfs:range xsd:string ;
+                           dcterms:isVersionOf dwc:verbatimIdentification ;
+                           dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimIdentification-2023-06-28> ;
+                           rdfs:comment "This term is meant to allow the capture of an unaltered original identification/determination, including identification qualifiers, hybrid formulas, uncertainties, etc. This term is meant to be used in addition to dwc:scientificName (and dwc:identificationQualifier etc.), not instead of it."@en ;
+                           rdfs:isDefinedBy dwc: ;
+                           skos:definition "A string representing the taxonomic identification as it appeared in the original record."@en ;
+                           skos:example "Aconitum pilipes × A. variegatum" ,
+                                        "Anser anser × Branta canadensis" ,
+                                        "Lepomis auritus x cyanellus" ,
+                                        "Ministrymon sp. nov. 1" ,
+                                        "Pachyporidae?" ,
+                                        "Peromyscus sp." ,
+                                        "Potentilla × pantotricha Soják" ;
+                           skos:prefLabel "Verbatim Label" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verbatimLabel
+dwc:verbatimLabel rdf:type owl:DatatypeProperty ;
+                  rdfs:domain dwc:MaterialEntity ;
+                  rdfs:range xsd:string ;
+                  dcterms:isVersionOf dwc:verbatimLabel ;
+                  dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimLabel-2023-09-13> ;
+                  rdfs:isDefinedBy dwc: ;
+                  skos:definition "The content of this term should include no embellishments, prefixes, headers or other additions made to the text. Abbreviations must not be expanded and supposed misspellings must not be corrected. Lines or breakpoints between blocks of text that could be verified by seeing the original labels or images of them may be used. Examples of material entities include preserved specimens, fossil specimens, and material samples. Best practice is to use UTF-8 for all characters. Best practice is to add comment “verbatimLabel derived from human transcription” in dwc:occurrenceRemarks."@en ;
+                  skos:prefLabel "Verbatim Label" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verbatimLatitude
+dwc:verbatimLatitude rdf:type owl:DatatypeProperty ;
+                     rdfs:domain dcterms:Location ;
+                     rdfs:range xsd:string ;
+                     dcterms:isVersionOf dwc:verbatimLatitude ;
+                     dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimLatitude-2023-06-28> ;
+                     rdfs:isDefinedBy dwc: ;
+                     skos:definition "The verbatim original latitude of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem."@en ;
+                     skos:example "41 05 54.03S" ;
+                     skos:prefLabel "Verbatim Latitude" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verbatimLocality
+dwc:verbatimLocality rdf:type owl:DatatypeProperty ;
+                     rdfs:domain dcterms:Location ;
+                     rdfs:range xsd:string ;
+                     dcterms:isVersionOf dwc:verbatimLocality ;
+                     dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimLocality-2021-07-15> ;
+                     rdfs:isDefinedBy dwc: ;
+                     skos:definition "The original textual description of the place."@en ;
+                     skos:example "25 km NNE Bariloche por R. Nac. 237" ;
+                     skos:prefLabel "Verbatim Locality" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verbatimLongitude
+dwc:verbatimLongitude rdf:type owl:DatatypeProperty ;
+                      rdfs:domain dcterms:Location ;
+                      rdfs:range xsd:string ;
+                      dcterms:isVersionOf dwc:verbatimLongitude ;
+                      dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimLongitude-2023-06-28> ;
+                      rdfs:isDefinedBy dwc: ;
+                      skos:definition "The verbatim original longitude of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem."@en ;
+                      skos:example "121d 10' 34\" W" ;
+                      skos:prefLabel "Verbatim Longitude" .
+
+
+###  http://rs.tdwg.org/dwc/terms/verbatimSRS
+dwc:verbatimSRS rdf:type owl:DatatypeProperty ;
+                rdfs:domain dcterms:Location ;
+                rdfs:range xsd:string ;
+                dcterms:isVersionOf dwc:verbatimSRS ;
+                dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimSRS-2025-06-12> ;
+                rdfs:comment "Recommended best practice is to use the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use the value `not recorded`. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                rdfs:isDefinedBy dwc: ;
+                skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which coordinates given in dwc:verbatimLatitude and dwc:verbatimLongitude, or dwc:verbatimCoordinates are based."@en ;
+                skos:example "Campo Inchauspe" ,
+                             "Clarke 1866" ,
+                             "EPSG:4326" ,
+                             "European 1950" ,
+                             "NAD27" ,
+                             "WGS84" ,
+                             "not recorded" ;
+                skos:prefLabel "Verbatim SRS" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/vernacularName
 dwc:vernacularName rdf:type owl:DatatypeProperty ;
                    rdfs:domain [ rdf:type owl:Class ;
@@ -1972,7 +2176,7 @@ dwc:verticalDatum rdf:type owl:DatatypeProperty ;
                                "PGM2006" ,
                                "PGM2007" ,
                                "not recorded" ;
-                  skos:prefLabel "Vitality" .
+                  skos:prefLabel "Vertical Datum" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/vitality
@@ -3545,6 +3749,12 @@ bb:Spider456 rdf:type owl:NamedIndividual ,
 ###  http://bioboum.ca/Sunfish456
 bb:Sunfish456 rdf:type owl:NamedIndividual ,
                        dwc:Occurrence .
+
+
+###  http://rs.tdwg.org/dwc/terms/BadEvent
+dwc:BadEvent rdf:type owl:NamedIndividual ,
+                      dwc:Event ;
+             dwc:startDayOfYear "2" .
 
 
 #################################################################

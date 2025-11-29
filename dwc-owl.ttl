@@ -179,6 +179,9 @@ dwc:AuthorAgent a owl:Class ;
     skos:definition "An instance of a [dcterms:Agent] that has authored a [dcterms:BibliographicResource]."@en ;
     skos:prefLabel "Author Agent" .
 
+dwc:BadEvent a dwc:Event ;
+    dwc:startDayOfYear "2"^^xsd:string .
+
 dwc:ChronometricAgeAssertion a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf dwc:Assertion ;
@@ -340,10 +343,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -1411,6 +1414,24 @@ dwciri:fieldNotes a owl:ObjectProperty ;
     skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
     skos:prefLabel "Establishment Means (IRI)" .
 
+dwciri:verbatimCoordinateSystem a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:verbatimCoordinateSystem ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/verbatimCoordinateSystem-2025-07-10> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwciri: ;
+    skos:definition "The spatial coordinate system for the dwc:verbatimLatitude and dwc:verbatimLongitude or the dwc:verbatimCoordinates of the dcterms:Location."@en ;
+    skos:prefLabel "Verbatim Coordinate System (IRI)" .
+
+dwciri:verbatimSRS a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:verbatimSRS ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/verbatimSRS-2025-06-12> ;
+    rdfs:comment "Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary IRI for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary IRI for the name or code of the ellipsoid, if known. Otherwise use an IRI for the value corresponding to `not recorded`."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwciri: ;
+    skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which coordinates given in dwc:verbatimLatitude and dwc:verbatimLongitude, or dwc:verbatimCoordinates are based."@en ;
+    skos:prefLabel "Verbatim SRS (IRI)" .
+
 dwciri:verticalDatum a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:verticalDatum ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/verticalDatum-2025-07-10> ;
@@ -1773,6 +1794,162 @@ dwc:sex a owl:DatatypeProperty ;
         "male" ;
     skos:prefLabel "Sex" .
 
+dwc:startDayOfYear a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:startDayOfYear ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/startDayOfYear-2023-06-28> ;
+    rdfs:domain dwc:Event ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:integer ;
+    skos:definition "The earliest integer day of the year on which the dwc:Event occurred (`1` for January 1, `365` for December 31, except in a leap year, in which case it is `366`)."@en ;
+    skos:example 1,
+        365,
+        366 ;
+    skos:prefLabel "Start Day Of Year" .
+
+dwc:stateProvince a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:stateProvince ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/stateProvince-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The name of the next smaller administrative region than country (state, province, canton, department, region, etc.) in which the dcterms:Location occurs."@en ;
+    skos:example "Córdoba",
+        "Minas Gerais",
+        "Montana" ;
+    skos:prefLabel "First Order Division" .
+
+dwc:verbatimCoordinateSystem a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimCoordinateSystem ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimCoordinateSystem-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The coordinate format for the dwc:verbatimLatitude and dwc:verbatimLongitude or the dwc:verbatimCoordinates of the dcterms:Location."@en ;
+    skos:example "UTM",
+        "decimal degrees",
+        "degrees decimal minutes",
+        "degrees minutes seconds" ;
+    skos:prefLabel "Verbatim Coordinate System" .
+
+dwc:verbatimCoordinates a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimCoordinates ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimCoordinates-2023-06-28> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The verbatim original spatial coordinates of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem."@en ;
+    skos:example "17T 630000 4833400",
+        "41 05 54S 121 05 34W" ;
+    skos:prefLabel "Verbatim Coordinates" .
+
+dwc:verbatimDepth a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimDepth ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimDepth-2017-10-06> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The original description of the depth below the local surface."@en ;
+    skos:example "100-200 m" ;
+    skos:prefLabel "Verbatim Depth" .
+
+dwc:verbatimElevation a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimElevation ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimElevation-2017-10-06> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The original description of the elevation (altitude, usually above sea level) of the dcterms:Location."@en ;
+    skos:example "100-200 m" ;
+    skos:prefLabel "Verbatim Elevation" .
+
+dwc:verbatimEventDate a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimEventDate ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimEventDate-2023-06-28> ;
+    rdfs:domain dwc:Event ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The verbatim original representation of the date and time information for a dwc:Event."@en ;
+    skos:example "17IV1934",
+        "1999-03-XX",
+        "Marzo 2002",
+        "spring 1910" ;
+    skos:prefLabel "Verbatim EventDate" .
+
+dwc:verbatimIdentification a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimIdentification ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimIdentification-2023-06-28> ;
+    rdfs:comment "This term is meant to allow the capture of an unaltered original identification/determination, including identification qualifiers, hybrid formulas, uncertainties, etc. This term is meant to be used in addition to dwc:scientificName (and dwc:identificationQualifier etc.), not instead of it."@en ;
+    rdfs:domain dwc:Identification ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "A string representing the taxonomic identification as it appeared in the original record."@en ;
+    skos:example "Aconitum pilipes × A. variegatum",
+        "Anser anser × Branta canadensis",
+        "Lepomis auritus x cyanellus",
+        "Ministrymon sp. nov. 1",
+        "Pachyporidae?",
+        "Peromyscus sp.",
+        "Potentilla × pantotricha Soják" ;
+    skos:prefLabel "Verbatim Label" .
+
+dwc:verbatimLabel a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimLabel ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimLabel-2023-09-13> ;
+    rdfs:domain dwc:MaterialEntity ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The content of this term should include no embellishments, prefixes, headers or other additions made to the text. Abbreviations must not be expanded and supposed misspellings must not be corrected. Lines or breakpoints between blocks of text that could be verified by seeing the original labels or images of them may be used. Examples of material entities include preserved specimens, fossil specimens, and material samples. Best practice is to use UTF-8 for all characters. Best practice is to add comment “verbatimLabel derived from human transcription” in dwc:occurrenceRemarks."@en ;
+    skos:prefLabel "Verbatim Label" .
+
+dwc:verbatimLatitude a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimLatitude ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimLatitude-2023-06-28> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The verbatim original latitude of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem."@en ;
+    skos:example "41 05 54.03S" ;
+    skos:prefLabel "Verbatim Latitude" .
+
+dwc:verbatimLocality a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimLocality ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimLocality-2021-07-15> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The original textual description of the place."@en ;
+    skos:example "25 km NNE Bariloche por R. Nac. 237" ;
+    skos:prefLabel "Verbatim Locality" .
+
+dwc:verbatimLongitude a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimLongitude ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimLongitude-2023-06-28> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The verbatim original longitude of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem."@en ;
+    skos:example "121d 10' 34\" W" ;
+    skos:prefLabel "Verbatim Longitude" .
+
+dwc:verbatimSRS a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:verbatimSRS ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/verbatimSRS-2025-06-12> ;
+    rdfs:comment "Recommended best practice is to use the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use the value `not recorded`. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which coordinates given in dwc:verbatimLatitude and dwc:verbatimLongitude, or dwc:verbatimCoordinates are based."@en ;
+    skos:example "Campo Inchauspe",
+        "Clarke 1866",
+        "EPSG:4326",
+        "European 1950",
+        "NAD27",
+        "WGS84",
+        "not recorded" ;
+    skos:prefLabel "Verbatim SRS" .
+
 dwc:vernacularName a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:vernacularName ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/vernacularName-2023-06-28> ;
@@ -1810,7 +1987,7 @@ dwc:verticalDatum a owl:DatatypeProperty ;
         "PGM2006",
         "PGM2007",
         "not recorded" ;
-    skos:prefLabel "Vitality" .
+    skos:prefLabel "Vertical Datum" .
 
 dwc:vitality a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:vitality ;
@@ -2359,14 +2536,6 @@ dc:source a owl:DatatypeProperty ;
     skos:definition "A related resource from which the described resource is derived"@en ;
     skos:prefLabel "Source (DC)" .
 
-dcterms:Location a owl:Class ;
-    dcterms:isVersionOf dcterms:Location ;
-    rdfs:isDefinedBy dcterms: ;
-    skos:definition "A spatial region or named place."@en ;
-    skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
-        "the place defined by a georeference" ;
-    skos:prefLabel "Location" .
-
 dwc:NucleotideSequence a owl:Class ;
     dcterms:isVersionOf dwc:NucleotideSequence ;
     rdfs:isDefinedBy dwc: ;
@@ -2397,16 +2566,6 @@ dwcdp:about a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism]."@en ;
     skos:prefLabel "About" .
 
-dwc:Identification a owl:Class ;
-    dcterms:isVersionOf dwc:Identification ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18> ;
-    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A classification of a resource according to a classification scheme."@en ;
-    skos:example "a nomenclatural act designating a specimen as a holotype",
-        "a subspecies determination of an organism" ;
-    skos:prefLabel "Identification" .
-
 dwc:OrganismInteraction a owl:Class ;
     dcterms:isVersionOf dwc:OrganismInteraction ;
     rdfs:comment "Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s."@en ;
@@ -2433,6 +2592,16 @@ chrono:ChronometricAge a owl:Class ;
         "an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum",
         "an age range of a specimen based on its biostratigraphic content" ;
     skos:prefLabel "Chronometric Age" .
+
+dwc:Identification a owl:Class ;
+    dcterms:isVersionOf dwc:Identification ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18> ;
+    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A classification of a resource according to a classification scheme."@en ;
+    skos:example "a nomenclatural act designating a specimen as a holotype",
+        "a subspecies determination of an organism" ;
+    skos:prefLabel "Identification" .
 
 eco:SurveyTarget a owl:Class ;
     dcterms:isVersionOf eco:SurveyTarget ;
@@ -2493,6 +2662,14 @@ dcterms:identifier a owl:DatatypeProperty ;
     skos:definition "An unambiguous reference to the resource within a given context." ;
     skos:prefLabel "Identifier" .
 
+dcterms:Location a owl:Class ;
+    dcterms:isVersionOf dcterms:Location ;
+    rdfs:isDefinedBy dcterms: ;
+    skos:definition "A spatial region or named place."@en ;
+    skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
+        "the place defined by a georeference" ;
+    skos:prefLabel "Location" .
+
 dwc:Occurrence a owl:Class ;
     dcterms:isVersionOf dwc:Occurrence ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
@@ -2518,6 +2695,19 @@ dwc:Assertion a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     skos:prefLabel "Assertion" .
 
+dwc:GeologicalContext a owl:Class ;
+    dcterms:isVersionOf dwc:GeologicalContext ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dwc:geologicalContextID ] ) ] ;
+    skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
+    skos:example "a particular lithostratigraphic layer",
+        "a specific chronostratigraphic unit" ;
+    skos:prefLabel "Geological Context" .
+
 dwc:Event a owl:Class ;
     dcterms:isVersionOf dwc:Event ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/Event-2023-09-18> ;
@@ -2534,18 +2724,15 @@ dwc:Event a owl:Class ;
         "an organism occurrence" ;
     skos:prefLabel "Event" .
 
-dwc:GeologicalContext a owl:Class ;
-    dcterms:isVersionOf dwc:GeologicalContext ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:cardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty dwc:geologicalContextID ] ) ] ;
-    skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
-    skos:example "a particular lithostratigraphic layer",
-        "a specific chronostratigraphic unit" ;
-    skos:prefLabel "Geological Context" .
+ac:Media a owl:Class ;
+    dcterms:isVersionOf ac:Media ;
+    rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
+    rdfs:isDefinedBy ac: ;
+    skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
+    skos:example "dcmi:MovingImage",
+        "dcmi:Sound",
+        "dcmi:StillImage" ;
+    skos:prefLabel "Media" .
 
 dwc:MaterialEntity a owl:Class ;
     dcterms:isVersionOf dwc:MaterialEntity ;
@@ -2567,16 +2754,6 @@ dwc:MaterialEntity a owl:Class ;
         "the entire contents of a trawl",
         "the stomach contents of a fish" ;
     skos:prefLabel "Material Entity" .
-
-ac:Media a owl:Class ;
-    dcterms:isVersionOf ac:Media ;
-    rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
-    rdfs:isDefinedBy ac: ;
-    skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
-    skos:example "dcmi:MovingImage",
-        "dcmi:Sound",
-        "dcmi:StillImage" ;
-    skos:prefLabel "Media" .
 
 dcterms:Agent a owl:Class ;
     dcterms:isVersionOf dcterms:Agent ;

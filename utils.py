@@ -20,7 +20,7 @@ def createOC(
         subclass_list: list[Node] | None = None,
         definition: Literal | None = None,
         comments: Literal | None = None,
-        examples_list: list[Literal] | None = None,
+        examples: Literal | list[Literal] | None = None,
         card1_restrictions: list[Node] | None = None,
         maxcard1_restrictions: list[Node] | None = None,
         references_s: str | None = None,
@@ -40,10 +40,14 @@ def createOC(
         graph.add((class_uri, SKOS["definition"], definition))
     if comments:
         graph.add((class_uri, RDFS["comment"], comments))
-    if examples_list:
-        for example in examples_list:
-            graph.add((class_uri, SKOS["example"], example))
 
+    # Add examples if provided
+    if examples:
+        if isinstance(examples, URIRef):
+            graph.add((class_uri, SKOS["example"], examples))
+        elif isinstance(examples, list):
+            for example in examples:
+                graph.add((class_uri, SKOS["example"], example))
     # Add version info.
     graph.add((class_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
 
@@ -98,8 +102,7 @@ def createDP(
         additional_list: list[Node] | None = None,
         definition: Literal | None = None,
         comments: Literal | None = None,
-        # examples: Literal | None = None,
-        examples_list: list[Literal] | None = None,
+        examples: Literal | list[Literal] | None = None,
         references_s: str | None = None,
         ) -> None:
     # Create the owl:DatatypeProperty URI
@@ -119,12 +122,13 @@ def createDP(
     if comments:
         graph.add((dp_uri, RDFS["comment"], comments))
 
-    # Optionally add examples.
-    # if examples:
-    #     graph.add((dp_uri, SKOS["example"], examples))
-    if examples_list:
-        for example in examples_list:
-            graph.add((dp_uri, SKOS["example"], example))
+    # Add examples if provided
+    if examples:
+        if isinstance(examples, URIRef):
+            graph.add((dp_uri, SKOS["example"], examples))
+        elif isinstance(examples, list):
+            for example in examples:
+                graph.add((dp_uri, SKOS["example"], example))
 
     # Add version info.
     graph.add((dp_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
