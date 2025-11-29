@@ -100,14 +100,19 @@ xsd:date rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
-###  http://purl.org/dc/elements/1.1/rights
-dc:rights rdf:type owl:ObjectProperty ;
-          rdfs:domain dwc:UsagePolicy ;
-          rdfs:range [ rdf:type owl:Class ;
-                       owl:unionOf ( xsd:anyURI
-                                     xsd:string
-                                   )
-                     ] .
+###  http://purl.org/dc/terms/rights
+dcterms:rights rdf:type owl:ObjectProperty ;
+               rdfs:domain dwc:UsagePolicy .
+
+
+###  http://purl.org/dc/terms/rightsHolder
+dcterms:rightsHolder rdf:type owl:ObjectProperty ;
+                     rdfs:range dcterms:Agent ;
+                     dcterms:isVersionOf dcterms:rightsHolder ;
+                     rdfs:comment "Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided." ;
+                     rdfs:isDefinedBy dcterms: ;
+                     skos:definition "A person or organization owning or managing rights over the resource." ;
+                     skos:prefLabel "Rights Holder" .
 
 
 ###  http://purl.org/dc/terms/source
@@ -136,16 +141,6 @@ dcterms:type rdf:type owl:ObjectProperty ;
 
 ###  http://purl.org/ontology/bibo/editor
 bibo:editor rdf:type owl:ObjectProperty .
-
-
-###  http://rs.gbif.org/terms/pcr_primer_reference
-gbif:pcr_primer_reference rdf:type owl:ObjectProperty ;
-                          rdfs:domain dwc:MolecularProtocol ;
-                          rdfs:range [ rdf:type owl:Class ;
-                                       owl:unionOf ( rdfs:Literal
-                                                     xsd:anyURI
-                                                   )
-                                     ] .
 
 
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
@@ -277,6 +272,33 @@ dwciri:fieldNotes rdf:type owl:ObjectProperty ;
                   skos:prefLabel "Establishment Means (IRI)" .
 
 
+###  http://rs.tdwg.org/dwc/iri/reproductiveCondition
+dwciri:reproductiveCondition rdf:type owl:ObjectProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( dwc:OccurrenceAssertion
+                                                         dwc:OrganismAssertion
+                                                       )
+                                         ] ;
+                             dcterms:isVersionOf dwciri:reproductiveCondition ;
+                             dcterms:references <http://rs.tdwg.org/dwc/iri/version/reproductiveCondition-2025-07-10> ;
+                             rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                             rdfs:isDefinedBy dwciri: ;
+                             skos:definition "The reproductive condition of the biological individual(s) represented in the dwc:Occurrence."@en ;
+                             skos:prefLabel "Reproductive Condition (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/iri/samplingProtocol
+dwciri:samplingProtocol rdf:type owl:ObjectProperty ;
+                        rdfs:domain dwc:Event ;
+                        dcterms:isVersionOf dwciri:samplingProtocol ;
+                        dcterms:references <http://rs.tdwg.org/dwc/iri/version/samplingProtocol-2023-06-28> ;
+                        rdfs:comment "Recommended best practice is describe a dwc:Event with no more than one sampling protocol. In the case of a summary dwc:Event in which a specific protocol can not be attributed to specific dwc:Occurrences, the recommended best practice is to repeat the property for each IRI that denotes a different sampling protocol that applies to the dwc:Occurrence."@en ;
+                        rdfs:isDefinedBy dwciri: ;
+                        skos:definition "The methods or protocols used during a dwc:Event, denoted by an IRI."@en ;
+                        skos:example <https://doi.org/10.1111/j.1466-8238.2009.00467.x> ;
+                        skos:prefLabel "Sampling Protocol (IRI)" .
+
+
 ###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeIRI
 dwciri:surveyTargetTypeIRI rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf dcterms:type ;
@@ -334,6 +356,35 @@ dwciri:vitality rdf:type owl:ObjectProperty ;
                 rdfs:isDefinedBy dwciri: ;
                 skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
                 skos:prefLabel "Vitality (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/terms/relationshipOfResourceID
+dwc:relationshipOfResourceID rdf:type owl:ObjectProperty ;
+                             rdfs:domain dwc:ResourceRelationship ;
+                             dcterms:isVersionOf dwc:relationshipOfResourceID ;
+                             dcterms:references <http://rs.tdwg.org/dwc/terms/version/relationshipOfResourceID-2023-06-28> ;
+                             rdfs:comment "Recommended best practice is to use the identifiers of the terms in a controlled vocabulary, such as the OBO Relation Ontology."@en ;
+                             rdfs:isDefinedBy dwc: ;
+                             skos:definition "An identifier for the relationship type (predicate) that connects the subject identified by dwc:resourceID to its object identified by dwc:relatedResourceID."@en ;
+                             skos:example "http://purl.obolibrary.org/obo/RO_0002455" ,
+                                          "http://purl.obolibrary.org/obo/RO_0002456" ,
+                                          "https://www.inaturalist.org/observation_fields/879" ;
+                             skos:prefLabel "Relationship Of Resource ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/relationshipTypeIRI
+dwc:relationshipTypeIRI rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf dwc:relationshipOfResourceID ;
+                        rdfs:domain dwc:ResourceRelationship ;
+                        dcterms:isVersionOf dwc:relationshipOfResourceID ;
+                        dcterms:references <http://rs.tdwg.org/dwc/terms/version/relationshipOfResourceID-2023-06-28> ;
+                        rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "An IRI of a controlled vocabulary value for the type of a dwc:ResourceRelationship."@en ;
+                        skos:example <http://purl.obolibrary.org/obo/RO_0002455> ,
+                                     <http://purl.obolibrary.org/obo/RO_0002456> ,
+                                     <https://www.inaturalist.org/observation_fields/879> ;
+                        skos:prefLabel "Relationship Type (IRI)" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/about
@@ -780,18 +831,6 @@ dwcdp:usedFor rdf:type owl:ObjectProperty .
                                                        skos:prefLabel "Survey Target Type Source IRI" .
 
 
-###  https://w3id.org/mixs/0000014
-<https://w3id.org/mixs/0000014> rdf:type owl:ObjectProperty ;
-                                rdfs:domain [ rdf:type owl:Class ;
-                                              owl:unionOf ( dwc:MolecularProtocol
-                                                          )
-                                            ] ;
-                                rdfs:range [ rdf:type owl:Class ;
-                                             owl:unionOf ( xsd:string
-                                                         )
-                                           ] .
-
-
 #################################################################
 #    Data properties
 #################################################################
@@ -864,7 +903,19 @@ xmp:CreateDate rdf:type owl:DatatypeProperty ;
 
 
 ###  http://purl.org/dc/elements/1.1/rights
-dc:rights rdf:type owl:DatatypeProperty .
+dc:rights rdf:type owl:DatatypeProperty ;
+          rdfs:domain dwc:UsagePolicy ;
+          rdfs:range [ rdf:type rdfs:Datatype ;
+                       owl:unionOf ( xsd:anyURI
+                                     xsd:string
+                                   )
+                     ] ;
+          dcterms:isVersionOf dc:rights ;
+          rdfs:isDefinedBy dc: ;
+          skos:definition "Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions." ;
+          skos:example "Copyright 2014 Ron Thomas" ,
+                       "http://creativecommons.org/licenses/by/3.0/legalcode" ;
+          skos:prefLabel "Rights (DC)" .
 
 
 ###  http://purl.org/dc/elements/1.1/source
@@ -902,15 +953,7 @@ dcterms:identifier rdf:type owl:DatatypeProperty ;
 
 ###  http://purl.org/dc/terms/rights
 dcterms:rights rdf:type owl:DatatypeProperty ;
-               rdfs:domain dwc:UsagePolicy ;
-               rdfs:range xsd:anyURI ;
-               dcterms:isVersionOf dcterms:rights ;
-               rdfs:comment "At least one of [dcterms:rights] and [dc:rights] must be supplied but, when feasible, supplying both may make the metadata more widely useful. They must specify the same rights. In case of ambiguity, [dcterms:rights] prevails." ;
-               rdfs:isDefinedBy dcterms: ;
-               skos:definition "A URI pointing to structured information about rights held in and over the resource." ;
-               skos:example "http://creativecommons.org/licenses/by/3.0/legalcode" ,
-                            "http://creativecommons.org/publicdomain/zero/1.0" ;
-               skos:prefLabel "Rights (DCTERMS)" .
+               rdfs:range xsd:anyURI .
 
 
 ###  http://purl.org/dc/terms/source
@@ -973,7 +1016,18 @@ gbif:pcr_primer_name_reverse rdf:type owl:DatatypeProperty ;
 
 
 ###  http://rs.gbif.org/terms/pcr_primer_reference
-gbif:pcr_primer_reference rdf:type owl:DatatypeProperty .
+gbif:pcr_primer_reference rdf:type owl:DatatypeProperty ;
+                          rdfs:domain dwc:MolecularProtocol ;
+                          rdfs:range [ rdf:type rdfs:Datatype ;
+                                       owl:unionOf ( rdfs:Literal
+                                                     xsd:anyURI
+                                                   )
+                                     ] ;
+                          dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_reference> ;
+                          rdfs:isDefinedBy gbif: ;
+                          skos:definition "Reference for the PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment."@en ;
+                          skos:example "https:doi.org/10.11861742-9994-10-31" ;
+                          skos:prefLabel "PCR Primer Reference" .
 
 
 ###  http://rs.gbif.org/terms/pcr_primer_reverse
@@ -1683,7 +1737,7 @@ dwc:member rdf:type owl:DatatypeProperty ;
 dwc:molecularProtocolID rdf:type owl:DatatypeProperty ;
                         rdfs:subPropertyOf dcterms:identifier ;
                         rdfs:domain dwc:MolecularProtocol ;
-                        rdfs:range rdfs:Literal ;
+                        rdfs:range xsd:string ;
                         dcterms:isVersionOf <http://example.com/term-pending/dwc/molecularProtocolID> ;
                         rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
                         rdfs:isDefinedBy dwc: ;
@@ -1772,6 +1826,28 @@ dwc:preferredEventName rdf:type owl:DatatypeProperty ;
                        skos:prefLabel "Preferred Event Name" .
 
 
+###  http://rs.tdwg.org/dwc/terms/projectID
+dwc:projectID rdf:type owl:DatatypeProperty ;
+              rdfs:domain dwc:Provenance ;
+              rdfs:range [ rdf:type rdfs:Datatype ;
+                           owl:unionOf ( xsd:anyURI
+                                         xsd:string
+                                       )
+                         ] ;
+              dcterms:isVersionOf dwc:projectID ;
+              dcterms:references <http://rs.tdwg.org/dwc/terms/version/projectID-2025-06-12> ;
+              rdfs:comment "A projectID may be shared in multiple distinct datasets. The nature of the association can be described in the metadata project description element. This term should be used to provide a globally unique identifier (GUID) for a project, if available. This could be a DOI, URI, or any other persistent identifier that ensures a project can be uniquely distinguished from others. Recommended best practice is to separate the values in a list with space vertical bar space (` | `)."@en ;
+              rdfs:isDefinedBy dwc: ;
+              skos:definition "A list (concatenated and separated) of identifiers for projects that contributed to a dwc:Event."@en ;
+              skos:example "https://arvenetternansen.com/"^^xsd:anyURI ,
+                           "https://doi.org/10.26259/3b15eca7"^^xsd:anyURI ,
+                           "https://doi.org/10.3030/101180559"^^xsd:anyURI ,
+                           "OC202405" ,
+                           "RCN276730" ,
+                           "RCN276730 | Artsproject_7-24" ;
+              skos:prefLabel "Project ID" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/readCount
 dwc:readCount rdf:type owl:DatatypeProperty ;
               rdfs:domain dwc:NucleotideAnalysis ;
@@ -1791,6 +1867,15 @@ dwc:relationshipEstablishedDate rdf:type owl:DatatypeProperty ;
                                 rdfs:comment "Recommended best practice is to use a date that conforms to ISO 8601-1:2019."@en ;
                                 rdfs:isDefinedBy dwc: ;
                                 skos:definition "A date on which a [dwc:ResourceRelationship] was established."@en ;
+                                skos:example "1809-02-12 (within the day 12 February 1809)" ,
+                                             "1900/1909 (some time within the interval between the beginning of the year 1900 and before the year 1909)" ,
+                                             "1906-06 (in the month of June 1906)" ,
+                                             "1963-04-08T14:07-06:00 (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC)" ,
+                                             "1971 (in the year 1971)" ,
+                                             "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC)" ,
+                                             "2007-11-13/15 (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)" ,
+                                             "2009-02-20T08:40Z (20 February 2009 at or after 8:40am and before 8:41 UTC)" ,
+                                             "2018-08-29T15:19 (29 August 2018 at or after 3:19pm and before 3:20pm local time)" ;
                                 skos:prefLabel "Relationship Established Date" .
 
 
@@ -1801,8 +1886,87 @@ dwc:relationshipRemarks rdf:type owl:DatatypeProperty ;
                         dcterms:isVersionOf dwc:relationshipRemarks ;
                         dcterms:references <http://rs.tdwg.org/dwc/terms/version/relationshipRemarks-2023-06-28> ;
                         rdfs:isDefinedBy dwc: ;
-                        skos:definition "Comments or notes about a [dwc:ResourceRelationship]."@en ;
+                        skos:definition "Comments or notes about the relationship between the two resources."@en ;
+                        skos:example "mother and offspring collected from the same nest" ,
+                                     "pollinator captured in the act" ;
                         skos:prefLabel "Relationship Remarks" .
+
+
+###  http://rs.tdwg.org/dwc/terms/reproductiveCondition
+dwc:reproductiveCondition rdf:type owl:DatatypeProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( dwc:OccurrenceAssertion
+                                                      dwc:OrganismAssertion
+                                                    )
+                                      ] ;
+                          rdfs:range xsd:string ;
+                          dcterms:isVersionOf dwc:reproductiveCondition ;
+                          dcterms:references <http://rs.tdwg.org/dwc/terms/version/reproductiveCondition-2023-06-28> ;
+                          rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                          rdfs:isDefinedBy dwc: ;
+                          skos:definition "The reproductive condition of the biological individual(s) represented in the dwc:Occurrence."@en ;
+                          skos:example "fruit-bearing" ,
+                                       "in bloom" ,
+                                       "non-reproductive" ,
+                                       "pregnant" ;
+                          skos:prefLabel "Reproductive Condition" .
+
+
+###  http://rs.tdwg.org/dwc/terms/resourceID
+dwc:resourceID rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf dcterms:identifier ;
+               rdfs:domain dwc:ResourceRelationship ;
+               rdfs:range xsd:string ;
+               dcterms:isVersionOf dwc:resourceID ;
+               dcterms:references <http://rs.tdwg.org/dwc/terms/version/resourceID-2018-09-06> ;
+               rdfs:isDefinedBy dwc: ;
+               skos:definition "An identifier for the resource that is the subject of the relationship."@en ;
+               skos:prefLabel "Resource ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/resourceRelationshipID
+dwc:resourceRelationshipID rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf dcterms:identifier ;
+                           rdfs:domain dwc:ResourceRelationship ;
+                           rdfs:range xsd:string ;
+                           dcterms:isVersionOf dwc:resourceRelationshipID ;
+                           dcterms:references <http://rs.tdwg.org/dwc/terms/version/resourceRelationshipID-2023-06-28> ;
+                           rdfs:isDefinedBy dwc: ;
+                           skos:definition "An identifier for an instance of relationship between one resource (the subject) and another (dwc:relatedResource, the object)."@en ;
+                           skos:prefLabel "Resource Relationship ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/samplingEffort
+dwc:samplingEffort rdf:type owl:DatatypeProperty ;
+                   rdfs:domain dwc:Event ;
+                   rdfs:range xsd:string ;
+                   dcterms:isVersionOf dwc:samplingEffort ;
+                   dcterms:references <http://rs.tdwg.org/dwc/terms/version/samplingEffort-2023-06-28> ;
+                   rdfs:isDefinedBy dwc: ;
+                   skos:definition "The amount of effort expended during a dwc:Event."@en ;
+                   skos:example "10 km by foot" ,
+                                "10 observer-hours" ,
+                                "30 km by car" ,
+                                "40 trap-nights" ;
+                   skos:prefLabel "Sampling Effort" .
+
+
+###  http://rs.tdwg.org/dwc/terms/samplingProtocol
+dwc:samplingProtocol rdf:type owl:DatatypeProperty ;
+                     rdfs:domain dwc:Event ;
+                     rdfs:range xsd:string ;
+                     dcterms:isVersionOf dwc:samplingProtocol ;
+                     dcterms:references <http://rs.tdwg.org/dwc/terms/version/samplingProtocol-2023-06-28> ;
+                     rdfs:comment "Recommended best practice is describe a dwc:Event with no more than one sampling protocol. In the case of a summary Event with multiple protocols, in which a specific protocol can not be attributed to specific dwc:Occurrences, the recommended best practice is to separate the values in a list with space vertical bar space (` | `). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                     rdfs:isDefinedBy dwc: ;
+                     skos:definition "The names of, references to, or descriptions of the methods or protocols used during a dwc:Event."@en ;
+                     skos:example "Penguins from space: faecal stains reveal the location of emperor penguin colonies, https://doi.org/10.1111/j.1466-8238.2009.00467.x" ,
+                                  "Takats et al. 2001. Guidelines for Nocturnal Owl Monitoring in North America. Beaverhill Bird Observatory and Bird Studies Canada, Edmonton, Alberta. 32 pp., http://www.bsc-eoc.org/download/Owl.pdf" ,
+                                  "UV light trap" ,
+                                  "ad hoc observation | point count" ,
+                                  "bottom trawl" ,
+                                  "mist net" ;
+                     skos:prefLabel "Sampling Protocol" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/scientificName
@@ -1820,14 +1984,14 @@ dwc:scientificName rdf:type owl:DatatypeProperty ;
                    rdfs:isDefinedBy dwc: ;
                    skos:definition "The full scientific name, with authorship and date information if known. When forming part of a dwc:Identification, this should be the name in lowest level taxonomic rank that can be determined. This term should not contain identification qualifications, which should instead be supplied in the dwc:identificationQualifier term."@en ;
                    skos:example "Agrostis stolonifera L. × Polypogon monspeliensis (L.) Desf." ,
-                                "Ambystoma tigrinum diaboli (genus + specificEpithet + infraspecificEpithet)" ,
-                                "Coleoptera (order)" ,
-                                "Ctenomys sociabilis (genus + specificEpithet)" ,
-                                "Manis (genus)" ,
+                                "Ambystoma tigrinum diaboli" ,
+                                "Coleoptera" ,
+                                "Ctenomys sociabilis" ,
+                                "Manis" ,
                                 "Mentha × smithiana R. A. Graham" ,
-                                "Quercus agrifolia var. oxyadenia (Torr.) J.T. Howell (genus + specificEpithet + taxonRank + infraspecificEpithet + scientificNameAuthorship)" ,
-                                "Roptrocerus typographi (Györfi, 1952) (genus + specificEpithet + scientificNameAuthorship)" ,
-                                "Vespertilionidae (family)" ,
+                                "Quercus agrifolia var. oxyadenia (Torr.) J.T. Howell" ,
+                                "Roptrocerus typographi (Györfi, 1952)" ,
+                                "Vespertilionidae" ,
                                 "×Agropogon littoralis (Sm.) C. E. Hubb." ;
                    skos:prefLabel "Scientific Name" .
 
@@ -2286,7 +2450,7 @@ eco:siteNestingDescription rdf:type owl:DatatypeProperty ;
                            rdfs:comment "Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy."@en ;
                            rdfs:isDefinedBy eco: ;
                            skos:definition "Textual description of a hierarchical sampling design."@en ;
-                           skos:example "`5 sampling sites of 3-5 plots each`" ;
+                           skos:example "5 sampling sites of 3-5 plots each" ;
                            skos:prefLabel "Site Nesting Description" .
 
 
@@ -2695,7 +2859,21 @@ minext:verbatimSize rdf:type owl:DatatypeProperty ;
 
 
 ###  https://w3id.org/mixs/0000014
-<https://w3id.org/mixs/0000014> rdf:type owl:DatatypeProperty .
+<https://w3id.org/mixs/0000014> rdf:type owl:DatatypeProperty ;
+                                rdfs:domain [ rdf:type owl:Class ;
+                                              owl:unionOf ( dwc:MolecularProtocol
+                                                          )
+                                            ] ;
+                                rdfs:range [ rdf:type rdfs:Datatype ;
+                                             owl:unionOf ( xsd:string
+                                                         )
+                                           ] ;
+                                dcterms:isVersionOf <https://w3id.org/mixs/0000014> ;
+                                rdfs:isDefinedBy mixs: ;
+                                skos:definition "In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
+                                skos:example "ocean water [ENVO:00002151]" ,
+                                             "pond water [ENVO:00002228]|air ENVO_00002005" ;
+                                skos:prefLabel "Environmental Medium" .
 
 
 ###  https://w3id.org/mixs/0000015
@@ -3486,7 +3664,12 @@ dwc:Protocol rdf:type owl:Class ;
 
 
 ###  http://rs.tdwg.org/dwc/terms/Provenance
-dwc:Provenance rdf:type owl:Class .
+dwc:Provenance rdf:type owl:Class ;
+               dcterms:isVersionOf <http://example.com/term-pending/dwc/provenance> ;
+               rdfs:comment "This is a convenience class to group related properties."@en ;
+               rdfs:isDefinedBy dwc: ;
+               skos:definition "Information about an entity's origins."@en ;
+               skos:prefLabel "Provenance" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/PublisherAgent
@@ -3755,12 +3938,11 @@ bb:Sunfish456 rdf:type owl:NamedIndividual ,
 #    Annotations
 #################################################################
 
-dc:rights dcterms:isVersionOf dc:rights ;
-          rdfs:isDefinedBy dc: ;
-          skos:definition "Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions." ;
-          skos:example "Copyright 2014 Ron Thomas" ,
-                       "http://creativecommons.org/licenses/by/3.0/legalcode" ;
-          skos:prefLabel "Rights (DC)" .
+dcterms:rights dcterms:isVersionOf dcterms:rights ;
+               rdfs:comment "Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights. Recommended practice is to refer to a rights statement with a URI. If this is not possible or feasible, a literal value (name, label, or short text) may be provided." ;
+               rdfs:isDefinedBy dcterms: ;
+               skos:definition "Information about rights held in and over the resource." ;
+               skos:prefLabel "Rights (DCTERMS)" .
 
 
 dcterms:source dcterms:isVersionOf dcterms:source ;
@@ -3768,21 +3950,6 @@ dcterms:source dcterms:isVersionOf dcterms:source ;
                rdfs:isDefinedBy dcterms: ;
                skos:definition "A related resource from which the described resource is derived"@en ;
                skos:prefLabel "Source (DCTERMS)" .
-
-
-gbif:pcr_primer_reference dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_reference> ;
-                          rdfs:isDefinedBy gbif: ;
-                          skos:definition "Reference for the PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment."@en ;
-                          skos:example "https:doi.org/10.11861742-9994-10-31" ;
-                          skos:prefLabel "PCR Primer Reference" .
-
-
-<https://w3id.org/mixs/0000014> dcterms:isVersionOf <https://w3id.org/mixs/0000014> ;
-                                rdfs:isDefinedBy mixs: ;
-                                skos:definition "In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
-                                skos:example "ocean water [ENVO:00002151]" ,
-                                             "pond water [ENVO:00002228]|air ENVO_00002005" ;
-                                skos:prefLabel "Environmental Medium" .
 
 
 #################################################################

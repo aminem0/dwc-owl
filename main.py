@@ -348,6 +348,16 @@ createOC(
     version_of_s="http://rs.tdwg.org/dwc/terms/Protocol",
 )
 
+createOC(
+    name="Provenance",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Provenance"),
+    definition=Literal("Information about an entity's origins.", lang="en"),
+    comments=Literal("This is a convenience class to group related properties.", lang="en"),
+    version_of_s="http://example.com/term-pending/dwc/provenance",
+)
+
 # WARN: dwc:OrganismRelationship is not recognized, so for now consider dwc:ResourceRelationship. But do note that 
 # WARN: Try and consider only specific cases, otherwise it might overlap with other owl:ObjectProperties.
 # For example, the MaterialEntity example can also be handled by dwcdp:isPartOf or dwcdp:isDerivedFrom.
@@ -854,6 +864,29 @@ g.add((BB["PieceOfRock456"], DWCDP["isPartOf"], BB["BiggerRock789"]))
 #####################################################################################################
 
 createOP(
+    name="rights",
+    namespace=DCTERMS,
+    graph=g,
+    domains=DWC["UsagePolicy"],
+    ranges=XSD["anyURI"],
+    pref_label=Literal("Rights (DCTERMS)"),
+    definition=Literal("Information about rights held in and over the resource."),
+    comments=Literal("Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights. Recommended practice is to refer to a rights statement with a URI. If this is not possible or feasible, a literal value (name, label, or short text) may be provided."),
+    version_of_s="http://purl.org/dc/terms/rights",
+)
+
+createOP(
+    name="rightsHolder",
+    namespace=DCTERMS,
+    graph=g,
+    ranges=DCTERMS["Agent"],
+    pref_label=Literal("Rights Holder"),
+    definition=Literal("A person or organization owning or managing rights over the resource."),
+    comments=Literal("Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided."),
+    version_of_s="http://purl.org/dc/terms/rightsHolder",
+)
+
+createOP(
     name="spatial",
     namespace=DCTERMS,
     graph=g,
@@ -1030,6 +1063,35 @@ createOP(
     comments=Literal("The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes.", lang="en"),
     version_of_s="http://rs.tdwg.org/dwc/iri/fieldNotes",
     references_s="http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28",
+)
+
+# WARN: Verify if actually about dwc:Occurrence
+createOP(
+    name="reproductiveCondition",
+    namespace=DWCIRI,
+    graph=g,
+    domains=[
+        DWC["OccurrenceAssertion"],
+        DWC["OrganismAssertion"],
+    ],
+    pref_label=Literal("Reproductive Condition (IRI)"),
+    definition=Literal("The reproductive condition of the biological individual(s) represented in the dwc:Occurrence.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/reproductiveCondition",
+    references_s="http://rs.tdwg.org/dwc/iri/version/reproductiveCondition-2025-07-10",
+)
+
+createOP(
+    name="samplingProtocol",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DWC["Event"],
+    pref_label=Literal("Sampling Protocol (IRI)"),
+    definition=Literal("The methods or protocols used during a dwc:Event, denoted by an IRI.", lang="en"),
+    comments=Literal("Recommended best practice is describe a dwc:Event with no more than one sampling protocol. In the case of a summary dwc:Event in which a specific protocol can not be attributed to specific dwc:Occurrences, the recommended best practice is to repeat the property for each IRI that denotes a different sampling protocol that applies to the dwc:Occurrence.", lang="en"),
+    examples=URIRef("https://doi.org/10.1111/j.1466-8238.2009.00467.x"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/samplingProtocol",
+    references_s="http://rs.tdwg.org/dwc/iri/version/samplingProtocol-2023-06-28",
 )
 
 createOP(
@@ -1787,22 +1849,23 @@ createDP(
     version_of_s="http://purl.org/dc/terms/identifier",
 )
 
+# BUG: SHOULD BE AN OP.
 # NOTE: Felt that the second part was more apt of a comment.
-createDP(
-    name="rights",
-    namespace=DCTERMS,
-    graph=g,
-    domains=DWC["UsagePolicy"],
-    ranges=XSD["anyURI"],
-    pref_label=Literal("Rights (DCTERMS)"),
-    definition=Literal("A URI pointing to structured information about rights held in and over the resource."),
-    comments=Literal("At least one of [dcterms:rights] and [dc:rights] must be supplied but, when feasible, supplying both may make the metadata more widely useful. They must specify the same rights. In case of ambiguity, [dcterms:rights] prevails."),
-    examples=[
-        Literal("http://creativecommons.org/licenses/by/3.0/legalcode"),
-        Literal("http://creativecommons.org/publicdomain/zero/1.0"),
-        ],
-    version_of_s="http://purl.org/dc/terms/rights",
-)
+# createDP(
+#     name="rights",
+#     namespace=DCTERMS,
+#     graph=g,
+#     domains=DWC["UsagePolicy"],
+#     ranges=XSD["anyURI"],
+#     pref_label=Literal("Rights (DCTERMS)"),
+#     definition=Literal("A URI pointing to structured information about rights held in and over the resource."),
+#     comments=Literal("At least one of [dcterms:rights] and [dc:rights] must be supplied but, when feasible, supplying both may make the metadata more widely useful. They must specify the same rights. In case of ambiguity, [dcterms:rights] prevails."),
+#     examples=[
+#         Literal("http://creativecommons.org/licenses/by/3.0/legalcode"),
+#         Literal("http://creativecommons.org/publicdomain/zero/1.0"),
+#         ],
+#     version_of_s="http://purl.org/dc/terms/rights",
+# )
 
 # WARN: Verify domain
 # BUG: Object Property, so owl:Thing
@@ -2426,7 +2489,7 @@ createDP(
     namespace=DWC,
     graph=g,
     domains=DWC["MolecularProtocol"],
-    ranges=RDFS["Literal"],
+    ranges=XSD["string"],
     pref_label=Literal("Molecular Protocol ID"),
     definition=Literal("An identifier for a [dwc:MolecularProtocol].", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
@@ -2523,6 +2586,30 @@ createDP(
 )
 
 createDP(
+    name="projectID",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Provenance"],
+    ranges=[
+        XSD["anyURI"],
+        XSD["string"],
+    ],
+    pref_label=Literal("Project ID"),
+    definition=Literal("A list (concatenated and separated) of identifiers for projects that contributed to a dwc:Event.", lang="en"),
+    comments=Literal("A projectID may be shared in multiple distinct datasets. The nature of the association can be described in the metadata project description element. This term should be used to provide a globally unique identifier (GUID) for a project, if available. This could be a DOI, URI, or any other persistent identifier that ensures a project can be uniquely distinguished from others. Recommended best practice is to separate the values in a list with space vertical bar space (` | `).", lang="en"),
+    examples=[
+        Literal("https://arvenetternansen.com/", datatype=XSD["anyURI"]),
+        Literal("https://doi.org/10.26259/3b15eca7", datatype=XSD["anyURI"]),
+        Literal("https://doi.org/10.3030/101180559", datatype=XSD["anyURI"]),
+        Literal("OC202405"),
+        Literal("RCN276730"),
+        Literal("RCN276730 | Artsproject_7-24"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/projectID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/projectID-2025-06-12",
+)
+
+createDP(
     name="readCount",
     namespace=DWC,
     graph=g,
@@ -2531,6 +2618,185 @@ createDP(
     pref_label=Literal("Read Count"),
     definition=Literal("A number of reads for a [dwc:NucleotideSequence] in a [dwc:NucleotideAnalysis].", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/readCount",
+)
+
+createDP(
+    name="relationshipEstablishedDate",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["ResourceRelationship"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Relationship Established Date"),
+    definition=Literal("A date on which a [dwc:ResourceRelationship] was established.", lang="en"),
+    comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
+    examples=[
+        Literal("1963-04-08T14:07-06:00 (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC)"),
+        Literal("2009-02-20T08:40Z (20 February 2009 at or after 8:40am and before 8:41 UTC)"),
+        Literal("2018-08-29T15:19 (29 August 2018 at or after 3:19pm and before 3:20pm local time)"),
+        Literal("1809-02-12 (within the day 12 February 1809)"),
+        Literal("1906-06 (in the month of June 1906)"),
+        Literal("1971 (in the year 1971)"),
+        Literal("2007-03-01T13:00:00Z/2008-05-11T15:30:00Z (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC)"),
+        Literal("1900/1909 (some time within the interval between the beginning of the year 1900 and before the year 1909)"),
+        Literal("2007-11-13/15 (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/relationshipEstablishedDate",
+    references_s="http://rs.tdwg.org/dwc/terms/version/relationshipEstablishedDate-2025-06-12",
+)
+
+# WARN: It is in dwc: and not dwciri: but by its construction it is made to be an object property
+createOP(
+    name="relationshipOfResourceID",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["ResourceRelationship"],
+    pref_label=Literal("Relationship Of Resource ID"),
+    definition=Literal("An identifier for the relationship type (predicate) that connects the subject identified by dwc:resourceID to its object identified by dwc:relatedResourceID.", lang="en"),
+    comments=Literal("Recommended best practice is to use the identifiers of the terms in a controlled vocabulary, such as the OBO Relation Ontology.", lang="en"),
+    examples=[
+        Literal("http://purl.obolibrary.org/obo/RO_0002456"),
+        Literal("http://purl.obolibrary.org/obo/RO_0002455"),
+        Literal("https://www.inaturalist.org/observation_fields/879"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/relationshipOfResourceID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/relationshipOfResourceID-2023-06-28",
+)
+
+createDP(
+    name="relationshipRemarks",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["ResourceRelationship"],
+    # ranges=XSD["string"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Relationship Remarks"),
+    definition=Literal("Comments or notes about the relationship between the two resources.", lang="en"),
+    examples=[
+        Literal("mother and offspring collected from the same nest"),
+        Literal("pollinator captured in the act"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/relationshipRemarks",
+    references_s="http://rs.tdwg.org/dwc/terms/version/relationshipRemarks-2023-06-28",
+)
+
+createOP(
+    name="relationshipTypeIRI",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["ResourceRelationship"],
+    pref_label=Literal("Relationship Type (IRI)"),
+    definition=Literal("An IRI of a controlled vocabulary value for the type of a dwc:ResourceRelationship.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
+    examples=[
+        URIRef("http://purl.obolibrary.org/obo/RO_0002456"),
+        URIRef("http://purl.obolibrary.org/obo/RO_0002455"),
+        URIRef("https://www.inaturalist.org/observation_fields/879"),
+    ],
+    subproperty_list=[DWC["relationshipOfResourceID"]],
+    version_of_s="http://rs.tdwg.org/dwc/terms/relationshipOfResourceID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/relationshipOfResourceID-2023-06-28",
+)
+
+createDP(
+    name="reproductiveCondition",
+    namespace=DWC,
+    graph=g,
+    domains=[
+        DWC["OccurrenceAssertion"],
+        DWC["OrganismAssertion"],
+    ],
+    ranges=XSD["string"],
+    pref_label=Literal("Reproductive Condition"),
+    definition=Literal("The reproductive condition of the biological individual(s) represented in the dwc:Occurrence.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("non-reproductive"),
+        Literal("pregnant"),
+        Literal("in bloom"),
+        Literal("fruit-bearing"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/reproductiveCondition",
+    references_s="http://rs.tdwg.org/dwc/terms/version/reproductiveCondition-2023-06-28",
+)
+
+createDP(
+    name="resourceID",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["ResourceRelationship"],
+    ranges=XSD["string"],
+    pref_label=Literal("Resource ID"),
+    definition=Literal("An identifier for the resource that is the subject of the relationship.", lang="en"),
+    examples=Literal("f809b9e0-b09b-11e8-96f8-529269fb1459"),
+    subproperty_list=[DCTERMS["identifier"]],
+    version_of_s="http://rs.tdwg.org/dwc/terms/resourceID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/resourceID-2018-09-06",
+)
+
+createDP(
+    name="resourceRelationshipID",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["ResourceRelationship"],
+    ranges=XSD["string"],
+    pref_label=Literal("Resource Relationship ID"),
+    definition=Literal("An identifier for an instance of relationship between one resource (the subject) and another (dwc:relatedResource, the object).", lang="en"),
+    examples=Literal("04b16710-b09c-11e8-96f8-529269fb1459"),
+    subproperty_list=[DCTERMS["identifier"]],
+    version_of_s="http://rs.tdwg.org/dwc/terms/resourceRelationshipID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/resourceRelationshipID-2023-06-28",
+)
+
+createDP(
+    name="resourceRelationshipID",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["ResourceRelationship"],
+    ranges=XSD["string"],
+    pref_label=Literal("Resource Relationship ID"),
+    definition=Literal("An identifier for an instance of relationship between one resource (the subject) and another (dwc:relatedResource, the object).", lang="en"),
+    subproperty_list=[DCTERMS["identifier"]],
+    version_of_s="http://rs.tdwg.org/dwc/terms/resourceRelationshipID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/resourceRelationshipID-2023-06-28",
+)
+
+createDP(
+    name="samplingEffort",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=XSD["string"],
+    pref_label=Literal("Sampling Effort"),
+    definition=Literal("The amount of effort expended during a dwc:Event.", lang="en"),
+    examples=[
+        Literal("40 trap-nights"),
+        Literal("10 observer-hours"),
+        Literal("10 km by foot"),
+        Literal("30 km by car"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/samplingEffort",
+    references_s="http://rs.tdwg.org/dwc/terms/version/samplingEffort-2023-06-28",
+)
+
+createDP(
+    name="samplingProtocol",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=XSD["string"],
+    pref_label=Literal("Sampling Protocol"),
+    definition=Literal("The names of, references to, or descriptions of the methods or protocols used during a dwc:Event.", lang="en"),
+    comments=Literal("Recommended best practice is describe a dwc:Event with no more than one sampling protocol. In the case of a summary Event with multiple protocols, in which a specific protocol can not be attributed to specific dwc:Occurrences, the recommended best practice is to separate the values in a list with space vertical bar space (` | `). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("UV light trap"),
+        Literal("mist net"),
+        Literal("bottom trawl"),
+        Literal("ad hoc observation | point count"),
+        Literal("Penguins from space: faecal stains reveal the location of emperor penguin colonies, https://doi.org/10.1111/j.1466-8238.2009.00467.x"),
+        Literal("Takats et al. 2001. Guidelines for Nocturnal Owl Monitoring in North America. Beaverhill Bird Observatory and Bird Studies Canada, Edmonton, Alberta. 32 pp., http://www.bsc-eoc.org/download/Owl.pdf"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/samplingProtocol",
+    references_s="http://rs.tdwg.org/dwc/terms/version/samplingProtocol-2023-06-28",
 )
 
 # NOTE: Check domain, can be more
@@ -2548,13 +2814,13 @@ createDP(
     definition=Literal("The full scientific name, with authorship and date information if known. When forming part of a dwc:Identification, this should be the name in lowest level taxonomic rank that can be determined. This term should not contain identification qualifications, which should instead be supplied in the dwc:identificationQualifier term.", lang="en"),
     comments=Literal("This term should not contain identification qualifications, which should instead be supplied in the IdentificationQualifier term. When applied to an Organism or Occurrence, this term should be used to represent the scientific name that was applied to the associated Organism in accordance with the Taxon to which it was or is currently identified. Names should be compliant to the most recent nomenclatural code. For example, names of hybrids for algae, fungi and plants should follow the rules of the International Code of Nomenclature for algae, fungi, and plants (Schenzhen Code Articles H.1, H.2 and H.3). Thus, use the multiplication sign × (Unicode U+00D7, HTML ×) to identify a hybrid, not x or X, if possible.", lang="en"),
     examples=[
-        Literal("Coleoptera (order)"),
-        Literal("Vespertilionidae (family)"),
-        Literal("Manis (genus)"),
-        Literal("Ctenomys sociabilis (genus + specificEpithet)"),
-        Literal("Ambystoma tigrinum diaboli (genus + specificEpithet + infraspecificEpithet)"),
-        Literal("Roptrocerus typographi (Györfi, 1952) (genus + specificEpithet + scientificNameAuthorship)"),
-        Literal("Quercus agrifolia var. oxyadenia (Torr.) J.T. Howell (genus + specificEpithet + taxonRank + infraspecificEpithet + scientificNameAuthorship)"),
+        Literal("Coleoptera"),
+        Literal("Vespertilionidae"),
+        Literal("Manis"),
+        Literal("Ctenomys sociabilis"),
+        Literal("Ambystoma tigrinum diaboli"),
+        Literal("Roptrocerus typographi (Györfi, 1952)"),
+        Literal("Quercus agrifolia var. oxyadenia (Torr.) J.T. Howell"),
         Literal("×Agropogon littoralis (Sm.) C. E. Hubb."),
         Literal("Mentha × smithiana R. A. Graham"),
         Literal("Agrostis stolonifera L. × Polypogon monspeliensis (L.) Desf."),
@@ -3114,7 +3380,7 @@ createDP(
     definition=Literal("Textual description of a hierarchical sampling design.", lang="en"),
     comments=Literal("Site refers to the location at which observations are made or samples/measurements are taken. The site can be at any level of hierarchy.", lang="en"),
     examples=[
-        Literal("`5 sampling sites of 3-5 plots each`"),
+        Literal("5 sampling sites of 3-5 plots each"),
     ],
     version_of_s="http://rs.tdwg.org/eco/terms/siteNestingDescription",
     references_s="http://rs.tdwg.org/eco/terms/version/siteNestingDescription-2024-02-28",
@@ -4136,30 +4402,6 @@ createDP(
     version_of_s="http://ns.adobe.com/xap/1.0/CreateDate",
 )
 
-createDP(
-    name="relationshipEstablishedDate",
-    namespace=DWC,
-    graph=g,
-    domains=DWC["ResourceRelationship"],
-    ranges=RDFS["Literal"],
-    pref_label=Literal("Relationship Established Date"),
-    definition=Literal("A date on which a [dwc:ResourceRelationship] was established.", lang="en"),
-    comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/terms/relationshipEstablishedDate",
-    references_s="http://rs.tdwg.org/dwc/terms/version/relationshipEstablishedDate-2025-06-12",
-)
-
-createDP(
-    name="relationshipRemarks",
-    namespace=DWC,
-    graph=g,
-    domains=DWC["ResourceRelationship"],
-    ranges=RDFS["Literal"],
-    pref_label=Literal("Relationship Remarks"),
-    definition=Literal("Comments or notes about a [dwc:ResourceRelationship].", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/terms/relationshipRemarks",
-    references_s="http://rs.tdwg.org/dwc/terms/version/relationshipRemarks-2023-06-28",
-)
 
 
 
