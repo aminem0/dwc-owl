@@ -298,7 +298,6 @@ def createOP(
     additional_list: list[Node] | None = None,
     definition: Literal | None = None,
     comments: Literal | None = None,
-    # examples_list: list[Literal] | None = None,
     examples: URIRef | list[URIRef] | None = None,
 ) -> None:
     """
@@ -307,28 +306,23 @@ def createOP(
     Parameters
     ----------
     name: str
-        Name to be used for the property.
+        Name to be used for the object property.
     namespace : Namespace
         RDFLib Namespace in which the property URI will be created.
     graph: Graph
         RDFLib Graph where triples will be added.
-    domain_list: list[Node]
-        A list of one or more domain classes.
-    range_list : list[Node]
-        A list of one or more range classes.
+    domains: Node | list[Node], optional
+        A class or a list of one or more domain classes.
+    ranges : Node | list[Node], optional
+        A class list of one or more range classes.
     additional_list : list[Node], optional
         Other OWL object property types.
     definition: Literal, optional
         Text-based definition of the object property.
     comments: Literal, optional
         Additional comments about the object property.
-    examples : Literal, optional
+    examples: Literal, optional
         Example triple about the use of the object property.
-       
-    Returns
-    -------
-    Graph
-        The updated RDFLib Graph containing the new ObjectProperty definition.
     """
 
     # Create the owl:ObjectProperty URI
@@ -343,12 +337,8 @@ def createOP(
         graph.add((op_uri, SKOS["definition"], definition))
     if comments:
         graph.add((op_uri, RDFS["comment"], comments))
-    # if examples:
-    #     graph.add((op_uri, SKOS["example"], examples))
-    # if examples_list:
-    #     for example in examples_list:
-    #         graph.add((op_uri, SKOS["example"], example))
 
+    # Add examples if provided
     if examples:
         if isinstance(examples, URIRef):
             graph.add((op_uri, SKOS["example"], examples))
@@ -389,60 +379,6 @@ def createOP(
             graph.add((range_union_class, RDF["type"], OWL["Class"]))
             graph.add((range_union_class, OWL["unionOf"], range_bnode))
             graph.add((op_uri, RDFS["range"], range_union_class))
-
-
-    # If there is only a single element in the list, take it as the range
-    # otherwise consider a blank node that is the intersect
-    # NOTE: Eventually, it would be best to have the function accept either
-    # an Node or a list of Nodes.
-    # if len(domain_list) == 1:
-    #     graph.add((op_uri, RDFS["domain"], domain_list[0]))
-    # else:
-    #     domain_bnode = BNode()
-    #     Collection(graph, domain_bnode, domain_list)
-    #     domain_union_class = BNode()
-    #     graph.add((domain_union_class, RDF["type"], OWL["Class"]))
-    #     graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
-    #     graph.add((op_uri, RDFS["domain"], domain_union_class))
-
-    # if domain_list:
-    #     if len(domain_list) == 1:
-    #         graph.add((op_uri, RDFS["domain"], domain_list[0]))
-    #     else:
-    #         domain_bnode = BNode()
-    #         Collection(graph, domain_bnode, domain_list)
-    #         domain_union_class = BNode()
-    #         graph.add((domain_union_class, RDF["type"], OWL["Class"]))
-    #         graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
-    #         graph.add((op_uri, RDFS["domain"], domain_union_class))
-
-    # TEST: Add all domains with a for loop.
-    # for domain in domain_list:
-    #     graph.add((op_uri, RDFS["domain"], domain))
-
-    # If there is only a single element in the list, take it as the range
-    # otherwise consider a blank node that is the intersect
-    # NOTE: Eventually, it would be best to have the function accept either
-    # an Node or a list of Nodes.
-    # if len(range_list) == 1:
-    #     graph.add((op_uri, RDFS["range"], range_list[0]))
-    # else:
-    #     range_bnode = BNode()
-    #     Collection(graph, range_bnode, range_list)
-    #     range_union_class = BNode()
-    #     graph.add((range_union_class, RDF["type"], OWL["Class"]))
-    #     graph.add((range_union_class, OWL["unionOf"], range_bnode))
-    #     graph.add((op_uri, RDFS["range"], range_union_class))
-    # if range_list:
-    #     if len(range_list) == 1:
-    #         graph.add((op_uri, RDFS["range"], range_list[0]))
-    #     else:
-    #         range_bnode = BNode()
-    #         Collection(graph, range_bnode, range_list)
-    #         range_union_class = BNode()
-    #         graph.add((range_union_class, RDF["type"], OWL["Class"]))
-    #         graph.add((range_union_class, OWL["unionOf"], range_bnode))
-    #         graph.add((op_uri, RDFS["range"], range_union_class))
 
     if subproperty_list:
         # Technically not a unified list, so can add them all with a for loop
