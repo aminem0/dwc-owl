@@ -7,7 +7,7 @@ import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
-from utils import createCTOP, createDP, createEDP, createOC, createOP, declare_disjoint
+from utils import createCTOP, createDP, createEDP, createOC, createOP, createRDP, declare_disjoint
 
 #####################################################################################################
 # BEGIN ONTOLOGY DEFINITION
@@ -1100,6 +1100,18 @@ createOP(
     comments=Literal("The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes.", lang="en"),
     version_of_s="http://rs.tdwg.org/dwc/iri/fieldNotes",
     references_s="http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28",
+)
+
+createOP(
+    name="occurrenceStatus",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DWC["Occurrence"],
+    pref_label=Literal("Occurrence Status (IRI)"),
+    definition=Literal("A statement about the presence or absence of a dwc:Taxon at a dcterms:Location.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/occurrenceStatus",
+    references_s="http://rs.tdwg.org/dwc/iri/version/occurrenceStatus-2025-07-10",
 )
 
 createOP(
@@ -2696,6 +2708,120 @@ createDP(
     version_of_s="http://example.com/term-pending/dwc/objectQuantityType",
 )
 
+
+# NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
+createRDP(
+    name="minimumElevationInMeters",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    restrictions=[
+        ["minInclusive", -430, "decimal"],
+        ["maxInclusive", 8850, "decimal"],
+    ],
+    pref_label=Literal("Minimum Elevation In Meters2"),
+    definition=Literal("The lower limit of the range of elevation (altitude, usually above sea level), in meters.", lang="en"),
+    examples=[
+        Literal("-100", datatype=XSD["decimal"]),
+        Literal("802", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/minimumElevationInMeters",
+    references_s="http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28",
+)
+
+# TEST: Test of range restriction on dwc:minimumElevationInMeters
+g.add((BB["SomePoint"], RDF["type"], DCTERMS["Location"]))
+g.add((BB["SomePoint"], DWC["minimumElevationInMeters"], Literal("-430", datatype=XSD["decimal"])))
+
+# NOTE: No range restriction of dwc:minimumElevationInMeters
+# Will delete soon
+createDP(
+    name="minimumElevationInMeters2",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Minimum Elevation In Meters"),
+    definition=Literal("The lower limit of the range of elevation (altitude, usually above sea level), in meters.", lang="en"),
+    examples=[
+        Literal("-100", datatype=XSD["decimal"]),
+        Literal("802", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/minimumElevationInMeters",
+    references_s="http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28",
+)
+
+createDP(
+    name="month",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=XSD["integer"],
+    pref_label=Literal("Month"),
+    definition=Literal("The integer month in which the dwc:Event occurred.", lang="en"),
+    examples=[
+        Literal("1", datatype=XSD["integer"]),
+        Literal("10", datatype=XSD["integer"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/month",
+    references_s="http://rs.tdwg.org/dwc/terms/version/month-2023-06-28",
+)
+
+createDP(
+    name="municipality",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Third Order Division"),
+    definition=Literal("The full, unabbreviated name of the next smaller administrative region than county (city, municipality, etc.) in which the dcterms:Location occurs. Do not use this term for a nearby named place that does not contain the actual dcterms:Location.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both.", lang="en"),
+    examples=[
+        Literal("Holzminden"),
+        Literal("Araçatuba"),
+        Literal("Ga-Segonyana"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/municipality",
+    references_s="http://rs.tdwg.org/dwc/terms/version/municipality-2023-06-28",
+)
+
+createDP(
+    name="occurrenceID",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Occurrence"],
+    ranges=[
+        XSD["anyURI"],
+        XSD["string"],
+    ],
+    pref_label=Literal("Occurrence ID"),
+    definition=Literal("An identifier for the dwc:Occurrence (as opposed to a particular digital record of the dwc:Occurrence). In the absence of a persistent global unique identifier, construct one from a combination of identifiers in the record that will most closely make the dwc:occurrenceID globally unique.", lang="en"),
+    comments=Literal("Recommended best practice is to use a persistent, globally unique identifier.", lang="en"),
+    examples=[
+        Literal("http://arctos.database.museum/guid/MSB:Mamm:233627", datatype=XSD["anyURI"]),
+        Literal("000866d2-c177-4648-a200-ead4007051b9"),
+        Literal("urn:catalog:UWBM:Bird:89776", datatype=XSD["anyURI"]),
+    ],
+    subproperty_list=[DCTERMS["identifier"]],
+    version_of_s="http://rs.tdwg.org/dwc/terms/occurrenceID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/occurrenceID-2023-06-28",
+)
+
+createDP(
+    name="occurrenceRemarks",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Occurrence"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Occurrence Remarks"),
+    definition=Literal("Comments or notes about the dwc:Occurrence.", lang="en"),
+    examples=[
+        Literal("found dead on road"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/occurrenceRemarks",
+    references_s="http://rs.tdwg.org/dwc/terms/version/occurrenceRemarks-2023-06-28",
+)
+
 # WARN: Considered the enumerated terms from the DwCDP SQL schema.
 # It considers `not detected` and not `notDetected`
 createEDP(
@@ -2717,7 +2843,7 @@ createEDP(
         Literal("notDetected"),
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/occurrenceStatus",
-    references_s="http://rs.tdwg.org/dwc/terms/version/occurrenceStatus-2023-06-28"
+    references_s="http://rs.tdwg.org/dwc/terms/version/occurrenceStatus-2023-06-28",
 )
 
 createDP(
@@ -2731,7 +2857,7 @@ createDP(
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
     subproperty_list=[DCTERMS["identifier"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/organismID",
-    references_s="http://rs.tdwg.org/dwc/terms/version/organismID-2023-06-28"
+    references_s="http://rs.tdwg.org/dwc/terms/version/organismID-2023-06-28",
 )
 
 createDP(

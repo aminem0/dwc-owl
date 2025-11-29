@@ -60,6 +60,9 @@ bb:PictureOfPeter123CatchingSunfish456FromSeineNet789 dwcdp:isMediaOf bb:Peter12
         bb:SeineNet789,
         bb:Sunfish456 .
 
+bb:SomePoint a dcterms:Location ;
+    dwc:minimumElevationInMeters -430.0 .
+
 bb:dwc-owl.owl a owl:Ontology ;
     dc:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
     dc:title "Darwin Core OWL" ;
@@ -528,6 +531,17 @@ dwc:mediaID a owl:DatatypeProperty ;
     rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for an [ac:Media] resource."@en ;
     skos:prefLabel "Media ID" .
+
+dwc:minimumElevationInMeters2 a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:minimumElevationInMeters ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The lower limit of the range of elevation (altitude, usually above sea level), in meters."@en ;
+    skos:example -100.0,
+        802.0 ;
+    skos:prefLabel "Minimum Elevation In Meters" .
 
 dwc:nucleotideAnalysisID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/nucleotideAnalysisID> ;
@@ -1478,6 +1492,15 @@ dwciri:fieldNotes a owl:ObjectProperty ;
     skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
     skos:prefLabel "Establishment Means (IRI)" .
 
+dwciri:occurrenceStatus a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:occurrenceStatus ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/occurrenceStatus-2025-07-10> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain dwc:Occurrence ;
+    rdfs:isDefinedBy dwciri: ;
+    skos:definition "A statement about the presence or absence of a dwc:Taxon at a dcterms:Location."@en ;
+    skos:prefLabel "Occurrence Status (IRI)" .
+
 dwciri:pathway a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:pathway ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/pathway-2025-07-10> ;
@@ -1848,6 +1871,30 @@ dwc:molecularProtocolID a owl:DatatypeProperty ;
     skos:definition "An identifier for a [dwc:MolecularProtocol]."@en ;
     skos:prefLabel "Molecular Protocol ID" .
 
+dwc:month a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:month ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/month-2023-06-28> ;
+    rdfs:domain dwc:Event ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:integer ;
+    skos:definition "The integer month in which the dwc:Event occurred."@en ;
+    skos:example 1,
+        10 ;
+    skos:prefLabel "Month" .
+
+dwc:municipality a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:municipality ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/municipality-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "The full, unabbreviated name of the next smaller administrative region than county (city, municipality, etc.) in which the dcterms:Location occurs. Do not use this term for a nearby named place that does not contain the actual dcterms:Location."@en ;
+    skos:example "Araçatuba",
+        "Ga-Segonyana",
+        "Holzminden" ;
+    skos:prefLabel "Third Order Division" .
+
 dwc:nucleotideSequenceID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/molecularProtocolID> ;
     rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
@@ -1857,6 +1904,31 @@ dwc:nucleotideSequenceID a owl:DatatypeProperty ;
     rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:NucleotideSequence]."@en ;
     skos:prefLabel "Nucleotide Sequence ID" .
+
+dwc:occurrenceID a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:occurrenceID ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/occurrenceID-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a persistent, globally unique identifier."@en ;
+    rdfs:domain dwc:Occurrence ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:unionOf ( xsd:anyURI xsd:string ) ] ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    skos:definition "An identifier for the dwc:Occurrence (as opposed to a particular digital record of the dwc:Occurrence). In the absence of a persistent global unique identifier, construct one from a combination of identifiers in the record that will most closely make the dwc:occurrenceID globally unique."@en ;
+    skos:example "http://arctos.database.museum/guid/MSB:Mamm:233627"^^xsd:anyURI,
+        "urn:catalog:UWBM:Bird:89776"^^xsd:anyURI,
+        "000866d2-c177-4648-a200-ead4007051b9" ;
+    skos:prefLabel "Occurrence ID" .
+
+dwc:occurrenceRemarks a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:occurrenceRemarks ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/occurrenceRemarks-2023-06-28> ;
+    rdfs:domain dwc:Occurrence ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "Comments or notes about the dwc:Occurrence."@en ;
+    skos:example "found dead on road" ;
+    skos:prefLabel "Occurrence Remarks" .
 
 dwc:occurrenceStatus a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:occurrenceStatus ;
@@ -2723,6 +2795,19 @@ dwc:geologicalContextID a owl:DatatypeProperty ;
     skos:example "https://opencontext.org/subjects/e54377f7-4452-4315-b676-40679b10c4d9" ;
     skos:prefLabel "Geological Context ID" .
 
+dwc:minimumElevationInMeters a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:minimumElevationInMeters ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range [ a rdfs:Datatype ;
+            owl:onDatatype xsd:decimal ;
+            owl:withRestrictions ( [ xsd:minInclusive -430.0 ] [ xsd:maxInclusive 8850.0 ] ) ] ;
+    skos:definition "The lower limit of the range of elevation (altitude, usually above sea level), in meters."@en ;
+    skos:example -100.0,
+        802.0 ;
+    skos:prefLabel "Minimum Elevation In Meters2" .
+
 dwc:organismID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:organismID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/organismID-2023-06-28> ;
@@ -3027,13 +3112,14 @@ dwc:Organism a owl:Class ;
         "a specific wolf pack" ;
     skos:prefLabel "Organism" .
 
-dcterms:Location a owl:Class ;
-    dcterms:isVersionOf dcterms:Location ;
-    rdfs:isDefinedBy dcterms: ;
-    skos:definition "A spatial region or named place."@en ;
-    skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
-        "the place defined by a georeference" ;
-    skos:prefLabel "Location" .
+dwc:MaterialEntityAssertion a owl:Class ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf dwc:Assertion ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty dwcdp:about ;
+            owl:someValuesFrom dwc:MaterialEntity ] ;
+    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]." ;
+    skos:prefLabel "Material Entity Assertion" .
 
 dcterms:identifier a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:identifier ;
@@ -3044,24 +3130,13 @@ dcterms:identifier a owl:DatatypeProperty ;
     skos:definition "An unambiguous reference to the resource within a given context." ;
     skos:prefLabel "Identifier" .
 
-dwc:MaterialEntityAssertion a owl:Class ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf dwc:Assertion ;
-    owl:equivalentClass [ a owl:Restriction ;
-            owl:onProperty dwcdp:about ;
-            owl:someValuesFrom dwc:MaterialEntity ] ;
-    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]." ;
-    skos:prefLabel "Material Entity Assertion" .
-
-dwc:Occurrence a owl:Class ;
-    dcterms:isVersionOf dwc:Occurrence ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A state of a [dwc:Organism] in a [dwc:Event]."@en ;
-    skos:example "a fungus in Central Park in the summer of 1929",
-        "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23",
-        "a wolf pack on the shore of Kluane Lake in 1988" ;
-    skos:prefLabel "Occurrence" .
+dcterms:Location a owl:Class ;
+    dcterms:isVersionOf dcterms:Location ;
+    rdfs:isDefinedBy dcterms: ;
+    skos:definition "A spatial region or named place."@en ;
+    skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
+        "the place defined by a georeference" ;
+    skos:prefLabel "Location" .
 
 dwc:Assertion a owl:Class ;
     dcterms:isVersionOf dwc:MeasurementOrFact ;
@@ -3081,6 +3156,16 @@ dwc:GeologicalContext a owl:Class ;
     skos:example "a particular lithostratigraphic layer",
         "a specific chronostratigraphic unit" ;
     skos:prefLabel "Geological Context" .
+
+dwc:Occurrence a owl:Class ;
+    dcterms:isVersionOf dwc:Occurrence ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A state of a [dwc:Organism] in a [dwc:Event]."@en ;
+    skos:example "a fungus in Central Park in the summer of 1929",
+        "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23",
+        "a wolf pack on the shore of Kluane Lake in 1988" ;
+    skos:prefLabel "Occurrence" .
 
 dwc:Event a owl:Class ;
     dcterms:isVersionOf dwc:Event ;

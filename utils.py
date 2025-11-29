@@ -264,6 +264,112 @@ def createEDP(
         for prop_type in additional_list:
             graph.add((dp_uri, RDF["type"], prop_type))
 
+# TEST: Function that creates an owl:DatatypeProperty but with a numeric range restriction
+# NOTE: Maybe later consider tuples, but for now, lists do the job
+def createRDP(
+        name: str,
+        namespace: Namespace,
+        graph: Graph,
+        pref_label: Literal,
+        restrictions: list[list[str, float, str]],
+        domains: Node | list[Node] | None = None,        
+        version_of_s: str | None = None,
+        subproperty_list: list[Node] | None = None,
+        additional_list: list[Node] | None = None,
+        definition: Literal | None = None,
+        comments: Literal | None = None,
+        examples: Literal | list[Literal] | None = None,
+        references_s: str | None = None,
+        ) -> None:
+    # Create the owl:DatatypeProperty URI
+    dp_uri = namespace[name]
+
+    # Add DEFINEDBY
+    graph.add((dp_uri, RDFS["isDefinedBy"], URIRef(str(namespace))))
+
+    # Add preferred label.
+    graph.add((dp_uri, SKOS["prefLabel"], pref_label))
+
+    # Optionally add definition.
+    if definition:
+        graph.add((dp_uri, SKOS["definition"], definition))
+
+    # Optionally add comments.
+    if comments:
+        graph.add((dp_uri, RDFS["comment"], comments))
+
+    # Add examples if provided
+    if examples:
+        if isinstance(examples, URIRef):
+            graph.add((dp_uri, SKOS["example"], examples))
+        elif isinstance(examples, list):
+            for example in examples:
+                graph.add((dp_uri, SKOS["example"], example))
+
+    # Add version info.
+    graph.add((dp_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
+
+    if references_s:
+        graph.add((dp_uri, DCTERMS["references"], URIRef(references_s)))
+
+    # Declare it in the graph
+    graph.add((dp_uri, RDF["type"], OWL["DatatypeProperty"]))
+
+    # NOTE: New version using domain
+    if domains:
+        if isinstance(domains, URIRef):
+            graph.add((dp_uri, RDFS["domain"], domains))
+        elif isinstance(domains, list):
+            domain_bnode = BNode()
+            Collection(graph, domain_bnode, domains)
+            domain_union_class = BNode()
+            graph.add((domain_union_class, RDF["type"], OWL["Class"]))
+            graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
+            graph.add((dp_uri, RDFS["domain"], domain_union_class))
+    
+    # WARN: Here goes a rewrite to consider a numeric variable with OWL restrictions
+    # on the values that can be taken.
+
+    # Create owl:withRestrictions list
+    restriction_list = BNode()
+    restriction_pylist = []
+
+    # Add all restrictions from the list with a loop
+    for restriction in restrictions:
+
+        # Create a BlankNode
+        restriction_bnode = BNode()
+
+        # Build it with template
+        graph.add((restriction_bnode, XSD[f"{restriction[0]}"], Literal(f"{restriction[1]}", datatype=XSD[f"{restriction[2]}"])))
+
+        # Add it to the Python list
+        restriction_pylist.append(restriction_bnode)
+
+    # Create a BlankNode for the datatype and declare it
+    datatype_bnode = BNode()
+    graph.add((datatype_bnode, RDF["type"], RDFS["Datatype"]))
+
+    # Create an rdf:List from the Python list of BlankNodes of restrictions
+    Collection(graph, restriction_list, restriction_pylist)
+ 
+    # Add the datatype restriction: owl:onDatatype xsd:decimal for now
+    # Later maybe make it accept different types of datatypes
+    # Attach the list to the datatype node
+    graph.add((dp_uri, RDFS["range"], datatype_bnode))
+    graph.add((datatype_bnode, OWL["onDatatype"], XSD["decimal"]))
+    graph.add((datatype_bnode, OWL["withRestrictions"], restriction_list))
+
+    if subproperty_list:
+        # Technically not a unified list, so can add them all with a for loop
+        for property in subproperty_list:
+            graph.add((dp_uri, RDFS["subPropertyOf"], property))
+
+    # Optionally add other types of properties??
+    if additional_list:
+        for prop_type in additional_list:
+            graph.add((dp_uri, RDF["type"], prop_type))
+
 def createOP(
     name: str,
     namespace: Namespace,

@@ -272,6 +272,17 @@ dwciri:fieldNotes rdf:type owl:ObjectProperty ;
                   skos:prefLabel "Establishment Means (IRI)" .
 
 
+###  http://rs.tdwg.org/dwc/iri/occurrenceStatus
+dwciri:occurrenceStatus rdf:type owl:ObjectProperty ;
+                        rdfs:domain dwc:Occurrence ;
+                        dcterms:isVersionOf dwciri:occurrenceStatus ;
+                        dcterms:references <http://rs.tdwg.org/dwc/iri/version/occurrenceStatus-2025-07-10> ;
+                        rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                        rdfs:isDefinedBy dwciri: ;
+                        skos:definition "A statement about the presence or absence of a dwc:Taxon at a dcterms:Location."@en ;
+                        skos:prefLabel "Occurrence Status (IRI)" .
+
+
 ###  http://rs.tdwg.org/dwc/iri/pathway
 dwciri:pathway rdf:type owl:ObjectProperty ;
                rdfs:domain dwc:Occurrence ;
@@ -1835,6 +1846,39 @@ dwc:member rdf:type owl:DatatypeProperty ;
            skos:prefLabel "Member" .
 
 
+###  http://rs.tdwg.org/dwc/terms/minimumElevationInMeters
+dwc:minimumElevationInMeters rdf:type owl:DatatypeProperty ;
+                             rdfs:domain dcterms:Location ;
+                             rdfs:range [ rdf:type rdfs:Datatype ;
+                                          owl:onDatatype xsd:decimal ;
+                                          owl:withRestrictions ( [ xsd:minInclusive -430.0
+                                                                 ]
+                                                                 [ xsd:maxInclusive 8850.0
+                                                                 ]
+                                                               )
+                                        ] ;
+                             dcterms:isVersionOf dwc:minimumElevationInMeters ;
+                             dcterms:references <http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28> ;
+                             rdfs:isDefinedBy dwc: ;
+                             skos:definition "The lower limit of the range of elevation (altitude, usually above sea level), in meters."@en ;
+                             skos:example -100.0 ,
+                                          802.0 ;
+                             skos:prefLabel "Minimum Elevation In Meters2" .
+
+
+###  http://rs.tdwg.org/dwc/terms/minimumElevationInMeters2
+dwc:minimumElevationInMeters2 rdf:type owl:DatatypeProperty ;
+                              rdfs:domain dcterms:Location ;
+                              rdfs:range xsd:decimal ;
+                              dcterms:isVersionOf dwc:minimumElevationInMeters ;
+                              dcterms:references <http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28> ;
+                              rdfs:isDefinedBy dwc: ;
+                              skos:definition "The lower limit of the range of elevation (altitude, usually above sea level), in meters."@en ;
+                              skos:example -100.0 ,
+                                           802.0 ;
+                              skos:prefLabel "Minimum Elevation In Meters" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/molecularProtocolID
 dwc:molecularProtocolID rdf:type owl:DatatypeProperty ;
                         rdfs:subPropertyOf dcterms:identifier ;
@@ -1845,6 +1889,34 @@ dwc:molecularProtocolID rdf:type owl:DatatypeProperty ;
                         rdfs:isDefinedBy dwc: ;
                         skos:definition "An identifier for a [dwc:MolecularProtocol]."@en ;
                         skos:prefLabel "Molecular Protocol ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/month
+dwc:month rdf:type owl:DatatypeProperty ;
+          rdfs:domain dwc:Event ;
+          rdfs:range xsd:integer ;
+          dcterms:isVersionOf dwc:month ;
+          dcterms:references <http://rs.tdwg.org/dwc/terms/version/month-2023-06-28> ;
+          rdfs:isDefinedBy dwc: ;
+          skos:definition "The integer month in which the dwc:Event occurred."@en ;
+          skos:example 1 ,
+                       10 ;
+          skos:prefLabel "Month" .
+
+
+###  http://rs.tdwg.org/dwc/terms/municipality
+dwc:municipality rdf:type owl:DatatypeProperty ;
+                 rdfs:domain dcterms:Location ;
+                 rdfs:range rdfs:Literal ;
+                 dcterms:isVersionOf dwc:municipality ;
+                 dcterms:references <http://rs.tdwg.org/dwc/terms/version/municipality-2023-06-28> ;
+                 rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both."@en ;
+                 rdfs:isDefinedBy dwc: ;
+                 skos:definition "The full, unabbreviated name of the next smaller administrative region than county (city, municipality, etc.) in which the dcterms:Location occurs. Do not use this term for a nearby named place that does not contain the actual dcterms:Location."@en ;
+                 skos:example "Araçatuba" ,
+                              "Ga-Segonyana" ,
+                              "Holzminden" ;
+                 skos:prefLabel "Third Order Division" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/nucleotideAnalysisID
@@ -1908,6 +1980,38 @@ dwc:objectQuantityType rdf:type owl:DatatypeProperty ;
                        skos:definition "The type of quantification system used for the quantity of dwc:MaterialEntities."@en ;
                        skos:example "individuals" ;
                        skos:prefLabel "Object Quantity Type" .
+
+
+###  http://rs.tdwg.org/dwc/terms/occurrenceID
+dwc:occurrenceID rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf dcterms:identifier ;
+                 rdfs:domain dwc:Occurrence ;
+                 rdfs:range [ rdf:type rdfs:Datatype ;
+                              owl:unionOf ( xsd:anyURI
+                                            xsd:string
+                                          )
+                            ] ;
+                 dcterms:isVersionOf dwc:occurrenceID ;
+                 dcterms:references <http://rs.tdwg.org/dwc/terms/version/occurrenceID-2023-06-28> ;
+                 rdfs:comment "Recommended best practice is to use a persistent, globally unique identifier."@en ;
+                 rdfs:isDefinedBy dwc: ;
+                 skos:definition "An identifier for the dwc:Occurrence (as opposed to a particular digital record of the dwc:Occurrence). In the absence of a persistent global unique identifier, construct one from a combination of identifiers in the record that will most closely make the dwc:occurrenceID globally unique."@en ;
+                 skos:example "http://arctos.database.museum/guid/MSB:Mamm:233627"^^xsd:anyURI ,
+                              "urn:catalog:UWBM:Bird:89776"^^xsd:anyURI ,
+                              "000866d2-c177-4648-a200-ead4007051b9" ;
+                 skos:prefLabel "Occurrence ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/occurrenceRemarks
+dwc:occurrenceRemarks rdf:type owl:DatatypeProperty ;
+                      rdfs:domain dwc:Occurrence ;
+                      rdfs:range rdfs:Literal ;
+                      dcterms:isVersionOf dwc:occurrenceRemarks ;
+                      dcterms:references <http://rs.tdwg.org/dwc/terms/version/occurrenceRemarks-2023-06-28> ;
+                      rdfs:isDefinedBy dwc: ;
+                      skos:definition "Comments or notes about the dwc:Occurrence."@en ;
+                      skos:example "found dead on road" ;
+                      skos:prefLabel "Occurrence Remarks" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/occurrenceStatus
@@ -4198,6 +4302,12 @@ bb:SeineNet789 rdf:type owl:NamedIndividual ,
 ###  http://bioboum.ca/Site123
 bb:Site123 rdf:type owl:NamedIndividual ;
            dwcdp:happenedDuring bb:ParentSite456 .
+
+
+###  http://bioboum.ca/SomePoint
+bb:SomePoint rdf:type owl:NamedIndividual ,
+                      dcterms:Location ;
+             dwc:minimumElevationInMeters -430.0 .
 
 
 ###  http://bioboum.ca/Sourco
