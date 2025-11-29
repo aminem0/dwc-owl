@@ -123,6 +123,19 @@ gbif:pcr_primer_reverse a owl:DatatypeProperty ;
     skos:example "GGACTACHVGGGTWTCTAAT" ;
     skos:prefLabel "Reverse PCR Primer" .
 
+ac:fundingAttributionID a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:fundingAttributionID ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/fundingAttributionID-2025-06-12> ;
+    rdfs:comment "Provide a unique identifier for the funding body, such as an identifier used in governmental or international databases. If no official identifier exists, use a persistent and unique identifier within your organization or dataset. Recommended best practice is to separate the values in a list with space vertical bar space (` | `)."@en ;
+    rdfs:domain dwc:Provenance ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:range xsd:string ;
+    skos:definition "An identifier for a dcterms:Agent that financially supported a project."@en ;
+    skos:example "https://ror.org/00epmv149",
+        "https://ror.org/00epmv149 | https://ror.org/04jnzhb65",
+        "https://www.wikidata.org/wiki/Q13102615" ;
+    skos:prefLabel "Funding Attribution ID" .
+
 dwciri:assertionTypeIRI a owl:ObjectProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
     rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
@@ -867,8 +880,7 @@ minext:color a owl:DatatypeProperty ;
         "green",
         "iridescent",
         "red" ;
-    skos:prefLabel "Cleavage",
-        "Color" .
+    skos:prefLabel "Color" .
 
 minext:crystalForm a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://rs.tdwg.org/minext/terms/crystalForm> ;
@@ -1237,34 +1249,48 @@ miqe:thresholdQuantificationCycle a owl:DatatypeProperty ;
 ac:caption a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:caption ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/caption-2021-10-05> ;
-    rdfs:comment "If both [dcterms:description] and [ac:caption] are present in the metadata, a [dcterms:description] is typically displayed instead of the resource, a [ac:caption] together with the resource. Thus, in HTML it would be appropriate to use [ac:caption] values in figcaption elements. Often only one of the [dcterms:description] or [ac:caption] is present; choose the term most appropriate for your metadata." ;
+    rdfs:comment "If both [dcterms:description] and [ac:caption] are present in the metadata, a [dcterms:description] is typically displayed instead of the resource, a [ac:caption] together with the resource. Thus, in HTML it would be appropriate to use [ac:caption] values in figcaption elements. Often only one of the [dcterms:description] or [ac:caption] is present; choose the term most appropriate for your metadata."@en ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy ac: ;
     rdfs:range rdfs:Literal ;
-    skos:definition "Free-form text to be displayed together with (rather than instead of) a resource that is suitable for captions (especially images)." ;
+    skos:definition "Free-form text to be displayed together with (rather than instead of) a resource that is suitable for captions (especially images)."@en ;
     skos:prefLabel "Caption" .
 
 ac:freqHigh a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:freqHigh ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/freqHigh-2021-10-05> ;
-    rdfs:comment "Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible." ;
+    rdfs:comment "Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible."@en ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
-    skos:definition "The highest frequency of the phenomena reflected in the multimedia item or Region of Interest." ;
+    skos:definition "The highest frequency of the phenomena reflected in the multimedia item or Region of Interest."@en ;
     skos:example 60.0 ;
     skos:prefLabel "Upper Frequency Bound" .
 
 ac:freqLow a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:freqLow ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/freqLow-2021-10-05> ;
-    rdfs:comment "Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible." ;
+    rdfs:comment "Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible."@en ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
-    skos:definition "The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest." ;
+    skos:definition "The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest."@en ;
     skos:example 60.0 ;
     skos:prefLabel "Lower Frequency Bound" .
+
+ac:fundingAttribution a owl:DatatypeProperty ;
+    dcterms:isVersionOf ac:fundingAttribution ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/fundingAttribution-2020-01-27> ;
+    rdfs:comment "Specify the full official name of the funding body. This should include the complete name without abbreviations, unless the abbreviation is an official and commonly recognized form (e.g., `NSF` for the `National Science Foundation`). Recommended best practice is to separate the values in a list with space vertical bar space (` | `)."@en ;
+    rdfs:domain dwc:Provenance ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:range xsd:string ;
+    skos:definition "A list (concatenated and separated) of names of the funding organizations or agencies that provided funding for a project."@en ;
+    skos:example "Artsdatabanken",
+        "National Science Foundation",
+        "Norges forskningsråd",
+        "Ocean Census | Nippon Foundation" ;
+    skos:prefLabel "Funding Attribution" .
 
 ac:heightFrac a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:heightFrac ;
@@ -1281,42 +1307,42 @@ ac:heightFrac a owl:DatatypeProperty ;
 ac:isROIOf a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:isROIOf ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/isROIOf-2021-10-05> ;
-    rdfs:comment "This term can be used to define an [ac:RegionOfInterest] within an [ac:Media] resource. Recommended best practice is to use a globally unique identifier." ;
+    rdfs:comment "This term can be used to define an [ac:RegionOfInterest] within an [ac:Media] resource. Recommended best practice is to use a globally unique identifier."@en ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy ac: ;
     rdfs:range rdfs:Literal ;
-    skos:definition "An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part." ;
+    skos:definition "An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part."@en ;
     skos:prefLabel "Is Part Of Media ID" .
 
 ac:radius a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:radius ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/radius-2021-10-05> ;
-    rdfs:comment "A valid value MUST be greater than or equal to zero. A valid value MAY cause the designated circle to extend beyond the bounds of a [dwc:Media] resource. In that case, the arc within a [dwc:Media] resource plus the bounds of a [dwc:Media] resource specify the region of interest. This term MUST NOT be used with [ac:widthFrac] or [ac:heightFrac] to define a region of interest. This term may be used with [ac:xFrac] and [ac:yFrac] to define a point. In that case, the implication is that the point falls on some object of interest within a [dwc:Media] resource, but nothing more can be assumed about the bounds of that object." ;
+    rdfs:comment "A valid value MUST be greater than or equal to zero. A valid value MAY cause the designated circle to extend beyond the bounds of a [dwc:Media] resource. In that case, the arc within a [dwc:Media] resource plus the bounds of a [dwc:Media] resource specify the region of interest. This term MUST NOT be used with [ac:widthFrac] or [ac:heightFrac] to define a region of interest. This term may be used with [ac:xFrac] and [ac:yFrac] to define a point. In that case, the implication is that the point falls on some object of interest within a [dwc:Media] resource, but nothing more can be assumed about the bounds of that object."@en ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:integer ;
-    skos:definition "The radius of a bounding circle or arc, expressed as a fraction of the width of a [dwc:Media] resource." ;
+    skos:definition "The radius of a bounding circle or arc, expressed as a fraction of the width of a [dwc:Media] resource."@en ;
     skos:example 100 ;
     skos:prefLabel "Radius" .
 
 ac:subtypeLiteral a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:subtypeLiteral ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/subtypeLiteral-2023-09-05> ;
-    rdfs:comment "The [ac:subtypeLiteral] term MUST NOT be applied to Collection objects. However, the Description term in the Content Coverage Vocabulary might add further description to a Collection object. Controlled string values SHOULD be selected from the Controlled Vocabulary for [ac:subtype]. Human-readable information about the Controlled Vocabulary for [ac:subtype] is at [http://rs.tdwg.org/ac/doc/subtype/]. It is best practice to use [ac:subtype] instead of [ac:subytpeLiteral] whenever practical." ;
+    rdfs:comment "The [ac:subtypeLiteral] term MUST NOT be applied to Collection objects. However, the Description term in the Content Coverage Vocabulary might add further description to a Collection object. Controlled string values SHOULD be selected from the Controlled Vocabulary for [ac:subtype]. Human-readable information about the Controlled Vocabulary for [ac:subtype] is at [http://rs.tdwg.org/ac/doc/subtype/]. It is best practice to use [ac:subtype] instead of [ac:subytpeLiteral] whenever practical."@en ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy ac: ;
     rdfs:range rdfs:Literal ;
-    skos:definition "A subcategory that allows further specialization of a [dwc:Media] resource type than [mediaType]." ;
+    skos:definition "A subcategory that allows further specialization of a [dwc:Media] resource type than [mediaType]."@en ;
     skos:prefLabel "Subtype Literal" .
 
 ac:widthFrac a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:widthFrac ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/widthFrac-2021-10-05> ;
-    rdfs:comment "The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
+    rdfs:comment "The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value."@en ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
-    skos:definition "The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource." ;
+    skos:definition "The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource."@en ;
     skos:example 0.5,
         1.0 ;
     skos:prefLabel "Fractional Width" .
@@ -1324,11 +1350,11 @@ ac:widthFrac a owl:DatatypeProperty ;
 ac:xFrac a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:xFrac ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/xFrac-2021-10-05> ;
-    rdfs:comment "A valid value MUST be greater than or equal to zero and less than or equal to one. The precision of this value SHOULD be great enough that when the [ac:xFrac] value is multiplied by the [exif:PixelXDimension] of the Best Quality variant of the Service Access point, rounding to the nearest integer results in the same horizontal pixel location originally used to define the point. This point can serve as the horizontal position of the upper left corner of a bounding rectangle, or as the center of a circle." ;
+    rdfs:comment "A valid value MUST be greater than or equal to zero and less than or equal to one. The precision of this value SHOULD be great enough that when the [ac:xFrac] value is multiplied by the [exif:PixelXDimension] of the Best Quality variant of the Service Access point, rounding to the nearest integer results in the same horizontal pixel location originally used to define the point. This point can serve as the horizontal position of the upper left corner of a bounding rectangle, or as the center of a circle."@en ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
-    skos:definition "The horizontal position of a reference point, measured from the left side of a [dwc:Media] resource and expressed as a decimal fraction of the width of a [dwc:Media] resource." ;
+    skos:definition "The horizontal position of a reference point, measured from the left side of a [dwc:Media] resource and expressed as a decimal fraction of the width of a [dwc:Media] resource."@en ;
     skos:example 0.5,
         1.0 ;
     skos:prefLabel "Fractional X" .
@@ -1336,11 +1362,11 @@ ac:xFrac a owl:DatatypeProperty ;
 ac:yFrac a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:yFrac ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/yFrac-2021-10-05> ;
-    rdfs:comment "A valid value MUST be greater than or equal to zero and less than or equal to one. The precision of this value SHOULD be great enough that when the [ac:yFrac] value is multiplied by the [exif:PixelYDimension] of the Best Quality variant of the Service Access point, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This point can serve as the vertical position of the upper left corner of a bounding rectangle, or as the center of a circle." ;
+    rdfs:comment "A valid value MUST be greater than or equal to zero and less than or equal to one. The precision of this value SHOULD be great enough that when the [ac:yFrac] value is multiplied by the [exif:PixelYDimension] of the Best Quality variant of the Service Access point, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This point can serve as the vertical position of the upper left corner of a bounding rectangle, or as the center of a circle."@en ;
     rdfs:domain ac:Media ;
     rdfs:isDefinedBy ac: ;
     rdfs:range xsd:decimal ;
-    skos:definition "The vertical position of a reference point, measured from the top of a [dwc:Media] resource and expressed as a decimal fraction of the height of a [dwc:Media] resource." ;
+    skos:definition "The vertical position of a reference point, measured from the top of a [dwc:Media] resource and expressed as a decimal fraction of the height of a [dwc:Media] resource."@en ;
     skos:example 0.5,
         1.0 ;
     skos:prefLabel "Fractional Y" .
@@ -1429,6 +1455,17 @@ dwciri:fieldNotes a owl:ObjectProperty ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
     skos:prefLabel "Establishment Means (IRI)" .
+
+dwciri:pathway a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:pathway ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/pathway-2025-07-10> ;
+    rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain dwc:Occurrence ;
+    rdfs:isDefinedBy dwciri: ;
+    skos:definition "The process by which a dwc:Organism came to be in a given place at a given time."@en ;
+    skos:example <http://rs.tdwg.org/dwcpw/values/p002>,
+        <http://rs.tdwg.org/dwcpw/values/p046> ;
+    skos:prefLabel "Pathway" .
 
 dwciri:reproductiveCondition a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:reproductiveCondition ;
@@ -1525,6 +1562,33 @@ dwc:caste a owl:DatatypeProperty ;
         "queen",
         "soldier" ;
     skos:prefLabel "Caste" .
+
+dwc:datasetID a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:datasetID ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/datasetID-2017-10-06> ;
+    rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
+    rdfs:domain dwc:Provenance ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "An identifier for a dataset from which data originated."@en ;
+    skos:example "b15d4952-7d20-46f1-8a3e-556a512b04c5" ;
+    skos:prefLabel "Dataset ID" .
+
+dwc:disposition a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:disposition ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/disposition-2023-09-13> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain dwc:MaterialEntity ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A current state of a dwc:MaterialEntity with respect to where it can be found."@en ;
+    skos:example "deaccessioned",
+        "destroyed",
+        "in collection",
+        "missing",
+        "on loan",
+        "used up" ;
+    skos:prefLabel "Disposition" .
 
 dwc:earliestAgeOrLowestStage a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:earliestAgeOrLowestStage ;
@@ -1750,6 +1814,59 @@ dwc:nucleotideSequenceID a owl:DatatypeProperty ;
     skos:definition "An identifier for a [dwc:NucleotideSequence]."@en ;
     skos:prefLabel "Nucleotide Sequence ID" .
 
+dwc:ownerInstitutionCode a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:ownerInstitutionCode ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/ownerInstitutionCode-2023-06-28> ;
+    rdfs:domain dwc:MaterialEntity ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A name (or acronym) in use by an institution having ownership of a dwc:MaterialEntity." ;
+    skos:example "APN",
+        "InBio",
+        "NPS" ;
+    skos:prefLabel "Owner Institution Code" .
+
+dwc:parentEventID a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:parentEventID ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/parentEventID-2023-06-28> ;
+    rdfs:comment "Use a globally unique identifier for a dwc:Event or an identifier for a dwc:Event that is specific to the data set." ;
+    rdfs:domain dwc:Event ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    skos:definition "An identifier for the broader dwc:Event that groups this and potentially other dwc:Events." ;
+    skos:example "A1" ;
+    skos:prefLabel "Parent Event ID" .
+
+dwc:pathway a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:pathway ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/pathway-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use controlled value strings from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain dwc:Occurrence ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The process by which a dwc:Organism came to be in a given place at a given time."@en ;
+    skos:example "corridor",
+        "otherEscape",
+        "releasedForUse",
+        "transportContaminant",
+        "transportStowaway",
+        "unaided" ;
+    skos:prefLabel "Pathway" .
+
+dwc:pointRadiusSpatialFit a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:pointRadiusSpatialFit ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/pointRadiusSpatialFit-2023-06-28> ;
+    rdfs:comment "Detailed explanations with graphical examples can be found in the Georeferencing Best Practices, Chapman and Wieczorek, 2020 ([https://doi.org/10.15468/doc-gg7h-s853](https://doi.org/10.15468/doc-gg7h-s853))."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The ratio of the area of the point-radius (dwc:decimalLatitude, dwc:decimalLongitude, dwc:coordinateUncertaintyInMeters) to the area of the true (original, or most specific) spatial representation of the dcterms:Location. Legal values are `0`, greater than or equal to `1`, or undefined. A value of `1` is an exact match or 100% overlap. A value of `0` should be used if the given point-radius does not completely contain the original representation. The dwc:pointRadiusSpatialFit is undefined (and should be left empty) if the original representation is any geometry without area (e.g., a point or polyline) and without uncertainty and the given georeference is not that same geometry (without uncertainty). If both the original and the given georeference are the same point, the dwc:pointRadiusSpatialFit is `1`."@en ;
+    skos:example 0.0,
+        1.0,
+        1.5708 ;
+    skos:prefLabel "Point Radius Spatial Fit" .
+
 dwc:preferredAgentName a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:title ;
     rdfs:domain dcterms:Agent ;
@@ -1767,6 +1884,22 @@ dwc:preferredEventName a owl:DatatypeProperty ;
     rdfs:subPropertyOf dcterms:title ;
     skos:definition "The name of a [dwc:Event] preferred in searches and results."@en ;
     skos:prefLabel "Preferred Event Name" .
+
+dwc:preparations a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:preparations ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/preparations-2025-06-12> ;
+    rdfs:comment "Recommended best practice is to separate the values in a list with space vertical bar space (` | `). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain dwc:MaterialEntity ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A list (concatenated and separated) of preparations and preservation methods for a dwc:MaterialEntity."@en ;
+    skos:example "DNA extract",
+        "cast",
+        "fossil",
+        "photograph",
+        "skin | skull | skeleton",
+        "whole animal (EtOH) | tissue (EDTA)" ;
+    skos:prefLabel "Preparations" .
 
 dwc:projectID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:projectID ;
@@ -2602,13 +2735,6 @@ dwc:Permit a owl:Class ;
     skos:example "a license to put up mist-nets to sample for bird communities" ;
     skos:prefLabel "Permit" .
 
-dwc:Provenance a owl:Class ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/provenance> ;
-    rdfs:comment "This is a convenience class to group related properties."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "Information about an entity's origins."@en ;
-    skos:prefLabel "Provenance" .
-
 dwc:relationshipOfResourceID a owl:ObjectProperty ;
     dcterms:isVersionOf dwc:relationshipOfResourceID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/relationshipOfResourceID-2023-06-28> ;
@@ -2637,6 +2763,13 @@ dcterms:title a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "A name given to a resource." ;
     skos:prefLabel "Title" .
+
+dwc:Provenance a owl:Class ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/provenance> ;
+    rdfs:comment "This is a convenience class to group related properties."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "Information about an entity's origins."@en ;
+    skos:prefLabel "Provenance" .
 
 dwc:UsagePolicy a owl:Class ;
     dcterms:isVersionOf dwc:UsagePolicy ;
@@ -2817,6 +2950,15 @@ dcterms:identifier a owl:DatatypeProperty ;
     skos:definition "An unambiguous reference to the resource within a given context." ;
     skos:prefLabel "Identifier" .
 
+dwc:MaterialEntityAssertion a owl:Class ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf dwc:Assertion ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty dwcdp:about ;
+            owl:someValuesFrom dwc:MaterialEntity ] ;
+    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]." ;
+    skos:prefLabel "Material Entity Assertion" .
+
 dwc:Occurrence a owl:Class ;
     dcterms:isVersionOf dwc:Occurrence ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
@@ -2826,15 +2968,6 @@ dwc:Occurrence a owl:Class ;
         "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23",
         "a wolf pack on the shore of Kluane Lake in 1988" ;
     skos:prefLabel "Occurrence" .
-
-dwc:MaterialEntityAssertion a owl:Class ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf dwc:Assertion ;
-    owl:equivalentClass [ a owl:Restriction ;
-            owl:onProperty dwcdp:about ;
-            owl:someValuesFrom dwc:MaterialEntity ] ;
-    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]." ;
-    skos:prefLabel "Material Entity Assertion" .
 
 dwc:Assertion a owl:Class ;
     dcterms:isVersionOf dwc:MeasurementOrFact ;
@@ -2881,6 +3014,22 @@ ac:Media a owl:Class ;
         "dcmi:StillImage" ;
     skos:prefLabel "Media" .
 
+dcterms:Agent a owl:Class ;
+    dcterms:isVersionOf dcterms:Agent ;
+    rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
+    rdfs:isDefinedBy dcterms: ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dwc:preferredAgentName ] ) ] ;
+    skos:definition "A resource that acts or has the power to act."@en ;
+    skos:example "Carl Linnaeus",
+        "ChatGPT",
+        "The El Yunque National Forest ARBIMON System",
+        "The National Science Foundation",
+        "The Terra Nova Expedition" ;
+    skos:prefLabel "Agent" .
+
 dwc:MaterialEntity a owl:Class ;
     dcterms:isVersionOf dwc:MaterialEntity ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/MaterialEntity-2023-09-13> ;
@@ -2901,22 +3050,6 @@ dwc:MaterialEntity a owl:Class ;
         "the entire contents of a trawl",
         "the stomach contents of a fish" ;
     skos:prefLabel "Material Entity" .
-
-dcterms:Agent a owl:Class ;
-    dcterms:isVersionOf dcterms:Agent ;
-    rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
-    rdfs:isDefinedBy dcterms: ;
-    rdfs:subClassOf [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty dwc:preferredAgentName ] ) ] ;
-    skos:definition "A resource that acts or has the power to act."@en ;
-    skos:example "Carl Linnaeus",
-        "ChatGPT",
-        "The El Yunque National Forest ARBIMON System",
-        "The National Science Foundation",
-        "The Terra Nova Expedition" ;
-    skos:prefLabel "Agent" .
 
 dwc:MolecularProtocol a owl:Class ;
     rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]." ;

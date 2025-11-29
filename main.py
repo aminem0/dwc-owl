@@ -863,6 +863,43 @@ g.add((BB["PieceOfRock456"], DWCDP["isPartOf"], BB["BiggerRock789"]))
 # BEGIN OBJECT PROPERTY DEFINITIONS
 #####################################################################################################
 
+# NOTE: REVOIR COMMENTS. THIS DOCUMENT? ALSO, ACCEPT BOTH A STRING OR A URI?
+createDP(
+    name="rights",
+    namespace=DC,
+    graph=g,
+    domains=DWC["UsagePolicy"],
+    ranges=[
+        XSD["anyURI"],
+        XSD["string"],
+    ],
+    pref_label=Literal("Rights (DC)"),
+    definition=Literal("Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions."),
+    examples=[
+        Literal("Copyright 2014 Ron Thomas"),
+        Literal("http://creativecommons.org/licenses/by/3.0/legalcode"),
+    ],
+    version_of_s="http://purl.org/dc/elements/1.1/rights",
+)
+
+# WARN: Verify domain
+# BUG: dc:source is source (heh) of inconsistency
+createDP(
+    name="source",
+    namespace=DC,
+    graph=g,
+    domains=OWL["Thing"],
+    # domains=[DWC["UsagePolicy"]],
+    ranges=RDFS["Literal"],
+    # ranges=[XSD["anyURI"], XSD["string"]],
+    pref_label=Literal("Source (DC)"),
+    definition=Literal("A related resource from which the described resource is derived", lang="en"),
+    comments=Literal("The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.", lang="en"),
+    version_of_s="http://purl.org/dc/elements/1.1/source",
+)
+
+#############################################################################
+
 createOP(
     name="rights",
     namespace=DCTERMS,
@@ -1063,6 +1100,22 @@ createOP(
     comments=Literal("The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes.", lang="en"),
     version_of_s="http://rs.tdwg.org/dwc/iri/fieldNotes",
     references_s="http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28",
+)
+
+createOP(
+    name="pathway",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DWC["Occurrence"],
+    pref_label=Literal("Pathway"),
+    definition=Literal("The process by which a dwc:Organism came to be in a given place at a given time.", lang="en"),
+    comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    examples=[
+        URIRef("http://rs.tdwg.org/dwcpw/values/p002"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/iri/pathway",
+    references_s="http://rs.tdwg.org/dwc/iri/version/pathway-2025-07-10",
 )
 
 # WARN: Verify if actually about dwc:Occurrence
@@ -1637,8 +1690,8 @@ createDP(
     domains=AC["Media"],
     ranges=RDFS["Literal"],
     pref_label=Literal("Caption"),
-    definition=Literal("Free-form text to be displayed together with (rather than instead of) a resource that is suitable for captions (especially images)."),
-    comments=Literal("If both [dcterms:description] and [ac:caption] are present in the metadata, a [dcterms:description] is typically displayed instead of the resource, a [ac:caption] together with the resource. Thus, in HTML it would be appropriate to use [ac:caption] values in figcaption elements. Often only one of the [dcterms:description] or [ac:caption] is present; choose the term most appropriate for your metadata."),
+    definition=Literal("Free-form text to be displayed together with (rather than instead of) a resource that is suitable for captions (especially images).", lang="en"),
+    comments=Literal("If both [dcterms:description] and [ac:caption] are present in the metadata, a [dcterms:description] is typically displayed instead of the resource, a [ac:caption] together with the resource. Thus, in HTML it would be appropriate to use [ac:caption] values in figcaption elements. Often only one of the [dcterms:description] or [ac:caption] is present; choose the term most appropriate for your metadata.", lang="en"),
     version_of_s="http://rs.tdwg.org/ac/terms/caption",
     references_s="http://rs.tdwg.org/ac/terms/version/caption-2021-10-05",
 )
@@ -1650,8 +1703,8 @@ createDP(
     domains=AC["Media"],
     ranges=XSD["decimal"],
     pref_label=Literal("Upper Frequency Bound"),
-    definition=Literal("The highest frequency of the phenomena reflected in the multimedia item or Region of Interest."),
-    comments=Literal("Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible."),
+    definition=Literal("The highest frequency of the phenomena reflected in the multimedia item or Region of Interest.", lang="en"),
+    comments=Literal("Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible.", lang="en"),
     examples=[
         Literal("60", datatype=XSD["decimal"]),
     ],
@@ -1666,13 +1719,54 @@ createDP(
     domains=AC["Media"],
     ranges=XSD["decimal"],
     pref_label=Literal("Lower Frequency Bound"),
-    definition=Literal("The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest."),
-    comments=Literal("Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible."),
+    definition=Literal("The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest.", lang="en"),
+    comments=Literal("Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible.", lang="en"),
     examples=[
         Literal("60", datatype=XSD["decimal"]),
     ],
     version_of_s="http://rs.tdwg.org/ac/terms/freqLow",
     references_s="http://rs.tdwg.org/ac/terms/version/freqLow-2021-10-05",
+)
+
+createDP(
+    name="fundingAttribution",
+    namespace=AC,
+    graph=g,
+    domains=DWC["Provenance"],
+    ranges=XSD["string"],
+    pref_label=Literal("Funding Attribution"),
+    definition=Literal("A list (concatenated and separated) of names of the funding organizations or agencies that provided funding for a project.", lang="en"),
+    comments=Literal("Specify the full official name of the funding body. This should include the complete name without abbreviations, unless the abbreviation is an official and commonly recognized form (e.g., `NSF` for the `National Science Foundation`). Recommended best practice is to separate the values in a list with space vertical bar space (` | `).", lang="en"),
+    examples=[
+        Literal("Artsdatabanken"),
+        Literal("National Science Foundation"),
+        Literal("Norges forskningsråd"),
+        Literal("Ocean Census | Nippon Foundation"),
+    ],
+    version_of_s="http://rs.tdwg.org/ac/terms/fundingAttribution",
+    references_s="http://rs.tdwg.org/ac/terms/version/fundingAttribution-2020-01-27",
+)
+
+# WARN: It is in ac:, and there is no aciri: but it is built to be an object property
+# Could be a way to insert URIs into a database, but declare it as an OP
+# I guess that if they are all URIs, the way to go would be to create an actual OP from it
+# (i.e. dwcdp:fundedBy) by splitting on the pipe operator
+createDP(
+    name="fundingAttributionID",
+    namespace=AC,
+    graph=g,
+    domains=DWC["Provenance"],
+    ranges=XSD["string"],
+    pref_label=Literal("Funding Attribution ID"),
+    definition=Literal("An identifier for a dcterms:Agent that financially supported a project.", lang="en"),
+    comments=Literal("Provide a unique identifier for the funding body, such as an identifier used in governmental or international databases. If no official identifier exists, use a persistent and unique identifier within your organization or dataset. Recommended best practice is to separate the values in a list with space vertical bar space (` | `).", lang="en"),
+    examples=[
+        Literal("https://ror.org/00epmv149"),
+        Literal("https://ror.org/00epmv149 | https://ror.org/04jnzhb65"),
+        Literal("https://www.wikidata.org/wiki/Q13102615"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/fundingAttributionID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/fundingAttributionID-2025-06-12",
 )
 
 createDP(
@@ -1701,8 +1795,8 @@ createDP(
     domains=AC["Media"],
     ranges=RDFS["Literal"],
     pref_label=Literal("Is Part Of Media ID"),
-    definition=Literal("An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part."),
-    comments=Literal("This term can be used to define an [ac:RegionOfInterest] within an [ac:Media] resource. Recommended best practice is to use a globally unique identifier."),
+    definition=Literal("An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part.", lang="en"),
+    comments=Literal("This term can be used to define an [ac:RegionOfInterest] within an [ac:Media] resource. Recommended best practice is to use a globally unique identifier.", lang="en"),
     version_of_s="http://rs.tdwg.org/ac/terms/isROIOf",
     references_s="http://rs.tdwg.org/ac/terms/version/isROIOf-2021-10-05",
 )
@@ -1714,8 +1808,8 @@ createDP(
     domains=AC["Media"],
     ranges=XSD["integer"],
     pref_label=Literal("Radius"),
-    definition=Literal("The radius of a bounding circle or arc, expressed as a fraction of the width of a [dwc:Media] resource."),
-    comments=Literal("A valid value MUST be greater than or equal to zero. A valid value MAY cause the designated circle to extend beyond the bounds of a [dwc:Media] resource. In that case, the arc within a [dwc:Media] resource plus the bounds of a [dwc:Media] resource specify the region of interest. This term MUST NOT be used with [ac:widthFrac] or [ac:heightFrac] to define a region of interest. This term may be used with [ac:xFrac] and [ac:yFrac] to define a point. In that case, the implication is that the point falls on some object of interest within a [dwc:Media] resource, but nothing more can be assumed about the bounds of that object."),
+    definition=Literal("The radius of a bounding circle or arc, expressed as a fraction of the width of a [dwc:Media] resource.", lang="en"),
+    comments=Literal("A valid value MUST be greater than or equal to zero. A valid value MAY cause the designated circle to extend beyond the bounds of a [dwc:Media] resource. In that case, the arc within a [dwc:Media] resource plus the bounds of a [dwc:Media] resource specify the region of interest. This term MUST NOT be used with [ac:widthFrac] or [ac:heightFrac] to define a region of interest. This term may be used with [ac:xFrac] and [ac:yFrac] to define a point. In that case, the implication is that the point falls on some object of interest within a [dwc:Media] resource, but nothing more can be assumed about the bounds of that object.", lang="en"),
     examples=[
         Literal("100", datatype=XSD["integer"]),
     ],
@@ -1731,8 +1825,8 @@ createDP(
     domains=AC["Media"],
     ranges=RDFS["Literal"],
     pref_label=Literal("Subtype Literal"),
-    definition=Literal("A subcategory that allows further specialization of a [dwc:Media] resource type than [mediaType]."),
-    comments=Literal("The [ac:subtypeLiteral] term MUST NOT be applied to Collection objects. However, the Description term in the Content Coverage Vocabulary might add further description to a Collection object. Controlled string values SHOULD be selected from the Controlled Vocabulary for [ac:subtype]. Human-readable information about the Controlled Vocabulary for [ac:subtype] is at [http://rs.tdwg.org/ac/doc/subtype/]. It is best practice to use [ac:subtype] instead of [ac:subytpeLiteral] whenever practical."),
+    definition=Literal("A subcategory that allows further specialization of a [dwc:Media] resource type than [mediaType].", lang="en"),
+    comments=Literal("The [ac:subtypeLiteral] term MUST NOT be applied to Collection objects. However, the Description term in the Content Coverage Vocabulary might add further description to a Collection object. Controlled string values SHOULD be selected from the Controlled Vocabulary for [ac:subtype]. Human-readable information about the Controlled Vocabulary for [ac:subtype] is at [http://rs.tdwg.org/ac/doc/subtype/]. It is best practice to use [ac:subtype] instead of [ac:subytpeLiteral] whenever practical.", lang="en"),
     version_of_s="http://rs.tdwg.org/ac/terms/subtypeLiteral",
     references_s="http://rs.tdwg.org/ac/terms/version/subtypeLiteral-2023-09-05",
 )
@@ -1744,8 +1838,8 @@ createDP(
     domains=AC["Media"],
     ranges=XSD["decimal"],
     pref_label=Literal("Fractional Width"),
-    definition=Literal("The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource."),
-    comments=Literal("The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value."),
+    definition=Literal("The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource.", lang="en"),
+    comments=Literal("The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value.", lang="en"),
     examples=[
         Literal("0.5", datatype=XSD["decimal"]),
         Literal("1", datatype=XSD["decimal"]),
@@ -1761,8 +1855,8 @@ createDP(
     domains=AC["Media"],
     ranges=XSD["decimal"],
     pref_label=Literal("Fractional X"),
-    definition=Literal("The horizontal position of a reference point, measured from the left side of a [dwc:Media] resource and expressed as a decimal fraction of the width of a [dwc:Media] resource."),
-    comments=Literal("A valid value MUST be greater than or equal to zero and less than or equal to one. The precision of this value SHOULD be great enough that when the [ac:xFrac] value is multiplied by the [exif:PixelXDimension] of the Best Quality variant of the Service Access point, rounding to the nearest integer results in the same horizontal pixel location originally used to define the point. This point can serve as the horizontal position of the upper left corner of a bounding rectangle, or as the center of a circle."),
+    definition=Literal("The horizontal position of a reference point, measured from the left side of a [dwc:Media] resource and expressed as a decimal fraction of the width of a [dwc:Media] resource.", lang="en"),
+    comments=Literal("A valid value MUST be greater than or equal to zero and less than or equal to one. The precision of this value SHOULD be great enough that when the [ac:xFrac] value is multiplied by the [exif:PixelXDimension] of the Best Quality variant of the Service Access point, rounding to the nearest integer results in the same horizontal pixel location originally used to define the point. This point can serve as the horizontal position of the upper left corner of a bounding rectangle, or as the center of a circle.", lang="en"),
     examples=[
         Literal("0.5", datatype=XSD["decimal"]),
         Literal("1", datatype=XSD["decimal"]),
@@ -1778,49 +1872,14 @@ createDP(
     domains=AC["Media"],
     ranges=XSD["decimal"],
     pref_label=Literal("Fractional Y"),
-    definition=Literal("The vertical position of a reference point, measured from the top of a [dwc:Media] resource and expressed as a decimal fraction of the height of a [dwc:Media] resource."),
-    comments=Literal("A valid value MUST be greater than or equal to zero and less than or equal to one. The precision of this value SHOULD be great enough that when the [ac:yFrac] value is multiplied by the [exif:PixelYDimension] of the Best Quality variant of the Service Access point, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This point can serve as the vertical position of the upper left corner of a bounding rectangle, or as the center of a circle."),
+    definition=Literal("The vertical position of a reference point, measured from the top of a [dwc:Media] resource and expressed as a decimal fraction of the height of a [dwc:Media] resource.", lang="en"),
+    comments=Literal("A valid value MUST be greater than or equal to zero and less than or equal to one. The precision of this value SHOULD be great enough that when the [ac:yFrac] value is multiplied by the [exif:PixelYDimension] of the Best Quality variant of the Service Access point, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This point can serve as the vertical position of the upper left corner of a bounding rectangle, or as the center of a circle.", lang="en"),
     examples=[
         Literal("0.5", datatype=XSD["decimal"]),
         Literal("1", datatype=XSD["decimal"]),
     ],
     version_of_s="http://rs.tdwg.org/ac/terms/yFrac",
     references_s="http://rs.tdwg.org/ac/terms/version/yFrac-2021-10-05",
-)
-
-# NOTE: REVOIR COMMENTS. THIS DOCUMENT? ALSO, ACCEPT BOTH A STRING OR A URI?
-createDP(
-    name="rights",
-    namespace=DC,
-    graph=g,
-    domains=DWC["UsagePolicy"],
-    ranges=[
-        XSD["anyURI"],
-        XSD["string"],
-    ],
-    pref_label=Literal("Rights (DC)"),
-    definition=Literal("Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions."),
-    examples=[
-        Literal("Copyright 2014 Ron Thomas"),
-        Literal("http://creativecommons.org/licenses/by/3.0/legalcode"),
-    ],
-    version_of_s="http://purl.org/dc/elements/1.1/rights",
-)
-
-# WARN: Verify domain
-# BUG: dc:source is source (heh) of inconsistency
-createDP(
-    name="source",
-    namespace=DC,
-    graph=g,
-    domains=OWL["Thing"],
-    # domains=[DWC["UsagePolicy"]],
-    ranges=RDFS["Literal"],
-    # ranges=[XSD["anyURI"], XSD["string"]],
-    pref_label=Literal("Source (DC)"),
-    definition=Literal("A related resource from which the described resource is derived", lang="en"),
-    comments=Literal("The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.", lang="en"),
-    version_of_s="http://purl.org/dc/elements/1.1/source",
 )
 
 createDP(
@@ -2147,6 +2206,22 @@ createDP(
 )
 
 createDP(
+    name="datasetID",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Provenance"],
+    ranges=XSD["string"],
+    pref_label=Literal("Dataset ID"),
+    definition=Literal("An identifier for a dataset from which data originated.", lang="en"),
+    comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
+    examples=[
+        Literal("b15d4952-7d20-46f1-8a3e-556a512b04c5"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/datasetID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/datasetID-2017-10-06",
+)
+
+createDP(
     name="derivedFromMediaID",
     namespace=DWC,
     graph=g,
@@ -2157,6 +2232,27 @@ createDP(
     comments=Literal("This term can be used when an [ac:Media] resource has been separated from its source [ac:Media] resource. Recommended best practice is to use a globally unique identifier."),
     subproperty_list=[DCTERMS["identifier"]],
     version_of_s="http://example.com/term-pending/dwc/derivedFromMediaID",
+)
+
+createDP(
+    name="disposition",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["MaterialEntity"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Disposition"),
+    definition=Literal("A current state of a dwc:MaterialEntity with respect to where it can be found.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("in collection"),
+        Literal("missing"),
+        Literal("on loan"),
+        Literal("used up"),
+        Literal("destroyed"),
+        Literal("deaccessioned"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/disposition",
+    references_s="http://rs.tdwg.org/dwc/terms/version/disposition-2023-09-13",
 )
 
 createDP(
@@ -2561,6 +2657,82 @@ createDP(
     version_of_s="http://rs.tdwg.org/dwc/terms/organismID",
 )
 
+
+
+
+createDP(
+    name="ownerInstitutionCode",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["MaterialEntity"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Owner Institution Code"),
+    definition=Literal("A name (or acronym) in use by an institution having ownership of a dwc:MaterialEntity."),
+    examples=[
+        Literal("NPS"),
+        Literal("APN"),
+        Literal("InBio"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/ownerInstitutionCode",
+    references_s="http://rs.tdwg.org/dwc/terms/version/ownerInstitutionCode-2023-06-28"
+)
+
+createDP(
+    name="parentEventID",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Parent Event ID"),
+    definition=Literal("An identifier for the broader dwc:Event that groups this and potentially other dwc:Events."),
+    comments=Literal("Use a globally unique identifier for a dwc:Event or an identifier for a dwc:Event that is specific to the data set."),
+    examples=[
+        Literal("A1"),
+    ],
+    subproperty_list=[DCTERMS["identifier"]],
+    version_of_s="http://rs.tdwg.org/dwc/terms/parentEventID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/parentEventID-2023-06-28"
+)
+
+createDP(
+    name="pathway",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Occurrence"],
+    ranges=XSD["string"],
+    pref_label=Literal("Pathway"),
+    definition=Literal("The process by which a dwc:Organism came to be in a given place at a given time.", lang="en"),
+    comments=Literal("Recommended best practice is to use controlled value strings from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("releasedForUse"),
+        Literal("otherEscape"),
+        Literal("transportContaminant"),
+        Literal("transportStowaway"),
+        Literal("corridor"),
+        Literal("unaided"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/pathway",
+    references_s="http://rs.tdwg.org/dwc/terms/version/pathway-2023-06-28",
+)
+
+createDP(
+    name="pointRadiusSpatialFit",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Point Radius Spatial Fit"),
+    definition=Literal("The ratio of the area of the point-radius (dwc:decimalLatitude, dwc:decimalLongitude, dwc:coordinateUncertaintyInMeters) to the area of the true (original, or most specific) spatial representation of the dcterms:Location. Legal values are `0`, greater than or equal to `1`, or undefined. A value of `1` is an exact match or 100% overlap. A value of `0` should be used if the given point-radius does not completely contain the original representation. The dwc:pointRadiusSpatialFit is undefined (and should be left empty) if the original representation is any geometry without area (e.g., a point or polyline) and without uncertainty and the given georeference is not that same geometry (without uncertainty). If both the original and the given georeference are the same point, the dwc:pointRadiusSpatialFit is `1`.", lang="en"),
+    comments=Literal("Detailed explanations with graphical examples can be found in the Georeferencing Best Practices, Chapman and Wieczorek, 2020 ([https://doi.org/10.15468/doc-gg7h-s853](https://doi.org/10.15468/doc-gg7h-s853)).", lang="en"),
+    examples=[
+        Literal("0", datatype=XSD["decimal"]),
+        Literal("1", datatype=XSD["decimal"]),
+        Literal("1.5708", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/pointRadiusSpatialFit",
+    references_s="http://rs.tdwg.org/dwc/terms/version/pointRadiusSpatialFit-2023-06-28",
+)
+
 createDP(
     name="preferredAgentName",
     namespace=DWC,
@@ -2583,6 +2755,27 @@ createDP(
     pref_label=Literal("Preferred Event Name"),
     definition=Literal("The name of a [dwc:Event] preferred in searches and results.", lang="en"),
     version_of_s="http://purl.org/dc/terms/title",
+)
+
+createDP(
+    name="preparations",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["MaterialEntity"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Preparations"),
+    definition=Literal("A list (concatenated and separated) of preparations and preservation methods for a dwc:MaterialEntity.", lang="en"),
+    comments=Literal("Recommended best practice is to separate the values in a list with space vertical bar space (` | `). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("fossil"),
+        Literal("cast"),
+        Literal("photograph"),
+        Literal("DNA extract"),
+        Literal("skin | skull | skeleton"),
+        Literal("whole animal (EtOH) | tissue (EDTA)"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/preparations",
+    references_s="http://rs.tdwg.org/dwc/terms/version/preparations-2025-06-12",
 )
 
 createDP(
@@ -3689,7 +3882,7 @@ createDP(
     graph=g,
     domains=DWC["MaterialEntityAssertion"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Cleavage"),
+    pref_label=Literal("Color"),
     definition=Literal("The intrinsic color of a mineral under natural light.", lang="en"),
     comments=Literal("Here, color is caused by the absorption, or lack of absorption of different wavelengths of natural light by a particular mineral.", lang="en"),
     examples=[
