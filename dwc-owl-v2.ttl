@@ -125,18 +125,15 @@ dcterms:type rdf:type owl:ObjectProperty ;
 
 
 ###  http://purl.org/ontology/bibo/editor
-bibo:editor rdf:type owl:ObjectProperty ;
-            rdfs:domain dcterms:BibliographicResource ;
-            rdfs:range dcterms:Agent ;
-            rdfs:comment "A person having managerial and sometimes policy-making responsibility for the editorial part of a publishing firm or of a newspaper, magazine, or other publication."@en ;
-            rdfs:isDefinedBy bibo: ;
-            skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it."@en ;
-            skos:prefLabel "Edited By" .
+bibo:editor rdf:type owl:ObjectProperty .
 
 
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
 dwciri:assertionTypeIRI rdf:type owl:ObjectProperty ;
-                        rdfs:domain dwc:Assertion ;
+                        rdfs:domain [ rdf:type owl:Class ;
+                                      owl:unionOf ( dwc:Assertion
+                                                  )
+                                    ] ;
                         dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
                         rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
                         rdfs:isDefinedBy dwciri: ;
@@ -146,7 +143,10 @@ dwciri:assertionTypeIRI rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/assertionValueIRI
 dwciri:assertionValueIRI rdf:type owl:ObjectProperty ;
-                         rdfs:domain dwc:Assertion ;
+                         rdfs:domain [ rdf:type owl:Class ;
+                                       owl:unionOf ( dwc:Assertion
+                                                   )
+                                     ] ;
                          dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionValueIRI> ;
                          rdfs:isDefinedBy dwciri: ;
                          skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
@@ -196,7 +196,10 @@ dwciri:dataGeneralizations rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/degreeOfEstablishment
 dwciri:degreeOfEstablishment rdf:type owl:ObjectProperty ;
-                             rdfs:domain dwc:Occurrence ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( dwc:Occurrence
+                                                       )
+                                         ] ;
                              dcterms:isVersionOf dwciri:degreeOfEstablishment ;
                              dcterms:references <http://rs.tdwg.org/dwc/iri/version/degreeOfEstablishment-2025-07-10> ;
                              rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -219,7 +222,10 @@ dwciri:discipline rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/disposition
 dwciri:disposition rdf:type owl:ObjectProperty ;
-                   rdfs:domain dwc:MaterialEntity ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( dwc:MaterialEntity
+                                             )
+                               ] ;
                    dcterms:isVersionOf dwciri:disposition ;
                    dcterms:references <http://rs.tdwg.org/dwc/iri/version/disposition-2025-07-10> ;
                    rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -230,7 +236,10 @@ dwciri:disposition rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/earliestGeochronologicalEra
 dwciri:earliestGeochronologicalEra rdf:type owl:ObjectProperty ;
-                                   rdfs:domain dwc:MaterialEntity ;
+                                   rdfs:domain [ rdf:type owl:Class ;
+                                                 owl:unionOf ( dwc:MaterialEntity
+                                                             )
+                                               ] ;
                                    dcterms:isVersionOf dwciri:earliestGeochronologicalEra ;
                                    dcterms:references <http://rs.tdwg.org/dwc/iri/version/earliestGeochronologicalEra-2023-09-13> ;
                                    rdfs:comment "Recommended best practice is to use an IRI from a controlled vocabulary. A \"convenience property\" that replaces Darwin Core literal-value terms related to geological context. See Section 2.7.6 of the Darwin Core RDF Guide for details."@en ;
@@ -241,7 +250,10 @@ dwciri:earliestGeochronologicalEra rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/establishmentMeans
 dwciri:establishmentMeans rdf:type owl:ObjectProperty ;
-                          rdfs:domain dwc:Occurrence ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( dwc:Occurrence
+                                                    )
+                                      ] ;
                           dcterms:isVersionOf dwciri:establishmentMeans ;
                           dcterms:references <http://rs.tdwg.org/dwc/iri/version/establishmentMeans-2025-07-10> ;
                           rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -254,7 +266,10 @@ dwciri:establishmentMeans rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/fieldNotes
 dwciri:fieldNotes rdf:type owl:ObjectProperty ;
-                  rdfs:domain dwc:Event ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( dwc:Event
+                                            )
+                              ] ;
                   dcterms:isVersionOf dwciri:fieldNotes ;
                   dcterms:references <http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28> ;
                   rdfs:comment "The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes."@en ;
@@ -266,7 +281,10 @@ dwciri:fieldNotes rdf:type owl:ObjectProperty ;
 ###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeIRI
 dwciri:surveyTargetTypeIRI rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf dcterms:type ;
-                           rdfs:domain eco:SurveyTarget ;
+                           rdfs:domain [ rdf:type owl:Class ;
+                                         owl:unionOf ( eco:SurveyTarget
+                                                     )
+                                       ] ;
                            dcterms:isVersionOf dcterms:type ;
                            rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
                            rdfs:isDefinedBy dwciri: ;
@@ -276,7 +294,10 @@ dwciri:surveyTargetTypeIRI rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/verticalDatum
 dwciri:verticalDatum rdf:type owl:ObjectProperty ;
-                     rdfs:domain dcterms:Location ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( dcterms:Location
+                                               )
+                                 ] ;
                      dcterms:isVersionOf dwciri:verticalDatum ;
                      dcterms:references <http://rs.tdwg.org/dwc/iri/version/verticalDatum-2025-07-10> ;
                      rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -315,7 +336,6 @@ dwcdp:about rdf:type owl:ObjectProperty ;
                        ] ;
             rdfs:isDefinedBy dwcdp: ;
             skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism]."@en ;
-            skos:example "bb:assertion123 dwcdp:about bb:event456 ." ;
             skos:prefLabel "About" .
 
 
@@ -330,7 +350,6 @@ dwcdp:allowsFor rdf:type owl:ObjectProperty ;
                            ] ;
                 rdfs:isDefinedBy dwcdp: ;
                 skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the activities it allows for. These activities can be varied, and include [dwc:Event], [dwc:NucleotideAnalysis] and [eco:Survey]."@en ;
-                skos:example "bb:SamplingPermit123 dwcdp:allowsFor bb:SamplingEvent456 ." ;
                 skos:prefLabel "Allows For" .
 
 
@@ -340,7 +359,6 @@ dwcdp:analysisOf rdf:type owl:ObjectProperty ;
                  rdfs:range dwc:MaterialEntity ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:MaterialEntity] of which it is an analysis of."@en ;
-                 skos:example "bb:PcrChain123 dwcdp:analysisOf bb:BoneFragment456 ." ;
                  skos:prefLabel "Analysis Of" .
 
 
@@ -350,7 +368,6 @@ dwcdp:assertedBy rdf:type owl:ObjectProperty ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the [dcterms:Agent] that asserted it."@en ;
-                 skos:example "bb:assertion123 dwcdp:assertedBy bb:agent456 ." ;
                  skos:prefLabel "Asserted By" .
 
 
@@ -360,7 +377,6 @@ dwcdp:authoredBy rdf:type owl:ObjectProperty ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that authored it."@en ;
-                 skos:example "bb:bibliographicResource123 dwcdp:authoredBy bb:agent456 ." ;
                  skos:prefLabel "Authored By" .
 
 
@@ -380,7 +396,6 @@ dwcdp:basedOn rdf:type owl:ObjectProperty ;
                                      ) ;
               rdfs:isDefinedBy dwcdp: ;
               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the entity on which it is based. These entities include [ac:Media], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:NucleotideSequence] and [dwc:Occurrence]."@en ;
-              skos:example "bb:identification123 dwcdp:basedOn bb:nucleotideSequence456 ." ;
               skos:prefLabel "Based On" .
 
 
@@ -391,7 +406,6 @@ dwcdp:commentedBy rdf:type owl:ObjectProperty ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that commented it."@en ;
-                  skos:example "bb:event123 dwcdp:commentedBy bb:agent456 ." ;
                   skos:prefLabel "Commented By" .
 
 
@@ -405,7 +419,6 @@ dwcdp:conductedBy rdf:type owl:ObjectProperty ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Agent] that conducted it."@en ;
-                  skos:example "bb:event123 dwcdp:conductedBy bb:agent456 ." ;
                   skos:prefLabel "Conducted By" .
 
 
@@ -416,6 +429,15 @@ dwcdp:datedMaterial rdf:type owl:ObjectProperty ;
                     rdfs:isDefinedBy dwcdp: ;
                     skos:definition "An [owl:ObjectProperty] used to relate a [chrono:ChronometricAge] to the [dwc:MaterialEntity] it represents the age of."@en ;
                     skos:prefLabel "Dated Material" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/editedBy
+dwcdp:editedBy rdf:type owl:ObjectProperty ;
+               rdfs:domain dcterms:BibliographicResource ;
+               rdfs:range dcterms:Agent ;
+               rdfs:isDefinedBy dwcdp: ;
+               skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it." ;
+               skos:prefLabel "Edited By" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/followed
@@ -448,8 +470,14 @@ dwcdp:fundedBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/georeferencedBy
 dwcdp:georeferencedBy rdf:type owl:ObjectProperty ;
-                      rdfs:domain dwc:Event ;
-                      rdfs:range dcterms:Agent ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( dwc:Event
+                                                )
+                                  ] ;
+                      rdfs:range [ rdf:type owl:Class ;
+                                   owl:unionOf ( dcterms:Agent
+                                               )
+                                 ] ;
                       rdfs:isDefinedBy dwcdp: ;
                       skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dwc:Agent] that georeferenced it."@en ;
                       skos:prefLabel "Georeferenced By" .
@@ -465,7 +493,10 @@ dwcdp:happenedDuring rdf:type owl:ObjectProperty ,
                                                  eco:Survey
                                                )
                                  ] ;
-                     rdfs:range dwc:Event ;
+                     rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( dwc:Event
+                                              )
+                                ] ;
                      rdfs:comment "This property is also an [owl:TransitiveProperty], which allows reasoners to infer hierarchical sampling patterns."@en ;
                      rdfs:isDefinedBy dwcdp: ;
                      skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to its parent [dwc:Event]." ;
@@ -479,7 +510,10 @@ dwcdp:happenedWithin rdf:type owl:ObjectProperty ;
                                                  dwc:MaterialEntity
                                                )
                                  ] ;
-                     rdfs:range dwc:GeologicalContext ;
+                     rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( dwc:GeologicalContext
+                                              )
+                                ] ;
                      rdfs:isDefinedBy dwcdp: ;
                      skos:definition "An [owl:ObjectProperty] used to relate either a [dwc:Event] or a [dwc:MaterialEntity] to the [dwc:GeologicalContext] within which it happened."@en ;
                      skos:prefLabel "Happened Within" .
@@ -498,7 +532,10 @@ dwcdp:hasMedia rdf:type owl:ObjectProperty ;
                                            dwc:OrganismInteraction
                                          )
                            ] ;
-               rdfs:range ac:Media ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( ac:Media
+                                        )
+                          ] ;
                rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:isMediaOf], which allows reasoners queries to go through different ways."@en ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]"@en ;
@@ -514,8 +551,14 @@ dwcdp:hasUsagePolicy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/identificationsBy
 dwcdp:identificationsBy rdf:type owl:ObjectProperty ;
-                        rdfs:domain eco:Survey ;
-                        rdfs:range dcterms:Agent ;
+                        rdfs:domain [ rdf:type owl:Class ;
+                                      owl:unionOf ( eco:Survey
+                                                  )
+                                    ] ;
+                        rdfs:range [ rdf:type owl:Class ;
+                                     owl:unionOf ( dcterms:Agent
+                                                 )
+                                   ] ;
                         rdfs:comment "The property [dwcdp:idenficationsBy] should not be confused with [dwcdp:identifiedBy], which has a different [rdfs:domain]. The former applies to a [eco:Survey], whereas the latter applies to a [dwc:Identification]."@en ;
                         rdfs:isDefinedBy dwcdp: ;
                         skos:definition "An [owl:ObjectProperty] used to relate a [eco:Survey] to the [dwc:Agent] who conducted the identifications."@en ;
@@ -524,8 +567,14 @@ dwcdp:identificationsBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/identifiedBy
 dwcdp:identifiedBy rdf:type owl:ObjectProperty ;
-                   rdfs:domain dwc:Identification ;
-                   rdfs:range dcterms:Agent ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( dwc:Identification
+                                             )
+                               ] ;
+                   rdfs:range [ rdf:type owl:Class ;
+                                owl:unionOf ( dcterms:Agent
+                                            )
+                              ] ;
                    rdfs:isDefinedBy dwcdp: ;
                    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Agent] that identified it."@en ;
                    skos:prefLabel "Identified By" .
@@ -533,8 +582,14 @@ dwcdp:identifiedBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/interactionBy
 dwcdp:interactionBy rdf:type owl:ObjectProperty ;
-                    rdfs:domain dwc:OrganismInteraction ;
-                    rdfs:range dwc:Occurrence ;
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( dwc:OrganismInteraction
+                                              )
+                                ] ;
+                    rdfs:range [ rdf:type owl:Class ;
+                                 owl:unionOf ( dwc:Occurrence
+                                             )
+                               ] ;
                     rdfs:comment "To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the subject of the statement."@en ;
                     rdfs:isDefinedBy dwcdp: ;
                     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves."@en ;
@@ -543,8 +598,14 @@ dwcdp:interactionBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/interactionWith
 dwcdp:interactionWith rdf:type owl:ObjectProperty ;
-                      rdfs:domain dwc:OrganismInteraction ;
-                      rdfs:range dwc:Occurrence ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( dwc:OrganismInteraction
+                                                )
+                                  ] ;
+                      rdfs:range [ rdf:type owl:Class ;
+                                   owl:unionOf ( dwc:Occurrence
+                                               )
+                                 ] ;
                       rdfs:comment "To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the object of the statement."@en ;
                       rdfs:isDefinedBy dwcdp: ;
                       skos:definition "An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves."@en ;
@@ -553,8 +614,14 @@ dwcdp:interactionWith rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/involves
 dwcdp:involves rdf:type owl:ObjectProperty ;
-               rdfs:domain dwc:Occurrence ;
-               rdfs:range dwc:Organism ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( dwc:Occurrence
+                                         )
+                           ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( dwc:Organism
+                                        )
+                          ] ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [dwc:Organism] it involves."@en ;
                skos:prefLabel "Involves" .
@@ -605,8 +672,14 @@ dwcdp:isPartOf rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/issuedBy
 dwcdp:issuedBy rdf:type owl:ObjectProperty ;
-               rdfs:domain dwc:Permit ;
-               rdfs:range dcterms:Agent ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( dwc:Permit
+                                         )
+                           ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( dcterms:Agent
+                                        )
+                          ] ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the [dcterms:Agent] that issued it."@en ;
                skos:prefLabel "Issued By" .
@@ -614,8 +687,14 @@ dwcdp:issuedBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/materialCollectedDuring
 dwcdp:materialCollectedDuring rdf:type owl:ObjectProperty ;
-                              rdfs:domain dwc:NucleotideAnalysis ;
-                              rdfs:range dwc:Event ;
+                              rdfs:domain [ rdf:type owl:Class ;
+                                            owl:unionOf ( dwc:NucleotideAnalysis
+                                                        )
+                                          ] ;
+                              rdfs:range [ rdf:type owl:Class ;
+                                           owl:unionOf ( dwc:Event
+                                                       )
+                                         ] ;
                               rdfs:isDefinedBy dwcdp: ;
                               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:Event] from which the material was collected."@en ;
                               skos:prefLabel "Material Collected During" .
@@ -635,7 +714,10 @@ dwcdp:mentionnedIn rdf:type owl:ObjectProperty ;
                                                eco:Survey
                                              )
                                ] ;
-                   rdfs:range dcterms:BibliographicResource ;
+                   rdfs:range [ rdf:type owl:Class ;
+                                owl:unionOf ( dcterms:BibliographicResource
+                                            )
+                              ] ;
                    rdfs:isDefinedBy dwcdp: ;
                    skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."@en ;
                    skos:prefLabel "Mentionned In" .
@@ -643,8 +725,14 @@ dwcdp:mentionnedIn rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/ownedBy
 dwcdp:ownedBy rdf:type owl:ObjectProperty ;
-              rdfs:domain dwc:MaterialEntity ;
-              rdfs:range dcterms:Agent ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( dwc:MaterialEntity
+                                        )
+                          ] ;
+              rdfs:range [ rdf:type owl:Class ;
+                           owl:unionOf ( dcterms:Agent
+                                       )
+                         ] ;
               rdfs:isDefinedBy dwcdp: ;
               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] which owns it."@en ;
               skos:prefLabel "Owned By" .
@@ -652,8 +740,14 @@ dwcdp:ownedBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/produced
 dwcdp:produced rdf:type owl:ObjectProperty ;
-               rdfs:domain dwc:NucleotideAnalysis ;
-               rdfs:range dwc:NucleotideSequence ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( dwc:NucleotideAnalysis
+                                         )
+                           ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( dwc:NucleotideSequence
+                                        )
+                          ] ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideSequence] to the [dwc:NucleotideAnalysis] that produced it."@en ;
                skos:prefLabel "Produced" .
@@ -661,8 +755,14 @@ dwcdp:produced rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/publishedBy
 dwcdp:publishedBy rdf:type owl:ObjectProperty ;
-                  rdfs:domain dcterms:BibliographicResource ;
-                  rdfs:range dcterms:Agent ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( dcterms:BibliographicResource
+                                            )
+                              ] ;
+                  rdfs:range [ rdf:type owl:Class ;
+                               owl:unionOf ( dcterms:Agent
+                                           )
+                             ] ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it."@en ;
                   skos:prefLabel "Published By" .
@@ -686,8 +786,14 @@ dwcdp:relationshipTo rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/reviewedBy
 dwcdp:reviewedBy rdf:type owl:ObjectProperty ;
-                 rdfs:domain ac:Media ;
-                 rdfs:range dcterms:Agent ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( ac:Media
+                                           )
+                             ] ;
+                 rdfs:range [ rdf:type owl:Class ;
+                              owl:unionOf ( dcterms:Agent
+                                          )
+                            ] ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that reviewed it."@en ;
                  skos:prefLabel "Reviewed By" .
@@ -695,8 +801,14 @@ dwcdp:reviewedBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/storedIn
 dwcdp:storedIn rdf:type owl:ObjectProperty ;
-               rdfs:domain dwc:MaterialEntity ;
-               rdfs:range dcterms:Agent ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( dwc:MaterialEntity
+                                         )
+                           ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( dcterms:Agent
+                                        )
+                          ] ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] in which it is stored."@en ;
                skos:prefLabel "Stored In" .
@@ -704,8 +816,14 @@ dwcdp:storedIn rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/targetFor
 dwcdp:targetFor rdf:type owl:ObjectProperty ;
-                rdfs:domain eco:SurveyTarget ;
-                rdfs:range eco:Survey ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( eco:SurveyTarget
+                                          )
+                            ] ;
+                rdfs:range [ rdf:type owl:Class ;
+                             owl:unionOf ( eco:Survey
+                                         )
+                           ] ;
                 rdfs:isDefinedBy dwcdp: ;
                 skos:definition "An [owl:ObjectProperty] used to relate a [eco:SurveyTarget] to the [eco:Survey] it is a target for."@en ;
                 skos:prefLabel "Target For" .
@@ -718,7 +836,10 @@ dwcdp:usedFor rdf:type owl:ObjectProperty .
 ###  http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI
 <http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI> rdf:type owl:ObjectProperty ;
                                                        rdfs:subPropertyOf dcterms:source ;
-                                                       rdfs:domain eco:SurveyTarget ;
+                                                       rdfs:domain [ rdf:type owl:Class ;
+                                                                     owl:unionOf ( eco:SurveyTarget
+                                                                                 )
+                                                                   ] ;
                                                        dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
                                                        rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
                                                        rdfs:isDefinedBy <http://rs.tdwg.org/eco/iri/> ;
