@@ -108,7 +108,7 @@ gbif:pcr_primer_reference a owl:DatatypeProperty ;
     dcterms:isVersionOf <https://rs.gbif/org/terms/pcr_primer_reference> ;
     rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy gbif: ;
-    rdfs:range [ a rdfs:Datatype ;
+    rdfs:range [ a owl:Class ;
             owl:unionOf ( rdfs:Literal xsd:anyURI ) ] ;
     skos:definition "Reference for the PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment."@en ;
     skos:example "https:doi.org/10.11861742-9994-10-31" ;
@@ -686,8 +686,7 @@ dwcdp:hasMedia a owl:ObjectProperty ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( chrono:ChronometricAge dcterms:Agent dwc:Event dwc:GeologicalContext dwc:MaterialEntity dwc:Occurrence dwc:OrganismInteraction ) ] ;
     rdfs:isDefinedBy dwcdp: ;
-    rdfs:range [ a owl:Class ;
-            owl:unionOf ( ac:Media ) ] ;
+    rdfs:range ac:Media ;
     owl:inverseOf dwcdp:isMediaOf ;
     skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]"@en ;
     skos:prefLabel "Has Media" .
@@ -707,21 +706,17 @@ dwcdp:identificationsBy a owl:ObjectProperty ;
 
 dwcdp:interactionBy a owl:ObjectProperty ;
     rdfs:comment "To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the subject of the statement."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:OrganismInteraction ) ] ;
+    rdfs:domain dwc:OrganismInteraction ;
     rdfs:isDefinedBy dwcdp: ;
-    rdfs:range [ a owl:Class ;
-            owl:unionOf ( dwc:Occurrence ) ] ;
+    rdfs:range dwc:Occurrence ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves."@en ;
     skos:prefLabel "Interaction By" .
 
 dwcdp:interactionWith a owl:ObjectProperty ;
     rdfs:comment "To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the object of the statement."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:OrganismInteraction ) ] ;
+    rdfs:domain dwc:OrganismInteraction ;
     rdfs:isDefinedBy dwcdp: ;
-    rdfs:range [ a owl:Class ;
-            owl:unionOf ( dwc:Occurrence ) ] ;
+    rdfs:range dwc:Occurrence ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves."@en ;
     skos:prefLabel "Interaction With" .
 
@@ -787,11 +782,9 @@ dwcdp:storedIn a owl:ObjectProperty ;
     skos:prefLabel "Stored In" .
 
 dwcdp:targetFor a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( eco:SurveyTarget ) ] ;
+    rdfs:domain eco:SurveyTarget ;
     rdfs:isDefinedBy dwcdp: ;
-    rdfs:range [ a owl:Class ;
-            owl:unionOf ( eco:Survey ) ] ;
+    rdfs:range eco:Survey ;
     skos:definition "An [owl:ObjectProperty] used to relate a [eco:SurveyTarget] to the [eco:Survey] it is a target for."@en ;
     skos:prefLabel "Target For" .
 
@@ -800,8 +793,7 @@ dwcdp:usedFor owl:inverseOf dwcdp:followed .
 <http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI> a owl:ObjectProperty ;
     dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
     rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( eco:SurveyTarget ) ] ;
+    rdfs:domain eco:SurveyTarget ;
     rdfs:isDefinedBy <http://rs.tdwg.org/eco/iri/> ;
     rdfs:subPropertyOf dcterms:source ;
     skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
@@ -1124,7 +1116,7 @@ dc:rights a owl:DatatypeProperty ;
     dcterms:isVersionOf dc:rights ;
     rdfs:domain dwc:UsagePolicy ;
     rdfs:isDefinedBy dc: ;
-    rdfs:range [ a rdfs:Datatype ;
+    rdfs:range [ a owl:Class ;
             owl:unionOf ( xsd:anyURI xsd:string ) ] ;
     skos:definition "Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions." ;
     skos:example "Copyright 2014 Ron Thomas",
@@ -1151,12 +1143,6 @@ dcterms:rights a owl:DatatypeProperty ;
         "http://creativecommons.org/publicdomain/zero/1.0" ;
     skos:prefLabel "Rights (DCTERMS)" .
 
-dcterms:spatial a owl:ObjectProperty ;
-    rdfs:isDefinedBy dcterms: ;
-    rdfs:range dcterms:Location ;
-    skos:definition "Spatial characteristics of the resource."@en ;
-    skos:prefLabel "Spatial Coverage" .
-
 miqe:ampliconSize a owl:DatatypeProperty ;
     dcterms:isVersionOf miqe:ampliconSize ;
     rdfs:domain dwc:MolecularProtocol ;
@@ -1181,7 +1167,7 @@ miqe:annealingTempUnit a owl:DatatypeProperty ;
     rdfs:isDefinedBy miqe: ;
     rdfs:range rdfs:Literal ;
     skos:definition "Measurement Unit of the reaction temperature during the annealing phase of PCR."@en ;
-    skos:example 60.0 ;
+    skos:example "Degrees celsius" ;
     skos:prefLabel "Annealing Phase Temperature Unit" .
 
 miqe:baselineValue a owl:DatatypeProperty ;
@@ -2115,9 +2101,11 @@ mixs:0000008 a owl:DatatypeProperty ;
 
 mixs:0000014 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000014 ;
-    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dwc:MolecularProtocol ) ] ;
     rdfs:isDefinedBy mixs: ;
-    rdfs:range xsd:string ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( xsd:string ) ] ;
     skos:definition "In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
     skos:example "ocean water [ENVO:00002151]",
         "pond water [ENVO:00002228]|air ENVO_00002005" ;
@@ -2183,6 +2171,13 @@ dcterms:source a owl:DatatypeProperty ;
     rdfs:range owl:Thing ;
     skos:definition "A related resource from which the described resource is derived"@en ;
     skos:prefLabel "Source (DCTERMS)" .
+
+dcterms:spatial a owl:ObjectProperty ;
+    dcterms:isVersionOf dcterms:spatial ;
+    rdfs:isDefinedBy dcterms: ;
+    rdfs:range dcterms:Location ;
+    skos:definition "Spatial characteristics of the resource."@en ;
+    skos:prefLabel "Spatial Coverage" .
 
 dwc:geologicalContextID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:geologicalContextID ;
@@ -2290,10 +2285,10 @@ mixs:0001320 a owl:DatatypeProperty ;
 
 dcterms:type a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:type ;
-    rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+    rdfs:comment "Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/). To describe the file format, physical medium, or dimensions of the resource, use the property Format." ;
     rdfs:isDefinedBy dcterms: ;
-    skos:definition "A category that best matches the nature of an [ac:Media] resource." ;
-    skos:prefLabel "Media Type" .
+    skos:definition "The nature or genre of the resource." ;
+    skos:prefLabel "Type" .
 
 dwc:Permit a owl:Class ;
     dcterms:isVersionOf dwc:Permit ;

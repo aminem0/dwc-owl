@@ -90,10 +90,10 @@ def createDP(
         name: str,
         namespace: Namespace,
         graph: Graph,
-        domain_list: list[Node],
-        range_list: list[Node],
         pref_label: Literal,
-        version_of_s: str,
+        domains: Node | list[Node] | None = None,
+        ranges: Node | list[Node] | None = None,
+        version_of_s: str | None = None,
         subproperty_list: list[Node] | None = None,
         additional_list: list[Node] | None = None,
         definition: Literal | None = None,
@@ -135,46 +135,29 @@ def createDP(
     # Declare it in the graph
     graph.add((dp_uri, RDF["type"], OWL["DatatypeProperty"]))
 
-    # If just one domain, take it and go.
-    if len(domain_list) == 1:
-        graph.add((dp_uri, RDFS["domain"], domain_list[0]))
-   
-    # Otherwise do the blank node process.
-    else:
-        # Create blank node to contain union list
-        domain_bnode = BNode()
-   
-        # Fill it with
-        Collection(graph, domain_bnode, domain_list)
+    # NOTE: New version using domain
+    if domains:
+        if isinstance(domains, URIRef):
+            graph.add((dp_uri, RDFS["domain"], domains))
+        elif isinstance(domains, list):
+            domain_bnode = BNode()
+            Collection(graph, domain_bnode, domains)
+            domain_union_class = BNode()
+            graph.add((domain_union_class, RDF["type"], OWL["Class"]))
+            graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
+            graph.add((dp_uri, RDFS["domain"], domain_union_class))
 
-        # Define the union of classes for the domain class
-        domain_union_class = BNode()
-        graph.add((domain_union_class, RDF["type"], OWL["Class"]))
-        graph.add((domain_union_class, OWL["unionOf"], domain_bnode))
-
-        # Define the domain of the owl:DatatypeProperty
-        graph.add((dp_uri, RDFS["domain"], domain_union_class))
-
-    # If just one range, take it and go.
-    if len(range_list) == 1:
-        graph.add((dp_uri, RDFS["range"], range_list[0]))
-
-    # Otherwise do the blank node process.
-    else:
-        # Create blank node to contain union list
-        range_bnode = BNode()
-
-        # Fill it with
-        Collection(graph, range_bnode, range_list)
-
-        # Define the union of classes for the range datatype
-        # WARN: Verify RDFS term
-        range_union_datatype = BNode()
-        graph.add((range_union_datatype, RDF["type"], RDFS["Datatype"]))
-        graph.add((range_union_datatype, OWL["unionOf"], range_bnode))
-
-        # Define the range of the owl:DatatypeProperty
-        graph.add((dp_uri, RDFS["range"], range_union_datatype))
+    # NOTE: New version using range
+    if ranges:
+        if isinstance(ranges, URIRef):
+            graph.add((dp_uri, RDFS["range"], ranges))
+        elif isinstance(ranges, list):
+            range_bnode = BNode()
+            Collection(graph, range_bnode, ranges)
+            range_union_class = BNode()
+            graph.add((range_union_class, RDF["type"], OWL["Class"]))
+            graph.add((range_union_class, OWL["unionOf"], range_bnode))
+            graph.add((dp_uri, RDFS["range"], range_union_class))
 
     if subproperty_list:
         # Technically not a unified list, so can add them all with a for loop
@@ -200,8 +183,7 @@ def createEDP(
         additional_list: list[Node] | None = None,
         definition: Literal | None = None,
         comments: Literal | None = None,
-        # examples: Literal | None = None,
-        examples_list: list[Literal] | None = None,
+        examples: Literal | list[Literal] | None = None,
         references_s: str | None = None,
         ) -> None:
     # Create the owl:DatatypeProperty URI
@@ -221,12 +203,13 @@ def createEDP(
     if comments:
         graph.add((dp_uri, RDFS["comment"], comments))
 
-    # Optionally add examples.
-    # if examples:
-    #     graph.add((dp_uri, SKOS["example"], examples))
-    if examples_list:
-        for example in examples_list:
-            graph.add((dp_uri, SKOS["example"], example))
+    # Add examples if provided
+    if examples:
+        if isinstance(examples, URIRef):
+            graph.add((dp_uri, SKOS["example"], examples))
+        elif isinstance(examples, list):
+            for example in examples:
+                graph.add((dp_uri, SKOS["example"], example))
 
     # Add version info.
     graph.add((dp_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
