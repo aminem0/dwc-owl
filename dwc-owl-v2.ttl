@@ -305,6 +305,28 @@ dwciri:georeferenceProtocol rdf:type owl:ObjectProperty ;
                             skos:prefLabel "Georeference Protocol (IRI)" .
 
 
+###  http://rs.tdwg.org/dwc/iri/georeferenceSources
+dwciri:georeferenceSources rdf:type owl:ObjectProperty ;
+                           rdfs:domain dcterms:Location ;
+                           dcterms:isVersionOf dwciri:georeferenceSources ;
+                           dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferenceSources-2025-07-10> ;
+                           rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                           rdfs:isDefinedBy dwciri: ;
+                           skos:definition "A map, gazetteer, or other resource used to georeference the dcterms:Location."@en ;
+                           skos:prefLabel "Georeference Sources (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/iri/georeferenceVerificationStatus
+dwciri:georeferenceVerificationStatus rdf:type owl:ObjectProperty ;
+                                      rdfs:domain dcterms:Location ;
+                                      dcterms:isVersionOf dwciri:georeferenceVerificationStatus ;
+                                      dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferenceVerificationStatus-2025-07-10> ;
+                                      rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                                      rdfs:isDefinedBy dwciri: ;
+                                      skos:definition "A categorical description of the extent to which the georeference has been verified to represent the best possible spatial description for the dcterms:Location of the dwc:Occurrence."@en ;
+                                      skos:prefLabel "Georeference Verification Status (IRI)" .
+
+
 ###  http://rs.tdwg.org/dwc/iri/georeferencedBy
 dwciri:georeferencedBy rdf:type owl:ObjectProperty ;
                        rdfs:domain dcterms:Location ;
@@ -314,6 +336,17 @@ dwciri:georeferencedBy rdf:type owl:ObjectProperty ;
                        rdfs:isDefinedBy dwciri: ;
                        skos:definition "A person, group, or organization who determined the georeference (spatial representation) for the dcterms:Location."@en ;
                        skos:prefLabel "Georeferenced By (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/iri/locationAccordingTo
+dwciri:locationAccordingTo rdf:type owl:ObjectProperty ;
+                           rdfs:domain dcterms:Location ;
+                           dcterms:isVersionOf dwciri:locationAccordingTo ;
+                           dcterms:references <http://rs.tdwg.org/dwc/iri/version/locationAccordingTo-2025-07-10> ;
+                           rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                           rdfs:isDefinedBy dwciri: ;
+                           skos:definition "Information about the source of this dcterms:Location information. Could be a publication (gazetteer), institution, or team of individuals."@en ;
+                           skos:prefLabel "Location According To (IRI)" .
 
 
 ###  http://rs.tdwg.org/dwc/iri/occurrenceStatus
@@ -1913,6 +1946,54 @@ dwc:georeferenceProtocol rdf:type owl:DatatypeProperty ;
                          skos:prefLabel "Georeference Protocol" .
 
 
+###  http://rs.tdwg.org/dwc/terms/georeferenceRemarks
+dwc:georeferenceRemarks rdf:type owl:DatatypeProperty ;
+                        rdfs:domain dcterms:Location ;
+                        rdfs:range xsd:string ;
+                        dcterms:isVersionOf dwc:georeferenceRemarks ;
+                        dcterms:references <http://rs.tdwg.org/dwc/terms/version/georeferenceRemarks-2025-06-12> ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "Comments or notes about the spatial description determination, explaining assumptions made in addition or opposition to the those formalized in the method referred to in dwc:georeferenceProtocol."@en ;
+                        skos:example "Assumed distance by road (Hwy. 101)" ;
+                        skos:prefLabel "Georeference Remarks" .
+
+
+###  http://rs.tdwg.org/dwc/terms/georeferenceSources
+dwc:georeferenceSources rdf:type owl:DatatypeProperty ;
+                        rdfs:domain dcterms:Location ;
+                        rdfs:range [ rdf:type rdfs:Datatype ;
+                                     owl:unionOf ( xsd:anyURI
+                                                   xsd:string
+                                                 )
+                                   ] ;
+                        dcterms:isVersionOf dwc:georeferenceSources ;
+                        dcterms:references <http://rs.tdwg.org/dwc/terms/version/georeferenceSources-2023-06-28> ;
+                        rdfs:comment "Recommended best practice is to separate the values in a list with space vertical bar space (` | `). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "A list (concatenated and separated) of maps, gazetteers, or other resources used to georeference the dcterms:Location, described specifically enough to allow anyone in the future to use the same resources."@en ;
+                        skos:example "https://www.geonames.org/"^^xsd:anyURI ,
+                                     "GeoLocate" ,
+                                     "USGS 1:24000 Florence Montana Quad 1967 | Terrametrics 2008 on Google Earth" ;
+                        skos:prefLabel "Georeference Sources" .
+
+
+###  http://rs.tdwg.org/dwc/terms/georeferenceVerificationStatus
+dwc:georeferenceVerificationStatus rdf:type owl:DatatypeProperty ;
+                                   rdfs:domain dcterms:Location ;
+                                   rdfs:range xsd:string ;
+                                   dcterms:isVersionOf dwc:georeferenceVerificationStatus ;
+                                   dcterms:references <http://rs.tdwg.org/dwc/terms/version/georeferenceVerificationStatus-2023-06-28> ;
+                                   rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                                   rdfs:isDefinedBy dwc: ;
+                                   skos:definition "A categorical description of the extent to which the georeference has been verified to represent the best possible spatial description for the dcterms:Location of the dwc:Occurrence."@en ;
+                                   skos:example "requires georeference" ,
+                                                "requires verification" ,
+                                                "unable to georeference" ,
+                                                "verified by contributor" ,
+                                                "verified by data custodian" ;
+                                   skos:prefLabel "Georeference Verification Status" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/georeferencedBy
 dwc:georeferencedBy rdf:type owl:DatatypeProperty ;
                     rdfs:domain dcterms:Location ;
@@ -1961,6 +2042,37 @@ dwc:group rdf:type owl:DatatypeProperty ;
           skos:prefLabel "Group" .
 
 
+###  http://rs.tdwg.org/dwc/terms/higherGeography
+dwc:higherGeography rdf:type owl:DatatypeProperty ;
+                    rdfs:domain dcterms:Location ;
+                    rdfs:range xsd:string ;
+                    dcterms:isVersionOf dwc:higherGeography ;
+                    dcterms:references <http://rs.tdwg.org/dwc/terms/version/higherGeography-2023-06-28> ;
+                    rdfs:comment "Recommended best practice is to separate the values in a list with space vertical bar space (` | `), with terms in order from least specific to most specific."@en ;
+                    rdfs:isDefinedBy dwc: ;
+                    skos:definition "A list (concatenated and separated) of geographic names less specific than the information captured in the dwc:locality term."@en ;
+                    skos:example "North Atlantic Ocean" ,
+                                 "South America | Argentina | Patagonia | Parque Nacional Nahuel Huapi | Neuquén | Los Lagos" ;
+                    skos:prefLabel "Higher Geography" .
+
+
+###  http://rs.tdwg.org/dwc/terms/higherGeographyID
+dwc:higherGeographyID rdf:type owl:DatatypeProperty ;
+                      rdfs:domain dcterms:Location ;
+                      rdfs:range [ rdf:type rdfs:Datatype ;
+                                   owl:unionOf ( xsd:anyURI
+                                                 xsd:string
+                                               )
+                                 ] ;
+                      dcterms:isVersionOf dwc:higherGeographyID ;
+                      dcterms:references <http://rs.tdwg.org/dwc/terms/version/higherGeographyID-2023-06-28> ;
+                      rdfs:comment "Recommended best practice is to use a persistent identifier from a controlled vocabulary such as the Getty Thesaurus of Geographic Names."@en ;
+                      rdfs:isDefinedBy dwc: ;
+                      skos:definition "An identifier for the geographic region within which the dcterms:Location occurred."@en ;
+                      skos:example "http://vocab.getty.edu/tgn/1002002"^^xsd:anyURI ;
+                      skos:prefLabel "Higher Geography ID" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/highestBiostratigraphicZone
 dwc:highestBiostratigraphicZone rdf:type owl:DatatypeProperty ;
                                 rdfs:domain dwc:GeologicalContext ;
@@ -1971,6 +2083,38 @@ dwc:highestBiostratigraphicZone rdf:type owl:DatatypeProperty ;
                                 skos:definition "The full name of the highest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
                                 skos:example "Blancan" ;
                                 skos:prefLabel "Highest Biostratigraphic Zone" .
+
+
+###  http://rs.tdwg.org/dwc/terms/island
+dwc:island rdf:type owl:DatatypeProperty ;
+           rdfs:domain dcterms:Location ;
+           rdfs:range xsd:string ;
+           dcterms:isVersionOf dwc:island ;
+           dcterms:references <http://rs.tdwg.org/dwc/terms/version/island-2023-06-28> ;
+           rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names."@en ;
+           rdfs:isDefinedBy dwc: ;
+           skos:definition "The name of the island on or near which the dcterms:Location occurs."@en ;
+           skos:example "Bikini Atoll" ,
+                        "Nosy Be" ,
+                        "Vancouver" ,
+                        "Viti Levu" ,
+                        "Zanzibar" ;
+           skos:prefLabel "Island" .
+
+
+###  http://rs.tdwg.org/dwc/terms/islandGroup
+dwc:islandGroup rdf:type owl:DatatypeProperty ;
+                rdfs:domain dcterms:Location ;
+                rdfs:range xsd:string ;
+                dcterms:isVersionOf dwc:islandGroup ;
+                dcterms:references <http://rs.tdwg.org/dwc/terms/version/islandGroup-2023-06-28> ;
+                rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names."@en ;
+                rdfs:isDefinedBy dwc: ;
+                skos:definition "The name of the island group in which the dcterms:Location occurs."@en ;
+                skos:example "Alexander Archipelago" ,
+                             "Archipiélago Diego Ramírez" ,
+                             "Seychelles" ;
+                skos:prefLabel "Island Group" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/latestAgeOrHighestStage
@@ -2053,6 +2197,46 @@ dwc:lithostratigraphicTerms rdf:type owl:DatatypeProperty ;
                             skos:prefLabel "Lithostratigraphic Terms" .
 
 
+###  http://rs.tdwg.org/dwc/terms/locality
+dwc:locality rdf:type owl:DatatypeProperty ;
+             rdfs:domain dcterms:Location ;
+             rdfs:range rdf:langString ;
+             dcterms:isVersionOf dwc:locality ;
+             dcterms:references <http://rs.tdwg.org/dwc/terms/version/locality-2023-06-28> ;
+             rdfs:comment "Less specific geographic information can be provided in other geographic terms (dwc:higherGeography, dwc:continent, dwc:country, dwc:stateProvince, dwc:county, dwc:municipality, dwc:waterBody, dwc:island, dwc:islandGroup). This term may contain information modified from the original to correct perceived errors or standardize the description."@en ;
+             rdfs:isDefinedBy dwc: ;
+             skos:definition "The specific description of the place."@en ;
+             skos:example "Bariloche, 25 km NNE via Ruta Nacional 40 (=Ruta 237)" ,
+                          "Queets Rainforest, Olympic National Park" ;
+             skos:prefLabel "Locality" .
+
+
+###  http://rs.tdwg.org/dwc/terms/locationAccordingTo
+dwc:locationAccordingTo rdf:type owl:DatatypeProperty ;
+                        rdfs:domain dcterms:Location ;
+                        rdfs:range rdf:langString ;
+                        dcterms:isVersionOf dwc:locationAccordingTo ;
+                        dcterms:references <http://rs.tdwg.org/dwc/terms/version/locationAccordingTo-2023-06-28> ;
+                        rdfs:comment "This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "Information about the source of this dcterms:Location information. Could be a publication (gazetteer), institution, or team of individuals."@en ;
+                        skos:example "GADM" ,
+                                     "Getty Thesaurus of Geographic Names" ;
+                        skos:prefLabel "Location According To" .
+
+
+###  http://rs.tdwg.org/dwc/terms/locationRemarks
+dwc:locationRemarks rdf:type owl:DatatypeProperty ;
+                    rdfs:domain dcterms:Location ;
+                    rdfs:range rdf:langString ;
+                    dcterms:isVersionOf dwc:locationRemarks ;
+                    dcterms:references <http://rs.tdwg.org/dwc/terms/version/locationRemarks-2023-06-28> ;
+                    rdfs:isDefinedBy dwc: ;
+                    skos:definition "Comments or notes about the dcterms:Location."@en ;
+                    skos:example "under water since 2005" ;
+                    skos:prefLabel "Location Remarks" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/lowestBiostratigraphicZone
 dwc:lowestBiostratigraphicZone rdf:type owl:DatatypeProperty ;
                                rdfs:domain dwc:GeologicalContext ;
@@ -2077,6 +2261,26 @@ dwc:materialEntityID rdf:type owl:DatatypeProperty ;
                      skos:definition "An identifier for a [dwc:MaterialEntity]."@en ;
                      skos:example "06809dc5-f143-459a-be1a-6f03e63fc083" ;
                      skos:prefLabel "Material Entity ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/maximumDepthInMeters
+dwc:maximumDepthInMeters rdf:type owl:DatatypeProperty ;
+                         rdfs:domain dcterms:Location ;
+                         rdfs:range [ rdf:type rdfs:Datatype ;
+                                      owl:onDatatype xsd:decimal ;
+                                      owl:withRestrictions ( [ xsd:minInclusive 0.0
+                                                             ]
+                                                             [ xsd:maxInclusive 11000.0
+                                                             ]
+                                                           )
+                                    ] ;
+                         dcterms:isVersionOf dwc:maximumDepthInMeters ;
+                         dcterms:references <http://rs.tdwg.org/dwc/terms/version/maximumDepthInMeters-2023-06-28> ;
+                         rdfs:isDefinedBy dwc: ;
+                         skos:definition "The greater depth of a range of depth below the local surface, in meters."@en ;
+                         skos:example 0.0 ,
+                                      200.0 ;
+                         skos:prefLabel "Maximum Depth In Meters" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/mediaID

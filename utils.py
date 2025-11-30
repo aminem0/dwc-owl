@@ -271,7 +271,7 @@ def createRDP(
         namespace: Namespace,
         graph: Graph,
         pref_label: Literal,
-        range_s: str,
+        range_n: Node,
         restrictions: list[list[Node, float, str]],
         domains: Node | list[Node] | None = None,        
         version_of_s: str | None = None,
@@ -356,7 +356,7 @@ def createRDP(
  
     # Attach the list to the datatype node
     graph.add((dp_uri, RDFS["range"], datatype_bnode))
-    graph.add((datatype_bnode, OWL["onDatatype"], XSD[f"{range_s}"]))
+    graph.add((datatype_bnode, OWL["onDatatype"], range_n))
     graph.add((datatype_bnode, OWL["withRestrictions"], restriction_list))
 
     if subproperty_list:

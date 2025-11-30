@@ -1151,6 +1151,42 @@ createOP(
 )
 
 createOP(
+    name="georeferenceSources",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DCTERMS["Location"],
+    pref_label=Literal("Georeference Sources (IRI)"),
+    definition=Literal("A map, gazetteer, or other resource used to georeference the dcterms:Location.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/georeferenceSources",
+    references_s="http://rs.tdwg.org/dwc/iri/version/georeferenceSources-2025-07-10",
+)
+
+createOP(
+    name="georeferenceVerificationStatus",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DCTERMS["Location"],
+    pref_label=Literal("Georeference Verification Status (IRI)"),
+    definition=Literal("A categorical description of the extent to which the georeference has been verified to represent the best possible spatial description for the dcterms:Location of the dwc:Occurrence.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/georeferenceVerificationStatus",
+    references_s="http://rs.tdwg.org/dwc/iri/version/georeferenceVerificationStatus-2025-07-10",
+)
+
+createOP(
+    name="locationAccordingTo",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DCTERMS["Location"],
+    pref_label=Literal("Location According To (IRI)"),
+    definition=Literal("Information about the source of this dcterms:Location information. Could be a publication (gazetteer), institution, or team of individuals.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/locationAccordingTo",
+    references_s="http://rs.tdwg.org/dwc/iri/version/locationAccordingTo-2025-07-10",
+)
+
+createOP(
     name="occurrenceStatus",
     namespace=DWCIRI,
     graph=g,
@@ -2744,6 +2780,62 @@ createDP(
 )
 
 createDP(
+    name="georeferenceRemarks",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Georeference Remarks"),
+    definition=Literal("Comments or notes about the spatial description determination, explaining assumptions made in addition or opposition to the those formalized in the method referred to in dwc:georeferenceProtocol.", lang="en"),
+    examples=[
+        Literal("Assumed distance by road (Hwy. 101)"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/georeferenceRemarks",
+    references_s="http://rs.tdwg.org/dwc/terms/version/georeferenceRemarks-2025-06-12",
+)
+
+createDP(
+    name="georeferenceSources",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=[
+        XSD["anyURI"],
+        XSD["string"],
+    ],
+    pref_label=Literal("Georeference Sources"),
+    definition=Literal("A list (concatenated and separated) of maps, gazetteers, or other resources used to georeference the dcterms:Location, described specifically enough to allow anyone in the future to use the same resources.", lang="en"),
+    comments=Literal("Recommended best practice is to separate the values in a list with space vertical bar space (` | `). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("https://www.geonames.org/", datatype=XSD["anyURI"]),
+        Literal("USGS 1:24000 Florence Montana Quad 1967 | Terrametrics 2008 on Google Earth"),
+        Literal("GeoLocate"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/georeferenceSources",
+    references_s="http://rs.tdwg.org/dwc/terms/version/georeferenceSources-2023-06-28",
+)
+
+createDP(
+    name="georeferenceVerificationStatus",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Georeference Verification Status"),
+    definition=Literal("A categorical description of the extent to which the georeference has been verified to represent the best possible spatial description for the dcterms:Location of the dwc:Occurrence.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("unable to georeference"),
+        Literal("requires georeference"),
+        Literal("requires verification"),
+        Literal("verified by data custodian"),
+        Literal("verified by contributor"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/georeferenceVerificationStatus",
+    references_s="http://rs.tdwg.org/dwc/terms/version/georeferenceVerificationStatus-2023-06-28",
+)
+
+createDP(
     name="group",
     namespace=DWC,
     graph=g,
@@ -2760,6 +2852,42 @@ createDP(
 )
 
 createDP(
+    name="higherGeography",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Higher Geography"),
+    definition=Literal("A list (concatenated and separated) of geographic names less specific than the information captured in the dwc:locality term.", lang="en"),
+    comments=Literal("Recommended best practice is to separate the values in a list with space vertical bar space (` | `), with terms in order from least specific to most specific.", lang="en"),
+    examples=[
+        Literal("North Atlantic Ocean"),
+        Literal("South America | Argentina | Patagonia | Parque Nacional Nahuel Huapi | Neuquén | Los Lagos"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/higherGeography",
+    references_s="http://rs.tdwg.org/dwc/terms/version/higherGeography-2023-06-28",
+)
+
+createDP(
+    name="higherGeographyID",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=[
+        XSD["anyURI"],
+        XSD["string"],
+    ],
+    pref_label=Literal("Higher Geography ID"),
+    definition=Literal("An identifier for the geographic region within which the dcterms:Location occurred.", lang="en"),
+    comments=Literal("Recommended best practice is to use a persistent identifier from a controlled vocabulary such as the Getty Thesaurus of Geographic Names.", lang="en"),
+    examples=[
+        Literal("http://vocab.getty.edu/tgn/1002002", datatype=XSD["anyURI"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/higherGeographyID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/higherGeographyID-2023-06-28",
+)
+
+createDP(
     name="highestBiostratigraphicZone",
     namespace=DWC,
     graph=g,
@@ -2772,6 +2900,44 @@ createDP(
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/highestBiostratigraphicZone",
     references_s="http://rs.tdwg.org/dwc/terms/version/highestBiostratigraphicZone-2023-09-13",
+)
+
+createDP(
+    name="island",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Island"),
+    definition=Literal("The name of the island on or near which the dcterms:Location occurs.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names.", lang="en"),
+    examples=[
+        Literal("Nosy Be"),
+        Literal("Bikini Atoll"),
+        Literal("Vancouver"),
+        Literal("Viti Levu"),
+        Literal("Zanzibar"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/island",
+    references_s="http://rs.tdwg.org/dwc/terms/version/island-2023-06-28",
+)
+
+createDP(
+    name="islandGroup",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Island Group"),
+    definition=Literal("The name of the island group in which the dcterms:Location occurs.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names.", lang="en"),
+    examples=[
+        Literal("Alexander Archipelago"),
+        Literal("Archipiélago Diego Ramírez"),
+        Literal("Seychelles"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/islandGroup",
+    references_s="http://rs.tdwg.org/dwc/terms/version/islandGroup-2023-06-28",
 )
 
 createDP(
@@ -2873,6 +3039,55 @@ createDP(
 )
 
 createDP(
+    name="locality",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Locality"),
+    definition=Literal("The specific description of the place.", lang="en"),
+    comments=Literal("Less specific geographic information can be provided in other geographic terms (dwc:higherGeography, dwc:continent, dwc:country, dwc:stateProvince, dwc:county, dwc:municipality, dwc:waterBody, dwc:island, dwc:islandGroup). This term may contain information modified from the original to correct perceived errors or standardize the description.", lang="en"),
+    examples=[
+        Literal("Bariloche, 25 km NNE via Ruta Nacional 40 (=Ruta 237)"),
+        Literal("Queets Rainforest, Olympic National Park"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/locality",
+    references_s="http://rs.tdwg.org/dwc/terms/version/locality-2023-06-28",
+)
+
+createDP(
+    name="locationAccordingTo",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Location According To"),
+    definition=Literal("Information about the source of this dcterms:Location information. Could be a publication (gazetteer), institution, or team of individuals.", lang="en"),
+    comments=Literal("This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("Getty Thesaurus of Geographic Names"),
+        Literal("GADM"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/locationAccordingTo",
+    references_s="http://rs.tdwg.org/dwc/terms/version/locationAccordingTo-2023-06-28",
+)
+
+createDP(
+    name="locationRemarks",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Location Remarks"),
+    definition=Literal("Comments or notes about the dcterms:Location.", lang="en"),
+    examples=[
+        Literal("under water since 2005"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/locationRemarks",
+    references_s="http://rs.tdwg.org/dwc/terms/version/locationRemarks-2023-06-28",
+)
+
+createDP(
     name="lowestBiostratigraphicZone",
     namespace=DWC,
     graph=g,
@@ -2902,6 +3117,27 @@ createDP(
     subproperty_list=[DCTERMS["identifier"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/materialEntityID",
     references_s="http://rs.tdwg.org/dwc/terms/version/materialEntityID-2023-09-13"
+)
+
+# NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
+createRDP(
+    name="maximumDepthInMeters",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    range_n=XSD["decimal"],
+    restrictions=[
+        [XSD["minInclusive"], 0, XSD["decimal"]],
+        [XSD["maxInclusive"], 11000, XSD["decimal"]],
+    ],
+    pref_label=Literal("Maximum Depth In Meters"),
+    definition=Literal("The greater depth of a range of depth below the local surface, in meters.", lang="en"),
+    examples=[
+        Literal("0", datatype=XSD["decimal"]),
+        Literal("200", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/maximumDepthInMeters",
+    references_s="http://rs.tdwg.org/dwc/terms/version/maximumDepthInMeters-2023-06-28",
 )
 
 # NOTE: Confirm namespace dwc: or ac:
@@ -2934,6 +3170,31 @@ createDP(
     references_s="http://rs.tdwg.org/dwc/terms/version/member-2023-09-13",
 )
 
+# NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
+createRDP(
+    name="minimumElevationInMeters",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    range_n=XSD["decimal"],
+    restrictions=[
+        [XSD["minInclusive"], -430, XSD["decimal"]],
+        [XSD["maxInclusive"], 8850, XSD["decimal"]],
+    ],
+    pref_label=Literal("Minimum Elevation In Meters"),
+    definition=Literal("The lower limit of the range of elevation (altitude, usually above sea level), in meters.", lang="en"),
+    examples=[
+        Literal("-100", datatype=XSD["decimal"]),
+        Literal("802", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/minimumElevationInMeters",
+    references_s="http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28",
+)
+
+# TEST: Test of range restriction on dwc:minimumElevationInMeters
+g.add((BB["SomePoint"], RDF["type"], DCTERMS["Location"]))
+g.add((BB["SomePoint"], DWC["minimumElevationInMeters"], Literal("-430", datatype=XSD["decimal"])))
+
 createDP(
     name="molecularProtocolID",
     namespace=DWC,
@@ -2945,6 +3206,40 @@ createDP(
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
     subproperty_list=[DCTERMS["identifier"]],
     version_of_s="http://example.com/term-pending/dwc/molecularProtocolID",
+)
+
+createDP(
+    name="month",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=XSD["integer"],
+    pref_label=Literal("Month"),
+    definition=Literal("The integer month in which the dwc:Event occurred.", lang="en"),
+    examples=[
+        Literal("1", datatype=XSD["integer"]),
+        Literal("10", datatype=XSD["integer"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/month",
+    references_s="http://rs.tdwg.org/dwc/terms/version/month-2023-06-28",
+)
+
+createDP(
+    name="municipality",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Third Order Division"),
+    definition=Literal("The full, unabbreviated name of the next smaller administrative region than county (city, municipality, etc.) in which the dcterms:Location occurs. Do not use this term for a nearby named place that does not contain the actual dcterms:Location.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both.", lang="en"),
+    examples=[
+        Literal("Holzminden"),
+        Literal("Araçatuba"),
+        Literal("Ga-Segonyana"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/municipality",
+    references_s="http://rs.tdwg.org/dwc/terms/version/municipality-2023-06-28",
 )
 
 createDP(
@@ -3016,65 +3311,6 @@ createDP(
         Literal("individuals"),
     ],
     version_of_s="http://example.com/term-pending/dwc/objectQuantityType",
-)
-
-# NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
-createRDP(
-    name="minimumElevationInMeters",
-    namespace=DWC,
-    graph=g,
-    domains=DCTERMS["Location"],
-    range_s="decimal",
-    restrictions=[
-        [XSD["minInclusive"], -430, XSD["decimal"]],
-        [XSD["maxInclusive"], 8850, XSD["decimal"]],
-    ],
-    pref_label=Literal("Minimum Elevation In Meters"),
-    definition=Literal("The lower limit of the range of elevation (altitude, usually above sea level), in meters.", lang="en"),
-    examples=[
-        Literal("-100", datatype=XSD["decimal"]),
-        Literal("802", datatype=XSD["decimal"]),
-    ],
-    version_of_s="http://rs.tdwg.org/dwc/terms/minimumElevationInMeters",
-    references_s="http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28",
-)
-
-# TEST: Test of range restriction on dwc:minimumElevationInMeters
-g.add((BB["SomePoint"], RDF["type"], DCTERMS["Location"]))
-g.add((BB["SomePoint"], DWC["minimumElevationInMeters"], Literal("-430", datatype=XSD["decimal"])))
-
-createDP(
-    name="month",
-    namespace=DWC,
-    graph=g,
-    domains=DWC["Event"],
-    ranges=XSD["integer"],
-    pref_label=Literal("Month"),
-    definition=Literal("The integer month in which the dwc:Event occurred.", lang="en"),
-    examples=[
-        Literal("1", datatype=XSD["integer"]),
-        Literal("10", datatype=XSD["integer"]),
-    ],
-    version_of_s="http://rs.tdwg.org/dwc/terms/month",
-    references_s="http://rs.tdwg.org/dwc/terms/version/month-2023-06-28",
-)
-
-createDP(
-    name="municipality",
-    namespace=DWC,
-    graph=g,
-    domains=DCTERMS["Location"],
-    ranges=RDFS["Literal"],
-    pref_label=Literal("Third Order Division"),
-    definition=Literal("The full, unabbreviated name of the next smaller administrative region than county (city, municipality, etc.) in which the dcterms:Location occurs. Do not use this term for a nearby named place that does not contain the actual dcterms:Location.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both.", lang="en"),
-    examples=[
-        Literal("Holzminden"),
-        Literal("Araçatuba"),
-        Literal("Ga-Segonyana"),
-    ],
-    version_of_s="http://rs.tdwg.org/dwc/terms/municipality",
-    references_s="http://rs.tdwg.org/dwc/terms/version/municipality-2023-06-28",
 )
 
 createDP(
