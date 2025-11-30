@@ -2708,7 +2708,6 @@ createDP(
     version_of_s="http://example.com/term-pending/dwc/objectQuantityType",
 )
 
-
 # NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
 createRDP(
     name="minimumElevationInMeters",
@@ -2717,10 +2716,10 @@ createRDP(
     domains=DCTERMS["Location"],
     range_s="decimal",
     restrictions=[
-        ["minInclusive", -430, "decimal"],
-        ["maxInclusive", 8850, "decimal"],
+        [XSD["minInclusive"], -430, XSD["decimal"]],
+        [XSD["maxInclusive"], 8850, XSD["decimal"]],
     ],
-    pref_label=Literal("Minimum Elevation In Meters2"),
+    pref_label=Literal("Minimum Elevation In Meters"),
     definition=Literal("The lower limit of the range of elevation (altitude, usually above sea level), in meters.", lang="en"),
     examples=[
         Literal("-100", datatype=XSD["decimal"]),

@@ -272,7 +272,7 @@ def createRDP(
         graph: Graph,
         pref_label: Literal,
         range_s: str,
-        restrictions: list[list[str, float, str]],
+        restrictions: list[list[Node, float, str]],
         domains: Node | list[Node] | None = None,        
         version_of_s: str | None = None,
         subproperty_list: list[Node] | None = None,
@@ -342,7 +342,7 @@ def createRDP(
         restriction_bnode = BNode()
 
         # Build it with template
-        graph.add((restriction_bnode, XSD[f"{restriction[0]}"], Literal(f"{restriction[1]}", datatype=XSD[f"{restriction[2]}"])))
+        graph.add((restriction_bnode, restriction[0], Literal(f"{restriction[1]}", datatype=restriction[2])))
 
         # Add it to the Python list
         restriction_pylist.append(restriction_bnode)

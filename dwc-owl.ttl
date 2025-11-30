@@ -1861,7 +1861,7 @@ dwc:minimumElevationInMeters a owl:DatatypeProperty ;
     skos:definition "The lower limit of the range of elevation (altitude, usually above sea level), in meters."@en ;
     skos:example -100.0,
         802.0 ;
-    skos:prefLabel "Minimum Elevation In Meters2" .
+    skos:prefLabel "Minimum Elevation In Meters" .
 
 dwc:molecularProtocolID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/molecularProtocolID> ;
