@@ -28,6 +28,9 @@ bb:BeeVisitingFlower dwcdp:happenedDuring bb:Site123 .
 bb:Bibi a dcterms:BibliographicResource ;
     dwcdp:authoredBy bb:Agnes .
 
+bb:BirdRingingLocation a dcterms:Location ;
+    dwc:county "SomewhereOverTheRainbow"@en .
+
 bb:Butterfly123EatenBySpider456 a dwc:ResourceRelationship,
         rdf:Statement ;
     dwc:relationshipAccordingTo "Joey Saucedo" ;
@@ -425,15 +428,15 @@ dwc:assertionEffectiveDate a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     skos:definition "A date on which a state or measurement of a [dwc:Assertion] was deemed to first be in effect." ;
-    skos:example "1809-02-12 (within the day 12 February 1809)",
-        "1900/1909 (some time within the interval between the beginning of the year 1900 and before the year 1909)",
-        "1906-06 (in the month of June 1906)",
-        "1963-04-08T14:07-06:00 (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC)",
-        "1971 (in the year 1971)",
-        "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC)",
-        "2007-11-13/15 (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)",
-        "2009-02-20T08:40Z (20 February 2009 at or after 8:40am and before 8:41 UTC)",
-        "2018-08-29T15:19 (29 August 2018 at or after 3:19pm and before 3:20pm local time)" ;
+    skos:example "1809-02-12",
+        "1900/1909",
+        "1906-06",
+        "1963-04-08T14:07-06:00",
+        "1971",
+        "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z",
+        "2007-11-13/15",
+        "2009-02-20T08:40Z",
+        "2018-08-29T15:19" ;
     skos:prefLabel "Assertion Effective Date" .
 
 dwc:assertionID a owl:DatatypeProperty ;
@@ -453,15 +456,15 @@ dwc:assertionMadeDate a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     skos:definition "A date on which a [dwc:Assertion] was created." ;
-    skos:example "1809-02-12 (within the day 12 February 1809)",
-        "1900/1909 (some time within the interval between the beginning of the year 1900 and before the year 1909)",
-        "1906-06 (in the month of June 1906)",
-        "1963-04-08T14:07-06:00 (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC)",
-        "1971 (in the year 1971)",
-        "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC)",
-        "2007-11-13/15 (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)",
-        "2009-02-20T08:40Z (20 February 2009 at or after 8:40am and before 8:41 UTC)",
-        "2018-08-29T15:19 (29 August 2018 at or after 3:19pm and before 3:20pm local time)" ;
+    skos:example "1809-02-12",
+        "1900/1909",
+        "1906-06",
+        "1963-04-08T14:07-06:00",
+        "1971",
+        "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z",
+        "2007-11-13/15",
+        "2009-02-20T08:40Z",
+        "2018-08-29T15:19" ;
     skos:prefLabel "Assertion Made Date" .
 
 dwc:assertionType a owl:DatatypeProperty ;
@@ -1481,6 +1484,42 @@ dwciri:fieldNotes a owl:ObjectProperty ;
     skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
     skos:prefLabel "Establishment Means (IRI)" .
 
+dwciri:footprintWKT a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:footprintWKT ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/footprintWKT-2025-07-10> ;
+    rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwciri: ;
+    skos:definition "A Well-Known Text (WKT) representation of the shape (footprint, geometry) that defines the dcterms:Location. A dcterms:Location may have both a point-radius representation (see dwc:decimalLatitude) and a footprint representation, and they may differ from each other."@en ;
+    skos:prefLabel "Footprint WKT (IRI)" .
+
+dwciri:geodeticDatum a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:geodeticDatum ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/geodeticDatum-2025-06-12> ;
+    rdfs:comment "Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use an IRI corresponding to the value not recorded."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwciri: ;
+    skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which the geographic coordinates given in dwc:decimalLatitude and dwc:decimalLongitude are based."@en ;
+    skos:prefLabel "Geodetic Datum (IRI)" .
+
+dwciri:georeferenceProtocol a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:georeferenceProtocol ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferenceProtocol-2025-07-10> ;
+    rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwciri: ;
+    skos:definition "A description or reference to the methods used to determine the spatial footprint, coordinates, and uncertainties."@en ;
+    skos:prefLabel "Georeference Protocol (IRI)" .
+
+dwciri:georeferencedBy a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:georeferencedBy ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferencedBy-2025-07-10> ;
+    rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwciri: ;
+    skos:definition "A person, group, or organization who determined the georeference (spatial representation) for the dcterms:Location."@en ;
+    skos:prefLabel "Georeferenced By (IRI)" .
+
 dwciri:occurrenceStatus a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:occurrenceStatus ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/occurrenceStatus-2025-07-10> ;
@@ -1619,6 +1658,88 @@ dwc:causeOfDeath a owl:DatatypeProperty ;
         "trapped" ;
     skos:prefLabel "Cause Of Death" .
 
+dwc:continent a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:continent ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/continent-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The name of the continent in which the dcterms:Location occurs."@en ;
+    skos:example "Africa",
+        "Antarctica",
+        "Asia",
+        "Europe",
+        "North America",
+        "Oceania",
+        "South America" ;
+    skos:prefLabel "Continent" .
+
+dwc:coordinatePrecision a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:coordinatePrecision ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/coordinatePrecision-2023-06-28> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "A decimal representation of the precision of the coordinates given in the dwc:decimalLatitude and dwc:decimalLongitude."@en ;
+    skos:example 0.00001,
+        0.000278,
+        0.01667,
+        1.0 ;
+    skos:prefLabel "Coordinate Precision" .
+
+dwc:coordinateUncertaintyInMeters a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:coordinateUncertaintyInMeters ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/coordinateUncertaintyInMeters-2023-06-28> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The horizontal distance (in meters) from the given dwc:decimalLatitude and dwc:decimalLongitude describing the smallest circle containing the whole of the dcterms:Location. Leave the value empty if the uncertainty is unknown, cannot be estimated, or is not applicable (because there are no coordinates). Zero is not a valid value for this term."@en ;
+    skos:example 30.0,
+        71.0,
+        100.0 ;
+    skos:prefLabel "Coordinate Uncertainty In Meters" .
+
+dwc:country a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:country ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/country-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The name of the country or major administrative unit in which the dcterms:Location occurs."@en ;
+    skos:example "Colombia",
+        "Denmark",
+        "España" ;
+    skos:prefLabel "Country" .
+
+dwc:countryCode a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:countryCode ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/countryCode-2025-06-12> ;
+    rdfs:comment "Recommended best practice is to use an ISO 3166-1-alpha-2 country code, or `ZZ` (for an unknown location or a location unassignable to a single country code), or `XZ` (for the high seas beyond national jurisdictions)."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The standard code for the country in which the dcterms:Location occurs."@en ;
+    skos:example "AR",
+        "SV",
+        "XZ",
+        "ZZ" ;
+    skos:prefLabel "Country Code" .
+
+dwc:county a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:county ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/county-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdf:langString ;
+    skos:definition "The full, unabbreviated name of the next smaller administrative region than stateProvince (county, shire, department, etc.) in which the dcterms:Location occurs."@en ;
+    skos:example "Los Lagos",
+        "Mataró",
+        "Missoula" ;
+    skos:prefLabel "Second Order Division" .
+
 dwc:datasetID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:datasetID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/datasetID-2017-10-06> ;
@@ -1629,6 +1750,26 @@ dwc:datasetID a owl:DatatypeProperty ;
     skos:definition "An identifier for a dataset from which data originated."@en ;
     skos:example "b15d4952-7d20-46f1-8a3e-556a512b04c5" ;
     skos:prefLabel "Dataset ID" .
+
+dwc:decimalLatitude a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:decimalLatitude ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/decimalLatitude-2023-06-28> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The geographic latitude (in decimal degrees, using the spatial reference system given in dwc:geodeticDatum) of the geographic center of a dcterms:Location. Positive values are north of the Equator, negative values are south of it. Legal values lie between `-90` and `90`, inclusive."@en ;
+    skos:example -41.0983423 ;
+    skos:prefLabel "Decimal Latitude" .
+
+dwc:decimalLongitude a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:decimalLongitude ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/decimalLongitude-2023-06-28> ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The geographic longitude (in decimal degrees, using the spatial reference system given in dwc:geodeticDatum) of the geographic center of a dcterms:Location. Positive values are east of the Greenwich Meridian, negative values are west of it. Legal values lie between `-180` and `180`, inclusive."@en ;
+    skos:example -41.0983423 ;
+    skos:prefLabel "Decimal Longitude" .
 
 dwc:disposition a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:disposition ;
@@ -1716,6 +1857,30 @@ dwc:eventID a owl:DatatypeProperty ;
     skos:example "INBO:VIS:Ev:00009375" ;
     skos:prefLabel "Event ID" .
 
+dwc:footprintSRS a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:footprintSRS ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/footprintSRS-2025-06-12> ;
+    rdfs:comment "Recommended best practice is to use the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use the value not recorded. It is also permitted to provide the SRS in Well-Known-Text, especially if no EPSG code provides the necessary values for the attributes of the SRS. Do not use this term to describe the SRS of the dwc:decimalLatitude and dwc:decimalLongitude, nor of any verbatim coordinates - use the dwc:geodeticDatum and dwc:verbatimSRS instead. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which the geometry given in dwc:footprintWKT is based."@en ;
+    skos:example "EPSG:4326",
+        "GEOGCS[\"GCS_WGS_1984\", DATUM[\"D_WGS_1984\", SPHEROID[\"WGS_1984\",6378137,298.257223563]], PRIMEM[\"Greenwich\",0], UNIT[\"Degree\",0.0174532925199433]]",
+        "not recorded" ;
+    skos:prefLabel "Footprint SRS" .
+
+dwc:footprintWKT a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:footprintWKT ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/footprintWKT-2023-06-28> ;
+    rdfs:comment "This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "A Well-Known Text (WKT) representation of the shape (footprint, geometry) that defines the dcterms:Location. A dcterms:Location may have both a point-radius representation (see dwc:decimalLatitude) and a footprint representation, and they may differ from each other."@en ;
+    skos:example "POLYGON ((10 20, 11 20, 11 21, 10 21, 10 20))" ;
+    skos:prefLabel "Footprint WKT" .
+
 dwc:formation a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:formation ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/formation-2023-09-13> ;
@@ -1727,6 +1892,65 @@ dwc:formation a owl:DatatypeProperty ;
         "House Limestone",
         "Notch Peak Formation" ;
     skos:prefLabel "Formation" .
+
+dwc:geodeticDatum a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:geodeticDatum ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/geodeticDatum-2025-06-12> ;
+    rdfs:comment "Recommended best practice is to use the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use the value not recorded. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for a string literal value."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which the geographic coordinates given in dwc:decimalLatitude and dwc:decimalLongitude are based."@en ;
+    skos:example "Campo Inchauspe",
+        "Clarke 1866",
+        "EPSG:4326",
+        "European 1950",
+        "NAD27",
+        "WGS84",
+        "not recorded" ;
+    skos:prefLabel "Geodetic Datum" .
+
+dwc:georeferenceProtocol a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:georeferenceProtocol ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/georeferenceProtocol-2023-06-28> ;
+    rdfs:comment "This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "A description or reference to the methods used to determine the spatial footprint, coordinates, and uncertainties."@en ;
+    skos:example "Georeferencing Quick Reference Guide (Zermoglio et al. 2020, https://doi.org/10.35035/e09p-h128)" ;
+    skos:prefLabel "Georeference Protocol" .
+
+dwc:georeferencedBy a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:georeferencedBy ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/georeferencedBy-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to separate the values in a list with space vertical bar space (` | `). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "A list (concatenated and separated) of names of people, groups, or organizations who determined the georeference (spatial representation) for the dcterms:Location."@en ;
+    skos:example "Brad Millen (ROM)",
+        "Kristina Yamamoto | Janet Fang" ;
+    skos:prefLabel "Georeferenced By" .
+
+dwc:georeferencedDate a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:georeferencedDate ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/georeferencedDate-2025-06-12> ;
+    rdfs:comment "Recommended best practice is to use a date that conforms to ISO 8601-1:2019."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "The date on which the dcterms:Location was georeferenced."@en ;
+    skos:example "1809-02-12",
+        "1900/1909",
+        "1906-06",
+        "1963-04-08T14:07-06:00",
+        "1971",
+        "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z",
+        "2007-11-13/15",
+        "2009-02-20T08:40Z",
+        "2018-08-29T15:19" ;
+    skos:prefLabel "Georeferenced Date" .
 
 dwc:group a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:group ;
@@ -2094,15 +2318,15 @@ dwc:relationshipEstablishedDate a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range rdfs:Literal ;
     skos:definition "A date on which a [dwc:ResourceRelationship] was established."@en ;
-    skos:example "1809-02-12 (within the day 12 February 1809)",
-        "1900/1909 (some time within the interval between the beginning of the year 1900 and before the year 1909)",
-        "1906-06 (in the month of June 1906)",
-        "1963-04-08T14:07-06:00 (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC)",
-        "1971 (in the year 1971)",
-        "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC)",
-        "2007-11-13/15 (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)",
-        "2009-02-20T08:40Z (20 February 2009 at or after 8:40am and before 8:41 UTC)",
-        "2018-08-29T15:19 (29 August 2018 at or after 3:19pm and before 3:20pm local time)" ;
+    skos:example "1809-02-12",
+        "1900/1909",
+        "1906-06",
+        "1963-04-08T14:07-06:00",
+        "1971",
+        "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z",
+        "2007-11-13/15",
+        "2009-02-20T08:40Z",
+        "2018-08-29T15:19" ;
     skos:prefLabel "Relationship Established Date" .
 
 dwc:relationshipRemarks a owl:DatatypeProperty ;
@@ -3119,14 +3343,6 @@ dcterms:identifier a owl:DatatypeProperty ;
     skos:definition "An unambiguous reference to the resource within a given context." ;
     skos:prefLabel "Identifier" .
 
-dcterms:Location a owl:Class ;
-    dcterms:isVersionOf dcterms:Location ;
-    rdfs:isDefinedBy dcterms: ;
-    skos:definition "A spatial region or named place."@en ;
-    skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
-        "the place defined by a georeference" ;
-    skos:prefLabel "Location" .
-
 dwc:Assertion a owl:Class ;
     dcterms:isVersionOf dwc:MeasurementOrFact ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
@@ -3218,6 +3434,14 @@ dwc:MaterialEntity a owl:Class ;
         "the entire contents of a trawl",
         "the stomach contents of a fish" ;
     skos:prefLabel "Material Entity" .
+
+dcterms:Location a owl:Class ;
+    dcterms:isVersionOf dcterms:Location ;
+    rdfs:isDefinedBy dcterms: ;
+    skos:definition "A spatial region or named place."@en ;
+    skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
+        "the place defined by a georeference" ;
+    skos:prefLabel "Location" .
 
 dwc:MolecularProtocol a owl:Class ;
     rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]." ;

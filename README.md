@@ -1,4 +1,4 @@
-# DWC-OWL
+# DwC-OWL
 
 ## Intent of the project
 

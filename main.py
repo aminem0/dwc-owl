@@ -1103,6 +1103,54 @@ createOP(
 )
 
 createOP(
+    name="footprintWKT",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DCTERMS["Location"],
+    pref_label=Literal("Footprint WKT (IRI)"),
+    definition=Literal("A Well-Known Text (WKT) representation of the shape (footprint, geometry) that defines the dcterms:Location. A dcterms:Location may have both a point-radius representation (see dwc:decimalLatitude) and a footprint representation, and they may differ from each other.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/footprintWKT",
+    references_s="http://rs.tdwg.org/dwc/iri/version/footprintWKT-2025-07-10",
+)
+
+createOP(
+    name="geodeticDatum",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DCTERMS["Location"],
+    pref_label=Literal("Geodetic Datum (IRI)"),
+    definition=Literal("The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which the geographic coordinates given in dwc:decimalLatitude and dwc:decimalLongitude are based.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use an IRI corresponding to the value not recorded.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/geodeticDatum",
+    references_s="http://rs.tdwg.org/dwc/iri/version/geodeticDatum-2025-06-12",
+)
+
+createOP(
+    name="georeferencedBy",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DCTERMS["Location"],
+    pref_label=Literal("Georeferenced By (IRI)"),
+    definition=Literal("A person, group, or organization who determined the georeference (spatial representation) for the dcterms:Location.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/georeferencedBy",
+    references_s="http://rs.tdwg.org/dwc/iri/version/georeferencedBy-2025-07-10",
+)
+
+createOP(
+    name="georeferenceProtocol",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DCTERMS["Location"],
+    pref_label=Literal("Georeference Protocol (IRI)"),
+    definition=Literal("A description or reference to the methods used to determine the spatial footprint, coordinates, and uncertainties.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/georeferenceProtocol",
+    references_s="http://rs.tdwg.org/dwc/iri/version/georeferenceProtocol-2025-07-10",
+)
+
+createOP(
     name="occurrenceStatus",
     namespace=DWCIRI,
     graph=g,
@@ -2060,15 +2108,15 @@ createDP(
     definition=Literal("A date on which a state or measurement of a [dwc:Assertion] was deemed to first be in effect."),
     comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019."),
     examples=[
-        Literal("1963-04-08T14:07-06:00 (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC)"),
-        Literal("2009-02-20T08:40Z (20 February 2009 at or after 8:40am and before 8:41 UTC)"),
-        Literal("2018-08-29T15:19 (29 August 2018 at or after 3:19pm and before 3:20pm local time)"),
-        Literal("1809-02-12 (within the day 12 February 1809)"),
-        Literal("1906-06 (in the month of June 1906)"),
-        Literal("1971 (in the year 1971)"),
-        Literal("2007-03-01T13:00:00Z/2008-05-11T15:30:00Z (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC)"),
-        Literal("1900/1909 (some time within the interval between the beginning of the year 1900 and before the year 1909)"),
-        Literal("2007-11-13/15 (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)"),
+        Literal("1963-04-08T14:07-06:00"),
+        Literal("2009-02-20T08:40Z"),
+        Literal("2018-08-29T15:19"),
+        Literal("1809-02-12"),
+        Literal("1906-06"),
+        Literal("1971"),
+        Literal("2007-03-01T13:00:00Z/2008-05-11T15:30:00Z"),
+        Literal("1900/1909"),
+        Literal("2007-11-13/15"),
     ],
     version_of_s="http://example.com/term-pending/dwc/assertionEffectiveDate",
 )
@@ -2097,15 +2145,15 @@ createDP(
     definition=Literal("A date on which a [dwc:Assertion] was created."),
     comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019."),
     examples=[
-        Literal("1963-04-08T14:07-06:00 (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC)"),
-        Literal("2009-02-20T08:40Z (20 February 2009 at or after 8:40am and before 8:41 UTC)"),
-        Literal("2018-08-29T15:19 (29 August 2018 at or after 3:19pm and before 3:20pm local time)"),
-        Literal("1809-02-12 (within the day 12 February 1809)"),
-        Literal("1906-06 (in the month of June 1906)"),
-        Literal("1971 (in the year 1971)"),
-        Literal("2007-03-01T13:00:00Z/2008-05-11T15:30:00Z (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC)"),
-        Literal("1900/1909 (some time within the interval between the beginning of the year 1900 and before the year 1909)"),
-        Literal("2007-11-13/15 (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)"),
+        Literal("1963-04-08T14:07-06:00"),
+        Literal("2009-02-20T08:40Z"),
+        Literal("2018-08-29T15:19"),
+        Literal("1809-02-12"),
+        Literal("1906-06"),
+        Literal("1971"),
+        Literal("2007-03-01T13:00:00Z/2008-05-11T15:30:00Z"),
+        Literal("1900/1909"),
+        Literal("2007-11-13/15"),
     ],
     version_of_s="http://example.com/term-pending/dwc/assertionMadeDate",
 )
@@ -2250,6 +2298,124 @@ createDP(
 )
 
 createDP(
+    name="continent",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Continent"),
+    definition=Literal("The name of the continent in which the dcterms:Location occurs.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both.", lang="en"),
+    examples=[
+        Literal("Africa"),
+        Literal("Antarctica"),
+        Literal("Asia"),
+        Literal("Europe"),
+        Literal("North America"),
+        Literal("Oceania"),
+        Literal("South America"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/continent",
+    references_s="http://rs.tdwg.org/dwc/terms/version/continent-2023-06-28",
+)
+
+createDP(
+    name="coordinatePrecision",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Coordinate Precision"),
+    definition=Literal("A decimal representation of the precision of the coordinates given in the dwc:decimalLatitude and dwc:decimalLongitude.", lang="en"),
+    examples=[
+        Literal("0.00001", datatype=XSD["decimal"]),
+        Literal("0.000278", datatype=XSD["decimal"]),
+        Literal("0.01667", datatype=XSD["decimal"]),
+        Literal("1.0", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/coordinatePrecision",
+    references_s="http://rs.tdwg.org/dwc/terms/version/coordinatePrecision-2023-06-28",
+)
+
+# NOTE: xsd:decimal seems appropriates
+createDP(
+    name="coordinateUncertaintyInMeters",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Coordinate Uncertainty In Meters"),
+    definition=Literal("The horizontal distance (in meters) from the given dwc:decimalLatitude and dwc:decimalLongitude describing the smallest circle containing the whole of the dcterms:Location. Leave the value empty if the uncertainty is unknown, cannot be estimated, or is not applicable (because there are no coordinates). Zero is not a valid value for this term.", lang="en"),
+    examples=[
+        Literal("30", datatype=XSD["decimal"]),
+        Literal("100", datatype=XSD["decimal"]),
+        Literal("71", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters",
+    references_s="http://rs.tdwg.org/dwc/terms/version/coordinateUncertaintyInMeters-2023-06-28",
+)
+
+createDP(
+    name="country",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Country"),
+    definition=Literal("The name of the country or major administrative unit in which the dcterms:Location occurs.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both.", lang="en"),
+    examples=[
+        Literal("Denmark"),
+        Literal("Colombia"),
+        Literal("España"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/country",
+    references_s="http://rs.tdwg.org/dwc/terms/version/country-2023-06-28",
+)
+
+createDP(
+    name="countryCode",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Country Code"),
+    definition=Literal("The standard code for the country in which the dcterms:Location occurs.", lang="en"),
+    comments=Literal("Recommended best practice is to use an ISO 3166-1-alpha-2 country code, or `ZZ` (for an unknown location or a location unassignable to a single country code), or `XZ` (for the high seas beyond national jurisdictions).", lang="en"),
+    examples=[
+        Literal("AR"),
+        Literal("SV"),
+        Literal("XZ"),
+        Literal("ZZ"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/countryCode",
+    references_s="http://rs.tdwg.org/dwc/terms/version/countryCode-2025-06-12",
+)
+
+createDP(
+    name="county",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    # ranges=XSD["string"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Second Order Division"),
+    definition=Literal("The full, unabbreviated name of the next smaller administrative region than stateProvince (county, shire, department, etc.) in which the dcterms:Location occurs.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both.", lang="en"),
+    examples=[
+        Literal("Missoula"),
+        Literal("Los Lagos"),
+        Literal("Mataró"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/county",
+    references_s="http://rs.tdwg.org/dwc/terms/version/county-2023-06-28",
+)
+
+# TEST: Small example to verify behavior of HermiT with language-tagged strings.
+g.add((BB["BirdRingingLocation"], RDF["type"], DCTERMS["Location"]))
+g.add((BB["BirdRingingLocation"], DWC["county"], Literal("SomewhereOverTheRainbow", lang="en")))
+
+createDP(
     name="datasetID",
     namespace=DWC,
     graph=g,
@@ -2263,6 +2429,36 @@ createDP(
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/datasetID",
     references_s="http://rs.tdwg.org/dwc/terms/version/datasetID-2017-10-06",
+)
+
+createDP(
+    name="decimalLatitude",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Decimal Latitude"),
+    definition=Literal("The geographic latitude (in decimal degrees, using the spatial reference system given in dwc:geodeticDatum) of the geographic center of a dcterms:Location. Positive values are north of the Equator, negative values are south of it. Legal values lie between `-90` and `90`, inclusive.", lang="en"),
+    examples=[
+        Literal("-41.0983423", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/decimalLatitude",
+    references_s="http://rs.tdwg.org/dwc/terms/version/decimalLatitude-2023-06-28",
+)
+
+createDP(
+    name="decimalLongitude",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Decimal Longitude"),
+    definition=Literal("The geographic longitude (in decimal degrees, using the spatial reference system given in dwc:geodeticDatum) of the geographic center of a dcterms:Location. Positive values are east of the Greenwich Meridian, negative values are west of it. Legal values lie between `-180` and `180`, inclusive.", lang="en"),
+    examples=[
+        Literal("-41.0983423", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/decimalLongitude",
+    references_s="http://rs.tdwg.org/dwc/terms/version/decimalLongitude-2023-06-28",
 )
 
 createDP(
@@ -2400,6 +2596,40 @@ createDP(
 )
 
 createDP(
+    name="footprintSRS",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Footprint SRS"),
+    definition=Literal("The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which the geometry given in dwc:footprintWKT is based.", lang="en"),
+    comments=Literal("Recommended best practice is to use the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use the value not recorded. It is also permitted to provide the SRS in Well-Known-Text, especially if no EPSG code provides the necessary values for the attributes of the SRS. Do not use this term to describe the SRS of the dwc:decimalLatitude and dwc:decimalLongitude, nor of any verbatim coordinates - use the dwc:geodeticDatum and dwc:verbatimSRS instead. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("EPSG:4326"),
+        Literal("GEOGCS[\"GCS_WGS_1984\", DATUM[\"D_WGS_1984\", SPHEROID[\"WGS_1984\",6378137,298.257223563]], PRIMEM[\"Greenwich\",0], UNIT[\"Degree\",0.0174532925199433]]"),
+        Literal("not recorded"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/footprintSRS",
+    references_s="http://rs.tdwg.org/dwc/terms/version/footprintSRS-2025-06-12",
+)
+
+createDP(
+    name="footprintWKT",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Footprint WKT"),
+    definition=Literal("A Well-Known Text (WKT) representation of the shape (footprint, geometry) that defines the dcterms:Location. A dcterms:Location may have both a point-radius representation (see dwc:decimalLatitude) and a footprint representation, and they may differ from each other.", lang="en"),
+    comments=Literal("This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("POLYGON ((10 20, 11 20, 11 21, 10 21, 10 20))"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/footprintWKT",
+    references_s="http://rs.tdwg.org/dwc/terms/version/footprintWKT-2023-06-28",
+)
+
+createDP(
     name="formation",
     namespace=DWC,
     graph=g,
@@ -2417,6 +2647,28 @@ createDP(
 )
 
 createDP(
+    name="geodeticDatum",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Geodetic Datum"),
+    definition=Literal("The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which the geographic coordinates given in dwc:decimalLatitude and dwc:decimalLongitude are based.", lang="en"),
+    comments=Literal("Recommended best practice is to use the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use the value not recorded. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for a string literal value.", lang="en"),
+    examples=[
+        Literal("EPSG:4326"),
+        Literal("WGS84"),
+        Literal("NAD27"),
+        Literal("Campo Inchauspe"),
+        Literal("European 1950"),
+        Literal("Clarke 1866"),
+        Literal("not recorded"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/geodeticDatum",
+    references_s="http://rs.tdwg.org/dwc/terms/version/geodeticDatum-2025-06-12",
+)
+
+createDP(
     name="geologicalContextID",
     namespace=DWC,
     graph=g,
@@ -2431,6 +2683,63 @@ createDP(
     subproperty_list=[DCTERMS["identifier"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/geologicalContextID",
     references_s="http://rs.tdwg.org/dwc/terms/version/geologicalContextID-2023-06-28"
+)
+
+createDP(
+    name="georeferencedBy",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Georeferenced By"),
+    definition=Literal("A list (concatenated and separated) of names of people, groups, or organizations who determined the georeference (spatial representation) for the dcterms:Location.", lang="en"),
+    comments=Literal("Recommended best practice is to separate the values in a list with space vertical bar space (` | `). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("Brad Millen (ROM)"),
+        Literal("Kristina Yamamoto | Janet Fang"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/georeferencedBy",
+    references_s="http://rs.tdwg.org/dwc/terms/version/georeferencedBy-2023-06-28",
+)
+
+createDP(
+    name="georeferencedDate",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Georeferenced Date"),
+    definition=Literal("The date on which the dcterms:Location was georeferenced.", lang="en"),
+    comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
+    examples=[
+        Literal("1963-04-08T14:07-06:00"),
+        Literal("2009-02-20T08:40Z"),
+        Literal("2018-08-29T15:19"),
+        Literal("1809-02-12"),
+        Literal("1906-06"),
+        Literal("1971"),
+        Literal("2007-03-01T13:00:00Z/2008-05-11T15:30:00Z"),
+        Literal("1900/1909"),
+        Literal("2007-11-13/15"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/georeferencedDate",
+    references_s="http://rs.tdwg.org/dwc/terms/version/georeferencedDate-2025-06-12",
+)
+
+createDP(
+    name="georeferenceProtocol",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["string"],
+    pref_label=Literal("Georeference Protocol"),
+    definition=Literal("A description or reference to the methods used to determine the spatial footprint, coordinates, and uncertainties.", lang="en"),
+    comments=Literal("This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("Georeferencing Quick Reference Guide (Zermoglio et al. 2020, https://doi.org/10.35035/e09p-h128)"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/georeferenceProtocol",
+    references_s="http://rs.tdwg.org/dwc/terms/version/georeferenceProtocol-2023-06-28",
 )
 
 createDP(
@@ -3070,15 +3379,15 @@ createDP(
     definition=Literal("A date on which a [dwc:ResourceRelationship] was established.", lang="en"),
     comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
     examples=[
-        Literal("1963-04-08T14:07-06:00 (8 Mar 1963 at or after 2:07pm and before 2:08pm in the time zone six hours earlier than UTC)"),
-        Literal("2009-02-20T08:40Z (20 February 2009 at or after 8:40am and before 8:41 UTC)"),
-        Literal("2018-08-29T15:19 (29 August 2018 at or after 3:19pm and before 3:20pm local time)"),
-        Literal("1809-02-12 (within the day 12 February 1809)"),
-        Literal("1906-06 (in the month of June 1906)"),
-        Literal("1971 (in the year 1971)"),
-        Literal("2007-03-01T13:00:00Z/2008-05-11T15:30:00Z (some time within the interval beginning 1 March 2007 at 1pm UTC and before 11 May 2008 at 3:30pm UTC)"),
-        Literal("1900/1909 (some time within the interval between the beginning of the year 1900 and before the year 1909)"),
-        Literal("2007-11-13/15 (some time in the interval between the beginning of 13 November 2007 and before 15 November 2007)"),
+        Literal("1963-04-08T14:07-06:00"),
+        Literal("2009-02-20T08:40Z"),
+        Literal("2018-08-29T15:19"),
+        Literal("1809-02-12"),
+        Literal("1906-06"),
+        Literal("1971"),
+        Literal("2007-03-01T13:00:00Z/2008-05-11T15:30:00Z"),
+        Literal("1900/1909"),
+        Literal("2007-11-13/15"),
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/relationshipEstablishedDate",
     references_s="http://rs.tdwg.org/dwc/terms/version/relationshipEstablishedDate-2025-06-12",
