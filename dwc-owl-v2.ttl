@@ -261,6 +261,17 @@ dwciri:establishmentMeans rdf:type owl:ObjectProperty ;
                           skos:prefLabel "Establishment Means (IRI)" .
 
 
+###  http://rs.tdwg.org/dwc/iri/eventType
+dwciri:eventType rdf:type owl:ObjectProperty ;
+                 rdfs:domain dwc:Event ;
+                 dcterms:isVersionOf dwciri:eventType ;
+                 dcterms:references <http://rs.tdwg.org/dwc/iri/version/eventType-2025-07-10> ;
+                 rdfs:comment "Recommended best practice is to use a controlled vocabulary. Regardless of the dwc:eventType, the interval of the dwc:Event can be captured in dwc:eventDate. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                 rdfs:isDefinedBy dwciri: ;
+                 skos:definition "The nature of the dwc:Event."@en ;
+                 skos:prefLabel "Event Type (IRI)" .
+
+
 ###  http://rs.tdwg.org/dwc/iri/fieldNotes
 dwciri:fieldNotes rdf:type owl:ObjectProperty ;
                   rdfs:domain dwc:Event ;
@@ -269,7 +280,18 @@ dwciri:fieldNotes rdf:type owl:ObjectProperty ;
                   rdfs:comment "The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes."@en ;
                   rdfs:isDefinedBy dwciri: ;
                   skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
-                  skos:prefLabel "Establishment Means (IRI)" .
+                  skos:prefLabel "Field Notes (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/iri/fieldNumber
+dwciri:fieldNumber rdf:type owl:ObjectProperty ;
+                   rdfs:domain dwc:Event ;
+                   dcterms:isVersionOf dwciri:fieldNumber ;
+                   dcterms:references <http://rs.tdwg.org/dwc/iri/version/fieldNumber-2023-06-28> ;
+                   rdfs:comment "The subject is a (possibly IRI-identified) resource that is the field notes and the object is a dwc:Event instance."@en ;
+                   rdfs:isDefinedBy dwciri: ;
+                   skos:definition "An identifier given to the event in the field. Often serves as a link between field notes and the dwc:Event."@en ;
+                   skos:prefLabel "Field Number (IRI)" .
 
 
 ###  http://rs.tdwg.org/dwc/iri/footprintWKT
@@ -336,6 +358,17 @@ dwciri:georeferencedBy rdf:type owl:ObjectProperty ;
                        rdfs:isDefinedBy dwciri: ;
                        skos:definition "A person, group, or organization who determined the georeference (spatial representation) for the dcterms:Location."@en ;
                        skos:prefLabel "Georeferenced By (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/iri/habitat
+dwciri:habitat rdf:type owl:ObjectProperty ;
+               rdfs:domain dwc:Event ;
+               dcterms:isVersionOf dwciri:habitat ;
+               dcterms:references <http://rs.tdwg.org/dwc/iri/version/habitat-2025-07-10> ;
+               rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+               rdfs:isDefinedBy dwciri: ;
+               skos:definition "A category or description of the habitat in which the dwc:Event occurred."@en ;
+               skos:prefLabel "Habitat (IRI)" .
 
 
 ###  http://rs.tdwg.org/dwc/iri/locationAccordingTo
@@ -1722,6 +1755,19 @@ dwc:datasetID rdf:type owl:DatatypeProperty ;
               skos:prefLabel "Dataset ID" .
 
 
+###  http://rs.tdwg.org/dwc/terms/day
+dwc:day rdf:type owl:DatatypeProperty ;
+        rdfs:domain dwc:Event ;
+        rdfs:range xsd:integer ;
+        dcterms:isVersionOf dwc:day ;
+        dcterms:references <http://rs.tdwg.org/dwc/terms/version/day-2023-06-28> ;
+        rdfs:isDefinedBy dwc: ;
+        skos:definition "The integer day of the month on which the dwc:Event occurred."@en ;
+        skos:example 28 ,
+                     9 ;
+        skos:prefLabel "Day" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/decimalLatitude
 dwc:decimalLatitude rdf:type owl:DatatypeProperty ;
                     rdfs:domain dcterms:Location ;
@@ -1844,6 +1890,50 @@ dwc:earliestPeriodOrLowestSystem rdf:type owl:DatatypeProperty ;
                                  skos:prefLabel "Earliest Period Or Lowest System" .
 
 
+###  http://rs.tdwg.org/dwc/terms/endDayOfYear
+dwc:endDayOfYear rdf:type owl:DatatypeProperty ;
+                 rdfs:domain dwc:Event ;
+                 rdfs:range [ rdf:type rdfs:Datatype ;
+                              owl:onDatatype xsd:integer ;
+                              owl:withRestrictions ( [ xsd:minInclusive 1
+                                                     ]
+                                                     [ xsd:maxInclusive 366
+                                                     ]
+                                                   )
+                            ] ;
+                 dcterms:isVersionOf dwc:endDayOfYear ;
+                 dcterms:references <http://rs.tdwg.org/dwc/terms/version/endDayOfYear-2023-06-28> ;
+                 rdfs:comment "The value is `1` for January 1 and `365` for December 31, except in a leap year, in which case it is `366`."@en ;
+                 rdfs:isDefinedBy dwc: ;
+                 skos:definition "The latest integer day of the year on which a dwc:Event occurred."@en ;
+                 skos:example 1 ,
+                              32 ,
+                              365 ,
+                              366 ;
+                 skos:prefLabel "End Day Of Year" .
+
+
+###  http://rs.tdwg.org/dwc/terms/eventDate
+dwc:eventDate rdf:type owl:DatatypeProperty ;
+              rdfs:domain dwc:Event ;
+              rdfs:range xsd:string ;
+              dcterms:isVersionOf dwc:eventDate ;
+              dcterms:references <http://rs.tdwg.org/dwc/terms/version/eventDate-2025-06-12> ;
+              rdfs:comment "Recommended best practice is to use a date that conforms to ISO 8601-1:2019."@en ;
+              rdfs:isDefinedBy dwc: ;
+              skos:definition "The date-time or interval during which a dwc:Event occurred. For occurrences, this is the date-time when the dwc:Event was recorded. Not suitable for a time in a geological context."@en ;
+              skos:example "1809-02-12" ,
+                           "1900/1909" ,
+                           "1906-06" ,
+                           "1963-04-08T14:07-06:00" ,
+                           "1971" ,
+                           "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z" ,
+                           "2007-11-13/15" ,
+                           "2009-02-20T08:40Z" ,
+                           "2018-08-29T15:19" ;
+              skos:prefLabel "Event Date" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/eventID
 dwc:eventID rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf dcterms:identifier ;
@@ -1851,11 +1941,83 @@ dwc:eventID rdf:type owl:DatatypeProperty ;
             rdfs:range rdfs:Literal ;
             dcterms:isVersionOf dwc:eventID ;
             dcterms:references <http://rs.tdwg.org/dwc/terms/version/eventID-2023-06-28> ;
-            rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+            rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
             rdfs:isDefinedBy dwc: ;
-            skos:definition "An identifier for a [dwc:Event]." ;
+            skos:definition "An identifier for a [dwc:Event]."@en ;
             skos:example "INBO:VIS:Ev:00009375" ;
             skos:prefLabel "Event ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/eventRemarks
+dwc:eventRemarks rdf:type owl:DatatypeProperty ;
+                 rdfs:domain dwc:Event ;
+                 rdfs:range rdf:langString ;
+                 dcterms:isVersionOf dwc:eventRemarks ;
+                 dcterms:references <http://rs.tdwg.org/dwc/terms/version/eventRemarks-2023-06-28> ;
+                 rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
+                 rdfs:isDefinedBy dwc: ;
+                 skos:definition "Comments or notes about the dwc:Event."@en ;
+                 skos:example "After the recent rains the river is nearly at flood stage." ;
+                 skos:prefLabel "Event Remarks" .
+
+
+###  http://rs.tdwg.org/dwc/terms/eventTime
+dwc:eventTime rdf:type owl:DatatypeProperty ;
+              rdfs:domain dwc:Event ;
+              rdfs:range xsd:string ;
+              dcterms:isVersionOf dwc:eventTime ;
+              dcterms:references <http://rs.tdwg.org/dwc/terms/version/eventTime-2025-06-12> ;
+              rdfs:comment "Recommended best practice is to use a time of day that conforms to ISO 8601-1:2019."@en ;
+              rdfs:isDefinedBy dwc: ;
+              skos:definition "The time or interval during which a dwc:Event occurred."@en ;
+              skos:example "08:40:21Z" ,
+                           "13:00:00Z/15:30:00Z" ,
+                           "14:07-06:00" ;
+              skos:prefLabel "Event Time" .
+
+
+###  http://rs.tdwg.org/dwc/terms/eventType
+dwc:eventType rdf:type owl:DatatypeProperty ;
+              rdfs:domain dwc:Event ;
+              rdfs:range rdf:langString ;
+              dcterms:isVersionOf dwc:eventType ;
+              dcterms:references <http://rs.tdwg.org/dwc/terms/version/eventType-2023-06-28> ;
+              rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+              rdfs:isDefinedBy dwc: ;
+              skos:definition "A narrow category that best matches the nature of a dwc:Event."@en ;
+              skos:example "BioBlitz" ,
+                           "camera trap deployment" ,
+                           "expedition" ,
+                           "project" ,
+                           "site visit" ,
+                           "trawl" ;
+              skos:prefLabel "Event Type" .
+
+
+###  http://rs.tdwg.org/dwc/terms/fieldNotes
+dwc:fieldNotes rdf:type owl:DatatypeProperty ;
+               rdfs:domain dwc:Event ;
+               rdfs:range xsd:anyURI ;
+               dcterms:isVersionOf dwc:fieldNotes ;
+               dcterms:references <http://rs.tdwg.org/dwc/terms/version/fieldNotes-2023-06-28> ;
+               rdfs:comment "This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+               rdfs:isDefinedBy dwc: ;
+               skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
+               skos:example "Notes available in the Grinnell-Miller Library." ;
+               skos:prefLabel "Field Notes" .
+
+
+###  http://rs.tdwg.org/dwc/terms/fieldNumber
+dwc:fieldNumber rdf:type owl:DatatypeProperty ;
+                rdfs:domain dwc:Event ;
+                rdfs:range xsd:string ;
+                dcterms:isVersionOf dwc:fieldNumber ;
+                dcterms:references <http://rs.tdwg.org/dwc/terms/version/fieldNumber-2023-06-28> ;
+                rdfs:comment "This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                rdfs:isDefinedBy dwc: ;
+                skos:definition "An identifier given to the dwc:Event in the field. Often serves as a link between field notes and the dwc:Event."@en ;
+                skos:example "RV Sol 87-03-08" ;
+                skos:prefLabel "Field Number" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/footprintSRS
@@ -2040,6 +2202,20 @@ dwc:group rdf:type owl:DatatypeProperty ;
           skos:example "Bathurst" ,
                        "Lower Wealden" ;
           skos:prefLabel "Group" .
+
+
+###  http://rs.tdwg.org/dwc/terms/habitat
+dwc:habitat rdf:type owl:DatatypeProperty ;
+            rdfs:domain dwc:Event ;
+            rdfs:range rdf:langString ;
+            dcterms:isVersionOf dwc:habitat ;
+            dcterms:references <http://rs.tdwg.org/dwc/terms/version/habitat-2023-06-28> ;
+            rdfs:comment "This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+            rdfs:isDefinedBy dwc: ;
+            skos:definition "A category or description of the habitat in which the dwc:Event occurred."@en ;
+            skos:example "oak savanna" ,
+                         "pre-cordilleran steppe" ;
+            skos:prefLabel "Habitat" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/higherGeography
@@ -2283,6 +2459,39 @@ dwc:maximumDepthInMeters rdf:type owl:DatatypeProperty ;
                          skos:prefLabel "Maximum Depth In Meters" .
 
 
+###  http://rs.tdwg.org/dwc/terms/maximumDistanceAboveSurfaceInMeters
+dwc:maximumDistanceAboveSurfaceInMeters rdf:type owl:DatatypeProperty ;
+                                        rdfs:domain dcterms:Location ;
+                                        rdfs:range xsd:decimal ;
+                                        dcterms:isVersionOf dwc:maximumDistanceAboveSurfaceInMeters ;
+                                        dcterms:references <http://rs.tdwg.org/dwc/terms/version/maximumDistanceAboveSurfaceInMeters-2023-06-28> ;
+                                        rdfs:isDefinedBy dwc: ;
+                                        skos:definition "The greater distance in a range of distance from a reference surface in the vertical direction, in meters. Use positive values for locations above the surface, negative values for locations below. If depth measures are given, the reference surface is the location given by the depth, otherwise the reference surface is the location given by the elevation."@en ;
+                                        skos:example -1.5 ,
+                                                     4.2 ;
+                                        skos:prefLabel "Maximum Distance Above Surface In Meters" .
+
+
+###  http://rs.tdwg.org/dwc/terms/maximumElevationInMeters
+dwc:maximumElevationInMeters rdf:type owl:DatatypeProperty ;
+                             rdfs:domain dcterms:Location ;
+                             rdfs:range [ rdf:type rdfs:Datatype ;
+                                          owl:onDatatype xsd:decimal ;
+                                          owl:withRestrictions ( [ xsd:minInclusive -430.0
+                                                                 ]
+                                                                 [ xsd:maxInclusive 8850.0
+                                                                 ]
+                                                               )
+                                        ] ;
+                             dcterms:isVersionOf dwc:maximumElevationInMeters ;
+                             dcterms:references <http://rs.tdwg.org/dwc/terms/version/maximumElevationInMeters-2023-06-28> ;
+                             rdfs:isDefinedBy dwc: ;
+                             skos:definition "The upper limit of the range of elevation (altitude, usually above sea level), in meters."@en ;
+                             skos:example -205.0 ,
+                                          1236.0 ;
+                             skos:prefLabel "Maximum Elevation In Meters" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/mediaID
 dwc:mediaID rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf dcterms:identifier ;
@@ -2306,6 +2515,39 @@ dwc:member rdf:type owl:DatatypeProperty ;
            skos:example "Hellnmaria Member" ,
                         "Lava Dam Member" ;
            skos:prefLabel "Member" .
+
+
+###  http://rs.tdwg.org/dwc/terms/minimumDepthInMeters
+dwc:minimumDepthInMeters rdf:type owl:DatatypeProperty ;
+                         rdfs:domain dcterms:Location ;
+                         rdfs:range [ rdf:type rdfs:Datatype ;
+                                      owl:onDatatype xsd:decimal ;
+                                      owl:withRestrictions ( [ xsd:minInclusive 0.0
+                                                             ]
+                                                             [ xsd:maxInclusive 11000.0
+                                                             ]
+                                                           )
+                                    ] ;
+                         dcterms:isVersionOf dwc:minimumDepthInMeters ;
+                         dcterms:references <http://rs.tdwg.org/dwc/terms/version/minimumDepthInMeters-2023-06-28> ;
+                         rdfs:isDefinedBy dwc: ;
+                         skos:definition "The lesser depth of a range of depth below the local surface, in meters."@en ;
+                         skos:example 0.0 ,
+                                      100.0 ;
+                         skos:prefLabel "Minimum Depth In Meters" .
+
+
+###  http://rs.tdwg.org/dwc/terms/minimumDistanceAboveSurfaceInMeterss
+dwc:minimumDistanceAboveSurfaceInMeterss rdf:type owl:DatatypeProperty ;
+                                         rdfs:domain dcterms:Location ;
+                                         rdfs:range xsd:decimal ;
+                                         dcterms:isVersionOf dwc:minimumDistanceAboveSurfaceInMeterss ;
+                                         dcterms:references <http://rs.tdwg.org/dwc/terms/version/minimumDistanceAboveSurfaceInMeters-2023-06-28> ;
+                                         rdfs:isDefinedBy dwc: ;
+                                         skos:definition "The lesser distance in a range of distance from a reference surface in the vertical direction, in meters. Use positive values for locations above the surface, negative values for locations below. If depth measures are given, the reference surface is the location given by the depth, otherwise the reference surface is the location given by the elevation."@en ;
+                                         skos:example -1.5 ,
+                                                      4.2 ;
+                                         skos:prefLabel "Minimum Distance Above Surface In Meters" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/minimumElevationInMeters
@@ -2680,6 +2922,86 @@ dwc:projectID rdf:type owl:DatatypeProperty ;
                            "RCN276730" ,
                            "RCN276730 | Artsproject_7-24" ;
               skos:prefLabel "Project ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/projectTitle
+dwc:projectTitle rdf:type owl:DatatypeProperty ;
+                 rdfs:domain dwc:Provenance ;
+                 rdfs:range rdf:langString ;
+                 dcterms:isVersionOf dwc:projectTitle ;
+                 dcterms:references <http://rs.tdwg.org/dwc/terms/version/projectTitle-2025-06-12> ;
+                 rdfs:comment "Use this term to provide the official name or title of a project as it is commonly known and cited. Avoid abbreviations unless they are widely understood. Recommended best practice is to separate the values in a list with space vertical bar space (` | `)."@en ;
+                 rdfs:isDefinedBy dwc: ;
+                 skos:definition "A list (concatenated and separated) of titles or names for projects that contributed to a dwc:Event."@en ;
+                 skos:example "Arctic Deep" ,
+                              "Scalidophora i Noreg" ,
+                              "The Nansen Legacy" ,
+                              "Underwater Oases of the Mar del Plata Canyon: Talud Continental IV" ;
+                 skos:prefLabel "Project Title" .
+
+
+###  http://rs.tdwg.org/dwc/terms/protocolDescription
+dwc:protocolDescription rdf:type owl:DatatypeProperty ;
+                        rdfs:domain dwc:Protocol ;
+                        rdfs:range rdf:langString ;
+                        dcterms:isVersionOf <http://example.com/term-pending/dwc/protocolDescription> ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "A detailed description of a dwc:Protocol."@en ;
+                        skos:prefLabel "Protocol Description" .
+
+
+###  http://rs.tdwg.org/dwc/terms/protocolID
+dwc:protocolID rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf dcterms:identifier ;
+               rdfs:domain dwc:Protocol ;
+               rdfs:range xsd:string ;
+               dcterms:isVersionOf <http://example.com/term-pending/dwc/protocolID> ;
+               rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
+               rdfs:isDefinedBy dwc: ;
+               skos:definition "An identifier for a dwc:Protocol."@en ;
+               skos:prefLabel "Protocol ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/protocolName
+dwc:protocolName rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf dcterms:title ;
+                 rdfs:domain dwc:Protocol ;
+                 rdfs:range rdf:langString ;
+                 dcterms:isVersionOf <http://example.com/term-pending/dwc/protocolName> ;
+                 rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
+                 rdfs:isDefinedBy dwc: ;
+                 skos:definition "A name of a dwc:Protocol."@en ;
+                 skos:example "UV light trap" ,
+                              "ad hoc observation" ,
+                              "bottom trawl" ,
+                              "point count" ;
+                 skos:prefLabel "Protocol ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/protocolRemarks
+dwc:protocolRemarks rdf:type owl:DatatypeProperty ;
+                    rdfs:domain dwc:Protocol ;
+                    rdfs:range rdf:langString ;
+                    dcterms:isVersionOf <http://example.com/term-pending/dwc/protocolRemarks> ;
+                    rdfs:isDefinedBy dwc: ;
+                    skos:definition "Comments or notes about a dwc:Protocol."@en ;
+                    skos:prefLabel "Protocol Remarks" .
+
+
+###  http://rs.tdwg.org/dwc/terms/protocolType
+dwc:protocolType rdf:type owl:DatatypeProperty ;
+                 rdfs:domain dwc:Protocol ;
+                 rdfs:range xsd:string ;
+                 dcterms:isVersionOf <http://example.com/term-pending/dwc/protocolType> ;
+                 rdfs:comment "Recommended best practice is to use a controlled vocabulary."@en ;
+                 rdfs:isDefinedBy dwc: ;
+                 skos:definition "A category that best matches the nature of a dwc:Protocol."@en ;
+                 skos:example "chronometric age" ,
+                              "chronometric age conversion" ,
+                              "georeference" ,
+                              "measurement" ,
+                              "sampling effort" ;
+                 skos:prefLabel "Protocol Type" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/readCount
@@ -3259,6 +3581,19 @@ eco:isSurveyTargetFullyReported rdf:type owl:DatatypeProperty ;
                                 skos:example "false"^^xsd:boolean ,
                                              "true"^^xsd:boolean ;
                                 skos:prefLabel "Is Survey Target Fully Reported" .
+
+
+###  http://rs.tdwg.org/eco/terms/protocolReferences
+eco:protocolReferences rdf:type owl:DatatypeProperty ;
+                       rdfs:domain dwc:Protocol ;
+                       rdfs:range xsd:string ;
+                       dcterms:isVersionOf eco:protocolReferences ;
+                       dcterms:references <http://rs.tdwg.org/eco/terms/version/protocolReferences-2024-02-28> ;
+                       rdfs:comment "Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `)."@en ;
+                       rdfs:isDefinedBy eco: ;
+                       skos:definition "A list (concatenated and separated) of dcterms:BibliographicResources used in a dwc:Protocol."@en ;
+                       skos:example "Penguins from space: faecal stains reveal the location of emperor penguin colonies, https://doi.org/10.1111/j.1466-8238.2009.00467.x" ;
+                       skos:prefLabel "Protocol References" .
 
 
 ###  http://rs.tdwg.org/eco/terms/siteCount

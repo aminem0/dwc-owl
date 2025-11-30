@@ -1089,17 +1089,40 @@ createOP(
     references_s="http://rs.tdwg.org/dwc/iri/version/establishmentMeans-2025-07-10",
 )
 
-# NOTE: Revoir domain
+createOP(
+    name="eventType",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DWC["Event"],
+    pref_label=Literal("Event Type (IRI)"),
+    definition=Literal("The nature of the dwc:Event.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Regardless of the dwc:eventType, the interval of the dwc:Event can be captured in dwc:eventDate. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/eventType",
+    references_s="http://rs.tdwg.org/dwc/iri/version/eventType-2025-07-10",
+)
+
 createOP(
     name="fieldNotes",
     namespace=DWCIRI,
     graph=g,
     domains=DWC["Event"],
-    pref_label=Literal("Establishment Means (IRI)"),
+    pref_label=Literal("Field Notes (IRI)"),
     definition=Literal("One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event.", lang="en"),
     comments=Literal("The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes.", lang="en"),
     version_of_s="http://rs.tdwg.org/dwc/iri/fieldNotes",
     references_s="http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28",
+)
+
+createOP(
+    name="fieldNumber",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DWC["Event"],
+    pref_label=Literal("Field Number (IRI)"),
+    definition=Literal("An identifier given to the event in the field. Often serves as a link between field notes and the dwc:Event.", lang="en"),
+    comments=Literal("The subject is a (possibly IRI-identified) resource that is the field notes and the object is a dwc:Event instance.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/fieldNumber",
+    references_s="http://rs.tdwg.org/dwc/iri/version/fieldNumber-2023-06-28",
 )
 
 createOP(
@@ -1172,6 +1195,18 @@ createOP(
     comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
     version_of_s="http://rs.tdwg.org/dwc/iri/georeferenceVerificationStatus",
     references_s="http://rs.tdwg.org/dwc/iri/version/georeferenceVerificationStatus-2025-07-10",
+)
+
+createOP(
+    name="habitat",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DWC["Event"],
+    pref_label=Literal("Habitat (IRI)"),
+    definition=Literal("A category or description of the habitat in which the dwc:Event occurred.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/habitat",
+    references_s="http://rs.tdwg.org/dwc/iri/version/habitat-2025-07-10",
 )
 
 createOP(
@@ -2469,6 +2504,22 @@ createDP(
 )
 
 createDP(
+    name="day",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=XSD["integer"],
+    pref_label=Literal("Day"),
+    definition=Literal("The integer day of the month on which the dwc:Event occurred.", lang="en"),
+    examples=[
+        Literal("9", datatype=XSD["integer"]),
+        Literal("28", datatype=XSD["integer"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/day",
+    references_s="http://rs.tdwg.org/dwc/terms/version/day-2023-06-28",
+)
+
+createDP(
     name="decimalLatitude",
     namespace=DWC,
     graph=g,
@@ -2615,6 +2666,54 @@ createDP(
     references_s="http://rs.tdwg.org/dwc/terms/version/earliestPeriodOrLowestSystem-2023-09-13",
 )
 
+# NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
+createRDP(
+    name="endDayOfYear",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    range_n=XSD["integer"],
+    restrictions=[
+        [XSD["minInclusive"], 1, XSD["integer"]],
+        [XSD["maxInclusive"], 366, XSD["integer"]],
+    ],
+    pref_label=Literal("End Day Of Year"),
+    definition=Literal("The latest integer day of the year on which a dwc:Event occurred.", lang="en"),
+    comments=Literal("The value is `1` for January 1 and `365` for December 31, except in a leap year, in which case it is `366`.", lang="en"),
+    examples=[
+        Literal("1", datatype=XSD["integer"]),
+        Literal("32", datatype=XSD["integer"]),
+        Literal("366", datatype=XSD["integer"]),
+        Literal("365", datatype=XSD["integer"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/endDayOfYear",
+    references_s="http://rs.tdwg.org/dwc/terms/version/endDayOfYear-2023-06-28",
+)
+
+createDP(
+    name="eventDate",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=XSD["string"],
+    pref_label=Literal("Event Date"),
+    definition=Literal("The date-time or interval during which a dwc:Event occurred. For occurrences, this is the date-time when the dwc:Event was recorded. Not suitable for a time in a geological context.", lang="en"),
+    comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
+    examples=[
+        Literal("1963-04-08T14:07-06:00"),
+        Literal("2009-02-20T08:40Z"),
+        Literal("2018-08-29T15:19"),
+        Literal("1809-02-12"),
+        Literal("1906-06"),
+        Literal("1971"),
+        Literal("2007-03-01T13:00:00Z/2008-05-11T15:30:00Z"),
+        Literal("1900/1909"),
+        Literal("2007-11-13/15"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/eventDate",
+    references_s="http://rs.tdwg.org/dwc/terms/version/eventDate-2025-06-12"
+)
+
 createDP(
     name="eventID",
     namespace=DWC,
@@ -2622,14 +2721,102 @@ createDP(
     domains=DWC["Event"],
     ranges=RDFS["Literal"],
     pref_label=Literal("Event ID"),
-    definition=Literal("An identifier for a [dwc:Event]."),
-    comments=Literal("Recommended best practice is to use a globally unique identifier."),
+    definition=Literal("An identifier for a [dwc:Event].", lang="en"),
+    comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
     examples=[
         Literal("INBO:VIS:Ev:00009375"),
     ],
     subproperty_list=[DCTERMS["identifier"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/eventID",
     references_s="http://rs.tdwg.org/dwc/terms/version/eventID-2023-06-28"
+)
+
+createDP(
+    name="eventRemarks",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Event Remarks"),
+    definition=Literal("Comments or notes about the dwc:Event.", lang="en"),
+    comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
+    examples=[
+        Literal("After the recent rains the river is nearly at flood stage."),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/eventRemarks",
+    references_s="http://rs.tdwg.org/dwc/terms/version/eventRemarks-2023-06-28"
+)
+
+# WARN: Left the range to xsd:string as some examples are not compliant with xsd:time
+createDP(
+    name="eventTime",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=XSD["string"],
+    pref_label=Literal("Event Time"),
+    definition=Literal("The time or interval during which a dwc:Event occurred.", lang="en"),
+    comments=Literal("Recommended best practice is to use a time of day that conforms to ISO 8601-1:2019.", lang="en"),
+    examples=[
+        Literal("14:07-06:00"),
+        Literal("08:40:21Z"),
+        Literal("13:00:00Z/15:30:00Z"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/eventTime",
+    references_s="http://rs.tdwg.org/dwc/terms/version/eventTime-2025-06-12"
+)
+
+createDP(
+    name="eventType",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Event Type"),
+    definition=Literal("A narrow category that best matches the nature of a dwc:Event.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("BioBlitz"),
+        Literal("camera trap deployment"),
+        Literal("expedition"),
+        Literal("project"),
+        Literal("site visit"),
+        Literal("trawl"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/eventType",
+    references_s="http://rs.tdwg.org/dwc/terms/version/eventType-2023-06-28"
+)
+
+createDP(
+    name="fieldNotes",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=XSD["anyURI"],
+    pref_label=Literal("Field Notes"),
+    definition=Literal("One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event.", lang="en"),
+    comments=Literal("This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("Notes available in the Grinnell-Miller Library."),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/fieldNotes",
+    references_s="http://rs.tdwg.org/dwc/terms/version/fieldNotes-2023-06-28"
+)
+
+createDP(
+    name="fieldNumber",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=XSD["string"],
+    pref_label=Literal("Field Number"),
+    definition=Literal("An identifier given to the dwc:Event in the field. Often serves as a link between field notes and the dwc:Event.", lang="en"),
+    comments=Literal("This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("RV Sol 87-03-08"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/fieldNumber",
+    references_s="http://rs.tdwg.org/dwc/terms/version/fieldNumber-2023-06-28"
 )
 
 createDP(
@@ -2849,6 +3036,23 @@ createDP(
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/group",
     references_s="http://rs.tdwg.org/dwc/terms/version/group-2023-09-13",
+)
+
+createDP(
+    name="habitat",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Habitat"),
+    definition=Literal("A category or description of the habitat in which the dwc:Event occurred.", lang="en"),
+    comments=Literal("This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("oak savanna"),
+        Literal("pre-cordilleran steppe"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/habitat",
+    references_s="http://rs.tdwg.org/dwc/terms/version/habitat-2023-06-28",
 )
 
 createDP(
@@ -3140,6 +3344,43 @@ createRDP(
     references_s="http://rs.tdwg.org/dwc/terms/version/maximumDepthInMeters-2023-06-28",
 )
 
+createDP(
+    name="maximumDistanceAboveSurfaceInMeters",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Maximum Distance Above Surface In Meters"),
+    definition=Literal("The greater distance in a range of distance from a reference surface in the vertical direction, in meters. Use positive values for locations above the surface, negative values for locations below. If depth measures are given, the reference surface is the location given by the depth, otherwise the reference surface is the location given by the elevation.", lang="en"),
+    examples=[
+        Literal("-1.5", datatype=XSD["decimal"]),
+        Literal("4.2", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/maximumDistanceAboveSurfaceInMeters",
+    references_s="http://rs.tdwg.org/dwc/terms/version/maximumDistanceAboveSurfaceInMeters-2023-06-28",
+)
+
+# NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
+createRDP(
+    name="maximumElevationInMeters",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    range_n=XSD["decimal"],
+    restrictions=[
+        [XSD["minInclusive"], -430, XSD["decimal"]],
+        [XSD["maxInclusive"], 8850, XSD["decimal"]],
+    ],
+    pref_label=Literal("Maximum Elevation In Meters"),
+    definition=Literal("The upper limit of the range of elevation (altitude, usually above sea level), in meters.", lang="en"),
+    examples=[
+        Literal("-205", datatype=XSD["decimal"]),
+        Literal("1236", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/maximumElevationInMeters",
+    references_s="http://rs.tdwg.org/dwc/terms/version/maximumElevationInMeters-2023-06-28",
+)
+
 # NOTE: Confirm namespace dwc: or ac:
 createDP(
     name="mediaID",
@@ -3168,6 +3409,43 @@ createDP(
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/member",
     references_s="http://rs.tdwg.org/dwc/terms/version/member-2023-09-13",
+)
+
+# NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
+createRDP(
+    name="minimumDepthInMeters",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    range_n=XSD["decimal"],
+    restrictions=[
+        [XSD["minInclusive"], 0, XSD["decimal"]],
+        [XSD["maxInclusive"], 11000, XSD["decimal"]],
+    ],
+    pref_label=Literal("Minimum Depth In Meters"),
+    definition=Literal("The lesser depth of a range of depth below the local surface, in meters.", lang="en"),
+    examples=[
+        Literal("0", datatype=XSD["decimal"]),
+        Literal("100", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/minimumDepthInMeters",
+    references_s="http://rs.tdwg.org/dwc/terms/version/minimumDepthInMeters-2023-06-28",
+)
+
+createDP(
+    name="minimumDistanceAboveSurfaceInMeterss",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["Location"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Minimum Distance Above Surface In Meters"),
+    definition=Literal("The lesser distance in a range of distance from a reference surface in the vertical direction, in meters. Use positive values for locations above the surface, negative values for locations below. If depth measures are given, the reference surface is the location given by the depth, otherwise the reference surface is the location given by the elevation.", lang="en"),
+    examples=[
+        Literal("-1.5", datatype=XSD["decimal"]),
+        Literal("4.2", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/minimumDistanceAboveSurfaceInMeterss",
+    references_s="http://rs.tdwg.org/dwc/terms/version/minimumDistanceAboveSurfaceInMeters-2023-06-28",
 )
 
 # NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
@@ -3593,6 +3871,98 @@ createDP(
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/projectID",
     references_s="http://rs.tdwg.org/dwc/terms/version/projectID-2025-06-12",
+)
+
+createDP(
+    name="projectTitle",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Provenance"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Project Title"),
+    definition=Literal("A list (concatenated and separated) of titles or names for projects that contributed to a dwc:Event.", lang="en"),
+    comments=Literal("Use this term to provide the official name or title of a project as it is commonly known and cited. Avoid abbreviations unless they are widely understood. Recommended best practice is to separate the values in a list with space vertical bar space (` | `).", lang="en"),
+    examples=[
+        Literal("Arctic Deep"),
+        Literal("Scalidophora i Noreg"),
+        Literal("The Nansen Legacy"),
+        Literal("Underwater Oases of the Mar del Plata Canyon: Talud Continental IV"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/projectTitle",
+    references_s="http://rs.tdwg.org/dwc/terms/version/projectTitle-2025-06-12",
+)
+
+createDP(
+    name="protocolDescription",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Protocol"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Protocol Description"),
+    definition=Literal("A detailed description of a dwc:Protocol.", lang="en"),
+    version_of_s="http://example.com/term-pending/dwc/protocolDescription",
+)
+
+createDP(
+    name="protocolID",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Protocol"],
+    ranges=XSD["string"],
+    pref_label=Literal("Protocol ID"),
+    definition=Literal("An identifier for a dwc:Protocol.", lang="en"),
+    comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
+    subproperty_list=[DCTERMS["identifier"]],
+    version_of_s="http://example.com/term-pending/dwc/protocolID",
+)
+
+createDP(
+    name="protocolName",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Protocol"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Protocol ID"),
+    definition=Literal("A name of a dwc:Protocol.", lang="en"),
+    comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
+    examples=[
+        Literal("ad hoc observation"),
+        Literal("bottom trawl"),
+        Literal("point count"),
+        Literal("UV light trap"),
+    ],
+    subproperty_list=[DCTERMS["title"]],
+    version_of_s="http://example.com/term-pending/dwc/protocolName",
+)
+
+createDP(
+    name="protocolType",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Protocol"],
+    ranges=XSD["string"],
+    pref_label=Literal("Protocol Type"),
+    definition=Literal("A category that best matches the nature of a dwc:Protocol.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary.", lang="en"),
+    examples=[
+        Literal("measurement"),
+        Literal("georeference"),
+        Literal("chronometric age"),
+        Literal("chronometric age conversion"),
+        Literal("sampling effort"),
+    ],
+    version_of_s="http://example.com/term-pending/dwc/protocolType",
+)
+
+createDP(
+    name="protocolRemarks",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Protocol"],
+    ranges=RDF["langString"],
+    pref_label=Literal("Protocol Remarks"),
+    definition=Literal("Comments or notes about a dwc:Protocol.", lang="en"),
+    version_of_s="http://example.com/term-pending/dwc/protocolRemarks",
 )
 
 createDP(
@@ -4336,6 +4706,22 @@ createDP(
         Literal("false", datatype=XSD["boolean"]),
     ],  
     version_of_s="http://rs.tdwg.org/eco/terms/isSurveyTargetFullyReported",
+)
+
+createDP(
+    name="protocolReferences",
+    namespace=ECO,
+    graph=g,
+    domains=DWC["Protocol"],
+    ranges=XSD["string"],
+    pref_label=Literal("Protocol References"),
+    definition=Literal("A list (concatenated and separated) of dcterms:BibliographicResources used in a dwc:Protocol.", lang="en"),
+    comments=Literal("Recommended best practice is to separate multiple values in a list with space vertical bar space (` | `).", lang="en"),
+    examples=[
+        Literal("Penguins from space: faecal stains reveal the location of emperor penguin colonies, https://doi.org/10.1111/j.1466-8238.2009.00467.x"),
+    ],
+    version_of_s="http://rs.tdwg.org/eco/terms/protocolReferences",
+    references_s="http://rs.tdwg.org/eco/terms/version/protocolReferences-2024-02-28",
 )
 
 # NOTE: Definition uses term dwc:Event, but we want to consider dwc:Survey. Should clarify difference or allow cases where an entity can be both a dwc:Event and a eco:Survey.
