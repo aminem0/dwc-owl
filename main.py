@@ -551,11 +551,11 @@ createCTOP(
     graph=g,
     subclass_list=[DCTERMS["Agent"]],
     object_prop=DWCDP["georeferencedBy"],
-    values_class=DWC["Event"],
+    values_class=DCTERMS["Location"],
     use_inverse=True,
     pref_label=Literal("Georeferencer Agent"),
-    definition=Literal("An instance of a [dcterms:Agent] that has georeferenced a [dwc:Event].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event].", lang="en")
+    definition=Literal("An instance of a [dcterms:Agent] that has georeferenced a [dcterms:Location].", lang="en"),
+    comments=Literal("Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dcterms:Location].", lang="en")
 )
 
 # NOTE: An important one to me (and the origin of the whole group of XYZAgents). Came to me during a discussion with Andre Heughebaert. Someone might want to explicitly exclude all observations where identifications were done by AI.
@@ -1426,10 +1426,11 @@ createOP(
     name="georeferencedBy",
     namespace=DWCDP,
     graph=g,
-    domains=DWC["Event"],
+    domains=DCTERMS["Location"],
     ranges=DCTERMS["Agent"],
     pref_label=Literal("Georeferenced By"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dwc:Agent] that georeferenced it.", lang="en"),
+    subproperty_list=[DWCIRI["georeferencedBy"]],
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:Location] to the [dwc:Agent] that georeferenced it.", lang="en"),
 )
 
 # WARN: Change definition.
@@ -4928,7 +4929,7 @@ createDP(
     name="0000014",
     namespace=MIXS,
     graph=g,
-    domains=[DWC["MolecularProtocol"]],
+    domains=DWC["MolecularProtocol"],
     ranges=[XSD["string"]],
     pref_label=Literal("Environmental Medium"),
     definition=Literal("In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html].", lang="en"),

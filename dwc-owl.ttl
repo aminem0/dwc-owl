@@ -298,14 +298,14 @@ dwc:GeologicalContextMedia a owl:Class ;
     skos:prefLabel "Geological Context Media" .
 
 dwc:GeoreferencerAgent a owl:Class ;
-    rdfs:comment "Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event]."@en ;
+    rdfs:comment "Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dcterms:Location]."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf dcterms:Agent ;
     owl:equivalentClass [ a owl:Restriction ;
             owl:onProperty [ a owl:ObjectProperty ;
                     owl:inverseOf dwcdp:georeferencedBy ] ;
-            owl:someValuesFrom dwc:Event ] ;
-    skos:definition "An instance of a [dcterms:Agent] that has georeferenced a [dwc:Event]."@en ;
+            owl:someValuesFrom dcterms:Location ] ;
+    skos:definition "An instance of a [dcterms:Agent] that has georeferenced a [dcterms:Location]."@en ;
     skos:prefLabel "Georeferencer Agent" .
 
 dwc:IdentificationAgent a owl:Class ;
@@ -1510,15 +1510,6 @@ dwciri:georeferenceProtocol a owl:ObjectProperty ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A description or reference to the methods used to determine the spatial footprint, coordinates, and uncertainties."@en ;
     skos:prefLabel "Georeference Protocol (IRI)" .
-
-dwciri:georeferencedBy a owl:ObjectProperty ;
-    dcterms:isVersionOf dwciri:georeferencedBy ;
-    dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferencedBy-2025-07-10> ;
-    rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dcterms:Location ;
-    rdfs:isDefinedBy dwciri: ;
-    skos:definition "A person, group, or organization who determined the georeference (spatial representation) for the dcterms:Location."@en ;
-    skos:prefLabel "Georeferenced By (IRI)" .
 
 dwciri:occurrenceStatus a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:occurrenceStatus ;
@@ -2737,10 +2728,11 @@ dwcdp:fundedBy a owl:ObjectProperty ;
     skos:prefLabel "Funded By" .
 
 dwcdp:georeferencedBy a owl:ObjectProperty ;
-    rdfs:domain dwc:Event ;
+    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwcdp: ;
     rdfs:range dcterms:Agent ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dwc:Agent] that georeferenced it."@en ;
+    rdfs:subPropertyOf dwciri:georeferencedBy ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:Location] to the [dwc:Agent] that georeferenced it."@en ;
     skos:prefLabel "Georeferenced By" .
 
 dwcdp:happenedWithin a owl:ObjectProperty ;
@@ -2931,8 +2923,7 @@ mixs:0000008 a owl:DatatypeProperty ;
 
 mixs:0000014 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000014 ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:MolecularProtocol ) ] ;
+    rdfs:domain dwc:MolecularProtocol ;
     rdfs:isDefinedBy mixs: ;
     rdfs:range [ a rdfs:Datatype ;
             owl:unionOf ( xsd:string ) ] ;
@@ -3008,6 +2999,15 @@ dcterms:spatial a owl:ObjectProperty ;
     rdfs:range dcterms:Location ;
     skos:definition "Spatial characteristics of the resource."@en ;
     skos:prefLabel "Spatial Coverage" .
+
+dwciri:georeferencedBy a owl:ObjectProperty ;
+    dcterms:isVersionOf dwciri:georeferencedBy ;
+    dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferencedBy-2025-07-10> ;
+    rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain dcterms:Location ;
+    rdfs:isDefinedBy dwciri: ;
+    skos:definition "A person, group, or organization who determined the georeference (spatial representation) for the dcterms:Location."@en ;
+    skos:prefLabel "Georeferenced By (IRI)" .
 
 dwc:geologicalContextID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:geologicalContextID ;

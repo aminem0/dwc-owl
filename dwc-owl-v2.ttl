@@ -604,10 +604,11 @@ dwcdp:fundedBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/georeferencedBy
 dwcdp:georeferencedBy rdf:type owl:ObjectProperty ;
-                      rdfs:domain dwc:Event ;
+                      rdfs:subPropertyOf dwciri:georeferencedBy ;
+                      rdfs:domain dcterms:Location ;
                       rdfs:range dcterms:Agent ;
                       rdfs:isDefinedBy dwcdp: ;
-                      skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dwc:Agent] that georeferenced it."@en ;
+                      skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:Location] to the [dwc:Agent] that georeferenced it."@en ;
                       skos:prefLabel "Georeferenced By" .
 
 
@@ -3488,10 +3489,7 @@ minext:verbatimSize rdf:type owl:DatatypeProperty ;
 
 ###  https://w3id.org/mixs/0000014
 <https://w3id.org/mixs/0000014> rdf:type owl:DatatypeProperty ;
-                                rdfs:domain [ rdf:type owl:Class ;
-                                              owl:unionOf ( dwc:MolecularProtocol
-                                                          )
-                                            ] ;
+                                rdfs:domain dwc:MolecularProtocol ;
                                 rdfs:range [ rdf:type rdfs:Datatype ;
                                              owl:unionOf ( xsd:string
                                                          )
@@ -3957,12 +3955,12 @@ dwc:GeoreferencerAgent rdf:type owl:Class ;
                        owl:equivalentClass [ rdf:type owl:Restriction ;
                                              owl:onProperty [ owl:inverseOf dwcdp:georeferencedBy
                                                             ] ;
-                                             owl:someValuesFrom dwc:Event
+                                             owl:someValuesFrom dcterms:Location
                                            ] ;
                        rdfs:subClassOf dcterms:Agent ;
-                       rdfs:comment "Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dwc:Event]."@en ;
+                       rdfs:comment "Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dcterms:Location]."@en ;
                        rdfs:isDefinedBy dwc: ;
-                       skos:definition "An instance of a [dcterms:Agent] that has georeferenced a [dwc:Event]."@en ;
+                       skos:definition "An instance of a [dcterms:Agent] that has georeferenced a [dcterms:Location]."@en ;
                        skos:prefLabel "Georeferencer Agent" .
 
 
