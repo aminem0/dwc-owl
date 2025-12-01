@@ -17,6 +17,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tdt: <http://rs.gbif.org/vocabulary/gbif/type_designation_type/> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xmp: <http://ns.adobe.com/xap/1.0/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -359,10 +360,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -896,6 +897,14 @@ dwcdp:targetFor a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [eco:SurveyTarget] to the [eco:Survey] it is a target for."@en ;
     skos:prefLabel "Target For" .
 
+dwcdp:typeDesignationType a owl:ObjectProperty ;
+    rdfs:comment "The class [dwc:TypeDesignationType] considers a finite set of named individuals."@en ;
+    rdfs:domain dwc:Identification ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dwc:TypeDesignationType ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to an instance of a [dwc:TypeDesignationType]."@en ;
+    skos:prefLabel "Type Designation Type" .
+
 dwcdp:usedFor owl:inverseOf dwcdp:followed .
 
 <http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI> a owl:ObjectProperty ;
@@ -1327,6 +1336,23 @@ miqe:thresholdQuantificationCycle a owl:DatatypeProperty ;
     skos:definition "Threshold for change in fluorescence signal between cycles."@en ;
     skos:example 0.3 ;
     skos:prefLabel "Fluorescence Cycle Threshold" .
+
+tdt:absoluteTautonymy a dwc:TypeDesignationType,
+        skos:Concept ;
+    skos:inScheme <http://rs.gbif.org/vocabulary/gbif/type_designation_type> ;
+    skos:prefLabel "Absolute Tautonymy" .
+
+tdt:linnaeanTautonymy a dwc:TypeDesignationType .
+
+tdt:originalDesignation a dwc:TypeDesignationType .
+
+tdt:presentDesignation a dwc:TypeDesignationType .
+
+tdt:rulingByCommission a dwc:TypeDesignationType .
+
+tdt:subsequentDesignation a dwc:TypeDesignationType .
+
+tdt:subsequentMonotypy a dwc:TypeDesignationType .
 
 ac:caption a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:caption ;
@@ -2254,6 +2280,17 @@ dwc:highestBiostratigraphicZone a owl:DatatypeProperty ;
     skos:definition "The full name of the highest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
     skos:example "Blancan" ;
     skos:prefLabel "Highest Biostratigraphic Zone" .
+
+dwc:identificationID a owl:DatatypeProperty ;
+    dcterms:isVersionOf dwc:identificationID ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/identificationID-2023-06-28> ;
+    rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
+    rdfs:domain dwc:Identification ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range xsd:string ;
+    skos:definition "An identifier for a dwc:Identification."@en ;
+    skos:example "9992" ;
+    skos:prefLabel "Identification ID" .
 
 dwc:island a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:island ;
@@ -3439,6 +3476,8 @@ dcterms:spatial a owl:ObjectProperty ;
     skos:definition "Spatial characteristics of the resource."@en ;
     skos:prefLabel "Spatial Coverage" .
 
+tdt:monotypy a dwc:TypeDesignationType .
+
 dwciri:georeferencedBy a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:georeferencedBy ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferencedBy-2025-07-10> ;
@@ -3683,15 +3722,14 @@ chrono:ChronometricAge a owl:Class ;
         "an age range of a specimen based on its biostratigraphic content" ;
     skos:prefLabel "Chronometric Age" .
 
-dwc:Identification a owl:Class ;
-    dcterms:isVersionOf dwc:Identification ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18> ;
-    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
+dwc:TypeDesignationType a owl:Class ;
+    dcterms:isVersionOf <http://rs.gbif.org/terms/1.0/typeDesignationType> ;
+    dcterms:references <https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml> ;
+    rdfs:comment "From [https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml](https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml)."@en ;
     rdfs:isDefinedBy dwc: ;
-    skos:definition "A classification of a resource according to a classification scheme."@en ;
-    skos:example "a nomenclatural act designating a specimen as a holotype",
-        "a subspecies determination of an organism" ;
-    skos:prefLabel "Identification" .
+    owl:oneOf ( tdt:originalDesignation tdt:presentDesignation tdt:subsequentDesignation tdt:monotypy tdt:subsequentMonotypy tdt:absoluteTautonymy tdt:monotypy tdt:linnaeanTautonymy tdt:rulingByCommission ) ;
+    skos:definition "A category that best matches the nature of a type designation."@en ;
+    skos:prefLabel "Type Designation Type" .
 
 eco:SurveyTarget a owl:Class ;
     dcterms:isVersionOf eco:SurveyTarget ;
@@ -3720,6 +3758,16 @@ dcterms:BibliographicResource a owl:Class ;
     rdfs:isDefinedBy dcterms: ;
     skos:definition "A book, article, or other documentary resource."@en ;
     skos:prefLabel "Bibliographic Resource" .
+
+dwc:Identification a owl:Class ;
+    dcterms:isVersionOf dwc:Identification ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18> ;
+    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A classification of a resource according to a classification scheme."@en ;
+    skos:example "a nomenclatural act designating a specimen as a holotype",
+        "a subspecies determination of an organism" ;
+    skos:prefLabel "Identification" .
 
 dwc:Protocol a owl:Class ;
     dcterms:isVersionOf dwc:Protocol ;

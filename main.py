@@ -7,7 +7,7 @@ import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
-from utils import createCTOP, createDP, createEDP, createOC, createOP, createRDP, declare_disjoint
+from utils import createCTOP, createDP, createEDP, createEOC, createOC, createOP, createRDP, declare_disjoint
 
 #####################################################################################################
 # BEGIN ONTOLOGY DEFINITION
@@ -32,6 +32,7 @@ GGBN = Namespace("http://data.ggbn.org/schemas/ggbn/terms/")
 MINEXT = Namespace("http://rs.tdwg.org/mineralogy/terms/")
 MIQE = Namespace("http://rs.gbif.org/terms/miqe/")
 MIXS = Namespace("https://w3id.org/mixs/")
+TDT = Namespace("http://rs.gbif.org/vocabulary/gbif/type_designation_type/")
 VANN = Namespace("http://purl.org/vocab/vann/")
 XMP = Namespace("http://ns.adobe.com/xap/1.0/")
 
@@ -56,6 +57,7 @@ g.bind("ggbn", GGBN)
 g.bind("minext", MINEXT)
 g.bind("miqe", MIQE)
 g.bind("mixs", MIXS)
+g.bind("tdt", TDT)
 g.bind("vann", VANN)
 g.bind("xmp", XMP)
 
@@ -377,6 +379,34 @@ createOC(
     references_s="http://rs.tdwg.org/dwc/terms/version/ResourceRelationship-2023-09-13",
 )
 
+createEOC(
+    name="TypeDesignationType",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Type Designation Type"),
+    definition=Literal("A category that best matches the nature of a type designation.", lang="en"),
+    comments=Literal("From [https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml](https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml).", lang="en"),
+    one_of=[
+        URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type/originalDesignation"),
+        URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type/presentDesignation"),
+        URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentDesignation"),
+        URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type/monotypy"),
+        URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentMonotypy"),
+        URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type/absoluteTautonymy"),
+        URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type/monotypy"),
+        URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type/linnaeanTautonymy"),
+        URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type/rulingByCommission"),
+    ],
+    version_of_s="http://rs.gbif.org/terms/1.0/typeDesignationType",
+    references_s="https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml",
+)
+
+g.add((TDT.absoluteTautonymy, RDF["type"], DWC.TypeDesignationType))
+g.add((TDT.absoluteTautonymy, RDF["type"], SKOS.Concept))
+g.add((TDT.absoluteTautonymy, SKOS.prefLabel, Literal("Absolute Tautonymy")))
+g.add((TDT.absoluteTautonymy, SKOS.inScheme, URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type")))
+
+
 createOC(
     name="UsagePolicy",
     namespace=DWC,
@@ -558,7 +588,6 @@ createCTOP(
     comments=Literal("Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dcterms:Location].", lang="en")
 )
 
-# NOTE: An important one to me (and the origin of the whole group of XYZAgents). Came to me during a discussion with Andre Heughebaert. Someone might want to explicitly exclude all observations where identifications were done by AI.
 createCTOP(
     name="IdentificationAgent",
     namespace=DWC,
@@ -1748,7 +1777,6 @@ createOP(
     pref_label=Literal("Interaction By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves.", lang="en"),
     comments=Literal("To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the subject of the statement.", lang="en"),
-    examples=Literal("bb:Robberfly123HuntingBee456 dwcdp:interactionBy bb:Robberfly123 ."),
 )
 
 # NOTE: For the dwc:OrganismInteraction, preferably consider longer names and avoid reserved keywords.
@@ -1761,7 +1789,6 @@ createOP(
     pref_label=Literal("Interaction With"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves.", lang="en"),
     comments=Literal("To keep the interaction terms semantically correct and in order, the [dwc:Occurrence] considered by this property should be the object of the statement.", lang="en"),
-    examples=Literal("bb:Robberfly123HuntingBee546 dwcdp:interactionWith bb:Bee456 ."),
 )
 
 # NOTE: For the dwc:ResourceRelationship, preferably consider longer names and avoid reserved keywords.
@@ -1772,7 +1799,6 @@ createOP(
     pref_label=Literal("Relationship Of"),
     definition=Literal("An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves.", lang="en"),
     comments=Literal("To keep the interaction terms semantically correct and in order, the resource considered by this property should be the subject of the statement.", lang="en"),
-    examples=Literal("bb:Robberfly123HuntingBee456 dwcdp:interactionBy bb:Robberfly123 ."),
 )
 
 # NOTE: For the dwc:ResourceRelationship, preferably consider longer names and avoid reserved keywords.
@@ -1784,6 +1810,18 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves.", lang="en"),
     comments=Literal("To keep the interaction terms semantically correct and in order, the resource considered by this property should be the object of the statement.", lang="en"),
     examples=Literal("bb:RobberflyHuntingBee dwcdp:interactionWith bb:Bee456 ."),
+)
+
+# NOTE: For now, use the same name as the class, but with camelCase.
+createOP(
+    name="typeDesignationType",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["Identification"],
+    ranges=DWC["TypeDesignationType"],
+    pref_label=Literal("Type Designation Type"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to an instance of a [dwc:TypeDesignationType].", lang="en"),
+    comments=Literal("The class [dwc:TypeDesignationType] considers a finite set of named individuals.", lang="en"),
 )
 
 # TEST: Example to see how not considering owl:unionOf affects WebVOWL
@@ -3104,6 +3142,22 @@ createDP(
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/highestBiostratigraphicZone",
     references_s="http://rs.tdwg.org/dwc/terms/version/highestBiostratigraphicZone-2023-09-13",
+)
+
+createDP(
+    name="identificationID",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Identification"],
+    ranges=XSD["string"],
+    pref_label=Literal("Identification ID"),
+    definition=Literal("An identifier for a dwc:Identification.", lang="en"),
+    comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
+    examples=[
+        Literal("9992"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/identificationID",
+    references_s="http://rs.tdwg.org/dwc/terms/version/identificationID-2023-06-28",
 )
 
 createDP(
@@ -4866,6 +4920,21 @@ createDP(
         Literal("https:doi.org/10.11861742-9994-10-31"),
     ],
     version_of_s="https://rs.gbif/org/terms/pcr_primer_reference",
+)
+
+# NOTE: Used xsd:string because I couldn't see a use for rdfs:Literal in this case.
+createDP(
+    name="pcr_primer_reverse",
+    namespace=GBIF,
+    graph=g,
+    domains=DWC["MolecularProtocol"],
+    ranges=XSD["string"],
+    pref_label=Literal("Reverse PCR Primer"),
+    definition=Literal("Reverse PCR primer that were used to amplify the sequence of the targeted gene, locus or subfragment. If multiple forward or reverse primers are present in a single PCR reaction, there should be a full row for each of these linked to the same [dwc:Occurrence]. The primer sequence should be reported in uppercase letters.", lang="en"),
+    examples=[
+        Literal("GGACTACHVGGGTWTCTAAT"),
+    ],
+    version_of_s="https://rs.gbif/org/terms/pcr_primer_reverse",
 )
 
 # NOTE: Used xsd:string because I couldn't see a use for rdfs:Literal in this case.

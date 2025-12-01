@@ -698,3 +698,75 @@ def declare_disjoint(
     graph.add((disjoint_node, OWL["members"], members_list))
 
 
+
+# TEST: Function that creates an owl:Class but allows only a finite set of possibilities
+# These possibilities are owl:NamedIndividuals
+def createEOC(
+        name: str,
+        namespace: Namespace,
+        graph: Graph,
+        pref_label: Literal,
+        one_of: list[Node],
+        version_of_s: str | None = None,
+        subclass_list: list[Node] | None = None,
+        definition: Literal | None = None,
+        comments: Literal | None = None,
+        examples: Literal | list[Literal] | None = None,
+        references_s: str | None = None,
+        ) -> None:
+    # Create the owl:Class URI
+    oc_uri = namespace[name]
+
+    # Add DEFINEDBY
+    graph.add((oc_uri, RDFS["isDefinedBy"], URIRef(str(namespace))))
+
+    # Add preferred label.
+    graph.add((oc_uri, SKOS["prefLabel"], pref_label))
+
+    # Optionally add definition.
+    if definition:
+        graph.add((oc_uri, SKOS["definition"], definition))
+
+    # Optionally add comments.
+    if comments:
+        graph.add((oc_uri, RDFS["comment"], comments))
+
+    # Add examples if provided
+    if examples:
+        if isinstance(examples, URIRef):
+            graph.add((oc_uri, SKOS["example"], examples))
+        elif isinstance(examples, list):
+            for example in examples:
+                graph.add((oc_uri, SKOS["example"], example))
+
+    # Add version info.
+    graph.add((oc_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
+
+    if references_s:
+        graph.add((oc_uri, DCTERMS["references"], URIRef(references_s)))
+
+    # Declare it in the graph
+    graph.add((oc_uri, RDF["type"], OWL["Class"]))
+    
+    # WARN: If a list of URIs is provided, these will form the finite
+    # set of possible values the owl:Class can take
+    if one_of:
+        # Create RDF list of the enumeration values
+        enum_list_bnode = BNode()
+        Collection(graph, enum_list_bnode, one_of)
+
+        # Attach owl:oneOf list to the owl:Class
+        graph.add((oc_uri, OWL["oneOf"], enum_list_bnode))
+        
+    if subclass_list:
+        # Technically not a unified list, so can add them all with a for loop
+        for class_ in subclass_list:
+            graph.add((oc_uri, RDFS["subClassOf"], class_))
+
+    # Declare each individual as an instance of the created class
+    # NOTE: This is just making it explicit, either way the reasoner
+    # would find it
+    for one in one_of:
+        graph.add((one, RDF["type"], oc_uri))
+
+

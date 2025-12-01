@@ -6,6 +6,7 @@
 @prefix eco: <http://rs.tdwg.org/eco/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix tdt: <http://rs.gbif.org/vocabulary/gbif/type_designation_type/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xmp: <http://ns.adobe.com/xap/1.0/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -78,6 +79,10 @@ skos:definition rdf:type owl:AnnotationProperty .
 
 ###  http://www.w3.org/2004/02/skos/core#example
 skos:example rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#inScheme
+skos:inScheme rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.w3.org/2004/02/skos/core#prefLabel
@@ -949,6 +954,16 @@ dwcdp:targetFor rdf:type owl:ObjectProperty ;
                 rdfs:isDefinedBy dwcdp: ;
                 skos:definition "An [owl:ObjectProperty] used to relate a [eco:SurveyTarget] to the [eco:Survey] it is a target for."@en ;
                 skos:prefLabel "Target For" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/typeDesignationType
+dwcdp:typeDesignationType rdf:type owl:ObjectProperty ;
+                          rdfs:domain dwc:Identification ;
+                          rdfs:range dwc:TypeDesignationType ;
+                          rdfs:comment "The class [dwc:TypeDesignationType] considers a finite set of named individuals."@en ;
+                          rdfs:isDefinedBy dwcdp: ;
+                          skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to an instance of a [dwc:TypeDesignationType]."@en ;
+                          skos:prefLabel "Type Designation Type" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/usedFor
@@ -2259,6 +2274,19 @@ dwc:highestBiostratigraphicZone rdf:type owl:DatatypeProperty ;
                                 skos:definition "The full name of the highest possible geological biostratigraphic zone of the stratigraphic horizon from which the [dwc:MaterialEntity] was collected."@en ;
                                 skos:example "Blancan" ;
                                 skos:prefLabel "Highest Biostratigraphic Zone" .
+
+
+###  http://rs.tdwg.org/dwc/terms/identificationID
+dwc:identificationID rdf:type owl:DatatypeProperty ;
+                     rdfs:domain dwc:Identification ;
+                     rdfs:range xsd:string ;
+                     dcterms:isVersionOf dwc:identificationID ;
+                     dcterms:references <http://rs.tdwg.org/dwc/terms/version/identificationID-2023-06-28> ;
+                     rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
+                     rdfs:isDefinedBy dwc: ;
+                     skos:definition "An identifier for a dwc:Identification."@en ;
+                     skos:example "9992" ;
+                     skos:prefLabel "Identification ID" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/island
@@ -4878,6 +4906,27 @@ dwc:ReviewerAgent rdf:type owl:Class ;
                   skos:prefLabel "Reviewer Agent" .
 
 
+###  http://rs.tdwg.org/dwc/terms/TypeDesignationType
+dwc:TypeDesignationType rdf:type owl:Class ;
+                        owl:equivalentClass [ rdf:type owl:Class ;
+                                              owl:oneOf ( tdt:absoluteTautonymy
+                                                          tdt:linnaeanTautonymy
+                                                          tdt:monotypy
+                                                          tdt:originalDesignation
+                                                          tdt:presentDesignation
+                                                          tdt:rulingByCommission
+                                                          tdt:subsequentDesignation
+                                                          tdt:subsequentMonotypy
+                                                        )
+                                            ] ;
+                        dcterms:isVersionOf <http://rs.gbif.org/terms/1.0/typeDesignationType> ;
+                        dcterms:references <https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml> ;
+                        rdfs:comment "From [https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml](https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml)."@en ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "A category that best matches the nature of a type designation."@en ;
+                        skos:prefLabel "Type Designation Type" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/UsagePolicy
 dwc:UsagePolicy rdf:type owl:Class ;
                 dcterms:isVersionOf dwc:UsagePolicy ;
@@ -4948,6 +4997,10 @@ eco:SurveyTarget rdf:type owl:Class ;
 
 ###  http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement
 rdf:Statement rdf:type owl:Class .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+skos:Concept rdf:type owl:Class .
 
 
 #################################################################
@@ -5109,6 +5162,49 @@ bb:Spider456 rdf:type owl:NamedIndividual ,
 ###  http://bioboum.ca/Sunfish456
 bb:Sunfish456 rdf:type owl:NamedIndividual ,
                        dwc:Occurrence .
+
+
+###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/absoluteTautonymy
+tdt:absoluteTautonymy rdf:type owl:NamedIndividual ,
+                               dwc:TypeDesignationType ,
+                               skos:Concept ;
+                      skos:inScheme <http://rs.gbif.org/vocabulary/gbif/type_designation_type> ;
+                      skos:prefLabel "Absolute Tautonymy" .
+
+
+###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/linnaeanTautonymy
+tdt:linnaeanTautonymy rdf:type owl:NamedIndividual ,
+                               dwc:TypeDesignationType .
+
+
+###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/monotypy
+tdt:monotypy rdf:type owl:NamedIndividual ,
+                      dwc:TypeDesignationType .
+
+
+###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/originalDesignation
+tdt:originalDesignation rdf:type owl:NamedIndividual ,
+                                 dwc:TypeDesignationType .
+
+
+###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/presentDesignation
+tdt:presentDesignation rdf:type owl:NamedIndividual ,
+                                dwc:TypeDesignationType .
+
+
+###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/rulingByCommission
+tdt:rulingByCommission rdf:type owl:NamedIndividual ,
+                                dwc:TypeDesignationType .
+
+
+###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentDesignation
+tdt:subsequentDesignation rdf:type owl:NamedIndividual ,
+                                   dwc:TypeDesignationType .
+
+
+###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentMonotypy
+tdt:subsequentMonotypy rdf:type owl:NamedIndividual ,
+                                dwc:TypeDesignationType .
 
 
 #################################################################
