@@ -406,6 +406,75 @@ g.add((TDT.absoluteTautonymy, RDF["type"], SKOS.Concept))
 g.add((TDT.absoluteTautonymy, SKOS.prefLabel, Literal("Absolute Tautonymy")))
 g.add((TDT.absoluteTautonymy, SKOS.inScheme, URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type")))
 
+from utils import createSC
+
+createSC(
+    name="originalDesignation",
+    namespace=TDT,
+    graph=g,
+    pref_label=Literal("Original Designation", lang="en"),
+    definition=Literal("If one nominal species is explicitly designated as the type species when a nominal genus-group taxon is established, that nominal species is the type species (type by original designation).", lang="en"),
+)
+
+createSC(
+    name="presentDesignation",
+    namespace=TDT,
+    graph=g,
+    pref_label=Literal("Present Designation", lang="en"),
+)
+
+createSC(
+    name="subsequentDesignation",
+    namespace=TDT,
+    graph=g,
+    pref_label=Literal("Subsequent Designation", lang="en"),
+)
+
+createSC(
+    name="monotypy",
+    namespace=TDT,
+    graph=g,
+    pref_label=Literal("Monotypy", lang="en"),
+    definition=Literal("Type species by monotypy. When an author establishes a new nominal genus-group taxon for a single taxonomic species and denotes that species by an available name, the nominal species so named is the type species.", lang="en"),
+)
+
+createSC(
+    name="subsequentMonotypy",
+    namespace=TDT,
+    graph=g,
+    pref_label=Literal("Subsequent Monotypy", lang="en"),
+)
+
+createSC(
+    name="tautonymy",
+    namespace=TDT,
+    graph=g,
+    pref_label=Literal("Tautonymy", lang="en"),
+    definition=Literal("If a valid species-group name, or its cited synonym, originally included in a nominal genus-group taxon is identical with the name of that taxon, the nominal species denoted by that specific name (if available) is the type species.", lang="en")
+)
+
+createSC(
+    name="absoluteTautonymy",
+    namespace=TDT,
+    graph=g,
+    pref_label=Literal("Absolute Tautonymy", lang="en"),
+)
+
+createSC(
+    name="linnaeanTautonymy",
+    namespace=TDT,
+    graph=g,
+    pref_label=Literal("Linnaean Tautonymy", lang="en"),
+    definition=Literal("The identical spelling of a new generic or subgeneric name established before 1931 and a pre-1758 name cited as a synonym of only one of the species or subspecies originally included in that genus.", lang="en",)
+)
+
+createSC(
+    name="rulingByCommission",
+    namespace=TDT,
+    graph=g,
+    pref_label=Literal("Ruling By Commission", lang="en"),
+)
+
 
 createOC(
     name="UsagePolicy",

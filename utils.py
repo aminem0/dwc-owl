@@ -1,6 +1,6 @@
 from rdflib import BNode, Graph, Literal, Namespace, Node, URIRef
 from rdflib.collection import Collection
-from rdflib.namespace import DCTERMS, OWL, RDF, RDFS, SKOS, XSD
+from rdflib.namespace import DC, DCTERMS, OWL, RDF, RDFS, SKOS, XSD
 
 # WARN: Rewriting this function.
 # For some reason, card0_restrictions seems like a useless parameter.
@@ -769,4 +769,29 @@ def createEOC(
     for one in one_of:
         graph.add((one, RDF["type"], oc_uri))
 
+# TEST: Function that defines a skos:Concept with pertinent information
+def createSC(
+        name: str,
+        namespace: Namespace,
+        graph: Graph,
+        pref_label: Literal,
+        definition: Literal | None = None,
+        ) -> None:
+    # Create the skos:Concept URI
+    sc_uri = namespace[name]
+
+    # Add DEFINEDBY
+    graph.add((sc_uri, RDFS["isDefinedBy"], URIRef(str(namespace))))
+
+    # Add preferred label.
+    graph.add((sc_uri, SKOS["prefLabel"], pref_label))
+
+    # Optionally add definition.
+    if definition:
+        graph.add((sc_uri, SKOS["definition"], definition))
+        # graph.add((sc_uri, DC["description"], definition))
+
+    # Declare it in the graph
+    graph.add((sc_uri, RDF["type"], SKOS["Concept"]))
+   
 

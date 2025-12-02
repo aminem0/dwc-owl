@@ -130,6 +130,11 @@ gbif:pcr_primer_reverse a owl:DatatypeProperty ;
     skos:example "GGACTACHVGGGTWTCTAAT" ;
     skos:prefLabel "Reverse PCR Primer" .
 
+tdt:tautonymy a skos:Concept ;
+    rdfs:isDefinedBy tdt: ;
+    skos:definition "If a valid species-group name, or its cited synonym, originally included in a nominal genus-group taxon is identical with the name of that taxon, the nominal species denoted by that specific name (if available) is the type species."@en ;
+    skos:prefLabel "Tautonymy"@en .
+
 ac:fundingAttributionID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:fundingAttributionID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/fundingAttributionID-2025-06-12> ;
@@ -360,10 +365,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -1339,20 +1344,42 @@ miqe:thresholdQuantificationCycle a owl:DatatypeProperty ;
 
 tdt:absoluteTautonymy a dwc:TypeDesignationType,
         skos:Concept ;
+    rdfs:isDefinedBy tdt: ;
     skos:inScheme <http://rs.gbif.org/vocabulary/gbif/type_designation_type> ;
-    skos:prefLabel "Absolute Tautonymy" .
+    skos:prefLabel "Absolute Tautonymy",
+        "Absolute Tautonymy"@en .
 
-tdt:linnaeanTautonymy a dwc:TypeDesignationType .
+tdt:linnaeanTautonymy a dwc:TypeDesignationType,
+        skos:Concept ;
+    rdfs:isDefinedBy tdt: ;
+    skos:definition "The identical spelling of a new generic or subgeneric name established before 1931 and a pre-1758 name cited as a synonym of only one of the species or subspecies originally included in that genus."@en ;
+    skos:prefLabel "Linnaean Tautonymy"@en .
 
-tdt:originalDesignation a dwc:TypeDesignationType .
+tdt:originalDesignation a dwc:TypeDesignationType,
+        skos:Concept ;
+    rdfs:isDefinedBy tdt: ;
+    skos:definition "If one nominal species is explicitly designated as the type species when a nominal genus-group taxon is established, that nominal species is the type species (type by original designation)."@en ;
+    skos:prefLabel "Original Designation"@en .
 
-tdt:presentDesignation a dwc:TypeDesignationType .
+tdt:presentDesignation a dwc:TypeDesignationType,
+        skos:Concept ;
+    rdfs:isDefinedBy tdt: ;
+    skos:prefLabel "Present Designation"@en .
 
-tdt:rulingByCommission a dwc:TypeDesignationType .
+tdt:rulingByCommission a dwc:TypeDesignationType,
+        skos:Concept ;
+    rdfs:isDefinedBy tdt: ;
+    skos:prefLabel "Ruling By Commission"@en .
 
-tdt:subsequentDesignation a dwc:TypeDesignationType .
+tdt:subsequentDesignation a dwc:TypeDesignationType,
+        skos:Concept ;
+    rdfs:isDefinedBy tdt: ;
+    skos:prefLabel "Subsequent Designation"@en .
 
-tdt:subsequentMonotypy a dwc:TypeDesignationType .
+tdt:subsequentMonotypy a dwc:TypeDesignationType,
+        skos:Concept ;
+    rdfs:isDefinedBy tdt: ;
+    skos:prefLabel "Subsequent Monotypy"@en .
 
 ac:caption a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:caption ;
@@ -3476,7 +3503,11 @@ dcterms:spatial a owl:ObjectProperty ;
     skos:definition "Spatial characteristics of the resource."@en ;
     skos:prefLabel "Spatial Coverage" .
 
-tdt:monotypy a dwc:TypeDesignationType .
+tdt:monotypy a dwc:TypeDesignationType,
+        skos:Concept ;
+    rdfs:isDefinedBy tdt: ;
+    skos:definition "Type species by monotypy. When an author establishes a new nominal genus-group taxon for a single taxonomic species and denotes that species by an available name, the nominal species so named is the type species."@en ;
+    skos:prefLabel "Monotypy"@en .
 
 dwciri:georeferencedBy a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:georeferencedBy ;

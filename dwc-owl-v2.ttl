@@ -5168,43 +5168,77 @@ bb:Sunfish456 rdf:type owl:NamedIndividual ,
 tdt:absoluteTautonymy rdf:type owl:NamedIndividual ,
                                dwc:TypeDesignationType ,
                                skos:Concept ;
+                      rdfs:isDefinedBy tdt: ;
                       skos:inScheme <http://rs.gbif.org/vocabulary/gbif/type_designation_type> ;
-                      skos:prefLabel "Absolute Tautonymy" .
+                      skos:prefLabel "Absolute Tautonymy"@en ,
+                                     "Absolute Tautonymy" .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/linnaeanTautonymy
 tdt:linnaeanTautonymy rdf:type owl:NamedIndividual ,
-                               dwc:TypeDesignationType .
+                               dwc:TypeDesignationType ,
+                               skos:Concept ;
+                      rdfs:isDefinedBy tdt: ;
+                      skos:definition "The identical spelling of a new generic or subgeneric name established before 1931 and a pre-1758 name cited as a synonym of only one of the species or subspecies originally included in that genus."@en ;
+                      skos:prefLabel "Linnaean Tautonymy"@en .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/monotypy
 tdt:monotypy rdf:type owl:NamedIndividual ,
-                      dwc:TypeDesignationType .
+                      dwc:TypeDesignationType ,
+                      skos:Concept ;
+             rdfs:isDefinedBy tdt: ;
+             skos:definition "Type species by monotypy. When an author establishes a new nominal genus-group taxon for a single taxonomic species and denotes that species by an available name, the nominal species so named is the type species."@en ;
+             skos:prefLabel "Monotypy"@en .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/originalDesignation
 tdt:originalDesignation rdf:type owl:NamedIndividual ,
-                                 dwc:TypeDesignationType .
+                                 dwc:TypeDesignationType ,
+                                 skos:Concept ;
+                        rdfs:isDefinedBy tdt: ;
+                        skos:definition "If one nominal species is explicitly designated as the type species when a nominal genus-group taxon is established, that nominal species is the type species (type by original designation)."@en ;
+                        skos:prefLabel "Original Designation"@en .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/presentDesignation
 tdt:presentDesignation rdf:type owl:NamedIndividual ,
-                                dwc:TypeDesignationType .
+                                dwc:TypeDesignationType ,
+                                skos:Concept ;
+                       rdfs:isDefinedBy tdt: ;
+                       skos:prefLabel "Present Designation"@en .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/rulingByCommission
 tdt:rulingByCommission rdf:type owl:NamedIndividual ,
-                                dwc:TypeDesignationType .
+                                dwc:TypeDesignationType ,
+                                skos:Concept ;
+                       rdfs:isDefinedBy tdt: ;
+                       skos:prefLabel "Ruling By Commission"@en .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentDesignation
 tdt:subsequentDesignation rdf:type owl:NamedIndividual ,
-                                   dwc:TypeDesignationType .
+                                   dwc:TypeDesignationType ,
+                                   skos:Concept ;
+                          rdfs:isDefinedBy tdt: ;
+                          skos:prefLabel "Subsequent Designation"@en .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentMonotypy
 tdt:subsequentMonotypy rdf:type owl:NamedIndividual ,
-                                dwc:TypeDesignationType .
+                                dwc:TypeDesignationType ,
+                                skos:Concept ;
+                       rdfs:isDefinedBy tdt: ;
+                       skos:prefLabel "Subsequent Monotypy"@en .
+
+
+###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/tautonymy
+tdt:tautonymy rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              rdfs:isDefinedBy tdt: ;
+              skos:definition "If a valid species-group name, or its cited synonym, originally included in a nominal genus-group taxon is identical with the name of that taxon, the nominal species denoted by that specific name (if available) is the type species."@en ;
+              skos:prefLabel "Tautonymy"@en .
 
 
 #################################################################
