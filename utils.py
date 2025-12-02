@@ -766,8 +766,8 @@ def createEOC(
     # Declare each individual as an instance of the created class
     # NOTE: This is just making it explicit, either way the reasoner
     # would find it
-    for one in one_of:
-        graph.add((one, RDF["type"], oc_uri))
+    # for one in one_of:
+    #     graph.add((one, RDF["type"], oc_uri))
 
 # TEST: Function that defines a skos:Concept with pertinent information
 def createSC(

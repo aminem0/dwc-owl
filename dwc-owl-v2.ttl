@@ -65,24 +65,12 @@ vann:example rdf:type owl:AnnotationProperty .
 vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
 
 
-###  http://rs.tdwg.org/dwc/terms/relationshipAccordingTo
-dwc:relationshipAccordingTo rdf:type owl:AnnotationProperty .
-
-
-###  http://rs.tdwg.org/dwc/terms/relationshipAccordingToID
-dwc:relationshipAccordingToID rdf:type owl:AnnotationProperty .
-
-
 ###  http://www.w3.org/2004/02/skos/core#definition
 skos:definition rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.w3.org/2004/02/skos/core#example
 skos:example rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/2004/02/skos/core#inScheme
-skos:inScheme rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.w3.org/2004/02/skos/core#prefLabel
@@ -92,10 +80,6 @@ skos:prefLabel rdf:type owl:AnnotationProperty .
 #################################################################
 #    Datatypes
 #################################################################
-
-###  http://bioboum.ca/Datato
-bb:Datato rdf:type rdfs:Datatype .
-
 
 ###  http://www.w3.org/2001/XMLSchema#date
 xsd:date rdf:type rdfs:Datatype .
@@ -4995,10 +4979,6 @@ eco:SurveyTarget rdf:type owl:Class ;
                  skos:prefLabel "Survey Target" .
 
 
-###  http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement
-rdf:Statement rdf:type owl:Class .
-
-
 ###  http://www.w3.org/2004/02/skos/core#Concept
 skos:Concept rdf:type owl:Class .
 
@@ -5007,176 +4987,15 @@ skos:Concept rdf:type owl:Class .
 #    Individuals
 #################################################################
 
-###  http://bioboum.ca/Agnes
-bb:Agnes rdf:type owl:NamedIndividual .
-
-
-###  http://bioboum.ca/BearLowerJaw123
-bb:BearLowerJaw123 rdf:type owl:NamedIndividual ;
-                   dwcdp:basedOn bb:PieceOfRock456 .
-
-
-###  http://bioboum.ca/BeeVisitingFlower
-bb:BeeVisitingFlower rdf:type owl:NamedIndividual ;
-                     dwcdp:happenedDuring bb:Site123 .
-
-
-###  http://bioboum.ca/Bibi
-bb:Bibi rdf:type owl:NamedIndividual ,
-                 dcterms:BibliographicResource ;
-        dwcdp:authoredBy bb:Agnes .
-
-
-###  http://bioboum.ca/BiggerRock789
-bb:BiggerRock789 rdf:type owl:NamedIndividual .
-
-
-###  http://bioboum.ca/BirdRingingLocation
-bb:BirdRingingLocation rdf:type owl:NamedIndividual ,
-                                dcterms:Location ;
-                       dwc:county "SomewhereOverTheRainbow"@en .
-
-
-###  http://bioboum.ca/Bobo
-bb:Bobo rdf:type owl:NamedIndividual .
-
-
-###  http://bioboum.ca/Butterfly123
-bb:Butterfly123 rdf:type owl:NamedIndividual ,
-                         dwc:Organism .
-
-
-###  http://bioboum.ca/Butterfly123EatenBySpider456
-bb:Butterfly123EatenBySpider456 rdf:type owl:NamedIndividual ,
-                                         dwc:ResourceRelationship ,
-                                         rdf:Statement ;
-                                dwc:relationshipEstablishedDate "15-06-2025" ;
-                                dwc:relationshipRemarks "The butterfly was a dead adult."@en ;
-                                dwc:relationshipAccordingTo "Joey Saucedo" ;
-                                dwc:relationshipAccordingToID bb:Joey366 .
-
-
-###  http://bioboum.ca/Idi
-bb:Idi rdf:type owl:NamedIndividual ,
-                dwc:Identification ;
-       dwcdp:basedOn bb:Bobo .
-
-
-###  http://bioboum.ca/Joey366
-bb:Joey366 rdf:type owl:NamedIndividual ,
-                    dcterms:Agent .
-
-
-###  http://bioboum.ca/Mato
-bb:Mato rdf:type owl:NamedIndividual ,
-                 dwc:MaterialEntity ;
-        dwcdp:isDerivedFrom bb:Sourco .
-
-
-###  http://bioboum.ca/Mato1
-bb:Mato1 rdf:type owl:NamedIndividual ,
-                  dwc:MaterialEntity ;
-         dwcdp:isDerivedFrom bb:Mato2 .
-
-
-###  http://bioboum.ca/Mato2
-bb:Mato2 rdf:type owl:NamedIndividual ;
-         dwcdp:isDerivedFrom bb:Mato3 .
-
-
-###  http://bioboum.ca/Mato3
-bb:Mato3 rdf:type owl:NamedIndividual ;
-         dwcdp:isDerivedFrom bb:Mato4 .
-
-
-###  http://bioboum.ca/Mato4
-bb:Mato4 rdf:type owl:NamedIndividual .
-
-
-###  http://bioboum.ca/Midio
-bb:Midio rdf:type owl:NamedIndividual ;
-         dwcdp:isMediaOf bb:Occurro .
-
-
-###  http://bioboum.ca/Moleco1
-bb:Moleco1 rdf:type owl:NamedIndividual ,
-                    dwc:MolecularProtocol ;
-           <https://w3id.org/mixs/0000015> "aerobe" .
-
-
-###  http://bioboum.ca/Moleco2
-bb:Moleco2 rdf:type owl:NamedIndividual ,
-                    dwc:MolecularProtocol .
-
-
-###  http://bioboum.ca/Occurro
-bb:Occurro rdf:type owl:NamedIndividual .
-
-
-###  http://bioboum.ca/ParentSite456
-bb:ParentSite456 rdf:type owl:NamedIndividual .
-
-
-###  http://bioboum.ca/Peter123
-bb:Peter123 rdf:type owl:NamedIndividual ,
-                     dcterms:Agent .
-
-
-###  http://bioboum.ca/PictureOfPeter123CatchingSunfish456FromSeineNet789
-bb:PictureOfPeter123CatchingSunfish456FromSeineNet789 rdf:type owl:NamedIndividual ;
-                                                      dwcdp:isMediaOf bb:Peter123 ,
-                                                                      bb:SeineNet789 ,
-                                                                      bb:Sunfish456 .
-
-
-###  http://bioboum.ca/PieceOfRock456
-bb:PieceOfRock456 rdf:type owl:NamedIndividual ;
-                  dwcdp:isPartOf bb:BiggerRock789 .
-
-
-###  http://bioboum.ca/SeineNet789
-bb:SeineNet789 rdf:type owl:NamedIndividual ,
-                        dwc:Event .
-
-
-###  http://bioboum.ca/Site123
-bb:Site123 rdf:type owl:NamedIndividual ;
-           dwcdp:happenedDuring bb:ParentSite456 .
-
-
-###  http://bioboum.ca/SomePoint
-bb:SomePoint rdf:type owl:NamedIndividual ,
-                      dcterms:Location ;
-             dwc:minimumElevationInMeters -430.0 .
-
-
-###  http://bioboum.ca/Sourco
-bb:Sourco rdf:type owl:NamedIndividual .
-
-
-###  http://bioboum.ca/Spider456
-bb:Spider456 rdf:type owl:NamedIndividual ,
-                      dwc:Organism .
-
-
-###  http://bioboum.ca/Sunfish456
-bb:Sunfish456 rdf:type owl:NamedIndividual ,
-                       dwc:Occurrence .
-
-
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/absoluteTautonymy
 tdt:absoluteTautonymy rdf:type owl:NamedIndividual ,
-                               dwc:TypeDesignationType ,
                                skos:Concept ;
                       rdfs:isDefinedBy tdt: ;
-                      skos:inScheme <http://rs.gbif.org/vocabulary/gbif/type_designation_type> ;
-                      skos:prefLabel "Absolute Tautonymy"@en ,
-                                     "Absolute Tautonymy" .
+                      skos:prefLabel "Absolute Tautonymy"@en .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/linnaeanTautonymy
 tdt:linnaeanTautonymy rdf:type owl:NamedIndividual ,
-                               dwc:TypeDesignationType ,
                                skos:Concept ;
                       rdfs:isDefinedBy tdt: ;
                       skos:definition "The identical spelling of a new generic or subgeneric name established before 1931 and a pre-1758 name cited as a synonym of only one of the species or subspecies originally included in that genus."@en ;
@@ -5185,7 +5004,6 @@ tdt:linnaeanTautonymy rdf:type owl:NamedIndividual ,
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/monotypy
 tdt:monotypy rdf:type owl:NamedIndividual ,
-                      dwc:TypeDesignationType ,
                       skos:Concept ;
              rdfs:isDefinedBy tdt: ;
              skos:definition "Type species by monotypy. When an author establishes a new nominal genus-group taxon for a single taxonomic species and denotes that species by an available name, the nominal species so named is the type species."@en ;
@@ -5194,7 +5012,6 @@ tdt:monotypy rdf:type owl:NamedIndividual ,
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/originalDesignation
 tdt:originalDesignation rdf:type owl:NamedIndividual ,
-                                 dwc:TypeDesignationType ,
                                  skos:Concept ;
                         rdfs:isDefinedBy tdt: ;
                         skos:definition "If one nominal species is explicitly designated as the type species when a nominal genus-group taxon is established, that nominal species is the type species (type by original designation)."@en ;
@@ -5203,7 +5020,6 @@ tdt:originalDesignation rdf:type owl:NamedIndividual ,
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/presentDesignation
 tdt:presentDesignation rdf:type owl:NamedIndividual ,
-                                dwc:TypeDesignationType ,
                                 skos:Concept ;
                        rdfs:isDefinedBy tdt: ;
                        skos:prefLabel "Present Designation"@en .
@@ -5211,7 +5027,6 @@ tdt:presentDesignation rdf:type owl:NamedIndividual ,
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/rulingByCommission
 tdt:rulingByCommission rdf:type owl:NamedIndividual ,
-                                dwc:TypeDesignationType ,
                                 skos:Concept ;
                        rdfs:isDefinedBy tdt: ;
                        skos:prefLabel "Ruling By Commission"@en .
@@ -5219,7 +5034,6 @@ tdt:rulingByCommission rdf:type owl:NamedIndividual ,
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentDesignation
 tdt:subsequentDesignation rdf:type owl:NamedIndividual ,
-                                   dwc:TypeDesignationType ,
                                    skos:Concept ;
                           rdfs:isDefinedBy tdt: ;
                           skos:prefLabel "Subsequent Designation"@en .
@@ -5227,7 +5041,6 @@ tdt:subsequentDesignation rdf:type owl:NamedIndividual ,
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentMonotypy
 tdt:subsequentMonotypy rdf:type owl:NamedIndividual ,
-                                dwc:TypeDesignationType ,
                                 skos:Concept ;
                        rdfs:isDefinedBy tdt: ;
                        skos:prefLabel "Subsequent Monotypy"@en .

@@ -2,12 +2,11 @@
 # BEGIN IMPORTS
 #####################################################################################################
 
-from pathlib import Path
 import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
-from utils import createCTOP, createDP, createEDP, createEOC, createOC, createOP, createRDP, declare_disjoint
+from utils import createCTOP, createDP, createEDP, createEOC, createOC, createOP, createRDP, createSC, declare_disjoint
 
 #####################################################################################################
 # BEGIN ONTOLOGY DEFINITION
@@ -401,12 +400,9 @@ createEOC(
     references_s="https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml",
 )
 
-g.add((TDT.absoluteTautonymy, RDF["type"], DWC.TypeDesignationType))
-g.add((TDT.absoluteTautonymy, RDF["type"], SKOS.Concept))
-g.add((TDT.absoluteTautonymy, SKOS.prefLabel, Literal("Absolute Tautonymy")))
-g.add((TDT.absoluteTautonymy, SKOS.inScheme, URIRef("http://rs.gbif.org/vocabulary/gbif/type_designation_type")))
-
-from utils import createSC
+#####################################################################################################
+# BEGIN DATATYPE PROPERTY DEFINITIONS
+#####################################################################################################
 
 createSC(
     name="originalDesignation",
@@ -953,9 +949,6 @@ prop_chain = BNode()
 Collection(g, prop_chain, [DWCDP["basedOn"], DWCDP["isPartOf"]])
 g.add((DWCDP["basedOn"], OWL.propertyChainAxiom, prop_chain))
 
-# Example individuals
-g.add((BB["BearLowerJaw123"], DWCDP["basedOn"], BB["PieceOfRock456"]))
-g.add((BB["PieceOfRock456"], DWCDP["isPartOf"], BB["BiggerRock789"]))
 
 #####################################################################################################
 # BEGIN OBJECT PROPERTY DEFINITIONS
@@ -2590,10 +2583,6 @@ createDP(
     references_s="http://rs.tdwg.org/dwc/terms/version/county-2023-06-28",
 )
 
-# TEST: Small example to verify behavior of HermiT with language-tagged strings.
-g.add((BB["BirdRingingLocation"], RDF["type"], DCTERMS["Location"]))
-g.add((BB["BirdRingingLocation"], DWC["county"], Literal("SomewhereOverTheRainbow", lang="en")))
-
 createDP(
     name="datasetID",
     namespace=DWC,
@@ -3591,10 +3580,6 @@ createRDP(
     version_of_s="http://rs.tdwg.org/dwc/terms/minimumElevationInMeters",
     references_s="http://rs.tdwg.org/dwc/terms/version/minimumElevationInMeters-2023-06-28",
 )
-
-# TEST: Test of range restriction on dwc:minimumElevationInMeters
-g.add((BB["SomePoint"], RDF["type"], DCTERMS["Location"]))
-g.add((BB["SomePoint"], DWC["minimumElevationInMeters"], Literal("-430", datatype=XSD["decimal"])))
 
 createDP(
     name="molecularProtocolID",
@@ -5724,16 +5709,6 @@ createEDP(
     version_of_s="https://w3id.org/mixs/0000015",
 )
 
-# TEST: Small triple just to see if OntPub catches it
-g.add((BB["Datato"], RDF["type"], RDFS["Datatype"]))
-
-# TEST: Small instances
-g.add((BB["Moleco1"], RDF["type"], DWC["MolecularProtocol"]))
-g.add((BB["Moleco1"], MIXS["0000015"], Literal("aerobe")))
-#
-g.add((BB["Moleco2"], RDF["type"], DWC["MolecularProtocol"]))
-# g.add((BB["Moleco2"], MIXS["0000015"], Literal("jumpluff")))
-
 # WARN: MiXS page has no mention of OBI.
 createDP(
     name="0000016",
@@ -5911,136 +5886,6 @@ createDP(
     comments=Literal("The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples.", lang="en"),
     version_of_s="http://ns.adobe.com/xap/1.0/CreateDate",
 )
-
-
-
-
-
-# g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipEstablishedDate"], Literal("15-06-2025")))
-# g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipRemarks"], Literal("The butterfly was a dead adult.", lang="en")))
-# g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingTo"], Literal("Joey Saucedo")))
-# g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingToID"], BB["Joey366"]))
-
-
-
-# BUG: Possible source of error for owl:ObjectProperty
-# TEST: agentID as an inverse functional property
-# A dummy property for now
-# createDP(
-#     name="agentID",
-#     namespace=DWC,
-#     graph=g,
-#     domains=[DCTERMS["Agent"]],
-#     ranges=[XSD["string"]],
-#     additional_list=[OWL["InverseFunctionalProperty"]],
-#     pref_label=Literal("Agent ID"),
-#     definition=Literal("The eventual definition of the term.", lang="en"),
-#     version_of_s="http://rs.tdwg.org/ac/terms/agentID",
-# )
-
-# # Three dcterms:Agent have the same dwc:agentID entry
-# # The reasoner will infer they are the same individual
-# g.add((BB["Mikey"], DWC["agentID"], Literal("0000-0002-1234-567X")))
-# g.add((BB["Michael"], DWC["agentID"], Literal("0000-0002-1234-567X")))
-# g.add((BB["MichaelRathboneIII"], DWC["agentID"], Literal("0000-0002-1234-567X")))
-
-
-
-
-#####################################################################################################
-# BEGIN INDIVIDUALS DEFINITIONS FOR REASONER TEST CASES
-#####################################################################################################
-
-# TEST: The reasoner will correctly infer that bb:Agnes is a dwcdp:AuthorAgent
-g.add((BB["Bibi"], RDF["type"], DCTERMS["BibliographicResource"]))
-g.add((BB["Bibi"], DWCDP["authoredBy"], BB["Agnes"]))
-# g.add((DWCDP["Agnes"], RDF["type"], DCTERMS["Agent"]))
-
-
-# TEST: The reasoner will not be able to state anything regarding bb:Bobo, as we declared it a blank node.
-# However, it will flag any illogical statement as an inconsistency.
-g.add((BB["Idi"], RDF["type"], DWC["Identification"]))
-g.add((BB["Idi"], DWCDP["basedOn"], BB["Bobo"]))
-# g.add((BB["Bobo"], RDF["type"], DWC["NucleotideSequence"]))
-# g.add((BB["Bobo"], RDF["type"], DWC["GeologicalContext"]))
-
-# TEST: bb:Sourco is correctly inferred to be a dwc:MaterialEntity
-g.add((BB["Mato"], RDF["type"], DWC["MaterialEntity"]))
-g.add((BB["Mato"], DWCDP["isDerivedFrom"], BB["Sourco"]))
-# g.add((BB["Mato"], RDF["type"], DWC["MaterialEntity"]))
-
-# TEST: The chain of derivations will be inferred by the reasoner.
-g.add((BB["Mato1"], RDF["type"], DWC["MaterialEntity"]))
-g.add((BB["Mato1"], DWCDP["isDerivedFrom"], BB["Mato2"]))
-g.add((BB["Mato2"], DWCDP["isDerivedFrom"], BB["Mato3"]))
-g.add((BB["Mato3"], DWCDP["isDerivedFrom"], BB["Mato4"]))
-
-
-# TEST: bb:Midio is inferred to be an instance of ac:Media.
-# Also, the inverse triple statement is inferred:
-# bb:Occurro dwcdp:hasMedia bb:Midio
-# g.add((BB["Midio"], RDF["type"], DWC["EventMedia"]))
-g.add((BB["Midio"], DWCDP["isMediaOf"], BB["Occurro"]))
-
-# TEST: Test case where the object property dwcdp:happenedDuring is used twice.
-# The first time to link bb:BeeVisitingFlower to bb:Site123, and the second
-# time to link bb:Site123 to its parent event bb:ParentSite456.
-# Note that only bb:BeeVisitingFlowerBeeVisitingFlower is declared as an
-# instance of dwc:OrganismInteraction.
-# The reasoner correctly infers that both bb:Site123 and bb:ParentSite456
-# are instances of dwc:Event.
-#g.add((BB["BeeVisitingFlower"], RDF["type"], DWC["OrganismInteraction"]))
-g.add((BB["BeeVisitingFlower"], DWCDP["happenedDuring"], BB["Site123"]))
-g.add((BB["Site123"], DWCDP["happenedDuring"], BB["ParentSite456"]))
-# NOTE: Note declaring bb:BeeVisitingFlower as a dwc:OrganismInteraction
-# still gives an inference that both infers that both bb:Site123 and
-# bb:ParentSite456 are instances of dwc:Event, but nothing can be inferred
-# for bb:BeeVisitingFlower, due to the wide domain that dwcdp:happenedDuring
-# has (i.e. the union of dwc:Event, dwc:Occurrence, dwc:OrganismInteraction and
-# eco:Survey).
-
-# g.add((BB["Sometho"], RDF["type"], DWC["Assertion"]))
-# g.add((BB["Sometho"], DWCDP["hasMedia"], BB["MidioNo"]))
-
-# g.add((BB["MidioNo"], DWCDP["isMediaOf"], BB["Sometho"]))
-# g.add((BB["Sometho"], RDF["type"], DWC["Assertion"]))
-
-
-
-
-# TEST: Complex case to show a multiple class entity.
-# A media of a dcterms:Agent taking a dwc:Occurrence during a dwc:Event.
-# However, only dwcdp:isMediaOf is used. The reasoner will infer
-# All classes bb:PictureOfPeter123CatchingSunfish456FromSeineNet789 belongs to.
-#
-g.add((BB["Peter123"], RDF["type"], DCTERMS["Agent"]))
-g.add((BB["Sunfish456"], RDF["type"], DWC["Occurrence"]))
-g.add((BB["SeineNet789"], RDF["type"], DWC["Event"]))
-#
-#g.add((BB["PictureOfPeter123CatchingSunfish456FromSeineNet789"], RDF["type"], AC["Media"]))
-#
-g.add((BB["PictureOfPeter123CatchingSunfish456FromSeineNet789"], DWCDP["isMediaOf"], BB["Peter123"]))
-g.add((BB["PictureOfPeter123CatchingSunfish456FromSeineNet789"], DWCDP["isMediaOf"], BB["Sunfish456"]))
-g.add((BB["PictureOfPeter123CatchingSunfish456FromSeineNet789"], DWCDP["isMediaOf"], BB["SeineNet789"]))
-
-
-
-# TEST: Reification test example with iNaturalist data.
-g.add((BB["Butterfly123"], RDF["type"], DWC["Organism"]))
-g.add((BB["Spider456"], RDF["type"], DWC["Organism"]))
-g.add((BB["Joey366"], RDF["type"], DCTERMS["Agent"]))
-#
-g.add((BB["Butterfly123EatenBySpider456"], RDF["type"], DWC["ResourceRelationship"]))
-g.add((BB["Butterfly123EatenBySpider456"], RDF["type"], RDF["Statement"]))
-g.add((BB["Butterfly123EatenBySpider456"], RDF["subject"], BB["Butterfly123"]))
-g.add((BB["Butterfly123EatenBySpider456"], RDF["predicate"], URIRef("https://www.inaturalist.org/observation_fields/879")))
-g.add((BB["Butterfly123EatenBySpider456"], RDF["object"], BB["Spider456"]))
-#
-# BUG: Incorrect use of dwc:relationshipAccordingToID
-g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipEstablishedDate"], Literal("15-06-2025")))
-g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipRemarks"], Literal("The butterfly was a dead adult.", lang="en")))
-g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingTo"], Literal("Joey Saucedo")))
-g.add((BB["Butterfly123EatenBySpider456"], DWC["relationshipAccordingToID"], BB["Joey366"]))
 
 #####################################################################################################
 # BEGIN OWL API USAGE

@@ -22,51 +22,6 @@
 @prefix xmp: <http://ns.adobe.com/xap/1.0/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-bb:BearLowerJaw123 dwcdp:basedOn bb:PieceOfRock456 .
-
-bb:BeeVisitingFlower dwcdp:happenedDuring bb:Site123 .
-
-bb:Bibi a dcterms:BibliographicResource ;
-    dwcdp:authoredBy bb:Agnes .
-
-bb:BirdRingingLocation a dcterms:Location ;
-    dwc:county "SomewhereOverTheRainbow"@en .
-
-bb:Butterfly123EatenBySpider456 a dwc:ResourceRelationship,
-        rdf:Statement ;
-    dwc:relationshipAccordingTo "Joey Saucedo" ;
-    dwc:relationshipAccordingToID bb:Joey366 ;
-    dwc:relationshipEstablishedDate "15-06-2025" ;
-    dwc:relationshipRemarks "The butterfly was a dead adult."@en ;
-    rdf:object bb:Spider456 ;
-    rdf:predicate <https://www.inaturalist.org/observation_fields/879> ;
-    rdf:subject bb:Butterfly123 .
-
-bb:Datato a rdfs:Datatype .
-
-bb:Idi a dwc:Identification ;
-    dwcdp:basedOn bb:Bobo .
-
-bb:Mato a dwc:MaterialEntity ;
-    dwcdp:isDerivedFrom bb:Sourco .
-
-bb:Mato1 a dwc:MaterialEntity ;
-    dwcdp:isDerivedFrom bb:Mato2 .
-
-bb:Midio dwcdp:isMediaOf bb:Occurro .
-
-bb:Moleco1 a dwc:MolecularProtocol ;
-    mixs:0000015 "aerobe" .
-
-bb:Moleco2 a dwc:MolecularProtocol .
-
-bb:PictureOfPeter123CatchingSunfish456FromSeineNet789 dwcdp:isMediaOf bb:Peter123,
-        bb:SeineNet789,
-        bb:Sunfish456 .
-
-bb:SomePoint a dcterms:Location ;
-    dwc:minimumElevationInMeters -430.0 .
-
 bb:dwc-owl.owl a owl:Ontology ;
     dc:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
     dc:title "Darwin Core OWL" ;
@@ -365,10 +320,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -1158,26 +1113,6 @@ minext:verbatimSize a owl:DatatypeProperty ;
         "width 3 inches" ;
     skos:prefLabel "Verbatim Size" .
 
-bb:Butterfly123 a dwc:Organism .
-
-bb:Joey366 a dcterms:Agent .
-
-bb:Mato2 dwcdp:isDerivedFrom bb:Mato3 .
-
-bb:Mato3 dwcdp:isDerivedFrom bb:Mato4 .
-
-bb:Peter123 a dcterms:Agent .
-
-bb:PieceOfRock456 dwcdp:isPartOf bb:BiggerRock789 .
-
-bb:SeineNet789 a dwc:Event .
-
-bb:Site123 dwcdp:happenedDuring bb:ParentSite456 .
-
-bb:Spider456 a dwc:Organism .
-
-bb:Sunfish456 a dwc:Occurrence .
-
 ggbn:concentration a owl:DatatypeProperty ;
     dcterms:isVersionOf ggbn:concentration ;
     rdfs:domain dwc:MolecularProtocol ;
@@ -1342,42 +1277,33 @@ miqe:thresholdQuantificationCycle a owl:DatatypeProperty ;
     skos:example 0.3 ;
     skos:prefLabel "Fluorescence Cycle Threshold" .
 
-tdt:absoluteTautonymy a dwc:TypeDesignationType,
-        skos:Concept ;
+tdt:absoluteTautonymy a skos:Concept ;
     rdfs:isDefinedBy tdt: ;
-    skos:inScheme <http://rs.gbif.org/vocabulary/gbif/type_designation_type> ;
-    skos:prefLabel "Absolute Tautonymy",
-        "Absolute Tautonymy"@en .
+    skos:prefLabel "Absolute Tautonymy"@en .
 
-tdt:linnaeanTautonymy a dwc:TypeDesignationType,
-        skos:Concept ;
+tdt:linnaeanTautonymy a skos:Concept ;
     rdfs:isDefinedBy tdt: ;
     skos:definition "The identical spelling of a new generic or subgeneric name established before 1931 and a pre-1758 name cited as a synonym of only one of the species or subspecies originally included in that genus."@en ;
     skos:prefLabel "Linnaean Tautonymy"@en .
 
-tdt:originalDesignation a dwc:TypeDesignationType,
-        skos:Concept ;
+tdt:originalDesignation a skos:Concept ;
     rdfs:isDefinedBy tdt: ;
     skos:definition "If one nominal species is explicitly designated as the type species when a nominal genus-group taxon is established, that nominal species is the type species (type by original designation)."@en ;
     skos:prefLabel "Original Designation"@en .
 
-tdt:presentDesignation a dwc:TypeDesignationType,
-        skos:Concept ;
+tdt:presentDesignation a skos:Concept ;
     rdfs:isDefinedBy tdt: ;
     skos:prefLabel "Present Designation"@en .
 
-tdt:rulingByCommission a dwc:TypeDesignationType,
-        skos:Concept ;
+tdt:rulingByCommission a skos:Concept ;
     rdfs:isDefinedBy tdt: ;
     skos:prefLabel "Ruling By Commission"@en .
 
-tdt:subsequentDesignation a dwc:TypeDesignationType,
-        skos:Concept ;
+tdt:subsequentDesignation a skos:Concept ;
     rdfs:isDefinedBy tdt: ;
     skos:prefLabel "Subsequent Designation"@en .
 
-tdt:subsequentMonotypy a dwc:TypeDesignationType,
-        skos:Concept ;
+tdt:subsequentMonotypy a skos:Concept ;
     rdfs:isDefinedBy tdt: ;
     skos:prefLabel "Subsequent Monotypy"@en .
 
@@ -1748,6 +1674,15 @@ dwciri:vitality a owl:ObjectProperty ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
     skos:prefLabel "Vitality (IRI)" .
+
+dwc:TypeDesignationType a owl:Class ;
+    dcterms:isVersionOf <http://rs.gbif.org/terms/1.0/typeDesignationType> ;
+    dcterms:references <https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml> ;
+    rdfs:comment "From [https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml](https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml)."@en ;
+    rdfs:isDefinedBy dwc: ;
+    owl:oneOf ( tdt:originalDesignation tdt:presentDesignation tdt:subsequentDesignation tdt:monotypy tdt:subsequentMonotypy tdt:absoluteTautonymy tdt:monotypy tdt:linnaeanTautonymy tdt:rulingByCommission ) ;
+    skos:definition "A category that best matches the nature of a type designation."@en ;
+    skos:prefLabel "Type Designation Type" .
 
 dwc:assayType a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/assayType> ;
@@ -3503,8 +3438,7 @@ dcterms:spatial a owl:ObjectProperty ;
     skos:definition "Spatial characteristics of the resource."@en ;
     skos:prefLabel "Spatial Coverage" .
 
-tdt:monotypy a dwc:TypeDesignationType,
-        skos:Concept ;
+tdt:monotypy a skos:Concept ;
     rdfs:isDefinedBy tdt: ;
     skos:definition "Type species by monotypy. When an author establishes a new nominal genus-group taxon for a single taxonomic species and denotes that species by an available name, the nominal species so named is the type species."@en ;
     skos:prefLabel "Monotypy"@en .
@@ -3753,14 +3687,16 @@ chrono:ChronometricAge a owl:Class ;
         "an age range of a specimen based on its biostratigraphic content" ;
     skos:prefLabel "Chronometric Age" .
 
-dwc:TypeDesignationType a owl:Class ;
-    dcterms:isVersionOf <http://rs.gbif.org/terms/1.0/typeDesignationType> ;
-    dcterms:references <https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml> ;
-    rdfs:comment "From [https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml](https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml)."@en ;
+dwc:ResourceRelationship a owl:Class ;
+    dcterms:isVersionOf dwc:ResourceRelationship ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/ResourceRelationship-2023-09-13> ;
+    rdfs:comment "Resources can be thought of as identifiable records or instances of classes and may include, but need not be limited to instances of [dwc:Occurrence], [dwc:Organism], [dwc:MaterialEntity], [dwc:Event], [dcterms:Location], [dwc:GeologicalContext], [dwc:Identification], or [dwc:Taxon.]"@en ;
     rdfs:isDefinedBy dwc: ;
-    owl:oneOf ( tdt:originalDesignation tdt:presentDesignation tdt:subsequentDesignation tdt:monotypy tdt:subsequentMonotypy tdt:absoluteTautonymy tdt:monotypy tdt:linnaeanTautonymy tdt:rulingByCommission ) ;
-    skos:definition "A category that best matches the nature of a type designation."@en ;
-    skos:prefLabel "Type Designation Type" .
+    skos:definition "A relationship of one [rdfs:Resource] ([http://www.w3.org/2000/01/rdf-schema#Resource]) to another."@en ;
+    skos:example "a dwc:MaterialEntity is a subsample of another dwc:MaterialEntity",
+        "a uniquely identified dwc:Occurrence represents the same dwc:Occurrence as another uniquely identified dwc:Occurrence",
+        "an instance of a dwc:Organism is the mother of another instance of a dwc:Organism" ;
+    skos:prefLabel "Resource Relationship" .
 
 eco:SurveyTarget a owl:Class ;
     dcterms:isVersionOf eco:SurveyTarget ;
@@ -3772,17 +3708,6 @@ eco:SurveyTarget a owl:Class ;
         "all total lengths except < 12 inches",
         "reproductive female Ctenomys sociabilis (only)" ;
     skos:prefLabel "Survey Target" .
-
-dwc:ResourceRelationship a owl:Class ;
-    dcterms:isVersionOf dwc:ResourceRelationship ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/ResourceRelationship-2023-09-13> ;
-    rdfs:comment "Resources can be thought of as identifiable records or instances of classes and may include, but need not be limited to instances of [dwc:Occurrence], [dwc:Organism], [dwc:MaterialEntity], [dwc:Event], [dcterms:Location], [dwc:GeologicalContext], [dwc:Identification], or [dwc:Taxon.]"@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A relationship of one [rdfs:Resource] ([http://www.w3.org/2000/01/rdf-schema#Resource]) to another."@en ;
-    skos:example "a dwc:MaterialEntity is a subsample of another dwc:MaterialEntity",
-        "a uniquely identified dwc:Occurrence represents the same dwc:Occurrence as another uniquely identified dwc:Occurrence",
-        "an instance of a dwc:Organism is the mother of another instance of a dwc:Organism" ;
-    skos:prefLabel "Resource Relationship" .
 
 dcterms:BibliographicResource a owl:Class ;
     dcterms:isVersionOf dcterms:BibliographicResource ;
@@ -3799,6 +3724,17 @@ dwc:Identification a owl:Class ;
     skos:example "a nomenclatural act designating a specimen as a holotype",
         "a subspecies determination of an organism" ;
     skos:prefLabel "Identification" .
+
+dwc:Organism a owl:Class ;
+    dcterms:isVersionOf dwc:Organism ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18> ;
+    rdfs:comment "Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A particular organism or defined group of organisms considered to be taxonomically homogeneous."@en ;
+    skos:example "a specific bird",
+        "a specific instance of a bacterial culture",
+        "a specific wolf pack" ;
+    skos:prefLabel "Organism" .
 
 dwc:Protocol a owl:Class ;
     dcterms:isVersionOf dwc:Protocol ;
@@ -3831,17 +3767,6 @@ eco:Survey a owl:Class ;
         "a wetland vegetation mapping",
         "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
     skos:prefLabel "Survey" .
-
-dwc:Organism a owl:Class ;
-    dcterms:isVersionOf dwc:Organism ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18> ;
-    rdfs:comment "Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A particular organism or defined group of organisms considered to be taxonomically homogeneous."@en ;
-    skos:example "a specific bird",
-        "a specific instance of a bacterial culture",
-        "a specific wolf pack" ;
-    skos:prefLabel "Organism" .
 
 dwc:MaterialEntityAssertion a owl:Class ;
     rdfs:isDefinedBy dwc: ;
