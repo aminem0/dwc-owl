@@ -716,6 +716,13 @@ def createEOC(
         ) -> None:
     # Create the owl:Class URI
     oc_uri = namespace[name]
+    
+    # NOTE: This declaration might be obsolete due to the use of owl:equivalentClass below
+    # Class declaration.
+    graph.add((oc_uri, RDF["type"], OWL["Class"]))
+
+    # Declaration as a subclass of skos:Concept.
+    graph.add((oc_uri, RDFS["subClassOf"], SKOS["Concept"]))
 
     # Add DEFINEDBY
     graph.add((oc_uri, RDFS["isDefinedBy"], URIRef(str(namespace))))

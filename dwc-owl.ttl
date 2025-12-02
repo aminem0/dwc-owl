@@ -85,11 +85,6 @@ gbif:pcr_primer_reverse a owl:DatatypeProperty ;
     skos:example "GGACTACHVGGGTWTCTAAT" ;
     skos:prefLabel "Reverse PCR Primer" .
 
-tdt:tautonymy a skos:Concept ;
-    rdfs:isDefinedBy tdt: ;
-    skos:definition "If a valid species-group name, or its cited synonym, originally included in a nominal genus-group taxon is identical with the name of that taxon, the nominal species denoted by that specific name (if available) is the type species."@en ;
-    skos:prefLabel "Tautonymy"@en .
-
 ac:fundingAttributionID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:fundingAttributionID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/fundingAttributionID-2025-06-12> ;
@@ -760,6 +755,20 @@ dwcdp:hasMedia a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]"@en ;
     skos:prefLabel "Has Media" .
 
+dwcdp:hasPermitStatus a owl:ObjectProperty ;
+    rdfs:domain dwc:Permit ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range ggbn:permitStatus_vocabulary ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to concepts associated in [ggbn:permitStatus_vocabulary]."@en ;
+    skos:prefLabel "Has Permit Status" .
+
+dwcdp:hasPermitType a owl:ObjectProperty ;
+    rdfs:domain dwc:Permit ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range ggbn:permitType_vocabulary ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to concepts associated in [ggbn:permitType_vocabulary]."@en ;
+    skos:prefLabel "Has Permit Type" .
+
 dwcdp:hasUsagePolicy a owl:ObjectProperty ;
     rdfs:domain ac:Media,
         dwc:MaterialEntity ;
@@ -1113,6 +1122,16 @@ minext:verbatimSize a owl:DatatypeProperty ;
         "width 3 inches" ;
     skos:prefLabel "Verbatim Size" .
 
+ggbn:Collecting_Permit a skos:Concept ;
+    rdfs:isDefinedBy ggbn: ;
+    skos:definition "A value of the ggbnvoc:permitType_vocabulary."@en ;
+    skos:prefLabel "Collecting Permit"@en .
+
+ggbn:Import_Permit a skos:Concept ;
+    rdfs:isDefinedBy ggbn: ;
+    skos:definition "A value of the ggbnvoc:permitType_vocabulary."@en ;
+    skos:prefLabel "Import Permit"@en .
+
 ggbn:concentration a owl:DatatypeProperty ;
     dcterms:isVersionOf ggbn:concentration ;
     rdfs:domain dwc:MolecularProtocol ;
@@ -1276,36 +1295,6 @@ miqe:thresholdQuantificationCycle a owl:DatatypeProperty ;
     skos:definition "Threshold for change in fluorescence signal between cycles."@en ;
     skos:example 0.3 ;
     skos:prefLabel "Fluorescence Cycle Threshold" .
-
-tdt:absoluteTautonymy a skos:Concept ;
-    rdfs:isDefinedBy tdt: ;
-    skos:prefLabel "Absolute Tautonymy"@en .
-
-tdt:linnaeanTautonymy a skos:Concept ;
-    rdfs:isDefinedBy tdt: ;
-    skos:definition "The identical spelling of a new generic or subgeneric name established before 1931 and a pre-1758 name cited as a synonym of only one of the species or subspecies originally included in that genus."@en ;
-    skos:prefLabel "Linnaean Tautonymy"@en .
-
-tdt:originalDesignation a skos:Concept ;
-    rdfs:isDefinedBy tdt: ;
-    skos:definition "If one nominal species is explicitly designated as the type species when a nominal genus-group taxon is established, that nominal species is the type species (type by original designation)."@en ;
-    skos:prefLabel "Original Designation"@en .
-
-tdt:presentDesignation a skos:Concept ;
-    rdfs:isDefinedBy tdt: ;
-    skos:prefLabel "Present Designation"@en .
-
-tdt:rulingByCommission a skos:Concept ;
-    rdfs:isDefinedBy tdt: ;
-    skos:prefLabel "Ruling By Commission"@en .
-
-tdt:subsequentDesignation a skos:Concept ;
-    rdfs:isDefinedBy tdt: ;
-    skos:prefLabel "Subsequent Designation"@en .
-
-tdt:subsequentMonotypy a skos:Concept ;
-    rdfs:isDefinedBy tdt: ;
-    skos:prefLabel "Subsequent Monotypy"@en .
 
 ac:caption a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:caption ;
@@ -1680,6 +1669,7 @@ dwc:TypeDesignationType a owl:Class ;
     dcterms:references <https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml> ;
     rdfs:comment "From [https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml](https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml)."@en ;
     rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf skos:Concept ;
     owl:oneOf ( tdt:originalDesignation tdt:presentDesignation tdt:subsequentDesignation tdt:monotypy tdt:subsequentMonotypy tdt:absoluteTautonymy tdt:monotypy tdt:linnaeanTautonymy tdt:rulingByCommission ) ;
     skos:definition "A category that best matches the nature of a type designation."@en ;
     skos:prefLabel "Type Designation Type" .
@@ -3422,6 +3412,22 @@ mixs:0001322 a owl:DatatypeProperty ;
     skos:definition "The substance, mixture, product, or apparatus used to verify that a process which is part of an investigation delivers a true positive."@en ;
     skos:prefLabel "Positive Control Type" .
 
+ggbn:permitStatus_vocabulary a owl:Class ;
+    dcterms:isVersionOf ggbn:permitStatus_vocabulary ;
+    rdfs:isDefinedBy ggbn: ;
+    rdfs:subClassOf skos:Concept ;
+    owl:oneOf ( ggbn:Permit_available ggbn:Permit_not_required ggbn:Permit_not_available ggbn:Unknown ) ;
+    skos:definition "Vocabulary of ggbn:permitStatus."@en ;
+    skos:prefLabel "Permit Status Vocabulary" .
+
+ggbn:permitType_vocabulary a owl:Class ;
+    dcterms:isVersionOf ggbn:permitType_vocabulary ;
+    rdfs:isDefinedBy ggbn: ;
+    rdfs:subClassOf skos:Concept ;
+    owl:oneOf ( ggbn:Collecting_Permit ggbn:Import_Permit ggbn:Export_Permit ggbn:Intellectual_Property_Rights ggbn:Copyright ggbn:Patent ggbn:Data_use ggbn:Phytosanitary ggbn:Salvage ggbn:Exemption_Permit ggbn:Material_Transfer_Agreement ggbn:Internationally_Recognized_Certificate_of_Compliance ggbn:Contract ggbn:Memorandum_of_Understanding ggbn:Memorandum_of_Cooperation ggbn:Veterinary_Certificate ggbn:Human_Pathogens ggbn:Genetically_Modified_Organism ggbn:Other ) ;
+    skos:definition "Vocabulary of ggbn:permitType term."@en ;
+    skos:prefLabel "Permit Type Vocabulary" .
+
 dcterms:source a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:source ;
     rdfs:comment "This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or string conforming to a formal identification system."@en ;
@@ -3437,11 +3443,6 @@ dcterms:spatial a owl:ObjectProperty ;
     rdfs:range dcterms:Location ;
     skos:definition "Spatial characteristics of the resource."@en ;
     skos:prefLabel "Spatial Coverage" .
-
-tdt:monotypy a skos:Concept ;
-    rdfs:isDefinedBy tdt: ;
-    skos:definition "Type species by monotypy. When an author establishes a new nominal genus-group taxon for a single taxonomic species and denotes that species by an available name, the nominal species so named is the type species."@en ;
-    skos:prefLabel "Monotypy"@en .
 
 dwciri:georeferencedBy a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:georeferencedBy ;
@@ -3563,13 +3564,6 @@ dcterms:type a owl:ObjectProperty ;
     skos:definition "The nature or genre of the resource." ;
     skos:prefLabel "Type" .
 
-dwc:Permit a owl:Class ;
-    dcterms:isVersionOf dwc:Permit ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A document, allowing for the execution of certain activities."@en ;
-    skos:example "a license to put up mist-nets to sample for bird communities" ;
-    skos:prefLabel "Permit" .
-
 dwc:relationshipOfResourceID a owl:ObjectProperty ;
     dcterms:isVersionOf dwc:relationshipOfResourceID ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/relationshipOfResourceID-2023-06-28> ;
@@ -3589,6 +3583,13 @@ dwcdp:followed a owl:ObjectProperty ;
     rdfs:range dwc:Protocol ;
     skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
     skos:prefLabel "Followed" .
+
+dwc:Permit a owl:Class ;
+    dcterms:isVersionOf dwc:Permit ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A document, allowing for the execution of certain activities."@en ;
+    skos:example "a license to put up mist-nets to sample for bird communities" ;
+    skos:prefLabel "Permit" .
 
 dcterms:title a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:title ;

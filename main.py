@@ -334,6 +334,56 @@ createOC(
     version_of_s="http://rs.tdwg.org/dwc/terms/Permit",
 )
 
+# TEST: Consider a class to contain the controlled types of Permits
+# Here the namespace is referred to as ggbn:
+createEOC(
+    name="permitStatus_vocabulary",
+    namespace=GGBN,
+    graph=g,
+    pref_label=Literal("Permit Status Vocabulary"),
+    definition=Literal("Vocabulary of ggbn:permitStatus.", lang="en"),
+    one_of=[
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Permit_available"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Permit_not_required"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Permit_not_available"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Unknown"),
+    ],
+    version_of_s="http://data.ggbn.org/schemas/ggbn/terms/permitStatus_vocabulary",
+)
+
+# TEST: Consider a class to contain the controlled types of Permits
+# Here the namespace is referred to as ggbn:
+# Beware the Data use and the 
+createEOC(
+    name="permitType_vocabulary",
+    namespace=GGBN,
+    graph=g,
+    pref_label=Literal("Permit Type Vocabulary"),
+    definition=Literal("Vocabulary of ggbn:permitType term.", lang="en"),
+    one_of=[
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Collecting_Permit"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Import_Permit"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Export_Permit"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Intellectual_Property_Rights"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Copyright"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Patent"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Data_use"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Phytosanitary"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Salvage"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Exemption_Permit"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Material_Transfer_Agreement"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Internationally_Recognized_Certificate_of_Compliance"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Contract"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Memorandum_of_Understanding"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Memorandum_of_Cooperation"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Veterinary_Certificate"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Human_Pathogens"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Genetically_Modified_Organism"),
+        URIRef("http://data.ggbn.org/schemas/ggbn/terms/Other"),
+    ],
+    version_of_s="http://data.ggbn.org/schemas/ggbn/terms/permitType_vocabulary",
+)
+
 createOC(
     name="Protocol",
     namespace=DWC,
@@ -863,71 +913,89 @@ g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], Robj_class))
 # BEGIN INDIVIDUALS
 #####################################################################################################
 
+# createSC(
+#     name="originalDesignation",
+#     namespace=TDT,
+#     graph=g,
+#     pref_label=Literal("Original Designation", lang="en"),
+#     definition=Literal("If one nominal species is explicitly designated as the type species when a nominal genus-group taxon is established, that nominal species is the type species (type by original designation).", lang="en"),
+# )
+
+# createSC(
+#     name="presentDesignation",
+#     namespace=TDT,
+#     graph=g,
+#     pref_label=Literal("Present Designation", lang="en"),
+# )
+
+# createSC(
+#     name="subsequentDesignation",
+#     namespace=TDT,
+#     graph=g,
+#     pref_label=Literal("Subsequent Designation", lang="en"),
+# )
+
+# createSC(
+#     name="monotypy",
+#     namespace=TDT,
+#     graph=g,
+#     pref_label=Literal("Monotypy", lang="en"),
+#     definition=Literal("Type species by monotypy. When an author establishes a new nominal genus-group taxon for a single taxonomic species and denotes that species by an available name, the nominal species so named is the type species.", lang="en"),
+# )
+
+# createSC(
+#     name="subsequentMonotypy",
+#     namespace=TDT,
+#     graph=g,
+#     pref_label=Literal("Subsequent Monotypy", lang="en"),
+# )
+
+# createSC(
+#     name="tautonymy",
+#     namespace=TDT,
+#     graph=g,
+#     pref_label=Literal("Tautonymy", lang="en"),
+#     definition=Literal("If a valid species-group name, or its cited synonym, originally included in a nominal genus-group taxon is identical with the name of that taxon, the nominal species denoted by that specific name (if available) is the type species.", lang="en")
+# )
+
+# createSC(
+#     name="absoluteTautonymy",
+#     namespace=TDT,
+#     graph=g,
+#     pref_label=Literal("Absolute Tautonymy", lang="en"),
+# )
+
+# createSC(
+#     name="linnaeanTautonymy",
+#     namespace=TDT,
+#     graph=g,
+#     pref_label=Literal("Linnaean Tautonymy", lang="en"),
+#     definition=Literal("The identical spelling of a new generic or subgeneric name established before 1931 and a pre-1758 name cited as a synonym of only one of the species or subspecies originally included in that genus.", lang="en",)
+# )
+
+# createSC(
+#     name="rulingByCommission",
+#     namespace=TDT,
+#     graph=g,
+#     pref_label=Literal("Ruling By Commission", lang="en"),
+# )
+
+
+
 createSC(
-    name="originalDesignation",
-    namespace=TDT,
+    name="Collecting_Permit",
+    namespace=GGBN,
     graph=g,
-    pref_label=Literal("Original Designation", lang="en"),
-    definition=Literal("If one nominal species is explicitly designated as the type species when a nominal genus-group taxon is established, that nominal species is the type species (type by original designation).", lang="en"),
+    pref_label=Literal("Collecting Permit", lang="en"),
+    definition=Literal("A value of the ggbnvoc:permitType_vocabulary.", lang="en"),
 )
 
 createSC(
-    name="presentDesignation",
-    namespace=TDT,
+    name="Import_Permit",
+    namespace=GGBN,
     graph=g,
-    pref_label=Literal("Present Designation", lang="en"),
-)
-
-createSC(
-    name="subsequentDesignation",
-    namespace=TDT,
-    graph=g,
-    pref_label=Literal("Subsequent Designation", lang="en"),
-)
-
-createSC(
-    name="monotypy",
-    namespace=TDT,
-    graph=g,
-    pref_label=Literal("Monotypy", lang="en"),
-    definition=Literal("Type species by monotypy. When an author establishes a new nominal genus-group taxon for a single taxonomic species and denotes that species by an available name, the nominal species so named is the type species.", lang="en"),
-)
-
-createSC(
-    name="subsequentMonotypy",
-    namespace=TDT,
-    graph=g,
-    pref_label=Literal("Subsequent Monotypy", lang="en"),
-)
-
-createSC(
-    name="tautonymy",
-    namespace=TDT,
-    graph=g,
-    pref_label=Literal("Tautonymy", lang="en"),
-    definition=Literal("If a valid species-group name, or its cited synonym, originally included in a nominal genus-group taxon is identical with the name of that taxon, the nominal species denoted by that specific name (if available) is the type species.", lang="en")
-)
-
-createSC(
-    name="absoluteTautonymy",
-    namespace=TDT,
-    graph=g,
-    pref_label=Literal("Absolute Tautonymy", lang="en"),
-)
-
-createSC(
-    name="linnaeanTautonymy",
-    namespace=TDT,
-    graph=g,
-    pref_label=Literal("Linnaean Tautonymy", lang="en"),
-    definition=Literal("The identical spelling of a new generic or subgeneric name established before 1931 and a pre-1758 name cited as a synonym of only one of the species or subspecies originally included in that genus.", lang="en",)
-)
-
-createSC(
-    name="rulingByCommission",
-    namespace=TDT,
-    graph=g,
-    pref_label=Literal("Ruling By Commission", lang="en"),
+    pref_label=Literal("Import Permit", lang="en"),
+    definition=Literal("A value of the ggbnvoc:permitType_vocabulary.", lang="en"),
 )
 
 #####################################################################################################
@@ -1643,6 +1711,26 @@ createOP(
     pref_label=Literal("Has Media"),
     definition=Literal("An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]", lang="en"),
     comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:isMediaOf], which allows reasoners queries to go through different ways.", lang="en"),
+)
+
+createOP(
+    name="hasPermitStatus",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["Permit"],
+    ranges=GGBN["permitStatus_vocabulary"],
+    pref_label=Literal("Has Permit Status"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Permit] to concepts associated in [ggbn:permitStatus_vocabulary].", lang="en"),
+)
+
+createOP(
+    name="hasPermitType",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["Permit"],
+    ranges=GGBN["permitType_vocabulary"],
+    pref_label=Literal("Has Permit Type"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Permit] to concepts associated in [ggbn:permitType_vocabulary].", lang="en"),
 )
 
 createOP(

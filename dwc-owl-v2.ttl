@@ -717,6 +717,24 @@ dwcdp:hasMedia rdf:type owl:ObjectProperty ;
                skos:prefLabel "Has Media" .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/hasPermitStatus
+dwcdp:hasPermitStatus rdf:type owl:ObjectProperty ;
+                      rdfs:domain dwc:Permit ;
+                      rdfs:range ggbn:permitStatus_vocabulary ;
+                      rdfs:isDefinedBy dwcdp: ;
+                      skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to concepts associated in [ggbn:permitStatus_vocabulary]."@en ;
+                      skos:prefLabel "Has Permit Status" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/hasPermitType
+dwcdp:hasPermitType rdf:type owl:ObjectProperty ;
+                    rdfs:domain dwc:Permit ;
+                    rdfs:range ggbn:permitType_vocabulary ;
+                    rdfs:isDefinedBy dwcdp: ;
+                    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to concepts associated in [ggbn:permitType_vocabulary]."@en ;
+                    skos:prefLabel "Has Permit Type" .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/hasUsagePolicy
 dwcdp:hasUsagePolicy rdf:type owl:ObjectProperty ;
                      rdfs:domain ac:Media ,
@@ -4219,6 +4237,53 @@ minext:verbatimSize rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
+###  http://data.ggbn.org/schemas/ggbn/terms/permitStatus_vocabulary
+ggbn:permitStatus_vocabulary rdf:type owl:Class ;
+                             owl:equivalentClass [ rdf:type owl:Class ;
+                                                   owl:oneOf ( ggbn:Permit_available
+                                                               ggbn:Permit_not_available
+                                                               ggbn:Permit_not_required
+                                                               ggbn:Unknown
+                                                             )
+                                                 ] ;
+                             rdfs:subClassOf skos:Concept ;
+                             dcterms:isVersionOf ggbn:permitStatus_vocabulary ;
+                             rdfs:isDefinedBy ggbn: ;
+                             skos:definition "Vocabulary of ggbn:permitStatus."@en ;
+                             skos:prefLabel "Permit Status Vocabulary" .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/permitType_vocabulary
+ggbn:permitType_vocabulary rdf:type owl:Class ;
+                           owl:equivalentClass [ rdf:type owl:Class ;
+                                                 owl:oneOf ( ggbn:Collecting_Permit
+                                                             ggbn:Contract
+                                                             ggbn:Copyright
+                                                             ggbn:Data_use
+                                                             ggbn:Exemption_Permit
+                                                             ggbn:Export_Permit
+                                                             ggbn:Genetically_Modified_Organism
+                                                             ggbn:Human_Pathogens
+                                                             ggbn:Import_Permit
+                                                             ggbn:Intellectual_Property_Rights
+                                                             ggbn:Internationally_Recognized_Certificate_of_Compliance
+                                                             ggbn:Material_Transfer_Agreement
+                                                             ggbn:Memorandum_of_Cooperation
+                                                             ggbn:Memorandum_of_Understanding
+                                                             ggbn:Other
+                                                             ggbn:Patent
+                                                             ggbn:Phytosanitary
+                                                             ggbn:Salvage
+                                                             ggbn:Veterinary_Certificate
+                                                           )
+                                               ] ;
+                           rdfs:subClassOf skos:Concept ;
+                           dcterms:isVersionOf ggbn:permitType_vocabulary ;
+                           rdfs:isDefinedBy ggbn: ;
+                           skos:definition "Vocabulary of ggbn:permitType term."@en ;
+                           skos:prefLabel "Permit Type Vocabulary" .
+
+
 ###  http://purl.org/dc/terms/Agent
 dcterms:Agent rdf:type owl:Class ;
               rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
@@ -4903,6 +4968,7 @@ dwc:TypeDesignationType rdf:type owl:Class ;
                                                           tdt:subsequentMonotypy
                                                         )
                                             ] ;
+                        rdfs:subClassOf skos:Concept ;
                         dcterms:isVersionOf <http://rs.gbif.org/terms/1.0/typeDesignationType> ;
                         dcterms:references <https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml> ;
                         rdfs:comment "From [https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml](https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml)."@en ;
@@ -4987,71 +5053,136 @@ skos:Concept rdf:type owl:Class .
 #    Individuals
 #################################################################
 
+###  http://data.ggbn.org/schemas/ggbn/terms/Collecting_Permit
+ggbn:Collecting_Permit rdf:type owl:NamedIndividual ,
+                                skos:Concept ;
+                       rdfs:isDefinedBy ggbn: ;
+                       skos:definition "A value of the ggbnvoc:permitType_vocabulary."@en ;
+                       skos:prefLabel "Collecting Permit"@en .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Contract
+ggbn:Contract rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Copyright
+ggbn:Copyright rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Data_use
+ggbn:Data_use rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Exemption_Permit
+ggbn:Exemption_Permit rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Export_Permit
+ggbn:Export_Permit rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Genetically_Modified_Organism
+ggbn:Genetically_Modified_Organism rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Human_Pathogens
+ggbn:Human_Pathogens rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Import_Permit
+ggbn:Import_Permit rdf:type owl:NamedIndividual ,
+                            skos:Concept ;
+                   rdfs:isDefinedBy ggbn: ;
+                   skos:definition "A value of the ggbnvoc:permitType_vocabulary."@en ;
+                   skos:prefLabel "Import Permit"@en .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Intellectual_Property_Rights
+ggbn:Intellectual_Property_Rights rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Internationally_Recognized_Certificate_of_Compliance
+ggbn:Internationally_Recognized_Certificate_of_Compliance rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Material_Transfer_Agreement
+ggbn:Material_Transfer_Agreement rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Memorandum_of_Cooperation
+ggbn:Memorandum_of_Cooperation rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Memorandum_of_Understanding
+ggbn:Memorandum_of_Understanding rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Other
+ggbn:Other rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Patent
+ggbn:Patent rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Permit_available
+ggbn:Permit_available rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Permit_not_available
+ggbn:Permit_not_available rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Permit_not_required
+ggbn:Permit_not_required rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Phytosanitary
+ggbn:Phytosanitary rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Salvage
+ggbn:Salvage rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Unknown
+ggbn:Unknown rdf:type owl:NamedIndividual .
+
+
+###  http://data.ggbn.org/schemas/ggbn/terms/Veterinary_Certificate
+ggbn:Veterinary_Certificate rdf:type owl:NamedIndividual .
+
+
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/absoluteTautonymy
-tdt:absoluteTautonymy rdf:type owl:NamedIndividual ,
-                               skos:Concept ;
-                      rdfs:isDefinedBy tdt: ;
-                      skos:prefLabel "Absolute Tautonymy"@en .
+tdt:absoluteTautonymy rdf:type owl:NamedIndividual .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/linnaeanTautonymy
-tdt:linnaeanTautonymy rdf:type owl:NamedIndividual ,
-                               skos:Concept ;
-                      rdfs:isDefinedBy tdt: ;
-                      skos:definition "The identical spelling of a new generic or subgeneric name established before 1931 and a pre-1758 name cited as a synonym of only one of the species or subspecies originally included in that genus."@en ;
-                      skos:prefLabel "Linnaean Tautonymy"@en .
+tdt:linnaeanTautonymy rdf:type owl:NamedIndividual .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/monotypy
-tdt:monotypy rdf:type owl:NamedIndividual ,
-                      skos:Concept ;
-             rdfs:isDefinedBy tdt: ;
-             skos:definition "Type species by monotypy. When an author establishes a new nominal genus-group taxon for a single taxonomic species and denotes that species by an available name, the nominal species so named is the type species."@en ;
-             skos:prefLabel "Monotypy"@en .
+tdt:monotypy rdf:type owl:NamedIndividual .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/originalDesignation
-tdt:originalDesignation rdf:type owl:NamedIndividual ,
-                                 skos:Concept ;
-                        rdfs:isDefinedBy tdt: ;
-                        skos:definition "If one nominal species is explicitly designated as the type species when a nominal genus-group taxon is established, that nominal species is the type species (type by original designation)."@en ;
-                        skos:prefLabel "Original Designation"@en .
+tdt:originalDesignation rdf:type owl:NamedIndividual .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/presentDesignation
-tdt:presentDesignation rdf:type owl:NamedIndividual ,
-                                skos:Concept ;
-                       rdfs:isDefinedBy tdt: ;
-                       skos:prefLabel "Present Designation"@en .
+tdt:presentDesignation rdf:type owl:NamedIndividual .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/rulingByCommission
-tdt:rulingByCommission rdf:type owl:NamedIndividual ,
-                                skos:Concept ;
-                       rdfs:isDefinedBy tdt: ;
-                       skos:prefLabel "Ruling By Commission"@en .
+tdt:rulingByCommission rdf:type owl:NamedIndividual .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentDesignation
-tdt:subsequentDesignation rdf:type owl:NamedIndividual ,
-                                   skos:Concept ;
-                          rdfs:isDefinedBy tdt: ;
-                          skos:prefLabel "Subsequent Designation"@en .
+tdt:subsequentDesignation rdf:type owl:NamedIndividual .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentMonotypy
-tdt:subsequentMonotypy rdf:type owl:NamedIndividual ,
-                                skos:Concept ;
-                       rdfs:isDefinedBy tdt: ;
-                       skos:prefLabel "Subsequent Monotypy"@en .
-
-
-###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/tautonymy
-tdt:tautonymy rdf:type owl:NamedIndividual ,
-                       skos:Concept ;
-              rdfs:isDefinedBy tdt: ;
-              skos:definition "If a valid species-group name, or its cited synonym, originally included in a nominal genus-group taxon is identical with the name of that taxon, the nominal species denoted by that specific name (if available) is the type species."@en ;
-              skos:prefLabel "Tautonymy"@en .
+tdt:subsequentMonotypy rdf:type owl:NamedIndividual .
 
 
 #################################################################
