@@ -747,17 +747,17 @@ createOC(
 # )
 
 
-# createCTOP(
-#     name="MaterialEntityAssertion",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Material Entity Assertion"),
-#     subclass_list=[DWC["Assertion"]],
-#     object_prop=DWCDP["about"],
-#     use_inverse=False,
-#     values_class=DWC["MaterialEntity"],
-#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]."),
-# )
+createCTOP(
+    name="MaterialEntityAssertion",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Material Entity Assertion"),
+    subclass_list=[DWC["Assertion"]],
+    object_prop=DWCDP["about"],
+    use_inverse=False,
+    values_class=DWC["MaterialEntity"],
+    definition=Literal("A dwc:Assertion made by a dcterms:Agent about a dwc:MaterialEntity."),
+)
 
 # createCTOP(
 #     name="MediaAssertion",

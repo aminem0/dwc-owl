@@ -128,10 +128,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -481,14 +481,6 @@ dwc:verbatimAssertionType a owl:DatatypeProperty ;
         "sampling net mesh size",
         "water_temp" ;
     skos:prefLabel "Verbatim Assertion Type" .
-
-dwcdp:about a owl:ObjectProperty ;
-    rdfs:domain dwc:Assertion ;
-    rdfs:isDefinedBy dwcdp: ;
-    rdfs:range [ a owl:Class ;
-            owl:unionOf ( ac:Media chrono:ChronometricAge dwc:Event dwc:MaterialEntity dwc:NucleotideAnalysis dwc:Occurrence dwc:Organism ) ] ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism]."@en ;
-    skos:prefLabel "About" .
 
 dwcdp:allowsFor a owl:ObjectProperty ;
     rdfs:domain dwc:Permit ;
@@ -3028,6 +3020,14 @@ dwc:year a owl:DatatypeProperty ;
         2008 ;
     skos:prefLabel "Year" .
 
+dwcdp:about a owl:ObjectProperty ;
+    rdfs:domain dwc:Assertion ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( ac:Media chrono:ChronometricAge dwc:Event dwc:MaterialEntity dwc:NucleotideAnalysis dwc:Occurrence dwc:Organism ) ] ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism]."@en ;
+    skos:prefLabel "About" .
+
 dwcdp:basedOn a owl:ObjectProperty ;
     rdfs:domain dwc:Identification ;
     rdfs:isDefinedBy dwcdp: ;
@@ -3768,6 +3768,15 @@ dwc:Assertion a owl:Class ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
     rdfs:isDefinedBy dwc: ;
     skos:prefLabel "Assertion" .
+
+dwc:MaterialEntityAssertion a owl:Class ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf dwc:Assertion ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty dwcdp:about ;
+            owl:someValuesFrom dwc:MaterialEntity ] ;
+    skos:definition "A dwc:Assertion made by a dcterms:Agent about a dwc:MaterialEntity." ;
+    skos:prefLabel "Material Entity Assertion" .
 
 ggbn:permitType_vocabulary a owl:Class ;
     dcterms:isVersionOf ggbn:permitType_vocabulary ;

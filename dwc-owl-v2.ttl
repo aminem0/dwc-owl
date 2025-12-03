@@ -4565,7 +4565,15 @@ dwc:MaterialEntity rdf:type owl:Class ;
 
 
 ###  http://rs.tdwg.org/dwc/terms/MaterialEntityAssertion
-dwc:MaterialEntityAssertion rdf:type owl:Class .
+dwc:MaterialEntityAssertion rdf:type owl:Class ;
+                            owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                  owl:onProperty dwcdp:about ;
+                                                  owl:someValuesFrom dwc:MaterialEntity
+                                                ] ;
+                            rdfs:subClassOf dwc:Assertion ;
+                            rdfs:isDefinedBy dwc: ;
+                            skos:definition "A dwc:Assertion made by a dcterms:Agent about a dwc:MaterialEntity." ;
+                            skos:prefLabel "Material Entity Assertion" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/MolecularProtocol
