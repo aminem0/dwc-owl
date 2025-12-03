@@ -48,6 +48,7 @@ def createOC(
         elif isinstance(examples, list):
             for example in examples:
                 graph.add((class_uri, SKOS["example"], example))
+
     # Add version info.
     graph.add((class_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
 
@@ -747,7 +748,8 @@ def createEOC(
                 graph.add((oc_uri, SKOS["example"], example))
 
     # Add version info.
-    graph.add((oc_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
+    if version_of_s:
+        graph.add((oc_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
 
     if references_s:
         graph.add((oc_uri, DCTERMS["references"], URIRef(references_s)))
@@ -773,8 +775,8 @@ def createEOC(
     # Declare each individual as an instance of the created class
     # NOTE: This is just making it explicit, either way the reasoner
     # would find it
-    # for one in one_of:
-    #     graph.add((one, RDF["type"], oc_uri))
+    for one in one_of:
+        graph.add((one, RDF["type"], oc_uri))
 
 # TEST: Function that defines a skos:Concept with pertinent information
 def createSC(
@@ -783,6 +785,9 @@ def createSC(
         graph: Graph,
         pref_label: Literal,
         definition: Literal | None = None,
+        comments: Literal | None = None,
+        version_of_s: str | None = None,
+        references_s: str | None = None,
         ) -> None:
     # Create the skos:Concept URI
     sc_uri = namespace[name]
@@ -798,7 +803,18 @@ def createSC(
         graph.add((sc_uri, SKOS["definition"], definition))
         # graph.add((sc_uri, DC["description"], definition))
 
+    # Optionally add comments.
+    if comments:
+        graph.add((sc_uri, RDFS["comment"], comments))
+
+    # Add version info.
+    graph.add((sc_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
+
+    if references_s:
+        graph.add((sc_uri, DCTERMS["references"], URIRef(references_s)))
+
+
     # Declare it in the graph
-    graph.add((sc_uri, RDF["type"], SKOS["Concept"]))
+    # graph.add((sc_uri, RDF["type"], SKOS["Concept"]))
    
 

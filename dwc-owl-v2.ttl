@@ -10,7 +10,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xmp: <http://ns.adobe.com/xap/1.0/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix gbif: <http://rs.gbif.org/terms/> .
 @prefix ggbn: <http://data.ggbn.org/schemas/ggbn/terms/> .
 @prefix miqe: <http://rs.gbif.org/terms/miqe/> .
@@ -19,7 +18,9 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
+@prefix dwcem: <http://rs.tdwg.org/dwcem/values/> .
 @prefix chrono: <http://rs.tdwg.org/chrono/terms/> .
+@prefix dwcdoe: <http://rs.tdwg.org/dwcdoe/values/> .
 @prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
 @prefix minext: <http://rs.tdwg.org/mineralogy/terms/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -128,10 +129,6 @@ dcterms:type rdf:type owl:ObjectProperty ;
              skos:prefLabel "Type" .
 
 
-###  http://purl.org/ontology/bibo/editor
-bibo:editor rdf:type owl:ObjectProperty .
-
-
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
 dwciri:assertionTypeIRI rdf:type owl:ObjectProperty ;
                         rdfs:domain dwc:Assertion ;
@@ -195,14 +192,15 @@ dwciri:dataGeneralizations rdf:type owl:ObjectProperty ;
 ###  http://rs.tdwg.org/dwc/iri/degreeOfEstablishment
 dwciri:degreeOfEstablishment rdf:type owl:ObjectProperty ;
                              rdfs:domain dwc:Occurrence ;
+                             rdfs:range dwc:DegreeOfEstablishment ;
                              dcterms:isVersionOf dwciri:degreeOfEstablishment ;
                              dcterms:references <http://rs.tdwg.org/dwc/iri/version/degreeOfEstablishment-2025-07-10> ;
                              rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                              rdfs:isDefinedBy dwciri: ;
                              skos:definition "The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time."@en ;
-                             skos:example <http://rs.tdwg.org/dwcdoe/values/d003> ,
-                                          <http://rs.tdwg.org/dwcdoe/values/d005> ;
-                             skos:prefLabel "Degree Of Establisment (IRI)" .
+                             skos:example dwcdoe:d003 ,
+                                          dwcdoe:d005 ;
+                             skos:prefLabel "Degree Of Establishment (IRI)" .
 
 
 ###  http://rs.tdwg.org/dwc/iri/discipline
@@ -240,13 +238,14 @@ dwciri:earliestGeochronologicalEra rdf:type owl:ObjectProperty ;
 ###  http://rs.tdwg.org/dwc/iri/establishmentMeans
 dwciri:establishmentMeans rdf:type owl:ObjectProperty ;
                           rdfs:domain dwc:Occurrence ;
+                          rdfs:range dwc:EstablishmentMeans ;
                           dcterms:isVersionOf dwciri:establishmentMeans ;
                           dcterms:references <http://rs.tdwg.org/dwc/iri/version/establishmentMeans-2025-07-10> ;
                           rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                           rdfs:isDefinedBy dwciri: ;
                           skos:definition "Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans."@en ;
-                          skos:example <http://rs.tdwg.org/dwcem/values/e001> ,
-                                       <http://rs.tdwg.org/dwcem/values/e005> ;
+                          skos:example dwcem:e001 ,
+                                       dwcem:e005 ;
                           skos:prefLabel "Establishment Means (IRI)" .
 
 
@@ -590,16 +589,11 @@ dwcdp:basedOn rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/commentedBy
 dwcdp:commentedBy rdf:type owl:ObjectProperty ;
-                  owl:inverseOf dwcdp:commentedOn ;
                   rdfs:domain ac:Media ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that commented it."@en ;
                   skos:prefLabel "Commented By" .
-
-
-###  http://rs.tdwg.org/dwcdp/terms/commentedOn
-dwcdp:commentedOn rdf:type owl:ObjectProperty .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/conductedBy
@@ -699,7 +693,6 @@ dwcdp:happenedWithin rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/hasMedia
 dwcdp:hasMedia rdf:type owl:ObjectProperty ;
-               owl:inverseOf dwcdp:isMediaOf ;
                rdfs:domain [ rdf:type owl:Class ;
                              owl:unionOf ( dcterms:Agent
                                            chrono:ChronometricAge
@@ -813,10 +806,6 @@ dwcdp:isDerivedFrom rdf:type owl:ObjectProperty ,
                     rdfs:isDefinedBy dwcdp: ;
                     skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
                     skos:prefLabel "Is Derived From" .
-
-
-###  http://rs.tdwg.org/dwcdp/terms/isMediaOf
-dwcdp:isMediaOf rdf:type owl:ObjectProperty .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/isPartOf
@@ -1809,6 +1798,64 @@ dwc:decimalLongitude rdf:type owl:DatatypeProperty ;
                      skos:prefLabel "Decimal Longitude" .
 
 
+###  http://rs.tdwg.org/dwc/terms/degreeOfEstablishment
+dwc:degreeOfEstablishment rdf:type owl:DatatypeProperty ;
+                          rdfs:domain dwc:Occurrence ;
+                          rdfs:range [ rdf:type rdfs:Datatype ;
+                                       owl:oneOf [ rdf:type rdf:List ;
+                                                   rdf:first "captive" ;
+                                                   rdf:rest [ rdf:type rdf:List ;
+                                                              rdf:first "casual" ;
+                                                              rdf:rest [ rdf:type rdf:List ;
+                                                                         rdf:first "colonising" ;
+                                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                                    rdf:first "cultivated" ;
+                                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                                               rdf:first "established" ;
+                                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                                          rdf:first "failing" ;
+                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                     rdf:first "invasive" ;
+                                                                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                rdf:first "native" ;
+                                                                                                                                rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                           rdf:first "released" ;
+                                                                                                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                      rdf:first "reproducing" ;
+                                                                                                                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                 rdf:first "widespreadInvasive" ;
+                                                                                                                                                                 rdf:rest rdf:nil
+                                                                                                                                                               ]
+                                                                                                                                                    ]
+                                                                                                                                         ]
+                                                                                                                              ]
+                                                                                                                   ]
+                                                                                                        ]
+                                                                                             ]
+                                                                                  ]
+                                                                       ]
+                                                            ]
+                                                 ]
+                                     ] ;
+                          dcterms:isVersionOf dwc:degreeOfEstablishment ;
+                          dcterms:references <http://rs.tdwg.org/dwc/terms/version/degreeOfEstablishment-2023-06-28> ;
+                          rdfs:comment "Recommended best practice is to use controlled value strings from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                          rdfs:isDefinedBy dwc: ;
+                          skos:definition "The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time."@en ;
+                          skos:example "captive" ,
+                                       "casual" ,
+                                       "colonising" ,
+                                       "cultivated" ,
+                                       "established" ,
+                                       "failing" ,
+                                       "invasive" ,
+                                       "native" ,
+                                       "released" ,
+                                       "reproducing" ,
+                                       "widespreadInvasive" ;
+                          skos:prefLabel "Degree of Establishment"@en .
+
+
 ###  http://rs.tdwg.org/dwc/terms/derivedFromMediaID
 dwc:derivedFromMediaID rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf dcterms:identifier ;
@@ -1928,6 +1975,48 @@ dwc:endDayOfYear rdf:type owl:DatatypeProperty ;
                               365 ,
                               366 ;
                  skos:prefLabel "End Day Of Year" .
+
+
+###  http://rs.tdwg.org/dwc/terms/establishmentMeans
+dwc:establishmentMeans rdf:type owl:DatatypeProperty ;
+                       rdfs:domain dwc:Occurrence ;
+                       rdfs:range [ rdf:type rdfs:Datatype ;
+                                    owl:oneOf [ rdf:type rdf:List ;
+                                                rdf:first "introduced" ;
+                                                rdf:rest [ rdf:type rdf:List ;
+                                                           rdf:first "introducedAssistedColonisation" ;
+                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                      rdf:first "native" ;
+                                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                                 rdf:first "nativeEndemic" ;
+                                                                                 rdf:rest [ rdf:type rdf:List ;
+                                                                                            rdf:first "nativeReintroduced" ;
+                                                                                            rdf:rest [ rdf:type rdf:List ;
+                                                                                                       rdf:first "uncertain" ;
+                                                                                                       rdf:rest [ rdf:type rdf:List ;
+                                                                                                                  rdf:first "vagrant" ;
+                                                                                                                  rdf:rest rdf:nil
+                                                                                                                ]
+                                                                                                     ]
+                                                                                          ]
+                                                                               ]
+                                                                    ]
+                                                         ]
+                                              ]
+                                  ] ;
+                       dcterms:isVersionOf dwc:establishmentMeans ;
+                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/establishmentMeans-2023-06-28> ;
+                       rdfs:comment "Recommended best practice is to use controlled value strings from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+                       rdfs:isDefinedBy dwc: ;
+                       skos:definition "Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans."@en ;
+                       skos:example "introduced" ,
+                                    "introducedAssistedColonisation" ,
+                                    "native" ,
+                                    "nativeEndemic" ,
+                                    "nativeReintroduced" ,
+                                    "uncertain" ,
+                                    "vagrant" ;
+                       skos:prefLabel "Establishment Means"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/eventDate
@@ -4350,18 +4439,6 @@ chrono:ChronometricAge rdf:type owl:Class ;
                        skos:prefLabel "Chronometric Age" .
 
 
-###  http://rs.tdwg.org/dwc/terms/AgentMedia
-dwc:AgentMedia rdf:type owl:Class ;
-               owl:equivalentClass [ rdf:type owl:Restriction ;
-                                     owl:onProperty dwcdp:isMediaOf ;
-                                     owl:someValuesFrom dcterms:Agent
-                                   ] ;
-               rdfs:subClassOf ac:Media ;
-               rdfs:isDefinedBy dwc: ;
-               skos:definition "A [ac:Media] about a [dcterms:Agent]." ;
-               skos:prefLabel "Agent Media" .
-
-
 ###  http://rs.tdwg.org/dwc/terms/Assertion
 dwc:Assertion rdf:type owl:Class ;
               dcterms:isVersionOf dwc:MeasurementOrFact ;
@@ -4370,99 +4447,46 @@ dwc:Assertion rdf:type owl:Class ;
               skos:prefLabel "Assertion" .
 
 
-###  http://rs.tdwg.org/dwc/terms/AssertionAgent
-dwc:AssertionAgent rdf:type owl:Class ;
-                   owl:equivalentClass [ rdf:type owl:Restriction ;
-                                         owl:onProperty [ owl:inverseOf dwcdp:assertedBy
-                                                        ] ;
-                                         owl:someValuesFrom dwc:Assertion
-                                       ] ;
-                   rdfs:subClassOf dcterms:Agent ;
-                   rdfs:comment "Due to the directionality of the property [dwcdp:assertedBy], the class is defined in description logic as [dwcdp:AssertionAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:assertedBy]⁻).[dwc:Assertion]."@en ;
-                   rdfs:isDefinedBy dwc: ;
-                   skos:definition "An instance of a [dcterms:Agent] that has made a [dwc:Assertion]."@en ;
-                   skos:prefLabel "Assertion Agent" .
+###  http://rs.tdwg.org/dwc/terms/DegreeOfEstablishment
+dwc:DegreeOfEstablishment rdf:type owl:Class ;
+                          owl:equivalentClass [ rdf:type owl:Class ;
+                                                owl:oneOf ( dwcdoe:d001
+                                                            dwcdoe:d002
+                                                            dwcdoe:d003
+                                                            dwcdoe:d004
+                                                            dwcdoe:d005
+                                                            dwcdoe:d006
+                                                            dwcdoe:d007
+                                                            dwcdoe:d008
+                                                            dwcdoe:d009
+                                                            dwcdoe:d010
+                                                            dwcdoe:d011
+                                                          )
+                                              ] ;
+                          rdfs:subClassOf skos:Concept ;
+                          rdfs:comment "For details and rationale, see [Groom et al. 2019](https://doi.org/10.3897/biss.3.38084)."@en ;
+                          rdfs:isDefinedBy dwc: ;
+                          skos:definition "Controlled value for Darwin Core terms with local name degreeOfEstablishment."@en ;
+                          skos:prefLabel "Degree Of Establishment"@en .
 
 
-###  http://rs.tdwg.org/dwc/terms/AuthorAgent
-dwc:AuthorAgent rdf:type owl:Class ;
-                owl:equivalentClass [ rdf:type owl:Restriction ;
-                                      owl:onProperty [ owl:inverseOf dwcdp:authoredBy
-                                                     ] ;
-                                      owl:someValuesFrom dcterms:BibliographicResource
-                                    ] ;
-                rdfs:subClassOf dcterms:Agent ;
-                rdfs:comment "Due to the directionality of the property [dwcdp:authoredBy], the class is defined in description logic as [dwcdp:AuthorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:authoredBy]⁻).[dcterms:BibliographicResource]."@en ;
-                rdfs:isDefinedBy dwc: ;
-                skos:definition "An instance of a [dcterms:Agent] that has authored a [dcterms:BibliographicResource]."@en ;
-                skos:prefLabel "Author Agent" .
-
-
-###  http://rs.tdwg.org/dwc/terms/ChronometricAgeAssertion
-dwc:ChronometricAgeAssertion rdf:type owl:Class ;
-                             owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                   owl:onProperty dwcdp:about ;
-                                                   owl:someValuesFrom chrono:ChronometricAge
-                                                 ] ;
-                             rdfs:subClassOf dwc:Assertion ;
-                             rdfs:isDefinedBy dwc: ;
-                             skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:ChronometricAge]." ;
-                             skos:prefLabel "Chronometric Age Assertion" .
-
-
-###  http://rs.tdwg.org/dwc/terms/CommenterAgent
-dwc:CommenterAgent rdf:type owl:Class ;
-                   owl:equivalentClass [ rdf:type owl:Restriction ;
-                                         owl:onProperty dwcdp:commentedOn ;
-                                         owl:someValuesFrom ac:Media
-                                       ] ;
-                   rdfs:subClassOf dcterms:Agent ;
-                   rdfs:comment "Due to the directionality of the property [dwcdp:commentedBy], the class is defined in description logic as [dwcdp:Commenter] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:commentedBy]⁻).[ac:Media]."@en ;
-                   rdfs:isDefinedBy dwc: ;
-                   skos:definition "An instance of a [dcterms:Agent] that has commented a [dwc:Media]."@en ;
-                   skos:prefLabel "Commenter Agent" .
-
-
-###  http://rs.tdwg.org/dwc/terms/ConductorAgent
-dwc:ConductorAgent rdf:type owl:Class ;
-                   owl:equivalentClass [ rdf:type owl:Restriction ;
-                                         owl:onProperty [ owl:inverseOf dwcdp:conductedBy
-                                                        ] ;
-                                         owl:someValuesFrom dwc:Event
-                                       ] ;
-                   rdfs:subClassOf dcterms:Agent ;
-                   rdfs:comment "Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwc:ConductorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event]."@en ;
-                   rdfs:isDefinedBy dwc: ;
-                   skos:definition "An instance of a [dcterms:Agent] that has conducted a [dwc:Event]."@en ;
-                   skos:prefLabel "Conductor Agent" .
-
-
-###  http://rs.tdwg.org/dwc/terms/DatedMaterialEntity
-dwc:DatedMaterialEntity rdf:type owl:Class ;
-                        owl:equivalentClass [ rdf:type owl:Restriction ;
-                                              owl:onProperty [ owl:inverseOf dwcdp:datedMaterial
-                                                             ] ;
-                                              owl:someValuesFrom chrono:ChronometricAge
-                                            ] ;
-                        rdfs:subClassOf dwc:MaterialEntity ;
-                        rdfs:comment "Due to the directionality of the property [dwcdp:datedMaterial], the class is defined in description logic as [dwc:DatedMaterialEntity] ≡ [dwc:MaterialEntity] ⊓ ∃([dwcdp:datedMaterial]⁻).[dwc:MaterialEntity]."@en ;
-                        rdfs:isDefinedBy dwc: ;
-                        skos:definition "An instance of a [dwc:MaterialEntity] that has been dated by a [chrono:ChronometricAge]."@en ;
-                        skos:prefLabel "Dated Material Entity" .
-
-
-###  http://rs.tdwg.org/dwc/terms/EditorAgent
-dwc:EditorAgent rdf:type owl:Class ;
-                owl:equivalentClass [ rdf:type owl:Restriction ;
-                                      owl:onProperty [ owl:inverseOf bibo:editor
-                                                     ] ;
-                                      owl:someValuesFrom dcterms:BibliographicResource
-                                    ] ;
-                rdfs:subClassOf dcterms:Agent ;
-                rdfs:comment "Due to the directionality of the property [dwcdp:editedBy], the class is defined in description logic as [dwcdp:EditorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:editedBy]⁻).[dcterms:BibliographicResource]."@en ;
-                rdfs:isDefinedBy dwc: ;
-                skos:definition "An instance of a [dcterms:Agent] that has edited a [dcterms:BibliographicResource]."@en ;
-                skos:prefLabel "Editor Agent" .
+###  http://rs.tdwg.org/dwc/terms/EstablishmentMeans
+dwc:EstablishmentMeans rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Class ;
+                                             owl:oneOf ( dwcem:e001
+                                                         dwcem:e002
+                                                         dwcem:e003
+                                                         dwcem:e004
+                                                         dwcem:e005
+                                                         dwcem:e006
+                                                         dwcem:e007
+                                                       )
+                                           ] ;
+                       rdfs:subClassOf skos:Concept ;
+                       rdfs:comment "For details and rationale, see [Groom et al. 2019](https://doi.org/10.3897/biss.3.38084)."@en ;
+                       rdfs:isDefinedBy dwc: ;
+                       skos:definition "Controlled value for Darwin Core terms with local name establishmentMeans."@en ;
+                       skos:prefLabel "Establishment Means"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/Event
@@ -4486,44 +4510,6 @@ dwc:Event rdf:type owl:Class ;
           skos:prefLabel "Event" .
 
 
-###  http://rs.tdwg.org/dwc/terms/EventAssertion
-dwc:EventAssertion rdf:type owl:Class ;
-                   owl:equivalentClass [ rdf:type owl:Restriction ;
-                                         owl:onProperty dwcdp:about ;
-                                         owl:someValuesFrom dwc:Event
-                                       ] ;
-                   rdfs:subClassOf dwc:Assertion ;
-                   rdfs:isDefinedBy dwc: ;
-                   skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Event]." ;
-                   skos:prefLabel "Event Assertion" .
-
-
-###  http://rs.tdwg.org/dwc/terms/EventMedia
-dwc:EventMedia rdf:type owl:Class ;
-               owl:equivalentClass [ rdf:type owl:Restriction ;
-                                     owl:onProperty dwcdp:isMediaOf ;
-                                     owl:someValuesFrom dwc:Event
-                                   ] ;
-               rdfs:subClassOf ac:Media ;
-               rdfs:isDefinedBy dwc: ;
-               skos:definition "A [ac:Media] about a [dwc:Event]." ;
-               skos:prefLabel "Event Media" .
-
-
-###  http://rs.tdwg.org/dwc/terms/FunderAgent
-dwc:FunderAgent rdf:type owl:Class ;
-                owl:equivalentClass [ rdf:type owl:Restriction ;
-                                      owl:onProperty [ owl:inverseOf dwcdp:fundedBy
-                                                     ] ;
-                                      owl:someValuesFrom dwc:Provenance
-                                    ] ;
-                rdfs:subClassOf dcterms:Agent ;
-                rdfs:comment "Due to the directionality of the property [dwcdp:fundedBy], the class is defined in description logic as [dwcdp:FunderAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:fundedBy]⁻).[dwc:Provenance]."@en ;
-                rdfs:isDefinedBy dwc: ;
-                skos:definition "An instance of a [dcterms:Agent] that has funded a [dwc:Provenance]."@en ;
-                skos:prefLabel "Funder Agent" .
-
-
 ###  http://rs.tdwg.org/dwc/terms/GeologicalContext
 dwc:GeologicalContext rdf:type owl:Class ;
                       rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
@@ -4542,44 +4528,6 @@ dwc:GeologicalContext rdf:type owl:Class ;
                       skos:prefLabel "Geological Context" .
 
 
-###  http://rs.tdwg.org/dwc/terms/GeologicalContextMaterialEntity
-dwc:GeologicalContextMaterialEntity rdf:type owl:Class ;
-                                    owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                          owl:onProperty dwcdp:happenedWithin ;
-                                                          owl:someValuesFrom dwc:GeologicalContext
-                                                        ] ;
-                                    rdfs:subClassOf dwc:MaterialEntity ;
-                                    rdfs:isDefinedBy dwc: ;
-                                    skos:definition "An instance of a [dwc:MaterialEntity] that happened within a [dwc:GeologicalContext]."@en ;
-                                    skos:prefLabel "Geological Context Material Entity" .
-
-
-###  http://rs.tdwg.org/dwc/terms/GeologicalContextMedia
-dwc:GeologicalContextMedia rdf:type owl:Class ;
-                           owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                 owl:onProperty dwcdp:isMediaOf ;
-                                                 owl:someValuesFrom dwc:GeologicalContext
-                                               ] ;
-                           rdfs:subClassOf ac:Media ;
-                           rdfs:isDefinedBy dwc: ;
-                           skos:definition "A [ac:Media] about a [dwc:GeologicalContext]." ;
-                           skos:prefLabel "Geological Context Media" .
-
-
-###  http://rs.tdwg.org/dwc/terms/GeoreferencerAgent
-dwc:GeoreferencerAgent rdf:type owl:Class ;
-                       owl:equivalentClass [ rdf:type owl:Restriction ;
-                                             owl:onProperty [ owl:inverseOf dwcdp:georeferencedBy
-                                                            ] ;
-                                             owl:someValuesFrom dcterms:Location
-                                           ] ;
-                       rdfs:subClassOf dcterms:Agent ;
-                       rdfs:comment "Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dcterms:Location]."@en ;
-                       rdfs:isDefinedBy dwc: ;
-                       skos:definition "An instance of a [dcterms:Agent] that has georeferenced a [dcterms:Location]."@en ;
-                       skos:prefLabel "Georeferencer Agent" .
-
-
 ###  http://rs.tdwg.org/dwc/terms/Identification
 dwc:Identification rdf:type owl:Class ;
                    dcterms:isVersionOf dwc:Identification ;
@@ -4590,20 +4538,6 @@ dwc:Identification rdf:type owl:Class ;
                    skos:example "a nomenclatural act designating a specimen as a holotype" ,
                                 "a subspecies determination of an organism" ;
                    skos:prefLabel "Identification" .
-
-
-###  http://rs.tdwg.org/dwc/terms/IdentificationAgent
-dwc:IdentificationAgent rdf:type owl:Class ;
-                        owl:equivalentClass [ rdf:type owl:Restriction ;
-                                              owl:onProperty [ owl:inverseOf dwcdp:identifiedBy
-                                                             ] ;
-                                              owl:someValuesFrom dwc:Identification
-                                            ] ;
-                        rdfs:subClassOf dcterms:Agent ;
-                        rdfs:comment "Due to the directionality of the property [dwcdp:identifiedBy], the class is defined in description logic as [dwcdp:IdentificationAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:identifiedBy]⁻).[dwc:Identification]." ;
-                        rdfs:isDefinedBy dwc: ;
-                        skos:definition "An instance of a [dcterms:Agent] that has published a [dwc:Identification]." ;
-                        skos:prefLabel "Identification Agent" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/MaterialEntity
@@ -4631,39 +4565,7 @@ dwc:MaterialEntity rdf:type owl:Class ;
 
 
 ###  http://rs.tdwg.org/dwc/terms/MaterialEntityAssertion
-dwc:MaterialEntityAssertion rdf:type owl:Class ;
-                            owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                  owl:onProperty dwcdp:about ;
-                                                  owl:someValuesFrom dwc:MaterialEntity
-                                                ] ;
-                            rdfs:subClassOf dwc:Assertion ;
-                            rdfs:isDefinedBy dwc: ;
-                            skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]." ;
-                            skos:prefLabel "Material Entity Assertion" .
-
-
-###  http://rs.tdwg.org/dwc/terms/MaterialEntityMedia
-dwc:MaterialEntityMedia rdf:type owl:Class ;
-                        owl:equivalentClass [ rdf:type owl:Restriction ;
-                                              owl:onProperty dwcdp:isMediaOf ;
-                                              owl:someValuesFrom dwc:MaterialEntity
-                                            ] ;
-                        rdfs:subClassOf ac:Media ;
-                        rdfs:isDefinedBy dwc: ;
-                        skos:definition "A [ac:Media] about a [dwc:MaterialEntity]." ;
-                        skos:prefLabel "Material Entity Media" .
-
-
-###  http://rs.tdwg.org/dwc/terms/MediaAssertion
-dwc:MediaAssertion rdf:type owl:Class ;
-                   owl:equivalentClass [ rdf:type owl:Restriction ;
-                                         owl:onProperty dwcdp:about ;
-                                         owl:someValuesFrom ac:Media
-                                       ] ;
-                   rdfs:subClassOf dwc:Assertion ;
-                   rdfs:isDefinedBy dwc: ;
-                   skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [ac:Media]." ;
-                   skos:prefLabel "Media Assertion" .
+dwc:MaterialEntityAssertion rdf:type owl:Class .
 
 
 ###  http://rs.tdwg.org/dwc/terms/MolecularProtocol
@@ -4759,18 +4661,6 @@ dwc:NucleotideAnalysis rdf:type owl:Class ;
                        skos:prefLabel "Nucleotide Analysis" .
 
 
-###  http://rs.tdwg.org/dwc/terms/NucleotideAnalysisAssertion
-dwc:NucleotideAnalysisAssertion rdf:type owl:Class ;
-                                owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                      owl:onProperty dwcdp:about ;
-                                                      owl:someValuesFrom dwc:NucleotideAnalysis
-                                                    ] ;
-                                rdfs:subClassOf dwc:Assertion ;
-                                rdfs:isDefinedBy dwc: ;
-                                skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:NucleotideAnalysis]." ;
-                                skos:prefLabel "Nucleotide Analysis Assertion" .
-
-
 ###  http://rs.tdwg.org/dwc/terms/NucleotideSequence
 dwc:NucleotideSequence rdf:type owl:Class ;
                        rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
@@ -4803,27 +4693,7 @@ dwc:Occurrence rdf:type owl:Class ;
 
 
 ###  http://rs.tdwg.org/dwc/terms/OccurrenceAssertion
-dwc:OccurrenceAssertion rdf:type owl:Class ;
-                        owl:equivalentClass [ rdf:type owl:Restriction ;
-                                              owl:onProperty dwcdp:about ;
-                                              owl:someValuesFrom dwc:Occurrence
-                                            ] ;
-                        rdfs:subClassOf dwc:Assertion ;
-                        rdfs:isDefinedBy dwc: ;
-                        skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]." ;
-                        skos:prefLabel "Occurrence Assertion" .
-
-
-###  http://rs.tdwg.org/dwc/terms/OccurrenceMedia
-dwc:OccurrenceMedia rdf:type owl:Class ;
-                    owl:equivalentClass [ rdf:type owl:Restriction ;
-                                          owl:onProperty dwcdp:isMediaOf ;
-                                          owl:someValuesFrom dwc:Occurrence
-                                        ] ;
-                    rdfs:subClassOf ac:Media ;
-                    rdfs:isDefinedBy dwc: ;
-                    skos:definition "A [ac:Media] about a [dwc:Occurrence]." ;
-                    skos:prefLabel "Occurrence Media" .
+dwc:OccurrenceAssertion rdf:type owl:Class .
 
 
 ###  http://rs.tdwg.org/dwc/terms/Organism
@@ -4840,15 +4710,7 @@ dwc:Organism rdf:type owl:Class ;
 
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismAssertion
-dwc:OrganismAssertion rdf:type owl:Class ;
-                      owl:equivalentClass [ rdf:type owl:Restriction ;
-                                            owl:onProperty dwcdp:about ;
-                                            owl:someValuesFrom dwc:Organism
-                                          ] ;
-                      rdfs:subClassOf dwc:Assertion ;
-                      rdfs:isDefinedBy dwc: ;
-                      skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]." ;
-                      skos:prefLabel "Organism Assertion" .
+dwc:OrganismAssertion rdf:type owl:Class .
 
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismInteraction
@@ -4914,20 +4776,6 @@ dwc:Provenance rdf:type owl:Class ;
                skos:prefLabel "Provenance" .
 
 
-###  http://rs.tdwg.org/dwc/terms/PublisherAgent
-dwc:PublisherAgent rdf:type owl:Class ;
-                   owl:equivalentClass [ rdf:type owl:Restriction ;
-                                         owl:onProperty [ owl:inverseOf dwcdp:publishedBy
-                                                        ] ;
-                                         owl:someValuesFrom dcterms:BibliographicResource
-                                       ] ;
-                   rdfs:subClassOf dcterms:Agent ;
-                   rdfs:comment "Due to the directionality of the property [dwcdp:publishedBy], the class is defined in description logic as [dwcdp:PublisherAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:publishedBy]⁻).[dcterms:BibliographicResource]." ;
-                   rdfs:isDefinedBy dwc: ;
-                   skos:definition "An instance of a [dcterms:Agent] that has published a [dcterms:BibliographicResource]." ;
-                   skos:prefLabel "Publisher Agent" .
-
-
 ###  http://rs.tdwg.org/dwc/terms/ResourceRelationship
 dwc:ResourceRelationship rdf:type owl:Class ;
                          dcterms:isVersionOf dwc:ResourceRelationship ;
@@ -4939,20 +4787,6 @@ dwc:ResourceRelationship rdf:type owl:Class ;
                                       "a uniquely identified dwc:Occurrence represents the same dwc:Occurrence as another uniquely identified dwc:Occurrence" ,
                                       "an instance of a dwc:Organism is the mother of another instance of a dwc:Organism" ;
                          skos:prefLabel "Resource Relationship" .
-
-
-###  http://rs.tdwg.org/dwc/terms/ReviewerAgent
-dwc:ReviewerAgent rdf:type owl:Class ;
-                  owl:equivalentClass [ rdf:type owl:Restriction ;
-                                        owl:onProperty [ owl:inverseOf dwcdp:reviewedBy
-                                                       ] ;
-                                        owl:someValuesFrom ac:Media
-                                      ] ;
-                  rdfs:subClassOf dcterms:Agent ;
-                  rdfs:comment "Due to the directionality of the property [dwcdp:reviewedBy], the class is defined in description logic as [dwcdp:Reviewer] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:reviewedBy]⁻).[dwc:Media]." ;
-                  rdfs:isDefinedBy dwc: ;
-                  skos:definition "An instance of a [dcterms:Agent] that has reviewed a [dwc:Media]." ;
-                  skos:prefLabel "Reviewer Agent" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/TypeDesignationType
@@ -4984,34 +4818,6 @@ dwc:UsagePolicy rdf:type owl:Class ;
                 rdfs:isDefinedBy dwc: ;
                 skos:definition "Information about rights, usage, and attribution statements applicable to an entity."@en ;
                 skos:prefLabel "Usage Policy" .
-
-
-###  http://rs.tdwg.org/dwcdp/terms/AssertionProtocol
-dwcdp:AssertionProtocol rdf:type owl:Class ;
-                        owl:equivalentClass [ rdf:type owl:Restriction ;
-                                              owl:onProperty [ owl:inverseOf dwcdp:followed
-                                                             ] ;
-                                              owl:someValuesFrom dwc:Assertion
-                                            ] ;
-                        rdfs:subClassOf dwc:Protocol ;
-                        rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Assertion]." ;
-                        rdfs:isDefinedBy dwcdp: ;
-                        skos:definition "A [dwc:Protocol] followed by a [dcterms:Agent] for a [dwc:Assertion]." ;
-                        skos:prefLabel "Assertion Protocol" .
-
-
-###  http://rs.tdwg.org/dwcdp/terms/EventProtocol
-dwcdp:EventProtocol rdf:type owl:Class ;
-                    owl:equivalentClass [ rdf:type owl:Restriction ;
-                                          owl:onProperty [ owl:inverseOf dwcdp:followed
-                                                         ] ;
-                                          owl:someValuesFrom dwc:Event
-                                        ] ;
-                    rdfs:subClassOf dwc:Protocol ;
-                    rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Event]." ;
-                    rdfs:isDefinedBy dwcdp: ;
-                    skos:definition "A [dwc:Protocol] followed by a [dcterms:Agent] for a [dwc:NucleotideAnalysis]." ;
-                    skos:prefLabel "Event Protocol" .
 
 
 ###  http://rs.tdwg.org/eco/terms/Survey
@@ -5055,134 +4861,355 @@ skos:Concept rdf:type owl:Class .
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Collecting_Permit
 ggbn:Collecting_Permit rdf:type owl:NamedIndividual ,
-                                skos:Concept ;
-                       rdfs:isDefinedBy ggbn: ;
-                       skos:definition "A value of the ggbnvoc:permitType_vocabulary."@en ;
-                       skos:prefLabel "Collecting Permit"@en .
+                                ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Contract
-ggbn:Contract rdf:type owl:NamedIndividual .
+ggbn:Contract rdf:type owl:NamedIndividual ,
+                       ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Copyright
-ggbn:Copyright rdf:type owl:NamedIndividual .
+ggbn:Copyright rdf:type owl:NamedIndividual ,
+                        ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Data_use
-ggbn:Data_use rdf:type owl:NamedIndividual .
+ggbn:Data_use rdf:type owl:NamedIndividual ,
+                       ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Exemption_Permit
-ggbn:Exemption_Permit rdf:type owl:NamedIndividual .
+ggbn:Exemption_Permit rdf:type owl:NamedIndividual ,
+                               ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Export_Permit
-ggbn:Export_Permit rdf:type owl:NamedIndividual .
+ggbn:Export_Permit rdf:type owl:NamedIndividual ,
+                            ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Genetically_Modified_Organism
-ggbn:Genetically_Modified_Organism rdf:type owl:NamedIndividual .
+ggbn:Genetically_Modified_Organism rdf:type owl:NamedIndividual ,
+                                            ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Human_Pathogens
-ggbn:Human_Pathogens rdf:type owl:NamedIndividual .
+ggbn:Human_Pathogens rdf:type owl:NamedIndividual ,
+                              ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Import_Permit
 ggbn:Import_Permit rdf:type owl:NamedIndividual ,
-                            skos:Concept ;
-                   rdfs:isDefinedBy ggbn: ;
-                   skos:definition "A value of the ggbnvoc:permitType_vocabulary."@en ;
-                   skos:prefLabel "Import Permit"@en .
+                            ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Intellectual_Property_Rights
-ggbn:Intellectual_Property_Rights rdf:type owl:NamedIndividual .
+ggbn:Intellectual_Property_Rights rdf:type owl:NamedIndividual ,
+                                           ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Internationally_Recognized_Certificate_of_Compliance
-ggbn:Internationally_Recognized_Certificate_of_Compliance rdf:type owl:NamedIndividual .
+ggbn:Internationally_Recognized_Certificate_of_Compliance rdf:type owl:NamedIndividual ,
+                                                                   ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Material_Transfer_Agreement
-ggbn:Material_Transfer_Agreement rdf:type owl:NamedIndividual .
+ggbn:Material_Transfer_Agreement rdf:type owl:NamedIndividual ,
+                                          ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Memorandum_of_Cooperation
-ggbn:Memorandum_of_Cooperation rdf:type owl:NamedIndividual .
+ggbn:Memorandum_of_Cooperation rdf:type owl:NamedIndividual ,
+                                        ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Memorandum_of_Understanding
-ggbn:Memorandum_of_Understanding rdf:type owl:NamedIndividual .
+ggbn:Memorandum_of_Understanding rdf:type owl:NamedIndividual ,
+                                          ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Other
-ggbn:Other rdf:type owl:NamedIndividual .
+ggbn:Other rdf:type owl:NamedIndividual ,
+                    ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Patent
-ggbn:Patent rdf:type owl:NamedIndividual .
+ggbn:Patent rdf:type owl:NamedIndividual ,
+                     ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Permit_available
-ggbn:Permit_available rdf:type owl:NamedIndividual .
+ggbn:Permit_available rdf:type owl:NamedIndividual ,
+                               ggbn:permitStatus_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Permit_not_available
-ggbn:Permit_not_available rdf:type owl:NamedIndividual .
+ggbn:Permit_not_available rdf:type owl:NamedIndividual ,
+                                   ggbn:permitStatus_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Permit_not_required
-ggbn:Permit_not_required rdf:type owl:NamedIndividual .
+ggbn:Permit_not_required rdf:type owl:NamedIndividual ,
+                                  ggbn:permitStatus_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Phytosanitary
-ggbn:Phytosanitary rdf:type owl:NamedIndividual .
+ggbn:Phytosanitary rdf:type owl:NamedIndividual ,
+                            ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Salvage
-ggbn:Salvage rdf:type owl:NamedIndividual .
+ggbn:Salvage rdf:type owl:NamedIndividual ,
+                      ggbn:permitType_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Unknown
-ggbn:Unknown rdf:type owl:NamedIndividual .
+ggbn:Unknown rdf:type owl:NamedIndividual ,
+                      ggbn:permitStatus_vocabulary .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Veterinary_Certificate
-ggbn:Veterinary_Certificate rdf:type owl:NamedIndividual .
+ggbn:Veterinary_Certificate rdf:type owl:NamedIndividual ,
+                                     ggbn:permitType_vocabulary .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/absoluteTautonymy
-tdt:absoluteTautonymy rdf:type owl:NamedIndividual .
+tdt:absoluteTautonymy rdf:type owl:NamedIndividual ,
+                               dwc:TypeDesignationType .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/linnaeanTautonymy
-tdt:linnaeanTautonymy rdf:type owl:NamedIndividual .
+tdt:linnaeanTautonymy rdf:type owl:NamedIndividual ,
+                               dwc:TypeDesignationType .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/monotypy
-tdt:monotypy rdf:type owl:NamedIndividual .
+tdt:monotypy rdf:type owl:NamedIndividual ,
+                      dwc:TypeDesignationType .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/originalDesignation
-tdt:originalDesignation rdf:type owl:NamedIndividual .
+tdt:originalDesignation rdf:type owl:NamedIndividual ,
+                                 dwc:TypeDesignationType .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/presentDesignation
-tdt:presentDesignation rdf:type owl:NamedIndividual .
+tdt:presentDesignation rdf:type owl:NamedIndividual ,
+                                dwc:TypeDesignationType .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/rulingByCommission
-tdt:rulingByCommission rdf:type owl:NamedIndividual .
+tdt:rulingByCommission rdf:type owl:NamedIndividual ,
+                                dwc:TypeDesignationType .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentDesignation
-tdt:subsequentDesignation rdf:type owl:NamedIndividual .
+tdt:subsequentDesignation rdf:type owl:NamedIndividual ,
+                                   dwc:TypeDesignationType .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentMonotypy
-tdt:subsequentMonotypy rdf:type owl:NamedIndividual .
+tdt:subsequentMonotypy rdf:type owl:NamedIndividual ,
+                                dwc:TypeDesignationType .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d001
+dwcdoe:d001 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d001 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d001-2021-09-01> ;
+            rdfs:comment "Considered native and naturally occurring. See also \"category A\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Not transported beyond limits of native range."@en ;
+            skos:prefLabel "Native (category A)"@en .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d002
+dwcdoe:d002 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d002 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d002-2021-09-01> ;
+            rdfs:comment "Only for cases where specific actions have been taken place to prevent escape of individuals or propagules. See also \"category B1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Individuals in captivity or quarantine (i.e., individuals provided with conditions suitable for them, but explicit measures of containment are in place)."@en ;
+            skos:prefLabel "Captive (category B1)"@en .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d003
+dwcdoe:d003 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d003 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d003-2021-09-01> ;
+            rdfs:comment "Examples include gardens, parks and farms. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Individuals in cultivation (i.e., individuals provided with conditions suitable for them, but explicit measures to prevent dispersal are limited at best)."@en ;
+            skos:prefLabel "Cultivated (category B2)"@en .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d004
+dwcdoe:d004 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d004 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d004-2021-09-01> ;
+            rdfs:comment "For example, fish stocked for angling, birds for hunting. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Individuals directly released into novel environment."@en ;
+            skos:prefLabel "Released (category B3)"@en .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d005
+dwcdoe:d005 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d005 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d005-2021-09-01> ;
+            rdfs:comment "For example, frost-tender plants sown or planted in a cold climate. See also \"category C0\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Individuals released outside of captivity or cultivation in a location, but incapable of surviving for a significant period."@en ;
+            skos:prefLabel "Failing (category C0)"@en .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d006
+dwcdoe:d006 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d006 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d006-2021-09-01> ;
+            rdfs:comment "Trees planted in the wild for forestry or ornament may come under this category. See also \"category C1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Individuals surviving outside of captivity or cultivation in a location with no reproduction."@en ;
+            skos:prefLabel "Casual (category C1)"@en .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d007
+dwcdoe:d007 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d007 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d007-2021-09-01> ;
+            rdfs:comment "Offspring are produced, but these either do not survive or are not fertile enough to maintain the population. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Individuals surviving outside of captivity or cultivation in a location with no reproduction."@en ;
+            skos:prefLabel "Reproducing (category C2)"@en .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d008
+dwcdoe:d008 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d008 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d008-2021-09-01> ;
+            rdfs:comment "The population is maintained by reproduction, but is not spreading. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Individuals surviving outside of captivity or cultivation in a location. Reproduction occurring, and population self-sustaining."@en ;
+            skos:prefLabel "Established (category C3)"@en .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d009
+dwcdoe:d009 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d009 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d009-2021-09-01> ;
+            rdfs:comment "The population is maintained by reproduction and is spreading. See also \"category D1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Self-sustaining population outside of captivity or cultivation, with individuals surviving a significant distance from the original point of introduction."@en ;
+            skos:prefLabel "Colonising (category D1)"@en .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d010
+dwcdoe:d010 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d010 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d010-2021-09-01> ;
+            rdfs:comment "The population is maintained by reproduction, is spreading, and its progeny are also reproducing and spreading. See also \"category D2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Self-sustaining population outside of captivity or cultivation, with individuals surviving and reproducing a significant distance from the original point of introduction."@en ;
+            skos:prefLabel "Invasive (category D2)"@en .
+
+
+###  http://rs.tdwg.org/dwcdoe/values/d011
+dwcdoe:d011 rdf:type owl:NamedIndividual ,
+                     dwc:DegreeOfEstablishment ;
+            dcterms:isVersionOf dwcdoe:d011 ;
+            dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d011-2021-09-01> ;
+            rdfs:comment "This term is only used for those invasives with the highest degree of encroachment. See also \"category E\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+            rdfs:isDefinedBy dwcdoe: ;
+            skos:definition "Fully invasive species, with individuals dispersing, surviving and reproducing at multiple sites across a spectrum of habitats and geographic range."@en ;
+            skos:prefLabel "Widespread invasive (category E)"@en .
+
+
+###  http://rs.tdwg.org/dwcem/values/e001
+dwcem:e001 rdf:type owl:NamedIndividual ,
+                    dwc:EstablishmentMeans ;
+           dcterms:isVersionOf dwcem:e001 ;
+           dcterms:references <http://rs.tdwg.org/dwcem/values/version/e001-2021-09-01> ;
+           rdfs:comment "What is considered native to an area varies with the biogeographic history of an area and the local interpretation of what is a \"natural range\"."@en ;
+           rdfs:isDefinedBy dwcem: ;
+           skos:definition "A taxon occurring within its natural range."@en ;
+           skos:prefLabel "Native (indigenous)"@en .
+
+
+###  http://rs.tdwg.org/dwcem/values/e002
+dwcem:e002 rdf:type owl:NamedIndividual ,
+                    dwc:EstablishmentMeans ;
+           dcterms:isVersionOf dwcem:e002 ;
+           dcterms:references <http://rs.tdwg.org/dwcem/values/version/e002-2025-06-12> ;
+           rdfs:comment "Where a taxon has become extirpated from an area where it had naturally occurred it may be returned to that area deliberately with the intention of re-establishing it."@en ;
+           rdfs:isDefinedBy dwcem: ;
+           skos:definition "A taxon re-established by direct introduction by humans into an area that was once part of its natural range, but from where it had become extinct."@en ;
+           skos:prefLabel "Native (reintroduced)"@en .
+
+
+###  http://rs.tdwg.org/dwcem/values/e003
+dwcem:e003 rdf:type owl:NamedIndividual ,
+                    dwc:EstablishmentMeans ;
+           dcterms:isVersionOf dwcem:e003 ;
+           dcterms:references <http://rs.tdwg.org/dwcem/values/version/e003-2021-09-01> ;
+           rdfs:comment "Organisms can be introduced to novel areas and habitats by human activity, either on purpose or by accident. Humans can also inadvertently create corridors that break down natural barriers to dispersal and allow organisms to spread beyond their natural range."@en ;
+           rdfs:isDefinedBy dwcem: ;
+           skos:definition "Establishment of a taxon by human agency into an area that is not part of its natural range."@en ;
+           skos:prefLabel "Introduced (alien, exotic, non-native, nonindigenous)"@en .
+
+
+###  http://rs.tdwg.org/dwcem/values/e004
+dwcem:e004 rdf:type owl:NamedIndividual ,
+                    dwc:EstablishmentMeans ;
+           dcterms:isVersionOf dwcem:e004 ;
+           dcterms:references <http://rs.tdwg.org/dwcem/values/version/e004-2021-09-01> ;
+           rdfs:comment "In the event of environmental change and habitat destruction a conservation option is to introduce a taxon into an area it did not naturally occur."@en ;
+           rdfs:isDefinedBy dwcem: ;
+           skos:definition "Establishment of a taxon specifically with the intention of creating a self-sustaining wild population in an area that is not part of the taxon's natural range."@en ;
+           skos:prefLabel "Introduced (assisted colonisation)"@en .
+
+
+###  http://rs.tdwg.org/dwcem/values/e005
+dwcem:e005 rdf:type owl:NamedIndividual ,
+                    dwc:EstablishmentMeans ;
+           dcterms:isVersionOf dwcem:e005 ;
+           dcterms:references <http://rs.tdwg.org/dwcem/values/version/e005-2020-10-13> ;
+           rdfs:comment "Natural events and human activity can disperse organisms unpredictably into places where they may stay or survive for a period."@en ;
+           rdfs:isDefinedBy dwcem: ;
+           skos:definition "The temporary occurrence of a taxon far outside its natural or migratory range."@en ;
+           skos:prefLabel "Vagrant (casual)"@en .
+
+
+###  http://rs.tdwg.org/dwcem/values/e006
+dwcem:e006 rdf:type owl:NamedIndividual ,
+                    dwc:EstablishmentMeans ;
+           dcterms:isVersionOf dwcem:e006 ;
+           dcterms:references <http://rs.tdwg.org/dwcem/values/version/e006-2021-09-01> ;
+           rdfs:comment "When there is a lack of fossil or historical evidence for the occurrence of a taxon in an area it can be impossible to know if the taxon is new to the area or native."@en ;
+           rdfs:isDefinedBy dwcem: ;
+           skos:definition "The origin of the occurrence of the taxon in an area is obscure."@en ;
+           skos:prefLabel "Uncertain (unknown, cryptogenic)"@en .
+
+
+###  http://rs.tdwg.org/dwcem/values/e007
+dwcem:e007 rdf:type owl:NamedIndividual ,
+                    dwc:EstablishmentMeans ;
+           dcterms:isVersionOf dwcem:e007 ;
+           dcterms:references <http://rs.tdwg.org/dwcem/values/version/e007-2025-06-12> ;
+           rdfs:comment "The term endemic is a subcategory of native and relates to geography, such as \"areas of endemism\", bioregions, and sometimes administrative boundaries. While a native taxon can naturally occur in several geographical areas an endemic taxon only occurs in one. In Darwin Core terms this would mean, \"A dwc:Organism referred to is recognized as a member of a dwc:Taxon endemic to the dcterms:Location at the time of the dwc:Occurrence.\""@en ;
+           rdfs:isDefinedBy dwcem: ;
+           skos:definition "A taxon with a natural distribution restricted to a single geographical area."@en ;
+           skos:prefLabel "Native (endemic)"@en .
 
 
 #################################################################

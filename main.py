@@ -21,6 +21,8 @@ CHRONO = Namespace("http://rs.tdwg.org/chrono/terms/")
 DC = Namespace("http://purl.org/dc/elements/1.1/")
 DCTERMS = Namespace("http://purl.org/dc/terms/")
 DWC = Namespace("http://rs.tdwg.org/dwc/terms/")
+DWCEM = Namespace("http://rs.tdwg.org/dwcem/values/")
+DWCDOE = Namespace("http://rs.tdwg.org/dwcdoe/values/")
 DWCIRI = Namespace("http://rs.tdwg.org/dwc/iri/")
 DWCDP = Namespace("http://rs.tdwg.org/dwcdp/terms/")
 ECO = Namespace("http://rs.tdwg.org/eco/terms/")
@@ -47,6 +49,8 @@ g.bind("chrono", CHRONO)
 g.bind("dc", DC)
 g.bind("dcterms", DCTERMS)
 g.bind("dwc", DWC)
+g.bind("dwcdoe", DWCDOE)
+g.bind("dwcem", DWCEM)
 g.bind("dwciri", DWCIRI)
 g.bind("dwcdp", DWCDP)
 g.bind("eco", ECO)
@@ -148,6 +152,50 @@ createOC(
     ],
     version_of_s="http://rs.tdwg.org/chrono/terms/ChronometricAge",
     references_s="http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21",
+)
+
+# NOTE: Review integration of skos:Concept and owl:Classes.
+# Here there is a defined skos:ConceptScheme
+createEOC(
+    name="DegreeOfEstablishment",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Degree Of Establishment", lang="en"),
+    definition=Literal("Controlled value for Darwin Core terms with local name degreeOfEstablishment.", lang="en"),
+    comments=Literal("For details and rationale, see [Groom et al. 2019](https://doi.org/10.3897/biss.3.38084).", lang="en"),
+    one_of=[
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d001"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d002"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d003"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d004"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d005"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d006"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d007"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d008"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d009"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d010"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d011"),
+    ],
+)
+
+# NOTE: Review integration of skos:Concept and owl:Classes.
+# Here there is a defined skos:ConceptScheme
+createEOC(
+    name="EstablishmentMeans",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Establishment Means", lang="en"),
+    definition=Literal("Controlled value for Darwin Core terms with local name establishmentMeans.", lang="en"),
+    comments=Literal("For details and rationale, see [Groom et al. 2019](https://doi.org/10.3897/biss.3.38084).", lang="en"),
+    one_of=[
+        URIRef("http://rs.tdwg.org/dwcem/values/e001"),
+        URIRef("http://rs.tdwg.org/dwcem/values/e002"),
+        URIRef("http://rs.tdwg.org/dwcem/values/e003"),
+        URIRef("http://rs.tdwg.org/dwcem/values/e004"),
+        URIRef("http://rs.tdwg.org/dwcem/values/e005"),
+        URIRef("http://rs.tdwg.org/dwcem/values/e006"),
+        URIRef("http://rs.tdwg.org/dwcem/values/e007"),
+    ],
 )
 
 # NOTE: Should we allow for several parent events? I mean that in the sense of OWL cardinalities.
@@ -505,259 +553,259 @@ createOC(
 # BEGIN CLASSES THROUGH OBJECT PROPERTY DEFINITIONS
 #####################################################################################################
 
-createCTOP(
-    name="AssertionAgent",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Assertion Agent"),
-    subclass_list=[DCTERMS["Agent"]],
-    object_prop=DWCDP["assertedBy"],
-    use_inverse=True,
-    values_class=DWC["Assertion"],
-    definition=Literal("An instance of a [dcterms:Agent] that has made a [dwc:Assertion].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:assertedBy], the class is defined in description logic as [dwcdp:AssertionAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:assertedBy]⁻).[dwc:Assertion].", lang="en")
-)
+# createCTOP(
+#     name="AssertionAgent",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Assertion Agent"),
+#     subclass_list=[DCTERMS["Agent"]],
+#     object_prop=DWCDP["assertedBy"],
+#     use_inverse=True,
+#     values_class=DWC["Assertion"],
+#     definition=Literal("An instance of a [dcterms:Agent] that has made a [dwc:Assertion].", lang="en"),
+#     comments=Literal("Due to the directionality of the property [dwcdp:assertedBy], the class is defined in description logic as [dwcdp:AssertionAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:assertedBy]⁻).[dwc:Assertion].", lang="en")
+# )
 
-createCTOP(
-    name="AuthorAgent",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Author Agent"),
-    subclass_list=[DCTERMS["Agent"]],
-    object_prop=DWCDP["authoredBy"],
-    use_inverse=True,
-    values_class=DCTERMS["BibliographicResource"],
-    definition=Literal("An instance of a [dcterms:Agent] that has authored a [dcterms:BibliographicResource].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:authoredBy], the class is defined in description logic as [dwcdp:AuthorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:authoredBy]⁻).[dcterms:BibliographicResource].", lang="en")
-)
+# createCTOP(
+#     name="AuthorAgent",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Author Agent"),
+#     subclass_list=[DCTERMS["Agent"]],
+#     object_prop=DWCDP["authoredBy"],
+#     use_inverse=True,
+#     values_class=DCTERMS["BibliographicResource"],
+#     definition=Literal("An instance of a [dcterms:Agent] that has authored a [dcterms:BibliographicResource].", lang="en"),
+#     comments=Literal("Due to the directionality of the property [dwcdp:authoredBy], the class is defined in description logic as [dwcdp:AuthorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:authoredBy]⁻).[dcterms:BibliographicResource].", lang="en")
+# )
 
-# WARN: Related to WebVOWL
-# TEST: Trying an inverse object property
+# # WARN: Related to WebVOWL
+# # TEST: Trying an inverse object property
 
-g.add((DWCDP["commentedOn"], OWL["inverseOf"], DWCDP["commentedBy"]))
+# g.add((DWCDP["commentedOn"], OWL["inverseOf"], DWCDP["commentedBy"]))
 
-createCTOP(
-    name="CommenterAgent",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Commenter Agent"),
-    subclass_list=[DCTERMS["Agent"]],
-    object_prop=DWCDP["commentedOn"],
-    use_inverse=False,
-    values_class=AC["Media"],
-    definition=Literal("An instance of a [dcterms:Agent] that has commented a [dwc:Media].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:commentedBy], the class is defined in description logic as [dwcdp:Commenter] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:commentedBy]⁻).[ac:Media].", lang="en")
-)
+# createCTOP(
+#     name="CommenterAgent",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Commenter Agent"),
+#     subclass_list=[DCTERMS["Agent"]],
+#     object_prop=DWCDP["commentedOn"],
+#     use_inverse=False,
+#     values_class=AC["Media"],
+#     definition=Literal("An instance of a [dcterms:Agent] that has commented a [dwc:Media].", lang="en"),
+#     comments=Literal("Due to the directionality of the property [dwcdp:commentedBy], the class is defined in description logic as [dwcdp:Commenter] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:commentedBy]⁻).[ac:Media].", lang="en")
+# )
 
-createCTOP(
-    name="ConductorAgent",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Conductor Agent"),
-    subclass_list=[DCTERMS["Agent"]],
-    object_prop=DWCDP["conductedBy"],
-    use_inverse=True,
-    values_class=DWC["Event"],
-    definition=Literal("An instance of a [dcterms:Agent] that has conducted a [dwc:Event].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwc:ConductorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event].", lang="en")
-)
+# createCTOP(
+#     name="ConductorAgent",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Conductor Agent"),
+#     subclass_list=[DCTERMS["Agent"]],
+#     object_prop=DWCDP["conductedBy"],
+#     use_inverse=True,
+#     values_class=DWC["Event"],
+#     definition=Literal("An instance of a [dcterms:Agent] that has conducted a [dwc:Event].", lang="en"),
+#     comments=Literal("Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwc:ConductorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event].", lang="en")
+# )
 
-# NOTE: Possibly find a better name, it looks too much like the object property dwcdp:datedMaterial
-createCTOP(
-    name="DatedMaterialEntity",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Dated Material Entity"),
-    subclass_list=[DWC["MaterialEntity"]],
-    object_prop=DWCDP["datedMaterial"],
-    use_inverse=True,
-    values_class=CHRONO["ChronometricAge"],
-    definition=Literal("An instance of a [dwc:MaterialEntity] that has been dated by a [chrono:ChronometricAge].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:datedMaterial], the class is defined in description logic as [dwc:DatedMaterialEntity] ≡ [dwc:MaterialEntity] ⊓ ∃([dwcdp:datedMaterial]⁻).[dwc:MaterialEntity].", lang="en")
-)
+# # NOTE: Possibly find a better name, it looks too much like the object property dwcdp:datedMaterial
+# createCTOP(
+#     name="DatedMaterialEntity",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Dated Material Entity"),
+#     subclass_list=[DWC["MaterialEntity"]],
+#     object_prop=DWCDP["datedMaterial"],
+#     use_inverse=True,
+#     values_class=CHRONO["ChronometricAge"],
+#     definition=Literal("An instance of a [dwc:MaterialEntity] that has been dated by a [chrono:ChronometricAge].", lang="en"),
+#     comments=Literal("Due to the directionality of the property [dwcdp:datedMaterial], the class is defined in description logic as [dwc:DatedMaterialEntity] ≡ [dwc:MaterialEntity] ⊓ ∃([dwcdp:datedMaterial]⁻).[dwc:MaterialEntity].", lang="en")
+# )
 
-# NOTE: Used bibo: property bibo:editor.
-# But bibo: does not provide straightforward object properties for other relationships like authoring and publishing.
-createCTOP(
-    name="EditorAgent",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Editor Agent"),
-    subclass_list=[DCTERMS["Agent"]],
-    # object_prop=DWCDP.editedBy,
-    object_prop=BIBO["editor"],
-    use_inverse=True,
-    values_class=DCTERMS["BibliographicResource"],
-    definition=Literal("An instance of a [dcterms:Agent] that has edited a [dcterms:BibliographicResource].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:editedBy], the class is defined in description logic as [dwcdp:EditorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:editedBy]⁻).[dcterms:BibliographicResource].", lang="en")
-)
+# # NOTE: Used bibo: property bibo:editor.
+# # But bibo: does not provide straightforward object properties for other relationships like authoring and publishing.
+# createCTOP(
+#     name="EditorAgent",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Editor Agent"),
+#     subclass_list=[DCTERMS["Agent"]],
+#     # object_prop=DWCDP.editedBy,
+#     object_prop=BIBO["editor"],
+#     use_inverse=True,
+#     values_class=DCTERMS["BibliographicResource"],
+#     definition=Literal("An instance of a [dcterms:Agent] that has edited a [dcterms:BibliographicResource].", lang="en"),
+#     comments=Literal("Due to the directionality of the property [dwcdp:editedBy], the class is defined in description logic as [dwcdp:EditorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:editedBy]⁻).[dcterms:BibliographicResource].", lang="en")
+# )
 
-createCTOP(
-    name="FunderAgent",
-    namespace=DWC,
-    graph=g,
-    subclass_list=[DCTERMS["Agent"]],
-    object_prop=DWCDP["fundedBy"],
-    values_class=DWC["Provenance"],
-    use_inverse=True,
-    pref_label=Literal("Funder Agent"),
-    definition=Literal("An instance of a [dcterms:Agent] that has funded a [dwc:Provenance].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:fundedBy], the class is defined in description logic as [dwcdp:FunderAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:fundedBy]⁻).[dwc:Provenance].", lang="en")
-)
+# createCTOP(
+#     name="FunderAgent",
+#     namespace=DWC,
+#     graph=g,
+#     subclass_list=[DCTERMS["Agent"]],
+#     object_prop=DWCDP["fundedBy"],
+#     values_class=DWC["Provenance"],
+#     use_inverse=True,
+#     pref_label=Literal("Funder Agent"),
+#     definition=Literal("An instance of a [dcterms:Agent] that has funded a [dwc:Provenance].", lang="en"),
+#     comments=Literal("Due to the directionality of the property [dwcdp:fundedBy], the class is defined in description logic as [dwcdp:FunderAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:fundedBy]⁻).[dwc:Provenance].", lang="en")
+# )
 
-# NOTE: Possibly find a better name, a bit too long
-createCTOP(
-    name="GeologicalContextMaterialEntity",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Geological Context Material Entity"),
-    subclass_list=[DWC["MaterialEntity"]],
-    object_prop=DWCDP["happenedWithin"],
-    use_inverse=False,
-    values_class=DWC["GeologicalContext"],
-    definition=Literal("An instance of a [dwc:MaterialEntity] that happened within a [dwc:GeologicalContext].", lang="en"),
-)
+# # NOTE: Possibly find a better name, a bit too long
+# createCTOP(
+#     name="GeologicalContextMaterialEntity",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Geological Context Material Entity"),
+#     subclass_list=[DWC["MaterialEntity"]],
+#     object_prop=DWCDP["happenedWithin"],
+#     use_inverse=False,
+#     values_class=DWC["GeologicalContext"],
+#     definition=Literal("An instance of a [dwc:MaterialEntity] that happened within a [dwc:GeologicalContext].", lang="en"),
+# )
 
-createCTOP(
-    name="GeoreferencerAgent",
-    namespace=DWC,
-    graph=g,
-    subclass_list=[DCTERMS["Agent"]],
-    object_prop=DWCDP["georeferencedBy"],
-    values_class=DCTERMS["Location"],
-    use_inverse=True,
-    pref_label=Literal("Georeferencer Agent"),
-    definition=Literal("An instance of a [dcterms:Agent] that has georeferenced a [dcterms:Location].", lang="en"),
-    comments=Literal("Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dcterms:Location].", lang="en")
-)
+# createCTOP(
+#     name="GeoreferencerAgent",
+#     namespace=DWC,
+#     graph=g,
+#     subclass_list=[DCTERMS["Agent"]],
+#     object_prop=DWCDP["georeferencedBy"],
+#     values_class=DCTERMS["Location"],
+#     use_inverse=True,
+#     pref_label=Literal("Georeferencer Agent"),
+#     definition=Literal("An instance of a [dcterms:Agent] that has georeferenced a [dcterms:Location].", lang="en"),
+#     comments=Literal("Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dcterms:Location].", lang="en")
+# )
 
-createCTOP(
-    name="IdentificationAgent",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Identification Agent"),
-    subclass_list=[DCTERMS["Agent"]],
-    object_prop=DWCDP["identifiedBy"],
-    use_inverse=True,
-    values_class=DWC["Identification"],
-    definition=Literal("An instance of a [dcterms:Agent] that has published a [dwc:Identification]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:identifiedBy], the class is defined in description logic as [dwcdp:IdentificationAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:identifiedBy]⁻).[dwc:Identification].")
-)
+# createCTOP(
+#     name="IdentificationAgent",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Identification Agent"),
+#     subclass_list=[DCTERMS["Agent"]],
+#     object_prop=DWCDP["identifiedBy"],
+#     use_inverse=True,
+#     values_class=DWC["Identification"],
+#     definition=Literal("An instance of a [dcterms:Agent] that has published a [dwc:Identification]."),
+#     comments=Literal("Due to the directionality of the property [dwcdp:identifiedBy], the class is defined in description logic as [dwcdp:IdentificationAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:identifiedBy]⁻).[dwc:Identification].")
+# )
 
-createCTOP(
-    name="PublisherAgent",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Publisher Agent"),
-    subclass_list=[DCTERMS["Agent"]],
-    object_prop=DWCDP["publishedBy"],
-    use_inverse=True,
-    values_class=DCTERMS["BibliographicResource"],
-    definition=Literal("An instance of a [dcterms:Agent] that has published a [dcterms:BibliographicResource]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:publishedBy], the class is defined in description logic as [dwcdp:PublisherAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:publishedBy]⁻).[dcterms:BibliographicResource].")
-)
+# createCTOP(
+#     name="PublisherAgent",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Publisher Agent"),
+#     subclass_list=[DCTERMS["Agent"]],
+#     object_prop=DWCDP["publishedBy"],
+#     use_inverse=True,
+#     values_class=DCTERMS["BibliographicResource"],
+#     definition=Literal("An instance of a [dcterms:Agent] that has published a [dcterms:BibliographicResource]."),
+#     comments=Literal("Due to the directionality of the property [dwcdp:publishedBy], the class is defined in description logic as [dwcdp:PublisherAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:publishedBy]⁻).[dcterms:BibliographicResource].")
+# )
 
-createCTOP(
-    name="ReviewerAgent",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Reviewer Agent"),
-    subclass_list=[DCTERMS["Agent"]],
-    object_prop=DWCDP["reviewedBy"],
-    use_inverse=True,
-    values_class=AC["Media"],
-    definition=Literal("An instance of a [dcterms:Agent] that has reviewed a [dwc:Media]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:reviewedBy], the class is defined in description logic as [dwcdp:Reviewer] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:reviewedBy]⁻).[dwc:Media].")
-)
+# createCTOP(
+#     name="ReviewerAgent",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Reviewer Agent"),
+#     subclass_list=[DCTERMS["Agent"]],
+#     object_prop=DWCDP["reviewedBy"],
+#     use_inverse=True,
+#     values_class=AC["Media"],
+#     definition=Literal("An instance of a [dcterms:Agent] that has reviewed a [dwc:Media]."),
+#     comments=Literal("Due to the directionality of the property [dwcdp:reviewedBy], the class is defined in description logic as [dwcdp:Reviewer] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:reviewedBy]⁻).[dwc:Media].")
+# )
 
 
 ###############################################################################################
 
 
-createCTOP(
-    name="EventAssertion",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Event Assertion"),
-    subclass_list=[DWC["Assertion"]],
-    object_prop=DWCDP["about"],
-    use_inverse=False,
-    values_class=DWC["Event"],
-    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Event]."),
-)
+# createCTOP(
+#     name="EventAssertion",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Event Assertion"),
+#     subclass_list=[DWC["Assertion"]],
+#     object_prop=DWCDP["about"],
+#     use_inverse=False,
+#     values_class=DWC["Event"],
+#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Event]."),
+# )
 
-createCTOP(
-    name="ChronometricAgeAssertion",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Chronometric Age Assertion"),
-    subclass_list=[DWC["Assertion"]],
-    object_prop=DWCDP["about"],
-    use_inverse=False,
-    values_class=CHRONO["ChronometricAge"],
-    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:ChronometricAge]."),
-)
+# createCTOP(
+#     name="ChronometricAgeAssertion",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Chronometric Age Assertion"),
+#     subclass_list=[DWC["Assertion"]],
+#     object_prop=DWCDP["about"],
+#     use_inverse=False,
+#     values_class=CHRONO["ChronometricAge"],
+#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:ChronometricAge]."),
+# )
 
 
-createCTOP(
-    name="MaterialEntityAssertion",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Material Entity Assertion"),
-    subclass_list=[DWC["Assertion"]],
-    object_prop=DWCDP["about"],
-    use_inverse=False,
-    values_class=DWC["MaterialEntity"],
-    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]."),
-)
+# createCTOP(
+#     name="MaterialEntityAssertion",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Material Entity Assertion"),
+#     subclass_list=[DWC["Assertion"]],
+#     object_prop=DWCDP["about"],
+#     use_inverse=False,
+#     values_class=DWC["MaterialEntity"],
+#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]."),
+# )
 
-createCTOP(
-    name="MediaAssertion",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Media Assertion"),
-    subclass_list=[DWC["Assertion"]],
-    object_prop=DWCDP["about"],
-    use_inverse=False,
-    values_class=AC["Media"],
-    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [ac:Media]."),
-)
+# createCTOP(
+#     name="MediaAssertion",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Media Assertion"),
+#     subclass_list=[DWC["Assertion"]],
+#     object_prop=DWCDP["about"],
+#     use_inverse=False,
+#     values_class=AC["Media"],
+#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [ac:Media]."),
+# )
 
-createCTOP(
-    name="NucleotideAnalysisAssertion",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Nucleotide Analysis Assertion"),
-    subclass_list=[DWC["Assertion"]],
-    object_prop=DWCDP["about"],
-    use_inverse=False,
-    values_class=DWC["NucleotideAnalysis"],
-    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:NucleotideAnalysis]."),
-)
+# createCTOP(
+#     name="NucleotideAnalysisAssertion",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Nucleotide Analysis Assertion"),
+#     subclass_list=[DWC["Assertion"]],
+#     object_prop=DWCDP["about"],
+#     use_inverse=False,
+#     values_class=DWC["NucleotideAnalysis"],
+#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:NucleotideAnalysis]."),
+# )
 
-createCTOP(
-    name="OccurrenceAssertion",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Occurrence Assertion"),
-    subclass_list=[DWC["Assertion"]],
-    object_prop=DWCDP["about"],
-    use_inverse=False,
-    values_class=DWC["Occurrence"],
-    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."),
-)
+# createCTOP(
+#     name="OccurrenceAssertion",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Occurrence Assertion"),
+#     subclass_list=[DWC["Assertion"]],
+#     object_prop=DWCDP["about"],
+#     use_inverse=False,
+#     values_class=DWC["Occurrence"],
+#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."),
+# )
 
-createCTOP(
-    name="OrganismAssertion",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Organism Assertion"),
-    subclass_list=[DWC["Assertion"]],
-    object_prop=DWCDP["about"],
-    use_inverse=False,
-    values_class=DWC["Organism"],
-    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]."),
-)
+# createCTOP(
+#     name="OrganismAssertion",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Organism Assertion"),
+#     subclass_list=[DWC["Assertion"]],
+#     object_prop=DWCDP["about"],
+#     use_inverse=False,
+#     values_class=DWC["Organism"],
+#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]."),
+# )
 
 
 
@@ -765,33 +813,33 @@ createCTOP(
 
 
 
-createCTOP(
-    name="AssertionProtocol",
-    namespace=DWCDP,
-    graph=g,
-    pref_label=Literal("Assertion Protocol"),
-    subclass_list=[DWC["Protocol"]],
-    object_prop=DWCDP["followed"],
-    use_inverse=True,
-    values_class=DWC["Assertion"],
-    definition=Literal("A [dwc:Protocol] followed by a [dcterms:Agent] for a [dwc:Assertion]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Assertion].")
-)
+# createCTOP(
+#     name="AssertionProtocol",
+#     namespace=DWCDP,
+#     graph=g,
+#     pref_label=Literal("Assertion Protocol"),
+#     subclass_list=[DWC["Protocol"]],
+#     object_prop=DWCDP["followed"],
+#     use_inverse=True,
+#     values_class=DWC["Assertion"],
+#     definition=Literal("A [dwc:Protocol] followed by a [dcterms:Agent] for a [dwc:Assertion]."),
+#     comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Assertion].")
+# )
 
-# GOOD COMPLEX EXAMPLE
-# BEFORE AFTER ADD
-createCTOP(
-    name="EventProtocol",
-    namespace=DWCDP,
-    graph=g,
-    pref_label=Literal("Event Protocol"),
-    subclass_list=[DWC["Protocol"]],
-    object_prop=DWCDP["followed"],
-    use_inverse=True,
-    values_class=DWC["Event"],
-    definition=Literal("A [dwc:Protocol] followed by a [dcterms:Agent] for a [dwc:NucleotideAnalysis]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Event].")
-)
+# # GOOD COMPLEX EXAMPLE
+# # BEFORE AFTER ADD
+# createCTOP(
+#     name="EventProtocol",
+#     namespace=DWCDP,
+#     graph=g,
+#     pref_label=Literal("Event Protocol"),
+#     subclass_list=[DWC["Protocol"]],
+#     object_prop=DWCDP["followed"],
+#     use_inverse=True,
+#     values_class=DWC["Event"],
+#     definition=Literal("A [dwc:Protocol] followed by a [dcterms:Agent] for a [dwc:NucleotideAnalysis]."),
+#     comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Event].")
+# )
 
 # NOTE: Particularly important one. It is the only dwc:Protocol that is the domain of the properties from GBIF, MIQE, MIXS, et al.
 createCTOP(
@@ -815,72 +863,72 @@ createCTOP(
 
 ##############################################
 
-# NOTE: owl:inverseFunction test
-createCTOP(
-    name="AgentMedia",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Agent Media"),
-    subclass_list=[AC["Media"]],
-    object_prop=DWCDP["isMediaOf"],
-    use_inverse=False,
-    values_class=DCTERMS["Agent"],
-    definition=Literal("A [ac:Media] about a [dcterms:Agent]."),
-)
+# # NOTE: owl:inverseFunction test
+# createCTOP(
+#     name="AgentMedia",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Agent Media"),
+#     subclass_list=[AC["Media"]],
+#     object_prop=DWCDP["isMediaOf"],
+#     use_inverse=False,
+#     values_class=DCTERMS["Agent"],
+#     definition=Literal("A [ac:Media] about a [dcterms:Agent]."),
+# )
 
-# NOTE: owl:inverseFunction test
-createCTOP(
-    name="EventMedia",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Event Media"),
-    subclass_list=[AC["Media"]],
-    object_prop=DWCDP["isMediaOf"],
-    use_inverse=False,
-    values_class=DWC["Event"],
-    definition=Literal("A [ac:Media] about a [dwc:Event]."),
-)
+# # NOTE: owl:inverseFunction test
+# createCTOP(
+#     name="EventMedia",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Event Media"),
+#     subclass_list=[AC["Media"]],
+#     object_prop=DWCDP["isMediaOf"],
+#     use_inverse=False,
+#     values_class=DWC["Event"],
+#     definition=Literal("A [ac:Media] about a [dwc:Event]."),
+# )
 
-# NOTE: owl:inverseFunction test
-createCTOP(
-    name="GeologicalContextMedia",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Geological Context Media"),
-    subclass_list=[AC["Media"]],
-    object_prop=DWCDP["isMediaOf"],
-    use_inverse=False,
-    values_class=DWC["GeologicalContext"],
-    definition=Literal("A [ac:Media] about a [dwc:GeologicalContext]."),
-)
+# # NOTE: owl:inverseFunction test
+# createCTOP(
+#     name="GeologicalContextMedia",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Geological Context Media"),
+#     subclass_list=[AC["Media"]],
+#     object_prop=DWCDP["isMediaOf"],
+#     use_inverse=False,
+#     values_class=DWC["GeologicalContext"],
+#     definition=Literal("A [ac:Media] about a [dwc:GeologicalContext]."),
+# )
 
-# NOTE: owl:inverseFunction test
-createCTOP(
-    name="MaterialEntityMedia",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Material Entity Media"),
-    subclass_list=[AC["Media"]],
-    object_prop=DWCDP["isMediaOf"],
-    use_inverse=False,
-    values_class=DWC["MaterialEntity"],
-    definition=Literal("A [ac:Media] about a [dwc:MaterialEntity]."),
-)
+# # NOTE: owl:inverseFunction test
+# createCTOP(
+#     name="MaterialEntityMedia",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Material Entity Media"),
+#     subclass_list=[AC["Media"]],
+#     object_prop=DWCDP["isMediaOf"],
+#     use_inverse=False,
+#     values_class=DWC["MaterialEntity"],
+#     definition=Literal("A [ac:Media] about a [dwc:MaterialEntity]."),
+# )
 
-# NOTE: owl:inverseFunction test
-createCTOP(
-    name="OccurrenceMedia",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Occurrence Media"),
-    subclass_list=[AC["Media"]],
-    object_prop=DWCDP["isMediaOf"],
-    use_inverse=False,
-    values_class=DWC["Occurrence"],
-    definition=Literal("A [ac:Media] about a [dwc:Occurrence]."),
-)
+# # NOTE: owl:inverseFunction test
+# createCTOP(
+#     name="OccurrenceMedia",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Occurrence Media"),
+#     subclass_list=[AC["Media"]],
+#     object_prop=DWCDP["isMediaOf"],
+#     use_inverse=False,
+#     values_class=DWC["Occurrence"],
+#     definition=Literal("A [ac:Media] about a [dwc:Occurrence]."),
+# )
 
-g.add((DWCDP["hasMedia"], OWL["inverseOf"], DWCDP["isMediaOf"]))
+# g.add((DWCDP["hasMedia"], OWL["inverseOf"], DWCDP["isMediaOf"]))
 
 
 #########################################################
@@ -980,22 +1028,218 @@ g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], Robj_class))
 #     pref_label=Literal("Ruling By Commission", lang="en"),
 # )
 
+# createSC(
+#     name="Collecting_Permit",
+#     namespace=GGBN,
+#     graph=g,
+#     pref_label=Literal("Collecting Permit", lang="en"),
+#     definition=Literal("A value of the ggbnvoc:permitType_vocabulary.", lang="en"),
+# )
 
+# createSC(
+#     name="Import_Permit",
+#     namespace=GGBN,
+#     graph=g,
+#     pref_label=Literal("Import Permit", lang="en"),
+#     definition=Literal("A value of the ggbnvoc:permitType_vocabulary.", lang="en"),
+# )
 
 createSC(
-    name="Collecting_Permit",
-    namespace=GGBN,
+    name="d001",
+    namespace=DWCDOE,
     graph=g,
-    pref_label=Literal("Collecting Permit", lang="en"),
-    definition=Literal("A value of the ggbnvoc:permitType_vocabulary.", lang="en"),
+    pref_label=Literal("Native (category A)", lang="en"),
+    definition=Literal("Not transported beyond limits of native range.", lang="en"),
+    comments=Literal("Considered native and naturally occurring. See also \"category A\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d001",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d001-2021-09-01",
 )
 
 createSC(
-    name="Import_Permit",
-    namespace=GGBN,
+    name="d002",
+    namespace=DWCDOE,
     graph=g,
-    pref_label=Literal("Import Permit", lang="en"),
-    definition=Literal("A value of the ggbnvoc:permitType_vocabulary.", lang="en"),
+    pref_label=Literal("Captive (category B1)", lang="en"),
+    definition=Literal("Individuals in captivity or quarantine (i.e., individuals provided with conditions suitable for them, but explicit measures of containment are in place).", lang="en"),
+    comments=Literal("Only for cases where specific actions have been taken place to prevent escape of individuals or propagules. See also \"category B1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d002",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d002-2021-09-01",
+)
+
+createSC(
+    name="d003",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Cultivated (category B2)", lang="en"),
+    definition=Literal("Individuals in cultivation (i.e., individuals provided with conditions suitable for them, but explicit measures to prevent dispersal are limited at best).", lang="en"),
+    comments=Literal("Examples include gardens, parks and farms. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d003",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d003-2021-09-01",
+)
+
+createSC(
+    name="d004",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Released (category B3)", lang="en"),
+    definition=Literal("Individuals directly released into novel environment.", lang="en"),
+    comments=Literal("For example, fish stocked for angling, birds for hunting. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d004",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d004-2021-09-01",
+)
+
+createSC(
+    name="d005",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Failing (category C0)", lang="en"),
+    definition=Literal("Individuals released outside of captivity or cultivation in a location, but incapable of surviving for a significant period.", lang="en"),
+    comments=Literal("For example, frost-tender plants sown or planted in a cold climate. See also \"category C0\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d005",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d005-2021-09-01",
+)
+
+createSC(
+    name="d006",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Casual (category C1)", lang="en"),
+    definition=Literal("Individuals surviving outside of captivity or cultivation in a location with no reproduction.", lang="en"),
+    comments=Literal("Trees planted in the wild for forestry or ornament may come under this category. See also \"category C1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d006",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d006-2021-09-01",
+)
+
+createSC(
+    name="d007",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Reproducing (category C2)", lang="en"),
+    definition=Literal("Individuals surviving outside of captivity or cultivation in a location with no reproduction.", lang="en"),
+    comments=Literal("Offspring are produced, but these either do not survive or are not fertile enough to maintain the population. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d007",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d007-2021-09-01",
+)
+
+createSC(
+    name="d008",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Established (category C3)", lang="en"),
+    definition=Literal("Individuals surviving outside of captivity or cultivation in a location. Reproduction occurring, and population self-sustaining.", lang="en"),
+    comments=Literal("The population is maintained by reproduction, but is not spreading. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d008",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d008-2021-09-01",
+)
+
+createSC(
+    name="d009",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Colonising (category D1)", lang="en"),
+    definition=Literal("Self-sustaining population outside of captivity or cultivation, with individuals surviving a significant distance from the original point of introduction.", lang="en"),
+    comments=Literal("The population is maintained by reproduction and is spreading. See also \"category D1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d009",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d009-2021-09-01",
+)
+
+createSC(
+    name="d010",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Invasive (category D2)", lang="en"),
+    definition=Literal("Self-sustaining population outside of captivity or cultivation, with individuals surviving and reproducing a significant distance from the original point of introduction.", lang="en"),
+    comments=Literal("The population is maintained by reproduction, is spreading, and its progeny are also reproducing and spreading. See also \"category D2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d010",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d010-2021-09-01",
+)
+
+createSC(
+    name="d011",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Widespread invasive (category E)", lang="en"),
+    definition=Literal("Fully invasive species, with individuals dispersing, surviving and reproducing at multiple sites across a spectrum of habitats and geographic range.", lang="en"),
+    comments=Literal("This term is only used for those invasives with the highest degree of encroachment. See also \"category E\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d011",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d011-2021-09-01",
+)
+
+createSC(
+    name="e001",
+    namespace=DWCEM,
+    graph=g,
+    pref_label=Literal("Native (indigenous)", lang="en"),
+    definition=Literal("A taxon occurring within its natural range.", lang="en"),
+    comments=Literal("What is considered native to an area varies with the biogeographic history of an area and the local interpretation of what is a \"natural range\".", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcem/values/e001",
+    references_s="http://rs.tdwg.org/dwcem/values/version/e001-2021-09-01",
+)
+
+createSC(
+    name="e002",
+    namespace=DWCEM,
+    graph=g,
+    pref_label=Literal("Native (reintroduced)", lang="en"),
+    definition=Literal("A taxon re-established by direct introduction by humans into an area that was once part of its natural range, but from where it had become extinct.", lang="en"),
+    comments=Literal("Where a taxon has become extirpated from an area where it had naturally occurred it may be returned to that area deliberately with the intention of re-establishing it.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcem/values/e002",
+    references_s="http://rs.tdwg.org/dwcem/values/version/e002-2025-06-12",
+)
+
+createSC(
+    name="e003",
+    namespace=DWCEM,
+    graph=g,
+    pref_label=Literal("Introduced (alien, exotic, non-native, nonindigenous)", lang="en"),
+    definition=Literal("Establishment of a taxon by human agency into an area that is not part of its natural range.", lang="en"),
+    comments=Literal("Organisms can be introduced to novel areas and habitats by human activity, either on purpose or by accident. Humans can also inadvertently create corridors that break down natural barriers to dispersal and allow organisms to spread beyond their natural range.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcem/values/e003",
+    references_s="http://rs.tdwg.org/dwcem/values/version/e003-2021-09-01",
+)
+
+createSC(
+    name="e004",
+    namespace=DWCEM,
+    graph=g,
+    pref_label=Literal("Introduced (assisted colonisation)", lang="en"),
+    definition=Literal("Establishment of a taxon specifically with the intention of creating a self-sustaining wild population in an area that is not part of the taxon's natural range.", lang="en"),
+    comments=Literal("In the event of environmental change and habitat destruction a conservation option is to introduce a taxon into an area it did not naturally occur.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcem/values/e004",
+    references_s="http://rs.tdwg.org/dwcem/values/version/e004-2021-09-01",
+)
+
+createSC(
+    name="e005",
+    namespace=DWCEM,
+    graph=g,
+    pref_label=Literal("Vagrant (casual)", lang="en"),
+    definition=Literal("The temporary occurrence of a taxon far outside its natural or migratory range.", lang="en"),
+    comments=Literal("Natural events and human activity can disperse organisms unpredictably into places where they may stay or survive for a period.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcem/values/e005",
+    references_s="http://rs.tdwg.org/dwcem/values/version/e005-2020-10-13",
+)
+
+createSC(
+    name="e006",
+    namespace=DWCEM,
+    graph=g,
+    pref_label=Literal("Uncertain (unknown, cryptogenic)", lang="en"),
+    definition=Literal("The origin of the occurrence of the taxon in an area is obscure.", lang="en"),
+    comments=Literal("When there is a lack of fossil or historical evidence for the occurrence of a taxon in an area it can be impossible to know if the taxon is new to the area or native.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcem/values/e006",
+    references_s="http://rs.tdwg.org/dwcem/values/version/e006-2021-09-01",
+)
+
+createSC(
+    name="e007",
+    namespace=DWCEM,
+    graph=g,
+    pref_label=Literal("Native (endemic)", lang="en"),
+    definition=Literal("A taxon with a natural distribution restricted to a single geographical area.", lang="en"),
+    comments=Literal("The term endemic is a subcategory of native and relates to geography, such as \"areas of endemism\", bioregions, and sometimes administrative boundaries. While a native taxon can naturally occur in several geographical areas an endemic taxon only occurs in one. In Darwin Core terms this would mean, \"A dwc:Organism referred to is recognized as a member of a dwc:Taxon endemic to the dcterms:Location at the time of the dwc:Occurrence.\"", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcem/values/e007",
+    references_s="http://rs.tdwg.org/dwcem/values/version/e007-2025-06-12",
 )
 
 #####################################################################################################
@@ -1184,7 +1428,8 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domains=DWC["Occurrence"],
-    pref_label=Literal("Degree Of Establisment (IRI)"),
+    ranges=DWC["DegreeOfEstablishment"],
+    pref_label=Literal("Degree Of Establishment (IRI)"),
     definition=Literal("The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time.", lang="en"),
     comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
     examples=[
@@ -1236,6 +1481,7 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domains=DWC["Occurrence"],
+    ranges=DWC["EstablishmentMeans"],
     pref_label=Literal("Establishment Means (IRI)"),
     definition=Literal("Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans.", lang="en"),
     comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -2732,6 +2978,44 @@ createDP(
     references_s="http://rs.tdwg.org/dwc/terms/version/decimalLongitude-2023-06-28",
 )
 
+createEDP(
+    name="degreeOfEstablishment",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Occurrence"],
+    one_of=[
+        Literal("native"),
+        Literal("captive"),
+        Literal("cultivated"),
+        Literal("released"),
+        Literal("failing"),
+        Literal("casual"),
+        Literal("reproducing"),
+        Literal("established"),
+        Literal("colonising"),
+        Literal("invasive"),
+        Literal("widespreadInvasive"),
+    ],
+    pref_label=Literal("Degree of Establishment", lang="en"),
+    definition=Literal("The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time.", lang="en"),
+    comments=Literal("Recommended best practice is to use controlled value strings from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("native"),
+        Literal("captive"),
+        Literal("cultivated"),
+        Literal("released"),
+        Literal("failing"),
+        Literal("casual"),
+        Literal("reproducing"),
+        Literal("established"),
+        Literal("colonising"),
+        Literal("invasive"),
+        Literal("widespreadInvasive"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/degreeOfEstablishment",
+    references_s="http://rs.tdwg.org/dwc/terms/version/degreeOfEstablishment-2023-06-28",
+)
+
 createDP(
     name="derivedFromMediaID",
     namespace=DWC,
@@ -2871,6 +3155,37 @@ createRDP(
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/endDayOfYear",
     references_s="http://rs.tdwg.org/dwc/terms/version/endDayOfYear-2023-06-28",
+)
+
+# WARN: List of examples in list of terms does not propose nativeEndemic (added in 20205)
+createEDP(
+    name="establishmentMeans",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Occurrence"],
+    one_of=[
+        Literal("native"),
+        Literal("nativeReintroduced"),
+        Literal("introduced"),
+        Literal("introducedAssistedColonisation"),
+        Literal("vagrant"),
+        Literal("uncertain"),
+        Literal("nativeEndemic"),        
+    ],
+    pref_label=Literal("Establishment Means", lang="en"),
+    definition=Literal("Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans.", lang="en"),
+    comments=Literal("Recommended best practice is to use controlled value strings from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("native"),
+        Literal("nativeReintroduced"),
+        Literal("introduced"),
+        Literal("introducedAssistedColonisation"),
+        Literal("vagrant"),
+        Literal("uncertain"),
+        Literal("nativeEndemic"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/establishmentMeans",
+    references_s="http://rs.tdwg.org/dwc/terms/version/establishmentMeans-2023-06-28",
 )
 
 createDP(
