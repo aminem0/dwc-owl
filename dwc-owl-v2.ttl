@@ -2993,24 +2993,150 @@ dwc:pathway rdf:type owl:DatatypeProperty ;
                                      rdf:rest [ rdf:type rdf:List ;
                                                 rdf:first "aquacultureMariculture" ;
                                                 rdf:rest [ rdf:type rdf:List ;
-                                                           rdf:first "biologicalControl" ;
+                                                           rdf:first "ballastWater" ;
                                                            rdf:rest [ rdf:type rdf:List ;
-                                                                      rdf:first "conservationOrWildlifeManagement" ;
+                                                                      rdf:first "biologicalControl" ;
                                                                       rdf:rest [ rdf:type rdf:List ;
-                                                                                 rdf:first "erosionControl" ;
+                                                                                 rdf:first "conservationOrWildlifeManagement" ;
                                                                                  rdf:rest [ rdf:type rdf:List ;
-                                                                                            rdf:first "fisheryInTheWild" ;
+                                                                                            rdf:first "containerBulk" ;
                                                                                             rdf:rest [ rdf:type rdf:List ;
-                                                                                                       rdf:first "hunting" ;
+                                                                                                       rdf:first "contaminantNursery" ;
                                                                                                        rdf:rest [ rdf:type rdf:List ;
-                                                                                                                  rdf:first "landscapeImprovement" ;
+                                                                                                                  rdf:first "contaminantOnAnimals" ;
                                                                                                                   rdf:rest [ rdf:type rdf:List ;
-                                                                                                                             rdf:first "otherIntentionalRelease" ;
+                                                                                                                             rdf:first "contaminantOnPlants" ;
                                                                                                                              rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                        rdf:first "publicGardenZooAquaria" ;
+                                                                                                                                        rdf:first "contaminateBait" ;
                                                                                                                                         rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                   rdf:first "releasedForUse" ;
-                                                                                                                                                   rdf:rest rdf:nil
+                                                                                                                                                   rdf:first "corridor" ;
+                                                                                                                                                   rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                              rdf:first "corridorAndDispersal" ;
+                                                                                                                                                              rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                         rdf:first "erosionControl" ;
+                                                                                                                                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                    rdf:first "escapeFromConfinement" ;
+                                                                                                                                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                               rdf:first "farmedAnimals" ;
+                                                                                                                                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                          rdf:first "fisheryInTheWild" ;
+                                                                                                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                     rdf:first "fishingEquipment" ;
+                                                                                                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                rdf:first "foodContaminant" ;
+                                                                                                                                                                                                                                rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                           rdf:first "forestry" ;
+                                                                                                                                                                                                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                      rdf:first "fur" ;
+                                                                                                                                                                                                                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                 rdf:first "hitchhikersAirplane" ;
+                                                                                                                                                                                                                                                                 rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                            rdf:first "hitchhikersShip" ;
+                                                                                                                                                                                                                                                                            rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                       rdf:first "horticulture" ;
+                                                                                                                                                                                                                                                                                       rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                  rdf:first "hullFouling" ;
+                                                                                                                                                                                                                                                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                             rdf:first "hunting" ;
+                                                                                                                                                                                                                                                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                        rdf:first "intentional" ;
+                                                                                                                                                                                                                                                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                   rdf:first "landscapeImprovement" ;
+                                                                                                                                                                                                                                                                                                                                   rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                              rdf:first "liveFoodLiveBait" ;
+                                                                                                                                                                                                                                                                                                                                              rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                         rdf:first "machineryEquipment" ;
+                                                                                                                                                                                                                                                                                                                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                    rdf:first "naturalDispersal" ;
+                                                                                                                                                                                                                                                                                                                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                               rdf:first "ornamentalNonHorticulture" ;
+                                                                                                                                                                                                                                                                                                                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                          rdf:first "otherEscape" ;
+                                                                                                                                                                                                                                                                                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                     rdf:first "otherIntentionalRelease" ;
+                                                                                                                                                                                                                                                                                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                rdf:first "otherTransport" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                           rdf:first "packingMaterial" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                      rdf:first "parasitesOnAnimals" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 rdf:first "parasitesOnPlants" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            rdf:first "people" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                       rdf:first "pet" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                       rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  rdf:first "publicGardenZooAquaria" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             rdf:first "releaseInNature" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        rdf:first "releasedForUse" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   rdf:first "research" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              rdf:first "seedContaminant" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         rdf:first "timberTrade" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    rdf:first "transportContaminant" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               rdf:first "transportStowaway" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          rdf:first "transportationHabitatMaterial" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     rdf:first "tunnelsBridges" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                rdf:first "unaided" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           rdf:first "unintentional" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      rdf:first "vehicles" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 rdf:first "waterwaysBasinsSeas" ;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 rdf:rest rdf:nil
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                               ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                                                                                                                                                                                                                              ]
+                                                                                                                                                                                                                                                                                                                                                                                                   ]
+                                                                                                                                                                                                                                                                                                                                                                                        ]
+                                                                                                                                                                                                                                                                                                                                                                             ]
+                                                                                                                                                                                                                                                                                                                                                                  ]
+                                                                                                                                                                                                                                                                                                                                                       ]
+                                                                                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                                                                                 ]
+                                                                                                                                                                                                                                                                                                                      ]
+                                                                                                                                                                                                                                                                                                           ]
+                                                                                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                                                                                     ]
+                                                                                                                                                                                                                                                                          ]
+                                                                                                                                                                                                                                                               ]
+                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                                              ]
+                                                                                                                                                                                                                   ]
+                                                                                                                                                                                                        ]
+                                                                                                                                                                                             ]
+                                                                                                                                                                                  ]
+                                                                                                                                                                       ]
+                                                                                                                                                            ]
                                                                                                                                                  ]
                                                                                                                                       ]
                                                                                                                            ]
@@ -5405,7 +5531,7 @@ dwcpw:p003 rdf:type owl:NamedIndividual ,
            rdfs:isDefinedBy dwcpw: ;
            skos:broader dwcpw:p045 ;
            skos:definition "Fish stocked into the wild either to create a fishery or for recreational angling."@en ;
-           skos:prefLabel "Fishery in the Wild"@en .
+           skos:prefLabel "Fishery In The Wild"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p004
@@ -5441,7 +5567,7 @@ dwcpw:p006 rdf:type owl:NamedIndividual ,
            rdfs:isDefinedBy dwcpw: ;
            skos:broader dwcpw:p045 ;
            skos:definition "Organisms introduced for conservation purposes or wildlife management."@en ;
-           skos:prefLabel "Conservation or Wildlife Management"@en .
+           skos:prefLabel "Conservation Or Wildlife Management"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p007
@@ -5453,7 +5579,7 @@ dwcpw:p007 rdf:type owl:NamedIndividual ,
            rdfs:isDefinedBy dwcpw: ;
            skos:broader dwcpw:p045 ;
            skos:definition "Release in nature for use (other than above, e.g., fur, transport, medical use)."@en ;
-           skos:prefLabel "Released for Use"@en .
+           skos:prefLabel "Released For Use"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p008
@@ -5477,7 +5603,7 @@ dwcpw:p009 rdf:type owl:NamedIndividual ,
            rdfs:isDefinedBy dwcpw: ;
            skos:broader dwcpw:p046 ;
            skos:definition "Plants grown with the intention of harvesting."@en ;
-           skos:prefLabel "Agriculture (including biofuel feedstocks)"@en .
+           skos:prefLabel "Agriculture (Including Biofuel Feedstocks)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p010
@@ -5513,7 +5639,7 @@ dwcpw:p012 rdf:type owl:NamedIndividual ,
            rdfs:isDefinedBy dwcpw: ;
            skos:broader dwcpw:p046 ;
            skos:definition "Privately kept animals."@en ;
-           skos:prefLabel "Pet/Aquarium/Terrarium Species (Including Live Food for Such Species)"@en .
+           skos:prefLabel "Pet/Aquarium/Terrarium Species (Including Live Food For Such Species)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p013
@@ -5554,147 +5680,350 @@ dwcpw:p015 rdf:type owl:NamedIndividual ,
 
 ###  http://rs.tdwg.org/dwcpw/values/p016
 dwcpw:p016 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p016 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p016-2021-09-01> ;
+           rdfs:comment "This term excludes plants and other organisms from aquaria and terrariums, which SHOULD be classified under the pet/aquarium/terrarium term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p046 ;
+           skos:definition "Plants distributed by the ornamental and decorative plants industry."@en ;
+           skos:prefLabel "Horticulture"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p017
 dwcpw:p017 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p017 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p017-2021-09-01> ;
+           rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p046 ;
+           skos:definition "Ornamental plants introduced through pathways other than the horticultural industry."@en ;
+           skos:prefLabel "Ornamental Purpose Other Than Horticulture"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p018
 dwcpw:p018 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p018 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p018-2021-09-01> ;
+           rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p046 ;
+           skos:definition "Plants and animals introduced for the purpose of breeding or scientific and medical research, including science education."@en ;
+           skos:prefLabel "Research And Ex-Situ Breeding (In Facilities)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p019
 dwcpw:p019 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p019 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p019-2021-09-01> ;
+           rdfs:comment "Live food, such as mealworms, for the organisms kept as pets should be classified under the pet term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p046 ;
+           skos:definition "Live food imported for human consumption or live bait, such as shellfish and snails."@en ;
+           skos:prefLabel "Live Food And Live Bait"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p020
 dwcpw:p020 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p020 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p020-2021-09-01> ;
+           rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p046 ;
+           skos:definition "Organisms brought into an area with the intention of keeping them in captivity permanently, but that have subsequently escaped."@en ;
+           skos:prefLabel "Other Escape From Confinement"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p021
 dwcpw:p021 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p021 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p021-2021-09-01> ;
+           rdfs:comment "These may be other plants, diseases, fungi and animals. They may be attached to the plant or within the soil. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p047 ;
+           skos:definition "Organisms transported into an area together with plant material."@en ;
+           skos:prefLabel "Contaminant Nursery Material"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p022
 dwcpw:p022 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p022 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p022-2021-09-01> ;
+           rdfs:comment "Typical examples include crustaceans, cephalopods and molluscs. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p047 ;
+           skos:definition "Contaminants, pathogens and parasites transported with live, frozen or preserved bait used to catch fish or other organisms."@en ;
+           skos:prefLabel "Contaminated Bait"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p023
 dwcpw:p023 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p023 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p023-2021-09-01> ;
+           rdfs:comment "This term includes unintentional introduction of contaminants such as diseases on those foods and in the case of plants, should include seeds. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p047 ;
+           skos:definition "Foods for human consumption, whether they are transported live or dead."@en ;
+           skos:prefLabel "Food Contaminant (Including Of Live Food)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p024
 dwcpw:p024 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p024 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p024-2021-09-01> ;
+           rdfs:comment "This term excludes parasites and pathogens, which SHOULD be classified under their own specific term (\"parasites on animals\"). Transported animals carry other organisms in their coats, in their guts and in soil on their hooves and feet. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p047 ;
+           skos:definition "Contaminants carried either on or in the body of transported animals."@en ;
+           skos:prefLabel "Contaminant On Animals (Except Parasites, Organisms Transported By Host/Vector)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p025
 dwcpw:p025 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p025 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p025-2021-09-01> ;
+           rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p047 ;
+           skos:definition "Parasitic and pathogenic organisms transported with their host or vector animal."@en ;
+           skos:prefLabel "Parasites On Animals (Including Organisms Transported By Host And Vector)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p026
 dwcpw:p026 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p026 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p026-2021-09-01> ;
+           rdfs:comment "This term excludes organisms carried on contaminant nursery material, seed contaminants, and the material from the timber trade, which SHOULD be classified under their own pathway terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p047 ;
+           skos:definition "Organisms transported on plant material."@en ;
+           skos:prefLabel "Contaminant On Plants (Except Parasites, Species Transported By Host/Vector)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p027
 dwcpw:p027 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p027 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p027-2021-09-01> ;
+           rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p047 ;
+           skos:definition "Parasitic and pathogenic organisms transported with their host or vector plant."@en ;
+           skos:prefLabel "Parasites On Plants (Including Species Transported By Host And Vector)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p028
 dwcpw:p028 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p028 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p028-2021-09-01> ;
+           rdfs:comment "These may be parasites or pathogens of seeds or species that eat seeds, whether intended to be transported or not. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p047 ;
+           skos:definition "Organisms contaminating transported seeds."@en ;
+           skos:prefLabel "Seed Contaminant"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p029
 dwcpw:p029 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p029 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p029-2021-09-01> ;
+           rdfs:comment "This term excludes packing material and habitat material made from wood, which SHOULD be included under their own terms (\"packing material\" and \"transportation of habitat material\"). Examples include wooden furniture, saw dust and fire wood. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p047 ;
+           skos:definition "Contaminants on unprocessed timber, processed wood and wood-derived products."@en ;
+           skos:prefLabel "Timber Trade"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p030
 dwcpw:p030 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p030 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p030-2021-09-01> ;
+           rdfs:comment "Examples include materials such as soil, vegetation, straw and wood chips. Unless these materials are sterilised the organisms can be transported with their habitat to a new location. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p047 ;
+           skos:definition "Organisms transported with their habitat material to a new location."@en ;
+           skos:prefLabel "Transportation Of Habitat Material (Soil, Vegetation, Wood, Etc.)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p031
 dwcpw:p031 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p031 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p031-2021-09-01> ;
+           rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "Aquatic organisms moved between sites on equipment of recreational anglers and professional fishermen."@en ;
+           skos:prefLabel "Angling/Fishing Equipment"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p032
 dwcpw:p032 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p032 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p032-2021-09-01> ;
+           rdfs:comment "The difference between this category and others, such as \"hitchhikers on ship/boat\", is that the organism embarked and disembarked from the container rather than the ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "Stowaways transported in or on cargo containers or bulk cargo units."@en ;
+           skos:prefLabel "Container/Bulk"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p033
 dwcpw:p033 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p033 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p033-2021-09-01> ;
+           rdfs:comment "This term does not apply to organisms that embarked in containers that were subsequently loaded onto an aircraft. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "Organisms that enter airplanes or other aircraft, such as helicopters, and are transported by them to another location."@en ;
+           skos:prefLabel "Hitchhikers In Or On Airplane"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p034
 dwcpw:p034 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p034 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p034-2021-09-01> ;
+           rdfs:comment "This term does not apply to organisms that embarked in containers that are subsequently loaded onto the ship, nor to contaminants of products loaded onto the ship. The term is intended for organisms that directly interact with the boat or ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "Organisms that enter directly onto boats or ships and are transported by them to another location."@en ;
+           skos:prefLabel "Hitchhikers On Ship/Boat (Excluding Ballast Water And Hull Fouling)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p035
 dwcpw:p035 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p035 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p035-2021-09-01> ;
+           rdfs:comment "This includes military equipment, farm machinery and manufacturing equipment. This term does not include products carried by vehicles. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "Organisms carried on the surfaces of or within heavy machinery and equipment."@en ;
+           skos:prefLabel "Machinery/Equipment"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p036
 dwcpw:p036 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p036 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p036-2021-09-01> ;
+           rdfs:comment "This term excludes recreational angling equipment, which SHOULD be classified under its own term (\"angling/fishing equipment\"). Examples include organisms transported by tourists. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "Organisms transported on people and/or their personal luggage."@en ;
+           skos:prefLabel "People And Their Luggage/Equipment (In Particular Tourism)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p037
 dwcpw:p037 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p037 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01> ;
+           rdfs:comment "Examples include woodern pallets, boxes, bags and baskets. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "Organic material, particularly unprocessed plant material that is used to pack transported goods."@en ;
+           skos:prefLabel "Organic Packing Material, In Particular Wood Packaging"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p038
 dwcpw:p038 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p038 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01> ;
+           rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "Organisms transported within the water pumped into boats and ships to provide ballast."@en ;
+           skos:prefLabel "Ship/Boat Ballast Water"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p039
 dwcpw:p039 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p039 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p039-2021-09-01> ;
+           rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "Organisms that attach themselves to the subsurface hull of boats and ships."@en ;
+           skos:prefLabel "Ship/Boat Hull Fouling"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p040
 dwcpw:p040 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p040 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p040-2021-09-01> ;
+           rdfs:comment "These organisms may be carried on or within the vehicle. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "Other vehicle hitchhikers that have been unintentionally dispersed, but are not covered by other terms."@en ;
+           skos:prefLabel "Vehicles (Car, Train, Etc.)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p041
 dwcpw:p041 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p041 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p041-2021-09-01> ;
+           rdfs:comment "Examples include fouling from offshore oil and gas platforms, offshore renewable energy sites (such as wind farms, pipelines, cable transport, etc.). See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p048 ;
+           skos:definition "A catch-all term for any transport related dispersal that is not covered in other terms."@en ;
+           skos:prefLabel "Other Means Of Transport"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p042
 dwcpw:p042 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p042 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p042-2021-09-01> ;
+           rdfs:comment "Organisms transported along these corridors in ballast or as hull fouling SHOULD be categorised under the \"ship/boat ballast water\" or \"ship/boat hull fouling\" terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p049 ;
+           skos:definition "Organisms that dispersed through artificial waterways created to connect previosuly unconnected water bodies."@en ;
+           skos:prefLabel "Interconnected Waterways/Basins/Seas"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p043
 dwcpw:p043 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p043 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p043-2021-09-01> ;
+           rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p049 ;
+           skos:definition "Unintentional dispersal by organisms using artificial tunnels, bridges, roads and railways."@en ;
+           skos:prefLabel "Tunnels And Land Bridges"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p044
 dwcpw:p044 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p044 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p044-2021-09-01> ;
+           rdfs:comment "Dispersal of organisms to new regions by natural dispersal from regions in which they are alien. These are alien species that have previously been introduced through one of these pathways: release in nature, escape from confinement, transport-contaminant, transport-stowaway, or corridor. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p050 ;
+           skos:definition "Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid."@en ;
+           skos:prefLabel "Natural Dispersal Across Borders Of Invasive Alien Organisms"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p045
@@ -5706,7 +6035,7 @@ dwcpw:p045 rdf:type owl:NamedIndividual ,
            rdfs:isDefinedBy dwcpw: ;
            skos:broader dwcpw:p051 ;
            skos:definition "Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid."@en ;
-           skos:prefLabel "Release in Nature"@en .
+           skos:prefLabel "Release In Nature"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p046
