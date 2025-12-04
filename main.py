@@ -25,6 +25,7 @@ DWCEM = Namespace("http://rs.tdwg.org/dwcem/values/")
 DWCDOE = Namespace("http://rs.tdwg.org/dwcdoe/values/")
 DWCIRI = Namespace("http://rs.tdwg.org/dwc/iri/")
 DWCDP = Namespace("http://rs.tdwg.org/dwcdp/terms/")
+DWCPW = Namespace("http://rs.tdwg.org/dwcpw/values/")
 ECO = Namespace("http://rs.tdwg.org/eco/terms/")
 ECOIRI = Namespace("http://rs.tdwg.org/eco/iri/")
 EXIF = Namespace("http://ns.adobe.com/exif/1.0/")
@@ -53,6 +54,7 @@ g.bind("dwcdoe", DWCDOE)
 g.bind("dwcem", DWCEM)
 g.bind("dwciri", DWCIRI)
 g.bind("dwcdp", DWCDP)
+g.bind("dwcpw", DWCPW)
 g.bind("eco", ECO)
 g.bind("exif", EXIF)
 g.bind("gbif", GBIF)
@@ -366,6 +368,72 @@ createOC(
     ],
     # card1_restrictions=[DWC["organismInteractionID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/OrganismInteraction",
+)
+
+# NOTE: Review integration of skos:Concept and owl:Classes.
+# Here there is a defined skos:ConceptScheme
+createEOC(
+    name="Pathway",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Pathway", lang="en"),
+    definition=Literal("Controlled value for Darwin Core terms with local name pathway.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    one_of=[
+        URIRef("http://rs.tdwg.org/dwcpw/values/p001"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p002"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p003"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p004"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p005"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p006"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p007"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p008"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p009"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p010"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p011"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p012"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p013"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p014"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p015"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p016"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p017"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p018"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p019"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p020"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p021"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p022"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p023"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p024"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p025"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p026"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p027"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p028"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p029"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p030"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p031"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p032"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p033"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p034"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p035"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p036"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p037"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p038"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p039"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p040"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p041"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p042"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p043"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p044"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p049"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p050"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p051"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p052"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p053"),
+    ],
 )
 
 # WARN: Not in original DwCDP definition, but I added it.
@@ -1242,6 +1310,293 @@ createSC(
     references_s="http://rs.tdwg.org/dwcem/values/version/e007-2025-06-12",
 )
 
+createSC(
+    name="p001",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Biological Control", lang="en"),
+    definition=Literal("Organisms occuring in an area because they were introduced for the purpose of biological control of another organism.", lang="en"),
+    comments=Literal("Released intentionally into the (semi)natural environment with the purpose of controlling the population(s) of one or more organisms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p001",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p001-2021-09-01",
+)
+
+createSC(
+    name="p002",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Erosion Control", lang="en"),
+    definition=Literal("Organisms introduced for the purpose of erosion control/dune stabilization (windbreaks, hedges, etc.).", lang="en"),
+    comments=Literal("Probably only applicable to plants. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p002",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p002-2021-09-01",
+)
+
+createSC(
+    name="p003",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Fishery in the Wild", lang="en"),
+    definition=Literal("Fish stocked into the wild either to create a fishery or for recreational angling.", lang="en"),
+    comments=Literal("Largely applicable to freshwater and anadromous fish. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p003",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p003-2021-09-01",
+)
+
+createSC(
+    name="p004",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Hunting", lang="en"),
+    definition=Literal("Animals stocked into the wild specifically with the intention that they would be hunted for sport.", lang="en"),
+    comments=Literal("Largely applicable to terrestrial vertebrates. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p004",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p004-2021-09-01",
+)
+
+createSC(
+    name="p005",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Landscape Improvement", lang="en"),
+    definition=Literal("Landscape/flora/fauna \"improvement\" in the wild.", lang="en"),
+    comments=Literal("\"Improvement\" in this context is intended for introductions for the purpose of aesthetic enhancement of the landscape, as opposed to practical introductions for the purpose of erosion control, agriculture, forestry etc. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p005",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p005-2021-09-01",
+)
+
+createSC(
+    name="p006",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Conservation or Wildlife Management", lang="en"),
+    definition=Literal("Organisms introduced for conservation purposes or wildlife management.", lang="en"),
+    comments=Literal("The organism was released with the intention of improving the conservation status of the species or the conservation status other species in the habitat. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p006",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p006-2021-09-01",
+)
+
+createSC(
+    name="p007",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Released for Use", lang="en"),
+    definition=Literal("Release in nature for use (other than above, e.g., fur, transport, medical use).", lang="en"),
+    comments=Literal("This term refers to organisms intentionally and directly released into the wild to serve a specific purpose. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p007",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p007-2021-09-01",
+)
+
+createSC(
+    name="p008",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Other Intentional Release", lang="en"),
+    definition=Literal("A catch-all term for intentional releases not for human use that are not covered by other more specific terms.", lang="en"),
+    comments=Literal("Compare with \"other escape from confinement\". See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p008",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p008-2021-09-01",
+)
+
+createSC(
+    name="p009",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Agriculture (including biofuel feedstocks)", lang="en"),
+    definition=Literal("Plants grown with the intention of harvesting.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p009",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p009-2021-09-01",
+)
+
+createSC(
+    name="p010",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Aquaculture/Mariculture", lang="en"),
+    definition=Literal("The analog of agriculture and farmed animals, specifically related to aquatic organisms.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p010",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p010-2021-09-01",
+)
+
+createSC(
+    name="p011",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Botanic Garden/Zoo/Aquaria (Excluding Domestic Aquaria)", lang="en"),
+    definition=Literal("Organisms in public collections of plants and/or animals.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p011",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p011-2021-09-01",
+)
+
+createSC(
+    name="p012",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Pet/Aquarium/Terrarium Species (Including Live Food for Such Species)", lang="en"),
+    definition=Literal("Privately kept animals.", lang="en"),
+    comments=Literal("Animals kept for hunting, such as falcons and ferrets, SHOULD be included here, not under the hunting term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p012",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p012-2021-09-01",
+)
+
+createSC(
+    name="p013",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Farmed Animals (Including Animals Left Under Limited Control)", lang="en"),
+    definition=Literal("Animals cared for and bred with the specific intention of using their products, such as meat and milk.", lang="en"),
+    comments=Literal("Farmed animals are generally kept in a defined area, such as a fields. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p013",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p013-2021-09-01",
+)
+
+createSC(
+    name="p014",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Forestry (Including Reforestation)", lang="en"),
+    definition=Literal("Trees specifically introduced to provide timber and other forestry products.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p014",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p014-2021-09-01",
+)
+
+createSC(
+    name="p015",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Fur Farms", lang="en"),
+    definition=Literal("Organisms escaped from a fur farm, including unauthorised releases.", lang="en"),
+    comments=Literal("Probably only applicable to vertebrates raised for their pelts and skins. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p015",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p015-2021-09-01",
+)
+
+######################################################################################################
+
+createSC(
+    name="p045",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Release in Nature", lang="en"),
+    definition=Literal("Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p051"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p045",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p045-2021-09-01",
+)
+
+createSC(
+    name="p046",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Escape From Confinement", lang="en"),
+    definition=Literal("Organisms intentionally transported by humans and intended to be kept in captivity or cultivation, but having inadvertently escaped from human control.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p051"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p046",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p046-2021-09-01",
+)
+
+createSC(
+    name="p047",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Transport-Contaminant", lang="en"),
+    definition=Literal("An umbrella term for all species transported as contaminants in other products.", lang="en"),
+    comments=Literal("An alien species is a contaminant if it had a trophic or biotic relationship to organisms or items being transported and was to some extent dependent on them for survival. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p052"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p047",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p047-2021-09-01",
+)
+
+createSC(
+    name="p048",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Transport-Stowaway", lang="en"),
+    definition=Literal("An umbrella term for all species transported by riding on forms of transport where the organism has a direct interaction with the transport and is not merely carried as part of, or a contaminant of cargo.", lang="en"),
+    comments=Literal("A stowaway has no trophic or biotic relationship to the organisms or items being transported. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p052"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p048",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p048-2021-09-01",
+)
+
+createSC(
+    name="p049",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Corridor", lang="en"),
+    definition=Literal("Infrastructure, such as bridges, tunnels and canals have removed natural barriers to dispersal and allowed a species to move into a novel location.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p053"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p049",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p049-2021-09-01",
+)
+
+createSC(
+    name="p050",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Unaided", lang="en"),
+    definition=Literal("Organisms that spread by natural dispersal, without action or assistance by humans, from regions in which they are also alien.", lang="en"),
+    comments=Literal("The term refers to secondary dispersal from an area where the taxon is also alien. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p053"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p051",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01",
+)
+
+createSC(
+    name="p051",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Intentional", lang="en"),
+    definition=Literal("Organisms were brought to new area with the specific intention of keeping them alive in the new region, regardless of whether they were intended to be cultivated or released into the wild.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p051",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01",
+)
+
+createSC(
+    name="p052",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Unintentional", lang="en"),
+    definition=Literal("The organism was unintentionally brought to a new region.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p052",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p052-2021-09-01",
+)
+
+createSC(
+    name="p053",
+    namespace=DWCPW,
+    graph=g,
+    pref_label=Literal("Corridor and Dispersal", lang="en"),
+    definition=Literal("Organisms dispersed naturally, even if that dispersal was aided by changes in the landscape created by humans.", lang="en"),
+    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwcpw/values/p053",
+    references_s="http://rs.tdwg.org/dwcpw/values/version/p053-2021-09-01",
+)
+
 #####################################################################################################
 # BEGIN AXIOMS
 #####################################################################################################
@@ -1614,6 +1969,22 @@ createOP(
 )
 
 createOP(
+    name="identifiedBy",
+    namespace=DWCIRI,
+    graph=g,
+    domains=[
+        DWC["Identification"],
+        DWC["Occurrence"],
+        ECO["Survey"],
+    ],
+    pref_label=Literal("Identified By (IRI)"),
+    definition=Literal("A person, group, or organization who assigned the dwc:Taxon to the subject.", lang="en"),
+    comments=Literal("When used in the context of an Event (such as in the Humboldt Extension), the subject consists of all of the dwc:Organisms related to the Event. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/identifiedBy",
+    references_s="http://rs.tdwg.org/dwc/iri/version/identifiedBy-2025-07-10",
+)
+
+createOP(
     name="locationAccordingTo",
     namespace=DWCIRI,
     graph=g,
@@ -1642,7 +2013,8 @@ createOP(
     namespace=DWCIRI,
     graph=g,
     domains=DWC["Occurrence"],
-    pref_label=Literal("Pathway"),
+    ranges=DWC["Pathway"],
+    pref_label=Literal("Pathway (IRI)"),
     definition=Literal("The process by which a dwc:Organism came to be in a given place at a given time.", lang="en"),
     comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
     examples=[
@@ -1651,6 +2023,18 @@ createOP(
     ],
     version_of_s="http://rs.tdwg.org/dwc/iri/pathway",
     references_s="http://rs.tdwg.org/dwc/iri/version/pathway-2025-07-10",
+)
+
+createOP(
+    name="recordedBy",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DWC["Occurrence"],
+    pref_label=Literal("Recorded By (IRI)"),
+    definition=Literal("A person, group, or organization responsible for recording the original dwc:Occurrence.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/recordedBy",
+    references_s="http://rs.tdwg.org/dwc/iri/version/recordedBy-2025-07-10",
 )
 
 # WARN: Verify if actually about dwc:Occurrence
@@ -1904,7 +2288,9 @@ createOP(
     domains=DCTERMS["Location"],
     ranges=DCTERMS["Agent"],
     pref_label=Literal("Georeferenced By"),
-    subproperty_list=[DWCIRI["georeferencedBy"]],
+    subproperty_list=[
+        DWCIRI["georeferencedBy"],
+    ],
     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:Location] to the [dwc:Agent] that georeferenced it.", lang="en"),
 )
 
@@ -1983,8 +2369,15 @@ createOP(
     name="identifiedBy",
     namespace=DWCDP,
     graph=g,
-    domains=DWC["Identification"],
+    domains=[
+        DWC["Identification"],
+        DWC["Occurrence"],
+        ECO["Survey"],
+    ],
     ranges=DCTERMS["Agent"],
+    subproperty_list=[
+        DWCIRI["identifiedBy"],
+    ],
     pref_label=Literal("Identified By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Agent] that identified it.", lang="en"),
 )
@@ -2994,7 +3387,6 @@ createEDP(
         Literal("established"),
         Literal("colonising"),
         Literal("invasive"),
-        Literal("widespreadInvasive"),
     ],
     pref_label=Literal("Degree of Establishment", lang="en"),
     definition=Literal("The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time.", lang="en"),
@@ -4275,13 +4667,46 @@ createDP(
     references_s="http://rs.tdwg.org/dwc/terms/version/parentEventID-2023-06-28",
 )
 
-createDP(
+# createDP(
+#     name="pathway",
+#     namespace=DWC,
+#     graph=g,
+#     domains=DWC["Occurrence"],
+#     ranges=XSD["string"],
+#     pref_label=Literal("Pathway"),
+#     definition=Literal("The process by which a dwc:Organism came to be in a given place at a given time.", lang="en"),
+#     comments=Literal("Recommended best practice is to use controlled value strings from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+#     examples=[
+#         Literal("releasedForUse"),
+#         Literal("otherEscape"),
+#         Literal("transportContaminant"),
+#         Literal("transportStowaway"),
+#         Literal("corridor"),
+#         Literal("unaided"),
+#     ],
+#     version_of_s="http://rs.tdwg.org/dwc/terms/pathway",
+#     references_s="http://rs.tdwg.org/dwc/terms/version/pathway-2023-06-28",
+# )
+
+createEDP(
     name="pathway",
     namespace=DWC,
     graph=g,
     domains=DWC["Occurrence"],
-    ranges=XSD["string"],
-    pref_label=Literal("Pathway"),
+    one_of=[
+        Literal("biologicalControl"),
+        Literal("erosionControl"),
+        Literal("fisheryInTheWild"),
+        Literal("hunting"),
+        Literal("landscapeImprovement"),
+        Literal("conservationOrWildlifeManagement"),
+        Literal("releasedForUse"),
+        Literal("otherIntentionalRelease"),
+        Literal("agriculture"),
+        Literal("aquacultureMariculture"),
+        Literal("publicGardenZooAquaria"),
+    ],
+    pref_label=Literal("Pathway", lang="en"),
     definition=Literal("The process by which a dwc:Organism came to be in a given place at a given time.", lang="en"),
     comments=Literal("Recommended best practice is to use controlled value strings from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
     examples=[

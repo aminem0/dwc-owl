@@ -786,6 +786,7 @@ def createSC(
         pref_label: Literal,
         definition: Literal | None = None,
         comments: Literal | None = None,
+        broader: URIRef | None = None,
         version_of_s: str | None = None,
         references_s: str | None = None,
         ) -> None:
@@ -813,6 +814,9 @@ def createSC(
     if references_s:
         graph.add((sc_uri, DCTERMS["references"], URIRef(references_s)))
 
+    # Possibly add broader relationships
+    if broader:
+        graph.add((sc_uri, SKOS["broader"], broader))
 
     # Declare it in the graph
     # graph.add((sc_uri, RDF["type"], SKOS["Concept"]))
