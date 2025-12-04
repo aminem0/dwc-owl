@@ -3034,14 +3034,6 @@ dwc:year a owl:DatatypeProperty ;
         2008 ;
     skos:prefLabel "Year" .
 
-dwcdp:about a owl:ObjectProperty ;
-    rdfs:domain dwc:Assertion ;
-    rdfs:isDefinedBy dwcdp: ;
-    rdfs:range [ a owl:Class ;
-            owl:unionOf ( ac:Media chrono:ChronometricAge dwc:Event dwc:MaterialEntity dwc:NucleotideAnalysis dwc:Occurrence dwc:Organism ) ] ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism]."@en ;
-    skos:prefLabel "About" .
-
 dwcdp:basedOn a owl:ObjectProperty ;
     rdfs:domain dwc:Identification ;
     rdfs:isDefinedBy dwcdp: ;
@@ -3083,10 +3075,6 @@ dwcdp:relationshipTo a owl:ObjectProperty ;
     rdfs:isDefinedBy dwcdp: ;
     skos:definition "An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves."@en ;
     skos:prefLabel "Relationship To" .
-
-dwcpw:p014 a dwc:Pathway .
-
-dwcpw:p015 a dwc:Pathway .
 
 dwcpw:p016 a dwc:Pathway .
 
@@ -3641,6 +3629,24 @@ dwcpw:p013 a dwc:Pathway ;
     skos:definition "Animals cared for and bred with the specific intention of using their products, such as meat and milk."@en ;
     skos:prefLabel "Farmed Animals (Including Animals Left Under Limited Control)"@en .
 
+dwcpw:p014 a dwc:Pathway ;
+    dcterms:isVersionOf dwcpw:p014 ;
+    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p014-2021-09-01> ;
+    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+    rdfs:isDefinedBy dwcpw: ;
+    skos:broader dwcpw:p046 ;
+    skos:definition "Trees specifically introduced to provide timber and other forestry products."@en ;
+    skos:prefLabel "Forestry (Including Reforestation)"@en .
+
+dwcpw:p015 a dwc:Pathway ;
+    dcterms:isVersionOf dwcpw:p015 ;
+    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p015-2021-09-01> ;
+    rdfs:comment "Probably only applicable to vertebrates raised for their pelts and skins. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+    rdfs:isDefinedBy dwcpw: ;
+    skos:broader dwcpw:p046 ;
+    skos:definition "Organisms escaped from a fur farm, including unauthorised releases."@en ;
+    skos:prefLabel "Fur Farms"@en .
+
 dwcpw:p047 a dwc:Pathway ;
     dcterms:isVersionOf dwcpw:p047 ;
     dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p047-2021-09-01> ;
@@ -3784,6 +3790,14 @@ dwcdoe:d005 a dwc:DegreeOfEstablishment ;
     skos:definition "Individuals released outside of captivity or cultivation in a location, but incapable of surviving for a significant period."@en ;
     skos:prefLabel "Failing (category C0)"@en .
 
+dwcdp:about a owl:ObjectProperty ;
+    rdfs:domain dwc:Assertion ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( ac:Media chrono:ChronometricAge dwc:Event dwc:MaterialEntity dwc:NucleotideAnalysis dwc:Occurrence dwc:Organism ) ] ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism]."@en ;
+    skos:prefLabel "About" .
+
 dwcem:e001 a dwc:EstablishmentMeans ;
     dcterms:isVersionOf dwcem:e001 ;
     dcterms:references <http://rs.tdwg.org/dwcem/values/version/e001-2021-09-01> ;
@@ -3919,6 +3933,24 @@ dwc:EstablishmentMeans a owl:Class ;
     skos:definition "Controlled value for Darwin Core terms with local name establishmentMeans."@en ;
     skos:prefLabel "Establishment Means"@en .
 
+dwc:OccurrenceAssertion a owl:Class ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf dwc:Assertion ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty dwcdp:about ;
+            owl:someValuesFrom dwc:Occurrence ] ;
+    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]." ;
+    skos:prefLabel "Occurrence Assertion" .
+
+dwc:OrganismAssertion a owl:Class ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf dwc:Assertion ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty dwcdp:about ;
+            owl:someValuesFrom dwc:Organism ] ;
+    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]." ;
+    skos:prefLabel "Organism Assertion" .
+
 dwc:OrganismInteraction a owl:Class ;
     dcterms:isVersionOf dwc:OrganismInteraction ;
     rdfs:comment "Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s."@en ;
@@ -3932,15 +3964,6 @@ dwc:OrganismInteraction a owl:Class ;
         "a slug eating a fungus growing on a decomposing stump (2 interactions)",
         "a viral infection in a plant" ;
     skos:prefLabel "Organism Interaction" .
-
-dwcpw:p046 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p046 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p046-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p051 ;
-    skos:definition "Organisms intentionally transported by humans and intended to be kept in captivity or cultivation, but having inadvertently escaped from human control."@en ;
-    skos:prefLabel "Escape From Confinement"@en .
 
 dwc:ResourceRelationship a owl:Class ;
     dcterms:isVersionOf dwc:ResourceRelationship ;
@@ -3993,6 +4016,15 @@ dwcpw:p045 a dwc:Pathway ;
     skos:definition "Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid."@en ;
     skos:prefLabel "Release in Nature"@en .
 
+dwcpw:p046 a dwc:Pathway ;
+    dcterms:isVersionOf dwcpw:p046 ;
+    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p046-2021-09-01> ;
+    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+    rdfs:isDefinedBy dwcpw: ;
+    skos:broader dwcpw:p051 ;
+    skos:definition "Organisms intentionally transported by humans and intended to be kept in captivity or cultivation, but having inadvertently escaped from human control."@en ;
+    skos:prefLabel "Escape From Confinement"@en .
+
 dwc:Protocol a owl:Class ;
     dcterms:isVersionOf dwc:Protocol ;
     rdfs:isDefinedBy dwc: ;
@@ -4011,6 +4043,12 @@ dwc:DegreeOfEstablishment a owl:Class ;
     skos:definition "Controlled value for Darwin Core terms with local name degreeOfEstablishment."@en ;
     skos:prefLabel "Degree Of Establishment"@en .
 
+dwc:NucleotideAnalysis a owl:Class ;
+    dcterms:isVersionOf dwc:NucleotideAnalysis ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
+    skos:prefLabel "Nucleotide Analysis" .
+
 dwc:Organism a owl:Class ;
     dcterms:isVersionOf dwc:Organism ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18> ;
@@ -4021,18 +4059,6 @@ dwc:Organism a owl:Class ;
         "a specific instance of a bacterial culture",
         "a specific wolf pack" ;
     skos:prefLabel "Organism" .
-
-dwc:NucleotideAnalysis a owl:Class ;
-    dcterms:isVersionOf dwc:NucleotideAnalysis ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
-    skos:prefLabel "Nucleotide Analysis" .
-
-dwc:Assertion a owl:Class ;
-    dcterms:isVersionOf dwc:MeasurementOrFact ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
-    rdfs:isDefinedBy dwc: ;
-    skos:prefLabel "Assertion" .
 
 eco:Survey a owl:Class ;
     dcterms:isVersionOf eco:Survey ;
@@ -4049,6 +4075,12 @@ eco:Survey a owl:Class ;
         "a wetland vegetation mapping",
         "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
     skos:prefLabel "Survey" .
+
+dwc:Assertion a owl:Class ;
+    dcterms:isVersionOf dwc:MeasurementOrFact ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
+    rdfs:isDefinedBy dwc: ;
+    skos:prefLabel "Assertion" .
 
 dwc:MaterialEntityAssertion a owl:Class ;
     rdfs:isDefinedBy dwc: ;

@@ -4772,7 +4772,15 @@ dwc:Occurrence rdf:type owl:Class ;
 
 
 ###  http://rs.tdwg.org/dwc/terms/OccurrenceAssertion
-dwc:OccurrenceAssertion rdf:type owl:Class .
+dwc:OccurrenceAssertion rdf:type owl:Class ;
+                        owl:equivalentClass [ rdf:type owl:Restriction ;
+                                              owl:onProperty dwcdp:about ;
+                                              owl:someValuesFrom dwc:Occurrence
+                                            ] ;
+                        rdfs:subClassOf dwc:Assertion ;
+                        rdfs:isDefinedBy dwc: ;
+                        skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]." ;
+                        skos:prefLabel "Occurrence Assertion" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/Organism
@@ -4789,7 +4797,15 @@ dwc:Organism rdf:type owl:Class ;
 
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismAssertion
-dwc:OrganismAssertion rdf:type owl:Class .
+dwc:OrganismAssertion rdf:type owl:Class ;
+                      owl:equivalentClass [ rdf:type owl:Restriction ;
+                                            owl:onProperty dwcdp:about ;
+                                            owl:someValuesFrom dwc:Organism
+                                          ] ;
+                      rdfs:subClassOf dwc:Assertion ;
+                      rdfs:isDefinedBy dwc: ;
+                      skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]." ;
+                      skos:prefLabel "Organism Assertion" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismInteraction
@@ -5514,12 +5530,26 @@ dwcpw:p013 rdf:type owl:NamedIndividual ,
 
 ###  http://rs.tdwg.org/dwcpw/values/p014
 dwcpw:p014 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p014 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p014-2021-09-01> ;
+           rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p046 ;
+           skos:definition "Trees specifically introduced to provide timber and other forestry products."@en ;
+           skos:prefLabel "Forestry (Including Reforestation)"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p015
 dwcpw:p015 rdf:type owl:NamedIndividual ,
-                    dwc:Pathway .
+                    dwc:Pathway ;
+           dcterms:isVersionOf dwcpw:p015 ;
+           dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p015-2021-09-01> ;
+           rdfs:comment "Probably only applicable to vertebrates raised for their pelts and skins. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+           rdfs:isDefinedBy dwcpw: ;
+           skos:broader dwcpw:p046 ;
+           skos:definition "Organisms escaped from a fur farm, including unauthorised releases."@en ;
+           skos:prefLabel "Fur Farms"@en .
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p016

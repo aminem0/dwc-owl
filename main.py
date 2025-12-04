@@ -851,29 +851,29 @@ createCTOP(
 #     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:NucleotideAnalysis]."),
 # )
 
-# createCTOP(
-#     name="OccurrenceAssertion",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Occurrence Assertion"),
-#     subclass_list=[DWC["Assertion"]],
-#     object_prop=DWCDP["about"],
-#     use_inverse=False,
-#     values_class=DWC["Occurrence"],
-#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."),
-# )
+createCTOP(
+    name="OccurrenceAssertion",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Occurrence Assertion"),
+    subclass_list=[DWC["Assertion"]],
+    object_prop=DWCDP["about"],
+    use_inverse=False,
+    values_class=DWC["Occurrence"],
+    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."),
+)
 
-# createCTOP(
-#     name="OrganismAssertion",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Organism Assertion"),
-#     subclass_list=[DWC["Assertion"]],
-#     object_prop=DWCDP["about"],
-#     use_inverse=False,
-#     values_class=DWC["Organism"],
-#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]."),
-# )
+createCTOP(
+    name="OrganismAssertion",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Organism Assertion"),
+    subclass_list=[DWC["Assertion"]],
+    object_prop=DWCDP["about"],
+    use_inverse=False,
+    values_class=DWC["Organism"],
+    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]."),
+)
 
 
 
