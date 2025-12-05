@@ -1971,16 +1971,21 @@ g.add((DWCDP["basedOn"], OWL.propertyChainAxiom, prop_chain))
 # BEGIN OBJECT PROPERTY DEFINITIONS
 #####################################################################################################
 
+createDP(
+    name="creator",
+    namespace=DC,
+    graph=g,
+    pref_label=Literal("Creator (DC)"),
+    definition=Literal("An entity primarily responsible for making the resource.", lang="en"),
+    comments=Literal("Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity.", lang="en"),
+    version_of_s="http://purl.org/dc/elements/1.1/creator",
+)
+
 # NOTE: REVOIR COMMENTS. THIS DOCUMENT? ALSO, ACCEPT BOTH A STRING OR A URI?
 createDP(
     name="rights",
     namespace=DC,
     graph=g,
-    domains=DWC["UsagePolicy"],
-    ranges=[
-        XSD["anyURI"],
-        XSD["string"],
-    ],
     pref_label=Literal("Rights (DC)"),
     definition=Literal("Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions."),
     examples=[
@@ -1996,10 +2001,6 @@ createDP(
     name="source",
     namespace=DC,
     graph=g,
-    domains=OWL["Thing"],
-    # domains=[DWC["UsagePolicy"]],
-    ranges=RDFS["Literal"],
-    # ranges=[XSD["anyURI"], XSD["string"]],
     pref_label=Literal("Source (DC)"),
     definition=Literal("A related resource from which the described resource is derived", lang="en"),
     comments=Literal("The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.", lang="en"),
@@ -2009,11 +2010,22 @@ createDP(
 #############################################################################
 
 createOP(
+    name="creator",
+    namespace=DCTERMS,
+    graph=g,
+    # ranges=DCTERMS["Location"],
+    pref_label=Literal("Creator (DCTERMS)"),
+    definition=Literal("An entity responsible for making the resource.", lang="en"),
+    comments=Literal("Recommended practice is to identify the creator with a URI. If this is not possible or feasible, a literal value that identifies the creator may be provided.", lang="en"),
+    version_of_s="http://purl.org/dc/terms/creator",
+)
+
+createOP(
     name="rights",
     namespace=DCTERMS,
     graph=g,
     domains=DWC["UsagePolicy"],
-    ranges=XSD["anyURI"],
+    # ranges=XSD["anyURI"],
     pref_label=Literal("Rights (DCTERMS)"),
     definition=Literal("Information about rights held in and over the resource."),
     comments=Literal("Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights. Recommended practice is to refer to a rights statement with a URI. If this is not possible or feasible, a literal value (name, label, or short text) may be provided."),
@@ -2024,7 +2036,7 @@ createOP(
     name="rightsHolder",
     namespace=DCTERMS,
     graph=g,
-    ranges=DCTERMS["Agent"],
+    # ranges=DCTERMS["Agent"],
     pref_label=Literal("Rights Holder"),
     definition=Literal("A person or organization owning or managing rights over the resource."),
     comments=Literal("Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided."),
@@ -2035,7 +2047,7 @@ createOP(
     name="spatial",
     namespace=DCTERMS,
     graph=g,
-    ranges=DCTERMS["Location"],
+    # ranges=DCTERMS["Location"],
     pref_label=Literal("Spatial Coverage"),
     definition=Literal("Spatial characteristics of the resource.", lang="en"),
     version_of_s="http://purl.org/dc/terms/spatial",
@@ -2598,6 +2610,19 @@ createOP(
     ranges=DCTERMS["Agent"],
     pref_label=Literal("Conducted By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Agent] that conducted it.", lang="en"),
+)
+
+createOP(
+    name="createdBy",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["Provenance"],
+    ranges=DCTERMS["Agent"],
+    pref_label=Literal("Created By"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dcterms:Agent] that created it.", lang="en"),
+    subproperty_list=[
+        DCTERMS["creator"],
+    ],
 )
 
 createOP(
@@ -3692,22 +3717,18 @@ createDP(
 )
 
 createDP(
-    name="county",
+    name="creatorLiteral",
     namespace=DWC,
     graph=g,
-    domains=DCTERMS["Location"],
-    # ranges=XSD["string"],
+    domains=DWC["Provenance"],
     ranges=RDF["langString"],
-    pref_label=Literal("Second Order Division"),
-    definition=Literal("The full, unabbreviated name of the next smaller administrative region than stateProvince (county, shire, department, etc.) in which the dcterms:Location occurs.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both.", lang="en"),
-    examples=[
-        Literal("Missoula"),
-        Literal("Los Lagos"),
-        Literal("Mataró"),
+    pref_label=Literal("Creator"),
+    definition=Literal("A name of a dcterms:Agent primarily responsible for making the resource.", lang="en"),
+    comments=Literal("Human readable, or doi number, or URL. Simple name of parent for human readable.", lang="en"),
+    subproperty_list=[
+        DC["creator"],
     ],
-    version_of_s="http://rs.tdwg.org/dwc/terms/county",
-    references_s="http://rs.tdwg.org/dwc/terms/version/county-2023-06-28",
+    version_of_s="http://purl.org/dc/elements/1.1/creator",
 )
 
 createDP(
