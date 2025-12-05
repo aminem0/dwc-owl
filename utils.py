@@ -380,6 +380,7 @@ def createOP(
     version_of_s: str | None = None,
     references_s: str | None = None,
     subproperty_list: list[Node] | None = None,
+    equivalent_property_list: list[Node] | None = None,
     additional_list: list[Node] | None = None,
     definition: Literal | None = None,
     comments: Literal | None = None,
@@ -469,6 +470,11 @@ def createOP(
         # Technically not a unified list, so can add them all with a for loop
         for property in subproperty_list:
             graph.add((op_uri, RDFS["subPropertyOf"], property))
+
+    if equivalent_property_list:
+        # Technically not a unified list, so can add them all with a for loop
+        for property in equivalent_property_list:
+            graph.add((op_uri, OWL["equivalentProperty"], property))
 
     # Add any additional property types.
     if additional_list:

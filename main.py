@@ -20,6 +20,7 @@ BB = Namespace("http://bioboum.ca/")
 CHRONO = Namespace("http://rs.tdwg.org/chrono/terms/")
 DC = Namespace("http://purl.org/dc/elements/1.1/")
 DCTERMS = Namespace("http://purl.org/dc/terms/")
+DSW = Namespace("http://purl.org/dsw/")
 DWC = Namespace("http://rs.tdwg.org/dwc/terms/")
 DWCEM = Namespace("http://rs.tdwg.org/dwcem/values/")
 DWCDOE = Namespace("http://rs.tdwg.org/dwcdoe/values/")
@@ -49,6 +50,7 @@ g.bind("bibo", BIBO)
 g.bind("chrono", CHRONO)
 g.bind("dc", DC)
 g.bind("dcterms", DCTERMS)
+g.bind("dsw", DSW)
 g.bind("dwc", DWC)
 g.bind("dwcdoe", DWCDOE)
 g.bind("dwcem", DWCEM)
@@ -2051,6 +2053,38 @@ createOP(
 
 #############################################################################
 
+createOP(
+    name="locatedAt",
+    namespace=DSW,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=DCTERMS["Location"],
+    equivalent_property_list=[
+        DWCDP["spatialLocation"],
+    ],
+    pref_label=Literal("Located At"),
+    definition=Literal("Links a subject dwc:Event instance to an object dcterms:Location instance.", lang="en"),
+    comments=Literal("The dsw:locatedAt relationship is many-to-one (many events at one location). This property is preferred over its inverse if the link is made in only one direction.", lang="en"),
+    references_s="http://purl.org/dsw/locatedAt"
+)
+
+createOP(
+    name="occurrenceOf",
+    namespace=DSW,
+    graph=g,
+    domains=DWC["Occurrence"],
+    ranges=DWC["Organism"],
+    equivalent_property_list=[
+        DWCDP["occurrenceOf"],
+    ],
+    pref_label=Literal("Occurrence Of (DSW)"),
+    definition=Literal("Links a subject dwc:Occurrence instance to an object dwc:Organism instance.", lang="en"),
+    comments=Literal("The dsw:occurrrenceOf relationship is many-to-one (many occurrences for one individual organism). This property is preferred over its inverse if the link is made in only one direction.", lang="en"),
+    references_s="http://purl.org/dsw/occurrenceOf"
+)
+
+#############################################################################
+
 # BUG: To avoid inconsistencies, changed range list
 createOP(
     name="assertionTypeIRI",
@@ -2832,6 +2866,20 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey].", lang="en"),
 )
 
+# NOTE: Maybe consider longer and more informative names than the explorer
+createOP(
+    name="occurrenceOf",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["Occurrence"],
+    ranges=DWC["Organism"],
+    equivalent_property_list=[
+        DSW["occurrenceOf"],
+    ],
+    pref_label=Literal("Occurrence Of (DWCDP)"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [DWC:Organism] it is an occurrence of.", lang="en"),
+)
+
 createOP(
     name="ownedBy",
     namespace=DWCDP,
@@ -2878,10 +2926,14 @@ createOP(
     graph=g,
     domains=DWC["Event"],
     ranges=DCTERMS["Location"],
-    subproperty_list=[DCTERMS["spatial"]],
+    subproperty_list=[
+        DCTERMS["spatial"],
+    ],
+    equivalent_property_list=[
+        DSW["locatedAt"],
+    ],
     pref_label=Literal("Spatial Location"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in.", lang="en"),
-    version_of_s="http://purl.org/dc/elements/terms/source",
 )
 
 createOP(

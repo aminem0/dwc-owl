@@ -2,6 +2,7 @@
 @prefix ac: <http://rs.tdwg.org/ac/terms/> .
 @prefix bb: <http://bioboum.ca/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dsw: <http://purl.org/dsw/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix eco: <http://rs.tdwg.org/eco/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -132,6 +133,30 @@ dcterms:type rdf:type owl:ObjectProperty ;
              rdfs:isDefinedBy dcterms: ;
              skos:definition "The nature or genre of the resource." ;
              skos:prefLabel "Type" .
+
+
+###  http://purl.org/dsw/locatedAt
+dsw:locatedAt rdf:type owl:ObjectProperty ;
+              owl:equivalentProperty dwcdp:spatialLocation ;
+              rdfs:domain dwc:Event ;
+              rdfs:range dcterms:Location ;
+              dcterms:references dsw:locatedAt ;
+              rdfs:comment "The dsw:locatedAt relationship is many-to-one (many events at one location). This property is preferred over its inverse if the link is made in only one direction."@en ;
+              rdfs:isDefinedBy dsw: ;
+              skos:definition "Links a subject dwc:Event instance to an object dcterms:Location instance."@en ;
+              skos:prefLabel "Located At" .
+
+
+###  http://purl.org/dsw/occurrenceOf
+dsw:occurrenceOf rdf:type owl:ObjectProperty ;
+                 owl:equivalentProperty dwcdp:occurrenceOf ;
+                 rdfs:domain dwc:Occurrence ;
+                 rdfs:range dwc:Organism ;
+                 dcterms:references dsw:occurrenceOf ;
+                 rdfs:comment "The dsw:occurrrenceOf relationship is many-to-one (many occurrences for one individual organism). This property is preferred over its inverse if the link is made in only one direction."@en ;
+                 rdfs:isDefinedBy dsw: ;
+                 skos:definition "Links a subject dwc:Occurrence instance to an object dwc:Organism instance."@en ;
+                 skos:prefLabel "Occurrence Of (DSW)" .
 
 
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
@@ -905,6 +930,15 @@ dwcdp:mentionedIn rdf:type owl:ObjectProperty ;
                   skos:prefLabel "Mentionned In" .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/occurrenceOf
+dwcdp:occurrenceOf rdf:type owl:ObjectProperty ;
+                   rdfs:domain dwc:Occurrence ;
+                   rdfs:range dwc:Organism ;
+                   rdfs:isDefinedBy dwcdp: ;
+                   skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [DWC:Organism] it is an occurrence of."@en ;
+                   skos:prefLabel "Occurrence Of (DWCDP)" .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/ownedBy
 dwcdp:ownedBy rdf:type owl:ObjectProperty ;
               rdfs:domain dwc:MaterialEntity ;
@@ -962,7 +996,6 @@ dwcdp:spatialLocation rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf dcterms:spatial ;
                       rdfs:domain dwc:Event ;
                       rdfs:range dcterms:Location ;
-                      dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
                       rdfs:isDefinedBy dwcdp: ;
                       skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."@en ;
                       skos:prefLabel "Spatial Location" .

@@ -3,6 +3,7 @@
 @prefix chrono: <http://rs.tdwg.org/chrono/terms/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dsw: <http://purl.org/dsw/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix dwcdoe: <http://rs.tdwg.org/dwcdoe/values/> .
 @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
@@ -692,15 +693,6 @@ dwcdp:reviewedBy a owl:ObjectProperty ;
     rdfs:range dcterms:Agent ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that reviewed it."@en ;
     skos:prefLabel "Reviewed By" .
-
-dwcdp:spatialLocation a owl:ObjectProperty ;
-    dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
-    rdfs:domain dwc:Event ;
-    rdfs:isDefinedBy dwcdp: ;
-    rdfs:range dcterms:Location ;
-    rdfs:subPropertyOf dcterms:spatial ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."@en ;
-    skos:prefLabel "Spatial Location" .
 
 dwcdp:storedIn a owl:ObjectProperty ;
     rdfs:domain dwc:MaterialEntity ;
@@ -3064,6 +3056,14 @@ dwcdp:isPartOf a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
     skos:prefLabel "Is Part Of" .
 
+dwcdp:occurrenceOf a owl:ObjectProperty ;
+    rdfs:domain dwc:Occurrence ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dwc:Organism ;
+    owl:equivalentProperty dsw:occurrenceOf ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [DWC:Organism] it is an occurrence of."@en ;
+    skos:prefLabel "Occurrence Of (DWCDP)" .
+
 dwcdp:relationshipOf a owl:ObjectProperty ;
     rdfs:comment "To keep the interaction terms semantically correct and in order, the resource considered by this property should be the subject of the statement."@en ;
     rdfs:isDefinedBy dwcdp: ;
@@ -3075,6 +3075,15 @@ dwcdp:relationshipTo a owl:ObjectProperty ;
     rdfs:isDefinedBy dwcdp: ;
     skos:definition "An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves."@en ;
     skos:prefLabel "Relationship To" .
+
+dwcdp:spatialLocation a owl:ObjectProperty ;
+    rdfs:domain dwc:Event ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dcterms:Location ;
+    rdfs:subPropertyOf dcterms:spatial ;
+    owl:equivalentProperty dsw:locatedAt ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."@en ;
+    skos:prefLabel "Spatial Location" .
 
 eco:includeOrExclude a owl:DatatypeProperty ;
     dcterms:isVersionOf eco:includeOrExclude ;
@@ -3289,6 +3298,26 @@ dcterms:spatial a owl:ObjectProperty ;
     rdfs:range dcterms:Location ;
     skos:definition "Spatial characteristics of the resource."@en ;
     skos:prefLabel "Spatial Coverage" .
+
+dsw:locatedAt a owl:ObjectProperty ;
+    dcterms:references dsw:locatedAt ;
+    rdfs:comment "The dsw:locatedAt relationship is many-to-one (many events at one location). This property is preferred over its inverse if the link is made in only one direction."@en ;
+    rdfs:domain dwc:Event ;
+    rdfs:isDefinedBy dsw: ;
+    rdfs:range dcterms:Location ;
+    owl:equivalentProperty dwcdp:spatialLocation ;
+    skos:definition "Links a subject dwc:Event instance to an object dcterms:Location instance."@en ;
+    skos:prefLabel "Located At" .
+
+dsw:occurrenceOf a owl:ObjectProperty ;
+    dcterms:references dsw:occurrenceOf ;
+    rdfs:comment "The dsw:occurrrenceOf relationship is many-to-one (many occurrences for one individual organism). This property is preferred over its inverse if the link is made in only one direction."@en ;
+    rdfs:domain dwc:Occurrence ;
+    rdfs:isDefinedBy dsw: ;
+    rdfs:range dwc:Organism ;
+    owl:equivalentProperty dwcdp:occurrenceOf ;
+    skos:definition "Links a subject dwc:Occurrence instance to an object dwc:Organism instance."@en ;
+    skos:prefLabel "Occurrence Of (DSW)" .
 
 tdt:monotypy a dwc:TypeDesignationType .
 
@@ -4234,6 +4263,15 @@ dwc:NucleotideAnalysis a owl:Class ;
     skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
     skos:prefLabel "Nucleotide Analysis" .
 
+dwcpw:p048 a dwc:Pathway ;
+    dcterms:isVersionOf dwcpw:p048 ;
+    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p048-2021-09-01> ;
+    rdfs:comment "A stowaway has no trophic or biotic relationship to the organisms or items being transported. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
+    rdfs:isDefinedBy dwcpw: ;
+    skos:broader dwcpw:p052 ;
+    skos:definition "An umbrella term for all species transported by riding on forms of transport where the organism has a direct interaction with the transport and is not merely carried as part of, or a contaminant of cargo."@en ;
+    skos:prefLabel "Transport-Stowaway"@en .
+
 dwc:Organism a owl:Class ;
     dcterms:isVersionOf dwc:Organism ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/Organism-2023-09-18> ;
@@ -4244,15 +4282,6 @@ dwc:Organism a owl:Class ;
         "a specific instance of a bacterial culture",
         "a specific wolf pack" ;
     skos:prefLabel "Organism" .
-
-dwcpw:p048 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p048 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p048-2021-09-01> ;
-    rdfs:comment "A stowaway has no trophic or biotic relationship to the organisms or items being transported. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p052 ;
-    skos:definition "An umbrella term for all species transported by riding on forms of transport where the organism has a direct interaction with the transport and is not merely carried as part of, or a contaminant of cargo."@en ;
-    skos:prefLabel "Transport-Stowaway"@en .
 
 dwcpw:p046 a dwc:Pathway ;
     dcterms:isVersionOf dwcpw:p046 ;
