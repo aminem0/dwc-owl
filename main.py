@@ -17,6 +17,8 @@ from utils import createCTOP, createDP, createEDP, createEOC, createNI, createOC
 # Define all namespces to be used
 #
 AC = Namespace("http://rs.tdwg.org/ac/terms/")
+ACPART = Namespace("http://rs.tdwg.org/acpart/values/")
+ACORIENT = Namespace("http://rs.tdwg.org/acorient/values/")
 ADMS = Namespace("http://www.w3.org/ns/adms#")
 BB = Namespace("http://bioboum.ca/")
 BIBO = Namespace("http://purl.org/ontology/bibo/")
@@ -50,6 +52,8 @@ g = Graph()
 
 # Bind the prefixes to the previously defined namespaces
 g.bind("ac", AC)
+g.bind("acpart", ACPART)
+g.bind("acorient", ACORIENT)
 g.bind("adms", ADMS)
 g.bind("bb", BB)
 g.bind("bibo", BIBO)
@@ -109,6 +113,77 @@ createOC(
     # maxcard1_restrictions=[AC["captureDevice"], AC["digitizationDate"], AC["frameRate"], AC["heightFrac"], AC["widthFrac"], XMP["CreateDate"]],
     #card0_restrictions=[AC["radius"]],
     version_of_s="http://rs.tdwg.org/ac/terms/Media",
+)
+
+# NOTE: Review integration of skos:Concept and owl:Classes.
+# Here there is a defined skos:ConceptScheme
+createEOC(
+    name="SubjectOrientation",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Subject Orientation", lang="en"),
+    definition=Literal("Controlled value for Darwin Core terms for Audiovisual Core subject orientation.", lang="en"),
+    one_of=[
+        URIRef("http://rs.tdwg.org/acorient/values/r0000"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0001"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0002"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0003"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0004"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0005"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0006"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0007"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0008"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0009"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0010"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0011"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0012"),
+        URIRef("http://rs.tdwg.org/acorient/values/r0013"),
+    ],
+)
+
+# NOTE: Review integration of skos:Concept and owl:Classes.
+# Here there is a defined skos:ConceptScheme
+createEOC(
+    name="SubjectPart",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Subject Part", lang="en"),
+    definition=Literal("Controlled value for Darwin Core terms for Audiovisual Core subject part.", lang="en"),
+    one_of=[
+        URIRef("http://rs.tdwg.org/acpart/values/p0000"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0001"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0002"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0003"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0004"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0005"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0006"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0007"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0008"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0009"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0010"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0011"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0012"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0013"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0014"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0015"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0016"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0017"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0018"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0019"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0020"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0021"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0022"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0023"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0024"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0025"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0026"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0027"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0028"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0029"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0030"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0031"),
+        URIRef("http://rs.tdwg.org/acpart/values/p0032"),
+    ],
 )
 
 createOC(
@@ -1269,6 +1344,509 @@ createNI(
 # )
 
 createSC(
+    name="r0000",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Unspecified Orientation", lang="en"),
+    definition=Literal("Orientation is not known because it is not specified.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0000",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0000-2023-04-26",
+)
+
+createSC(
+    name="r0001",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Anterior Side", lang="en"),
+    definition=Literal("View of the side towards the head or forward end of the organism.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0001",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0001-2023-04-26",
+)
+
+createSC(
+    name="r0002",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Posterior Side", lang="en"),
+    definition=Literal("View of the side away from the head or towards the rear end of the organism.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0002",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0002-2023-04-26",
+)
+
+createSC(
+    name="r0003",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Lateral Side", lang="en"),
+    definition=Literal("View of the side perpendicular to the main axis of the organism.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0003",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0003-2023-04-26",
+)
+
+createSC(
+    name="r0004",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Right Side", lang="en"),
+    definition=Literal("View of the right side of a whole bilaterally symmetric organism.", lang="en"),
+    broader=ACORIENT["r0003"],
+    version_of_s="http://rs.tdwg.org/acorient/values/r0004",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0004-2023-04-26",
+)
+
+createSC(
+    name="r0005",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Left Side", lang="en"),
+    definition=Literal("View of the right side of a whole bilaterally symmetric organism.", lang="en"),
+    broader=ACORIENT["r0003"],
+    version_of_s="http://rs.tdwg.org/acorient/values/r0005",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0005-2023-04-26",
+)
+
+createSC(
+    name="r0006",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Dorsal Side", lang="en"),
+    definition=Literal("View of the side dorsal to the frontal plane of a bilaterally symmetric organism.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0006",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0006-2023-04-26",
+)
+
+createSC(
+    name="r0007",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Ventral Side", lang="en"),
+    definition=Literal("View of the side ventral to the frontal plane of a bilaterally symmetric organism.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0007",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0007-2023-04-26",
+)
+
+createSC(
+    name="r0008",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Upper Side", lang="en"),
+    definition=Literal("View of the side of the part oriented toward the central axis of a plant (adaxial).", lang="en"),
+    comments=Literal("In plants, use this term rather than \"dorsal\". For types of plants or fungi having horizontal parts and lacking a clear central axis, this is the surface away from the ground.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0008",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0008-2023-04-26",
+)
+
+createSC(
+    name="r0009",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Lower Side", lang="en"),
+    definition=Literal("View of the side of the part oriented away from the central axis of a plant (abaxial).", lang="en"),
+    comments=Literal("In plants, use this term rather than \"ventral\". For types of plants or fungi having horizontal parts and lacking a clear central axis, this is the surface towards the ground.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0009",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0009-2023-04-26",
+)
+
+createSC(
+    name="r0010",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Lateral Side", lang="en"),
+    definition=Literal("View of the side perpendicular to the main axis of the organism.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0010",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0010-2023-04-26",
+)
+
+createSC(
+    name="r0010",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Apical Side", lang="en"),
+    definition=Literal("View of the side of the part oriented towards the end of the axis away from its attachement point (the apex).", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0010",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0010-2023-04-26",
+)
+
+
+createSC(
+    name="r0011",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Basal Side", lang="en"),
+    definition=Literal("View of the side of the part oriented towards the attachement point of the axis.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0011",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0011-2023-04-26",
+)
+
+createSC(
+    name="r0012",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Oral Side", lang="en"),
+    definition=Literal("View of the side of the organism oriented towards the oral opening.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0012",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0012-2023-04-26",
+)
+
+createSC(
+    name="r0013",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Aboral Side", lang="en"),
+    definition=Literal("View of the side or the organism oriented away from the oral opening.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/values/r0013",
+    references_s="http://rs.tdwg.org/acorient/values/version/r0013-2023-04-26",
+)
+
+
+##################################################################################
+
+createSC(
+    name="p0000",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Unspecified Part", lang="en"),
+    definition=Literal("Part is not known because it is not specified.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0000",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0000-2023-04-26",
+)
+
+createSC(
+    name="p0001",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Entire Organism", lang="en"),
+    definition=Literal("An entire multicellular organism.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0001",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0001-2023-04-26",
+)
+
+createSC(
+    name="p0002",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Bark", lang="en"),
+    definition=Literal("Plant tissue outside the vascular cambium.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0002",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0002-2023-04-26",
+)
+
+createSC(
+    name="p0003",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Twig", lang="en"),
+    definition=Literal("Plant shoot axis developped from axillary buds.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0003",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0003-2023-04-26",
+)
+
+createSC(
+    name="p0004",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Stem", lang="en"),
+    definition=Literal("Plant shoot that defines the primary axis.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0004",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0004-2023-04-26",
+)
+
+createSC(
+    name="p0005",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Leaf", lang="en"),
+    definition=Literal("Plant non-reproductive phyllome.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0005",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0005-2023-04-26",
+)
+
+createSC(
+    name="p0006",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Strobilis (cone)", lang="en"),
+    definition=Literal("Plant reproductive system consisting of sporophylls.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0006",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0006-2023-04-26",
+)
+
+createSC(
+    name="p0007",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Inflorescence", lang="en"),
+    definition=Literal("Plant reproductive shoot system containing flowers.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0007",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0007-2023-04-26",
+)
+
+createSC(
+    name="p0008",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Fruit", lang="en"),
+    definition=Literal("Plant structure developing from a flower.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0008",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0008-2023-04-26",
+)
+
+createSC(
+    name="p0009",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Seed", lang="en"),
+    definition=Literal("Plant structure containing dormant embryo.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0009",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0009-2023-04-26",
+)
+
+createSC(
+    name="p0010",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Male Cone", lang="en"),
+    definition=Literal("Plant strobilis bearing pollen.", lang="en"),
+    broader=ACPART["p0006"],
+    version_of_s="http://rs.tdwg.org/acpart/values/p0010",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0010-2023-04-26",
+)
+
+createSC(
+    name="p0011",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Female Cone", lang="en"),
+    definition=Literal("Plant strobilis bearing ovules.", lang="en"),
+    broader=ACPART["p0006"],
+    version_of_s="http://rs.tdwg.org/acpart/values/p0011",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0011-2023-04-26",
+)
+
+createSC(
+    name="p0012",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Flower", lang="en"),
+    definition=Literal("Plant reproductive shoot system containing a carpel.", lang="en"),
+    broader=ACPART["p0007"],
+    version_of_s="http://rs.tdwg.org/acpart/values/p0012",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0012-2023-04-26",
+)
+
+createSC(
+    name="p0013",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Head", lang="en"),
+    definition=Literal("Anterior-most division of the body.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0013",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0013-2023-04-26",
+)
+
+createSC(
+    name="p0014",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Thorax", lang="en"),
+    definition=Literal("The middle division of the insect body bearing locomotor appendages.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0014",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0014-2023-04-26",
+)
+
+createSC(
+    name="p0015",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Abdomen", lang="en"),
+    definition=Literal("The posterior-most division of the insect body.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0015",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0015-2023-04-26",
+)
+
+createSC(
+    name="p0016",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Leg", lang="en"),
+    definition=Literal("Walking appendage.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0016",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0016-2023-04-26",
+)
+
+createSC(
+    name="p0017",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Wing", lang="en"),
+    definition=Literal("Appendage that is shaped in order to produce lift for flight through the air.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0017",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0017-2023-04-26",
+)
+
+createSC(
+    name="p0018",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Antenna", lang="en"),
+    definition=Literal("The paired, usually multiple jointed, sensory organs on the head.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0018",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0018-2023-04-26",
+)
+
+createSC(
+    name="p0019",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Forewing", lang="en"),
+    definition=Literal("The paired insect wing that is continuous with the mesonotum.", lang="en"),
+    broader=ACPART["p0017"],
+    version_of_s="http://rs.tdwg.org/acpart/values/p0019",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0019-2023-04-26",
+)
+
+createSC(
+    name="p0020",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Hindwing", lang="en"),
+    definition=Literal("The paired insect wing that is continuous with the metanotum.", lang="en"),
+    broader=ACPART["p0017"],
+    version_of_s="http://rs.tdwg.org/acpart/values/p0020",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0020-2023-04-26",
+)
+
+createSC(
+    name="p0021",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Foreleg", lang="en"),
+    definition=Literal("Leg of the prothoracic segment.", lang="en"),
+    broader=ACPART["p0016"],
+    version_of_s="http://rs.tdwg.org/acpart/values/p0021",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0021-2023-04-26",
+)
+
+createSC(
+    name="p0022",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Midleg", lang="en"),
+    definition=Literal("Leg of the mesothoracic segment.", lang="en"),
+    broader=ACPART["p0016"],
+    version_of_s="http://rs.tdwg.org/acpart/values/p0022",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0022-2023-04-26",
+)
+
+createSC(
+    name="p0023",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Hindleg", lang="en"),
+    definition=Literal("Leg of the metathoracic segment.", lang="en"),
+    broader=ACPART["p0016"],
+    version_of_s="http://rs.tdwg.org/acpart/values/p0023",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0023-2023-04-26",
+)
+
+createSC(
+    name="p0024",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Eye", lang="en"),
+    definition=Literal("An organ that detects light.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0024",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0024-2023-04-26",
+)
+
+createSC(
+    name="p0025",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Shell", lang="en"),
+    definition=Literal("A rigid covering that envelops an object.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0025",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0025-2023-04-26",
+)
+
+createSC(
+    name="p0026",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Genitalia", lang="en"),
+    definition=Literal("The outer sex organs.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0026",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0026-2023-04-26",
+)
+
+createSC(
+    name="p0027",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Skull", lang="en"),
+    definition=Literal("The part of the head consisting entirely of cranium and mandible.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0027",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0027-2023-04-26",
+)
+
+createSC(
+    name="p0028",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Cranium", lang="en"),
+    definition=Literal("Upper portion of the skull.", lang="en"),
+    broader=ACPART["p0027"],
+    version_of_s="http://rs.tdwg.org/acpart/values/p0028",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0028-2023-04-26",
+)
+
+createSC(
+    name="p0029",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Mandible", lang="en"),
+    definition=Literal("A dentary bone that is the only bone in one of the lateral halves of the lower jaw.", lang="en"),
+    broader=ACPART["p0027"],
+    version_of_s="http://rs.tdwg.org/acpart/values/p0029",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0029-2023-04-26",
+)
+
+createSC(
+    name="p0030",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Fin", lang="en"),
+    definition=Literal("An external projection of an aquatic animal used in propelling or guiding the body.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0030",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0030-2023-04-26",
+)
+
+createSC(
+    name="p0031",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Egg", lang="en"),
+    definition=Literal("The hard-shelled reproductive body produced by an animal.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0031",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0031-2023-04-26",
+)
+
+createSC(
+    name="p0032",
+    namespace=ACPART,
+    graph=g,
+    pref_label=Literal("Bud", lang="en"),
+    definition=Literal("An undevelopped shoot system.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acpart/values/p0032",
+    references_s="http://rs.tdwg.org/acpart/values/version/p0032-2023-04-26",
+)
+
+
+
+
+#################################################################################################
+
+createSC(
     name="d001",
     namespace=DWCDOE,
     graph=g,
@@ -1473,7 +2051,7 @@ createSC(
     pref_label=Literal("Biological Control", lang="en"),
     definition=Literal("Organisms occuring in an area because they were introduced for the purpose of biological control of another organism.", lang="en"),
     comments=Literal("Released intentionally into the (semi)natural environment with the purpose of controlling the population(s) of one or more organisms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    broader=DWCPW["p045"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p001",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p001-2021-09-01",
 )
@@ -1485,7 +2063,7 @@ createSC(
     pref_label=Literal("Erosion Control", lang="en"),
     definition=Literal("Organisms introduced for the purpose of erosion control/dune stabilization (windbreaks, hedges, etc.).", lang="en"),
     comments=Literal("Probably only applicable to plants. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    broader=DWCPW["p045"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p002",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p002-2021-09-01",
 )
@@ -1497,7 +2075,7 @@ createSC(
     pref_label=Literal("Fishery In The Wild", lang="en"),
     definition=Literal("Fish stocked into the wild either to create a fishery or for recreational angling.", lang="en"),
     comments=Literal("Largely applicable to freshwater and anadromous fish. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    broader=DWCPW["p045"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p003",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p003-2021-09-01",
 )
@@ -1509,7 +2087,7 @@ createSC(
     pref_label=Literal("Hunting", lang="en"),
     definition=Literal("Animals stocked into the wild specifically with the intention that they would be hunted for sport.", lang="en"),
     comments=Literal("Largely applicable to terrestrial vertebrates. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    broader=DWCPW["p045"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p004",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p004-2021-09-01",
 )
@@ -1521,7 +2099,7 @@ createSC(
     pref_label=Literal("Landscape Improvement", lang="en"),
     definition=Literal("Landscape/flora/fauna \"improvement\" in the wild.", lang="en"),
     comments=Literal("\"Improvement\" in this context is intended for introductions for the purpose of aesthetic enhancement of the landscape, as opposed to practical introductions for the purpose of erosion control, agriculture, forestry etc. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    broader=DWCPW["p045"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p005",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p005-2021-09-01",
 )
@@ -1533,7 +2111,7 @@ createSC(
     pref_label=Literal("Conservation Or Wildlife Management", lang="en"),
     definition=Literal("Organisms introduced for conservation purposes or wildlife management.", lang="en"),
     comments=Literal("The organism was released with the intention of improving the conservation status of the species or the conservation status other species in the habitat. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    broader=DWCPW["p045"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p006",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p006-2021-09-01",
 )
@@ -1545,7 +2123,7 @@ createSC(
     pref_label=Literal("Released For Use", lang="en"),
     definition=Literal("Release in nature for use (other than above, e.g., fur, transport, medical use).", lang="en"),
     comments=Literal("This term refers to organisms intentionally and directly released into the wild to serve a specific purpose. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    broader=DWCPW["p045"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p007",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p007-2021-09-01",
 )
@@ -1557,7 +2135,7 @@ createSC(
     pref_label=Literal("Other Intentional Release", lang="en"),
     definition=Literal("A catch-all term for intentional releases not for human use that are not covered by other more specific terms.", lang="en"),
     comments=Literal("Compare with \"other escape from confinement\". See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+    broader=DWCPW["p045"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p008",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p008-2021-09-01",
 )
@@ -1569,7 +2147,7 @@ createSC(
     pref_label=Literal("Agriculture (Including Biofuel Feedstocks)", lang="en"),
     definition=Literal("Plants grown with the intention of harvesting.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p009",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p009-2021-09-01",
 )
@@ -1581,7 +2159,7 @@ createSC(
     pref_label=Literal("Aquaculture/Mariculture", lang="en"),
     definition=Literal("The analog of agriculture and farmed animals, specifically related to aquatic organisms.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p010",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p010-2021-09-01",
 )
@@ -1593,7 +2171,7 @@ createSC(
     pref_label=Literal("Botanic Garden/Zoo/Aquaria (Excluding Domestic Aquaria)", lang="en"),
     definition=Literal("Organisms in public collections of plants and/or animals.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p011",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p011-2021-09-01",
 )
@@ -1617,7 +2195,7 @@ createSC(
     pref_label=Literal("Farmed Animals (Including Animals Left Under Limited Control)", lang="en"),
     definition=Literal("Animals cared for and bred with the specific intention of using their products, such as meat and milk.", lang="en"),
     comments=Literal("Farmed animals are generally kept in a defined area, such as a fields. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p013",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p013-2021-09-01",
 )
@@ -1629,7 +2207,7 @@ createSC(
     pref_label=Literal("Forestry (Including Reforestation)", lang="en"),
     definition=Literal("Trees specifically introduced to provide timber and other forestry products.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p014",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p014-2021-09-01",
 )
@@ -1641,7 +2219,7 @@ createSC(
     pref_label=Literal("Fur Farms", lang="en"),
     definition=Literal("Organisms escaped from a fur farm, including unauthorised releases.", lang="en"),
     comments=Literal("Probably only applicable to vertebrates raised for their pelts and skins. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p015",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p015-2021-09-01",
 )
@@ -1653,7 +2231,7 @@ createSC(
     pref_label=Literal("Horticulture", lang="en"),
     definition=Literal("Plants distributed by the ornamental and decorative plants industry.", lang="en"),
     comments=Literal("This term excludes plants and other organisms from aquaria and terrariums, which SHOULD be classified under the pet/aquarium/terrarium term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p016",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p016-2021-09-01",
 )
@@ -1665,7 +2243,7 @@ createSC(
     pref_label=Literal("Ornamental Purpose Other Than Horticulture", lang="en"),
     definition=Literal("Ornamental plants introduced through pathways other than the horticultural industry.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p017",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p017-2021-09-01",
 )
@@ -1677,7 +2255,7 @@ createSC(
     pref_label=Literal("Research And Ex-Situ Breeding (In Facilities)", lang="en"),
     definition=Literal("Plants and animals introduced for the purpose of breeding or scientific and medical research, including science education.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p018",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p018-2021-09-01",
 )
@@ -1689,7 +2267,7 @@ createSC(
     pref_label=Literal("Live Food And Live Bait", lang="en"),
     definition=Literal("Live food imported for human consumption or live bait, such as shellfish and snails.", lang="en"),
     comments=Literal("Live food, such as mealworms, for the organisms kept as pets should be classified under the pet term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p019",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p019-2021-09-01",
 )
@@ -1701,7 +2279,7 @@ createSC(
     pref_label=Literal("Other Escape From Confinement", lang="en"),
     definition=Literal("Organisms brought into an area with the intention of keeping them in captivity permanently, but that have subsequently escaped.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    broader=DWCPW["p046"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p020",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p020-2021-09-01",
 )
@@ -1713,7 +2291,7 @@ createSC(
     pref_label=Literal("Contaminant Nursery Material", lang="en"),
     definition=Literal("Organisms transported into an area together with plant material.", lang="en"),
     comments=Literal("These may be other plants, diseases, fungi and animals. They may be attached to the plant or within the soil. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+    broader=DWCPW["p047"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p021",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p021-2021-09-01",
 )
@@ -1725,7 +2303,7 @@ createSC(
     pref_label=Literal("Contaminated Bait", lang="en"),
     definition=Literal("Contaminants, pathogens and parasites transported with live, frozen or preserved bait used to catch fish or other organisms.", lang="en"),
     comments=Literal("Typical examples include crustaceans, cephalopods and molluscs. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+    broader=DWCPW["p047"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p022",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p022-2021-09-01",
 )
@@ -1737,7 +2315,7 @@ createSC(
     pref_label=Literal("Food Contaminant (Including Of Live Food)", lang="en"),
     definition=Literal("Foods for human consumption, whether they are transported live or dead.", lang="en"),
     comments=Literal("This term includes unintentional introduction of contaminants such as diseases on those foods and in the case of plants, should include seeds. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+    broader=DWCPW["p047"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p023",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p023-2021-09-01",
 )
@@ -1749,7 +2327,7 @@ createSC(
     pref_label=Literal("Contaminant On Animals (Except Parasites, Organisms Transported By Host/Vector)", lang="en"),
     definition=Literal("Contaminants carried either on or in the body of transported animals.", lang="en"),
     comments=Literal("This term excludes parasites and pathogens, which SHOULD be classified under their own specific term (\"parasites on animals\"). Transported animals carry other organisms in their coats, in their guts and in soil on their hooves and feet. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+    broader=DWCPW["p047"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p024",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p024-2021-09-01",
 )
@@ -1761,7 +2339,7 @@ createSC(
     pref_label=Literal("Parasites On Animals (Including Organisms Transported By Host And Vector)", lang="en"),
     definition=Literal("Parasitic and pathogenic organisms transported with their host or vector animal.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+    broader=DWCPW["p047"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p025",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p025-2021-09-01",
 )
@@ -1773,7 +2351,7 @@ createSC(
     pref_label=Literal("Contaminant On Plants (Except Parasites, Species Transported By Host/Vector)", lang="en"),
     definition=Literal("Organisms transported on plant material.", lang="en"),
     comments=Literal("This term excludes organisms carried on contaminant nursery material, seed contaminants, and the material from the timber trade, which SHOULD be classified under their own pathway terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+    broader=DWCPW["p047"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p026",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p026-2021-09-01",
 )
@@ -1785,7 +2363,7 @@ createSC(
     pref_label=Literal("Parasites On Plants (Including Species Transported By Host And Vector)", lang="en"),
     definition=Literal("Parasitic and pathogenic organisms transported with their host or vector plant.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+    broader=DWCPW["p047"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p027",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p027-2021-09-01",
 )
@@ -1797,7 +2375,7 @@ createSC(
     pref_label=Literal("Seed Contaminant", lang="en"),
     definition=Literal("Organisms contaminating transported seeds.", lang="en"),
     comments=Literal("These may be parasites or pathogens of seeds or species that eat seeds, whether intended to be transported or not. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+    broader=DWCPW["p047"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p028",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p028-2021-09-01",
 )
@@ -1809,7 +2387,7 @@ createSC(
     pref_label=Literal("Timber Trade", lang="en"),
     definition=Literal("Contaminants on unprocessed timber, processed wood and wood-derived products.", lang="en"),
     comments=Literal("This term excludes packing material and habitat material made from wood, which SHOULD be included under their own terms (\"packing material\" and \"transportation of habitat material\"). Examples include wooden furniture, saw dust and fire wood. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+    broader=DWCPW["p047"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p029",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p029-2021-09-01",
 )
@@ -1821,7 +2399,7 @@ createSC(
     pref_label=Literal("Transportation Of Habitat Material (Soil, Vegetation, Wood, Etc.)", lang="en"),
     definition=Literal("Organisms transported with their habitat material to a new location.", lang="en"),
     comments=Literal("Examples include materials such as soil, vegetation, straw and wood chips. Unless these materials are sterilised the organisms can be transported with their habitat to a new location. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+    broader=DWCPW["p047"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p030",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p030-2021-09-01",
 )
@@ -1834,7 +2412,7 @@ createSC(
     pref_label=Literal("Angling/Fishing Equipment", lang="en"),
     definition=Literal("Aquatic organisms moved between sites on equipment of recreational anglers and professional fishermen.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p031",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p031-2021-09-01",
 )
@@ -1847,7 +2425,7 @@ createSC(
     pref_label=Literal("Container/Bulk", lang="en"),
     definition=Literal("Stowaways transported in or on cargo containers or bulk cargo units.", lang="en"),
     comments=Literal("The difference between this category and others, such as \"hitchhikers on ship/boat\", is that the organism embarked and disembarked from the container rather than the ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p032",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p032-2021-09-01",
 )
@@ -1859,7 +2437,7 @@ createSC(
     pref_label=Literal("Hitchhikers In Or On Airplane", lang="en"),
     definition=Literal("Organisms that enter airplanes or other aircraft, such as helicopters, and are transported by them to another location.", lang="en"),
     comments=Literal("This term does not apply to organisms that embarked in containers that were subsequently loaded onto an aircraft. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p033",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p033-2021-09-01",
 )
@@ -1871,7 +2449,7 @@ createSC(
     pref_label=Literal("Hitchhikers On Ship/Boat (Excluding Ballast Water And Hull Fouling)", lang="en"),
     definition=Literal("Organisms that enter directly onto boats or ships and are transported by them to another location.", lang="en"),
     comments=Literal("This term does not apply to organisms that embarked in containers that are subsequently loaded onto the ship, nor to contaminants of products loaded onto the ship. The term is intended for organisms that directly interact with the boat or ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p034",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p034-2021-09-01",
 )
@@ -1883,7 +2461,7 @@ createSC(
     pref_label=Literal("Machinery/Equipment", lang="en"),
     definition=Literal("Organisms carried on the surfaces of or within heavy machinery and equipment.", lang="en"),
     comments=Literal("This includes military equipment, farm machinery and manufacturing equipment. This term does not include products carried by vehicles. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p035",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p035-2021-09-01",
 )
@@ -1896,7 +2474,7 @@ createSC(
     pref_label=Literal("People And Their Luggage/Equipment (In Particular Tourism)", lang="en"),
     definition=Literal("Organisms transported on people and/or their personal luggage.", lang="en"),
     comments=Literal("This term excludes recreational angling equipment, which SHOULD be classified under its own term (\"angling/fishing equipment\"). Examples include organisms transported by tourists. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p036",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p036-2021-09-01",
 )
@@ -1908,7 +2486,7 @@ createSC(
     pref_label=Literal("Organic Packing Material, In Particular Wood Packaging", lang="en"),
     definition=Literal("Organic material, particularly unprocessed plant material that is used to pack transported goods.", lang="en"),
     comments=Literal("Examples include woodern pallets, boxes, bags and baskets. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p037",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01",
 )
@@ -1920,7 +2498,7 @@ createSC(
     pref_label=Literal("Ship/Boat Ballast Water", lang="en"),
     definition=Literal("Organisms transported within the water pumped into boats and ships to provide ballast.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p038",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01",
 )
@@ -1932,7 +2510,7 @@ createSC(
     pref_label=Literal("Ship/Boat Hull Fouling", lang="en"),
     definition=Literal("Organisms that attach themselves to the subsurface hull of boats and ships.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p039",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p039-2021-09-01",
 )
@@ -1944,7 +2522,7 @@ createSC(
     pref_label=Literal("Vehicles (Car, Train, Etc.)", lang="en"),
     definition=Literal("Other vehicle hitchhikers that have been unintentionally dispersed, but are not covered by other terms.", lang="en"),
     comments=Literal("These organisms may be carried on or within the vehicle. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p040",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p040-2021-09-01",
 )
@@ -1956,7 +2534,7 @@ createSC(
     pref_label=Literal("Other Means Of Transport", lang="en"),
     definition=Literal("A catch-all term for any transport related dispersal that is not covered in other terms.", lang="en"),
     comments=Literal("Examples include fouling from offshore oil and gas platforms, offshore renewable energy sites (such as wind farms, pipelines, cable transport, etc.). See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+    broader=DWCPW["p048"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p041",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p041-2021-09-01",
 )
@@ -1968,7 +2546,7 @@ createSC(
     pref_label=Literal("Interconnected Waterways/Basins/Seas", lang="en"),
     definition=Literal("Organisms that dispersed through artificial waterways created to connect previosuly unconnected water bodies.", lang="en"),
     comments=Literal("Organisms transported along these corridors in ballast or as hull fouling SHOULD be categorised under the \"ship/boat ballast water\" or \"ship/boat hull fouling\" terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p049"),
+    broader=DWCPW["p049"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p042",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p042-2021-09-01",
 )
@@ -1980,7 +2558,7 @@ createSC(
     pref_label=Literal("Tunnels And Land Bridges", lang="en"),
     definition=Literal("Unintentional dispersal by organisms using artificial tunnels, bridges, roads and railways.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p049"),
+    broader=DWCPW["p049"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p043",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p043-2021-09-01",
 )
@@ -1992,7 +2570,7 @@ createSC(
     pref_label=Literal("Natural Dispersal Across Borders Of Invasive Alien Organisms", lang="en"),
     definition=Literal("Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid.", lang="en"),
     comments=Literal("Dispersal of organisms to new regions by natural dispersal from regions in which they are alien. These are alien species that have previously been introduced through one of these pathways: release in nature, escape from confinement, transport-contaminant, transport-stowaway, or corridor. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p050"),
+    broader=DWCPW["p050"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p044",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p044-2021-09-01",
 )
@@ -2004,7 +2582,7 @@ createSC(
     pref_label=Literal("Release In Nature", lang="en"),
     definition=Literal("Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p051"),
+    broader=DWCPW["p051"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p045",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p045-2021-09-01",
 )
@@ -2016,7 +2594,7 @@ createSC(
     pref_label=Literal("Escape From Confinement", lang="en"),
     definition=Literal("Organisms intentionally transported by humans and intended to be kept in captivity or cultivation, but having inadvertently escaped from human control.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p051"),
+    broader=DWCPW["p051"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p046",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p046-2021-09-01",
 )
@@ -2028,7 +2606,7 @@ createSC(
     pref_label=Literal("Transport-Contaminant", lang="en"),
     definition=Literal("An umbrella term for all species transported as contaminants in other products.", lang="en"),
     comments=Literal("An alien species is a contaminant if it had a trophic or biotic relationship to organisms or items being transported and was to some extent dependent on them for survival. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p052"),
+    broader=DWCPW["p052"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p047",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p047-2021-09-01",
 )
@@ -2040,7 +2618,7 @@ createSC(
     pref_label=Literal("Transport-Stowaway", lang="en"),
     definition=Literal("An umbrella term for all species transported by riding on forms of transport where the organism has a direct interaction with the transport and is not merely carried as part of, or a contaminant of cargo.", lang="en"),
     comments=Literal("A stowaway has no trophic or biotic relationship to the organisms or items being transported. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p052"),
+    broader=DWCPW["p052"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p048",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p048-2021-09-01",
 )
@@ -2052,7 +2630,7 @@ createSC(
     pref_label=Literal("Corridor", lang="en"),
     definition=Literal("Infrastructure, such as bridges, tunnels and canals have removed natural barriers to dispersal and allowed a species to move into a novel location.", lang="en"),
     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p053"),
+    broader=DWCPW["p053"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p049",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p049-2021-09-01",
 )
@@ -2064,7 +2642,7 @@ createSC(
     pref_label=Literal("Unaided", lang="en"),
     definition=Literal("Organisms that spread by natural dispersal, without action or assistance by humans, from regions in which they are also alien.", lang="en"),
     comments=Literal("The term refers to secondary dispersal from an area where the taxon is also alien. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=URIRef("http://rs.tdwg.org/dwcpw/values/p053"),
+    broader=DWCPW["p053"],
     version_of_s="http://rs.tdwg.org/dwcpw/values/p051",
     references_s="http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01",
 )
@@ -2155,7 +2733,7 @@ createDP(
     name="source",
     namespace=DC,
     graph=g,
-    pref_label=Literal("Source (DC)"),
+    pref_label=Literal("Source (DC)", lang="en"),
     definition=Literal("A related resource from which the described resource is derived", lang="en"),
     comments=Literal("The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.", lang="en"),
     version_of_s="http://purl.org/dc/elements/1.1/source",
@@ -2170,6 +2748,31 @@ createDP(
     version_of_s="http://purl.org/dc/elements/1.1/title",
 )
 
+
+############################################################################
+
+createOP(
+    name="hasSubjectOrientation",
+    namespace=DWC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=DWC["SubjectOrientation"],
+    pref_label=Literal("Has Subject Orientation", lang="en"),
+    definition=Literal("Object property to relate a ac:Media instance to a controlled IRI value from the acorient vocabulary.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/hasSubjectOrientation",
+)
+
+createOP(
+    name="hasSubjectPart",
+    namespace=DWC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=DWC["SubjectPart"],
+    pref_label=Literal("Has Subject Part", lang="en"),
+    definition=Literal("Object property to relate a ac:Media instance to a controlled IRI value from the acpart vocabulary.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/hasSubjectOrientation",
+)
+
 #############################################################################
 
 # NOTE: Possibly reword previously skos:editorialNote into a comment
@@ -2179,7 +2782,7 @@ createOP(
     graph=g,
     domains=BIBO["Document"],
     ranges=BIBO["DocumentStatus"],
-    pref_label=Literal("Status"),
+    pref_label=Literal("Status", lang="en"),
     definition=Literal("The publication status of (typically academic) content.", lang="en"),
     comments=Literal("We are not defining, using an enumeration, the range of the bibo:status to the defined list of bibo:DocumentStatus. We won't do it because we want people to be able to define new status if needed by some special usecases. Creating such an enumeration would restrict this to happen.", lang="en"),
     version_of_s="http://purl.org/ontology/bibo/status",
@@ -2192,7 +2795,7 @@ createOP(
     namespace=DCTERMS,
     graph=g,
     # ranges=DCTERMS["Location"],
-    pref_label=Literal("Creator (DCTERMS)"),
+    pref_label=Literal("Creator (DCTERMS)", lang="en"),
     definition=Literal("An entity responsible for making the resource.", lang="en"),
     comments=Literal("Recommended practice is to identify the creator with a URI. If this is not possible or feasible, a literal value that identifies the creator may be provided.", lang="en"),
     version_of_s="http://purl.org/dc/terms/creator",
@@ -3300,6 +3903,32 @@ createDP(
 )
 
 createDP(
+    name="endTime",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("End Time in Seconds", lang="en"),
+    definition=Literal("The end of a temporal region, as specified as an absolute offset relative to the beginning of a ac:Media resource (this corresponds to Normal Play Time RFC 2326), specified as seconds, with an optional fractional part to indicate milliseconds or finer.", lang="en"),
+    comments=Literal("This term MUST be applied to a region of interest.", lang="en"),
+    version_of_s="http://rs.tdwg.org/ac/terms/endTime",
+    references_s="http://rs.tdwg.org/ac/terms/version/endTime-2021-10-05",
+)
+
+createDP(
+    name="endTimestamp",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["string"],
+    pref_label=Literal("End Time Stamp", lang="en"),
+    definition=Literal("The end of a temporal region, specified as real-world clock time ISO 8601 timestamps, using UTC timezone, with an optional fractional part to indicate milliseconds or finer. There is no limit on the number of decimal places for the decimal fraction.", lang="en"),
+    comments=Literal("This term MAY be applied to a region of interest or an entire media item.", lang="en"),
+    version_of_s="http://rs.tdwg.org/ac/terms/endTimestamp",
+    references_s="http://rs.tdwg.org/ac/terms/version/endTimestamp-2021-10-05",
+)
+
+createDP(
     name="freqHigh",
     namespace=AC,
     graph=g,
@@ -3379,7 +4008,7 @@ createDP(
     domains=AC["Media"],
     ranges=XSD["decimal"],
     pref_label=Literal("Fractional Height", lang="en"),
-    definition=Literal("The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource."),
+    definition=Literal("The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource.", lang="en"),
     comments=Literal("The sum of a valid value plus [ac:yFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:heightFrac] and [ac:yFrac] are used with the [exif:PixelYDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value."),
     examples=[
         Literal("0.5", datatype=XSD["decimal"]),
@@ -3405,6 +4034,36 @@ createDP(
 )
 
 createDP(
+    name="mediaDuration",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Media Duration", lang="en"),
+    definition=Literal("The playback duration of an audio or video file in seconds.", lang="en"),
+    comments=Literal("This might be different from the time in seconds calculated as the difference of ac:endTimestamp and ac:startTimestamp if ac:mediaSpeed is not equal to `1`.", lang="en"),
+    version_of_s="http://rs.tdwg.org/ac/terms/mediaDuration",
+    references_s="http://rs.tdwg.org/ac/terms/version/mediaDuration-2021-10-05",
+)
+
+createDP(
+    name="mediaSpeed",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Media Speed", lang="en"),
+    definition=Literal("The decimal fraction representing the natural speed over the encoded speed.", lang="en"),
+    comments=Literal("If a value for ac:mediaSpeed is not provided, applications SHOULD assume that 1.0 is the value. For example, in a time-lapse recording where 60 seconds of natural time is represented in 1 second of media this would be `60`. In a time-expanded recording where 1 second of recording is represented in 5 seconds of media, this would be `0.2`.", lang="en"),
+    examples=[
+        Literal("60", datatype=XSD["decimal"]),
+        Literal("0.2", datatype=XSD["decimal"])
+    ],
+    version_of_s="http://rs.tdwg.org/ac/terms/mediaSpeed",
+    references_s="http://rs.tdwg.org/ac/terms/version/mediaSpeed-2021-10-05",
+)
+
+createDP(
     name="radius",
     namespace=AC,
     graph=g,
@@ -3418,6 +4077,147 @@ createDP(
     ],
     version_of_s="http://rs.tdwg.org/ac/terms/radius",
     references_s="http://rs.tdwg.org/ac/terms/version/radius-2021-10-05",
+)
+
+createDP(
+    name="startTime",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Start Time in Seconds", lang="en"),
+    definition=Literal("The beginning of a temporal region, as specified as an absolute offset relative to the beginning of a ac:Media resource (this corresponds to Normal Play Time RFC 2326), specified as seconds, with an optional fractional part to indicate milliseconds or finer.", lang="en"),
+    comments=Literal("This term MUST be applied to a region of interest.", lang="en"),
+    version_of_s="http://rs.tdwg.org/ac/terms/startTime",
+    references_s="http://rs.tdwg.org/ac/terms/version/startTime-2021-10-05",
+)
+
+
+createDP(
+    name="startTimestamp",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["string"],
+    pref_label=Literal("Start Time Stamp", lang="en"),
+    definition=Literal("The beginning of a temporal region, specified as real-world clock time ISO 8601 timestamps, using UTC timezone, with an optional fractional part to indicate milliseconds or finer. There is no limit on the number of decimal places for the decimal fraction.", lang="en"),
+    comments=Literal("This term MAY be applied to a region of interest or an entire media item.", lang="en"),
+    version_of_s="http://rs.tdwg.org/ac/terms/startTimestamp",
+    references_s="http://rs.tdwg.org/ac/terms/version/startTimestamp-2021-10-05",
+)
+
+createDP(
+    name="subjectOrientationIRI",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["anyURI"],
+    pref_label=Literal("Subject Orientation", lang="en"),
+    definition=Literal("Specific orientation (= direction, view angle) of the subject represented in the media resource with respect to the acquisition device, denoted by an IRI.", lang="en"),
+    comments=Literal("Values SHOULD be selected from the Controlled Vocabulary for Audiovisual Core subjectOrientation. In text-based systems such as tables, IRI values MUST be in unabbreviated form.", lang="en"),
+    version_of_s="http://rs.tdwg.org/ac/terms/SubjectOrientation",
+    references_s="http://rs.tdwg.org/ac/terms/version/subjectOrientation-2023-09-05",
+)
+
+createEDP(
+    name="subjectOrientationLiteral",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    one_of=[
+        Literal("unspecifiedOrientation"),
+        Literal("anterior"),
+        Literal("posterior"),
+        Literal("lateral"),
+        Literal("right"),
+        Literal("left"),
+        Literal("dorsal"),
+        Literal("ventral"),
+        Literal("upper"),
+        Literal("lower"),
+        Literal("apical"),
+        Literal("basal"),
+        Literal("oral"),
+        Literal("aboral"),
+    ],
+    pref_label=Literal("Subject Orientation Literal", lang="en"),
+    definition=Literal("Specific orientation (= direction view angle) of the subject represented in the ac:Media resource with respect to the acquisition device, denoted by a controlled value string.", lang="en"),
+    comments=Literal("Values SHOULD be selected fom the Controlled Vocabulary for ac:subjectOrientation. It is best practice to use ac:subjectOrientationLiteral whenever practical.", lang="en"),
+    examples=[
+        Literal("anterior"),
+        Literal("basal"),
+        Literal("apical"),
+        Literal("oral"),
+    ],
+    version_of_s="http://rs.tdwg.org/ac/terms/subjectOrientationLiteral",
+    references_s="http://rs.tdwg.org/ac/terms/version/subjectOrientationLiteral-2023-09-05",
+)
+
+createEDP(
+    name="subjectPartLiteral",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    one_of=[
+        Literal("unspecifiedPart"),
+        Literal("entireOrganism"),
+        Literal("bark"),
+        Literal("twig"),
+        Literal("stem"),
+        Literal("leaf"),
+        Literal("strobilis"),
+        Literal("inflorescence"),
+        Literal("fruit"),
+        Literal("seed"),
+        Literal("maleCone"),
+        Literal("femaleCone"),
+        Literal("flower"),
+        Literal("head"),
+        Literal("thorax"),
+        Literal("abdomen"),
+        Literal("leg"),
+        Literal("wing"),
+        Literal("antenna"),
+        Literal("forewing"),
+        Literal("hindwing"),
+        Literal("foreleg"),
+        Literal("midleg"),
+        Literal("hindleg"),
+        Literal("eye"),
+        Literal("shell"),
+        Literal("genitalia"),
+        Literal("skull"),
+        Literal("cranium"),
+        Literal("mandible"),
+        Literal("fin"),
+        Literal("egg"),
+        Literal("bud"),
+    ],
+    pref_label=Literal("Subject Part Literal", lang="en"),
+    definition=Literal("The portion or product of organism morphology, behaviour, environment, etc. that is eithre predominently shown or particularly well exemplified by the ac:Media resource, denoted by a controlled value string.", lang="en"),
+    comments=Literal("Values SHOULD be selected fom the Controlled Vocabulary for ac:subjectPart. It is best practice to use ac:subjectPartLiteral whenever practical.", lang="en"),
+    examples=[
+        Literal("entireOrganism"),
+        Literal("fin"),
+        Literal(""),
+        Literal("flower"),
+    ],
+    version_of_s="http://rs.tdwg.org/ac/terms/subjectPartLiteral",
+    references_s="http://rs.tdwg.org/ac/terms/version/subjectPartLiteral-2023-09-05",
+)
+
+
+createDP(
+    name="subjectPartIRI",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["anyURI"],
+    pref_label=Literal("Subject Part", lang="en"),
+    definition=Literal("The portion or product of organism morphology, behaviour, environment, etc. that is either predominantly shown or particularly well exemplified by the ac:Media resource, denoted by an IRI.", lang="en"),
+    comments=Literal("Values SHOULD be selected from the Controlled Vocabulary for Audiovisual Core subjectPart. In text-based systems such as tables, IRI values MUST be in unabbreviated form.", lang="en"),
+    version_of_s="http://rs.tdwg.org/ac/terms/SubjectPart",
+    references_s="http://rs.tdwg.org/ac/terms/version/subjectPart-2023-09-05",
 )
 
 # NOTE: JSON file says dwc:Media, but we mostly consider ac:Media.

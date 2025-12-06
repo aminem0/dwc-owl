@@ -22,11 +22,13 @@
 @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
 @prefix dwcem: <http://rs.tdwg.org/dwcem/values/> .
 @prefix dwcpw: <http://rs.tdwg.org/dwcpw/values/> .
+@prefix acpart: <http://rs.tdwg.org/acpart/values/> .
 @prefix chrono: <http://rs.tdwg.org/chrono/terms/> .
 @prefix dwcdoe: <http://rs.tdwg.org/dwcdoe/values/> .
 @prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
 @prefix minext: <http://rs.tdwg.org/mineralogy/terms/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix acorient: <http://rs.tdwg.org/acorient/values/> .
 @base <http://bioboum.ca/dwc-owl.owl> .
 
 <http://bioboum.ca/dwc-owl.owl> rdf:type owl:Ontology ;
@@ -98,7 +100,7 @@ dcterms:creator rdf:type owl:ObjectProperty ;
                 rdfs:comment "Recommended practice is to identify the creator with a URI. If this is not possible or feasible, a literal value that identifies the creator may be provided."@en ;
                 rdfs:isDefinedBy dcterms: ;
                 skos:definition "An entity responsible for making the resource."@en ;
-                skos:prefLabel "Creator (DCTERMS)" .
+                skos:prefLabel "Creator (DCTERMS)"@en .
 
 
 ###  http://purl.org/dc/terms/rights
@@ -175,7 +177,7 @@ bibo:status rdf:type owl:ObjectProperty ;
             rdfs:comment "We are not defining, using an enumeration, the range of the bibo:status to the defined list of bibo:DocumentStatus. We won't do it because we want people to be able to define new status if needed by some special usecases. Creating such an enumeration would restrict this to happen."@en ;
             rdfs:isDefinedBy bibo: ;
             skos:definition "The publication status of (typically academic) content."@en ;
-            skos:prefLabel "Status" .
+            skos:prefLabel "Status"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
@@ -555,6 +557,26 @@ dwciri:vitality rdf:type owl:ObjectProperty ;
                 rdfs:isDefinedBy dwciri: ;
                 skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
                 skos:prefLabel "Vitality (IRI)" .
+
+
+###  http://rs.tdwg.org/dwc/terms/hasSubjectOrientation
+dwc:hasSubjectOrientation rdf:type owl:ObjectProperty ;
+                          rdfs:domain ac:Media ;
+                          rdfs:range dwc:SubjectOrientation ;
+                          dcterms:isVersionOf dwc:hasSubjectOrientation ;
+                          rdfs:isDefinedBy dwc: ;
+                          skos:definition "Object property to relate a ac:Media instance to a controlled IRI value from the acorient vocabulary."@en ;
+                          skos:prefLabel "Has Subject Orientation"@en .
+
+
+###  http://rs.tdwg.org/dwc/terms/hasSubjectPart
+dwc:hasSubjectPart rdf:type owl:ObjectProperty ;
+                   rdfs:domain ac:Media ;
+                   rdfs:range dwc:SubjectPart ;
+                   dcterms:isVersionOf dwc:hasSubjectOrientation ;
+                   rdfs:isDefinedBy dwc: ;
+                   skos:definition "Object property to relate a ac:Media instance to a controlled IRI value from the acpart vocabulary."@en ;
+                   skos:prefLabel "Has Subject Part"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/relationshipOfResourceID
@@ -1190,7 +1212,7 @@ dc:source rdf:type owl:DatatypeProperty ;
           rdfs:comment "The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en ;
           rdfs:isDefinedBy dc: ;
           skos:definition "A related resource from which the described resource is derived"@en ;
-          skos:prefLabel "Source (DC)" .
+          skos:prefLabel "Source (DC)"@en .
 
 
 ###  http://purl.org/dc/elements/1.1/title
@@ -1447,7 +1469,31 @@ ac:caption rdf:type owl:DatatypeProperty ;
            rdfs:comment "If both [dcterms:description] and [ac:caption] are present in the metadata, a [dcterms:description] is typically displayed instead of the resource, a [ac:caption] together with the resource. Thus, in HTML it would be appropriate to use [ac:caption] values in figcaption elements. Often only one of the [dcterms:description] or [ac:caption] is present; choose the term most appropriate for your metadata."@en ;
            rdfs:isDefinedBy ac: ;
            skos:definition "Free-form text to be displayed together with (rather than instead of) a resource that is suitable for captions (especially images)."@en ;
-           skos:prefLabel "Caption" .
+           skos:prefLabel "Caption"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/endTime
+ac:endTime rdf:type owl:DatatypeProperty ;
+           rdfs:domain ac:Media ;
+           rdfs:range xsd:decimal ;
+           dcterms:isVersionOf ac:endTime ;
+           dcterms:references <http://rs.tdwg.org/ac/terms/version/endTime-2021-10-05> ;
+           rdfs:comment "This term MUST be applied to a region of interest."@en ;
+           rdfs:isDefinedBy ac: ;
+           skos:definition "The end of a temporal region, as specified as an absolute offset relative to the beginning of a ac:Media resource (this corresponds to Normal Play Time RFC 2326), specified as seconds, with an optional fractional part to indicate milliseconds or finer."@en ;
+           skos:prefLabel "End Time in Seconds"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/endTimestamp
+ac:endTimestamp rdf:type owl:DatatypeProperty ;
+                rdfs:domain ac:Media ;
+                rdfs:range xsd:string ;
+                dcterms:isVersionOf ac:endTimestamp ;
+                dcterms:references <http://rs.tdwg.org/ac/terms/version/endTimestamp-2021-10-05> ;
+                rdfs:comment "This term MAY be applied to a region of interest or an entire media item."@en ;
+                rdfs:isDefinedBy ac: ;
+                skos:definition "The end of a temporal region, specified as real-world clock time ISO 8601 timestamps, using UTC timezone, with an optional fractional part to indicate milliseconds or finer. There is no limit on the number of decimal places for the decimal fraction."@en ;
+                skos:prefLabel "End Time Stamp"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/freqHigh
@@ -1460,7 +1506,7 @@ ac:freqHigh rdf:type owl:DatatypeProperty ;
             rdfs:isDefinedBy ac: ;
             skos:definition "The highest frequency of the phenomena reflected in the multimedia item or Region of Interest."@en ;
             skos:example 60.0 ;
-            skos:prefLabel "Upper Frequency Bound" .
+            skos:prefLabel "Upper Frequency Bound"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/freqLow
@@ -1473,7 +1519,7 @@ ac:freqLow rdf:type owl:DatatypeProperty ;
            rdfs:isDefinedBy ac: ;
            skos:definition "The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest."@en ;
            skos:example 60.0 ;
-           skos:prefLabel "Lower Frequency Bound" .
+           skos:prefLabel "Lower Frequency Bound"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/fundingAttribution
@@ -1515,10 +1561,10 @@ ac:heightFrac rdf:type owl:DatatypeProperty ;
               dcterms:references <http://rs.tdwg.org/ac/terms/version/heightFrac-2021-10-05> ;
               rdfs:comment "The sum of a valid value plus [ac:yFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:heightFrac] and [ac:yFrac] are used with the [exif:PixelYDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
               rdfs:isDefinedBy ac: ;
-              skos:definition "The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource." ;
+              skos:definition "The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource."@en ;
               skos:example 0.5 ,
                            1.0 ;
-              skos:prefLabel "Fractional Height" .
+              skos:prefLabel "Fractional Height"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/isROIOf
@@ -1533,6 +1579,32 @@ ac:isROIOf rdf:type owl:DatatypeProperty ;
            skos:prefLabel "Is Part Of Media ID" .
 
 
+###  http://rs.tdwg.org/ac/terms/mediaDuration
+ac:mediaDuration rdf:type owl:DatatypeProperty ;
+                 rdfs:domain ac:Media ;
+                 rdfs:range xsd:decimal ;
+                 dcterms:isVersionOf ac:mediaDuration ;
+                 dcterms:references <http://rs.tdwg.org/ac/terms/version/mediaDuration-2021-10-05> ;
+                 rdfs:comment "This might be different from the time in seconds calculated as the difference of ac:endTimestamp and ac:startTimestamp if ac:mediaSpeed is not equal to `1`."@en ;
+                 rdfs:isDefinedBy ac: ;
+                 skos:definition "The playback duration of an audio or video file in seconds."@en ;
+                 skos:prefLabel "Media Duration"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/mediaSpeed
+ac:mediaSpeed rdf:type owl:DatatypeProperty ;
+              rdfs:domain ac:Media ;
+              rdfs:range xsd:decimal ;
+              dcterms:isVersionOf ac:mediaSpeed ;
+              dcterms:references <http://rs.tdwg.org/ac/terms/version/mediaSpeed-2021-10-05> ;
+              rdfs:comment "If a value for ac:mediaSpeed is not provided, applications SHOULD assume that 1.0 is the value. For example, in a time-lapse recording where 60 seconds of natural time is represented in 1 second of media this would be `60`. In a time-expanded recording where 1 second of recording is represented in 5 seconds of media, this would be `0.2`."@en ;
+              rdfs:isDefinedBy ac: ;
+              skos:definition "The decimal fraction representing the natural speed over the encoded speed."@en ;
+              skos:example 0.2 ,
+                           60.0 ;
+              skos:prefLabel "Media Speed"@en .
+
+
 ###  http://rs.tdwg.org/ac/terms/radius
 ac:radius rdf:type owl:DatatypeProperty ;
           rdfs:domain ac:Media ;
@@ -1543,7 +1615,232 @@ ac:radius rdf:type owl:DatatypeProperty ;
           rdfs:isDefinedBy ac: ;
           skos:definition "The radius of a bounding circle or arc, expressed as a fraction of the width of a [dwc:Media] resource."@en ;
           skos:example 100 ;
-          skos:prefLabel "Radius" .
+          skos:prefLabel "Radius"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/startTime
+ac:startTime rdf:type owl:DatatypeProperty ;
+             rdfs:domain ac:Media ;
+             rdfs:range xsd:decimal ;
+             dcterms:isVersionOf ac:startTime ;
+             dcterms:references <http://rs.tdwg.org/ac/terms/version/startTime-2021-10-05> ;
+             rdfs:comment "This term MUST be applied to a region of interest."@en ;
+             rdfs:isDefinedBy ac: ;
+             skos:definition "The beginning of a temporal region, as specified as an absolute offset relative to the beginning of a ac:Media resource (this corresponds to Normal Play Time RFC 2326), specified as seconds, with an optional fractional part to indicate milliseconds or finer."@en ;
+             skos:prefLabel "Start Time in Seconds"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/startTimestamp
+ac:startTimestamp rdf:type owl:DatatypeProperty ;
+                  rdfs:domain ac:Media ;
+                  rdfs:range xsd:string ;
+                  dcterms:isVersionOf ac:startTimestamp ;
+                  dcterms:references <http://rs.tdwg.org/ac/terms/version/startTimestamp-2021-10-05> ;
+                  rdfs:comment "This term MAY be applied to a region of interest or an entire media item."@en ;
+                  rdfs:isDefinedBy ac: ;
+                  skos:definition "The beginning of a temporal region, specified as real-world clock time ISO 8601 timestamps, using UTC timezone, with an optional fractional part to indicate milliseconds or finer. There is no limit on the number of decimal places for the decimal fraction."@en ;
+                  skos:prefLabel "Start Time Stamp"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/subjectOrientationIRI
+ac:subjectOrientationIRI rdf:type owl:DatatypeProperty ;
+                         rdfs:domain ac:Media ;
+                         rdfs:range xsd:anyURI ;
+                         dcterms:isVersionOf ac:SubjectOrientation ;
+                         dcterms:references <http://rs.tdwg.org/ac/terms/version/subjectOrientation-2023-09-05> ;
+                         rdfs:comment "Values SHOULD be selected from the Controlled Vocabulary for Audiovisual Core subjectOrientation. In text-based systems such as tables, IRI values MUST be in unabbreviated form."@en ;
+                         rdfs:isDefinedBy ac: ;
+                         skos:definition "Specific orientation (= direction, view angle) of the subject represented in the media resource with respect to the acquisition device, denoted by an IRI."@en ;
+                         skos:prefLabel "Subject Orientation"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/subjectOrientationLiteral
+ac:subjectOrientationLiteral rdf:type owl:DatatypeProperty ;
+                             rdfs:domain ac:Media ;
+                             rdfs:range [ rdf:type rdfs:Datatype ;
+                                          owl:oneOf [ rdf:type rdf:List ;
+                                                      rdf:first "aboral" ;
+                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                 rdf:first "anterior" ;
+                                                                 rdf:rest [ rdf:type rdf:List ;
+                                                                            rdf:first "apical" ;
+                                                                            rdf:rest [ rdf:type rdf:List ;
+                                                                                       rdf:first "basal" ;
+                                                                                       rdf:rest [ rdf:type rdf:List ;
+                                                                                                  rdf:first "dorsal" ;
+                                                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                                                             rdf:first "lateral" ;
+                                                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                                                        rdf:first "left" ;
+                                                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                   rdf:first "lower" ;
+                                                                                                                                   rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                              rdf:first "oral" ;
+                                                                                                                                              rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                         rdf:first "posterior" ;
+                                                                                                                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                    rdf:first "right" ;
+                                                                                                                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                               rdf:first "unspecifiedOrientation" ;
+                                                                                                                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                          rdf:first "upper" ;
+                                                                                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                     rdf:first "ventral" ;
+                                                                                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                                                                                   ]
+                                                                                                                                                                                        ]
+                                                                                                                                                                             ]
+                                                                                                                                                                  ]
+                                                                                                                                                       ]
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                        ] ;
+                             dcterms:isVersionOf ac:subjectOrientationLiteral ;
+                             dcterms:references <http://rs.tdwg.org/ac/terms/version/subjectOrientationLiteral-2023-09-05> ;
+                             rdfs:comment "Values SHOULD be selected fom the Controlled Vocabulary for ac:subjectOrientation. It is best practice to use ac:subjectOrientationLiteral whenever practical."@en ;
+                             rdfs:isDefinedBy ac: ;
+                             skos:definition "Specific orientation (= direction view angle) of the subject represented in the ac:Media resource with respect to the acquisition device, denoted by a controlled value string."@en ;
+                             skos:example "anterior" ,
+                                          "apical" ,
+                                          "basal" ,
+                                          "oral" ;
+                             skos:prefLabel "Subject Orientation Literal"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/subjectPartIRI
+ac:subjectPartIRI rdf:type owl:DatatypeProperty ;
+                  rdfs:domain ac:Media ;
+                  rdfs:range xsd:anyURI ;
+                  dcterms:isVersionOf ac:SubjectPart ;
+                  dcterms:references <http://rs.tdwg.org/ac/terms/version/subjectPart-2023-09-05> ;
+                  rdfs:comment "Values SHOULD be selected from the Controlled Vocabulary for Audiovisual Core subjectPart. In text-based systems such as tables, IRI values MUST be in unabbreviated form."@en ;
+                  rdfs:isDefinedBy ac: ;
+                  skos:definition "The portion or product of organism morphology, behaviour, environment, etc. that is either predominantly shown or particularly well exemplified by the ac:Media resource, denoted by an IRI."@en ;
+                  skos:prefLabel "Subject Part"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/subjectPartLiteral
+ac:subjectPartLiteral rdf:type owl:DatatypeProperty ;
+                      rdfs:domain ac:Media ;
+                      rdfs:range [ rdf:type rdfs:Datatype ;
+                                   owl:oneOf [ rdf:type rdf:List ;
+                                               rdf:first "abdomen" ;
+                                               rdf:rest [ rdf:type rdf:List ;
+                                                          rdf:first "antenna" ;
+                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                     rdf:first "bark" ;
+                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                rdf:first "bud" ;
+                                                                                rdf:rest [ rdf:type rdf:List ;
+                                                                                           rdf:first "cranium" ;
+                                                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                                                      rdf:first "egg" ;
+                                                                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                                                                 rdf:first "entireOrganism" ;
+                                                                                                                 rdf:rest [ rdf:type rdf:List ;
+                                                                                                                            rdf:first "eye" ;
+                                                                                                                            rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                       rdf:first "femaleCone" ;
+                                                                                                                                       rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                  rdf:first "fin" ;
+                                                                                                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                             rdf:first "flower" ;
+                                                                                                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                        rdf:first "foreleg" ;
+                                                                                                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                   rdf:first "forewing" ;
+                                                                                                                                                                                   rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                              rdf:first "fruit" ;
+                                                                                                                                                                                              rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                         rdf:first "genitalia" ;
+                                                                                                                                                                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                    rdf:first "head" ;
+                                                                                                                                                                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                               rdf:first "hindleg" ;
+                                                                                                                                                                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                          rdf:first "hindwing" ;
+                                                                                                                                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                     rdf:first "inflorescence" ;
+                                                                                                                                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                rdf:first "leaf" ;
+                                                                                                                                                                                                                                                                rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                           rdf:first "leg" ;
+                                                                                                                                                                                                                                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                      rdf:first "maleCone" ;
+                                                                                                                                                                                                                                                                                      rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                 rdf:first "mandible" ;
+                                                                                                                                                                                                                                                                                                 rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                            rdf:first "midleg" ;
+                                                                                                                                                                                                                                                                                                            rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                       rdf:first "seed" ;
+                                                                                                                                                                                                                                                                                                                       rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                  rdf:first "shell" ;
+                                                                                                                                                                                                                                                                                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                             rdf:first "skull" ;
+                                                                                                                                                                                                                                                                                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                        rdf:first "stem" ;
+                                                                                                                                                                                                                                                                                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                   rdf:first "strobilis" ;
+                                                                                                                                                                                                                                                                                                                                                                   rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                              rdf:first "thorax" ;
+                                                                                                                                                                                                                                                                                                                                                                              rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                         rdf:first "twig" ;
+                                                                                                                                                                                                                                                                                                                                                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                    rdf:first "unspecifiedPart" ;
+                                                                                                                                                                                                                                                                                                                                                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                                                                                                                                                                                                                                                                                               rdf:first "wing" ;
+                                                                                                                                                                                                                                                                                                                                                                                                               rdf:rest rdf:nil
+                                                                                                                                                                                                                                                                                                                                                                                                             ]
+                                                                                                                                                                                                                                                                                                                                                                                                  ]
+                                                                                                                                                                                                                                                                                                                                                                                       ]
+                                                                                                                                                                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                                                                                                                                                                 ]
+                                                                                                                                                                                                                                                                                                                                                      ]
+                                                                                                                                                                                                                                                                                                                                           ]
+                                                                                                                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                                                                                                                     ]
+                                                                                                                                                                                                                                                                                                          ]
+                                                                                                                                                                                                                                                                                               ]
+                                                                                                                                                                                                                                                                                    ]
+                                                                                                                                                                                                                                                                         ]
+                                                                                                                                                                                                                                                              ]
+                                                                                                                                                                                                                                                   ]
+                                                                                                                                                                                                                                        ]
+                                                                                                                                                                                                                             ]
+                                                                                                                                                                                                                  ]
+                                                                                                                                                                                                       ]
+                                                                                                                                                                                            ]
+                                                                                                                                                                                 ]
+                                                                                                                                                                      ]
+                                                                                                                                                           ]
+                                                                                                                                                ]
+                                                                                                                                     ]
+                                                                                                                          ]
+                                                                                                               ]
+                                                                                                    ]
+                                                                                         ]
+                                                                              ]
+                                                                   ]
+                                                        ]
+                                             ]
+                                 ] ;
+                      dcterms:isVersionOf ac:subjectPartLiteral ;
+                      dcterms:references <http://rs.tdwg.org/ac/terms/version/subjectPartLiteral-2023-09-05> ;
+                      rdfs:comment "Values SHOULD be selected fom the Controlled Vocabulary for ac:subjectPart. It is best practice to use ac:subjectPartLiteral whenever practical."@en ;
+                      rdfs:isDefinedBy ac: ;
+                      skos:definition "The portion or product of organism morphology, behaviour, environment, etc. that is eithre predominently shown or particularly well exemplified by the ac:Media resource, denoted by a controlled value string."@en ;
+                      skos:example "" ,
+                                   "entireOrganism" ,
+                                   "fin" ,
+                                   "flower" ;
+                      skos:prefLabel "Subject Part Literal"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/subtypeLiteral
@@ -1569,7 +1866,7 @@ ac:widthFrac rdf:type owl:DatatypeProperty ;
              skos:definition "The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource."@en ;
              skos:example 0.5 ,
                           1.0 ;
-             skos:prefLabel "Fractional Width" .
+             skos:prefLabel "Fractional Width"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/xFrac
@@ -1583,7 +1880,7 @@ ac:xFrac rdf:type owl:DatatypeProperty ;
          skos:definition "The horizontal position of a reference point, measured from the left side of a [dwc:Media] resource and expressed as a decimal fraction of the width of a [dwc:Media] resource."@en ;
          skos:example 0.5 ,
                       1.0 ;
-         skos:prefLabel "Fractional X" .
+         skos:prefLabel "Fractional X"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/yFrac
@@ -1597,7 +1894,7 @@ ac:yFrac rdf:type owl:DatatypeProperty ;
          skos:definition "The vertical position of a reference point, measured from the top of a [dwc:Media] resource and expressed as a decimal fraction of the height of a [dwc:Media] resource."@en ;
          skos:example 0.5 ,
                       1.0 ;
-         skos:prefLabel "Fractional Y" .
+         skos:prefLabel "Fractional Y"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/agentID
@@ -5257,6 +5554,75 @@ dwc:ResourceRelationship rdf:type owl:Class ;
                          skos:prefLabel "Resource Relationship"@en .
 
 
+###  http://rs.tdwg.org/dwc/terms/SubjectOrientation
+dwc:SubjectOrientation rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Class ;
+                                             owl:oneOf ( acorient:r0000
+                                                         acorient:r0001
+                                                         acorient:r0002
+                                                         acorient:r0003
+                                                         acorient:r0004
+                                                         acorient:r0005
+                                                         acorient:r0006
+                                                         acorient:r0007
+                                                         acorient:r0008
+                                                         acorient:r0009
+                                                         acorient:r0010
+                                                         acorient:r0011
+                                                         acorient:r0012
+                                                         acorient:r0013
+                                                       )
+                                           ] ;
+                       rdfs:subClassOf skos:Concept ;
+                       rdfs:isDefinedBy dwc: ;
+                       skos:definition "Controlled value for Darwin Core terms for Audiovisual Core subject orientation."@en ;
+                       skos:prefLabel "Subject Orientation"@en .
+
+
+###  http://rs.tdwg.org/dwc/terms/SubjectPart
+dwc:SubjectPart rdf:type owl:Class ;
+                owl:equivalentClass [ rdf:type owl:Class ;
+                                      owl:oneOf ( acpart:p0000
+                                                  acpart:p0001
+                                                  acpart:p0002
+                                                  acpart:p0003
+                                                  acpart:p0004
+                                                  acpart:p0005
+                                                  acpart:p0006
+                                                  acpart:p0007
+                                                  acpart:p0008
+                                                  acpart:p0009
+                                                  acpart:p0010
+                                                  acpart:p0011
+                                                  acpart:p0012
+                                                  acpart:p0013
+                                                  acpart:p0014
+                                                  acpart:p0015
+                                                  acpart:p0016
+                                                  acpart:p0017
+                                                  acpart:p0018
+                                                  acpart:p0019
+                                                  acpart:p0020
+                                                  acpart:p0021
+                                                  acpart:p0022
+                                                  acpart:p0023
+                                                  acpart:p0024
+                                                  acpart:p0025
+                                                  acpart:p0026
+                                                  acpart:p0027
+                                                  acpart:p0028
+                                                  acpart:p0029
+                                                  acpart:p0030
+                                                  acpart:p0031
+                                                  acpart:p0032
+                                                )
+                                    ] ;
+                rdfs:subClassOf skos:Concept ;
+                rdfs:isDefinedBy dwc: ;
+                skos:definition "Controlled value for Darwin Core terms for Audiovisual Core subject part."@en ;
+                skos:prefLabel "Subject Part"@en .
+
+
 ###  http://rs.tdwg.org/dwc/terms/TypeDesignationType
 dwc:TypeDesignationType rdf:type owl:Class ;
                         owl:equivalentClass [ rdf:type owl:Class ;
@@ -5561,6 +5927,492 @@ tdt:subsequentDesignation rdf:type owl:NamedIndividual ,
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/subsequentMonotypy
 tdt:subsequentMonotypy rdf:type owl:NamedIndividual ,
                                 dwc:TypeDesignationType .
+
+
+###  http://rs.tdwg.org/acorient/values/r0000
+acorient:r0000 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0000 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0000-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "Orientation is not known because it is not specified."@en ;
+               skos:prefLabel "Unspecified Orientation"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0001
+acorient:r0001 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0001 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0001-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side towards the head or forward end of the organism."@en ;
+               skos:prefLabel "Anterior Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0002
+acorient:r0002 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0002 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0002-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side away from the head or towards the rear end of the organism."@en ;
+               skos:prefLabel "Posterior Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0003
+acorient:r0003 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0003 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0003-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side perpendicular to the main axis of the organism."@en ;
+               skos:prefLabel "Lateral Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0004
+acorient:r0004 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0004 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0004-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:broader acorient:r0003 ;
+               skos:definition "View of the right side of a whole bilaterally symmetric organism."@en ;
+               skos:prefLabel "Right Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0005
+acorient:r0005 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0005 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0005-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:broader acorient:r0003 ;
+               skos:definition "View of the right side of a whole bilaterally symmetric organism."@en ;
+               skos:prefLabel "Left Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0006
+acorient:r0006 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0006 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0006-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side dorsal to the frontal plane of a bilaterally symmetric organism."@en ;
+               skos:prefLabel "Dorsal Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0007
+acorient:r0007 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0007 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0007-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side ventral to the frontal plane of a bilaterally symmetric organism."@en ;
+               skos:prefLabel "Ventral Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0008
+acorient:r0008 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0008 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0008-2023-04-26> ;
+               rdfs:comment "In plants, use this term rather than \"dorsal\". For types of plants or fungi having horizontal parts and lacking a clear central axis, this is the surface away from the ground."@en ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side of the part oriented toward the central axis of a plant (adaxial)."@en ;
+               skos:prefLabel "Upper Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0009
+acorient:r0009 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0009 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0009-2023-04-26> ;
+               rdfs:comment "In plants, use this term rather than \"ventral\". For types of plants or fungi having horizontal parts and lacking a clear central axis, this is the surface towards the ground."@en ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side of the part oriented away from the central axis of a plant (abaxial)."@en ;
+               skos:prefLabel "Lower Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0010
+acorient:r0010 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0010 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0010-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side of the part oriented towards the end of the axis away from its attachement point (the apex)."@en ,
+                               "View of the side perpendicular to the main axis of the organism."@en ;
+               skos:prefLabel "Apical Side"@en ,
+                              "Lateral Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0011
+acorient:r0011 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0011 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0011-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side of the part oriented towards the attachement point of the axis."@en ;
+               skos:prefLabel "Basal Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0012
+acorient:r0012 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0012 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0012-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side of the organism oriented towards the oral opening."@en ;
+               skos:prefLabel "Oral Side"@en .
+
+
+###  http://rs.tdwg.org/acorient/values/r0013
+acorient:r0013 rdf:type owl:NamedIndividual ,
+                        dwc:SubjectOrientation ;
+               dcterms:isVersionOf acorient:r0013 ;
+               dcterms:references <http://rs.tdwg.org/acorient/values/version/r0013-2023-04-26> ;
+               rdfs:isDefinedBy acorient: ;
+               skos:definition "View of the side or the organism oriented away from the oral opening."@en ;
+               skos:prefLabel "Aboral Side"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0000
+acpart:p0000 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0000 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0000-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Part is not known because it is not specified."@en ;
+             skos:prefLabel "Unspecified Part"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0001
+acpart:p0001 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0001 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0001-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "An entire multicellular organism."@en ;
+             skos:prefLabel "Entire Organism"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0002
+acpart:p0002 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0002 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0002-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Plant tissue outside the vascular cambium."@en ;
+             skos:prefLabel "Bark"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0003
+acpart:p0003 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0003 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0003-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Plant shoot axis developped from axillary buds."@en ;
+             skos:prefLabel "Twig"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0004
+acpart:p0004 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0004 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0004-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Plant shoot that defines the primary axis."@en ;
+             skos:prefLabel "Stem"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0005
+acpart:p0005 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0005 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0005-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Plant non-reproductive phyllome."@en ;
+             skos:prefLabel "Leaf"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0006
+acpart:p0006 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0006 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0006-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Plant reproductive system consisting of sporophylls."@en ;
+             skos:prefLabel "Strobilis (cone)"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0007
+acpart:p0007 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0007 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0007-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Plant reproductive shoot system containing flowers."@en ;
+             skos:prefLabel "Inflorescence"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0008
+acpart:p0008 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0008 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0008-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Plant structure developing from a flower."@en ;
+             skos:prefLabel "Fruit"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0009
+acpart:p0009 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0009 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0009-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Plant structure containing dormant embryo."@en ;
+             skos:prefLabel "Seed"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0010
+acpart:p0010 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0010 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0010-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:broader acpart:p0006 ;
+             skos:definition "Plant strobilis bearing pollen."@en ;
+             skos:prefLabel "Male Cone"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0011
+acpart:p0011 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0011 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0011-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:broader acpart:p0006 ;
+             skos:definition "Plant strobilis bearing ovules."@en ;
+             skos:prefLabel "Female Cone"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0012
+acpart:p0012 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0012 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0012-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:broader acpart:p0007 ;
+             skos:definition "Plant reproductive shoot system containing a carpel."@en ;
+             skos:prefLabel "Flower"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0013
+acpart:p0013 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0013 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0013-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Anterior-most division of the body."@en ;
+             skos:prefLabel "Head"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0014
+acpart:p0014 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0014 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0014-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "The middle division of the insect body bearing locomotor appendages."@en ;
+             skos:prefLabel "Thorax"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0015
+acpart:p0015 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0015 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0015-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "The posterior-most division of the insect body."@en ;
+             skos:prefLabel "Abdomen"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0016
+acpart:p0016 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0016 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0016-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Walking appendage."@en ;
+             skos:prefLabel "Leg"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0017
+acpart:p0017 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0017 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0017-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "Appendage that is shaped in order to produce lift for flight through the air."@en ;
+             skos:prefLabel "Wing"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0018
+acpart:p0018 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0018 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0018-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "The paired, usually multiple jointed, sensory organs on the head."@en ;
+             skos:prefLabel "Antenna"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0019
+acpart:p0019 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0019 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0019-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:broader acpart:p0017 ;
+             skos:definition "The paired insect wing that is continuous with the mesonotum."@en ;
+             skos:prefLabel "Forewing"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0020
+acpart:p0020 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0020 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0020-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:broader acpart:p0017 ;
+             skos:definition "The paired insect wing that is continuous with the metanotum."@en ;
+             skos:prefLabel "Hindwing"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0021
+acpart:p0021 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0021 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0021-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:broader acpart:p0016 ;
+             skos:definition "Leg of the prothoracic segment."@en ;
+             skos:prefLabel "Foreleg"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0022
+acpart:p0022 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0022 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0022-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:broader acpart:p0016 ;
+             skos:definition "Leg of the mesothoracic segment."@en ;
+             skos:prefLabel "Midleg"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0023
+acpart:p0023 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0023 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0023-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:broader acpart:p0016 ;
+             skos:definition "Leg of the metathoracic segment."@en ;
+             skos:prefLabel "Hindleg"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0024
+acpart:p0024 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0024 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0024-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "An organ that detects light."@en ;
+             skos:prefLabel "Eye"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0025
+acpart:p0025 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0025 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0025-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "A rigid covering that envelops an object."@en ;
+             skos:prefLabel "Shell"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0026
+acpart:p0026 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0026 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0026-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "The outer sex organs."@en ;
+             skos:prefLabel "Genitalia"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0027
+acpart:p0027 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0027 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0027-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "The part of the head consisting entirely of cranium and mandible."@en ;
+             skos:prefLabel "Skull"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0028
+acpart:p0028 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0028 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0028-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:broader acpart:p0027 ;
+             skos:definition "Upper portion of the skull."@en ;
+             skos:prefLabel "Cranium"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0029
+acpart:p0029 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0029 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0029-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:broader acpart:p0027 ;
+             skos:definition "A dentary bone that is the only bone in one of the lateral halves of the lower jaw."@en ;
+             skos:prefLabel "Mandible"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0030
+acpart:p0030 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0030 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0030-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "An external projection of an aquatic animal used in propelling or guiding the body."@en ;
+             skos:prefLabel "Fin"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0031
+acpart:p0031 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0031 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0031-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "The hard-shelled reproductive body produced by an animal."@en ;
+             skos:prefLabel "Egg"@en .
+
+
+###  http://rs.tdwg.org/acpart/values/p0032
+acpart:p0032 rdf:type owl:NamedIndividual ,
+                      dwc:SubjectPart ;
+             dcterms:isVersionOf acpart:p0032 ;
+             dcterms:references <http://rs.tdwg.org/acpart/values/version/p0032-2023-04-26> ;
+             rdfs:isDefinedBy acpart: ;
+             skos:definition "An undevelopped shoot system."@en ;
+             skos:prefLabel "Bud"@en .
 
 
 ###  http://rs.tdwg.org/dwcdoe/values/d001
