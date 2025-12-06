@@ -153,10 +153,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -1020,6 +1020,14 @@ minext:verbatimSize a owl:DatatypeProperty ;
         "largest diameter 16 cm",
         "width 3 inches" ;
     skos:prefLabel "Verbatim Size" .
+
+skos:inScheme a owl:ObjectProperty ;
+    dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
+    rdfs:comment "A conceptmay be a member of more thann one concept scheme."@en ;
+    rdfs:isDefinedBy skos: ;
+    rdfs:range skos:ConceptScheme ;
+    skos:definition "Relates a resource (for example a concept) to a concept scheme in which it is included"@en ;
+    skos:prefLabel "Is In Scheme"@en .
 
 ggbn:Collecting_Permit a ggbn:permitType_vocabulary .
 
@@ -3563,6 +3571,7 @@ acorient:r0000 a dwc:SubjectOrientation ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r0000-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "Orientation is not known because it is not specified."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Unspecified Orientation"@en .
 
 acorient:r0001 a dwc:SubjectOrientation ;
@@ -3570,6 +3579,7 @@ acorient:r0001 a dwc:SubjectOrientation ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r0001-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side towards the head or forward end of the organism."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Anterior Side"@en .
 
 acorient:r0002 a dwc:SubjectOrientation ;
@@ -3577,6 +3587,7 @@ acorient:r0002 a dwc:SubjectOrientation ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r0002-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side away from the head or towards the rear end of the organism."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Posterior Side"@en .
 
 acorient:r0004 a dwc:SubjectOrientation ;
@@ -3585,6 +3596,7 @@ acorient:r0004 a dwc:SubjectOrientation ;
     rdfs:isDefinedBy acorient: ;
     skos:broader acorient:r0003 ;
     skos:definition "View of the right side of a whole bilaterally symmetric organism."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Right Side"@en .
 
 acorient:r0005 a dwc:SubjectOrientation ;
@@ -3593,6 +3605,7 @@ acorient:r0005 a dwc:SubjectOrientation ;
     rdfs:isDefinedBy acorient: ;
     skos:broader acorient:r0003 ;
     skos:definition "View of the right side of a whole bilaterally symmetric organism."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Left Side"@en .
 
 acorient:r0006 a dwc:SubjectOrientation ;
@@ -3600,6 +3613,7 @@ acorient:r0006 a dwc:SubjectOrientation ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r0006-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side dorsal to the frontal plane of a bilaterally symmetric organism."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Dorsal Side"@en .
 
 acorient:r0007 a dwc:SubjectOrientation ;
@@ -3607,6 +3621,7 @@ acorient:r0007 a dwc:SubjectOrientation ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r0007-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side ventral to the frontal plane of a bilaterally symmetric organism."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Ventral Side"@en .
 
 acorient:r0008 a dwc:SubjectOrientation ;
@@ -3615,6 +3630,7 @@ acorient:r0008 a dwc:SubjectOrientation ;
     rdfs:comment "In plants, use this term rather than \"dorsal\". For types of plants or fungi having horizontal parts and lacking a clear central axis, this is the surface away from the ground."@en ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side of the part oriented toward the central axis of a plant (adaxial)."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Upper Side"@en .
 
 acorient:r0009 a dwc:SubjectOrientation ;
@@ -3623,6 +3639,7 @@ acorient:r0009 a dwc:SubjectOrientation ;
     rdfs:comment "In plants, use this term rather than \"ventral\". For types of plants or fungi having horizontal parts and lacking a clear central axis, this is the surface towards the ground."@en ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side of the part oriented away from the central axis of a plant (abaxial)."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Lower Side"@en .
 
 acorient:r0010 a dwc:SubjectOrientation ;
@@ -3631,6 +3648,7 @@ acorient:r0010 a dwc:SubjectOrientation ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side of the part oriented towards the end of the axis away from its attachement point (the apex)."@en,
         "View of the side perpendicular to the main axis of the organism."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Apical Side"@en,
         "Lateral Side"@en .
 
@@ -3639,6 +3657,7 @@ acorient:r0011 a dwc:SubjectOrientation ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r0011-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side of the part oriented towards the attachement point of the axis."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Basal Side"@en .
 
 acorient:r0012 a dwc:SubjectOrientation ;
@@ -3646,6 +3665,7 @@ acorient:r0012 a dwc:SubjectOrientation ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r0012-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side of the organism oriented towards the oral opening."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Oral Side"@en .
 
 acorient:r0013 a dwc:SubjectOrientation ;
@@ -3653,6 +3673,7 @@ acorient:r0013 a dwc:SubjectOrientation ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r0013-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side or the organism oriented away from the oral opening."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Aboral Side"@en .
 
 acpart:p0000 a dwc:SubjectPart ;
@@ -4599,11 +4620,18 @@ dwcpw:p002 a dwc:Pathway ;
     skos:definition "Organisms introduced for the purpose of erosion control/dune stabilization (windbreaks, hedges, etc.)."@en ;
     skos:prefLabel "Erosion Control"@en .
 
+skos:ConceptScheme a owl:Class ;
+    dcterms:isVersionOf skos:ConceptScheme ;
+    rdfs:isDefinedBy skos: ;
+    skos:definition "A set of concepts, optionally including statements about semantic relationships between those concepts."@en ;
+    skos:prefLabel "Concept Scheme"@en .
+
 acorient:r0003 a dwc:SubjectOrientation ;
     dcterms:isVersionOf acorient:r0003 ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r0003-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "View of the side perpendicular to the main axis of the organism."@en ;
+    skos:inScheme acorient:r ;
     skos:prefLabel "Lateral Side"@en .
 
 acpart:p0006 a dwc:SubjectPart ;
@@ -4912,6 +4940,13 @@ dwcpw:p048 a dwc:Pathway ;
     skos:broader dwcpw:p052 ;
     skos:definition "An umbrella term for all species transported by riding on forms of transport where the organism has a direct interaction with the transport and is not merely carried as part of, or a contaminant of cargo."@en ;
     skos:prefLabel "Transport-Stowaway"@en .
+
+acorient:r a skos:ConceptScheme ;
+    dcterms:isVersionOf <http://rs.tdwg.org/acorient/r> ;
+    dcterms:references <http://rs.tdwg.org/acorient/r-2023-04-26> ;
+    rdfs:isDefinedBy acorient: ;
+    skos:definition "A SKOS concept scheme for orientation."@en ;
+    skos:prefLabel "Subject Orientation Concept Scheme"@en .
 
 dwc:Organism a owl:Class ;
     dcterms:isVersionOf dwc:Organism ;

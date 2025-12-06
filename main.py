@@ -8,7 +8,7 @@ import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
-from utils import createCTOP, createDP, createEDP, createEOC, createNI, createOC, createOP, createRDP, createSC, declare_disjoint
+from utils import createCTOP, createDP, createEDP, createEOC, createNI, createOC, createOP, createRDP, createSC, createSCS, declare_disjoint
 
 #####################################################################################################
 # BEGIN ONTOLOGY DEFINITION
@@ -267,15 +267,6 @@ createOC(
     ],
     version_of_s="http://rs.tdwg.org/chrono/terms/ChronometricAge",
     references_s="http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21",
-)
-
-createOC(
-    name="Concept",
-    namespace=SKOS,
-    graph=g,
-    pref_label=Literal("Concept", lang="en"),
-    definition=Literal("An idea or notion; a unit of thought.", lang="en"),
-    version_of_s="http://www.w3.org/2004/02/skos/core#Concept",
 )
 
 # NOTE: Review integration of skos:Concept and owl:Classes.
@@ -765,6 +756,24 @@ createOC(
     ],
     # card1_restrictions=[DWC["surveyID"], DWC["surveyTargetID"]],
     version_of_s="http://rs.tdwg.org/eco/terms/SurveyTarget",
+)
+
+createOC(
+    name="Concept",
+    namespace=SKOS,
+    graph=g,
+    pref_label=Literal("Concept", lang="en"),
+    definition=Literal("An idea or notion; a unit of thought.", lang="en"),
+    version_of_s="http://www.w3.org/2004/02/skos/core#Concept",
+)
+
+createOC(
+    name="ConceptScheme",
+    namespace=SKOS,
+    graph=g,
+    pref_label=Literal("Concept Scheme", lang="en"),
+    definition=Literal("A set of concepts, optionally including statements about semantic relationships between those concepts.", lang="en"),
+    version_of_s="http://www.w3.org/2004/02/skos/core#ConceptScheme",
 )
 
 #####################################################################################################
@@ -1343,12 +1352,25 @@ createNI(
 #     definition=Literal("A value of the ggbnvoc:permitType_vocabulary.", lang="en"),
 # )
 
+
+createSCS(
+    name="r",
+    namespace=ACORIENT,
+    graph=g,
+    pref_label=Literal("Subject Orientation Concept Scheme", lang="en"),
+    definition=Literal("A SKOS concept scheme for orientation.", lang="en"),
+    version_of_s="http://rs.tdwg.org/acorient/r",
+    references_s="http://rs.tdwg.org/acorient/r-2023-04-26",
+)
+
+
 createSC(
     name="r0000",
     namespace=ACORIENT,
     graph=g,
     pref_label=Literal("Unspecified Orientation", lang="en"),
     definition=Literal("Orientation is not known because it is not specified.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0000",
     references_s="http://rs.tdwg.org/acorient/values/version/r0000-2023-04-26",
 )
@@ -1359,6 +1381,7 @@ createSC(
     graph=g,
     pref_label=Literal("Anterior Side", lang="en"),
     definition=Literal("View of the side towards the head or forward end of the organism.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0001",
     references_s="http://rs.tdwg.org/acorient/values/version/r0001-2023-04-26",
 )
@@ -1369,6 +1392,7 @@ createSC(
     graph=g,
     pref_label=Literal("Posterior Side", lang="en"),
     definition=Literal("View of the side away from the head or towards the rear end of the organism.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0002",
     references_s="http://rs.tdwg.org/acorient/values/version/r0002-2023-04-26",
 )
@@ -1379,6 +1403,7 @@ createSC(
     graph=g,
     pref_label=Literal("Lateral Side", lang="en"),
     definition=Literal("View of the side perpendicular to the main axis of the organism.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0003",
     references_s="http://rs.tdwg.org/acorient/values/version/r0003-2023-04-26",
 )
@@ -1390,6 +1415,7 @@ createSC(
     pref_label=Literal("Right Side", lang="en"),
     definition=Literal("View of the right side of a whole bilaterally symmetric organism.", lang="en"),
     broader=ACORIENT["r0003"],
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0004",
     references_s="http://rs.tdwg.org/acorient/values/version/r0004-2023-04-26",
 )
@@ -1401,6 +1427,7 @@ createSC(
     pref_label=Literal("Left Side", lang="en"),
     definition=Literal("View of the right side of a whole bilaterally symmetric organism.", lang="en"),
     broader=ACORIENT["r0003"],
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0005",
     references_s="http://rs.tdwg.org/acorient/values/version/r0005-2023-04-26",
 )
@@ -1411,6 +1438,7 @@ createSC(
     graph=g,
     pref_label=Literal("Dorsal Side", lang="en"),
     definition=Literal("View of the side dorsal to the frontal plane of a bilaterally symmetric organism.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0006",
     references_s="http://rs.tdwg.org/acorient/values/version/r0006-2023-04-26",
 )
@@ -1421,6 +1449,7 @@ createSC(
     graph=g,
     pref_label=Literal("Ventral Side", lang="en"),
     definition=Literal("View of the side ventral to the frontal plane of a bilaterally symmetric organism.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0007",
     references_s="http://rs.tdwg.org/acorient/values/version/r0007-2023-04-26",
 )
@@ -1432,6 +1461,7 @@ createSC(
     pref_label=Literal("Upper Side", lang="en"),
     definition=Literal("View of the side of the part oriented toward the central axis of a plant (adaxial).", lang="en"),
     comments=Literal("In plants, use this term rather than \"dorsal\". For types of plants or fungi having horizontal parts and lacking a clear central axis, this is the surface away from the ground.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0008",
     references_s="http://rs.tdwg.org/acorient/values/version/r0008-2023-04-26",
 )
@@ -1443,6 +1473,7 @@ createSC(
     pref_label=Literal("Lower Side", lang="en"),
     definition=Literal("View of the side of the part oriented away from the central axis of a plant (abaxial).", lang="en"),
     comments=Literal("In plants, use this term rather than \"ventral\". For types of plants or fungi having horizontal parts and lacking a clear central axis, this is the surface towards the ground.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0009",
     references_s="http://rs.tdwg.org/acorient/values/version/r0009-2023-04-26",
 )
@@ -1453,6 +1484,7 @@ createSC(
     graph=g,
     pref_label=Literal("Lateral Side", lang="en"),
     definition=Literal("View of the side perpendicular to the main axis of the organism.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0010",
     references_s="http://rs.tdwg.org/acorient/values/version/r0010-2023-04-26",
 )
@@ -1463,10 +1495,10 @@ createSC(
     graph=g,
     pref_label=Literal("Apical Side", lang="en"),
     definition=Literal("View of the side of the part oriented towards the end of the axis away from its attachement point (the apex).", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0010",
     references_s="http://rs.tdwg.org/acorient/values/version/r0010-2023-04-26",
 )
-
 
 createSC(
     name="r0011",
@@ -1474,6 +1506,7 @@ createSC(
     graph=g,
     pref_label=Literal("Basal Side", lang="en"),
     definition=Literal("View of the side of the part oriented towards the attachement point of the axis.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0011",
     references_s="http://rs.tdwg.org/acorient/values/version/r0011-2023-04-26",
 )
@@ -1484,6 +1517,7 @@ createSC(
     graph=g,
     pref_label=Literal("Oral Side", lang="en"),
     definition=Literal("View of the side of the organism oriented towards the oral opening.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0012",
     references_s="http://rs.tdwg.org/acorient/values/version/r0012-2023-04-26",
 )
@@ -1494,6 +1528,7 @@ createSC(
     graph=g,
     pref_label=Literal("Aboral Side", lang="en"),
     definition=Literal("View of the side or the organism oriented away from the oral opening.", lang="en"),
+    in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0013",
     references_s="http://rs.tdwg.org/acorient/values/version/r0013-2023-04-26",
 )
@@ -3882,6 +3917,19 @@ createOP(
     ],
     version_of_s="http://purl.org/dc/elements/terms/source",
 )
+
+
+createOP(
+    name="inScheme",
+    namespace=SKOS,
+    graph=g,
+    ranges=SKOS["ConceptScheme"],
+    pref_label=Literal("Is In Scheme", lang="en"),
+    definition=Literal("Relates a resource (for example a concept) to a concept scheme in which it is included", lang="en"),
+    comments=Literal("A conceptmay be a member of more thann one concept scheme.", lang="en"),
+    version_of_s="http://purl.org/dc/elements/terms/source",
+)
+
 
 
 

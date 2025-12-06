@@ -1116,6 +1116,16 @@ dwcdp:usedFor rdf:type owl:ObjectProperty .
                                                        skos:prefLabel "Survey Target Type Source IRI" .
 
 
+###  http://www.w3.org/2004/02/skos/core#inScheme
+skos:inScheme rdf:type owl:ObjectProperty ;
+              rdfs:range skos:ConceptScheme ;
+              dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
+              rdfs:comment "A conceptmay be a member of more thann one concept scheme."@en ;
+              rdfs:isDefinedBy skos: ;
+              skos:definition "Relates a resource (for example a concept) to a concept scheme in which it is included"@en ;
+              skos:prefLabel "Is In Scheme"@en .
+
+
 #################################################################
 #    Data properties
 #################################################################
@@ -5693,6 +5703,14 @@ skos:Concept rdf:type owl:Class ;
              skos:prefLabel "Concept"@en .
 
 
+###  http://www.w3.org/2004/02/skos/core#ConceptScheme
+skos:ConceptScheme rdf:type owl:Class ;
+                   dcterms:isVersionOf skos:ConceptScheme ;
+                   rdfs:isDefinedBy skos: ;
+                   skos:definition "A set of concepts, optionally including statements about semantic relationships between those concepts."@en ;
+                   skos:prefLabel "Concept Scheme"@en .
+
+
 #################################################################
 #    Individuals
 #################################################################
@@ -5929,9 +5947,20 @@ tdt:subsequentMonotypy rdf:type owl:NamedIndividual ,
                                 dwc:TypeDesignationType .
 
 
+###  http://rs.tdwg.org/acorient/values/r
+acorient:r rdf:type owl:NamedIndividual ,
+                    skos:ConceptScheme ;
+           dcterms:isVersionOf <http://rs.tdwg.org/acorient/r> ;
+           dcterms:references <http://rs.tdwg.org/acorient/r-2023-04-26> ;
+           rdfs:isDefinedBy acorient: ;
+           skos:definition "A SKOS concept scheme for orientation."@en ;
+           skos:prefLabel "Subject Orientation Concept Scheme"@en .
+
+
 ###  http://rs.tdwg.org/acorient/values/r0000
 acorient:r0000 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0000 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0000-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -5942,6 +5971,7 @@ acorient:r0000 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0001
 acorient:r0001 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0001 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0001-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -5952,6 +5982,7 @@ acorient:r0001 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0002
 acorient:r0002 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0002 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0002-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -5962,6 +5993,7 @@ acorient:r0002 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0003
 acorient:r0003 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0003 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0003-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -5972,6 +6004,7 @@ acorient:r0003 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0004
 acorient:r0004 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0004 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0004-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -5983,6 +6016,7 @@ acorient:r0004 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0005
 acorient:r0005 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0005 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0005-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -5994,6 +6028,7 @@ acorient:r0005 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0006
 acorient:r0006 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0006 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0006-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -6004,6 +6039,7 @@ acorient:r0006 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0007
 acorient:r0007 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0007 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0007-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -6014,6 +6050,7 @@ acorient:r0007 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0008
 acorient:r0008 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0008 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0008-2023-04-26> ;
                rdfs:comment "In plants, use this term rather than \"dorsal\". For types of plants or fungi having horizontal parts and lacking a clear central axis, this is the surface away from the ground."@en ;
@@ -6025,6 +6062,7 @@ acorient:r0008 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0009
 acorient:r0009 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0009 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0009-2023-04-26> ;
                rdfs:comment "In plants, use this term rather than \"ventral\". For types of plants or fungi having horizontal parts and lacking a clear central axis, this is the surface towards the ground."@en ;
@@ -6036,6 +6074,7 @@ acorient:r0009 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0010
 acorient:r0010 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0010 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0010-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -6048,6 +6087,7 @@ acorient:r0010 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0011
 acorient:r0011 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0011 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0011-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -6058,6 +6098,7 @@ acorient:r0011 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0012
 acorient:r0012 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0012 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0012-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
@@ -6068,6 +6109,7 @@ acorient:r0012 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r0013
 acorient:r0013 rdf:type owl:NamedIndividual ,
                         dwc:SubjectOrientation ;
+               skos:inScheme acorient:r ;
                dcterms:isVersionOf acorient:r0013 ;
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0013-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;

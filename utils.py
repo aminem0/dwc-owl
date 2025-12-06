@@ -807,6 +807,7 @@ def createSC(
         definition: Literal | None = None,
         comments: Literal | None = None,
         broader: URIRef | None = None,
+        in_scheme: Node | None = None,
         version_of_s: str | None = None,
         references_s: str | None = None,
         ) -> None:
@@ -838,9 +839,51 @@ def createSC(
     if broader:
         graph.add((sc_uri, SKOS["broader"], broader))
 
+    if in_scheme:
+        graph.add((sc_uri, SKOS["inScheme"], in_scheme))
+
     # Declare it in the graph
     # graph.add((sc_uri, RDF["type"], SKOS["Concept"]))
    
+# TEST: Function that defines a skos:Concept with pertinent information
+def createSCS(
+        name: str,
+        namespace: Namespace,
+        graph: Graph,
+        pref_label: Literal,
+        definition: Literal | None = None,
+        comments: Literal | None = None,
+        version_of_s: str | None = None,
+        references_s: str | None = None,
+        ) -> None:
+    # Create the skos:ConceptScheme URI
+    scs_uri = namespace[name]
+
+    # Declare it in the graph
+    graph.add((scs_uri, RDF["type"], SKOS["ConceptScheme"]))
+ 
+    # Add DEFINEDBY
+    graph.add((scs_uri, RDFS["isDefinedBy"], URIRef(str(namespace))))
+
+    # Add preferred label.
+    graph.add((scs_uri, SKOS["prefLabel"], pref_label))
+
+    # Optionally add definition.
+    if definition:
+        graph.add((scs_uri, SKOS["definition"], definition))
+
+    # Optionally add comments.
+    if comments:
+        graph.add((scs_uri, RDFS["comment"], comments))
+
+    # Add version info.
+    graph.add((scs_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
+
+    if references_s:
+        graph.add((scs_uri, DCTERMS["references"], URIRef(references_s)))
+
+  
+
 
 def createNI(
         uri_s: str,
