@@ -860,7 +860,7 @@ def createSCS(
     scs_uri = namespace[name]
 
     # Declare it in the graph
-    graph.add((scs_uri, RDF["type"], SKOS["ConceptScheme"]))
+    # graph.add((scs_uri, RDF["type"], SKOS["ConceptScheme"]))
  
     # Add DEFINEDBY
     graph.add((scs_uri, RDFS["isDefinedBy"], URIRef(str(namespace))))

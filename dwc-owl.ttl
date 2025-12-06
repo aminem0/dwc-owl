@@ -153,10 +153,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -4543,6 +4543,12 @@ dwcpw:p050 a dwc:Pathway ;
     skos:definition "A person, group, or organization responsible for recording the dwc:Event."@en ;
     skos:prefLabel "Sampling Performed By (IRI)" .
 
+skos:ConceptScheme a owl:Class ;
+    dcterms:isVersionOf skos:ConceptScheme ;
+    rdfs:isDefinedBy skos: ;
+    skos:definition "A set of concepts, optionally including statements about semantic relationships between those concepts."@en ;
+    skos:prefLabel "Concept Scheme"@en .
+
 mixs:0000012 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000012 ;
     rdfs:domain dwc:MolecularProtocol ;
@@ -4881,12 +4887,6 @@ dwc:NucleotideSequence a owl:Class ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
     skos:prefLabel "Nucleotide Sequence"@en .
 
-skos:ConceptScheme a owl:Class ;
-    dcterms:isVersionOf skos:ConceptScheme ;
-    rdfs:isDefinedBy skos: ;
-    skos:definition "A set of concepts, optionally including statements about semantic relationships between those concepts."@en ;
-    skos:prefLabel "Concept Scheme"@en .
-
 dwc:EstablishmentMeans a owl:Class ;
     rdfs:comment "For details and rationale, see [Groom et al. 2019](https://doi.org/10.3897/biss.3.38084)."@en ;
     rdfs:isDefinedBy dwc: ;
@@ -4934,8 +4934,7 @@ dwc:Provenance a owl:Class ;
     skos:definition "Information about an entity's origins."@en ;
     skos:prefLabel "Provenance"@en .
 
-dwcem:e a skos:ConceptScheme ;
-    dcterms:isVersionOf dwcem:e ;
+dwcem:e dcterms:isVersionOf dwcem:e ;
     dcterms:references <http://rs.tdwg.org/dwcem/values/version/e-2020-10-13> ;
     rdfs:isDefinedBy dwcem: ;
     skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:establishmentMeans and dwciri:establishmentMeans."@en ;
@@ -5025,8 +5024,7 @@ dwc:DegreeOfEstablishment a owl:Class ;
     skos:definition "Controlled value for Darwin Core terms with local name degreeOfEstablishment."@en ;
     skos:prefLabel "Degree Of Establishment"@en .
 
-dwcdoe:d a skos:ConceptScheme ;
-    dcterms:isVersionOf dwcdoe:d ;
+dwcdoe:d dcterms:isVersionOf dwcdoe:d ;
     dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d-2020-10-13> ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:degreeOfEstablishment and dwciri:degreeOfEstablishment."@en ;
@@ -5058,8 +5056,7 @@ dwcpw:p048 a dwc:Pathway ;
     skos:inScheme dwcpw:p ;
     skos:prefLabel "Transport-Stowaway"@en .
 
-acorient:r a skos:ConceptScheme ;
-    dcterms:isVersionOf acorient:r ;
+acorient:r dcterms:isVersionOf acorient:r ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
     skos:definition "A SKOS concept scheme for ac:subjectOrientation."@en ;
@@ -5201,8 +5198,7 @@ dwc:MaterialEntity a owl:Class ;
         "the stomach contents of a fish" ;
     skos:prefLabel "Material Entity"@en .
 
-acpart:p a skos:ConceptScheme ;
-    dcterms:isVersionOf acpart:p ;
+acpart:p dcterms:isVersionOf acpart:p ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "A SKOS concept scheme for ac:subjectPart."@en ;
@@ -5296,8 +5292,7 @@ dwc:Pathway a owl:Class ;
     skos:definition "Controlled value for Darwin Core terms with local name pathway."@en ;
     skos:prefLabel "Pathway"@en .
 
-dwcpw:p a skos:ConceptScheme ;
-    dcterms:isVersionOf dwcpw:p ;
+dwcpw:p dcterms:isVersionOf dwcpw:p ;
     dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p-2020-10-13> ;
     rdfs:isDefinedBy dwcpw: ;
     skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:pathway and dwciri:pathway."@en ;

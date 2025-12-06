@@ -5948,8 +5948,7 @@ tdt:subsequentMonotypy rdf:type owl:NamedIndividual ,
 
 
 ###  http://rs.tdwg.org/acorient/values/r
-acorient:r rdf:type owl:NamedIndividual ,
-                    skos:ConceptScheme ;
+acorient:r rdf:type owl:NamedIndividual ;
            dcterms:isVersionOf acorient:r ;
            dcterms:references <http://rs.tdwg.org/acorient/values/version/r-2023-04-26> ;
            rdfs:isDefinedBy acorient: ;
@@ -6118,8 +6117,7 @@ acorient:r0013 rdf:type owl:NamedIndividual ,
 
 
 ###  http://rs.tdwg.org/acpart/values/p
-acpart:p rdf:type owl:NamedIndividual ,
-                  skos:ConceptScheme ;
+acpart:p rdf:type owl:NamedIndividual ;
          dcterms:isVersionOf acpart:p ;
          dcterms:references <http://rs.tdwg.org/acpart/values/version/p-2023-04-26> ;
          rdfs:isDefinedBy acpart: ;
@@ -6501,8 +6499,7 @@ acpart:p0032 rdf:type owl:NamedIndividual ,
 
 
 ###  http://rs.tdwg.org/dwcdoe/values/d
-dwcdoe:d rdf:type owl:NamedIndividual ,
-                  skos:ConceptScheme ;
+dwcdoe:d rdf:type owl:NamedIndividual ;
          dcterms:isVersionOf dwcdoe:d ;
          dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d-2020-10-13> ;
          rdfs:isDefinedBy dwcdoe: ;
@@ -6643,8 +6640,7 @@ dwcdoe:d011 rdf:type owl:NamedIndividual ,
 
 
 ###  http://rs.tdwg.org/dwcem/values/e
-dwcem:e rdf:type owl:NamedIndividual ,
-                 skos:ConceptScheme ;
+dwcem:e rdf:type owl:NamedIndividual ;
         dcterms:isVersionOf dwcem:e ;
         dcterms:references <http://rs.tdwg.org/dwcem/values/version/e-2020-10-13> ;
         rdfs:isDefinedBy dwcem: ;
@@ -6737,8 +6733,7 @@ dwcem:e007 rdf:type owl:NamedIndividual ,
 
 
 ###  http://rs.tdwg.org/dwcpw/values/p
-dwcpw:p rdf:type owl:NamedIndividual ,
-                 skos:ConceptScheme ;
+dwcpw:p rdf:type owl:NamedIndividual ;
         dcterms:isVersionOf dwcpw:p ;
         dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p-2020-10-13> ;
         rdfs:isDefinedBy dwcpw: ;
