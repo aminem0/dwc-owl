@@ -688,39 +688,12 @@ td {
             </tr>
             <tr>
               <th>
-                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inDomainOf" title="Inverse of rdfs:domain. Defined in Ontology Documentation Profile">In Domain Of</a>
-              </th>
-              <td>
-                <ul>
-                  <li>
-                    <span>
-                      <a href="http://rs.tdwg.org/dwcdp/terms/authoredBy">Authored By</a>
-                      <sup class="sup-op" title="OWL Object Property">op</sup>
-                    </span>
-                  </li>
-                  <li>
-                    <span>
-                      <a href="http://rs.tdwg.org/dwcdp/terms/editedBy">Edited By</a>
-                      <sup class="sup-op" title="OWL Object Property">op</sup>
-                    </span>
-                  </li>
-                  <li>
-                    <span>
-                      <a href="http://rs.tdwg.org/dwcdp/terms/publishedBy">Published By</a>
-                      <sup class="sup-op" title="OWL Object Property">op</sup>
-                    </span>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inRangeOf" title="Inverse of rdfs:range. Defined in Ontology Documentation Profile">In Range Of</a>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/superClassOf" title="Inverse of RDFS' subClassOf. Defined in Ontology Documentation Profile">Super Class Of</a>
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/dwcdp/terms/mentionedIn">Mentionned In</a>
-                  <sup class="sup-op" title="OWL Object Property">op</sup>
+                  <a href="http://rs.tdwg.org/dwc/terms/BibliographicDocument">Bibliographic Document</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
             </tr>
@@ -1116,6 +1089,136 @@ td {
             </tr>
           </table>
         </div>
+        <div class="property entity" id="Document(BIBO)">
+          <h3>Document (BIBO)
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/ontology/bibo/Document</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://purl.org/ontology/bibo/">http://purl.org/ontology/bibo/</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>A document (noun) is a bounded physical representation of body of information designed with the capacity (and usually intent) to communicate. A document may manifest symbolic, diagrammatic or sensory-representational information.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inDomainOf" title="Inverse of rdfs:domain. Defined in Ontology Documentation Profile">In Domain Of</a>
+              </th>
+              <td>
+                <ul>
+                  <li>
+                    <span>
+                      <a href="http://purl.org/ontology/bibo/edition">Edition</a>
+                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://purl.org/ontology/bibo/issue">Issue</a>
+                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://purl.org/ontology/bibo/pages">Pages</a>
+                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://purl.org/ontology/bibo/status">Status</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://purl.org/ontology/bibo/volume">Volume</a>
+                      <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                    </span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/superClassOf" title="Inverse of RDFS' subClassOf. Defined in Ontology Documentation Profile">Super Class Of</a>
+              </th>
+              <td>
+                <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/BibliographicDocument">Bibliographic Document</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="DocumentStatus">
+          <h3>Document Status
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/ontology/bibo/DocumentStatus</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://purl.org/ontology/bibo/">http://purl.org/ontology/bibo/</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>The status of the publication of a document.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2004/02/skos/core#example" title="An example of the use of a concept. Defined in SKOS Vocabulary">Example</a>
+              </th>
+              <td>
+                <ul>
+                  <li>
+                    <a href="http://purl.org/ontology/bibo/status/accepted">Accepted</a>
+                  </li>
+                  <li>
+                    <a href="http://purl.org/ontology/bibo/status/published">Published</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inRangeOf" title="Inverse of rdfs:range. Defined in Ontology Documentation Profile">In Range Of</a>
+              </th>
+              <td>
+                <span>
+                  <a href="http://purl.org/ontology/bibo/status">Status</a>
+                  <sup class="sup-op" title="OWL Object Property">op</sup>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
         <div class="property entity" id="Media">
           <h3>Media
             <sup class="sup-c" title="OWL/RDFS Class">c</sup>
@@ -1474,6 +1577,176 @@ td {
                     </span>
                   </li>
                 </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="BibliographicDocument">
+          <h3>Bibliographic Document
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://rs.tdwg.org/dwc/terms/BibliographicDocument</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://rs.tdwg.org/dwc/terms/">http://rs.tdwg.org/dwc/terms/</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td>
+                <ul>
+                  <li><p>An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions.</p></li>
+                  <li><p>A book, article, or other documentatry resource.</p></li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <ul>
+                  <li>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="http://purl.org/dc/elements/1.1/title">Title (DC)</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">exactly</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="http://purl.org/ontology/bibo/pages">Pages</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="http://purl.org/ontology/bibo/issue">Issue</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="http://purl.org/ontology/bibo/edition">Edition</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="http://purl.org/ontology/bibo/volume">Volume</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="http://purl.org/ontology/bibo/status">Status</a>
+                          <sup class="sup-op" title="OWL Object Property">op</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://purl.org/dc/terms/BibliographicResource">Bibliographic Resource</a>
+                      <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://purl.org/ontology/bibo/Document">Document (BIBO)</a>
+                      <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                    </span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inDomainOf" title="Inverse of rdfs:domain. Defined in Ontology Documentation Profile">In Domain Of</a>
+              </th>
+              <td>
+                <ul>
+                  <li>
+                    <span>
+                      <a href="http://rs.tdwg.org/dwcdp/terms/authoredBy">Authored By</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://rs.tdwg.org/dwcdp/terms/editedBy">Edited By</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://rs.tdwg.org/dwcdp/terms/publishedBy">Published By</a>
+                      <sup class="sup-op" title="OWL Object Property">op</sup>
+                    </span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/inRangeOf" title="Inverse of rdfs:range. Defined in Ontology Documentation Profile">In Range Of</a>
+              </th>
+              <td>
+                <span>
+                  <a href="http://rs.tdwg.org/dwcdp/terms/mentionedIn">Mentionned In</a>
+                  <sup class="sup-op" title="OWL Object Property">op</sup>
+                </span>
               </td>
             </tr>
           </table>
@@ -2545,33 +2818,7 @@ td {
                     <span>
                       <span>
                         <span>
-                          <a href="http://rs.tdwg.org/dwc/terms/assayType">Assay Type</a>
-                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
-                        </span>
-                        <span>
-                          <span class="cardinality">max</span>
-                          <span>1</span>
-                        </span><br>
-                      </span>
-                    </span>
-                    <span class="cardinality">and</span>
-                    <span>
-                      <span>
-                        <span>
-                          <a href="https://w3id.org/mixs/0000005">Contamination Screening Input</a>
-                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
-                        </span>
-                        <span>
-                          <span class="cardinality">max</span>
-                          <span>1</span>
-                        </span><br>
-                      </span>
-                    </span>
-                    <span class="cardinality">and</span>
-                    <span>
-                      <span>
-                        <span>
-                          <a href="https://w3id.org/mixs/0000015">Relation To Oxygen</a>
+                          <a href="https://w3id.org/mixs/0000017">Size Fraction Selected</a>
                           <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
                         </span>
                         <span>
@@ -2597,7 +2844,7 @@ td {
                     <span>
                       <span>
                         <span>
-                          <a href="https://w3id.org/mixs/0001107">Sample Name</a>
+                          <a href="https://w3id.org/mixs/0000003">Isolation And Growth Condition</a>
                           <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
                         </span>
                         <span>
@@ -2623,33 +2870,7 @@ td {
                     <span>
                       <span>
                         <span>
-                          <a href="https://w3id.org/mixs/0000003">Isolation And Growth Condition</a>
-                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
-                        </span>
-                        <span>
-                          <span class="cardinality">max</span>
-                          <span>1</span>
-                        </span><br>
-                      </span>
-                    </span>
-                    <span class="cardinality">and</span>
-                    <span>
-                      <span>
-                        <span>
                           <a href="https://w3id.org/mixs/0000013">Local Environmental Context</a>
-                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
-                        </span>
-                        <span>
-                          <span class="cardinality">max</span>
-                          <span>1</span>
-                        </span><br>
-                      </span>
-                    </span>
-                    <span class="cardinality">and</span>
-                    <span>
-                      <span>
-                        <span>
-                          <a href="https://w3id.org/mixs/0000006">WGA Amplification Kit</a>
                           <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
                         </span>
                         <span>
@@ -2675,46 +2896,7 @@ td {
                     <span>
                       <span>
                         <span>
-                          <a href="https://w3id.org/mixs/0000008">Experimental Factor</a>
-                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
-                        </span>
-                        <span>
-                          <span class="cardinality">max</span>
-                          <span>1</span>
-                        </span><br>
-                      </span>
-                    </span>
-                    <span class="cardinality">and</span>
-                    <span>
-                      <span>
-                        <span>
-                          <a href="https://w3id.org/mixs/0000002">Sample Collection Device</a>
-                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
-                        </span>
-                        <span>
-                          <span class="cardinality">max</span>
-                          <span>1</span>
-                        </span><br>
-                      </span>
-                    </span>
-                    <span class="cardinality">and</span>
-                    <span>
-                      <span>
-                        <span>
-                          <a href="https://w3id.org/mixs/0000012">Broad-scale Environmental Context</a>
-                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
-                        </span>
-                        <span>
-                          <span class="cardinality">max</span>
-                          <span>1</span>
-                        </span><br>
-                      </span>
-                    </span>
-                    <span class="cardinality">and</span>
-                    <span>
-                      <span>
-                        <span>
-                          <a href="https://w3id.org/mixs/0000017">Size Fraction Selected</a>
+                          <a href="https://w3id.org/mixs/0001107">Sample Name</a>
                           <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
                         </span>
                         <span>
@@ -2740,7 +2922,98 @@ td {
                     <span>
                       <span>
                         <span>
+                          <a href="https://w3id.org/mixs/0000002">Sample Collection Device</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="https://w3id.org/mixs/0000005">Contamination Screening Input</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="https://w3id.org/mixs/0000012">Broad-scale Environmental Context</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
                           <a href="https://w3id.org/mixs/0000001">Amount Or Size Of Sample Collected</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="https://w3id.org/mixs/0000006">WGA Amplification Kit</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="https://w3id.org/mixs/0000008">Experimental Factor</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="https://w3id.org/mixs/0000015">Relation To Oxygen</a>
+                          <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">max</span>
+                          <span>1</span>
+                        </span><br>
+                      </span>
+                    </span>
+                    <span class="cardinality">and</span>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="http://rs.tdwg.org/dwc/terms/assayType">Assay Type</a>
                           <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
                         </span>
                         <span>
@@ -2780,7 +3053,7 @@ td {
                 <span>
                   <span>
                     <span>
-                      <a href="N61e8207956764a0ea9ce01c7a322ce4c">N61e8207956764a0ea9ce01c7a322ce4c</a>
+                      <a href="N2e4ac680ae624fffb76f8b8f728e4b61">N2e4ac680ae624fffb76f8b8f728e4b61</a>
                       <sup class="sup-op" title="OWL Object Property">op</sup>
                     </span>
                     <span>
@@ -3761,7 +4034,7 @@ td {
                     <span>
                       <span>
                         <span>
-                          <a href="http://rs.tdwg.org/dwcdp/terms/relationshipOf">Relationship Of</a>
+                          <a href="http://rs.tdwg.org/dwcdp/terms/relationshipTo">Relationship To</a>
                           <sup class="sup-op" title="OWL Object Property">op</sup>
                         </span>
                         <span>
@@ -3780,7 +4053,7 @@ td {
                     <span>
                       <span>
                         <span>
-                          <a href="http://rs.tdwg.org/dwcdp/terms/relationshipTo">Relationship To</a>
+                          <a href="http://rs.tdwg.org/dwcdp/terms/relationshipOf">Relationship Of</a>
                           <sup class="sup-op" title="OWL Object Property">op</sup>
                         </span>
                         <span>
@@ -4582,6 +4855,78 @@ td {
             </tr>
           </table>
         </div>
+        <div class="property entity" id="Concept">
+          <h3>Concept
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://www.w3.org/2004/02/skos/core#Concept</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2004/02/skos/core#">http://www.w3.org/2004/02/skos/core#</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>An idea or notion; a unit of thought.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="https://w3id.org/profile/ontdoc/superClassOf" title="Inverse of RDFS' subClassOf. Defined in Ontology Documentation Profile">Super Class Of</a>
+              </th>
+              <td>
+                <ul>
+                  <li>
+                    <span>
+                      <a href="http://data.ggbn.org/schemas/ggbn/terms/permitStatus_vocabulary">Permit Status Vocabulary</a>
+                      <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://data.ggbn.org/schemas/ggbn/terms/permitType_vocabulary">Permit Type Vocabulary</a>
+                      <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://rs.tdwg.org/dwc/terms/DegreeOfEstablishment">Degree Of Establishment</a>
+                      <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://rs.tdwg.org/dwc/terms/EstablishmentMeans">Establishment Means</a>
+                      <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://rs.tdwg.org/dwc/terms/Pathway">Pathway</a>
+                      <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <a href="http://rs.tdwg.org/dwc/terms/TypeDesignationType">Type Designation Type</a>
+                      <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                    </span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
       <span class="cardinality">and</span>
       <span class="cardinality">and</span>
@@ -4895,6 +5240,60 @@ td {
             </tr>
           </table>
         </div>
+        <div class="property entity" id="Status">
+          <h3>Status
+            <sup class="sup-op" title="OWL Object Property">op</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/ontology/bibo/status</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://purl.org/ontology/bibo/">http://purl.org/ontology/bibo/</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td>
+                <ul>
+                  <li><p>We are not defining, using an enumeration, the range of the bibo:status to the defined list of bibo:DocumentStatus. We won't do it because we want people to be able to define new status if needed by some special usecases. Creating such an enumeration would restrict this to happen.</p></li>
+                  <li><p>The publication status of (typically academic) content.</p></li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="http://purl.org/ontology/bibo/Document">Document (BIBO)</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <span>
+                  <a href="http://purl.org/ontology/bibo/DocumentStatus">Document Status</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
         <div class="property entity" id="AssertionType(IRI)">
           <h3>Assertion Type (IRI)
             <sup class="sup-op" title="OWL Object Property">op</sup>
@@ -5068,12 +5467,12 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/OrganismAssertion">Organism Assertion</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/OccurrenceAssertion">Occurrence Assertion</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/OccurrenceAssertion">Occurrence Assertion</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/OrganismAssertion">Organism Assertion</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -6587,7 +6986,7 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
@@ -6597,17 +6996,12 @@ td {
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
                   <a href="http://rs.tdwg.org/ac/terms/Media">Media</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/chrono/terms/ChronometricAge">Chronometric Age</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
@@ -6617,7 +7011,12 @@ td {
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
+                  <a href="http://rs.tdwg.org/chrono/terms/ChronometricAge">Chronometric Age</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -6671,12 +7070,12 @@ td {
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
+                  <a href="http://rs.tdwg.org/eco/terms/Survey">Survey</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/eco/terms/Survey">Survey</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -6812,7 +7211,7 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://purl.org/dc/terms/BibliographicResource">Bibliographic Resource</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/BibliographicDocument">Bibliographic Document</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -6877,22 +7276,22 @@ td {
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/ac/terms/Media">Media</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
                   <a href="http://rs.tdwg.org/dwc/terms/NucleotideAnalysis">Nucleotide Analysis</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
                   <a href="http://rs.tdwg.org/dwc/terms/NucleotideSequence">Nucleotide Sequence</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/ac/terms/Media">Media</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -7137,7 +7536,7 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://purl.org/dc/terms/BibliographicResource">Bibliographic Resource</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/BibliographicDocument">Bibliographic Document</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -7186,17 +7585,22 @@ td {
               </th>
               <td>
                 <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/chrono/terms/ChronometricAge">Chronometric Age</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
                   <a href="http://rs.tdwg.org/dwc/terms/Assertion">Assertion</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
                   <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
-                  <a href="http://rs.tdwg.org/chrono/terms/ChronometricAge">Chronometric Age</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
@@ -7212,11 +7616,6 @@ td {
                 <span class="cardinality">or</span>
                 <span>
                   <a href="http://rs.tdwg.org/dwc/terms/NucleotideAnalysis">Nucleotide Analysis</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -7379,22 +7778,22 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/eco/terms/Survey">Survey</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
                   <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/OrganismInteraction">Organism Interaction</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/OrganismInteraction">Organism Interaction</a>
+                  <a href="http://rs.tdwg.org/eco/terms/Survey">Survey</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -7443,12 +7842,12 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -7502,11 +7901,6 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
                   <a href="http://rs.tdwg.org/dwc/terms/OrganismInteraction">Organism Interaction</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
@@ -7517,7 +7911,7 @@ td {
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/GeologicalContext">Geological Context</a>
+                  <a href="http://rs.tdwg.org/chrono/terms/ChronometricAge">Chronometric Age</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
@@ -7527,12 +7921,17 @@ td {
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/chrono/terms/ChronometricAge">Chronometric Age</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
                   <a href="http://purl.org/dc/terms/Agent">Agent</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/GeologicalContext">Geological Context</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -8026,12 +8425,12 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
+                  <a href="http://rs.tdwg.org/ac/terms/Media">Media</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/ac/terms/Media">Media</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -8074,17 +8473,17 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://purl.org/dc/terms/BibliographicResource">Bibliographic Resource</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/BibliographicDocument">Bibliographic Document</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
                   <a href="http://rs.tdwg.org/ac/terms/Media">Media</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -8095,7 +8494,7 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://purl.org/dc/terms/BibliographicResource">Bibliographic Resource</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/BibliographicDocument">Bibliographic Document</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
@@ -8241,6 +8640,31 @@ td {
               </th>
               <td>
                 <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/chrono/terms/ChronometricAge">Chronometric Age</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/Protocol">Protocol</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/eco/terms/Survey">Survey</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
                   <a href="http://rs.tdwg.org/dwc/terms/Organism">Organism</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
@@ -8259,31 +8683,6 @@ td {
                   <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
-                <span class="cardinality">or</span>
-                <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Protocol">Protocol</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
-                  <a href="http://rs.tdwg.org/chrono/terms/ChronometricAge">Chronometric Age</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
-                  <a href="http://rs.tdwg.org/eco/terms/Survey">Survey</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Event">Event</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
               </td>
             </tr>
             <tr>
@@ -8292,7 +8691,7 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://purl.org/dc/terms/BibliographicResource">Bibliographic Resource</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/BibliographicDocument">Bibliographic Document</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -8477,7 +8876,7 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://purl.org/dc/terms/BibliographicResource">Bibliographic Resource</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/BibliographicDocument">Bibliographic Document</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -9351,6 +9750,33 @@ td {
             </tr>
           </table>
         </div>
+        <div class="property entity" id="Title(DC)">
+          <h3>Title (DC)
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/dc/elements/1.1/title</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://purl.org/dc/elements/1.1/">http://purl.org/dc/elements/1.1/</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>A name given to the resource.</p></td>
+            </tr>
+          </table>
+        </div>
         <div class="property entity" id="Description">
           <h3>Description
             <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
@@ -9721,6 +10147,203 @@ td {
               </th>
               <td>
                 <a href="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="Edition">
+          <h3>Edition
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/ontology/bibo/edition</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://purl.org/ontology/bibo/">http://purl.org/ontology/bibo/</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>The name defining a special edition of a document. Normally its a literal value composed of a version number and words.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="http://purl.org/ontology/bibo/Document">Document (BIBO)</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="Issue">
+          <h3>Issue
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/ontology/bibo/issue</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://purl.org/ontology/bibo/">http://purl.org/ontology/bibo/</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>An issue number of a dcterms:BibliographicResource.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="http://purl.org/ontology/bibo/Document">Document (BIBO)</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="Pages">
+          <h3>Pages
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/ontology/bibo/pages</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://purl.org/ontology/bibo/">http://purl.org/ontology/bibo/</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td>
+                <ul>
+                  <li><p>A string of non-contiguous page spans that locate a bibo:Document within a bibo:Collection. Example: 23-25, 34, 54-56. For continuous page ranges, use the bibo:pageStart and bibo:pageEnd properties.</p></li>
+                  <li><p>A range of pages within a dcterms:BibliographicResource.</p></li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2004/02/skos/core#example" title="An example of the use of a concept. Defined in SKOS Vocabulary">Example</a>
+              </th>
+              <td>
+                <pre>23-25, 34, 54-56</pre>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="http://purl.org/ontology/bibo/Document">Document (BIBO)</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="Volume">
+          <h3>Volume
+            <sup class="sup-dp" title="OWL Datatype Property">dp</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/ontology/bibo/volume</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://purl.org/ontology/bibo/">http://purl.org/ontology/bibo/</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>A volume number of a dcterms:BibliographicResource.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#domain" title="A domain of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Domain</a>
+              </th>
+              <td>
+                <span>
+                  <a href="http://purl.org/ontology/bibo/Document">Document (BIBO)</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#range" title="A range of the subject property. Defined in The RDF Schema vocabulary (RDFS)">Range</a>
+              </th>
+              <td>
+                <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
               </td>
             </tr>
           </table>
@@ -14564,12 +15187,12 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
+                  <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a>
+                  <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -18043,12 +18666,12 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
+                  <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a>
+                  <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -19044,17 +19667,17 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
                   <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
                   <a href="http://rs.tdwg.org/dwc/terms/Identification">Identification</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -20681,12 +21304,12 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/OrganismAssertion">Organism Assertion</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/OccurrenceAssertion">Occurrence Assertion</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/OccurrenceAssertion">Occurrence Assertion</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/OrganismAssertion">Organism Assertion</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -23904,6 +24527,12 @@ td {
               <a href="#Location">Location</a>
             </li>
             <li>
+              <a href="#Document(BIBO)">Document (BIBO)</a>
+            </li>
+            <li>
+              <a href="#DocumentStatus">Document Status</a>
+            </li>
+            <li>
               <a href="#Media">Media</a>
             </li>
             <li>
@@ -23911,6 +24540,9 @@ td {
             </li>
             <li>
               <a href="#Assertion">Assertion</a>
+            </li>
+            <li>
+              <a href="#BibliographicDocument">Bibliographic Document</a>
             </li>
             <li>
               <a href="#DegreeOfEstablishment">Degree Of Establishment</a>
@@ -23987,6 +24619,9 @@ td {
             <li>
               <a href="#SurveyTarget">Survey Target</a>
             </li>
+            <li>
+              <a href="#Concept">Concept</a>
+            </li>
           </ul>
         </li>
         <li>
@@ -24014,6 +24649,9 @@ td {
             </li>
             <li>
               <a href="#OccurrenceOf(DSW)">Occurrence Of (DSW)</a>
+            </li>
+            <li>
+              <a href="#Status">Status</a>
             </li>
             <li>
               <a href="#AssertionType(IRI)">Assertion Type (IRI)</a>
@@ -24278,6 +24916,9 @@ td {
               <a href="#Source(DC)">Source (DC)</a>
             </li>
             <li>
+              <a href="#Title(DC)">Title (DC)</a>
+            </li>
+            <li>
               <a href="#Description">Description</a>
             </li>
             <li>
@@ -24288,6 +24929,18 @@ td {
             </li>
             <li>
               <a href="#Title">Title</a>
+            </li>
+            <li>
+              <a href="#Edition">Edition</a>
+            </li>
+            <li>
+              <a href="#Issue">Issue</a>
+            </li>
+            <li>
+              <a href="#Pages">Pages</a>
+            </li>
+            <li>
+              <a href="#Volume">Volume</a>
             </li>
             <li>
               <a href="#DNASequence">DNA Sequence</a>

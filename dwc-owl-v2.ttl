@@ -11,6 +11,7 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xmp: <http://ns.adobe.com/xap/1.0/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix gbif: <http://rs.gbif.org/terms/> .
 @prefix ggbn: <http://data.ggbn.org/schemas/ggbn/terms/> .
 @prefix miqe: <http://rs.gbif.org/terms/miqe/> .
@@ -30,7 +31,6 @@
 
 <http://bioboum.ca/dwc-owl.owl> rdf:type owl:Ontology ;
                                  dc:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
-                                 dc:title "Darwin Core OWL" ;
                                  dcterms:created "2025-04-03"^^xsd:date ;
                                  vann:example <https://github.com/aminem0/dwc-owl-rdf> ;
                                  vann:preferredNamespacePrefix "dwcowl" ;
@@ -42,10 +42,6 @@
 
 ###  http://purl.org/dc/elements/1.1/description
 dc:description rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/elements/1.1/title
-dc:title rdf:type owl:AnnotationProperty .
 
 
 ###  http://purl.org/dc/terms/created
@@ -169,6 +165,17 @@ dsw:occurrenceOf rdf:type owl:ObjectProperty ;
                  rdfs:isDefinedBy dsw: ;
                  skos:definition "Links a subject dwc:Occurrence instance to an object dwc:Organism instance."@en ;
                  skos:prefLabel "Occurrence Of (DSW)" .
+
+
+###  http://purl.org/ontology/bibo/status
+bibo:status rdf:type owl:ObjectProperty ;
+            rdfs:domain bibo:Document ;
+            rdfs:range bibo:DocumentStatus ;
+            dcterms:isVersionOf bibo:status ;
+            rdfs:comment "We are not defining, using an enumeration, the range of the bibo:status to the defined list of bibo:DocumentStatus. We won't do it because we want people to be able to define new status if needed by some special usecases. Creating such an enumeration would restrict this to happen."@en ;
+            rdfs:isDefinedBy bibo: ;
+            skos:definition "The publication status of (typically academic) content."@en ;
+            skos:prefLabel "Status" .
 
 
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
@@ -631,7 +638,7 @@ dwcdp:assertedBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/authoredBy
 dwcdp:authoredBy rdf:type owl:ObjectProperty ;
-                 rdfs:domain dcterms:BibliographicResource ;
+                 rdfs:domain dwc:BibliographicDocument ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that authored it."@en ;
@@ -696,7 +703,7 @@ dwcdp:datedMaterial rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/editedBy
 dwcdp:editedBy rdf:type owl:ObjectProperty ;
-               rdfs:domain dcterms:BibliographicResource ;
+               rdfs:domain dwc:BibliographicDocument ;
                rdfs:range dcterms:Agent ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it." ;
@@ -897,14 +904,14 @@ dwcdp:isDerivedFrom rdf:type owl:ObjectProperty ,
 ###  http://rs.tdwg.org/dwcdp/terms/isPartOf
 dwcdp:isPartOf rdf:type owl:ObjectProperty ;
                rdfs:domain [ rdf:type owl:Class ;
-                             owl:unionOf ( dcterms:BibliographicResource
-                                           ac:Media
+                             owl:unionOf ( ac:Media
+                                           dwc:BibliographicDocument
                                            dwc:MaterialEntity
                                          )
                            ] ;
                rdfs:range [ rdf:type owl:Class ;
-                            owl:unionOf ( dcterms:BibliographicResource
-                                          ac:Media
+                            owl:unionOf ( ac:Media
+                                          dwc:BibliographicDocument
                                           dwc:MaterialEntity
                                         )
                           ] ;
@@ -946,7 +953,7 @@ dwcdp:mentionedIn rdf:type owl:ObjectProperty ;
                                               eco:Survey
                                             )
                               ] ;
-                  rdfs:range dcterms:BibliographicResource ;
+                  rdfs:range dwc:BibliographicDocument ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."@en ;
                   skos:prefLabel "Mentionned In" .
@@ -981,7 +988,7 @@ dwcdp:produced rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/publishedBy
 dwcdp:publishedBy rdf:type owl:ObjectProperty ;
-                  rdfs:domain dcterms:BibliographicResource ;
+                  rdfs:domain dwc:BibliographicDocument ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it."@en ;
@@ -1165,6 +1172,14 @@ dc:source rdf:type owl:DatatypeProperty ;
           skos:prefLabel "Source (DC)" .
 
 
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:DatatypeProperty ;
+         dcterms:isVersionOf dc:title ;
+         rdfs:isDefinedBy dc: ;
+         skos:definition "A name given to the resource."@en ;
+         skos:prefLabel "Title (DC)"@en .
+
+
 ###  http://purl.org/dc/terms/description
 dcterms:description rdf:type owl:DatatypeProperty ;
                     rdfs:domain owl:Thing ;
@@ -1200,6 +1215,48 @@ dcterms:title rdf:type owl:DatatypeProperty ;
               rdfs:isDefinedBy dcterms: ;
               skos:definition "A name given to a resource." ;
               skos:prefLabel "Title" .
+
+
+###  http://purl.org/ontology/bibo/edition
+bibo:edition rdf:type owl:DatatypeProperty ;
+             rdfs:domain bibo:Document ;
+             rdfs:range xsd:string ;
+             dcterms:isVersionOf bibo:edition ;
+             rdfs:isDefinedBy bibo: ;
+             skos:definition "The name defining a special edition of a document. Normally its a literal value composed of a version number and words."@en ;
+             skos:prefLabel "Edition"@en .
+
+
+###  http://purl.org/ontology/bibo/issue
+bibo:issue rdf:type owl:DatatypeProperty ;
+           rdfs:domain bibo:Document ;
+           rdfs:range xsd:string ;
+           dcterms:isVersionOf bibo:issue ;
+           rdfs:isDefinedBy bibo: ;
+           skos:definition "An issue number of a dcterms:BibliographicResource."@en ;
+           skos:prefLabel "Issue"@en .
+
+
+###  http://purl.org/ontology/bibo/pages
+bibo:pages rdf:type owl:DatatypeProperty ;
+           rdfs:domain bibo:Document ;
+           rdfs:range xsd:string ;
+           dcterms:isVersionOf bibo:pages ;
+           rdfs:comment "A string of non-contiguous page spans that locate a bibo:Document within a bibo:Collection. Example: 23-25, 34, 54-56. For continuous page ranges, use the bibo:pageStart and bibo:pageEnd properties."@en ;
+           rdfs:isDefinedBy bibo: ;
+           skos:definition "A range of pages within a dcterms:BibliographicResource."@en ;
+           skos:example "23-25, 34, 54-56" ;
+           skos:prefLabel "Pages"@en .
+
+
+###  http://purl.org/ontology/bibo/volume
+bibo:volume rdf:type owl:DatatypeProperty ;
+            rdfs:domain bibo:Document ;
+            rdfs:range xsd:string ;
+            dcterms:isVersionOf bibo:volume ;
+            rdfs:isDefinedBy bibo: ;
+            skos:definition "A volume number of a dcterms:BibliographicResource."@en ;
+            skos:prefLabel "Volume"@en .
 
 
 ###  http://rs.gbif.org/terms/dna_sequence
@@ -4657,6 +4714,24 @@ dcterms:Location rdf:type owl:Class ;
                  skos:prefLabel "Location" .
 
 
+###  http://purl.org/ontology/bibo/Document
+bibo:Document rdf:type owl:Class ;
+              dcterms:isVersionOf bibo:Document ;
+              rdfs:isDefinedBy bibo: ;
+              skos:definition "A document (noun) is a bounded physical representation of body of information designed with the capacity (and usually intent) to communicate. A document may manifest symbolic, diagrammatic or sensory-representational information."@en ;
+              skos:prefLabel "Document (BIBO)"@en .
+
+
+###  http://purl.org/ontology/bibo/DocumentStatus
+bibo:DocumentStatus rdf:type owl:Class ;
+                    dcterms:isVersionOf bibo:DocumentStatus ;
+                    rdfs:isDefinedBy bibo: ;
+                    skos:definition "The status of the publication of a document."@en ;
+                    skos:example <http://purl.org/ontology/bibo/status/accepted> ,
+                                 <http://purl.org/ontology/bibo/status/published> ;
+                    skos:prefLabel "Document Status"@en .
+
+
 ###  http://rs.tdwg.org/ac/terms/Media
 ac:Media rdf:type owl:Class ;
          dcterms:isVersionOf ac:Media ;
@@ -4690,6 +4765,44 @@ dwc:Assertion rdf:type owl:Class ;
               dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
               rdfs:isDefinedBy dwc: ;
               skos:prefLabel "Assertion" .
+
+
+###  http://rs.tdwg.org/dwc/terms/BibliographicDocument
+dwc:BibliographicDocument rdf:type owl:Class ;
+                          rdfs:subClassOf dcterms:BibliographicResource ,
+                                          bibo:Document ,
+                                          [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty bibo:status ;
+                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty dc:title ;
+                                                                   owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty bibo:edition ;
+                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty bibo:issue ;
+                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty bibo:pages ;
+                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty bibo:volume ;
+                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                          dcterms:isVersionOf dwc:BibliographicDocument ;
+                          rdfs:comment "An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions."@en ;
+                          rdfs:isDefinedBy dwc: ;
+                          skos:definition "A book, article, or other documentatry resource."@en ;
+                          skos:prefLabel "Bibliographic Document" .
 
 
 ###  http://rs.tdwg.org/dwc/terms/DegreeOfEstablishment
@@ -5186,12 +5299,21 @@ eco:SurveyTarget rdf:type owl:Class ;
 
 
 ###  http://www.w3.org/2004/02/skos/core#Concept
-skos:Concept rdf:type owl:Class .
+skos:Concept rdf:type owl:Class ;
+             dcterms:isVersionOf skos:Concept ;
+             rdfs:isDefinedBy skos: ;
+             skos:definition "An idea or notion; a unit of thought."@en ;
+             skos:prefLabel "Concept"@en .
 
 
 #################################################################
 #    Individuals
 #################################################################
+
+###  http://bioboum.ca/dwc-owl.owl
+<http://bioboum.ca/dwc-owl.owl> rdf:type owl:NamedIndividual ;
+                                dc:title "Darwin Core OWL" .
+
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/Collecting_Permit
 ggbn:Collecting_Permit rdf:type owl:NamedIndividual ,
@@ -5306,6 +5428,78 @@ ggbn:Unknown rdf:type owl:NamedIndividual ,
 ###  http://data.ggbn.org/schemas/ggbn/terms/Veterinary_Certificate
 ggbn:Veterinary_Certificate rdf:type owl:NamedIndividual ,
                                      ggbn:permitType_vocabulary .
+
+
+###  http://purl.org/ontology/bibo/status/accepted
+<http://purl.org/ontology/bibo/status/accepted> rdf:type owl:NamedIndividual ,
+                                                         bibo:DocumentStatus ;
+                                                dcterms:isVersionOf <http://purl.org/ontology/bibo/status/accepted> ;
+                                                skos:definition "Accepted for publication after peer reviewing."@en ;
+                                                skos:prefLabel "Accepted"@en .
+
+
+###  http://purl.org/ontology/bibo/status/draft
+<http://purl.org/ontology/bibo/status/draft> rdf:type owl:NamedIndividual ,
+                                                      bibo:DocumentStatus ;
+                                             dcterms:isVersionOf <http://purl.org/ontology/bibo/status/draft> ;
+                                             skos:definition "Document drafted."@en ;
+                                             skos:prefLabel "Draft"@en .
+
+
+###  http://purl.org/ontology/bibo/status/forthcoming
+<http://purl.org/ontology/bibo/status/forthcoming> rdf:type owl:NamedIndividual ,
+                                                            bibo:DocumentStatus ;
+                                                   dcterms:isVersionOf <http://purl.org/ontology/bibo/status/forthcoming> ;
+                                                   skos:definition "Document to be published."@en ;
+                                                   skos:prefLabel "Forthcoming"@en .
+
+
+###  http://purl.org/ontology/bibo/status/legal
+<http://purl.org/ontology/bibo/status/legal> rdf:type owl:NamedIndividual ,
+                                                      bibo:DocumentStatus ;
+                                             dcterms:isVersionOf <http://purl.org/ontology/bibo/status/legal> ;
+                                             skos:definition "Legal document."@en ;
+                                             skos:prefLabel "Legal"@en .
+
+
+###  http://purl.org/ontology/bibo/status/nonPeerReviewed
+<http://purl.org/ontology/bibo/status/nonPeerReviewed> rdf:type owl:NamedIndividual ,
+                                                                bibo:DocumentStatus ;
+                                                       dcterms:isVersionOf <http://purl.org/ontology/bibo/status/nonPeerReviewed> ;
+                                                       skos:definition "A document that is not peer reviewed."@en ;
+                                                       skos:prefLabel "Non Peer Reviewed"@en .
+
+
+###  http://purl.org/ontology/bibo/status/peerReviewed
+<http://purl.org/ontology/bibo/status/peerReviewed> rdf:type owl:NamedIndividual ,
+                                                             bibo:DocumentStatus ;
+                                                    dcterms:isVersionOf <http://purl.org/ontology/bibo/status/peerReviewed> ;
+                                                    skos:definition "The process by which articles are chosen to be included in a refereed journal. An editorial board consisting of experts in the same field as the author review the article and decide if it is authoritative enough for publication."@en ;
+                                                    skos:prefLabel "Peer Reviewed"@en .
+
+
+###  http://purl.org/ontology/bibo/status/published
+<http://purl.org/ontology/bibo/status/published> rdf:type owl:NamedIndividual ,
+                                                          bibo:DocumentStatus ;
+                                                 dcterms:isVersionOf <http://purl.org/ontology/bibo/status/published> ;
+                                                 skos:definition "Published document."@en ;
+                                                 skos:prefLabel "Published"@en .
+
+
+###  http://purl.org/ontology/bibo/status/rejected
+<http://purl.org/ontology/bibo/status/rejected> rdf:type owl:NamedIndividual ,
+                                                         bibo:DocumentStatus ;
+                                                dcterms:isVersionOf <http://purl.org/ontology/bibo/status/rejected> ;
+                                                skos:definition "Rejected for publication after peer reviewing."@en ;
+                                                skos:prefLabel "Rejected"@en .
+
+
+###  http://purl.org/ontology/bibo/status/unpublished
+<http://purl.org/ontology/bibo/status/unpublished> rdf:type owl:NamedIndividual ,
+                                                            bibo:DocumentStatus ;
+                                                   dcterms:isVersionOf <http://purl.org/ontology/bibo/status/unpublished> ;
+                                                   skos:definition "Unpublished document."@en ;
+                                                   skos:prefLabel "Unpublished"@en .
 
 
 ###  http://rs.gbif.org/vocabulary/gbif/type_designation_type/absoluteTautonymy

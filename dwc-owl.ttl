@@ -1,5 +1,6 @@
 @prefix ac: <http://rs.tdwg.org/ac/terms/> .
 @prefix bb: <http://bioboum.ca/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix chrono: <http://rs.tdwg.org/chrono/terms/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -130,10 +131,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -517,7 +518,7 @@ dwcdp:assertedBy a owl:ObjectProperty ;
     skos:prefLabel "Asserted By" .
 
 dwcdp:authoredBy a owl:ObjectProperty ;
-    rdfs:domain dcterms:BibliographicResource ;
+    rdfs:domain dwc:BibliographicDocument ;
     rdfs:isDefinedBy dwcdp: ;
     rdfs:range dcterms:Agent ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that authored it."@en ;
@@ -553,7 +554,7 @@ dwcdp:datedMaterial a owl:ObjectProperty ;
     skos:prefLabel "Dated Material" .
 
 dwcdp:editedBy a owl:ObjectProperty ;
-    rdfs:domain dcterms:BibliographicResource ;
+    rdfs:domain dwc:BibliographicDocument ;
     rdfs:isDefinedBy dwcdp: ;
     rdfs:range dcterms:Agent ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it." ;
@@ -680,7 +681,7 @@ dwcdp:mentionedIn a owl:ObjectProperty ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( chrono:ChronometricAge dwc:Event dwc:Identification dwc:MaterialEntity dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol eco:Survey ) ] ;
     rdfs:isDefinedBy dwcdp: ;
-    rdfs:range dcterms:BibliographicResource ;
+    rdfs:range dwc:BibliographicDocument ;
     skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."@en ;
     skos:prefLabel "Mentionned In" .
 
@@ -699,7 +700,7 @@ dwcdp:produced a owl:ObjectProperty ;
     skos:prefLabel "Produced" .
 
 dwcdp:publishedBy a owl:ObjectProperty ;
-    rdfs:domain dcterms:BibliographicResource ;
+    rdfs:domain dwc:BibliographicDocument ;
     rdfs:isDefinedBy dwcdp: ;
     rdfs:range dcterms:Agent ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it."@en ;
@@ -1114,6 +1115,41 @@ dcterms:rightsHolder a owl:ObjectProperty ;
     rdfs:isDefinedBy dcterms: ;
     skos:definition "A person or organization owning or managing rights over the resource." ;
     skos:prefLabel "Rights Holder" .
+
+<http://purl.org/ontology/bibo/status/draft> a bibo:DocumentStatus ;
+    dcterms:isVersionOf <http://purl.org/ontology/bibo/status/draft> ;
+    skos:definition "Document drafted."@en ;
+    skos:prefLabel "Draft"@en .
+
+<http://purl.org/ontology/bibo/status/forthcoming> a bibo:DocumentStatus ;
+    dcterms:isVersionOf <http://purl.org/ontology/bibo/status/forthcoming> ;
+    skos:definition "Document to be published."@en ;
+    skos:prefLabel "Forthcoming"@en .
+
+<http://purl.org/ontology/bibo/status/legal> a bibo:DocumentStatus ;
+    dcterms:isVersionOf <http://purl.org/ontology/bibo/status/legal> ;
+    skos:definition "Legal document."@en ;
+    skos:prefLabel "Legal"@en .
+
+<http://purl.org/ontology/bibo/status/nonPeerReviewed> a bibo:DocumentStatus ;
+    dcterms:isVersionOf <http://purl.org/ontology/bibo/status/nonPeerReviewed> ;
+    skos:definition "A document that is not peer reviewed."@en ;
+    skos:prefLabel "Non Peer Reviewed"@en .
+
+<http://purl.org/ontology/bibo/status/peerReviewed> a bibo:DocumentStatus ;
+    dcterms:isVersionOf <http://purl.org/ontology/bibo/status/peerReviewed> ;
+    skos:definition "The process by which articles are chosen to be included in a refereed journal. An editorial board consisting of experts in the same field as the author review the article and decide if it is authoritative enough for publication."@en ;
+    skos:prefLabel "Peer Reviewed"@en .
+
+<http://purl.org/ontology/bibo/status/rejected> a bibo:DocumentStatus ;
+    dcterms:isVersionOf <http://purl.org/ontology/bibo/status/rejected> ;
+    skos:definition "Rejected for publication after peer reviewing."@en ;
+    skos:prefLabel "Rejected"@en .
+
+<http://purl.org/ontology/bibo/status/unpublished> a bibo:DocumentStatus ;
+    dcterms:isVersionOf <http://purl.org/ontology/bibo/status/unpublished> ;
+    skos:definition "Unpublished document."@en ;
+    skos:prefLabel "Unpublished"@en .
 
 miqe:ampliconSize a owl:DatatypeProperty ;
     dcterms:isVersionOf miqe:ampliconSize ;
@@ -3049,10 +3085,10 @@ dwcdp:isDerivedFrom a owl:ObjectProperty,
 dwcdp:isPartOf a owl:ObjectProperty ;
     rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term."@en ;
     rdfs:domain [ a owl:Class ;
-            owl:unionOf ( ac:Media dcterms:BibliographicResource dwc:MaterialEntity ) ] ;
+            owl:unionOf ( ac:Media dwc:BibliographicDocument dwc:MaterialEntity ) ] ;
     rdfs:isDefinedBy dwcdp: ;
     rdfs:range [ a owl:Class ;
-            owl:unionOf ( ac:Media dcterms:BibliographicResource dwc:MaterialEntity ) ] ;
+            owl:unionOf ( ac:Media dwc:BibliographicDocument dwc:MaterialEntity ) ] ;
     skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
     skos:prefLabel "Is Part Of" .
 
@@ -3283,6 +3319,18 @@ mixs:0001322 a owl:DatatypeProperty ;
     skos:definition "The substance, mixture, product, or apparatus used to verify that a process which is part of an investigation delivers a true positive."@en ;
     skos:prefLabel "Positive Control Type" .
 
+dc:title a owl:DatatypeProperty ;
+    dcterms:isVersionOf dc:title ;
+    rdfs:isDefinedBy dc: ;
+    skos:definition "A name given to the resource."@en ;
+    skos:prefLabel "Title (DC)"@en .
+
+dcterms:BibliographicResource a owl:Class ;
+    dcterms:isVersionOf dcterms:BibliographicResource ;
+    rdfs:isDefinedBy dcterms: ;
+    skos:definition "A book, article, or other documentary resource."@en ;
+    skos:prefLabel "Bibliographic Resource" .
+
 dcterms:creator a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:creator ;
     rdfs:comment "Recommended practice is to identify the creator with a URI. If this is not possible or feasible, a literal value that identifies the creator may be provided."@en ;
@@ -3324,6 +3372,59 @@ dsw:occurrenceOf a owl:ObjectProperty ;
     owl:equivalentProperty dwcdp:occurrenceOf ;
     skos:definition "Links a subject dwc:Occurrence instance to an object dwc:Organism instance."@en ;
     skos:prefLabel "Occurrence Of (DSW)" .
+
+bibo:edition a owl:DatatypeProperty ;
+    dcterms:isVersionOf bibo:edition ;
+    rdfs:domain bibo:Document ;
+    rdfs:isDefinedBy bibo: ;
+    rdfs:range xsd:string ;
+    skos:definition "The name defining a special edition of a document. Normally its a literal value composed of a version number and words."@en ;
+    skos:prefLabel "Edition"@en .
+
+bibo:issue a owl:DatatypeProperty ;
+    dcterms:isVersionOf bibo:issue ;
+    rdfs:domain bibo:Document ;
+    rdfs:isDefinedBy bibo: ;
+    rdfs:range xsd:string ;
+    skos:definition "An issue number of a dcterms:BibliographicResource."@en ;
+    skos:prefLabel "Issue"@en .
+
+bibo:pages a owl:DatatypeProperty ;
+    dcterms:isVersionOf bibo:pages ;
+    rdfs:comment "A string of non-contiguous page spans that locate a bibo:Document within a bibo:Collection. Example: 23-25, 34, 54-56. For continuous page ranges, use the bibo:pageStart and bibo:pageEnd properties."@en ;
+    rdfs:domain bibo:Document ;
+    rdfs:isDefinedBy bibo: ;
+    rdfs:range xsd:string ;
+    skos:definition "A range of pages within a dcterms:BibliographicResource."@en ;
+    skos:example "23-25, 34, 54-56" ;
+    skos:prefLabel "Pages"@en .
+
+bibo:status a owl:ObjectProperty ;
+    dcterms:isVersionOf bibo:status ;
+    rdfs:comment "We are not defining, using an enumeration, the range of the bibo:status to the defined list of bibo:DocumentStatus. We won't do it because we want people to be able to define new status if needed by some special usecases. Creating such an enumeration would restrict this to happen."@en ;
+    rdfs:domain bibo:Document ;
+    rdfs:isDefinedBy bibo: ;
+    rdfs:range bibo:DocumentStatus ;
+    skos:definition "The publication status of (typically academic) content."@en ;
+    skos:prefLabel "Status" .
+
+<http://purl.org/ontology/bibo/status/accepted> a bibo:DocumentStatus ;
+    dcterms:isVersionOf <http://purl.org/ontology/bibo/status/accepted> ;
+    skos:definition "Accepted for publication after peer reviewing."@en ;
+    skos:prefLabel "Accepted"@en .
+
+<http://purl.org/ontology/bibo/status/published> a bibo:DocumentStatus ;
+    dcterms:isVersionOf <http://purl.org/ontology/bibo/status/published> ;
+    skos:definition "Published document."@en ;
+    skos:prefLabel "Published"@en .
+
+bibo:volume a owl:DatatypeProperty ;
+    dcterms:isVersionOf bibo:volume ;
+    rdfs:domain bibo:Document ;
+    rdfs:isDefinedBy bibo: ;
+    rdfs:range xsd:string ;
+    skos:definition "A volume number of a dcterms:BibliographicResource."@en ;
+    skos:prefLabel "Volume"@en .
 
 tdt:monotypy a dwc:TypeDesignationType .
 
@@ -4112,11 +4213,11 @@ dc:source a owl:DatatypeProperty ;
     skos:definition "A related resource from which the described resource is derived"@en ;
     skos:prefLabel "Source (DC)" .
 
-dcterms:BibliographicResource a owl:Class ;
-    dcterms:isVersionOf dcterms:BibliographicResource ;
-    rdfs:isDefinedBy dcterms: ;
-    skos:definition "A book, article, or other documentary resource."@en ;
-    skos:prefLabel "Bibliographic Resource" .
+bibo:Document a owl:Class ;
+    dcterms:isVersionOf bibo:Document ;
+    rdfs:isDefinedBy bibo: ;
+    skos:definition "A document (noun) is a bounded physical representation of body of information designed with the capacity (and usually intent) to communicate. A document may manifest symbolic, diagrammatic or sensory-representational information."@en ;
+    skos:prefLabel "Document (BIBO)"@en .
 
 chrono:ChronometricAge a owl:Class ;
     dcterms:isVersionOf chrono:ChronometricAge ;
@@ -4131,6 +4232,29 @@ chrono:ChronometricAge a owl:Class ;
         "an age range of a specimen based on its biostratigraphic content" ;
     skos:prefLabel "Chronometric Age" .
 
+dwc:BibliographicDocument a owl:Class ;
+    dcterms:isVersionOf dwc:BibliographicDocument ;
+    rdfs:comment "An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions."@en ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dc:title ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty bibo:status ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty bibo:edition ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty bibo:issue ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty bibo:pages ] [ a owl:Restriction ;
+                        owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty bibo:volume ] ) ],
+        dcterms:BibliographicResource,
+        bibo:Document ;
+    skos:definition "A book, article, or other documentatry resource."@en ;
+    skos:prefLabel "Bibliographic Document" .
+
 dwc:NucleotideSequence a owl:Class ;
     dcterms:isVersionOf dwc:NucleotideSequence ;
     rdfs:isDefinedBy dwc: ;
@@ -4142,6 +4266,12 @@ dwc:NucleotideSequence a owl:Class ;
                         owl:onProperty dwc:sequence ] ) ] ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
     skos:prefLabel "Nucleotide Sequence" .
+
+skos:Concept a owl:Class ;
+    dcterms:isVersionOf skos:Concept ;
+    rdfs:isDefinedBy skos: ;
+    skos:definition "An idea or notion; a unit of thought."@en ;
+    skos:prefLabel "Concept"@en .
 
 dwc:EstablishmentMeans a owl:Class ;
     rdfs:comment "For details and rationale, see [Groom et al. 2019](https://doi.org/10.3897/biss.3.38084)."@en ;
@@ -4240,6 +4370,14 @@ dwcpw:p045 a dwc:Pathway ;
     skos:broader dwcpw:p051 ;
     skos:definition "Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid."@en ;
     skos:prefLabel "Release In Nature"@en .
+
+bibo:DocumentStatus a owl:Class ;
+    dcterms:isVersionOf bibo:DocumentStatus ;
+    rdfs:isDefinedBy bibo: ;
+    skos:definition "The status of the publication of a document."@en ;
+    skos:example <http://purl.org/ontology/bibo/status/accepted>,
+        <http://purl.org/ontology/bibo/status/published> ;
+    skos:prefLabel "Document Status"@en .
 
 dwc:Protocol a owl:Class ;
     dcterms:isVersionOf dwc:Protocol ;

@@ -41,3 +41,12 @@ Originally, the semantics were more consistent with my original proposal, consid
 ## Applications of the ontology
 
 The terms in this ontology are being applied to model real-world datasets at [another GitHub repository](https://github.com/aminem0/dwc-owl-rdf).
+
+## Ontology principles
+
+- Compatibility with other ontologies
+
+One of the core processes of t
+This involves specifically setting the object property dwcdp:spatialLocation as a subproperty of dcterms:spatial or dwcdp:createdBy as a subproperty of dcterms:creator.
+
+- 

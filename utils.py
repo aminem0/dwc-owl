@@ -18,6 +18,7 @@ def createOC(
         pref_label: Literal,
         version_of_s: str,
         subclass_list: list[Node] | None = None,
+        equivalent_class: Node | None = None,
         definition: Literal | None = None,
         comments: Literal | None = None,
         examples: Literal | list[Literal] | None = None,
@@ -62,6 +63,10 @@ def createOC(
         # Technically not a unified list, so can add them all with a for loop
         for ro_class in subclass_list:
             graph.add((class_uri, RDFS["subClassOf"], ro_class))
+
+    # Declare any equivalent classes.
+    if equivalent_class:
+        graph.add((class_uri, OWL["equivalentClass"], equivalent_class))
 
     if any(restriction is not None for restriction in (card1_restrictions, maxcard1_restrictions)):
         # OWL Restrictions
@@ -827,4 +832,36 @@ def createSC(
     # Declare it in the graph
     # graph.add((sc_uri, RDF["type"], SKOS["Concept"]))
    
+
+def createNI(
+        uri_s: str,
+        class_of: Node,
+        graph: Graph,
+        pref_label: Literal,
+        version_of_s: str,
+        definition: Literal | None = None,
+        comments: Literal | None = None,
+        references_s: str | None = None,
+) -> None:
+    """
+    Define an OWL named individual
+    """
+
+    # Define named individual URI
+    named_individual_uri = URIRef(uri_s)
+
+    # Add DEFINEDBY
+    graph.add((named_individual_uri, RDF["type"], class_of))
+    graph.add((named_individual_uri, SKOS["prefLabel"], pref_label))
+
+    if definition:
+        graph.add((named_individual_uri, SKOS["definition"], definition))
+    if comments:
+        graph.add((named_individual_uri, RDFS["comment"], comments))
+
+    # Add version info.
+    graph.add((named_individual_uri, DCTERMS["isVersionOf"], URIRef(version_of_s)))
+
+    if references_s:
+        graph.add((named_individual_uri, DCTERMS["references"], URIRef(references_s)))
 

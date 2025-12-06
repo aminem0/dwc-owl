@@ -6,7 +6,7 @@ import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
-from utils import createCTOP, createDP, createEDP, createEOC, createOC, createOP, createRDP, createSC, declare_disjoint
+from utils import createCTOP, createDP, createEDP, createEOC, createNI, createOC, createOP, createRDP, createSC, declare_disjoint
 
 #####################################################################################################
 # BEGIN ONTOLOGY DEFINITION
@@ -15,8 +15,8 @@ from utils import createCTOP, createDP, createEDP, createEOC, createOC, createOP
 # Define all namespces to be used
 AC = Namespace("http://rs.tdwg.org/ac/terms/")
 ADMS = Namespace("http://www.w3.org/ns/adms#")
-BIBO = Namespace("http://purl.org/ontology/bibo/")
 BB = Namespace("http://bioboum.ca/")
+BIBO = Namespace("http://purl.org/ontology/bibo/")
 CHRONO = Namespace("http://rs.tdwg.org/chrono/terms/")
 DC = Namespace("http://purl.org/dc/elements/1.1/")
 DCTERMS = Namespace("http://purl.org/dc/terms/")
@@ -30,6 +30,7 @@ DWCPW = Namespace("http://rs.tdwg.org/dwcpw/values/")
 ECO = Namespace("http://rs.tdwg.org/eco/terms/")
 ECOIRI = Namespace("http://rs.tdwg.org/eco/iri/")
 EXIF = Namespace("http://ns.adobe.com/exif/1.0/")
+FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 GBIF = Namespace("http://rs.gbif.org/terms/")
 GGBN = Namespace("http://data.ggbn.org/schemas/ggbn/terms/")
 MINEXT = Namespace("http://rs.tdwg.org/mineralogy/terms/")
@@ -59,6 +60,7 @@ g.bind("dwcdp", DWCDP)
 g.bind("dwcpw", DWCPW)
 g.bind("eco", ECO)
 g.bind("exif", EXIF)
+g.bind("foaf", FOAF)
 g.bind("gbif", GBIF)
 g.bind("ggbn", GGBN)
 g.bind("minext", MINEXT)
@@ -140,6 +142,32 @@ createOC(
     version_of_s="http://purl.org/dc/terms/BibliographicResource",
 )
 
+# NOTE: Revoir definition
+createOC(
+    name="BibliographicDocument",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Bibliographic Document"),
+    definition=Literal("A book, article, or other documentatry resource.", lang="en"),
+    comments=Literal("An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions.", lang="en"),
+    subclass_list=[
+        BIBO["Document"],
+        DCTERMS["BibliographicResource"],
+    ],
+    card1_restrictions=[
+        DC["title"],
+    ],
+    maxcard1_restrictions=[
+        BIBO["status"],
+        #
+        BIBO["edition"],
+        BIBO["issue"],
+        BIBO["pages"],
+        BIBO["volume"],
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/BibliographicDocument",
+)
+
 createOC(
     name="ChronometricAge",
     namespace=CHRONO,
@@ -156,6 +184,15 @@ createOC(
     ],
     version_of_s="http://rs.tdwg.org/chrono/terms/ChronometricAge",
     references_s="http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21",
+)
+
+createOC(
+    name="Concept",
+    namespace=SKOS,
+    graph=g,
+    pref_label=Literal("Concept", lang="en"),
+    definition=Literal("An idea or notion; a unit of thought.", lang="en"),
+    version_of_s="http://www.w3.org/2004/02/skos/core#Concept",
 )
 
 # NOTE: Review integration of skos:Concept and owl:Classes.
@@ -180,6 +217,29 @@ createEOC(
         URIRef("http://rs.tdwg.org/dwcdoe/values/d010"),
         URIRef("http://rs.tdwg.org/dwcdoe/values/d011"),
     ],
+)
+
+createOC(
+    name="Document",
+    namespace=BIBO,
+    graph=g,
+    pref_label=Literal("Document (BIBO)", lang="en"),
+    definition=Literal("A document (noun) is a bounded physical representation of body of information designed with the capacity (and usually intent) to communicate. A document may manifest symbolic, diagrammatic or sensory-representational information.", lang="en"),
+    # equivalent_class=FOAF["Document"],
+    version_of_s="http://purl.org/ontology/bibo/Document",
+)
+
+createOC(
+    name="DocumentStatus",
+    namespace=BIBO,
+    graph=g,
+    pref_label=Literal("Document Status", lang="en"),
+    definition=Literal("The status of the publication of a document.", lang="en"),
+    examples=[
+        URIRef("http://purl.org/ontology/bibo/status/published"),
+        URIRef("http://purl.org/ontology/bibo/status/accepted"),
+    ],
+    version_of_s="http://purl.org/ontology/bibo/DocumentStatus",
 )
 
 # NOTE: Review integration of skos:Concept and owl:Classes.
@@ -1030,6 +1090,87 @@ g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], Robj_class))
 #####################################################################################################
 # BEGIN INDIVIDUALS
 #####################################################################################################
+
+createNI(
+    uri_s="http://purl.org/ontology/bibo/status/accepted",
+    class_of=BIBO["DocumentStatus"],
+    graph=g,
+    pref_label=Literal("Accepted", lang="en"),
+    definition=Literal("Accepted for publication after peer reviewing.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status/accepted",
+)
+
+createNI(
+    uri_s="http://purl.org/ontology/bibo/status/draft",
+    class_of=BIBO["DocumentStatus"],
+    graph=g,
+    pref_label=Literal("Draft", lang="en"),
+    definition=Literal("Document drafted.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status/draft",
+)
+
+createNI(
+    uri_s="http://purl.org/ontology/bibo/status/forthcoming",
+    class_of=BIBO["DocumentStatus"],
+    graph=g,
+    pref_label=Literal("Forthcoming", lang="en"),
+    definition=Literal("Document to be published.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status/forthcoming",
+)
+
+createNI(
+    uri_s="http://purl.org/ontology/bibo/status/legal",
+    class_of=BIBO["DocumentStatus"],
+    graph=g,
+    pref_label=Literal("Legal", lang="en"),
+    definition=Literal("Legal document.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status/legal",
+)
+
+createNI(
+    uri_s="http://purl.org/ontology/bibo/status/nonPeerReviewed",
+    class_of=BIBO["DocumentStatus"],
+    graph=g,
+    pref_label=Literal("Non Peer Reviewed", lang="en"),
+    definition=Literal("A document that is not peer reviewed.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status/nonPeerReviewed",
+)
+
+createNI(
+    uri_s="http://purl.org/ontology/bibo/status/peerReviewed",
+    class_of=BIBO["DocumentStatus"],
+    graph=g,
+    pref_label=Literal("Peer Reviewed", lang="en"),
+    definition=Literal("The process by which articles are chosen to be included in a refereed journal. An editorial board consisting of experts in the same field as the author review the article and decide if it is authoritative enough for publication.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status/peerReviewed",
+)
+
+createNI(
+    uri_s="http://purl.org/ontology/bibo/status/published",
+    class_of=BIBO["DocumentStatus"],
+    graph=g,
+    pref_label=Literal("Published", lang="en"),
+    definition=Literal("Published document.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status/published",
+)
+
+createNI(
+    uri_s="http://purl.org/ontology/bibo/status/rejected",
+    class_of=BIBO["DocumentStatus"],
+    graph=g,
+    pref_label=Literal("Rejected", lang="en"),
+    definition=Literal("Rejected for publication after peer reviewing.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status/rejected",
+)
+
+createNI(
+    uri_s="http://purl.org/ontology/bibo/status/unpublished",
+    class_of=BIBO["DocumentStatus"],
+    graph=g,
+    pref_label=Literal("Unpublished", lang="en"),
+    definition=Literal("Unpublished document.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status/unpublished",
+)
 
 # createSC(
 #     name="originalDesignation",
@@ -2007,6 +2148,30 @@ createDP(
     version_of_s="http://purl.org/dc/elements/1.1/source",
 )
 
+createDP(
+    name="title",
+    namespace=DC,
+    graph=g,
+    pref_label=Literal("Title (DC)", lang="en"),
+    definition=Literal("A name given to the resource.", lang="en"),
+    version_of_s="http://purl.org/dc/elements/1.1/title",
+)
+
+#############################################################################
+
+# NOTE: Possibly reword previously skos:editorialNote into a comment
+createOP(
+    name="status",
+    namespace=BIBO,
+    graph=g,
+    domains=BIBO["Document"],
+    ranges=BIBO["DocumentStatus"],
+    pref_label=Literal("Status"),
+    definition=Literal("The publication status of (typically academic) content.", lang="en"),
+    comments=Literal("We are not defining, using an enumeration, the range of the bibo:status to the defined list of bibo:DocumentStatus. We won't do it because we want people to be able to define new status if needed by some special usecases. Creating such an enumeration would restrict this to happen.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status",
+)
+
 #############################################################################
 
 createOP(
@@ -2569,7 +2734,8 @@ createOP(
     name="authoredBy",
     namespace=DWCDP,
     graph=g,
-    domains=DCTERMS["BibliographicResource"],
+    # domains=DCTERMS["BibliographicResource"],
+    domains=DWC["BibliographicDocument"],
     ranges=DCTERMS["Agent"],
     pref_label=Literal("Authored By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that authored it.", lang="en"),
@@ -2642,20 +2808,29 @@ createOP(
     namespace=DWCDP,
     pref_label=Literal("Edited By"),
     graph=g,
-    domains=DCTERMS["BibliographicResource"],
+    # domains=DCTERMS["BibliographicResource"],
+    domains=DWC["BibliographicDocument"],
     ranges=DCTERMS["Agent"],
+    # equivalent_property_list=[
+    #     BIBO["editor"],
+    # ],
     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it."),
 )
 
 # createOP(
 #     name="editor",
-#     namespace = BIBO,
-#     graph = g,
-#     domains = DCTERMS["BibliographicResource"],
-#     ranges = DCTERMS["Agent"],
-#     pref_label = Literal("Edited By"),
-#     definition = Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it.", lang="en"),
-#     comments = Literal("A person having managerial and sometimes policy-making responsibility for the editorial part of a publishing firm or of a newspaper, magazine, or other publication.", lang="en"),
+#     namespace=BIBO,
+#     graph=g,
+#     domains=[
+#         BIBO["Collection"],
+#         BIBO["Document"],
+#     ],
+#     ranges=FOAF["Agent"],
+#     subproperty_list=[
+#         DCTERMS["contributor"],
+#     ],
+#     pref_label=Literal("Editor"),
+#     definition=Literal("A person having managerial and sometimes policy-making responsibility for the editorial part of a publishing firm or of a newspaper, magazine, or other publication.", lang="en"),
 # )
 
 createOP(
@@ -2836,12 +3011,14 @@ createOP(
     graph=g,
     domains=[
         AC["Media"],
-        DCTERMS["BibliographicResource"],
+        # DCTERMS["BibliographicResource"],
+        DWC["BibliographicDocument"],
         DWC["MaterialEntity"],
     ],
     ranges=[
         AC["Media"],
-        DCTERMS["BibliographicResource"],
+        # DCTERMS["BibliographicResource"],
+        DWC["BibliographicDocument"],
         DWC["MaterialEntity"],
     ],
     pref_label=Literal("Is Part Of"),
@@ -2886,7 +3063,8 @@ createOP(
         DWC["Protocol"],
         ECO["Survey"]
     ],
-    ranges=DCTERMS["BibliographicResource"],
+    # ranges=DCTERMS["BibliographicResource"],
+    ranges=DWC["BibliographicDocument"],
     pref_label=Literal("Mentionned In"),
     definition=Literal("An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey].", lang="en"),
 )
@@ -2929,7 +3107,8 @@ createOP(
     name="publishedBy",
     namespace=DWCDP,
     graph=g,
-    domains=DCTERMS["BibliographicResource"],
+    # domains=DCTERMS["BibliographicResource"],
+    domains=DWC["BibliographicDocument"],
     ranges=DCTERMS["Agent"],
     pref_label=Literal("Published By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it.", lang="en"),
@@ -3265,6 +3444,59 @@ createDP(
     version_of_s="http://rs.tdwg.org/ac/terms/yFrac",
     references_s="http://rs.tdwg.org/ac/terms/version/yFrac-2021-10-05",
 )
+
+###################################################################################
+
+createDP(
+    name="edition",
+    namespace=BIBO,
+    graph=g,
+    domains=BIBO["Document"],
+    ranges=XSD["string"],
+    pref_label=Literal("Edition", lang="en"),
+    definition=Literal("The name defining a special edition of a document. Normally its a literal value composed of a version number and words.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/edition",
+)
+
+createDP(
+    name="issue",
+    namespace=BIBO,
+    graph=g,
+    domains=BIBO["Document"],
+    ranges=XSD["string"],
+    pref_label=Literal("Issue", lang="en"),
+    definition=Literal("An issue number of a dcterms:BibliographicResource.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/issue",
+)
+
+createDP(
+    name="pages",
+    namespace=BIBO,
+    graph=g,
+    domains=BIBO["Document"],
+    ranges=XSD["string"],
+    pref_label=Literal("Pages", lang="en"),
+    definition=Literal("A range of pages within a dcterms:BibliographicResource.", lang="en"),
+    comments=Literal("A string of non-contiguous page spans that locate a bibo:Document within a bibo:Collection. Example: 23-25, 34, 54-56. For continuous page ranges, use the bibo:pageStart and bibo:pageEnd properties.", lang="en"),
+    examples=[
+        Literal("23-25, 34, 54-56"),
+    ],
+    version_of_s="http://purl.org/ontology/bibo/pages",
+)
+
+createDP(
+    name="volume",
+    namespace=BIBO,
+    graph=g,
+    domains=BIBO["Document"],
+    ranges=XSD["string"],
+    pref_label=Literal("Volume", lang="en"),
+    definition=Literal("A volume number of a dcterms:BibliographicResource.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/volume",
+)
+
+# g.add((URIRef("bibi"), RDF["type"], DCTERMS["BibliographicResource"]))
+# g.add((URIRef("bibi"), BIBO["pages"], Literal("1-20")))
 
 createDP(
     name="description",
