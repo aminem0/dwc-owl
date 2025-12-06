@@ -55,3 +55,7 @@ A central design principle of this ontology is compatibility with established vo
 ### Integration of controlled vocabularies
 
 Beyond OWL classes and properties, many ontologies incorporate controlled vocabularies or thesauri. Controlled vocabularies are often represented as sets of `owl:NamedIndividuals`, while thesauri, such as those defined using SKOS, are typically collections of `skos:Concepts`. This ontology supports the integration of such vocabularies, enabling resources to be linked to domain-specific terms and researcher-defined concept schemes. This strengthens semantic clarity and enhances interoperability with external knowledge models.
+
+### Built according to open science principles
+
+The ontology is developed and maintained openly on GitHub to ensure full transparency and accessibility for the research community. Hosting the ontology in a public repository guarantees that all source files, documentation, and version histories are openly available. This approach not only facilitates reuse and verification but also encourages community engagement by enabling researchers to submit suggestions, report issues, and contribute constructive feedback. In this way, the ontology evolves through collaborative refinement consistent with open science practices.
