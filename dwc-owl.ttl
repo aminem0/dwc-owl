@@ -713,6 +713,14 @@ dwcdp:reviewedBy a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that reviewed it."@en ;
     skos:prefLabel "Reviewed By" .
 
+dwcdp:samplingPerformedBy a owl:ObjectProperty ;
+    rdfs:domain eco:Survey ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dcterms:Agent ;
+    rdfs:subPropertyOf <http://rs.tdwg.org/eco/iri/samplingPerformedBy> ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [eco:Survey] to the [dcterms:Agent] that carried out the sampling."@en ;
+    skos:prefLabel "Sampling Performed By" .
+
 dwcdp:storedIn a owl:ObjectProperty ;
     rdfs:domain dwc:MaterialEntity ;
     rdfs:isDefinedBy dwcdp: ;
@@ -3986,6 +3994,15 @@ dwcpw:p050 a dwc:Pathway ;
     skos:definition "Organisms that spread by natural dispersal, without action or assistance by humans, from regions in which they are also alien."@en ;
     skos:prefLabel "Unaided"@en .
 
+<http://rs.tdwg.org/eco/iri/samplingPerformedBy> a owl:ObjectProperty ;
+    dcterms:isVersionOf <http://rs.tdwg.org/eco/iri/samplingPerformedBy> ;
+    dcterms:references <http://rs.tdwg.org/eco/iri/version/samplingPerformedBy-2025-07-10> ;
+    rdfs:comment "The sampling dwc:Event could be at any level of hierarchy. In the case of a higher level (parent) dwc:Event, include all the organizations or people involved in the child dwc:Events that contributed to the parent dwc:Event. Terms in the ecoiri: namespace are intended to be used in RDF with non-literal objects."@en ;
+    rdfs:domain eco:Survey ;
+    rdfs:isDefinedBy <http://rs.tdwg.org/eco/iri/> ;
+    skos:definition "A person, group, or organization responsible for recording the dwc:Event."@en ;
+    skos:prefLabel "Sampling Performed By (IRI)" .
+
 mixs:0000012 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:0000012 ;
     rdfs:domain dwc:MolecularProtocol ;
@@ -4441,6 +4458,12 @@ dwcpw:p046 a dwc:Pathway ;
     skos:definition "Organisms intentionally transported by humans and intended to be kept in captivity or cultivation, but having inadvertently escaped from human control."@en ;
     skos:prefLabel "Escape From Confinement"@en .
 
+dwc:Assertion a owl:Class ;
+    dcterms:isVersionOf dwc:MeasurementOrFact ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
+    rdfs:isDefinedBy dwc: ;
+    skos:prefLabel "Assertion" .
+
 eco:Survey a owl:Class ;
     dcterms:isVersionOf eco:Survey ;
     rdfs:comment "This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget]."@en ;
@@ -4456,12 +4479,6 @@ eco:Survey a owl:Class ;
         "a wetland vegetation mapping",
         "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
     skos:prefLabel "Survey" .
-
-dwc:Assertion a owl:Class ;
-    dcterms:isVersionOf dwc:MeasurementOrFact ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
-    rdfs:isDefinedBy dwc: ;
-    skos:prefLabel "Assertion" .
 
 dwc:MaterialEntityAssertion a owl:Class ;
     rdfs:isDefinedBy dwc: ;
@@ -4489,6 +4506,19 @@ dcterms:identifier a owl:DatatypeProperty ;
     skos:definition "An unambiguous reference to the resource within a given context." ;
     skos:prefLabel "Identifier" .
 
+dwc:GeologicalContext a owl:Class ;
+    dcterms:isVersionOf dwc:GeologicalContext ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onProperty dwc:geologicalContextID ] ) ] ;
+    skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
+    skos:example "a particular lithostratigraphic layer",
+        "a specific chronostratigraphic unit" ;
+    skos:prefLabel "Geological Context" .
+
 dcterms:Agent a owl:Class ;
     dcterms:isVersionOf dcterms:Agent ;
     rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
@@ -4504,19 +4534,6 @@ dcterms:Agent a owl:Class ;
         "The National Science Foundation",
         "The Terra Nova Expedition" ;
     skos:prefLabel "Agent" .
-
-dwc:GeologicalContext a owl:Class ;
-    dcterms:isVersionOf dwc:GeologicalContext ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:cardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onProperty dwc:geologicalContextID ] ) ] ;
-    skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
-    skos:example "a particular lithostratigraphic layer",
-        "a specific chronostratigraphic unit" ;
-    skos:prefLabel "Geological Context" .
 
 ac:Media a owl:Class ;
     dcterms:isVersionOf ac:Media ;

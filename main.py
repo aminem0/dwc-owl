@@ -3125,6 +3125,19 @@ createOP(
 )
 
 createOP(
+    name="samplingPerformedBy",
+    namespace=DWCDP,
+    graph=g,
+    domains=ECO["Survey"],
+    ranges=DCTERMS["Agent"],
+    subproperty_list=[
+        ECOIRI["samplingPerformedBy"],
+    ],
+    pref_label=Literal("Sampling Performed By"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [eco:Survey] to the [dcterms:Agent] that carried out the sampling.", lang="en"),
+)
+
+createOP(
     name="spatialLocation",
     namespace=DWCDP,
     graph=g,
@@ -3226,6 +3239,18 @@ g.add((DWCDP["hasUsagePolicy"], RDFS["range"], DWC["UsagePolicy"]))
 
 #############################################################################
 
+createOP(
+    name="samplingPerformedBy",
+    namespace=ECOIRI,
+    graph=g,
+    domains=ECO["Survey"],
+    pref_label=Literal("Sampling Performed By (IRI)"),
+    definition=Literal("A person, group, or organization responsible for recording the dwc:Event.", lang="en"),
+    comments=Literal("The sampling dwc:Event could be at any level of hierarchy. In the case of a higher level (parent) dwc:Event, include all the organizations or people involved in the child dwc:Events that contributed to the parent dwc:Event. Terms in the ecoiri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/eco/iri/samplingPerformedBy",
+    references_s="http://rs.tdwg.org/eco/iri/version/samplingPerformedBy-2025-07-10",
+)
+
 # NOTE: Property I created. I do not see why there is not a dwciri: analogue of dwc:surveyTargetTypeSource. I would like to be able to give the URI of something like the NERC vocabulary from which my term was taken (e.g. `http://vocab/nerc.ac.uk/collection/S11/current/`).
 # BUG: Change to an object property
 createOP(
@@ -3236,7 +3261,9 @@ createOP(
     pref_label=Literal("Survey Target Type Source IRI"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
-    subproperty_list=[DCTERMS["source"]],
+    subproperty_list=[
+        DCTERMS["source"]
+    ],
     version_of_s="http://purl.org/dc/elements/terms/source",
 )
 

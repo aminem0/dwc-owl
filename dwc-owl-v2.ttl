@@ -1020,6 +1020,16 @@ dwcdp:reviewedBy rdf:type owl:ObjectProperty ;
                  skos:prefLabel "Reviewed By" .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/samplingPerformedBy
+dwcdp:samplingPerformedBy rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf <http://rs.tdwg.org/eco/iri/samplingPerformedBy> ;
+                          rdfs:domain eco:Survey ;
+                          rdfs:range dcterms:Agent ;
+                          rdfs:isDefinedBy dwcdp: ;
+                          skos:definition "An [owl:ObjectProperty] used to relate a [eco:Survey] to the [dcterms:Agent] that carried out the sampling."@en ;
+                          skos:prefLabel "Sampling Performed By" .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/spatialLocation
 dwcdp:spatialLocation rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf dcterms:spatial ;
@@ -1060,6 +1070,17 @@ dwcdp:typeDesignationType rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/usedFor
 dwcdp:usedFor rdf:type owl:ObjectProperty .
+
+
+###  http://rs.tdwg.org/eco/iri/samplingPerformedBy
+<http://rs.tdwg.org/eco/iri/samplingPerformedBy> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain eco:Survey ;
+                                                 dcterms:isVersionOf <http://rs.tdwg.org/eco/iri/samplingPerformedBy> ;
+                                                 dcterms:references <http://rs.tdwg.org/eco/iri/version/samplingPerformedBy-2025-07-10> ;
+                                                 rdfs:comment "The sampling dwc:Event could be at any level of hierarchy. In the case of a higher level (parent) dwc:Event, include all the organizations or people involved in the child dwc:Events that contributed to the parent dwc:Event. Terms in the ecoiri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                                                 rdfs:isDefinedBy <http://rs.tdwg.org/eco/iri/> ;
+                                                 skos:definition "A person, group, or organization responsible for recording the dwc:Event."@en ;
+                                                 skos:prefLabel "Sampling Performed By (IRI)" .
 
 
 ###  http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI

@@ -42,11 +42,14 @@ Originally, the semantics were more consistent with my original proposal, consid
 
 The terms in this ontology are being applied to model real-world datasets at [another GitHub repository](https://github.com/aminem0/dwc-owl-rdf).
 
-## Ontology principles
+### Designed for OWL-based semantics
 
-- Compatibility with other ontologies
+The ontology was constructed explicitly to take advantage of OWL-based modelling. This includes the use of cardinality restrictions, existential restrictions, and other axioms that allow for precise semantic constraints. OWL class constructors, such as `owl:unionOf`, play an important role by enabling the natural expression of complex domain and range conditions, as well as other logical structures.
 
-One of the core processes of t
-This involves specifically setting the object property dwcdp:spatialLocation as a subproperty of dcterms:spatial or dwcdp:createdBy as a subproperty of dcterms:creator.
+### Compatibility with external ontologies
 
-- 
+A central design principle of this ontology is compatibility with established vocabularies and standards. This is achieved by aligning terms with those defined in other ontologies. These include, for example, declaring `dwcdp:spatialLocation` as a subproperty of `dcterms:spatial` and `dwcdp:createdBy` as a subproperty of `dcterms:creator`. Such alignments help ensure semantic interoperability, improve integration with external datasets, and support Linked Data best practices.
+
+### Integration of controlled vocabularies
+
+Beyond OWL classes and properties, many ontologies incorporate controlled vocabularies or thesauri. Controlled vocabularies are often represented as sets of `owl:NamedIndividuals`, while thesauri, such as those defined using SKOS, are typically collections of `skos:Concepts`. This ontology supports the integration of such vocabularies, enabling resources to be linked to domain-specific terms and researcher-defined concept schemes. This strengthens semantic clarity and enhances interoperability with external knowledge models.
