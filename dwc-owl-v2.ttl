@@ -1119,8 +1119,8 @@ dwcdp:usedFor rdf:type owl:ObjectProperty .
 ###  http://www.w3.org/2004/02/skos/core#inScheme
 skos:inScheme rdf:type owl:ObjectProperty ;
               rdfs:range skos:ConceptScheme ;
-              dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
-              rdfs:comment "A conceptmay be a member of more thann one concept scheme."@en ;
+              dcterms:isVersionOf skos: ;
+              rdfs:comment "A conceptmay be a member of more than one concept scheme."@en ;
               rdfs:isDefinedBy skos: ;
               skos:definition "Relates a resource (for example a concept) to a concept scheme in which it is included"@en ;
               skos:prefLabel "Is In Scheme"@en .
@@ -5950,10 +5950,10 @@ tdt:subsequentMonotypy rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acorient/values/r
 acorient:r rdf:type owl:NamedIndividual ,
                     skos:ConceptScheme ;
-           dcterms:isVersionOf <http://rs.tdwg.org/acorient/r> ;
-           dcterms:references <http://rs.tdwg.org/acorient/r-2023-04-26> ;
+           dcterms:isVersionOf acorient:r ;
+           dcterms:references <http://rs.tdwg.org/acorient/values/version/r-2023-04-26> ;
            rdfs:isDefinedBy acorient: ;
-           skos:definition "A SKOS concept scheme for orientation."@en ;
+           skos:definition "A SKOS concept scheme for ac:subjectOrientation."@en ;
            skos:prefLabel "Subject Orientation Concept Scheme"@en .
 
 
@@ -6117,9 +6117,20 @@ acorient:r0013 rdf:type owl:NamedIndividual ,
                skos:prefLabel "Aboral Side"@en .
 
 
+###  http://rs.tdwg.org/acpart/values/p
+acpart:p rdf:type owl:NamedIndividual ,
+                  skos:ConceptScheme ;
+         dcterms:isVersionOf acpart:p ;
+         dcterms:references <http://rs.tdwg.org/acpart/values/version/p-2023-04-26> ;
+         rdfs:isDefinedBy acpart: ;
+         skos:definition "A SKOS concept scheme for ac:subjectPart."@en ;
+         skos:prefLabel "Subject Part Concept Scheme"@en .
+
+
 ###  http://rs.tdwg.org/acpart/values/p0000
 acpart:p0000 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0000 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0000-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6130,6 +6141,7 @@ acpart:p0000 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0001
 acpart:p0001 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0001 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0001-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6140,6 +6152,7 @@ acpart:p0001 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0002
 acpart:p0002 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0002 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0002-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6150,6 +6163,7 @@ acpart:p0002 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0003
 acpart:p0003 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0003 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0003-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6160,6 +6174,7 @@ acpart:p0003 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0004
 acpart:p0004 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0004 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0004-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6170,6 +6185,7 @@ acpart:p0004 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0005
 acpart:p0005 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0005 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0005-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6180,6 +6196,7 @@ acpart:p0005 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0006
 acpart:p0006 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0006 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0006-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6190,6 +6207,7 @@ acpart:p0006 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0007
 acpart:p0007 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0007 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0007-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6200,6 +6218,7 @@ acpart:p0007 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0008
 acpart:p0008 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0008 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0008-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6210,6 +6229,7 @@ acpart:p0008 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0009
 acpart:p0009 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0009 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0009-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6220,6 +6240,7 @@ acpart:p0009 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0010
 acpart:p0010 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0010 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0010-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6231,6 +6252,7 @@ acpart:p0010 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0011
 acpart:p0011 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0011 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0011-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6242,6 +6264,7 @@ acpart:p0011 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0012
 acpart:p0012 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0012 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0012-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6253,6 +6276,7 @@ acpart:p0012 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0013
 acpart:p0013 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0013 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0013-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6263,6 +6287,7 @@ acpart:p0013 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0014
 acpart:p0014 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0014 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0014-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6273,6 +6298,7 @@ acpart:p0014 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0015
 acpart:p0015 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0015 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0015-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6283,6 +6309,7 @@ acpart:p0015 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0016
 acpart:p0016 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0016 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0016-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6293,6 +6320,7 @@ acpart:p0016 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0017
 acpart:p0017 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0017 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0017-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6303,6 +6331,7 @@ acpart:p0017 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0018
 acpart:p0018 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0018 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0018-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6313,6 +6342,7 @@ acpart:p0018 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0019
 acpart:p0019 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0019 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0019-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6324,6 +6354,7 @@ acpart:p0019 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0020
 acpart:p0020 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0020 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0020-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6335,6 +6366,7 @@ acpart:p0020 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0021
 acpart:p0021 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0021 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0021-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6346,6 +6378,7 @@ acpart:p0021 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0022
 acpart:p0022 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0022 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0022-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6357,6 +6390,7 @@ acpart:p0022 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0023
 acpart:p0023 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0023 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0023-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6368,6 +6402,7 @@ acpart:p0023 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0024
 acpart:p0024 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0024 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0024-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6378,6 +6413,7 @@ acpart:p0024 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0025
 acpart:p0025 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0025 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0025-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6388,6 +6424,7 @@ acpart:p0025 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0026
 acpart:p0026 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0026 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0026-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6398,6 +6435,7 @@ acpart:p0026 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0027
 acpart:p0027 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0027 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0027-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6408,6 +6446,7 @@ acpart:p0027 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0028
 acpart:p0028 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0028 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0028-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6419,6 +6458,7 @@ acpart:p0028 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0029
 acpart:p0029 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0029 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0029-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6430,6 +6470,7 @@ acpart:p0029 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0030
 acpart:p0030 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0030 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0030-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6440,6 +6481,7 @@ acpart:p0030 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0031
 acpart:p0031 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0031 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0031-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6450,6 +6492,7 @@ acpart:p0031 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/acpart/values/p0032
 acpart:p0032 rdf:type owl:NamedIndividual ,
                       dwc:SubjectPart ;
+             skos:inScheme acpart:p ;
              dcterms:isVersionOf acpart:p0032 ;
              dcterms:references <http://rs.tdwg.org/acpart/values/version/p0032-2023-04-26> ;
              rdfs:isDefinedBy acpart: ;
@@ -6457,9 +6500,20 @@ acpart:p0032 rdf:type owl:NamedIndividual ,
              skos:prefLabel "Bud"@en .
 
 
+###  http://rs.tdwg.org/dwcdoe/values/d
+dwcdoe:d rdf:type owl:NamedIndividual ,
+                  skos:ConceptScheme ;
+         dcterms:isVersionOf dwcdoe:d ;
+         dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d-2020-10-13> ;
+         rdfs:isDefinedBy dwcdoe: ;
+         skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:degreeOfEstablishment and dwciri:degreeOfEstablishment."@en ;
+         skos:prefLabel "degreeOfEstablishment Concept Scheme"@en .
+
+
 ###  http://rs.tdwg.org/dwcdoe/values/d001
 dwcdoe:d001 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d001 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d001-2021-09-01> ;
             rdfs:comment "Considered native and naturally occurring. See also \"category A\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6471,6 +6525,7 @@ dwcdoe:d001 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcdoe/values/d002
 dwcdoe:d002 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d002 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d002-2021-09-01> ;
             rdfs:comment "Only for cases where specific actions have been taken place to prevent escape of individuals or propagules. See also \"category B1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6482,6 +6537,7 @@ dwcdoe:d002 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcdoe/values/d003
 dwcdoe:d003 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d003 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d003-2021-09-01> ;
             rdfs:comment "Examples include gardens, parks and farms. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6493,6 +6549,7 @@ dwcdoe:d003 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcdoe/values/d004
 dwcdoe:d004 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d004 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d004-2021-09-01> ;
             rdfs:comment "For example, fish stocked for angling, birds for hunting. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6504,6 +6561,7 @@ dwcdoe:d004 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcdoe/values/d005
 dwcdoe:d005 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d005 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d005-2021-09-01> ;
             rdfs:comment "For example, frost-tender plants sown or planted in a cold climate. See also \"category C0\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6515,6 +6573,7 @@ dwcdoe:d005 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcdoe/values/d006
 dwcdoe:d006 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d006 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d006-2021-09-01> ;
             rdfs:comment "Trees planted in the wild for forestry or ornament may come under this category. See also \"category C1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6526,6 +6585,7 @@ dwcdoe:d006 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcdoe/values/d007
 dwcdoe:d007 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d007 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d007-2021-09-01> ;
             rdfs:comment "Offspring are produced, but these either do not survive or are not fertile enough to maintain the population. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6537,6 +6597,7 @@ dwcdoe:d007 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcdoe/values/d008
 dwcdoe:d008 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d008 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d008-2021-09-01> ;
             rdfs:comment "The population is maintained by reproduction, but is not spreading. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6548,6 +6609,7 @@ dwcdoe:d008 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcdoe/values/d009
 dwcdoe:d009 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d009 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d009-2021-09-01> ;
             rdfs:comment "The population is maintained by reproduction and is spreading. See also \"category D1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6559,6 +6621,7 @@ dwcdoe:d009 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcdoe/values/d010
 dwcdoe:d010 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d010 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d010-2021-09-01> ;
             rdfs:comment "The population is maintained by reproduction, is spreading, and its progeny are also reproducing and spreading. See also \"category D2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6570,6 +6633,7 @@ dwcdoe:d010 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcdoe/values/d011
 dwcdoe:d011 rdf:type owl:NamedIndividual ,
                      dwc:DegreeOfEstablishment ;
+            skos:inScheme dwcdoe:d ;
             dcterms:isVersionOf dwcdoe:d011 ;
             dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d011-2021-09-01> ;
             rdfs:comment "This term is only used for those invasives with the highest degree of encroachment. See also \"category E\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
@@ -6578,9 +6642,20 @@ dwcdoe:d011 rdf:type owl:NamedIndividual ,
             skos:prefLabel "Widespread invasive (category E)"@en .
 
 
+###  http://rs.tdwg.org/dwcem/values/e
+dwcem:e rdf:type owl:NamedIndividual ,
+                 skos:ConceptScheme ;
+        dcterms:isVersionOf dwcem:e ;
+        dcterms:references <http://rs.tdwg.org/dwcem/values/version/e-2020-10-13> ;
+        rdfs:isDefinedBy dwcem: ;
+        skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:establishmentMeans and dwciri:establishmentMeans."@en ;
+        skos:prefLabel "establishmentMeans concept scheme"@en .
+
+
 ###  http://rs.tdwg.org/dwcem/values/e001
 dwcem:e001 rdf:type owl:NamedIndividual ,
                     dwc:EstablishmentMeans ;
+           skos:inScheme dwcem:e ;
            dcterms:isVersionOf dwcem:e001 ;
            dcterms:references <http://rs.tdwg.org/dwcem/values/version/e001-2021-09-01> ;
            rdfs:comment "What is considered native to an area varies with the biogeographic history of an area and the local interpretation of what is a \"natural range\"."@en ;
@@ -6592,6 +6667,7 @@ dwcem:e001 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcem/values/e002
 dwcem:e002 rdf:type owl:NamedIndividual ,
                     dwc:EstablishmentMeans ;
+           skos:inScheme dwcem:e ;
            dcterms:isVersionOf dwcem:e002 ;
            dcterms:references <http://rs.tdwg.org/dwcem/values/version/e002-2025-06-12> ;
            rdfs:comment "Where a taxon has become extirpated from an area where it had naturally occurred it may be returned to that area deliberately with the intention of re-establishing it."@en ;
@@ -6603,6 +6679,7 @@ dwcem:e002 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcem/values/e003
 dwcem:e003 rdf:type owl:NamedIndividual ,
                     dwc:EstablishmentMeans ;
+           skos:inScheme dwcem:e ;
            dcterms:isVersionOf dwcem:e003 ;
            dcterms:references <http://rs.tdwg.org/dwcem/values/version/e003-2021-09-01> ;
            rdfs:comment "Organisms can be introduced to novel areas and habitats by human activity, either on purpose or by accident. Humans can also inadvertently create corridors that break down natural barriers to dispersal and allow organisms to spread beyond their natural range."@en ;
@@ -6614,6 +6691,7 @@ dwcem:e003 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcem/values/e004
 dwcem:e004 rdf:type owl:NamedIndividual ,
                     dwc:EstablishmentMeans ;
+           skos:inScheme dwcem:e ;
            dcterms:isVersionOf dwcem:e004 ;
            dcterms:references <http://rs.tdwg.org/dwcem/values/version/e004-2021-09-01> ;
            rdfs:comment "In the event of environmental change and habitat destruction a conservation option is to introduce a taxon into an area it did not naturally occur."@en ;
@@ -6625,6 +6703,7 @@ dwcem:e004 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcem/values/e005
 dwcem:e005 rdf:type owl:NamedIndividual ,
                     dwc:EstablishmentMeans ;
+           skos:inScheme dwcem:e ;
            dcterms:isVersionOf dwcem:e005 ;
            dcterms:references <http://rs.tdwg.org/dwcem/values/version/e005-2020-10-13> ;
            rdfs:comment "Natural events and human activity can disperse organisms unpredictably into places where they may stay or survive for a period."@en ;
@@ -6636,6 +6715,7 @@ dwcem:e005 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcem/values/e006
 dwcem:e006 rdf:type owl:NamedIndividual ,
                     dwc:EstablishmentMeans ;
+           skos:inScheme dwcem:e ;
            dcterms:isVersionOf dwcem:e006 ;
            dcterms:references <http://rs.tdwg.org/dwcem/values/version/e006-2021-09-01> ;
            rdfs:comment "When there is a lack of fossil or historical evidence for the occurrence of a taxon in an area it can be impossible to know if the taxon is new to the area or native."@en ;
@@ -6647,6 +6727,7 @@ dwcem:e006 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcem/values/e007
 dwcem:e007 rdf:type owl:NamedIndividual ,
                     dwc:EstablishmentMeans ;
+           skos:inScheme dwcem:e ;
            dcterms:isVersionOf dwcem:e007 ;
            dcterms:references <http://rs.tdwg.org/dwcem/values/version/e007-2025-06-12> ;
            rdfs:comment "The term endemic is a subcategory of native and relates to geography, such as \"areas of endemism\", bioregions, and sometimes administrative boundaries. While a native taxon can naturally occur in several geographical areas an endemic taxon only occurs in one. In Darwin Core terms this would mean, \"A dwc:Organism referred to is recognized as a member of a dwc:Taxon endemic to the dcterms:Location at the time of the dwc:Occurrence.\""@en ;
@@ -6655,9 +6736,20 @@ dwcem:e007 rdf:type owl:NamedIndividual ,
            skos:prefLabel "Native (endemic)"@en .
 
 
+###  http://rs.tdwg.org/dwcpw/values/p
+dwcpw:p rdf:type owl:NamedIndividual ,
+                 skos:ConceptScheme ;
+        dcterms:isVersionOf dwcpw:p ;
+        dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p-2020-10-13> ;
+        rdfs:isDefinedBy dwcpw: ;
+        skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:pathway and dwciri:pathway."@en ;
+        skos:prefLabel "pathway Concept Scheme"@en .
+
+
 ###  http://rs.tdwg.org/dwcpw/values/p001
 dwcpw:p001 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p001 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p001-2021-09-01> ;
            rdfs:comment "Released intentionally into the (semi)natural environment with the purpose of controlling the population(s) of one or more organisms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6670,6 +6762,7 @@ dwcpw:p001 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p002
 dwcpw:p002 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p002 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p002-2021-09-01> ;
            rdfs:comment "Probably only applicable to plants. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6682,6 +6775,7 @@ dwcpw:p002 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p003
 dwcpw:p003 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p003 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p003-2021-09-01> ;
            rdfs:comment "Largely applicable to freshwater and anadromous fish. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6694,6 +6788,7 @@ dwcpw:p003 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p004
 dwcpw:p004 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p004 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p004-2021-09-01> ;
            rdfs:comment "Largely applicable to terrestrial vertebrates. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6706,6 +6801,7 @@ dwcpw:p004 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p005
 dwcpw:p005 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p005 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p005-2021-09-01> ;
            rdfs:comment "\"Improvement\" in this context is intended for introductions for the purpose of aesthetic enhancement of the landscape, as opposed to practical introductions for the purpose of erosion control, agriculture, forestry etc. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6718,6 +6814,7 @@ dwcpw:p005 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p006
 dwcpw:p006 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p006 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p006-2021-09-01> ;
            rdfs:comment "The organism was released with the intention of improving the conservation status of the species or the conservation status other species in the habitat. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6730,6 +6827,7 @@ dwcpw:p006 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p007
 dwcpw:p007 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p007 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p007-2021-09-01> ;
            rdfs:comment "This term refers to organisms intentionally and directly released into the wild to serve a specific purpose. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6742,6 +6840,7 @@ dwcpw:p007 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p008
 dwcpw:p008 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p008 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p008-2021-09-01> ;
            rdfs:comment "Compare with \"other escape from confinement\". See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6754,6 +6853,7 @@ dwcpw:p008 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p009
 dwcpw:p009 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p009 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p009-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6766,6 +6866,7 @@ dwcpw:p009 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p010
 dwcpw:p010 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p010 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p010-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6778,6 +6879,7 @@ dwcpw:p010 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p011
 dwcpw:p011 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p011 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p011-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6790,6 +6892,7 @@ dwcpw:p011 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p012
 dwcpw:p012 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p012 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p012-2021-09-01> ;
            rdfs:comment "Animals kept for hunting, such as falcons and ferrets, SHOULD be included here, not under the hunting term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6802,6 +6905,7 @@ dwcpw:p012 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p013
 dwcpw:p013 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p013 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p013-2021-09-01> ;
            rdfs:comment "Farmed animals are generally kept in a defined area, such as a fields. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6814,6 +6918,7 @@ dwcpw:p013 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p014
 dwcpw:p014 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p014 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p014-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6826,6 +6931,7 @@ dwcpw:p014 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p015
 dwcpw:p015 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p015 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p015-2021-09-01> ;
            rdfs:comment "Probably only applicable to vertebrates raised for their pelts and skins. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6838,6 +6944,7 @@ dwcpw:p015 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p016
 dwcpw:p016 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p016 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p016-2021-09-01> ;
            rdfs:comment "This term excludes plants and other organisms from aquaria and terrariums, which SHOULD be classified under the pet/aquarium/terrarium term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6850,6 +6957,7 @@ dwcpw:p016 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p017
 dwcpw:p017 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p017 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p017-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6862,6 +6970,7 @@ dwcpw:p017 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p018
 dwcpw:p018 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p018 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p018-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6874,6 +6983,7 @@ dwcpw:p018 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p019
 dwcpw:p019 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p019 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p019-2021-09-01> ;
            rdfs:comment "Live food, such as mealworms, for the organisms kept as pets should be classified under the pet term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6886,6 +6996,7 @@ dwcpw:p019 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p020
 dwcpw:p020 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p020 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p020-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6898,6 +7009,7 @@ dwcpw:p020 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p021
 dwcpw:p021 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p021 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p021-2021-09-01> ;
            rdfs:comment "These may be other plants, diseases, fungi and animals. They may be attached to the plant or within the soil. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6910,6 +7022,7 @@ dwcpw:p021 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p022
 dwcpw:p022 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p022 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p022-2021-09-01> ;
            rdfs:comment "Typical examples include crustaceans, cephalopods and molluscs. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6922,6 +7035,7 @@ dwcpw:p022 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p023
 dwcpw:p023 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p023 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p023-2021-09-01> ;
            rdfs:comment "This term includes unintentional introduction of contaminants such as diseases on those foods and in the case of plants, should include seeds. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6934,6 +7048,7 @@ dwcpw:p023 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p024
 dwcpw:p024 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p024 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p024-2021-09-01> ;
            rdfs:comment "This term excludes parasites and pathogens, which SHOULD be classified under their own specific term (\"parasites on animals\"). Transported animals carry other organisms in their coats, in their guts and in soil on their hooves and feet. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6946,6 +7061,7 @@ dwcpw:p024 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p025
 dwcpw:p025 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p025 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p025-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6958,6 +7074,7 @@ dwcpw:p025 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p026
 dwcpw:p026 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p026 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p026-2021-09-01> ;
            rdfs:comment "This term excludes organisms carried on contaminant nursery material, seed contaminants, and the material from the timber trade, which SHOULD be classified under their own pathway terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6970,6 +7087,7 @@ dwcpw:p026 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p027
 dwcpw:p027 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p027 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p027-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6982,6 +7100,7 @@ dwcpw:p027 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p028
 dwcpw:p028 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p028 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p028-2021-09-01> ;
            rdfs:comment "These may be parasites or pathogens of seeds or species that eat seeds, whether intended to be transported or not. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -6994,6 +7113,7 @@ dwcpw:p028 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p029
 dwcpw:p029 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p029 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p029-2021-09-01> ;
            rdfs:comment "This term excludes packing material and habitat material made from wood, which SHOULD be included under their own terms (\"packing material\" and \"transportation of habitat material\"). Examples include wooden furniture, saw dust and fire wood. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7006,6 +7126,7 @@ dwcpw:p029 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p030
 dwcpw:p030 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p030 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p030-2021-09-01> ;
            rdfs:comment "Examples include materials such as soil, vegetation, straw and wood chips. Unless these materials are sterilised the organisms can be transported with their habitat to a new location. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7018,6 +7139,7 @@ dwcpw:p030 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p031
 dwcpw:p031 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p031 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p031-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7030,6 +7152,7 @@ dwcpw:p031 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p032
 dwcpw:p032 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p032 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p032-2021-09-01> ;
            rdfs:comment "The difference between this category and others, such as \"hitchhikers on ship/boat\", is that the organism embarked and disembarked from the container rather than the ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7042,6 +7165,7 @@ dwcpw:p032 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p033
 dwcpw:p033 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p033 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p033-2021-09-01> ;
            rdfs:comment "This term does not apply to organisms that embarked in containers that were subsequently loaded onto an aircraft. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7054,6 +7178,7 @@ dwcpw:p033 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p034
 dwcpw:p034 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p034 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p034-2021-09-01> ;
            rdfs:comment "This term does not apply to organisms that embarked in containers that are subsequently loaded onto the ship, nor to contaminants of products loaded onto the ship. The term is intended for organisms that directly interact with the boat or ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7066,6 +7191,7 @@ dwcpw:p034 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p035
 dwcpw:p035 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p035 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p035-2021-09-01> ;
            rdfs:comment "This includes military equipment, farm machinery and manufacturing equipment. This term does not include products carried by vehicles. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7078,6 +7204,7 @@ dwcpw:p035 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p036
 dwcpw:p036 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p036 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p036-2021-09-01> ;
            rdfs:comment "This term excludes recreational angling equipment, which SHOULD be classified under its own term (\"angling/fishing equipment\"). Examples include organisms transported by tourists. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7090,6 +7217,7 @@ dwcpw:p036 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p037
 dwcpw:p037 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p037 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01> ;
            rdfs:comment "Examples include woodern pallets, boxes, bags and baskets. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7102,6 +7230,7 @@ dwcpw:p037 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p038
 dwcpw:p038 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p038 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7114,6 +7243,7 @@ dwcpw:p038 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p039
 dwcpw:p039 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p039 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p039-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7126,6 +7256,7 @@ dwcpw:p039 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p040
 dwcpw:p040 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p040 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p040-2021-09-01> ;
            rdfs:comment "These organisms may be carried on or within the vehicle. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7138,6 +7269,7 @@ dwcpw:p040 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p041
 dwcpw:p041 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p041 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p041-2021-09-01> ;
            rdfs:comment "Examples include fouling from offshore oil and gas platforms, offshore renewable energy sites (such as wind farms, pipelines, cable transport, etc.). See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7150,6 +7282,7 @@ dwcpw:p041 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p042
 dwcpw:p042 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p042 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p042-2021-09-01> ;
            rdfs:comment "Organisms transported along these corridors in ballast or as hull fouling SHOULD be categorised under the \"ship/boat ballast water\" or \"ship/boat hull fouling\" terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7162,6 +7295,7 @@ dwcpw:p042 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p043
 dwcpw:p043 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p043 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p043-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7174,6 +7308,7 @@ dwcpw:p043 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p044
 dwcpw:p044 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p044 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p044-2021-09-01> ;
            rdfs:comment "Dispersal of organisms to new regions by natural dispersal from regions in which they are alien. These are alien species that have previously been introduced through one of these pathways: release in nature, escape from confinement, transport-contaminant, transport-stowaway, or corridor. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7186,6 +7321,7 @@ dwcpw:p044 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p045
 dwcpw:p045 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p045 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p045-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7198,6 +7334,7 @@ dwcpw:p045 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p046
 dwcpw:p046 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p046 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p046-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7210,6 +7347,7 @@ dwcpw:p046 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p047
 dwcpw:p047 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p047 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p047-2021-09-01> ;
            rdfs:comment "An alien species is a contaminant if it had a trophic or biotic relationship to organisms or items being transported and was to some extent dependent on them for survival. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7222,6 +7360,7 @@ dwcpw:p047 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p048
 dwcpw:p048 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p048 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p048-2021-09-01> ;
            rdfs:comment "A stowaway has no trophic or biotic relationship to the organisms or items being transported. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7234,6 +7373,7 @@ dwcpw:p048 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p049
 dwcpw:p049 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p049 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p049-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7246,6 +7386,7 @@ dwcpw:p049 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p050
 dwcpw:p050 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p051 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01> ;
            rdfs:comment "The term refers to secondary dispersal from an area where the taxon is also alien. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7258,6 +7399,7 @@ dwcpw:p050 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p051
 dwcpw:p051 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p051 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7269,6 +7411,7 @@ dwcpw:p051 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p052
 dwcpw:p052 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p052 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p052-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -7280,6 +7423,7 @@ dwcpw:p052 rdf:type owl:NamedIndividual ,
 ###  http://rs.tdwg.org/dwcpw/values/p053
 dwcpw:p053 rdf:type owl:NamedIndividual ,
                     dwc:Pathway ;
+           skos:inScheme dwcpw:p ;
            dcterms:isVersionOf dwcpw:p053 ;
            dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p053-2021-09-01> ;
            rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;

@@ -1022,8 +1022,8 @@ minext:verbatimSize a owl:DatatypeProperty ;
     skos:prefLabel "Verbatim Size" .
 
 skos:inScheme a owl:ObjectProperty ;
-    dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
-    rdfs:comment "A conceptmay be a member of more thann one concept scheme."@en ;
+    dcterms:isVersionOf skos: ;
+    rdfs:comment "A conceptmay be a member of more than one concept scheme."@en ;
     rdfs:isDefinedBy skos: ;
     rdfs:range skos:ConceptScheme ;
     skos:definition "Relates a resource (for example a concept) to a concept scheme in which it is included"@en ;
@@ -3681,6 +3681,7 @@ acpart:p0000 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0000-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Part is not known because it is not specified."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Unspecified Part"@en .
 
 acpart:p0001 a dwc:SubjectPart ;
@@ -3688,6 +3689,7 @@ acpart:p0001 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0001-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "An entire multicellular organism."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Entire Organism"@en .
 
 acpart:p0002 a dwc:SubjectPart ;
@@ -3695,6 +3697,7 @@ acpart:p0002 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0002-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Plant tissue outside the vascular cambium."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Bark"@en .
 
 acpart:p0003 a dwc:SubjectPart ;
@@ -3702,6 +3705,7 @@ acpart:p0003 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0003-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Plant shoot axis developped from axillary buds."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Twig"@en .
 
 acpart:p0004 a dwc:SubjectPart ;
@@ -3709,6 +3713,7 @@ acpart:p0004 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0004-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Plant shoot that defines the primary axis."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Stem"@en .
 
 acpart:p0005 a dwc:SubjectPart ;
@@ -3716,6 +3721,7 @@ acpart:p0005 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0005-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Plant non-reproductive phyllome."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Leaf"@en .
 
 acpart:p0008 a dwc:SubjectPart ;
@@ -3723,6 +3729,7 @@ acpart:p0008 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0008-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Plant structure developing from a flower."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Fruit"@en .
 
 acpart:p0009 a dwc:SubjectPart ;
@@ -3730,6 +3737,7 @@ acpart:p0009 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0009-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Plant structure containing dormant embryo."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Seed"@en .
 
 acpart:p0010 a dwc:SubjectPart ;
@@ -3738,6 +3746,7 @@ acpart:p0010 a dwc:SubjectPart ;
     rdfs:isDefinedBy acpart: ;
     skos:broader acpart:p0006 ;
     skos:definition "Plant strobilis bearing pollen."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Male Cone"@en .
 
 acpart:p0011 a dwc:SubjectPart ;
@@ -3746,6 +3755,7 @@ acpart:p0011 a dwc:SubjectPart ;
     rdfs:isDefinedBy acpart: ;
     skos:broader acpart:p0006 ;
     skos:definition "Plant strobilis bearing ovules."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Female Cone"@en .
 
 acpart:p0012 a dwc:SubjectPart ;
@@ -3754,6 +3764,7 @@ acpart:p0012 a dwc:SubjectPart ;
     rdfs:isDefinedBy acpart: ;
     skos:broader acpart:p0007 ;
     skos:definition "Plant reproductive shoot system containing a carpel."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Flower"@en .
 
 acpart:p0013 a dwc:SubjectPart ;
@@ -3761,6 +3772,7 @@ acpart:p0013 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0013-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Anterior-most division of the body."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Head"@en .
 
 acpart:p0014 a dwc:SubjectPart ;
@@ -3768,6 +3780,7 @@ acpart:p0014 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0014-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "The middle division of the insect body bearing locomotor appendages."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Thorax"@en .
 
 acpart:p0015 a dwc:SubjectPart ;
@@ -3775,6 +3788,7 @@ acpart:p0015 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0015-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "The posterior-most division of the insect body."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Abdomen"@en .
 
 acpart:p0018 a dwc:SubjectPart ;
@@ -3782,6 +3796,7 @@ acpart:p0018 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0018-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "The paired, usually multiple jointed, sensory organs on the head."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Antenna"@en .
 
 acpart:p0019 a dwc:SubjectPart ;
@@ -3790,6 +3805,7 @@ acpart:p0019 a dwc:SubjectPart ;
     rdfs:isDefinedBy acpart: ;
     skos:broader acpart:p0017 ;
     skos:definition "The paired insect wing that is continuous with the mesonotum."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Forewing"@en .
 
 acpart:p0020 a dwc:SubjectPart ;
@@ -3798,6 +3814,7 @@ acpart:p0020 a dwc:SubjectPart ;
     rdfs:isDefinedBy acpart: ;
     skos:broader acpart:p0017 ;
     skos:definition "The paired insect wing that is continuous with the metanotum."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Hindwing"@en .
 
 acpart:p0021 a dwc:SubjectPart ;
@@ -3806,6 +3823,7 @@ acpart:p0021 a dwc:SubjectPart ;
     rdfs:isDefinedBy acpart: ;
     skos:broader acpart:p0016 ;
     skos:definition "Leg of the prothoracic segment."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Foreleg"@en .
 
 acpart:p0022 a dwc:SubjectPart ;
@@ -3814,6 +3832,7 @@ acpart:p0022 a dwc:SubjectPart ;
     rdfs:isDefinedBy acpart: ;
     skos:broader acpart:p0016 ;
     skos:definition "Leg of the mesothoracic segment."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Midleg"@en .
 
 acpart:p0023 a dwc:SubjectPart ;
@@ -3822,6 +3841,7 @@ acpart:p0023 a dwc:SubjectPart ;
     rdfs:isDefinedBy acpart: ;
     skos:broader acpart:p0016 ;
     skos:definition "Leg of the metathoracic segment."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Hindleg"@en .
 
 acpart:p0024 a dwc:SubjectPart ;
@@ -3829,6 +3849,7 @@ acpart:p0024 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0024-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "An organ that detects light."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Eye"@en .
 
 acpart:p0025 a dwc:SubjectPart ;
@@ -3836,6 +3857,7 @@ acpart:p0025 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0025-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "A rigid covering that envelops an object."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Shell"@en .
 
 acpart:p0026 a dwc:SubjectPart ;
@@ -3843,6 +3865,7 @@ acpart:p0026 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0026-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "The outer sex organs."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Genitalia"@en .
 
 acpart:p0028 a dwc:SubjectPart ;
@@ -3851,6 +3874,7 @@ acpart:p0028 a dwc:SubjectPart ;
     rdfs:isDefinedBy acpart: ;
     skos:broader acpart:p0027 ;
     skos:definition "Upper portion of the skull."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Cranium"@en .
 
 acpart:p0029 a dwc:SubjectPart ;
@@ -3859,6 +3883,7 @@ acpart:p0029 a dwc:SubjectPart ;
     rdfs:isDefinedBy acpart: ;
     skos:broader acpart:p0027 ;
     skos:definition "A dentary bone that is the only bone in one of the lateral halves of the lower jaw."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Mandible"@en .
 
 acpart:p0030 a dwc:SubjectPart ;
@@ -3866,6 +3891,7 @@ acpart:p0030 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0030-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "An external projection of an aquatic animal used in propelling or guiding the body."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Fin"@en .
 
 acpart:p0031 a dwc:SubjectPart ;
@@ -3873,6 +3899,7 @@ acpart:p0031 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0031-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "The hard-shelled reproductive body produced by an animal."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Egg"@en .
 
 acpart:p0032 a dwc:SubjectPart ;
@@ -3880,6 +3907,7 @@ acpart:p0032 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0032-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "An undevelopped shoot system."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Bud"@en .
 
 dwciri:georeferencedBy a owl:ObjectProperty ;
@@ -3938,6 +3966,7 @@ dwcdoe:d001 a dwc:DegreeOfEstablishment ;
     rdfs:comment "Considered native and naturally occurring. See also \"category A\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Not transported beyond limits of native range."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Native (category A)"@en .
 
 dwcdoe:d002 a dwc:DegreeOfEstablishment ;
@@ -3946,6 +3975,7 @@ dwcdoe:d002 a dwc:DegreeOfEstablishment ;
     rdfs:comment "Only for cases where specific actions have been taken place to prevent escape of individuals or propagules. See also \"category B1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Individuals in captivity or quarantine (i.e., individuals provided with conditions suitable for them, but explicit measures of containment are in place)."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Captive (category B1)"@en .
 
 dwcdoe:d004 a dwc:DegreeOfEstablishment ;
@@ -3954,6 +3984,7 @@ dwcdoe:d004 a dwc:DegreeOfEstablishment ;
     rdfs:comment "For example, fish stocked for angling, birds for hunting. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Individuals directly released into novel environment."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Released (category B3)"@en .
 
 dwcdoe:d006 a dwc:DegreeOfEstablishment ;
@@ -3962,6 +3993,7 @@ dwcdoe:d006 a dwc:DegreeOfEstablishment ;
     rdfs:comment "Trees planted in the wild for forestry or ornament may come under this category. See also \"category C1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Individuals surviving outside of captivity or cultivation in a location with no reproduction."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Casual (category C1)"@en .
 
 dwcdoe:d007 a dwc:DegreeOfEstablishment ;
@@ -3970,6 +4002,7 @@ dwcdoe:d007 a dwc:DegreeOfEstablishment ;
     rdfs:comment "Offspring are produced, but these either do not survive or are not fertile enough to maintain the population. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Individuals surviving outside of captivity or cultivation in a location with no reproduction."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Reproducing (category C2)"@en .
 
 dwcdoe:d008 a dwc:DegreeOfEstablishment ;
@@ -3978,6 +4011,7 @@ dwcdoe:d008 a dwc:DegreeOfEstablishment ;
     rdfs:comment "The population is maintained by reproduction, but is not spreading. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Individuals surviving outside of captivity or cultivation in a location. Reproduction occurring, and population self-sustaining."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Established (category C3)"@en .
 
 dwcdoe:d009 a dwc:DegreeOfEstablishment ;
@@ -3986,6 +4020,7 @@ dwcdoe:d009 a dwc:DegreeOfEstablishment ;
     rdfs:comment "The population is maintained by reproduction and is spreading. See also \"category D1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Self-sustaining population outside of captivity or cultivation, with individuals surviving a significant distance from the original point of introduction."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Colonising (category D1)"@en .
 
 dwcdoe:d010 a dwc:DegreeOfEstablishment ;
@@ -3994,6 +4029,7 @@ dwcdoe:d010 a dwc:DegreeOfEstablishment ;
     rdfs:comment "The population is maintained by reproduction, is spreading, and its progeny are also reproducing and spreading. See also \"category D2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Self-sustaining population outside of captivity or cultivation, with individuals surviving and reproducing a significant distance from the original point of introduction."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Invasive (category D2)"@en .
 
 dwcdoe:d011 a dwc:DegreeOfEstablishment ;
@@ -4002,6 +4038,7 @@ dwcdoe:d011 a dwc:DegreeOfEstablishment ;
     rdfs:comment "This term is only used for those invasives with the highest degree of encroachment. See also \"category E\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Fully invasive species, with individuals dispersing, surviving and reproducing at multiple sites across a spectrum of habitats and geographic range."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Widespread invasive (category E)"@en .
 
 dwcdp:followed a owl:ObjectProperty ;
@@ -4018,6 +4055,7 @@ dwcem:e002 a dwc:EstablishmentMeans ;
     rdfs:comment "Where a taxon has become extirpated from an area where it had naturally occurred it may be returned to that area deliberately with the intention of re-establishing it."@en ;
     rdfs:isDefinedBy dwcem: ;
     skos:definition "A taxon re-established by direct introduction by humans into an area that was once part of its natural range, but from where it had become extinct."@en ;
+    skos:inScheme dwcem:e ;
     skos:prefLabel "Native (reintroduced)"@en .
 
 dwcem:e003 a dwc:EstablishmentMeans ;
@@ -4026,6 +4064,7 @@ dwcem:e003 a dwc:EstablishmentMeans ;
     rdfs:comment "Organisms can be introduced to novel areas and habitats by human activity, either on purpose or by accident. Humans can also inadvertently create corridors that break down natural barriers to dispersal and allow organisms to spread beyond their natural range."@en ;
     rdfs:isDefinedBy dwcem: ;
     skos:definition "Establishment of a taxon by human agency into an area that is not part of its natural range."@en ;
+    skos:inScheme dwcem:e ;
     skos:prefLabel "Introduced (alien, exotic, non-native, nonindigenous)"@en .
 
 dwcem:e004 a dwc:EstablishmentMeans ;
@@ -4034,6 +4073,7 @@ dwcem:e004 a dwc:EstablishmentMeans ;
     rdfs:comment "In the event of environmental change and habitat destruction a conservation option is to introduce a taxon into an area it did not naturally occur."@en ;
     rdfs:isDefinedBy dwcem: ;
     skos:definition "Establishment of a taxon specifically with the intention of creating a self-sustaining wild population in an area that is not part of the taxon's natural range."@en ;
+    skos:inScheme dwcem:e ;
     skos:prefLabel "Introduced (assisted colonisation)"@en .
 
 dwcem:e006 a dwc:EstablishmentMeans ;
@@ -4042,6 +4082,7 @@ dwcem:e006 a dwc:EstablishmentMeans ;
     rdfs:comment "When there is a lack of fossil or historical evidence for the occurrence of a taxon in an area it can be impossible to know if the taxon is new to the area or native."@en ;
     rdfs:isDefinedBy dwcem: ;
     skos:definition "The origin of the occurrence of the taxon in an area is obscure."@en ;
+    skos:inScheme dwcem:e ;
     skos:prefLabel "Uncertain (unknown, cryptogenic)"@en .
 
 dwcem:e007 a dwc:EstablishmentMeans ;
@@ -4050,6 +4091,7 @@ dwcem:e007 a dwc:EstablishmentMeans ;
     rdfs:comment "The term endemic is a subcategory of native and relates to geography, such as \"areas of endemism\", bioregions, and sometimes administrative boundaries. While a native taxon can naturally occur in several geographical areas an endemic taxon only occurs in one. In Darwin Core terms this would mean, \"A dwc:Organism referred to is recognized as a member of a dwc:Taxon endemic to the dcterms:Location at the time of the dwc:Occurrence.\""@en ;
     rdfs:isDefinedBy dwcem: ;
     skos:definition "A taxon with a natural distribution restricted to a single geographical area."@en ;
+    skos:inScheme dwcem:e ;
     skos:prefLabel "Native (endemic)"@en .
 
 dwcpw:p001 a dwc:Pathway ;
@@ -4059,6 +4101,7 @@ dwcpw:p001 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p045 ;
     skos:definition "Organisms occuring in an area because they were introduced for the purpose of biological control of another organism."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Biological Control"@en .
 
 dwcpw:p003 a dwc:Pathway ;
@@ -4068,6 +4111,7 @@ dwcpw:p003 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p045 ;
     skos:definition "Fish stocked into the wild either to create a fishery or for recreational angling."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Fishery In The Wild"@en .
 
 dwcpw:p004 a dwc:Pathway ;
@@ -4077,6 +4121,7 @@ dwcpw:p004 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p045 ;
     skos:definition "Animals stocked into the wild specifically with the intention that they would be hunted for sport."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Hunting"@en .
 
 dwcpw:p005 a dwc:Pathway ;
@@ -4086,6 +4131,7 @@ dwcpw:p005 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p045 ;
     skos:definition "Landscape/flora/fauna \"improvement\" in the wild."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Landscape Improvement"@en .
 
 dwcpw:p006 a dwc:Pathway ;
@@ -4095,6 +4141,7 @@ dwcpw:p006 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p045 ;
     skos:definition "Organisms introduced for conservation purposes or wildlife management."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Conservation Or Wildlife Management"@en .
 
 dwcpw:p007 a dwc:Pathway ;
@@ -4104,6 +4151,7 @@ dwcpw:p007 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p045 ;
     skos:definition "Release in nature for use (other than above, e.g., fur, transport, medical use)."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Released For Use"@en .
 
 dwcpw:p008 a dwc:Pathway ;
@@ -4113,6 +4161,7 @@ dwcpw:p008 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p045 ;
     skos:definition "A catch-all term for intentional releases not for human use that are not covered by other more specific terms."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Other Intentional Release"@en .
 
 dwcpw:p009 a dwc:Pathway ;
@@ -4122,6 +4171,7 @@ dwcpw:p009 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Plants grown with the intention of harvesting."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Agriculture (Including Biofuel Feedstocks)"@en .
 
 dwcpw:p010 a dwc:Pathway ;
@@ -4131,6 +4181,7 @@ dwcpw:p010 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "The analog of agriculture and farmed animals, specifically related to aquatic organisms."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Aquaculture/Mariculture"@en .
 
 dwcpw:p011 a dwc:Pathway ;
@@ -4140,6 +4191,7 @@ dwcpw:p011 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Organisms in public collections of plants and/or animals."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Botanic Garden/Zoo/Aquaria (Excluding Domestic Aquaria)"@en .
 
 dwcpw:p012 a dwc:Pathway ;
@@ -4149,6 +4201,7 @@ dwcpw:p012 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Privately kept animals."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Pet/Aquarium/Terrarium Species (Including Live Food For Such Species)"@en .
 
 dwcpw:p013 a dwc:Pathway ;
@@ -4158,6 +4211,7 @@ dwcpw:p013 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Animals cared for and bred with the specific intention of using their products, such as meat and milk."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Farmed Animals (Including Animals Left Under Limited Control)"@en .
 
 dwcpw:p014 a dwc:Pathway ;
@@ -4167,6 +4221,7 @@ dwcpw:p014 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Trees specifically introduced to provide timber and other forestry products."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Forestry (Including Reforestation)"@en .
 
 dwcpw:p015 a dwc:Pathway ;
@@ -4176,6 +4231,7 @@ dwcpw:p015 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Organisms escaped from a fur farm, including unauthorised releases."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Fur Farms"@en .
 
 dwcpw:p016 a dwc:Pathway ;
@@ -4185,6 +4241,7 @@ dwcpw:p016 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Plants distributed by the ornamental and decorative plants industry."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Horticulture"@en .
 
 dwcpw:p017 a dwc:Pathway ;
@@ -4194,6 +4251,7 @@ dwcpw:p017 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Ornamental plants introduced through pathways other than the horticultural industry."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Ornamental Purpose Other Than Horticulture"@en .
 
 dwcpw:p018 a dwc:Pathway ;
@@ -4203,6 +4261,7 @@ dwcpw:p018 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Plants and animals introduced for the purpose of breeding or scientific and medical research, including science education."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Research And Ex-Situ Breeding (In Facilities)"@en .
 
 dwcpw:p019 a dwc:Pathway ;
@@ -4212,6 +4271,7 @@ dwcpw:p019 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Live food imported for human consumption or live bait, such as shellfish and snails."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Live Food And Live Bait"@en .
 
 dwcpw:p020 a dwc:Pathway ;
@@ -4221,6 +4281,7 @@ dwcpw:p020 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p046 ;
     skos:definition "Organisms brought into an area with the intention of keeping them in captivity permanently, but that have subsequently escaped."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Other Escape From Confinement"@en .
 
 dwcpw:p021 a dwc:Pathway ;
@@ -4230,6 +4291,7 @@ dwcpw:p021 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p047 ;
     skos:definition "Organisms transported into an area together with plant material."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Contaminant Nursery Material"@en .
 
 dwcpw:p022 a dwc:Pathway ;
@@ -4239,6 +4301,7 @@ dwcpw:p022 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p047 ;
     skos:definition "Contaminants, pathogens and parasites transported with live, frozen or preserved bait used to catch fish or other organisms."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Contaminated Bait"@en .
 
 dwcpw:p023 a dwc:Pathway ;
@@ -4248,6 +4311,7 @@ dwcpw:p023 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p047 ;
     skos:definition "Foods for human consumption, whether they are transported live or dead."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Food Contaminant (Including Of Live Food)"@en .
 
 dwcpw:p024 a dwc:Pathway ;
@@ -4257,6 +4321,7 @@ dwcpw:p024 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p047 ;
     skos:definition "Contaminants carried either on or in the body of transported animals."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Contaminant On Animals (Except Parasites, Organisms Transported By Host/Vector)"@en .
 
 dwcpw:p025 a dwc:Pathway ;
@@ -4266,6 +4331,7 @@ dwcpw:p025 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p047 ;
     skos:definition "Parasitic and pathogenic organisms transported with their host or vector animal."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Parasites On Animals (Including Organisms Transported By Host And Vector)"@en .
 
 dwcpw:p026 a dwc:Pathway ;
@@ -4275,6 +4341,7 @@ dwcpw:p026 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p047 ;
     skos:definition "Organisms transported on plant material."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Contaminant On Plants (Except Parasites, Species Transported By Host/Vector)"@en .
 
 dwcpw:p027 a dwc:Pathway ;
@@ -4284,6 +4351,7 @@ dwcpw:p027 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p047 ;
     skos:definition "Parasitic and pathogenic organisms transported with their host or vector plant."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Parasites On Plants (Including Species Transported By Host And Vector)"@en .
 
 dwcpw:p028 a dwc:Pathway ;
@@ -4293,6 +4361,7 @@ dwcpw:p028 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p047 ;
     skos:definition "Organisms contaminating transported seeds."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Seed Contaminant"@en .
 
 dwcpw:p029 a dwc:Pathway ;
@@ -4302,6 +4371,7 @@ dwcpw:p029 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p047 ;
     skos:definition "Contaminants on unprocessed timber, processed wood and wood-derived products."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Timber Trade"@en .
 
 dwcpw:p030 a dwc:Pathway ;
@@ -4311,6 +4381,7 @@ dwcpw:p030 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p047 ;
     skos:definition "Organisms transported with their habitat material to a new location."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Transportation Of Habitat Material (Soil, Vegetation, Wood, Etc.)"@en .
 
 dwcpw:p031 a dwc:Pathway ;
@@ -4320,6 +4391,7 @@ dwcpw:p031 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "Aquatic organisms moved between sites on equipment of recreational anglers and professional fishermen."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Angling/Fishing Equipment"@en .
 
 dwcpw:p032 a dwc:Pathway ;
@@ -4329,6 +4401,7 @@ dwcpw:p032 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "Stowaways transported in or on cargo containers or bulk cargo units."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Container/Bulk"@en .
 
 dwcpw:p033 a dwc:Pathway ;
@@ -4338,6 +4411,7 @@ dwcpw:p033 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "Organisms that enter airplanes or other aircraft, such as helicopters, and are transported by them to another location."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Hitchhikers In Or On Airplane"@en .
 
 dwcpw:p034 a dwc:Pathway ;
@@ -4347,6 +4421,7 @@ dwcpw:p034 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "Organisms that enter directly onto boats or ships and are transported by them to another location."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Hitchhikers On Ship/Boat (Excluding Ballast Water And Hull Fouling)"@en .
 
 dwcpw:p035 a dwc:Pathway ;
@@ -4356,6 +4431,7 @@ dwcpw:p035 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "Organisms carried on the surfaces of or within heavy machinery and equipment."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Machinery/Equipment"@en .
 
 dwcpw:p036 a dwc:Pathway ;
@@ -4365,6 +4441,7 @@ dwcpw:p036 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "Organisms transported on people and/or their personal luggage."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "People And Their Luggage/Equipment (In Particular Tourism)"@en .
 
 dwcpw:p037 a dwc:Pathway ;
@@ -4374,6 +4451,7 @@ dwcpw:p037 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "Organic material, particularly unprocessed plant material that is used to pack transported goods."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Organic Packing Material, In Particular Wood Packaging"@en .
 
 dwcpw:p038 a dwc:Pathway ;
@@ -4383,6 +4461,7 @@ dwcpw:p038 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "Organisms transported within the water pumped into boats and ships to provide ballast."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Ship/Boat Ballast Water"@en .
 
 dwcpw:p039 a dwc:Pathway ;
@@ -4392,6 +4471,7 @@ dwcpw:p039 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "Organisms that attach themselves to the subsurface hull of boats and ships."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Ship/Boat Hull Fouling"@en .
 
 dwcpw:p040 a dwc:Pathway ;
@@ -4401,6 +4481,7 @@ dwcpw:p040 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "Other vehicle hitchhikers that have been unintentionally dispersed, but are not covered by other terms."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Vehicles (Car, Train, Etc.)"@en .
 
 dwcpw:p041 a dwc:Pathway ;
@@ -4410,6 +4491,7 @@ dwcpw:p041 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p048 ;
     skos:definition "A catch-all term for any transport related dispersal that is not covered in other terms."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Other Means Of Transport"@en .
 
 dwcpw:p042 a dwc:Pathway ;
@@ -4419,6 +4501,7 @@ dwcpw:p042 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p049 ;
     skos:definition "Organisms that dispersed through artificial waterways created to connect previosuly unconnected water bodies."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Interconnected Waterways/Basins/Seas"@en .
 
 dwcpw:p043 a dwc:Pathway ;
@@ -4428,6 +4511,7 @@ dwcpw:p043 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p049 ;
     skos:definition "Unintentional dispersal by organisms using artificial tunnels, bridges, roads and railways."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Tunnels And Land Bridges"@en .
 
 dwcpw:p044 a dwc:Pathway ;
@@ -4437,6 +4521,7 @@ dwcpw:p044 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p050 ;
     skos:definition "Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Natural Dispersal Across Borders Of Invasive Alien Organisms"@en .
 
 dwcpw:p050 a dwc:Pathway ;
@@ -4446,6 +4531,7 @@ dwcpw:p050 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p053 ;
     skos:definition "Organisms that spread by natural dispersal, without action or assistance by humans, from regions in which they are also alien."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Unaided"@en .
 
 <http://rs.tdwg.org/eco/iri/samplingPerformedBy> a owl:ObjectProperty ;
@@ -4557,6 +4643,7 @@ acpart:p0007 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0007-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Plant reproductive shoot system containing flowers."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Inflorescence"@en .
 
 dwc:relationshipOfResourceID a owl:ObjectProperty ;
@@ -4577,6 +4664,7 @@ dwcdoe:d003 a dwc:DegreeOfEstablishment ;
     rdfs:comment "Examples include gardens, parks and farms. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Individuals in cultivation (i.e., individuals provided with conditions suitable for them, but explicit measures to prevent dispersal are limited at best)."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Cultivated (category B2)"@en .
 
 dwcdoe:d005 a dwc:DegreeOfEstablishment ;
@@ -4585,6 +4673,7 @@ dwcdoe:d005 a dwc:DegreeOfEstablishment ;
     rdfs:comment "For example, frost-tender plants sown or planted in a cold climate. See also \"category C0\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
     rdfs:isDefinedBy dwcdoe: ;
     skos:definition "Individuals released outside of captivity or cultivation in a location, but incapable of surviving for a significant period."@en ;
+    skos:inScheme dwcdoe:d ;
     skos:prefLabel "Failing (category C0)"@en .
 
 dwcdp:about a owl:ObjectProperty ;
@@ -4601,6 +4690,7 @@ dwcem:e001 a dwc:EstablishmentMeans ;
     rdfs:comment "What is considered native to an area varies with the biogeographic history of an area and the local interpretation of what is a \"natural range\"."@en ;
     rdfs:isDefinedBy dwcem: ;
     skos:definition "A taxon occurring within its natural range."@en ;
+    skos:inScheme dwcem:e ;
     skos:prefLabel "Native (indigenous)"@en .
 
 dwcem:e005 a dwc:EstablishmentMeans ;
@@ -4609,6 +4699,7 @@ dwcem:e005 a dwc:EstablishmentMeans ;
     rdfs:comment "Natural events and human activity can disperse organisms unpredictably into places where they may stay or survive for a period."@en ;
     rdfs:isDefinedBy dwcem: ;
     skos:definition "The temporary occurrence of a taxon far outside its natural or migratory range."@en ;
+    skos:inScheme dwcem:e ;
     skos:prefLabel "Vagrant (casual)"@en .
 
 dwcpw:p002 a dwc:Pathway ;
@@ -4618,13 +4709,8 @@ dwcpw:p002 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p045 ;
     skos:definition "Organisms introduced for the purpose of erosion control/dune stabilization (windbreaks, hedges, etc.)."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Erosion Control"@en .
-
-skos:ConceptScheme a owl:Class ;
-    dcterms:isVersionOf skos:ConceptScheme ;
-    rdfs:isDefinedBy skos: ;
-    skos:definition "A set of concepts, optionally including statements about semantic relationships between those concepts."@en ;
-    skos:prefLabel "Concept Scheme"@en .
 
 acorient:r0003 a dwc:SubjectOrientation ;
     dcterms:isVersionOf acorient:r0003 ;
@@ -4639,6 +4725,7 @@ acpart:p0006 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0006-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Plant reproductive system consisting of sporophylls."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Strobilis (cone)"@en .
 
 acpart:p0017 a dwc:SubjectPart ;
@@ -4646,6 +4733,7 @@ acpart:p0017 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0017-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Appendage that is shaped in order to produce lift for flight through the air."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Wing"@en .
 
 acpart:p0027 a dwc:SubjectPart ;
@@ -4653,6 +4741,7 @@ acpart:p0027 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0027-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "The part of the head consisting entirely of cranium and mandible."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Skull"@en .
 
 dwcpw:p049 a dwc:Pathway ;
@@ -4662,6 +4751,7 @@ dwcpw:p049 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p053 ;
     skos:definition "Infrastructure, such as bridges, tunnels and canals have removed natural barriers to dispersal and allowed a species to move into a novel location."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Corridor"@en .
 
 dwcpw:p052 a dwc:Pathway ;
@@ -4670,6 +4760,7 @@ dwcpw:p052 a dwc:Pathway ;
     rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
     rdfs:isDefinedBy dwcpw: ;
     skos:definition "The organism was unintentionally brought to a new region."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Unintentional"@en .
 
 dwcpw:p053 a dwc:Pathway ;
@@ -4678,6 +4769,7 @@ dwcpw:p053 a dwc:Pathway ;
     rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
     rdfs:isDefinedBy dwcpw: ;
     skos:definition "Organisms dispersed naturally, even if that dispersal was aided by changes in the landscape created by humans."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Corridor and Dispersal"@en .
 
 acpart:p0016 a dwc:SubjectPart ;
@@ -4685,6 +4777,7 @@ acpart:p0016 a dwc:SubjectPart ;
     dcterms:references <http://rs.tdwg.org/acpart/values/version/p0016-2023-04-26> ;
     rdfs:isDefinedBy acpart: ;
     skos:definition "Walking appendage."@en ;
+    skos:inScheme acpart:p ;
     skos:prefLabel "Leg"@en .
 
 dwc:Permit a owl:Class ;
@@ -4707,6 +4800,7 @@ dwcpw:p051 a dwc:Pathway ;
     rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
     rdfs:isDefinedBy dwcpw: ;
     skos:definition "Organisms were brought to new area with the specific intention of keeping them alive in the new region, regardless of whether they were intended to be cultivated or released into the wild."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Intentional"@en .
 
 ggbn:permitStatus_vocabulary a owl:Class ;
@@ -4787,6 +4881,12 @@ dwc:NucleotideSequence a owl:Class ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
     skos:prefLabel "Nucleotide Sequence"@en .
 
+skos:ConceptScheme a owl:Class ;
+    dcterms:isVersionOf skos:ConceptScheme ;
+    rdfs:isDefinedBy skos: ;
+    skos:definition "A set of concepts, optionally including statements about semantic relationships between those concepts."@en ;
+    skos:prefLabel "Concept Scheme"@en .
+
 dwc:EstablishmentMeans a owl:Class ;
     rdfs:comment "For details and rationale, see [Groom et al. 2019](https://doi.org/10.3897/biss.3.38084)."@en ;
     rdfs:isDefinedBy dwc: ;
@@ -4833,6 +4933,13 @@ dwc:Provenance a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     skos:definition "Information about an entity's origins."@en ;
     skos:prefLabel "Provenance"@en .
+
+dwcem:e a skos:ConceptScheme ;
+    dcterms:isVersionOf dwcem:e ;
+    dcterms:references <http://rs.tdwg.org/dwcem/values/version/e-2020-10-13> ;
+    rdfs:isDefinedBy dwcem: ;
+    skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:establishmentMeans and dwciri:establishmentMeans."@en ;
+    skos:prefLabel "establishmentMeans concept scheme"@en .
 
 dwc:ResourceRelationship a owl:Class ;
     dcterms:isVersionOf dwc:ResourceRelationship ;
@@ -4889,6 +4996,7 @@ dwcpw:p045 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p051 ;
     skos:definition "Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Release In Nature"@en .
 
 bibo:DocumentStatus a owl:Class ;
@@ -4917,6 +5025,13 @@ dwc:DegreeOfEstablishment a owl:Class ;
     skos:definition "Controlled value for Darwin Core terms with local name degreeOfEstablishment."@en ;
     skos:prefLabel "Degree Of Establishment"@en .
 
+dwcdoe:d a skos:ConceptScheme ;
+    dcterms:isVersionOf dwcdoe:d ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d-2020-10-13> ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:degreeOfEstablishment and dwciri:degreeOfEstablishment."@en ;
+    skos:prefLabel "degreeOfEstablishment Concept Scheme"@en .
+
 dwcpw:p047 a dwc:Pathway ;
     dcterms:isVersionOf dwcpw:p047 ;
     dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p047-2021-09-01> ;
@@ -4924,6 +5039,7 @@ dwcpw:p047 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p052 ;
     skos:definition "An umbrella term for all species transported as contaminants in other products."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Transport-Contaminant"@en .
 
 dwc:NucleotideAnalysis a owl:Class ;
@@ -4939,13 +5055,14 @@ dwcpw:p048 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p052 ;
     skos:definition "An umbrella term for all species transported by riding on forms of transport where the organism has a direct interaction with the transport and is not merely carried as part of, or a contaminant of cargo."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Transport-Stowaway"@en .
 
 acorient:r a skos:ConceptScheme ;
-    dcterms:isVersionOf <http://rs.tdwg.org/acorient/r> ;
-    dcterms:references <http://rs.tdwg.org/acorient/r-2023-04-26> ;
+    dcterms:isVersionOf acorient:r ;
+    dcterms:references <http://rs.tdwg.org/acorient/values/version/r-2023-04-26> ;
     rdfs:isDefinedBy acorient: ;
-    skos:definition "A SKOS concept scheme for orientation."@en ;
+    skos:definition "A SKOS concept scheme for ac:subjectOrientation."@en ;
     skos:prefLabel "Subject Orientation Concept Scheme"@en .
 
 dwc:Organism a owl:Class ;
@@ -4973,6 +5090,7 @@ dwcpw:p046 a dwc:Pathway ;
     rdfs:isDefinedBy dwcpw: ;
     skos:broader dwcpw:p051 ;
     skos:definition "Organisms intentionally transported by humans and intended to be kept in captivity or cultivation, but having inadvertently escaped from human control."@en ;
+    skos:inScheme dwcpw:p ;
     skos:prefLabel "Escape From Confinement"@en .
 
 dwc:Assertion a owl:Class ;
@@ -5083,6 +5201,13 @@ dwc:MaterialEntity a owl:Class ;
         "the stomach contents of a fish" ;
     skos:prefLabel "Material Entity"@en .
 
+acpart:p a skos:ConceptScheme ;
+    dcterms:isVersionOf acpart:p ;
+    dcterms:references <http://rs.tdwg.org/acpart/values/version/p-2023-04-26> ;
+    rdfs:isDefinedBy acpart: ;
+    skos:definition "A SKOS concept scheme for ac:subjectPart."@en ;
+    skos:prefLabel "Subject Part Concept Scheme"@en .
+
 dwc:SubjectPart a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf skos:Concept ;
@@ -5170,6 +5295,13 @@ dwc:Pathway a owl:Class ;
     owl:oneOf ( dwcpw:p001 dwcpw:p002 dwcpw:p003 dwcpw:p004 dwcpw:p005 dwcpw:p006 dwcpw:p007 dwcpw:p008 dwcpw:p009 dwcpw:p010 dwcpw:p011 dwcpw:p012 dwcpw:p013 dwcpw:p014 dwcpw:p015 dwcpw:p016 dwcpw:p017 dwcpw:p018 dwcpw:p019 dwcpw:p020 dwcpw:p021 dwcpw:p022 dwcpw:p023 dwcpw:p024 dwcpw:p025 dwcpw:p026 dwcpw:p027 dwcpw:p028 dwcpw:p029 dwcpw:p030 dwcpw:p031 dwcpw:p032 dwcpw:p033 dwcpw:p034 dwcpw:p035 dwcpw:p036 dwcpw:p037 dwcpw:p038 dwcpw:p039 dwcpw:p040 dwcpw:p041 dwcpw:p042 dwcpw:p043 dwcpw:p044 dwcpw:p045 dwcpw:p046 dwcpw:p047 dwcpw:p048 dwcpw:p049 dwcpw:p050 dwcpw:p051 dwcpw:p052 dwcpw:p053 ) ;
     skos:definition "Controlled value for Darwin Core terms with local name pathway."@en ;
     skos:prefLabel "Pathway"@en .
+
+dwcpw:p a skos:ConceptScheme ;
+    dcterms:isVersionOf dwcpw:p ;
+    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p-2020-10-13> ;
+    rdfs:isDefinedBy dwcpw: ;
+    skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:pathway and dwciri:pathway."@en ;
+    skos:prefLabel "pathway Concept Scheme"@en .
 
 dcterms:Location a owl:Class ;
     dcterms:isVersionOf dcterms:Location ;
