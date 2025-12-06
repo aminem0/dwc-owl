@@ -3337,7 +3337,7 @@ dcterms:BibliographicResource a owl:Class ;
     dcterms:isVersionOf dcterms:BibliographicResource ;
     rdfs:isDefinedBy dcterms: ;
     skos:definition "A book, article, or other documentary resource."@en ;
-    skos:prefLabel "Bibliographic Resource" .
+    skos:prefLabel "Bibliographic Resource"@en .
 
 dcterms:creator a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:creator ;
@@ -4189,14 +4189,14 @@ dwc:Permit a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     skos:definition "A document, allowing for the execution of certain activities."@en ;
     skos:example "a license to put up mist-nets to sample for bird communities" ;
-    skos:prefLabel "Permit" .
+    skos:prefLabel "Permit"@en .
 
 dwc:UsagePolicy a owl:Class ;
     dcterms:isVersionOf dwc:UsagePolicy ;
     rdfs:comment "This is a convenience class to group related properties."@en ;
     rdfs:isDefinedBy dwc: ;
     skos:definition "Information about rights, usage, and attribution statements applicable to an entity."@en ;
-    skos:prefLabel "Usage Policy" .
+    skos:prefLabel "Usage Policy"@en .
 
 dwcpw:p051 a dwc:Pathway ;
     dcterms:isVersionOf dwcpw:p051 ;
@@ -4212,7 +4212,7 @@ ggbn:permitStatus_vocabulary a owl:Class ;
     rdfs:subClassOf skos:Concept ;
     owl:oneOf ( ggbn:Permit_available ggbn:Permit_not_required ggbn:Permit_not_available ggbn:Unknown ) ;
     skos:definition "Vocabulary of ggbn:permitStatus."@en ;
-    skos:prefLabel "Permit Status Vocabulary" .
+    skos:prefLabel "Permit Status Vocabulary"@en .
 
 dcterms:title a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:title ;
@@ -4247,7 +4247,7 @@ chrono:ChronometricAge a owl:Class ;
         "an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum",
         "an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum",
         "an age range of a specimen based on its biostratigraphic content" ;
-    skos:prefLabel "Chronometric Age" .
+    skos:prefLabel "Chronometric Age"@en .
 
 dwc:BibliographicDocument a owl:Class ;
     dcterms:isVersionOf dwc:BibliographicDocument ;
@@ -4270,7 +4270,7 @@ dwc:BibliographicDocument a owl:Class ;
         dcterms:BibliographicResource,
         bibo:Document ;
     skos:definition "A book, article, or other documentatry resource."@en ;
-    skos:prefLabel "Bibliographic Document" .
+    skos:prefLabel "Bibliographic Document"@en .
 
 dwc:NucleotideSequence a owl:Class ;
     dcterms:isVersionOf dwc:NucleotideSequence ;
@@ -4282,7 +4282,7 @@ dwc:NucleotideSequence a owl:Class ;
                         owl:cardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onProperty dwc:sequence ] ) ] ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
-    skos:prefLabel "Nucleotide Sequence" .
+    skos:prefLabel "Nucleotide Sequence"@en .
 
 skos:Concept a owl:Class ;
     dcterms:isVersionOf skos:Concept ;
@@ -4305,7 +4305,7 @@ dwc:OccurrenceAssertion a owl:Class ;
             owl:onProperty dwcdp:about ;
             owl:someValuesFrom dwc:Occurrence ] ;
     skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]." ;
-    skos:prefLabel "Occurrence Assertion" .
+    skos:prefLabel "Occurrence Assertion"@en .
 
 dwc:OrganismAssertion a owl:Class ;
     rdfs:isDefinedBy dwc: ;
@@ -4314,7 +4314,7 @@ dwc:OrganismAssertion a owl:Class ;
             owl:onProperty dwcdp:about ;
             owl:someValuesFrom dwc:Organism ] ;
     skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]." ;
-    skos:prefLabel "Organism Assertion" .
+    skos:prefLabel "Organism Assertion"@en .
 
 dwc:OrganismInteraction a owl:Class ;
     dcterms:isVersionOf dwc:OrganismInteraction ;
@@ -4328,14 +4328,14 @@ dwc:OrganismInteraction a owl:Class ;
         "a mosquito sucking blood from a chimpanzee's arm",
         "a slug eating a fungus growing on a decomposing stump (2 interactions)",
         "a viral infection in a plant" ;
-    skos:prefLabel "Organism Interaction" .
+    skos:prefLabel "Organism Interaction"@en .
 
 dwc:Provenance a owl:Class ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/provenance> ;
     rdfs:comment "This is a convenience class to group related properties."@en ;
     rdfs:isDefinedBy dwc: ;
     skos:definition "Information about an entity's origins."@en ;
-    skos:prefLabel "Provenance" .
+    skos:prefLabel "Provenance"@en .
 
 dwc:ResourceRelationship a owl:Class ;
     dcterms:isVersionOf dwc:ResourceRelationship ;
@@ -4346,7 +4346,7 @@ dwc:ResourceRelationship a owl:Class ;
     skos:example "a dwc:MaterialEntity is a subsample of another dwc:MaterialEntity",
         "a uniquely identified dwc:Occurrence represents the same dwc:Occurrence as another uniquely identified dwc:Occurrence",
         "an instance of a dwc:Organism is the mother of another instance of a dwc:Organism" ;
-    skos:prefLabel "Resource Relationship" .
+    skos:prefLabel "Resource Relationship"@en .
 
 dwc:TypeDesignationType a owl:Class ;
     dcterms:isVersionOf <http://rs.gbif.org/terms/1.0/typeDesignationType> ;
@@ -4356,7 +4356,7 @@ dwc:TypeDesignationType a owl:Class ;
     rdfs:subClassOf skos:Concept ;
     owl:oneOf ( tdt:originalDesignation tdt:presentDesignation tdt:subsequentDesignation tdt:monotypy tdt:subsequentMonotypy tdt:absoluteTautonymy tdt:monotypy tdt:linnaeanTautonymy tdt:rulingByCommission ) ;
     skos:definition "A category that best matches the nature of a type designation."@en ;
-    skos:prefLabel "Type Designation Type" .
+    skos:prefLabel "Type Designation Type"@en .
 
 eco:SurveyTarget a owl:Class ;
     dcterms:isVersionOf eco:SurveyTarget ;
@@ -4367,7 +4367,7 @@ eco:SurveyTarget a owl:Class ;
         "all bird species except Larus gulls, fulmars and kittiwakes",
         "all total lengths except < 12 inches",
         "reproductive female Ctenomys sociabilis (only)" ;
-    skos:prefLabel "Survey Target" .
+    skos:prefLabel "Survey Target"@en .
 
 dwc:Identification a owl:Class ;
     dcterms:isVersionOf dwc:Identification ;
@@ -4377,7 +4377,7 @@ dwc:Identification a owl:Class ;
     skos:definition "A classification of a resource according to a classification scheme."@en ;
     skos:example "a nomenclatural act designating a specimen as a holotype",
         "a subspecies determination of an organism" ;
-    skos:prefLabel "Identification" .
+    skos:prefLabel "Identification"@en .
 
 dwcpw:p045 a dwc:Pathway ;
     dcterms:isVersionOf dwcpw:p045 ;
@@ -4404,7 +4404,7 @@ dwc:Protocol a owl:Class ;
         "a linear regression model to estimate body mass from skeletal measurements",
         "a pitfall method for sampling ground-dwelling arthropods",
         "a point-radius georeferencing method" ;
-    skos:prefLabel "Protocol" .
+    skos:prefLabel "Protocol"@en .
 
 dwc:DegreeOfEstablishment a owl:Class ;
     rdfs:comment "For details and rationale, see [Groom et al. 2019](https://doi.org/10.3897/biss.3.38084)."@en ;
@@ -4427,7 +4427,7 @@ dwc:NucleotideAnalysis a owl:Class ;
     dcterms:isVersionOf dwc:NucleotideAnalysis ;
     rdfs:isDefinedBy dwc: ;
     skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
-    skos:prefLabel "Nucleotide Analysis" .
+    skos:prefLabel "Nucleotide Analysis"@en .
 
 dwcpw:p048 a dwc:Pathway ;
     dcterms:isVersionOf dwcpw:p048 ;
@@ -4447,7 +4447,7 @@ dwc:Organism a owl:Class ;
     skos:example "a specific bird",
         "a specific instance of a bacterial culture",
         "a specific wolf pack" ;
-    skos:prefLabel "Organism" .
+    skos:prefLabel "Organism"@en .
 
 dwcpw:p046 a dwc:Pathway ;
     dcterms:isVersionOf dwcpw:p046 ;
@@ -4462,7 +4462,7 @@ dwc:Assertion a owl:Class ;
     dcterms:isVersionOf dwc:MeasurementOrFact ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
     rdfs:isDefinedBy dwc: ;
-    skos:prefLabel "Assertion" .
+    skos:prefLabel "Assertion"@en .
 
 eco:Survey a owl:Class ;
     dcterms:isVersionOf eco:Survey ;
@@ -4478,7 +4478,7 @@ eco:Survey a owl:Class ;
         "a pollinator survey in an agricultural landscape",
         "a wetland vegetation mapping",
         "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
-    skos:prefLabel "Survey" .
+    skos:prefLabel "Survey"@en .
 
 dwc:MaterialEntityAssertion a owl:Class ;
     rdfs:isDefinedBy dwc: ;
@@ -4487,7 +4487,7 @@ dwc:MaterialEntityAssertion a owl:Class ;
             owl:onProperty dwcdp:about ;
             owl:someValuesFrom dwc:MaterialEntity ] ;
     skos:definition "A dwc:Assertion made by a dcterms:Agent about a dwc:MaterialEntity." ;
-    skos:prefLabel "Material Entity Assertion" .
+    skos:prefLabel "Material Entity Assertion"@en .
 
 ggbn:permitType_vocabulary a owl:Class ;
     dcterms:isVersionOf ggbn:permitType_vocabulary ;
@@ -4495,7 +4495,7 @@ ggbn:permitType_vocabulary a owl:Class ;
     rdfs:subClassOf skos:Concept ;
     owl:oneOf ( ggbn:Collecting_Permit ggbn:Import_Permit ggbn:Export_Permit ggbn:Intellectual_Property_Rights ggbn:Copyright ggbn:Patent ggbn:Data_use ggbn:Phytosanitary ggbn:Salvage ggbn:Exemption_Permit ggbn:Material_Transfer_Agreement ggbn:Internationally_Recognized_Certificate_of_Compliance ggbn:Contract ggbn:Memorandum_of_Understanding ggbn:Memorandum_of_Cooperation ggbn:Veterinary_Certificate ggbn:Human_Pathogens ggbn:Genetically_Modified_Organism ggbn:Other ) ;
     skos:definition "Vocabulary of ggbn:permitType term."@en ;
-    skos:prefLabel "Permit Type Vocabulary" .
+    skos:prefLabel "Permit Type Vocabulary"@en .
 
 dcterms:identifier a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:identifier ;
@@ -4517,7 +4517,7 @@ dwc:GeologicalContext a owl:Class ;
     skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
     skos:example "a particular lithostratigraphic layer",
         "a specific chronostratigraphic unit" ;
-    skos:prefLabel "Geological Context" .
+    skos:prefLabel "Geological Context"@en .
 
 dcterms:Agent a owl:Class ;
     dcterms:isVersionOf dcterms:Agent ;
@@ -4533,7 +4533,7 @@ dcterms:Agent a owl:Class ;
         "The El Yunque National Forest ARBIMON System",
         "The National Science Foundation",
         "The Terra Nova Expedition" ;
-    skos:prefLabel "Agent" .
+    skos:prefLabel "Agent"@en .
 
 ac:Media a owl:Class ;
     dcterms:isVersionOf ac:Media ;
@@ -4543,7 +4543,7 @@ ac:Media a owl:Class ;
     skos:example "dcmi:MovingImage",
         "dcmi:Sound",
         "dcmi:StillImage" ;
-    skos:prefLabel "Media" .
+    skos:prefLabel "Media"@en .
 
 dwc:Occurrence a owl:Class ;
     dcterms:isVersionOf dwc:Occurrence ;
@@ -4553,7 +4553,7 @@ dwc:Occurrence a owl:Class ;
     skos:example "a fungus in Central Park in the summer of 1929",
         "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23",
         "a wolf pack on the shore of Kluane Lake in 1988" ;
-    skos:prefLabel "Occurrence" .
+    skos:prefLabel "Occurrence"@en .
 
 dwc:MaterialEntity a owl:Class ;
     dcterms:isVersionOf dwc:MaterialEntity ;
@@ -4574,7 +4574,7 @@ dwc:MaterialEntity a owl:Class ;
         "the body of a fish",
         "the entire contents of a trawl",
         "the stomach contents of a fish" ;
-    skos:prefLabel "Material Entity" .
+    skos:prefLabel "Material Entity"@en .
 
 dwc:Event a owl:Class ;
     dcterms:isVersionOf dwc:Event ;
@@ -4590,7 +4590,7 @@ dwc:Event a owl:Class ;
         "a camera trap image capture",
         "a material collecting event",
         "an organism occurrence" ;
-    skos:prefLabel "Event" .
+    skos:prefLabel "Event"@en .
 
 dwc:MolecularProtocol a owl:Class ;
     rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]." ;
@@ -4637,7 +4637,7 @@ dwc:MolecularProtocol a owl:Class ;
                     owl:inverseOf dwcdp:followed ] ;
             owl:someValuesFrom dwc:NucleotideAnalysis ] ;
     skos:definition "A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]." ;
-    skos:prefLabel "Molecular Protocol" .
+    skos:prefLabel "Molecular Protocol"@en .
 
 dwc:Pathway a owl:Class ;
     rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
@@ -4653,7 +4653,7 @@ dcterms:Location a owl:Class ;
     skos:definition "A spatial region or named place."@en ;
     skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
         "the place defined by a georeference" ;
-    skos:prefLabel "Location" .
+    skos:prefLabel "Location"@en .
 
 [] a owl:AllDisjointClasses ;
     owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .

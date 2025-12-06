@@ -2,6 +2,11 @@ from rdflib import BNode, Graph, Literal, Namespace, Node, URIRef
 from rdflib.collection import Collection
 from rdflib.namespace import DC, DCTERMS, OWL, RDF, RDFS, SKOS, XSD
 
+
+# WARN:
+# Technically examples should be list[URIRef] but left list[Literal]
+# to accomodate textual definitons of examples
+#
 # WARN: Rewriting this function.
 # For some reason, card0_restrictions seems like a useless parameter.
 # It is something that is already stated by stating that a property has
@@ -21,7 +26,7 @@ def createOC(
         equivalent_class: Node | None = None,
         definition: Literal | None = None,
         comments: Literal | None = None,
-        examples: Literal | list[Literal] | None = None,
+        examples: Literal | list[URIRef] | list[Literal] | None = None,
         card1_restrictions: list[Node] | None = None,
         maxcard1_restrictions: list[Node] | None = None,
         references_s: str | None = None,
@@ -610,7 +615,7 @@ def createCTOP(
     object_prop: Node,
     values_class: Node,
     use_inverse: bool = False,
-    subclass_list: list[Node] | None = None,
+    subclass_of: Node | list[Node] | None = None,
     definition: Literal | None = None,
     comments: Literal | None = None,
     examples: Literal | None = None,
@@ -623,10 +628,14 @@ def createCTOP(
     # Class declaration.
     graph.add((class_uri, RDF["type"], OWL["Class"]))
 
-    if subclass_list:
+    if subclass_of:
+        if isinstance(subclass_of, Node):
+            graph.add((class_uri, RDFS["subClassOf"], subclass_of))
         # Technically not a unified list, so can add them all with a for loop.
-        for ro_class in subclass_list:
-            graph.add((class_uri, RDFS["subClassOf"], ro_class))
+        elif isinstance(subclass_of, list) and all(isinstance(x, Node) for x in subclass_of):
+            for ro_class in subclass_of:
+                graph.add((class_uri, RDFS["subClassOf"], ro_class))
+        # NOTE: Maybe add myself a message if not a Node or a list of Nodes
 
     # Add rdfs:isDefinedBy
     graph.add((class_uri, RDFS["isDefinedBy"], URIRef(str(namespace))))

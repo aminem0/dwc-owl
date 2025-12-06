@@ -4662,7 +4662,7 @@ ggbn:permitStatus_vocabulary rdf:type owl:Class ;
                              dcterms:isVersionOf ggbn:permitStatus_vocabulary ;
                              rdfs:isDefinedBy ggbn: ;
                              skos:definition "Vocabulary of ggbn:permitStatus."@en ;
-                             skos:prefLabel "Permit Status Vocabulary" .
+                             skos:prefLabel "Permit Status Vocabulary"@en .
 
 
 ###  http://data.ggbn.org/schemas/ggbn/terms/permitType_vocabulary
@@ -4693,7 +4693,7 @@ ggbn:permitType_vocabulary rdf:type owl:Class ;
                            dcterms:isVersionOf ggbn:permitType_vocabulary ;
                            rdfs:isDefinedBy ggbn: ;
                            skos:definition "Vocabulary of ggbn:permitType term."@en ;
-                           skos:prefLabel "Permit Type Vocabulary" .
+                           skos:prefLabel "Permit Type Vocabulary"@en .
 
 
 ###  http://purl.org/dc/terms/Agent
@@ -4714,7 +4714,7 @@ dcterms:Agent rdf:type owl:Class ;
                            "The El Yunque National Forest ARBIMON System" ,
                            "The National Science Foundation" ,
                            "The Terra Nova Expedition" ;
-              skos:prefLabel "Agent" .
+              skos:prefLabel "Agent"@en .
 
 
 ###  http://purl.org/dc/terms/BibliographicResource
@@ -4722,7 +4722,7 @@ dcterms:BibliographicResource rdf:type owl:Class ;
                               dcterms:isVersionOf dcterms:BibliographicResource ;
                               rdfs:isDefinedBy dcterms: ;
                               skos:definition "A book, article, or other documentary resource."@en ;
-                              skos:prefLabel "Bibliographic Resource" .
+                              skos:prefLabel "Bibliographic Resource"@en .
 
 
 ###  http://purl.org/dc/terms/Location
@@ -4732,7 +4732,7 @@ dcterms:Location rdf:type owl:Class ;
                  skos:definition "A spatial region or named place."@en ;
                  skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina" ,
                               "the place defined by a georeference" ;
-                 skos:prefLabel "Location" .
+                 skos:prefLabel "Location"@en .
 
 
 ###  http://purl.org/ontology/bibo/Document
@@ -4762,7 +4762,7 @@ ac:Media rdf:type owl:Class ;
          skos:example "dcmi:MovingImage" ,
                       "dcmi:Sound" ,
                       "dcmi:StillImage" ;
-         skos:prefLabel "Media" .
+         skos:prefLabel "Media"@en .
 
 
 ###  http://rs.tdwg.org/chrono/terms/ChronometricAge
@@ -4777,7 +4777,7 @@ chrono:ChronometricAge rdf:type owl:Class ;
                                     "an age range associated with a specimen derived from a ceramics analysis based on other materials found in the same stratum" ,
                                     "an age range associated with a specimen derived from an AMS dating assay applied to an oyster shell in the same stratum" ,
                                     "an age range of a specimen based on its biostratigraphic content" ;
-                       skos:prefLabel "Chronometric Age" .
+                       skos:prefLabel "Chronometric Age"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/Assertion
@@ -4785,7 +4785,7 @@ dwc:Assertion rdf:type owl:Class ;
               dcterms:isVersionOf dwc:MeasurementOrFact ;
               dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
               rdfs:isDefinedBy dwc: ;
-              skos:prefLabel "Assertion" .
+              skos:prefLabel "Assertion"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/BibliographicDocument
@@ -4823,7 +4823,7 @@ dwc:BibliographicDocument rdf:type owl:Class ;
                           rdfs:comment "An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions."@en ;
                           rdfs:isDefinedBy dwc: ;
                           skos:definition "A book, article, or other documentatry resource."@en ;
-                          skos:prefLabel "Bibliographic Document" .
+                          skos:prefLabel "Bibliographic Document"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/DegreeOfEstablishment
@@ -4886,7 +4886,7 @@ dwc:Event rdf:type owl:Class ;
                        "a camera trap image capture" ,
                        "a material collecting event" ,
                        "an organism occurrence" ;
-          skos:prefLabel "Event" .
+          skos:prefLabel "Event"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/GeologicalContext
@@ -4904,7 +4904,7 @@ dwc:GeologicalContext rdf:type owl:Class ;
                       skos:definition "A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location]."@en ;
                       skos:example "a particular lithostratigraphic layer" ,
                                    "a specific chronostratigraphic unit" ;
-                      skos:prefLabel "Geological Context" .
+                      skos:prefLabel "Geological Context"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/Identification
@@ -4916,7 +4916,7 @@ dwc:Identification rdf:type owl:Class ;
                    skos:definition "A classification of a resource according to a classification scheme."@en ;
                    skos:example "a nomenclatural act designating a specimen as a holotype" ,
                                 "a subspecies determination of an organism" ;
-                   skos:prefLabel "Identification" .
+                   skos:prefLabel "Identification"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/MaterialEntity
@@ -4940,7 +4940,7 @@ dwc:MaterialEntity rdf:type owl:Class ;
                                 "the body of a fish" ,
                                 "the entire contents of a trawl" ,
                                 "the stomach contents of a fish" ;
-                   skos:prefLabel "Material Entity" .
+                   skos:prefLabel "Material Entity"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/MaterialEntityAssertion
@@ -4952,7 +4952,7 @@ dwc:MaterialEntityAssertion rdf:type owl:Class ;
                             rdfs:subClassOf dwc:Assertion ;
                             rdfs:isDefinedBy dwc: ;
                             skos:definition "A dwc:Assertion made by a dcterms:Agent about a dwc:MaterialEntity." ;
-                            skos:prefLabel "Material Entity Assertion" .
+                            skos:prefLabel "Material Entity Assertion"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/MolecularProtocol
@@ -5037,7 +5037,7 @@ dwc:MolecularProtocol rdf:type owl:Class ;
                       rdfs:comment "Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]." ;
                       rdfs:isDefinedBy dwc: ;
                       skos:definition "A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]." ;
-                      skos:prefLabel "Molecular Protocol" .
+                      skos:prefLabel "Molecular Protocol"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/NucleotideAnalysis
@@ -5045,7 +5045,7 @@ dwc:NucleotideAnalysis rdf:type owl:Class ;
                        dcterms:isVersionOf dwc:NucleotideAnalysis ;
                        rdfs:isDefinedBy dwc: ;
                        skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
-                       skos:prefLabel "Nucleotide Analysis" .
+                       skos:prefLabel "Nucleotide Analysis"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/NucleotideSequence
@@ -5064,7 +5064,7 @@ dwc:NucleotideSequence rdf:type owl:Class ;
                        dcterms:isVersionOf dwc:NucleotideSequence ;
                        rdfs:isDefinedBy dwc: ;
                        skos:definition "A digital representation of a nucleotide sequence."@en ;
-                       skos:prefLabel "Nucleotide Sequence" .
+                       skos:prefLabel "Nucleotide Sequence"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/Occurrence
@@ -5076,7 +5076,7 @@ dwc:Occurrence rdf:type owl:Class ;
                skos:example "a fungus in Central Park in the summer of 1929" ,
                             "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23" ,
                             "a wolf pack on the shore of Kluane Lake in 1988" ;
-               skos:prefLabel "Occurrence" .
+               skos:prefLabel "Occurrence"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/OccurrenceAssertion
@@ -5088,7 +5088,7 @@ dwc:OccurrenceAssertion rdf:type owl:Class ;
                         rdfs:subClassOf dwc:Assertion ;
                         rdfs:isDefinedBy dwc: ;
                         skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]." ;
-                        skos:prefLabel "Occurrence Assertion" .
+                        skos:prefLabel "Occurrence Assertion"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/Organism
@@ -5101,7 +5101,7 @@ dwc:Organism rdf:type owl:Class ;
              skos:example "a specific bird" ,
                           "a specific instance of a bacterial culture" ,
                           "a specific wolf pack" ;
-             skos:prefLabel "Organism" .
+             skos:prefLabel "Organism"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismAssertion
@@ -5113,7 +5113,7 @@ dwc:OrganismAssertion rdf:type owl:Class ;
                       rdfs:subClassOf dwc:Assertion ;
                       rdfs:isDefinedBy dwc: ;
                       skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]." ;
-                      skos:prefLabel "Organism Assertion" .
+                      skos:prefLabel "Organism Assertion"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismInteraction
@@ -5129,7 +5129,7 @@ dwc:OrganismInteraction rdf:type owl:Class ;
                                      "a mosquito sucking blood from a chimpanzee's arm" ,
                                      "a slug eating a fungus growing on a decomposing stump (2 interactions)" ,
                                      "a viral infection in a plant" ;
-                        skos:prefLabel "Organism Interaction" .
+                        skos:prefLabel "Organism Interaction"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismRelationship
@@ -5220,7 +5220,7 @@ dwc:Permit rdf:type owl:Class ;
            rdfs:isDefinedBy dwc: ;
            skos:definition "A document, allowing for the execution of certain activities."@en ;
            skos:example "a license to put up mist-nets to sample for bird communities" ;
-           skos:prefLabel "Permit" .
+           skos:prefLabel "Permit"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/Protocol
@@ -5232,7 +5232,7 @@ dwc:Protocol rdf:type owl:Class ;
                           "a linear regression model to estimate body mass from skeletal measurements" ,
                           "a pitfall method for sampling ground-dwelling arthropods" ,
                           "a point-radius georeferencing method" ;
-             skos:prefLabel "Protocol" .
+             skos:prefLabel "Protocol"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/Provenance
@@ -5241,7 +5241,7 @@ dwc:Provenance rdf:type owl:Class ;
                rdfs:comment "This is a convenience class to group related properties."@en ;
                rdfs:isDefinedBy dwc: ;
                skos:definition "Information about an entity's origins."@en ;
-               skos:prefLabel "Provenance" .
+               skos:prefLabel "Provenance"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/ResourceRelationship
@@ -5254,7 +5254,7 @@ dwc:ResourceRelationship rdf:type owl:Class ;
                          skos:example "a dwc:MaterialEntity is a subsample of another dwc:MaterialEntity" ,
                                       "a uniquely identified dwc:Occurrence represents the same dwc:Occurrence as another uniquely identified dwc:Occurrence" ,
                                       "an instance of a dwc:Organism is the mother of another instance of a dwc:Organism" ;
-                         skos:prefLabel "Resource Relationship" .
+                         skos:prefLabel "Resource Relationship"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/TypeDesignationType
@@ -5276,7 +5276,7 @@ dwc:TypeDesignationType rdf:type owl:Class ;
                         rdfs:comment "From [https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml](https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml)."@en ;
                         rdfs:isDefinedBy dwc: ;
                         skos:definition "A category that best matches the nature of a type designation."@en ;
-                        skos:prefLabel "Type Designation Type" .
+                        skos:prefLabel "Type Designation Type"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/UsagePolicy
@@ -5285,7 +5285,7 @@ dwc:UsagePolicy rdf:type owl:Class ;
                 rdfs:comment "This is a convenience class to group related properties."@en ;
                 rdfs:isDefinedBy dwc: ;
                 skos:definition "Information about rights, usage, and attribution statements applicable to an entity."@en ;
-                skos:prefLabel "Usage Policy" .
+                skos:prefLabel "Usage Policy"@en .
 
 
 ###  http://rs.tdwg.org/eco/terms/Survey
@@ -5303,7 +5303,7 @@ eco:Survey rdf:type owl:Class ;
                         "a pollinator survey in an agricultural landscape" ,
                         "a wetland vegetation mapping" ,
                         "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
-           skos:prefLabel "Survey" .
+           skos:prefLabel "Survey"@en .
 
 
 ###  http://rs.tdwg.org/eco/terms/SurveyTarget
@@ -5316,7 +5316,7 @@ eco:SurveyTarget rdf:type owl:Class ;
                               "all bird species except Larus gulls, fulmars and kittiwakes" ,
                               "all total lengths except < 12 inches" ,
                               "reproductive female Ctenomys sociabilis (only)" ;
-                 skos:prefLabel "Survey Target" .
+                 skos:prefLabel "Survey Target"@en .
 
 
 ###  http://www.w3.org/2004/02/skos/core#Concept

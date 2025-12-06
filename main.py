@@ -2,7 +2,9 @@
 # BEGIN IMPORTS
 #####################################################################################################
 
+from pathlib import Path
 import subprocess
+#
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
@@ -13,6 +15,7 @@ from utils import createCTOP, createDP, createEDP, createEOC, createNI, createOC
 #####################################################################################################
 
 # Define all namespces to be used
+#
 AC = Namespace("http://rs.tdwg.org/ac/terms/")
 ADMS = Namespace("http://www.w3.org/ns/adms#")
 BB = Namespace("http://bioboum.ca/")
@@ -36,11 +39,13 @@ GGBN = Namespace("http://data.ggbn.org/schemas/ggbn/terms/")
 MINEXT = Namespace("http://rs.tdwg.org/mineralogy/terms/")
 MIQE = Namespace("http://rs.gbif.org/terms/miqe/")
 MIXS = Namespace("https://w3id.org/mixs/")
+SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
 TDT = Namespace("http://rs.gbif.org/vocabulary/gbif/type_designation_type/")
 VANN = Namespace("http://purl.org/vocab/vann/")
 XMP = Namespace("http://ns.adobe.com/xap/1.0/")
 
 # Create an instance of a Graph object
+#
 g = Graph()
 
 # Bind the prefixes to the previously defined namespaces
@@ -66,12 +71,14 @@ g.bind("ggbn", GGBN)
 g.bind("minext", MINEXT)
 g.bind("miqe", MIQE)
 g.bind("mixs", MIXS)
+g.bind("skos", SKOS)
 g.bind("tdt", TDT)
 g.bind("vann", VANN)
 g.bind("xmp", XMP)
 
 
 # Define ontology URI and basic definitions.
+#
 ontology_uri = URIRef("http://bioboum.ca/dwc-owl.owl")
 g.add((ontology_uri, RDF["type"], OWL["Ontology"]))
 g.add((ontology_uri, OWL["versionInfo"], Literal("0.0.3")))
@@ -86,11 +93,12 @@ g.add((ontology_uri, DCTERMS["created"], Literal("2025-04-03", datatype=XSD["dat
 #####################################################################################################
 
 # NOTE: RECHECK terms in example.
+#
 createOC(
     name="Media",
     namespace=AC,
     graph=g,
-    pref_label=Literal("Media"),
+    pref_label=Literal("Media", lang="en"),
     definition=Literal("A dcmi:MediaType or other media type with other entities as subject matter.", lang="en"),
     comments=Literal("An instance of digital textual media may be better represented as a dcterms:BibliographicResource.", lang="en"),
     examples=[
@@ -107,7 +115,7 @@ createOC(
     name="Agent",
     namespace=DCTERMS,
     graph=g,
-    pref_label=Literal("Agent"),
+    pref_label=Literal("Agent", lang="en"),
     definition=Literal("A resource that acts or has the power to act.", lang="en"),
     comments=Literal("A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious.", lang="en"),
     examples=[
@@ -127,7 +135,7 @@ createOC(
     name="Assertion",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Assertion"),
+    pref_label=Literal("Assertion", lang="en"),
     # card0_restrictions=[DWCDP["assertedBy"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/MeasurementOrFact",
     references_s="http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13",
@@ -137,7 +145,7 @@ createOC(
     name="BibliographicResource",
     namespace=DCTERMS,
     graph=g,
-    pref_label=Literal("Bibliographic Resource"),
+    pref_label=Literal("Bibliographic Resource", lang="en"),
     definition=Literal("A book, article, or other documentary resource.", lang="en"),
     version_of_s="http://purl.org/dc/terms/BibliographicResource",
 )
@@ -147,7 +155,7 @@ createOC(
     name="BibliographicDocument",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Bibliographic Document"),
+    pref_label=Literal("Bibliographic Document", lang="en"),
     definition=Literal("A book, article, or other documentatry resource.", lang="en"),
     comments=Literal("An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions.", lang="en"),
     subclass_list=[
@@ -159,7 +167,7 @@ createOC(
     ],
     maxcard1_restrictions=[
         BIBO["status"],
-        #
+    
         BIBO["edition"],
         BIBO["issue"],
         BIBO["pages"],
@@ -172,7 +180,7 @@ createOC(
     name="ChronometricAge",
     namespace=CHRONO,
     graph=g,
-    pref_label=Literal("Chronometric Age"),
+    pref_label=Literal("Chronometric Age", lang="en"),
     definition=Literal("An approximation of temporal position (in the sense conveyed by [https://www.w3.org/TR/owl-time/#time:TemporalPosition]) that is supported by evidence.", lang="en"),
     comments=Literal("The age of a [dwc:MaterialEntity] and how this age is known, whether by a dating assay, or a relative association with dated material, or legacy collection information.", lang="en"),
     examples=[
@@ -267,7 +275,7 @@ createOC(
     name="Event",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Event"),
+    pref_label=Literal("Event", lang="en"),
     definition=Literal("An action, process, or set of circumstances occurring at a [dcterms:Location] during a period of time.", lang="en"),
     examples=[
         Literal("a material collecting event"),
@@ -278,7 +286,9 @@ createOC(
     ],
     # card1_restrictions=[DWC["eventID"]],
     # card0_restrictions=[DWCDP["happenedDuring"]],
-    maxcard1_restrictions=[DWC["preferredEventName"]],
+    maxcard1_restrictions=[
+        DWC["preferredEventName"],
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/Event",
     references_s="http://rs.tdwg.org/dwc/terms/version/Event-2023-09-18",
 )
@@ -287,11 +297,11 @@ createOC(
     name="GeologicalContext",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Geological Context"),
+    pref_label=Literal("Geological Context", lang="en"),
     definition=Literal("A set of geological designations, such as stratigraphy, that qualifies a [dcterms:Location].", lang="en"),
     examples=[
         Literal("a particular lithostratigraphic layer"),
-        Literal("a specific chronostratigraphic unit")
+        Literal("a specific chronostratigraphic unit"),
     ],
     card1_restrictions=[DWC["geologicalContextID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/GeologicalContext",
@@ -302,7 +312,7 @@ createOC(
     name="Identification",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Identification"),
+    pref_label=Literal("Identification", lang="en"),
     definition=Literal("A classification of a resource according to a classification scheme.", lang="en"),
     comments=Literal("For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism].", lang="en"),
     examples=[
@@ -317,7 +327,7 @@ createOC(
     name="Location",
     namespace=DCTERMS,
     graph=g,
-    pref_label=Literal("Location"),
+    pref_label=Literal("Location", lang="en"),
     definition=Literal("A spatial region or named place.", lang="en"),
     examples=[
         Literal("the municipality of San Carlos de Bariloche, Río Negro, Argentina"),
@@ -330,7 +340,7 @@ createOC(
     name="MaterialEntity",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Material Entity"),
+    pref_label=Literal("Material Entity", lang="en"),
     definition=Literal("An entity that can be identified, exist for some period of time, and consist in whole or in part of physical matter while it exists.", lang="en"),
     comments=Literal("The term is defined at the most general level to admit descriptions of any subtype of material entity within the scope of Darwin Core. In particular, any kind of material sample, preserved specimen, fossil, or exemplar from living collections is intended to be subsumed under this term.", lang="en"),
     examples=[
@@ -362,7 +372,7 @@ createOC(
     name="NucleotideAnalysis",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Nucleotide Analysis"),
+    pref_label=Literal("Nucleotide Analysis", lang="en"),
     definition=Literal("A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol].", lang="en"),
     # card1_restrictions=[DWC["eventID"], DWC["molecularProtocolID"], DWC["nucleotideAnalysisID"], DWC["nucleotideSequenceID"]],
     # card01_restrictions=[DWC["materialEntityID"], DWC["readCount"], DWC["totalReadCount"]],
@@ -373,9 +383,12 @@ createOC(
     name="NucleotideSequence",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Nucleotide Sequence"),
+    pref_label=Literal("Nucleotide Sequence", lang="en"),
     definition=Literal("A digital representation of a nucleotide sequence.", lang="en"),
-    card1_restrictions=[DWC["nucleotideSequenceID"], DWC["sequence"]],
+    card1_restrictions=[
+        DWC["nucleotideSequenceID"],
+        DWC["sequence"]
+    ],
     version_of_s="http://rs.tdwg.org/dwc/terms/NucleotideSequence",
 )
 
@@ -383,7 +396,7 @@ createOC(
     name="Occurrence",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Occurrence"),
+    pref_label=Literal("Occurrence", lang="en"),
     definition=Literal("A state of a [dwc:Organism] in a [dwc:Event].", lang="en"),
     examples=[
         Literal("a wolf pack on the shore of Kluane Lake in 1988"),
@@ -398,7 +411,7 @@ createOC(
     name="Organism",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Organism"),
+    pref_label=Literal("Organism", lang="en"),
     definition=Literal("A particular organism or defined group of organisms considered to be taxonomically homogeneous.", lang="en"),
     comments=Literal("Instances of the [dwc:Organism] class are intended to facilitate linking one or more [dwc:Identification] instances to one or more [dwc:Occurrence] instances. Therefore, things that are typically assigned scientific names (such as viruses, hybrids and lichens) and aggregates whose [dwc:Occurrence]s are typically recorded (such as packs, clones, and colonies) are included in the scope of this class.", lang="en"),
     examples=[
@@ -416,7 +429,7 @@ createOC(
     name="OrganismInteraction",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Organism Interaction"),
+    pref_label=Literal("Organism Interaction", lang="en"),
     definition=Literal("An interaction between two [dwc:Organism]s during a [dwc:Event].", lang="en"),
     comments=Literal("Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s.", lang="en"),
     examples=[
@@ -504,7 +517,7 @@ createOC(
     name="Permit",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Permit"),
+    pref_label=Literal("Permit", lang="en"),
     definition=Literal("A document, allowing for the execution of certain activities.", lang="en"),
     examples=[
         Literal("a license to put up mist-nets to sample for bird communities"),
@@ -518,7 +531,7 @@ createEOC(
     name="permitStatus_vocabulary",
     namespace=GGBN,
     graph=g,
-    pref_label=Literal("Permit Status Vocabulary"),
+    pref_label=Literal("Permit Status Vocabulary", lang="en"),
     definition=Literal("Vocabulary of ggbn:permitStatus.", lang="en"),
     one_of=[
         URIRef("http://data.ggbn.org/schemas/ggbn/terms/Permit_available"),
@@ -536,7 +549,7 @@ createEOC(
     name="permitType_vocabulary",
     namespace=GGBN,
     graph=g,
-    pref_label=Literal("Permit Type Vocabulary"),
+    pref_label=Literal("Permit Type Vocabulary", lang="en"),
     definition=Literal("Vocabulary of ggbn:permitType term.", lang="en"),
     one_of=[
         URIRef("http://data.ggbn.org/schemas/ggbn/terms/Collecting_Permit"),
@@ -566,7 +579,7 @@ createOC(
     name="Protocol",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Protocol"),
+    pref_label=Literal("Protocol", lang="en"),
     definition=Literal("A method used during an action.", lang="en"),
     examples=[
         Literal("a pitfall method for sampling ground-dwelling arthropods"),
@@ -581,7 +594,7 @@ createOC(
     name="Provenance",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Provenance"),
+    pref_label=Literal("Provenance", lang="en"),
     definition=Literal("Information about an entity's origins.", lang="en"),
     comments=Literal("This is a convenience class to group related properties.", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/provenance",
@@ -594,7 +607,7 @@ createOC(
     name="ResourceRelationship",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Resource Relationship"),
+    pref_label=Literal("Resource Relationship", lang="en"),
     definition=Literal("A relationship of one [rdfs:Resource] ([http://www.w3.org/2000/01/rdf-schema#Resource]) to another.", lang="en"),
     comments=Literal("Resources can be thought of as identifiable records or instances of classes and may include, but need not be limited to instances of [dwc:Occurrence], [dwc:Organism], [dwc:MaterialEntity], [dwc:Event], [dcterms:Location], [dwc:GeologicalContext], [dwc:Identification], or [dwc:Taxon.]", lang="en"),
     examples=[
@@ -610,7 +623,7 @@ createEOC(
     name="TypeDesignationType",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Type Designation Type"),
+    pref_label=Literal("Type Designation Type", lang="en"),
     definition=Literal("A category that best matches the nature of a type designation.", lang="en"),
     comments=Literal("From [https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml](https://rs.gbif.org/extension/gbif/1.0/typesandspecimen.xml).", lang="en"),
     one_of=[
@@ -632,7 +645,7 @@ createOC(
     name="UsagePolicy",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Usage Policy"),
+    pref_label=Literal("Usage Policy", lang="en"),
     definition=Literal("Information about rights, usage, and attribution statements applicable to an entity.", lang="en"),
     comments=Literal("This is a convenience class to group related properties.", lang="en"),
     # card1_restrictions=[DWC["usagePolicyID"]],
@@ -644,7 +657,7 @@ createOC(
     name="Survey",
     namespace=ECO,
     graph=g,
-    pref_label=Literal("Survey"),
+    pref_label=Literal("Survey", lang="en"),
     definition=Literal("A biotic survey or inventory.", lang="en"),
     comments=Literal("This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget].", lang="en"),
     examples=[
@@ -666,7 +679,7 @@ createOC(
     name="SurveyTarget",
     namespace=ECO,
     graph=g,
-    pref_label=Literal("Survey Target"),
+    pref_label=Literal("Survey Target", lang="en"),
     definition=Literal("An intended scope for [dwc:Occurrence]s in a [eco:Survey].", lang="en"),
     examples=[
         Literal("all bird species"),
@@ -881,8 +894,8 @@ createCTOP(
     name="MaterialEntityAssertion",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Material Entity Assertion"),
-    subclass_list=[DWC["Assertion"]],
+    pref_label=Literal("Material Entity Assertion", lang="en"),
+    subclass_of=DWC["Assertion"],
     object_prop=DWCDP["about"],
     use_inverse=False,
     values_class=DWC["MaterialEntity"],
@@ -917,8 +930,8 @@ createCTOP(
     name="OccurrenceAssertion",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Occurrence Assertion"),
-    subclass_list=[DWC["Assertion"]],
+    pref_label=Literal("Occurrence Assertion", lang="en"),
+    subclass_of=DWC["Assertion"],
     object_prop=DWCDP["about"],
     use_inverse=False,
     values_class=DWC["Occurrence"],
@@ -929,8 +942,8 @@ createCTOP(
     name="OrganismAssertion",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Organism Assertion"),
-    subclass_list=[DWC["Assertion"]],
+    pref_label=Literal("Organism Assertion", lang="en"),
+    subclass_of=DWC["Assertion"],
     object_prop=DWCDP["about"],
     use_inverse=False,
     values_class=DWC["Organism"],
@@ -976,8 +989,8 @@ createCTOP(
     name="MolecularProtocol",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("Molecular Protocol"),
-    subclass_list=[DWC["Protocol"]],
+    pref_label=Literal("Molecular Protocol", lang="en"),
+    subclass_of=DWC["Protocol"],
     object_prop=DWCDP["followed"],
     use_inverse=True,
     values_class=DWC["NucleotideAnalysis"],
@@ -3279,7 +3292,7 @@ createDP(
     graph=g,
     domains=AC["Media"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Caption"),
+    pref_label=Literal("Caption", lang="en"),
     definition=Literal("Free-form text to be displayed together with (rather than instead of) a resource that is suitable for captions (especially images).", lang="en"),
     comments=Literal("If both [dcterms:description] and [ac:caption] are present in the metadata, a [dcterms:description] is typically displayed instead of the resource, a [ac:caption] together with the resource. Thus, in HTML it would be appropriate to use [ac:caption] values in figcaption elements. Often only one of the [dcterms:description] or [ac:caption] is present; choose the term most appropriate for your metadata.", lang="en"),
     version_of_s="http://rs.tdwg.org/ac/terms/caption",
@@ -3292,7 +3305,7 @@ createDP(
     graph=g,
     domains=AC["Media"],
     ranges=XSD["decimal"],
-    pref_label=Literal("Upper Frequency Bound"),
+    pref_label=Literal("Upper Frequency Bound", lang="en"),
     definition=Literal("The highest frequency of the phenomena reflected in the multimedia item or Region of Interest.", lang="en"),
     comments=Literal("Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible.", lang="en"),
     examples=[
@@ -3308,7 +3321,7 @@ createDP(
     graph=g,
     domains=AC["Media"],
     ranges=XSD["decimal"],
-    pref_label=Literal("Lower Frequency Bound"),
+    pref_label=Literal("Lower Frequency Bound", lang="en"),
     definition=Literal("The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest.", lang="en"),
     comments=Literal("Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible.", lang="en"),
     examples=[
@@ -3365,7 +3378,7 @@ createDP(
     graph=g,
     domains=AC["Media"],
     ranges=XSD["decimal"],
-    pref_label=Literal("Fractional Height"),
+    pref_label=Literal("Fractional Height", lang="en"),
     definition=Literal("The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource."),
     comments=Literal("The sum of a valid value plus [ac:yFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:heightFrac] and [ac:yFrac] are used with the [exif:PixelYDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value."),
     examples=[
@@ -3397,7 +3410,7 @@ createDP(
     graph=g,
     domains=AC["Media"],
     ranges=XSD["integer"],
-    pref_label=Literal("Radius"),
+    pref_label=Literal("Radius", lang="en"),
     definition=Literal("The radius of a bounding circle or arc, expressed as a fraction of the width of a [dwc:Media] resource.", lang="en"),
     comments=Literal("A valid value MUST be greater than or equal to zero. A valid value MAY cause the designated circle to extend beyond the bounds of a [dwc:Media] resource. In that case, the arc within a [dwc:Media] resource plus the bounds of a [dwc:Media] resource specify the region of interest. This term MUST NOT be used with [ac:widthFrac] or [ac:heightFrac] to define a region of interest. This term may be used with [ac:xFrac] and [ac:yFrac] to define a point. In that case, the implication is that the point falls on some object of interest within a [dwc:Media] resource, but nothing more can be assumed about the bounds of that object.", lang="en"),
     examples=[
@@ -3427,7 +3440,7 @@ createDP(
     graph=g,
     domains=AC["Media"],
     ranges=XSD["decimal"],
-    pref_label=Literal("Fractional Width"),
+    pref_label=Literal("Fractional Width", lang="en"),
     definition=Literal("The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource.", lang="en"),
     comments=Literal("The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value.", lang="en"),
     examples=[
@@ -3444,7 +3457,7 @@ createDP(
     graph=g,
     domains=AC["Media"],
     ranges=XSD["decimal"],
-    pref_label=Literal("Fractional X"),
+    pref_label=Literal("Fractional X", lang="en"),
     definition=Literal("The horizontal position of a reference point, measured from the left side of a [dwc:Media] resource and expressed as a decimal fraction of the width of a [dwc:Media] resource.", lang="en"),
     comments=Literal("A valid value MUST be greater than or equal to zero and less than or equal to one. The precision of this value SHOULD be great enough that when the [ac:xFrac] value is multiplied by the [exif:PixelXDimension] of the Best Quality variant of the Service Access point, rounding to the nearest integer results in the same horizontal pixel location originally used to define the point. This point can serve as the horizontal position of the upper left corner of a bounding rectangle, or as the center of a circle.", lang="en"),
     examples=[
@@ -3461,7 +3474,7 @@ createDP(
     graph=g,
     domains=AC["Media"],
     ranges=XSD["decimal"],
-    pref_label=Literal("Fractional Y"),
+    pref_label=Literal("Fractional Y", lang="en"),
     definition=Literal("The vertical position of a reference point, measured from the top of a [dwc:Media] resource and expressed as a decimal fraction of the height of a [dwc:Media] resource.", lang="en"),
     comments=Literal("A valid value MUST be greater than or equal to zero and less than or equal to one. The precision of this value SHOULD be great enough that when the [ac:yFrac] value is multiplied by the [exif:PixelYDimension] of the Best Quality variant of the Service Access point, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This point can serve as the vertical position of the upper left corner of a bounding rectangle, or as the center of a circle.", lang="en"),
     examples=[
@@ -7455,13 +7468,14 @@ subprocess.run(["java", "-jar", "jarfiles/robot.jar", "convert", "--input", "dwc
 # BEGIN PYLODE DOCUMENTATION GENERATION
 #####################################################################################################
 
+
 # 
 od = OntPub(ontology=g, sort_subjects=True)
 #od = OntPub(ontology=g, sort_subjects=False)
 
 # Write html documentation to docs directory
 #
-od.make_html(destination="docs/index.html", include_css=True)
+od.make_html(destination=Path("docs/index.html"), include_css=True)
 
 #####################################################################################################
 # BEGIN HERMIT TEST EXECUTION
