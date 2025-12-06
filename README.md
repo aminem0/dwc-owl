@@ -42,6 +42,8 @@ Originally, the semantics were more consistent with my original proposal, consid
 
 The terms in this ontology are being applied to model real-world datasets at [another GitHub repository](https://github.com/aminem0/dwc-owl-rdf).
 
+## Ontology principles
+
 ### Designed for OWL-based semantics
 
 The ontology was constructed explicitly to take advantage of OWL-based modelling. This includes the use of cardinality restrictions, existential restrictions, and other axioms that allow for precise semantic constraints. OWL class constructors, such as `owl:unionOf`, play an important role by enabling the natural expression of complex domain and range conditions, as well as other logical structures.
