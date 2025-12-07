@@ -153,10 +153,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -4934,12 +4934,6 @@ dwc:Provenance a owl:Class ;
     skos:definition "Information about an entity's origins."@en ;
     skos:prefLabel "Provenance"@en .
 
-dwcem:e dcterms:isVersionOf dwcem:e ;
-    dcterms:references <http://rs.tdwg.org/dwcem/values/version/e-2020-10-13> ;
-    rdfs:isDefinedBy dwcem: ;
-    skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:establishmentMeans and dwciri:establishmentMeans."@en ;
-    skos:prefLabel "establishmentMeans concept scheme"@en .
-
 dwc:ResourceRelationship a owl:Class ;
     dcterms:isVersionOf dwc:ResourceRelationship ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/ResourceRelationship-2023-09-13> ;
@@ -5023,12 +5017,6 @@ dwc:DegreeOfEstablishment a owl:Class ;
     owl:oneOf ( dwcdoe:d001 dwcdoe:d002 dwcdoe:d003 dwcdoe:d004 dwcdoe:d005 dwcdoe:d006 dwcdoe:d007 dwcdoe:d008 dwcdoe:d009 dwcdoe:d010 dwcdoe:d011 ) ;
     skos:definition "Controlled value for Darwin Core terms with local name degreeOfEstablishment."@en ;
     skos:prefLabel "Degree Of Establishment"@en .
-
-dwcdoe:d dcterms:isVersionOf dwcdoe:d ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d-2020-10-13> ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:degreeOfEstablishment and dwciri:degreeOfEstablishment."@en ;
-    skos:prefLabel "degreeOfEstablishment Concept Scheme"@en .
 
 dwcpw:p047 a dwc:Pathway ;
     dcterms:isVersionOf dwcpw:p047 ;
@@ -5198,12 +5186,6 @@ dwc:MaterialEntity a owl:Class ;
         "the stomach contents of a fish" ;
     skos:prefLabel "Material Entity"@en .
 
-acpart:p dcterms:isVersionOf acpart:p ;
-    dcterms:references <http://rs.tdwg.org/acpart/values/version/p-2023-04-26> ;
-    rdfs:isDefinedBy acpart: ;
-    skos:definition "A SKOS concept scheme for ac:subjectPart."@en ;
-    skos:prefLabel "Subject Part Concept Scheme"@en .
-
 dwc:SubjectPart a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf skos:Concept ;
@@ -5291,12 +5273,6 @@ dwc:Pathway a owl:Class ;
     owl:oneOf ( dwcpw:p001 dwcpw:p002 dwcpw:p003 dwcpw:p004 dwcpw:p005 dwcpw:p006 dwcpw:p007 dwcpw:p008 dwcpw:p009 dwcpw:p010 dwcpw:p011 dwcpw:p012 dwcpw:p013 dwcpw:p014 dwcpw:p015 dwcpw:p016 dwcpw:p017 dwcpw:p018 dwcpw:p019 dwcpw:p020 dwcpw:p021 dwcpw:p022 dwcpw:p023 dwcpw:p024 dwcpw:p025 dwcpw:p026 dwcpw:p027 dwcpw:p028 dwcpw:p029 dwcpw:p030 dwcpw:p031 dwcpw:p032 dwcpw:p033 dwcpw:p034 dwcpw:p035 dwcpw:p036 dwcpw:p037 dwcpw:p038 dwcpw:p039 dwcpw:p040 dwcpw:p041 dwcpw:p042 dwcpw:p043 dwcpw:p044 dwcpw:p045 dwcpw:p046 dwcpw:p047 dwcpw:p048 dwcpw:p049 dwcpw:p050 dwcpw:p051 dwcpw:p052 dwcpw:p053 ) ;
     skos:definition "Controlled value for Darwin Core terms with local name pathway."@en ;
     skos:prefLabel "Pathway"@en .
-
-dwcpw:p dcterms:isVersionOf dwcpw:p ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p-2020-10-13> ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:definition "A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:pathway and dwciri:pathway."@en ;
-    skos:prefLabel "pathway Concept Scheme"@en .
 
 dcterms:Location a owl:Class ;
     dcterms:isVersionOf dcterms:Location ;

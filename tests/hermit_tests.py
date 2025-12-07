@@ -10,7 +10,9 @@ owl_bottom_data_property_uri_s = "http://www.w3.org/2002/07/owl#bottomDataProper
 
 # HermiT expects a URI as input, so get that.
 #
-ontology_uri = (Path(__file__).parent.parent /  "dwc-owl-v2.ttl").resolve().as_uri()
+ontology_uri = (Path(__file__).parent.parent / "ontology/dwc-owl-v2.ttl").resolve().as_uri()
+
+print(ontology_uri)
 
 # Use HermiT as validation that there are no unsatisfiable things.
 #

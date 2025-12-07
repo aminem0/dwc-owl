@@ -1365,45 +1365,45 @@ createSCS(
     references_s="http://rs.tdwg.org/acorient/values/version/r-2023-04-26",
 )
 
-createSCS(
-    name="p",
-    namespace=ACPART,
-    graph=g,
-    pref_label=Literal("Subject Part Concept Scheme", lang="en"),
-    definition=Literal("A SKOS concept scheme for ac:subjectPart.", lang="en"),
-    version_of_s="http://rs.tdwg.org/acpart/values/p",
-    references_s="http://rs.tdwg.org/acpart/values/version/p-2023-04-26",
-)
+# createSCS(
+#     name="p",
+#     namespace=ACPART,
+#     graph=g,
+#     pref_label=Literal("Subject Part Concept Scheme", lang="en"),
+#     definition=Literal("A SKOS concept scheme for ac:subjectPart.", lang="en"),
+#     version_of_s="http://rs.tdwg.org/acpart/values/p",
+#     references_s="http://rs.tdwg.org/acpart/values/version/p-2023-04-26",
+# )
 
-createSCS(
-    name="d",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("degreeOfEstablishment Concept Scheme", lang="en"),
-    definition=Literal("A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:degreeOfEstablishment and dwciri:degreeOfEstablishment.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d-2020-10-13",
-)
+# createSCS(
+#     name="d",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("degreeOfEstablishment Concept Scheme", lang="en"),
+#     definition=Literal("A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:degreeOfEstablishment and dwciri:degreeOfEstablishment.", lang="en"),
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d-2020-10-13",
+# )
 
-createSCS(
-    name="e",
-    namespace=DWCEM,
-    graph=g,
-    pref_label=Literal("establishmentMeans concept scheme", lang="en"),
-    definition=Literal("A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:establishmentMeans and dwciri:establishmentMeans.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwcem/values/e",
-    references_s="http://rs.tdwg.org/dwcem/values/version/e-2020-10-13",
-)
+# createSCS(
+#     name="e",
+#     namespace=DWCEM,
+#     graph=g,
+#     pref_label=Literal("establishmentMeans concept scheme", lang="en"),
+#     definition=Literal("A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:establishmentMeans and dwciri:establishmentMeans.", lang="en"),
+#     version_of_s="http://rs.tdwg.org/dwcem/values/e",
+#     references_s="http://rs.tdwg.org/dwcem/values/version/e-2020-10-13",
+# )
 
-createSCS(
-    name="p",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("pathway Concept Scheme", lang="en"),
-    definition=Literal("A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:pathway and dwciri:pathway.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p-2020-10-13",
-)
+# createSCS(
+#     name="p",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("pathway Concept Scheme", lang="en"),
+#     definition=Literal("A SKOS Concept Scheme to be used as a controlled vocabulary for the Darwin Core terms dwc:pathway and dwciri:pathway.", lang="en"),
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p-2020-10-13",
+# )
 
 ##########################################################################################
 
@@ -8443,18 +8443,31 @@ createDP(
 )
 
 #####################################################################################################
+# BEGIN HERMIT DL CLAUSES DUMP
+#####################################################################################################
+
+# HermiT expects a URI, so we need to get it
+#
+ontology_uri = Path("ontology/dwc-owl-v2.ttl").resolve().as_uri()
+
+# Have HermiT dump its DL clauses
+#
+subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "--dump-clauses=ontology/clauses.txt", ontology_uri])
+
+#####################################################################################################
 # BEGIN OWL API USAGE
 #####################################################################################################
 
-# Serialize the ontology to xml.
-# g.serialize(destination="dwc-owl.owl", format="pretty-xml")
-g.serialize(destination="dwc-owl.ttl", format="turtle")
+# Serialize the ontology to xml and ttl.
+#
+g.serialize(destination="ontology/dwc-owl.owl", format="xml")
+g.serialize(destination="ontology/dwc-owl.ttl", format="turtle")
 
 # NOTE: Use ROBOT to use the OWL API directly, better than having to go into Protege everytime.
 # Obtained with curl -L -o robot.jar https://github.com/ontodev/robot/releases/download/v1.9.8/robot.jar
 # Put in .gitgnore since it is borderline LFS.
 #
-subprocess.run(["java", "-jar", "jarfiles/robot.jar", "convert", "--input", "dwc-owl.ttl", "--output", "dwc-owl-v2.ttl"])
+subprocess.run(["java", "-jar", "jarfiles/robot.jar", "convert", "--input", "ontology/dwc-owl.ttl", "--output", "ontology/dwc-owl-v2.ttl"])
 
 #####################################################################################################
 # BEGIN PYLODE DOCUMENTATION GENERATION
