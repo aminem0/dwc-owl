@@ -1468,7 +1468,7 @@ createSC(
     namespace=ACORIENT,
     graph=g,
     pref_label=Literal("Left Side", lang="en"),
-    definition=Literal("View of the right side of a whole bilaterally symmetric organism.", lang="en"),
+    definition=Literal("View of the left side of a whole bilaterally symmetric organism.", lang="en"),
     broader=ACORIENT["r0003"],
     in_scheme=ACORIENT["r"],
     version_of_s="http://rs.tdwg.org/acorient/values/r0005",
@@ -4023,6 +4023,17 @@ createOP(
     pref_label=Literal("Type Designation Type"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to an instance of a [dwc:TypeDesignationType].", lang="en"),
     comments=Literal("The class [dwc:TypeDesignationType] considers a finite set of named individuals.", lang="en"),
+)
+
+# NOTE: For now, use the same name as the class, but with camelCase.
+createOP(
+    name="usedFor",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["BibliographicDocument"],
+    ranges=DWC["Identification"],
+    pref_label=Literal("Used For"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:BibliographicResource] to an instance of a [dwc:Identification] it was used to determine.", lang="en"),
 )
 
 # TEST: Example to see how not considering owl:unionOf affects WebVOWL
