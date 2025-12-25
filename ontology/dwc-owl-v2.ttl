@@ -1078,6 +1078,15 @@ dwcdp:targetFor rdf:type owl:ObjectProperty ;
                 skos:prefLabel "Target For" .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/targetOccurrence
+dwcdp:targetOccurrence rdf:type owl:ObjectProperty ;
+                       rdfs:domain dwc:Identification ;
+                       rdfs:range dwc:Occurrence ;
+                       rdfs:isDefinedBy dwcdp: ;
+                       skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Occurrence] it identifies."@en ;
+                       skos:prefLabel "Target Occurrence" .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/typeDesignationType
 dwcdp:typeDesignationType rdf:type owl:ObjectProperty ;
                           rdfs:domain dwc:Identification ;
@@ -5069,6 +5078,14 @@ ac:Media rdf:type owl:Class ;
                          [ rdf:type owl:Restriction ;
                            owl:onProperty dwcdp:partOf ;
                            owl:allValuesFrom ac:Media
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:heightFrac ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:widthFrac ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
                          ] ;
          dcterms:isVersionOf ac:Media ;
          rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;

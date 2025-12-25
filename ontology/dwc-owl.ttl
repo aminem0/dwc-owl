@@ -153,10 +153,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -765,6 +765,13 @@ dwcdp:targetFor a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [eco:SurveyTarget] to the [eco:Survey] it is a target for."@en ;
     skos:prefLabel "Target For" .
 
+dwcdp:targetOccurrence a owl:ObjectProperty ;
+    rdfs:domain dwc:Identification ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dwc:Occurrence ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Occurrence] it identifies."@en ;
+    skos:prefLabel "Target Occurrence" .
+
 dwcdp:typeDesignationType a owl:ObjectProperty ;
     rdfs:comment "The class [dwc:TypeDesignationType] considers a finite set of named individuals."@en ;
     rdfs:domain dwc:Identification ;
@@ -1355,18 +1362,6 @@ ac:fundingAttribution a owl:DatatypeProperty ;
         "Ocean Census | Nippon Foundation" ;
     skos:prefLabel "Funding Attribution" .
 
-ac:heightFrac a owl:DatatypeProperty ;
-    dcterms:isVersionOf ac:heightFrac ;
-    dcterms:references <http://rs.tdwg.org/ac/terms/version/heightFrac-2021-10-05> ;
-    rdfs:comment "The sum of a valid value plus [ac:yFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:heightFrac] and [ac:yFrac] are used with the [exif:PixelYDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy ac: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource."@en ;
-    skos:example 0.5,
-        1.0 ;
-    skos:prefLabel "Fractional Height"@en .
-
 ac:isROIOf a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:isROIOf ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/isROIOf-2021-10-05> ;
@@ -1469,18 +1464,6 @@ ac:subtypeLiteral a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "A subcategory that allows further specialization of a [dwc:Media] resource type than [mediaType]."@en ;
     skos:prefLabel "Subtype Literal" .
-
-ac:widthFrac a owl:DatatypeProperty ;
-    dcterms:isVersionOf ac:widthFrac ;
-    dcterms:references <http://rs.tdwg.org/ac/terms/version/widthFrac-2021-10-05> ;
-    rdfs:comment "The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value."@en ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy ac: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource."@en ;
-    skos:example 0.5,
-        1.0 ;
-    skos:prefLabel "Fractional Width"@en .
 
 ac:xFrac a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:xFrac ;
@@ -3551,6 +3534,30 @@ bibo:volume a owl:DatatypeProperty ;
 
 tdt:monotypy a dwc:TypeDesignationType .
 
+ac:heightFrac a owl:DatatypeProperty ;
+    dcterms:isVersionOf ac:heightFrac ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/heightFrac-2021-10-05> ;
+    rdfs:comment "The sum of a valid value plus [ac:yFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:heightFrac] and [ac:yFrac] are used with the [exif:PixelYDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same vertical pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value." ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The height of the bounding rectangle, expressed as a decimal fraction of the height of a [dwc:Media] resource."@en ;
+    skos:example 0.5,
+        1.0 ;
+    skos:prefLabel "Fractional Height"@en .
+
+ac:widthFrac a owl:DatatypeProperty ;
+    dcterms:isVersionOf ac:widthFrac ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/widthFrac-2021-10-05> ;
+    rdfs:comment "The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value."@en ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The width of the bounding rectangle, expressed as a decimal fraction of the width of a [dwc:Media] resource."@en ;
+    skos:example 0.5,
+        1.0 ;
+    skos:prefLabel "Fractional Width"@en .
+
 acorient:r0000 a dwc:SubjectOrientation ;
     dcterms:isVersionOf acorient:r0000 ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r0000-2023-04-26> ;
@@ -4840,9 +4847,6 @@ dwc:BibliographicDocument a owl:Class ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:edition ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:issue ],
-        [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty dc:title ],
         [ a owl:Restriction ;
@@ -4850,10 +4854,13 @@ dwc:BibliographicDocument a owl:Class ;
             owl:onProperty bibo:pages ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:status ],
+            owl:onProperty bibo:volume ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:volume ],
+            owl:onProperty bibo:issue ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty bibo:status ],
         dcterms:BibliographicResource,
         bibo:Document ;
     skos:definition "A book, article, or other documentatry resource."@en ;
@@ -5000,16 +5007,6 @@ bibo:DocumentStatus a owl:Class ;
         <http://purl.org/ontology/bibo/status/published> ;
     skos:prefLabel "Document Status"@en .
 
-dwc:Identification a owl:Class ;
-    dcterms:isVersionOf dwc:Identification ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18> ;
-    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A classification of a resource according to a classification scheme."@en ;
-    skos:example "a nomenclatural act designating a specimen as a holotype",
-        "a subspecies determination of an organism" ;
-    skos:prefLabel "Identification"@en .
-
 dwc:Protocol a owl:Class ;
     dcterms:isVersionOf dwc:Protocol ;
     rdfs:isDefinedBy dwc: ;
@@ -5027,6 +5024,16 @@ dwc:DegreeOfEstablishment a owl:Class ;
     owl:oneOf ( dwcdoe:d001 dwcdoe:d002 dwcdoe:d003 dwcdoe:d004 dwcdoe:d005 dwcdoe:d006 dwcdoe:d007 dwcdoe:d008 dwcdoe:d009 dwcdoe:d010 dwcdoe:d011 ) ;
     skos:definition "Controlled value for Darwin Core terms with local name degreeOfEstablishment."@en ;
     skos:prefLabel "Degree Of Establishment"@en .
+
+dwc:Identification a owl:Class ;
+    dcterms:isVersionOf dwc:Identification ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Identification-2023-09-18> ;
+    rdfs:comment "For biology, the assignment of a scientific name or taxon concept to a [dwc:Organism]."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A classification of a resource according to a classification scheme."@en ;
+    skos:example "a nomenclatural act designating a specimen as a holotype",
+        "a subspecies determination of an organism" ;
+    skos:prefLabel "Identification"@en .
 
 dwcpw:p047 a dwc:Pathway ;
     dcterms:isVersionOf dwcpw:p047 ;
@@ -5180,10 +5187,10 @@ dwc:MaterialEntity a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom dwc:MaterialEntity ;
-            owl:onProperty dwcdp:derivedFrom ],
+            owl:onProperty dwcdp:partOf ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:MaterialEntity ;
-            owl:onProperty dwcdp:partOf ] ;
+            owl:onProperty dwcdp:derivedFrom ] ;
     skos:definition "An entity that can be identified, exist for some period of time, and consist in whole or in part of physical matter while it exists."@en ;
     skos:example "a flower on a plant specimen",
         "a fossil within a rock",
@@ -5226,6 +5233,12 @@ ac:Media a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom ac:Media ;
             owl:onProperty dwcdp:partOf ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:heightFrac ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:widthFrac ],
         [ a owl:Restriction ;
             owl:allValuesFrom ac:Media ;
             owl:onProperty dwcdp:derivedFrom ] ;

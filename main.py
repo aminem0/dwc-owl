@@ -114,6 +114,14 @@ createOC(
         (DWCDP["derivedFrom"], AC["Media"]),
         (DWCDP["partOf"], AC["Media"]),
     ],
+    maxcard1_restrictions=[
+        # AC["captureDevice"],
+        # AC["digitizationDate"],
+        # AC["frameRate"],
+        AC["heightFrac"],
+        AC["widthFrac"],
+        # XMP["CreateDate"],
+    ],
     # maxcard1_restrictions=[AC["captureDevice"], AC["digitizationDate"], AC["frameRate"], AC["heightFrac"], AC["widthFrac"], XMP["CreateDate"]],
     #card0_restrictions=[AC["radius"]],
     version_of_s="http://rs.tdwg.org/ac/terms/Media",
@@ -4010,6 +4018,16 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves.", lang="en"),
     comments=Literal("To keep the interaction terms semantically correct and in order, the resource considered by this property should be the object of the statement.", lang="en"),
     examples=Literal("bb:RobberflyHuntingBee dwcdp:interactionWith bb:Bee456 ."),
+)
+
+createOP(
+    name="targetOccurrence",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["Identification"],
+    ranges=DWC["Occurrence"],
+    pref_label=Literal("Target Occurrence"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Occurrence] it identifies.", lang="en"),
 )
 
 # NOTE: For now, use the same name as the class, but with camelCase.
