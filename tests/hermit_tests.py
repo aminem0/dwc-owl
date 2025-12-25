@@ -24,7 +24,9 @@ single_classification = subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "
 #
 if single_classification.returncode == 1:
     print("+ Ontology is globally inconsistent.")
-    print("+ Probably an A-Box and T-Box conflict.")
+    print("- Could be a T-Box conflict.")
+    print("- Could also be an A-Box and T-Box conflict.")
+    print("- Use Protégé for a detailed explanation.")
 
 elif single_classification.returncode == 0:
 
