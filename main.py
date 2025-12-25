@@ -110,6 +110,10 @@ createOC(
         Literal("dcmi:StillImage"),
         Literal("dcmi:MovingImage"),
     ],
+    univ_rest_filler=[
+        (DWCDP["derivedFrom"], AC["Media"]),
+        (DWCDP["partOf"], AC["Media"]),
+    ],
     # maxcard1_restrictions=[AC["captureDevice"], AC["digitizationDate"], AC["frameRate"], AC["heightFrac"], AC["widthFrac"], XMP["CreateDate"]],
     #card0_restrictions=[AC["radius"]],
     version_of_s="http://rs.tdwg.org/ac/terms/Media",
@@ -420,6 +424,10 @@ createOC(
         Literal("a flower on a plant specimen"),
         Literal("a specific water sample"),
         Literal("an isolated molecule of DNA"),
+    ],
+    univ_rest_filler=[
+        (DWCDP["derivedFrom"], DWC["MaterialEntity"]),
+        (DWCDP["partOf"], DWC["MaterialEntity"]),
     ],
     version_of_s="http://rs.tdwg.org/dwc/terms/MaterialEntity",
     references_s="http://rs.tdwg.org/dwc/terms/version/MaterialEntity-2023-09-13",
@@ -2874,7 +2882,7 @@ from rdflib.collection import Collection
 # NOTE: Try a property chain
 # For a test case: dwcdp:basedOn o dwcdp:isPartOf -> dwcdp:basedOn
 prop_chain = BNode()
-Collection(g, prop_chain, [DWCDP["basedOn"], DWCDP["isPartOf"]])
+Collection(g, prop_chain, [DWCDP["basedOn"], DWCDP["partOf"]])
 g.add((DWCDP["basedOn"], OWL.propertyChainAxiom, prop_chain))
 
 
@@ -3596,6 +3604,25 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [chrono:ChronometricAge] to the [dwc:MaterialEntity] it represents the age of.", lang="en"),
 )
 
+# NOTE: Recheck transitivity.
+createOP(
+    name="derivedFrom",
+    namespace=DWCDP,
+    graph=g,
+    domains=[
+        AC["Media"],
+        DWC["MaterialEntity"],
+    ],
+    ranges=[
+        AC["Media"],
+        DWC["MaterialEntity"],
+    ],
+    additional_list=[OWL["TransitiveProperty"]],
+    pref_label=Literal("Derived From"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived.", lang="en"),
+    comments=Literal("Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term.", lang="en"),
+)
+
 # NOTE: Could be redundant to bibo:editor, but bibo:editor has a domain of bibo:Document, not dcterms:BibliographicResource, so resources would need to be declared as both.
 # NOTE: I imagine this is related to the OWA.
 createOP(
@@ -3781,46 +3808,6 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [dwc:Organism] it involves.", lang="en"),
 )
 
-# NOTE: Recheck transitivity.
-createOP(
-    name="isDerivedFrom",
-    namespace=DWCDP,
-    graph=g,
-    domains=[
-        AC["Media"],
-        DWC["MaterialEntity"],
-    ],
-    ranges=[
-        AC["Media"],
-        DWC["MaterialEntity"],
-    ],
-    additional_list=[OWL["TransitiveProperty"]],
-    pref_label=Literal("Is Derived From"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived.", lang="en"),
-    comments=Literal("Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term.", lang="en"),
-)
-
-createOP(
-    name="isPartOf",
-    namespace=DWCDP,
-    graph=g,
-    domains=[
-        AC["Media"],
-        # DCTERMS["BibliographicResource"],
-        DWC["BibliographicDocument"],
-        DWC["MaterialEntity"],
-    ],
-    ranges=[
-        AC["Media"],
-        # DCTERMS["BibliographicResource"],
-        DWC["BibliographicDocument"],
-        DWC["MaterialEntity"],
-    ],
-    pref_label=Literal("Is Part Of"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived.", lang="en"),
-    comments=Literal("Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term.", lang="en"),
-)
-
 createOP(
     name="issuedBy",
     namespace=DWCDP,
@@ -3886,6 +3873,27 @@ createOP(
     ranges=DCTERMS["Agent"],
     pref_label=Literal("Owned By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] which owns it.", lang="en"),
+)
+
+createOP(
+    name="partOf",
+    namespace=DWCDP,
+    graph=g,
+    domains=[
+        AC["Media"],
+        # DCTERMS["BibliographicResource"],
+        # DWC["BibliographicDocument"],
+        DWC["MaterialEntity"],
+    ],
+    ranges=[
+        AC["Media"],
+        # DCTERMS["BibliographicResource"],
+        # DWC["BibliographicDocument"],
+        DWC["MaterialEntity"],
+    ],
+    pref_label=Literal("Part Of"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived.", lang="en"),
+    comments=Literal("Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term.", lang="en"),
 )
 
 createOP(

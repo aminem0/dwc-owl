@@ -24,6 +24,7 @@ def createOC(
         version_of_s: str,
         subclass_list: list[Node] | None = None,
         equivalent_class: Node | None = None,
+        univ_rest_filler: list[tuple[Node, Node]] | None = None,
         definition: Literal | None = None,
         comments: Literal | None = None,
         examples: Literal | list[URIRef] | list[Literal] | None = None,
@@ -73,10 +74,10 @@ def createOC(
     if equivalent_class:
         graph.add((class_uri, OWL["equivalentClass"], equivalent_class))
 
-    if any(restriction is not None for restriction in (card1_restrictions, maxcard1_restrictions)):
-        # OWL Restrictions
-        entity_pylist = []
+    # OWL Restrictions
+    entity_pylist = []
 
+    if any(restriction is not None for restriction in (card1_restrictions, maxcard1_restrictions)):
         if card1_restrictions:
             for property in card1_restrictions:
                 R_BNode = BNode()
@@ -93,14 +94,28 @@ def createOC(
                 graph.add((R1_BNode, OWL["maxCardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
                 entity_pylist.append(R1_BNode)
 
-        # rdfs:subclassOf via owl:intersectionOf
-        Entity_intersection = BNode()
-        Entity_list = BNode()
-        Collection(graph, Entity_list, entity_pylist)
-        graph.add((Entity_intersection, RDF["type"], OWL["Class"]))
-        graph.add((Entity_intersection, OWL["intersectionOf"], Entity_list))
-        graph.add((class_uri, RDFS["subClassOf"], Entity_intersection))
+    if univ_rest_filler:
+        for pair in univ_rest_filler:
+            print(pair)
 
+            # Create an OWL universal restriction
+            UR_class = BNode()
+            graph.add((UR_class, RDF["type"], OWL["Restriction"]))
+            graph.add((UR_class, OWL["onProperty"], pair[0]))
+            graph.add((UR_class, OWL["allValuesFrom"], pair[1]))
+            entity_pylist.append(UR_class)
+
+
+    for entity in entity_pylist:
+        graph.add((class_uri, RDFS["subClassOf"], entity))
+
+        # Entity_intersection = BNode()
+        # Entity_list = BNode()
+        # Collection(graph, Entity_list, entity_pylist)
+        # graph.add((Entity_intersection, RDF["type"], OWL["Class"]))
+        # graph.add((Entity_intersection, OWL["intersectionOf"], Entity_list))
+        # graph.add((class_uri, RDFS["subClassOf"], Entity_intersection))
+        #
 def createDP(
         name: str,
         namespace: Namespace,

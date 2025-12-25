@@ -679,7 +679,7 @@ dwcdp:basedOn rdf:type owl:ObjectProperty ;
                                        )
                          ] ;
               owl:propertyChainAxiom ( dwcdp:basedOn
-                                       dwcdp:isPartOf
+                                       dwcdp:partOf
                                      ) ;
               rdfs:isDefinedBy dwcdp: ;
               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the entity on which it is based. These entities include [ac:Media], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:NucleotideSequence] and [dwc:Occurrence]."@en ;
@@ -721,6 +721,25 @@ dwcdp:datedMaterial rdf:type owl:ObjectProperty ;
                     rdfs:isDefinedBy dwcdp: ;
                     skos:definition "An [owl:ObjectProperty] used to relate a [chrono:ChronometricAge] to the [dwc:MaterialEntity] it represents the age of."@en ;
                     skos:prefLabel "Dated Material" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/derivedFrom
+dwcdp:derivedFrom rdf:type owl:ObjectProperty ,
+                           owl:TransitiveProperty ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( ac:Media
+                                              dwc:MaterialEntity
+                                            )
+                              ] ;
+                  rdfs:range [ rdf:type owl:Class ;
+                               owl:unionOf ( ac:Media
+                                             dwc:MaterialEntity
+                                           )
+                             ] ;
+                  rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term."@en ;
+                  rdfs:isDefinedBy dwcdp: ;
+                  skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
+                  skos:prefLabel "Derived From" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/editedBy
@@ -905,42 +924,7 @@ dwcdp:involves rdf:type owl:ObjectProperty ;
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/isDerivedFrom
-dwcdp:isDerivedFrom rdf:type owl:ObjectProperty ,
-                             owl:TransitiveProperty ;
-                    rdfs:domain [ rdf:type owl:Class ;
-                                  owl:unionOf ( ac:Media
-                                                dwc:MaterialEntity
-                                              )
-                                ] ;
-                    rdfs:range [ rdf:type owl:Class ;
-                                 owl:unionOf ( ac:Media
-                                               dwc:MaterialEntity
-                                             )
-                               ] ;
-                    rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term."@en ;
-                    rdfs:isDefinedBy dwcdp: ;
-                    skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
-                    skos:prefLabel "Is Derived From" .
-
-
-###  http://rs.tdwg.org/dwcdp/terms/isPartOf
-dwcdp:isPartOf rdf:type owl:ObjectProperty ;
-               rdfs:domain [ rdf:type owl:Class ;
-                             owl:unionOf ( ac:Media
-                                           dwc:BibliographicDocument
-                                           dwc:MaterialEntity
-                                         )
-                           ] ;
-               rdfs:range [ rdf:type owl:Class ;
-                            owl:unionOf ( ac:Media
-                                          dwc:BibliographicDocument
-                                          dwc:MaterialEntity
-                                        )
-                          ] ;
-               rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term."@en ;
-               rdfs:isDefinedBy dwcdp: ;
-               skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
-               skos:prefLabel "Is Part Of" .
+dwcdp:isDerivedFrom rdf:type owl:ObjectProperty .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/issuedBy
@@ -997,6 +981,24 @@ dwcdp:ownedBy rdf:type owl:ObjectProperty ;
               rdfs:isDefinedBy dwcdp: ;
               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] which owns it."@en ;
               skos:prefLabel "Owned By" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/partOf
+dwcdp:partOf rdf:type owl:ObjectProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( ac:Media
+                                         dwc:MaterialEntity
+                                       )
+                         ] ;
+             rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( ac:Media
+                                        dwc:MaterialEntity
+                                      )
+                        ] ;
+             rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term."@en ;
+             rdfs:isDefinedBy dwcdp: ;
+             skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
+             skos:prefLabel "Part Of" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/produced
@@ -1091,7 +1093,12 @@ dwcdp:typeDesignationType rdf:type owl:ObjectProperty ;
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/usedFor
-dwcdp:usedFor rdf:type owl:ObjectProperty .
+dwcdp:usedFor rdf:type owl:ObjectProperty ;
+              rdfs:domain dwc:BibliographicDocument ;
+              rdfs:range dwc:Identification ;
+              rdfs:isDefinedBy dwcdp: ;
+              skos:definition "An [owl:ObjectProperty] used to relate a [dwc:BibliographicResource] to an instance of a [dwc:Identification] it was used to determine."@en ;
+              skos:prefLabel "Used For" .
 
 
 ###  http://rs.tdwg.org/eco/iri/samplingPerformedBy
@@ -5005,12 +5012,9 @@ ggbn:permitType_vocabulary rdf:type owl:Class ;
 
 ###  http://purl.org/dc/terms/Agent
 dcterms:Agent rdf:type owl:Class ;
-              rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                       owl:onProperty dwc:preferredAgentName ;
-                                                       owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                     ]
-                                                   ) ;
-                                rdf:type owl:Class
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty dwc:preferredAgentName ;
+                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
                               ] ;
               dcterms:isVersionOf dcterms:Agent ;
               rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
@@ -5062,6 +5066,14 @@ bibo:DocumentStatus rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/ac/terms/Media
 ac:Media rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty dwcdp:derivedFrom ;
+                           owl:allValuesFrom ac:Media
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty dwcdp:partOf ;
+                           owl:allValuesFrom ac:Media
+                         ] ;
          dcterms:isVersionOf ac:Media ;
          rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
          rdfs:isDefinedBy ac: ;
@@ -5099,32 +5111,29 @@ dwc:Assertion rdf:type owl:Class ;
 dwc:BibliographicDocument rdf:type owl:Class ;
                           rdfs:subClassOf dcterms:BibliographicResource ,
                                           bibo:Document ,
-                                          [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty bibo:status ;
-                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty dc:title ;
-                                                                   owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty bibo:edition ;
-                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty bibo:issue ;
-                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty bibo:pages ;
-                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty bibo:volume ;
-                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                               ) ;
-                                            rdf:type owl:Class
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bibo:status ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty dc:title ;
+                                            owl:cardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bibo:edition ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bibo:issue ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bibo:pages ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bibo:volume ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                           ] ;
                           dcterms:isVersionOf dwc:BibliographicDocument ;
                           rdfs:comment "An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions."@en ;
@@ -5177,12 +5186,9 @@ dwc:EstablishmentMeans rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/Event
 dwc:Event rdf:type owl:Class ;
-          rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                   owl:onProperty dwc:preferredEventName ;
-                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                 ]
-                                               ) ;
-                            rdf:type owl:Class
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty dwc:preferredEventName ;
+                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
                           ] ;
           dcterms:isVersionOf dwc:Event ;
           dcterms:references <http://rs.tdwg.org/dwc/terms/version/Event-2023-09-18> ;
@@ -5198,12 +5204,9 @@ dwc:Event rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/GeologicalContext
 dwc:GeologicalContext rdf:type owl:Class ;
-                      rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                               owl:onProperty dwc:geologicalContextID ;
-                                                               owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                           ) ;
-                                        rdf:type owl:Class
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty dwc:geologicalContextID ;
+                                        owl:cardinality "1"^^xsd:nonNegativeInteger
                                       ] ;
                       dcterms:isVersionOf dwc:GeologicalContext ;
                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
@@ -5229,7 +5232,15 @@ dwc:Identification rdf:type owl:Class ;
 ###  http://rs.tdwg.org/dwc/terms/MaterialEntity
 dwc:MaterialEntity rdf:type owl:Class ;
                    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                     owl:onProperty dwcdp:derivedFrom ;
+                                     owl:allValuesFrom dwc:MaterialEntity
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
                                      owl:onProperty dwcdp:isDerivedFrom ;
+                                     owl:allValuesFrom dwc:MaterialEntity
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty dwcdp:partOf ;
                                      owl:allValuesFrom dwc:MaterialEntity
                                    ] ;
                    dcterms:isVersionOf dwc:MaterialEntity ;
@@ -5357,16 +5368,13 @@ dwc:NucleotideAnalysis rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/NucleotideSequence
 dwc:NucleotideSequence rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:nucleotideSequenceID ;
-                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:sequence ;
-                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty dwc:nucleotideSequenceID ;
+                                         owl:cardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty dwc:sequence ;
+                                         owl:cardinality "1"^^xsd:nonNegativeInteger
                                        ] ;
                        dcterms:isVersionOf dwc:NucleotideSequence ;
                        rdfs:isDefinedBy dwc: ;
@@ -6020,7 +6028,7 @@ acorient:r0005 rdf:type owl:NamedIndividual ,
                dcterms:references <http://rs.tdwg.org/acorient/values/version/r0005-2023-04-26> ;
                rdfs:isDefinedBy acorient: ;
                skos:broader acorient:r0003 ;
-               skos:definition "View of the right side of a whole bilaterally symmetric organism."@en ;
+               skos:definition "View of the left side of a whole bilaterally symmetric organism."@en ;
                skos:prefLabel "Left Side"@en .
 
 
