@@ -433,15 +433,6 @@ createOC(
     references_s="http://rs.tdwg.org/dwc/terms/version/MaterialEntity-2023-09-13",
 )
 
-# WARN: Add triples to express owl:Restriction here then integrate to function
-# This is done to avoid cross-class use of the term dwcdp:isDerivedFrom, which is the union of
-# ac:Media and dwc:MaterialEntity.
-R_isDerivedFrom = BNode()
-g.add((R_isDerivedFrom, RDF["type"], OWL["Restriction"]))
-g.add((R_isDerivedFrom, OWL["onProperty"], DWCDP["isDerivedFrom"]))
-g.add((R_isDerivedFrom, OWL["allValuesFrom"], DWC["MaterialEntity"]))
-g.add((DWC["MaterialEntity"], RDFS["subClassOf"], R_isDerivedFrom))
-
 createOC(
     name="NucleotideAnalysis",
     namespace=DWC,

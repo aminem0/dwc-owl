@@ -923,10 +923,6 @@ dwcdp:involves rdf:type owl:ObjectProperty ;
                skos:prefLabel "Involves" .
 
 
-###  http://rs.tdwg.org/dwcdp/terms/isDerivedFrom
-dwcdp:isDerivedFrom rdf:type owl:ObjectProperty .
-
-
 ###  http://rs.tdwg.org/dwcdp/terms/issuedBy
 dwcdp:issuedBy rdf:type owl:ObjectProperty ;
                rdfs:domain dwc:Permit ;
@@ -5233,10 +5229,6 @@ dwc:Identification rdf:type owl:Class ;
 dwc:MaterialEntity rdf:type owl:Class ;
                    rdfs:subClassOf [ rdf:type owl:Restriction ;
                                      owl:onProperty dwcdp:derivedFrom ;
-                                     owl:allValuesFrom dwc:MaterialEntity
-                                   ] ,
-                                   [ rdf:type owl:Restriction ;
-                                     owl:onProperty dwcdp:isDerivedFrom ;
                                      owl:allValuesFrom dwc:MaterialEntity
                                    ] ,
                                    [ rdf:type owl:Restriction ;
