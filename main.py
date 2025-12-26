@@ -440,6 +440,111 @@ createOC(
 )
 
 createOC(
+    name="MaterialEntityAssertion",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Material Entity Assertion", lang="en"),
+    subclass_list=[
+        DWC["Assertion"],
+    ],
+    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity].", lang="en"),
+    exist_rest_filler=[
+        (DWCDP["about"], DWC["MaterialEntity"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/MaterialEntityAssertion",
+    references_s="http://rs.tdwg.org/dwc/terms/version/MaterialEntityAssertion-0000-00-00",
+)
+
+createOC(
+    name="MolecularProtocol",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("MolecularProtocol", lang="en"),
+    subclass_list=[
+        DWC["Protocol"],
+    ],
+    definition=Literal("A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity].", lang="en"),
+    exist_rest_filler=[
+        (DWCDP["usedFor"], DWC["NucleotideAnalysis"]),
+    ],
+    maxcard1_restrictions=[
+        DWC["assayType"],
+        MIXS["0000001"],
+        MIXS["0000002"],
+        MIXS["0000003"],
+        MIXS["0000005"],
+        MIXS["0000006"],
+        MIXS["0000008"],
+        
+        MIXS["0000012"],
+        MIXS["0000013"],
+        MIXS["0000015"],
+        MIXS["0000016"],
+        MIXS["0000017"],
+        MIXS["0000020"],
+                           
+        MIXS["0000092"],
+        MIXS["0001107"],
+        MIXS["0001320"],
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/MolecularProtocol",
+    references_s="http://rs.tdwg.org/dwc/terms/version/MolecularProtocol-0000-00-00",
+)
+
+createOC(
+    name="OccurrenceAssertion",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Occurrence Assertion", lang="en"),
+    subclass_list=[
+        DWC["Assertion"],
+    ],
+    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence].", lang="en"),
+    exist_rest_filler=[
+        (DWCDP["about"], DWC["Occurrence"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/OccurrenceAssertion",
+    references_s="http://rs.tdwg.org/dwc/terms/version/OccurrenceAssertion-0000-00-00",
+)
+
+createOC(
+    name="OrganismAssertion",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Organism Assertion", lang="en"),
+    subclass_list=[
+        DWC["Assertion"],
+    ],
+    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism].", lang="en"),
+    exist_rest_filler=[
+        (DWCDP["about"], DWC["Organism"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/OrganismAssertion",
+    references_s="http://rs.tdwg.org/dwc/terms/version/OrganismAssertion-0000-00-00",
+)
+
+
+
+#
+#     object_prop=DWCDP["about"],
+#     use_inverse=False,
+#     values_class=DWC["MaterialEntity"],
+#     definition=Literal("A dwc:Assertion made by a dcterms:Agent about a dwc:MaterialEntity."),
+# )
+#
+# createCTOP(
+#     name="MaterialEntityAssertion",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Material Entity Assertion", lang="en"),
+#     subclass_of=DWC["Assertion"],
+#     object_prop=DWCDP["about"],
+#     use_inverse=False,
+#     values_class=DWC["MaterialEntity"],
+#     definition=Literal("A dwc:Assertion made by a dcterms:Agent about a dwc:MaterialEntity."),
+# )
+#
+createOC(
     name="NucleotideAnalysis",
     namespace=DWC,
     graph=g,
@@ -979,18 +1084,6 @@ createOC(
 # )
 
 
-createCTOP(
-    name="MaterialEntityAssertion",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Material Entity Assertion", lang="en"),
-    subclass_of=DWC["Assertion"],
-    object_prop=DWCDP["about"],
-    use_inverse=False,
-    values_class=DWC["MaterialEntity"],
-    definition=Literal("A dwc:Assertion made by a dcterms:Agent about a dwc:MaterialEntity."),
-)
-
 # createCTOP(
 #     name="MediaAssertion",
 #     namespace=DWC,
@@ -1014,32 +1107,6 @@ createCTOP(
 #     values_class=DWC["NucleotideAnalysis"],
 #     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:NucleotideAnalysis]."),
 # )
-
-createCTOP(
-    name="OccurrenceAssertion",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Occurrence Assertion", lang="en"),
-    subclass_of=DWC["Assertion"],
-    object_prop=DWCDP["about"],
-    use_inverse=False,
-    values_class=DWC["Occurrence"],
-    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."),
-)
-
-createCTOP(
-    name="OrganismAssertion",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Organism Assertion", lang="en"),
-    subclass_of=DWC["Assertion"],
-    object_prop=DWCDP["about"],
-    use_inverse=False,
-    values_class=DWC["Organism"],
-    definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]."),
-)
-
-
 
 ##########################################################
 
@@ -1072,27 +1139,6 @@ createCTOP(
 #     definition=Literal("A [dwc:Protocol] followed by a [dcterms:Agent] for a [dwc:NucleotideAnalysis]."),
 #     comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Event].")
 # )
-
-# NOTE: Particularly important one. It is the only dwc:Protocol that is the domain of the properties from GBIF, MIQE, MIXS, et al.
-createCTOP(
-    name="MolecularProtocol",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Molecular Protocol", lang="en"),
-    subclass_of=DWC["Protocol"],
-    object_prop=DWCDP["followed"],
-    use_inverse=True,
-    values_class=DWC["NucleotideAnalysis"],
-    definition=Literal("A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]."),
-    comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:MolecularProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:NucleotideAnalysis]."),
-    card1_restrictions=[DWC["molecularProtocolID"]],
-    maxcard1_restrictions=[DWC["assayType"],
-                           MIXS["0000001"], MIXS["0000002"], MIXS["0000003"], MIXS["0000005"], MIXS["0000006"], MIXS["0000008"],
-                           MIXS["0000012"], MIXS["0000013"], MIXS["0000015"], MIXS["0000016"], MIXS["0000017"], MIXS["0000020"],
-                           
-                           MIXS["0000092"], MIXS["0001107"], MIXS["0001320"]]
-)
-
 ##############################################
 
 # # NOTE: owl:inverseFunction test

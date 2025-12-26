@@ -17,6 +17,7 @@ def createOC(
         version_of_s: str,
         subclass_list: list[Node] | None = None,
         equivalent_class: Node | None = None,
+        exist_rest_filler: list[tuple[Node, Node]] | None = None,
         univ_rest_filler: list[tuple[Node, Node]] | None = None,
         definition: Literal | None = None,
         comments: Literal | None = None,
@@ -69,6 +70,14 @@ def createOC(
 
     # OWL Restrictions
     entity_pylist = []
+
+    if exist_rest_filler:
+        for pair in exist_rest_filler:
+            ER_class = BNode()
+            graph.add((ER_class, RDF["type"], OWL["Restriction"]))
+            graph.add((ER_class, OWL["onProperty"], pair[0]))
+            graph.add((ER_class, OWL["someValuesFrom"], pair[1]))
+            entity_pylist.append(ER_class)
 
     if univ_rest_filler:
         for pair in univ_rest_filler:
