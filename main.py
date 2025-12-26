@@ -3159,7 +3159,7 @@ createOP(
     pref_label=Literal("Survey Target Type IRI"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given.", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
-    subproperty_list=[DCTERMS["type"]],
+    subproperty_of=DCTERMS["type"],
     version_of_s="http://purl.org/dc/terms/type",
 )
 
@@ -3648,9 +3648,7 @@ createOP(
     ranges=DCTERMS["Agent"],
     pref_label=Literal("Created By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dcterms:Agent] that created it.", lang="en"),
-    subproperty_list=[
-        DCTERMS["creator"],
-    ],
+    subproperty_of=DCTERMS["creator"],
 )
 
 createOP(
@@ -3773,9 +3771,7 @@ createOP(
     domains=DCTERMS["Location"],
     ranges=DCTERMS["Agent"],
     pref_label=Literal("Georeferenced By"),
-    subproperty_list=[
-        DWCIRI["georeferencedBy"],
-    ],
+    subproperty_of=DWCIRI["georeferencedBy"],
     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:Location] to the [dwc:Agent] that georeferenced it.", lang="en"),
 )
 
@@ -3860,9 +3856,7 @@ createOP(
         ECO["Survey"],
     ],
     ranges=DCTERMS["Agent"],
-    subproperty_list=[
-        DWCIRI["identifiedBy"],
-    ],
+    subproperty_of=DWCIRI["identifiedBy"],
     pref_label=Literal("Identified By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Agent] that identified it.", lang="en"),
 )
@@ -3998,6 +3992,18 @@ createOP(
 )
 
 createOP(
+    name="recordedBy",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["Occurrence"],
+    ranges=DCTERMS["Agent"],
+    pref_label=Literal("Recorded By (DWCDP)"),
+    subproperty_of=DWCIRI["recordedBy"],
+    definition=Literal("A person, group, or organization responsible for recording the original dwc:Occurrence.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+)
+
+createOP(
     name="reviewedBy",
     namespace=DWCDP,
     graph=g,
@@ -4013,9 +4019,7 @@ createOP(
     graph=g,
     domains=ECO["Survey"],
     ranges=DCTERMS["Agent"],
-    subproperty_list=[
-        ECOIRI["samplingPerformedBy"],
-    ],
+    subproperty_of=ECOIRI["samplingPerformedBy"],
     pref_label=Literal("Sampling Performed By"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [eco:Survey] to the [dcterms:Agent] that carried out the sampling.", lang="en"),
 )
@@ -4026,9 +4030,7 @@ createOP(
     graph=g,
     domains=DWC["Event"],
     ranges=DCTERMS["Location"],
-    subproperty_list=[
-        DCTERMS["spatial"],
-    ],
+    subproperty_of=DCTERMS["spatial"],
     equivalent_property_list=[
         DSW["locatedAt"],
     ],
@@ -4136,11 +4138,11 @@ createOP(
 
 # TEST: Example to see how not considering owl:unionOf affects WebVOWL
 # BUG: Simply considering the domains separately considers the intersection
-g.add((DWCDP["hasUsagePolicy"], RDF["type"], OWL["ObjectProperty"]))
-g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], AC["Media"]))
-g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], DWC["MaterialEntity"]))
-g.add((DWCDP["hasUsagePolicy"], RDFS["range"], DWC["UsagePolicy"]))
-
+# g.add((DWCDP["hasUsagePolicy"], RDF["type"], OWL["ObjectProperty"]))
+# g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], AC["Media"]))
+# g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], DWC["MaterialEntity"]))
+# g.add((DWCDP["hasUsagePolicy"], RDFS["range"], DWC["UsagePolicy"]))
+#
 #############################################################################
 
 createOP(
@@ -4165,9 +4167,7 @@ createOP(
     pref_label=Literal("Survey Target Type Source IRI"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
-    subproperty_list=[
-        DCTERMS["source"]
-    ],
+    subproperty_of=DCTERMS["source"],
     version_of_s="http://purl.org/dc/elements/terms/source",
 )
 
@@ -6857,7 +6857,7 @@ createOP(
         URIRef("http://purl.obolibrary.org/obo/RO_0002455"),
         URIRef("https://www.inaturalist.org/observation_fields/879"),
     ],
-    subproperty_list=[DWC["relationshipOfResourceID"]],
+    subproperty_of=DWC["relationshipOfResourceID"],
     version_of_s="http://rs.tdwg.org/dwc/terms/relationshipOfResourceID",
     references_s="http://rs.tdwg.org/dwc/terms/version/relationshipOfResourceID-2023-06-28",
 )

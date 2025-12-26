@@ -874,13 +874,6 @@ dwcdp:hasPermitType rdf:type owl:ObjectProperty ;
                     skos:prefLabel "Has Permit Type" .
 
 
-###  http://rs.tdwg.org/dwcdp/terms/hasUsagePolicy
-dwcdp:hasUsagePolicy rdf:type owl:ObjectProperty ;
-                     rdfs:domain ac:Media ,
-                                 dwc:MaterialEntity ;
-                     rdfs:range dwc:UsagePolicy .
-
-
 ###  http://rs.tdwg.org/dwcdp/terms/identificationsBy
 dwcdp:identificationsBy rdf:type owl:ObjectProperty ;
                         rdfs:domain eco:Survey ;
@@ -1031,6 +1024,17 @@ dwcdp:publishedBy rdf:type owl:ObjectProperty ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it."@en ;
                   skos:prefLabel "Published By" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/recordedBy
+dwcdp:recordedBy rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf dwciri:recordedBy ;
+                 rdfs:domain dwc:Occurrence ;
+                 rdfs:range dcterms:Agent ;
+                 rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                 rdfs:isDefinedBy dwcdp: ;
+                 skos:definition "A person, group, or organization responsible for recording the original dwc:Occurrence."@en ;
+                 skos:prefLabel "Recorded By (DWCDP)" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/relationshipOf
