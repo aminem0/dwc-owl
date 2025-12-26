@@ -202,11 +202,7 @@ dwciri:assertionValueIRI rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/behavior
 dwciri:behavior rdf:type owl:ObjectProperty ;
-                rdfs:domain [ rdf:type owl:Class ;
-                              owl:unionOf ( dwc:OccurrenceAssertion
-                                            dwc:OrganismAssertion
-                                          )
-                            ] ;
+                rdfs:domain dwc:OccurrenceAssertion ;
                 dcterms:isVersionOf dwciri:behavior ;
                 dcterms:references <http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10> ;
                 rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -217,11 +213,7 @@ dwciri:behavior rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/caste
 dwciri:caste rdf:type owl:ObjectProperty ;
-             rdfs:domain [ rdf:type owl:Class ;
-                           owl:unionOf ( dwc:OccurrenceAssertion
-                                         dwc:OrganismAssertion
-                                       )
-                         ] ;
+             rdfs:domain dwc:OccurrenceAssertion ;
              dcterms:isVersionOf dwciri:caste ;
              dcterms:references <http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10> ;
              rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -475,11 +467,7 @@ dwciri:recordedBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/reproductiveCondition
 dwciri:reproductiveCondition rdf:type owl:ObjectProperty ;
-                             rdfs:domain [ rdf:type owl:Class ;
-                                           owl:unionOf ( dwc:OccurrenceAssertion
-                                                         dwc:OrganismAssertion
-                                                       )
-                                         ] ;
+                             rdfs:domain dwc:OccurrenceAssertion ;
                              dcterms:isVersionOf dwciri:reproductiveCondition ;
                              dcterms:references <http://rs.tdwg.org/dwc/iri/version/reproductiveCondition-2025-07-10> ;
                              rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -546,11 +534,7 @@ dwciri:verticalDatum rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/vitality
 dwciri:vitality rdf:type owl:ObjectProperty ;
-                rdfs:domain [ rdf:type owl:Class ;
-                              owl:unionOf ( dwc:OccurrenceAssertion
-                                            dwc:OrganismAssertion
-                                          )
-                            ] ;
+                rdfs:domain dwc:OccurrenceAssertion ;
                 dcterms:isVersionOf dwciri:vitality ;
                 dcterms:references <http://rs.tdwg.org/dwc/iri/version/vitality-2025-07-10> ;
                 rdfs:comment "Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -2145,11 +2129,7 @@ dwc:bed rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/caste
 dwc:caste rdf:type owl:DatatypeProperty ;
-          rdfs:domain [ rdf:type owl:Class ;
-                        owl:unionOf ( dwc:OccurrenceAssertion
-                                      dwc:OrganismAssertion
-                                    )
-                      ] ;
+          rdfs:domain dwc:OccurrenceAssertion ;
           rdfs:range xsd:string ;
           dcterms:isVersionOf dwc:caste ;
           dcterms:references <http://rs.tdwg.org/dwc/terms/version/caste-2023-06-28> ;
@@ -3862,11 +3842,7 @@ dwc:relationshipRemarks rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/reproductiveCondition
 dwc:reproductiveCondition rdf:type owl:DatatypeProperty ;
-                          rdfs:domain [ rdf:type owl:Class ;
-                                        owl:unionOf ( dwc:OccurrenceAssertion
-                                                      dwc:OrganismAssertion
-                                                    )
-                                      ] ;
+                          rdfs:domain dwc:OccurrenceAssertion ;
                           rdfs:range xsd:string ;
                           dcterms:isVersionOf dwc:reproductiveCondition ;
                           dcterms:references <http://rs.tdwg.org/dwc/terms/version/reproductiveCondition-2023-06-28> ;
@@ -3976,11 +3952,7 @@ dwc:sequence rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/sex
 dwc:sex rdf:type owl:DatatypeProperty ;
-        rdfs:domain [ rdf:type owl:Class ;
-                      owl:unionOf ( dwc:OccurrenceAssertion
-                                    dwc:OrganismAssertion
-                                  )
-                    ] ;
+        rdfs:domain dwc:OccurrenceAssertion ;
         rdfs:range xsd:string ;
         dcterms:isVersionOf dwc:sex ;
         dcterms:references <http://rs.tdwg.org/dwc/terms/version/sex-2023-06-28> ;
@@ -4313,11 +4285,7 @@ dwc:verticalDatum rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/vitality
 dwc:vitality rdf:type owl:DatatypeProperty ;
-             rdfs:domain [ rdf:type owl:Class ;
-                           owl:unionOf ( dwc:OccurrenceAssertion
-                                         dwc:OrganismAssertion
-                                       )
-                         ] ;
+             rdfs:domain dwc:OccurrenceAssertion ;
              rdfs:range xsd:string ;
              dcterms:isVersionOf dwc:vitality ;
              dcterms:references <http://rs.tdwg.org/dwc/terms/version/vitality-2023-09-13> ;

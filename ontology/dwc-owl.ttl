@@ -153,10 +153,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -1484,8 +1484,7 @@ dwciri:behavior a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:behavior ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:domain dwc:OccurrenceAssertion ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded."@en ;
     skos:prefLabel "Behavior (IRI)" .
@@ -1494,8 +1493,7 @@ dwciri:caste a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:caste ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:domain dwc:OccurrenceAssertion ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "Categorisation of individuals for eusocial species (including some mammals and arthropods)."@en ;
     skos:prefLabel "Caste (IRI)" .
@@ -1673,8 +1671,7 @@ dwciri:reproductiveCondition a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:reproductiveCondition ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/reproductiveCondition-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:domain dwc:OccurrenceAssertion ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "The reproductive condition of the biological individual(s) represented in the dwc:Occurrence."@en ;
     skos:prefLabel "Reproductive Condition (IRI)" .
@@ -1720,11 +1717,21 @@ dwciri:vitality a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:vitality ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/vitality-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:domain dwc:OccurrenceAssertion ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
     skos:prefLabel "Vitality (IRI)" .
+
+dwc:OrganismAssertion a owl:Class ;
+    dcterms:isVersionOf dwc:OrganismAssertion ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/OrganismAssertion-0000-00-00> ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty dwcdp:about ;
+            owl:someValuesFrom dwc:Organism ],
+        dwc:Assertion ;
+    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]."@en ;
+    skos:prefLabel "Organism Assertion"@en .
 
 dwc:assayType a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/assayType> ;
@@ -1752,8 +1759,7 @@ dwc:caste a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:caste ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/caste-2023-06-28> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:domain dwc:OccurrenceAssertion ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range xsd:string ;
     skos:definition "Categorisation of individuals for eusocial species (including some mammals and arthropods)."@en ;
@@ -2822,8 +2828,7 @@ dwc:reproductiveCondition a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:reproductiveCondition ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/reproductiveCondition-2023-06-28> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:domain dwc:OccurrenceAssertion ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range xsd:string ;
     skos:definition "The reproductive condition of the biological individual(s) represented in the dwc:Occurrence."@en ;
@@ -2915,8 +2920,7 @@ dwc:sex a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:sex ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/sex-2023-06-28> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:domain dwc:OccurrenceAssertion ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range xsd:string ;
     skos:definition "The sex of the biological individual(s) represented in the dwc:Occurrence."@en ;
@@ -3124,8 +3128,7 @@ dwc:vitality a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:vitality ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/vitality-2023-09-13> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`,` MaterialSample`, or `HumanObservation`. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:OccurrenceAssertion dwc:OrganismAssertion ) ] ;
+    rdfs:domain dwc:OccurrenceAssertion ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range xsd:string ;
     skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
@@ -4883,19 +4886,19 @@ dwc:BibliographicDocument a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:issue ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:pages ],
+            owl:onProperty bibo:edition ],
         [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty dc:title ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:edition ],
+            owl:onProperty bibo:volume ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:volume ],
+            owl:onProperty bibo:pages ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty bibo:issue ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:status ],
@@ -4981,17 +4984,6 @@ dwc:OccurrenceAssertion a owl:Class ;
         dwc:Assertion ;
     skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."@en ;
     skos:prefLabel "Occurrence Assertion"@en .
-
-dwc:OrganismAssertion a owl:Class ;
-    dcterms:isVersionOf dwc:OrganismAssertion ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/OrganismAssertion-0000-00-00> ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:about ;
-            owl:someValuesFrom dwc:Organism ],
-        dwc:Assertion ;
-    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]."@en ;
-    skos:prefLabel "Organism Assertion"@en .
 
 dwc:ResourceRelationship a owl:Class ;
     dcterms:isVersionOf dwc:ResourceRelationship ;
@@ -5276,7 +5268,7 @@ ac:Media a owl:Class ;
     rdfs:isDefinedBy ac: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:heightFrac ],
+            owl:onProperty ac:freqLow ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:widthFrac ],
@@ -5285,16 +5277,16 @@ ac:Media a owl:Class ;
             owl:onProperty dwcdp:derivedFrom ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:captureDevice ],
+            owl:onProperty ac:digitizationDate ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:freqHigh ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:digitizationDate ],
+            owl:onProperty ac:heightFrac ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:freqLow ],
+            owl:onProperty ac:captureDevice ],
         [ a owl:Restriction ;
             owl:allValuesFrom ac:Media ;
             owl:onProperty dwcdp:partOf ] ;
@@ -5310,58 +5302,58 @@ dwc:MolecularProtocol a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000016 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000013 ],
-        [ a owl:Restriction ;
-            owl:onProperty dwcdp:followedBy ;
-            owl:someValuesFrom dwc:NucleotideAnalysis ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000092 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000012 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000015 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000006 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0001107 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:assayType ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000005 ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:NucleotideAnalysis ;
             owl:onProperty dwcdp:followedBy ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000017 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000001 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000020 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000008 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000002 ],
+            owl:onProperty mixs:0000012 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0001320 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000016 ],
+            owl:onProperty mixs:0000092 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000003 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0001107 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000006 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000020 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000001 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dwc:assayType ],
+        [ a owl:Restriction ;
+            owl:onProperty dwcdp:followedBy ;
+            owl:someValuesFrom dwc:NucleotideAnalysis ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000002 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000005 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000008 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000017 ],
         dwc:Protocol ;
     skos:definition "A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]."@en ;
     skos:prefLabel "Molecular Protocol"@en .
