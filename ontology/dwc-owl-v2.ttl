@@ -751,27 +751,41 @@ dwcdp:editedBy rdf:type owl:ObjectProperty ;
                skos:prefLabel "Edited By" .
 
 
-###  http://rs.tdwg.org/dwcdp/terms/followed
-dwcdp:followed rdf:type owl:ObjectProperty ;
-               owl:inverseOf dwcdp:usedFor ;
-               rdfs:domain [ rdf:type owl:Class ;
-                             owl:unionOf ( chrono:ChronometricAge
-                                           dwc:Assertion
-                                           dwc:Event
-                                           dwc:MaterialEntity
-                                           dwc:NucleotideAnalysis
-                                           dwc:Occurrence
-                                           eco:Survey
-                                         )
-                           ] ;
-               rdfs:range dwc:Protocol ;
-               rdfs:isDefinedBy dwcdp: ;
-               skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
-               skos:prefLabel "Followed" .
-
-
 ###  http://rs.tdwg.org/dwcdp/terms/followedBy
-dwcdp:followedBy rdf:type owl:ObjectProperty .
+dwcdp:followedBy rdf:type owl:ObjectProperty ;
+                 owl:inverseOf dwcdp:follows ;
+                 rdfs:domain dwc:Protocol ;
+                 rdfs:range [ rdf:type owl:Class ;
+                              owl:unionOf ( chrono:ChronometricAge
+                                            dwc:Assertion
+                                            dwc:Event
+                                            dwc:MaterialEntity
+                                            dwc:NucleotideAnalysis
+                                            dwc:Occurrence
+                                            eco:Survey
+                                          )
+                            ] ;
+                 rdfs:isDefinedBy dwcdp: ;
+                 skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Protocol] to the entities it is followed by. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
+                 skos:prefLabel "Followed By" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/follows
+dwcdp:follows rdf:type owl:ObjectProperty ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( chrono:ChronometricAge
+                                          dwc:Assertion
+                                          dwc:Event
+                                          dwc:MaterialEntity
+                                          dwc:NucleotideAnalysis
+                                          dwc:Occurrence
+                                          eco:Survey
+                                        )
+                          ] ;
+              rdfs:range dwc:Protocol ;
+              rdfs:isDefinedBy dwcdp: ;
+              skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
+              skos:prefLabel "Follows" .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/fundedBy

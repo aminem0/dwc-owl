@@ -3690,7 +3690,7 @@ createOP(
 # )
 
 createOP(
-    name="followed",
+    name="follows",
     namespace=DWCDP,
     graph=g,
     domains=[
@@ -3703,12 +3703,33 @@ createOP(
         ECO["Survey"],
     ],
     ranges=DWC["Protocol"],
-    pref_label=Literal("Followed"),
+    pref_label=Literal("Follows"),
     definition=Literal("An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]", lang="en"),
+    inverse_prop=DWCDP["followedBy"],
 )
 
+createOP(
+    name="followedBy",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["Protocol"],
+    ranges=[
+        CHRONO["ChronometricAge"],
+        DWC["Assertion"],
+        DWC["Event"],
+        DWC["NucleotideAnalysis"],
+        DWC["MaterialEntity"],
+        DWC["Occurrence"],
+        ECO["Survey"],
+    ],
+    pref_label=Literal("Followed By"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Protocol] to the entities it is followed by. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]", lang="en"),
+    inverse_prop=DWCDP["follows"],
+)
+
+
 # WARN: Later link to subclasses of dwc:Protocol to avoid cross-class usage of the term.
-g.add((DWCDP["usedFor"], OWL["inverseOf"], DWCDP["followed"]))
+# g.add((DWCDP["usedFor"], OWL["inverseOf"], DWCDP["followed"]))
 
 createOP(
     name="fundedBy",

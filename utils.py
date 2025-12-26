@@ -407,6 +407,7 @@ def createOP(
     subproperty_list: list[Node] | None = None,
     equivalent_property_list: list[Node] | None = None,
     additional_list: list[Node] | None = None,
+    inverse_prop: Node | None = None,
     definition: Literal | None = None,
     comments: Literal | None = None,
     examples: URIRef | list[URIRef] | None = None,
@@ -500,6 +501,9 @@ def createOP(
         # Technically not a unified list, so can add them all with a for loop
         for property in equivalent_property_list:
             graph.add((op_uri, OWL["equivalentProperty"], property))
+
+    if inverse_prop:
+        graph.add((op_uri, OWL["inverseOf"], inverse_prop))
 
     # Add any additional property types.
     if additional_list:
