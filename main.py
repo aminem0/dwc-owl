@@ -3705,9 +3705,7 @@ createOP(
 #         BIBO["Document"],
 #     ],
 #     ranges=FOAF["Agent"],
-#     subproperty_list=[
-#         DCTERMS["contributor"],
-#     ],
+#     subproperty_of=DCTERMS["contributor"],
 #     pref_label=Literal("Editor"),
 #     definition=Literal("A person having managerial and sometimes policy-making responsibility for the editorial part of a publishing firm or of a newspaper, magazine, or other publication.", lang="en"),
 # )
@@ -4780,7 +4778,7 @@ createDP(
     ranges=RDFS["Literal"],
     pref_label=Literal("Agent ID"),
     definition=Literal("An identifier for a [dcterms:Agent]."),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     comments=Literal("Recommended best practice is to use a globally unique identifier."),
     version_of_s="http://example.com/term-pending/dwc/agentID"
 )
@@ -4864,7 +4862,7 @@ createDP(
     pref_label=Literal("Assertion ID"),
     definition=Literal("An identifier for a [dwc:Assertion]."),
     comments=Literal("Recommended best practice is to use a globally unique identifier."),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://example.com/term-pending/dwc/assertionID"
 )
 
@@ -4921,7 +4919,7 @@ createDP(
     pref_label=Literal("Assertion Type Source"),
     definition=Literal("A reference to the controlled vocabulary in which the definition of a value in [dwc:assertionType] is given."),
     version_of_s="http://purl.org/dc/elements/1.1/source",
-    subproperty_list=[DC["source"]],
+    subproperty_of=DC["source"],
 )
 
 createDP(
@@ -4956,7 +4954,7 @@ createDP(
     ranges=RDFS["Literal"],
     pref_label=Literal("Assertion Value Source"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [dwc:assertionValue] is given."),
-    subproperty_list=[DC["source"]],
+    subproperty_of=DC["source"],
     version_of_s="http://purl.org/dc/elements/1.1/source",
 )
 
@@ -5135,9 +5133,7 @@ createDP(
     pref_label=Literal("Creator"),
     definition=Literal("A name of a dcterms:Agent primarily responsible for making the resource.", lang="en"),
     comments=Literal("Human readable, or doi number, or URL. Simple name of parent for human readable.", lang="en"),
-    subproperty_list=[
-        DC["creator"],
-    ],
+    subproperty_of=DC["creator"],
     version_of_s="http://purl.org/dc/elements/1.1/creator",
 )
 
@@ -5249,7 +5245,7 @@ createDP(
     pref_label=Literal("Derived From Media ID"),
     definition=Literal("An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part."),
     comments=Literal("This term can be used when an [ac:Media] resource has been separated from its source [ac:Media] resource. Recommended best practice is to use a globally unique identifier."),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://example.com/term-pending/dwc/derivedFromMediaID",
 )
 
@@ -5448,7 +5444,7 @@ createDP(
     examples=[
         Literal("INBO:VIS:Ev:00009375"),
     ],
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://rs.tdwg.org/dwc/terms/eventID",
     references_s="http://rs.tdwg.org/dwc/terms/version/eventID-2023-06-28"
 )
@@ -5626,7 +5622,7 @@ createDP(
     examples=[
         Literal("https://opencontext.org/subjects/e54377f7-4452-4315-b676-40679b10c4d9"),
     ],
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://rs.tdwg.org/dwc/terms/geologicalContextID",
     references_s="http://rs.tdwg.org/dwc/terms/version/geologicalContextID-2023-06-28"
 )
@@ -6056,7 +6052,7 @@ createDP(
     examples=[
         Literal("06809dc5-f143-459a-be1a-6f03e63fc083"),
     ],
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://rs.tdwg.org/dwc/terms/materialEntityID",
     references_s="http://rs.tdwg.org/dwc/terms/version/materialEntityID-2023-09-13"
 )
@@ -6129,7 +6125,7 @@ createDP(
     pref_label=Literal("Media ID"),
     definition=Literal("An identifier for an [ac:Media] resource.", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://example.com/term-pending/dwc/mediaID",
 )
 
@@ -6216,7 +6212,7 @@ createDP(
     pref_label=Literal("Molecular Protocol ID"),
     definition=Literal("An identifier for a [dwc:MolecularProtocol].", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://example.com/term-pending/dwc/molecularProtocolID",
 )
 
@@ -6263,7 +6259,7 @@ createDP(
     pref_label=Literal("Nucleotide Analysis ID"),
     definition=Literal("An identifier for a [dwc:NucleotideAnalysis].", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://example.com/term-pending/dwc/nucleotideAnalysisID",
 )
 
@@ -6274,7 +6270,7 @@ createDP(
     domains=DWC["NucleotideSequence"],
     ranges=XSD["string"],
     pref_label=Literal("Nucleotide Sequence ID"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     definition=Literal("An identifier for a [dwc:NucleotideSequence].", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/molecularProtocolID",
@@ -6342,7 +6338,7 @@ createDP(
         Literal("000866d2-c177-4648-a200-ead4007051b9"),
         Literal("urn:catalog:UWBM:Bird:89776", datatype=XSD["anyURI"]),
     ],
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://rs.tdwg.org/dwc/terms/occurrenceID",
     references_s="http://rs.tdwg.org/dwc/terms/version/occurrenceID-2023-06-28",
 )
@@ -6395,7 +6391,7 @@ createDP(
     pref_label=Literal("Organism ID"),
     definition=Literal("An identifier for a [dwc:Organism].", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://rs.tdwg.org/dwc/terms/organismID",
     references_s="http://rs.tdwg.org/dwc/terms/version/organismID-2023-06-28",
 )
@@ -6409,7 +6405,7 @@ createDP(
     pref_label=Literal("Organism Interaction ID"),
     definition=Literal("An identifier for a [dwc:OrganismInteraction].", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://rs.tdwg.org/dwc/terms/organismID",
 )
 
@@ -6494,7 +6490,7 @@ createDP(
     examples=[
         Literal("A1"),
     ],
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://rs.tdwg.org/dwc/terms/parentEventID",
     references_s="http://rs.tdwg.org/dwc/terms/version/parentEventID-2023-06-28",
 )
@@ -6619,7 +6615,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Agent"],
     ranges=RDFS["Literal"],
-    subproperty_list=[DCTERMS["title"]],
+    subproperty_of=DCTERMS["title"],
     pref_label=Literal("Preferred Agent Name"),
     definition=Literal("A name of a [dcterms:Agent] preferred in searches and results.", lang="en"),
     version_of_s="http://purl.org/dc/terms/title",
@@ -6631,7 +6627,7 @@ createDP(
     graph=g,
     domains=DWC["Event"],
     ranges=RDFS["Literal"],
-    subproperty_list=[DCTERMS["title"]],
+    subproperty_of=DCTERMS["title"],
     pref_label=Literal("Preferred Event Name"),
     definition=Literal("The name of a [dwc:Event] preferred in searches and results.", lang="en"),
     version_of_s="http://purl.org/dc/terms/title",
@@ -6721,7 +6717,7 @@ createDP(
     pref_label=Literal("Protocol ID"),
     definition=Literal("An identifier for a dwc:Protocol.", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://example.com/term-pending/dwc/protocolID",
 )
 
@@ -6740,7 +6736,7 @@ createDP(
         Literal("point count"),
         Literal("UV light trap"),
     ],
-    subproperty_list=[DCTERMS["title"]],
+    subproperty_of=DCTERMS["title"],
     version_of_s="http://example.com/term-pending/dwc/protocolName",
 )
 
@@ -6893,7 +6889,7 @@ createDP(
     pref_label=Literal("Resource ID"),
     definition=Literal("An identifier for the resource that is the subject of the relationship.", lang="en"),
     examples=Literal("f809b9e0-b09b-11e8-96f8-529269fb1459"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://rs.tdwg.org/dwc/terms/resourceID",
     references_s="http://rs.tdwg.org/dwc/terms/version/resourceID-2018-09-06",
 )
@@ -6907,7 +6903,7 @@ createDP(
     pref_label=Literal("Resource Relationship ID"),
     definition=Literal("An identifier for an instance of relationship between one resource (the subject) and another (dwc:relatedResource, the object).", lang="en"),
     examples=Literal("04b16710-b09c-11e8-96f8-529269fb1459"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://rs.tdwg.org/dwc/terms/resourceRelationshipID",
     references_s="http://rs.tdwg.org/dwc/terms/version/resourceRelationshipID-2023-06-28",
 )
@@ -6920,7 +6916,7 @@ createDP(
     ranges=XSD["string"],
     pref_label=Literal("Resource Relationship ID"),
     definition=Literal("An identifier for an instance of relationship between one resource (the subject) and another (dwc:relatedResource, the object).", lang="en"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://rs.tdwg.org/dwc/terms/resourceRelationshipID",
     references_s="http://rs.tdwg.org/dwc/terms/version/resourceRelationshipID-2023-06-28",
 )
@@ -7077,7 +7073,7 @@ createDP(
     pref_label=Literal("Survey ID"),
     definition=Literal("An identifier for a [eco:Survey].", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://example.com/term-pending/dwc/surveyID",
 )
 
@@ -7091,7 +7087,7 @@ createDP(
     pref_label=Literal("Survey Target ID"),
     definition=Literal("An identifier for a [eco:SurveyTarget].", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://example.com/term-pending/dwc/surveyTargetID",
 )
 
@@ -7125,7 +7121,7 @@ createDP(
     ranges=XSD["string"],
     pref_label=Literal("Survey Target Type Source"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
-    subproperty_list=[DC["source"]],
+    subproperty_of=DC["source"],
     version_of_s="http://purl.org/dc/elements/1.1/source",
 )
 
@@ -7149,7 +7145,7 @@ createDP(
     pref_label=Literal("Usage Policy ID"),
     definition=Literal("An identifier for a [dwc:UsagePolicy]."),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
-    subproperty_list=[DCTERMS["identifier"]],
+    subproperty_of=DCTERMS["identifier"],
     version_of_s="http://example.com/term-pending/dwc/usagePolicyID",
 )
 

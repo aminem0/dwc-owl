@@ -123,7 +123,7 @@ def createDP(
         domains: Node | list[Node] | None = None,
         ranges: Node | list[Node] | None = None,
         version_of_s: str | None = None,
-        subproperty_list: list[Node] | None = None,
+        subproperty_of: Node | list[Node] | None = None,
         additional_list: list[Node] | None = None,
         definition: Literal | None = None,
         comments: Literal | None = None,
@@ -189,9 +189,12 @@ def createDP(
             graph.add((range_union_class, OWL["unionOf"], range_bnode))
             graph.add((dp_uri, RDFS["range"], range_union_class))
 
-    if subproperty_list:
+    if subproperty_of and isinstance(subproperty_of, Node):
+        graph.add((dp_uri, RDFS["subPropertyOf"], subproperty_of))
+
+    elif subproperty_of and isinstance(subproperty_of, list):
         # Technically not a unified list, so can add them all with a for loop
-        for property in subproperty_list:
+        for property in subproperty_of:
             graph.add((dp_uri, RDFS["subPropertyOf"], property))
 
     # Optionally add other types of properties??
