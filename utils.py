@@ -15,7 +15,7 @@ def createOC(
         graph: Graph,
         pref_label: Literal,
         version_of_s: str,
-        subclass_list: list[Node] | None = None,
+        subclass_of: Node | list[Node] | None = None,
         equivalent_class: Node | None = None,
         exist_rest_filler: list[tuple[Node, Node]] | None = None,
         univ_rest_filler: list[tuple[Node, Node]] | None = None,
@@ -59,10 +59,11 @@ def createOC(
     # Declare the owl:Class explicitly.
     graph.add((class_uri, RDF["type"], OWL["Class"]))
 
-    if subclass_list:
-        # Technically not a unified list, so can add them all with a for loop
-        for ro_class in subclass_list:
-            graph.add((class_uri, RDFS["subClassOf"], ro_class))
+    if subclass_of and isinstance(subclass_of, Node):
+        graph.add((class_uri, RDFS["subClassOf"], subclass_of))
+    elif subclass_of and isinstance(subclass_of, list):
+        for _class in subclass_of:
+            graph.add((class_uri, RDFS["subClassOf"], _class))
 
     # Declare any equivalent classes.
     if equivalent_class:

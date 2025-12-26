@@ -243,7 +243,7 @@ createOC(
     pref_label=Literal("Bibliographic Document", lang="en"),
     definition=Literal("A book, article, or other documentatry resource.", lang="en"),
     comments=Literal("An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions.", lang="en"),
-    subclass_list=[
+    subclass_of=[
         BIBO["Document"],
         DCTERMS["BibliographicResource"],
     ],
@@ -444,9 +444,7 @@ createOC(
     namespace=DWC,
     graph=g,
     pref_label=Literal("Material Entity Assertion", lang="en"),
-    subclass_list=[
-        DWC["Assertion"],
-    ],
+    subclass_of=DWC["Assertion"],
     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity].", lang="en"),
     exist_rest_filler=[
         (DWCDP["about"], DWC["MaterialEntity"]),
@@ -460,12 +458,10 @@ createOC(
     namespace=DWC,
     graph=g,
     pref_label=Literal("MolecularProtocol", lang="en"),
-    subclass_list=[
-        DWC["Protocol"],
-    ],
+    subclass_of=DWC["Protocol"],
     definition=Literal("A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity].", lang="en"),
     exist_rest_filler=[
-        (DWCDP["usedFor"], DWC["NucleotideAnalysis"]),
+        (DWCDP["followedBy"], DWC["NucleotideAnalysis"]),
     ],
     maxcard1_restrictions=[
         DWC["assayType"],
@@ -496,9 +492,7 @@ createOC(
     namespace=DWC,
     graph=g,
     pref_label=Literal("Occurrence Assertion", lang="en"),
-    subclass_list=[
-        DWC["Assertion"],
-    ],
+    subclass_of=DWC["Assertion"],
     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence].", lang="en"),
     exist_rest_filler=[
         (DWCDP["about"], DWC["Occurrence"]),
@@ -512,9 +506,7 @@ createOC(
     namespace=DWC,
     graph=g,
     pref_label=Literal("Organism Assertion", lang="en"),
-    subclass_list=[
-        DWC["Assertion"],
-    ],
+    subclass_of=DWC["Assertion"],
     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism].", lang="en"),
     exist_rest_filler=[
         (DWCDP["about"], DWC["Organism"]),

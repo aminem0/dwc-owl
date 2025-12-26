@@ -770,6 +770,10 @@ dwcdp:followed rdf:type owl:ObjectProperty ;
                skos:prefLabel "Followed" .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/followedBy
+dwcdp:followedBy rdf:type owl:ObjectProperty .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/fundedBy
 dwcdp:fundedBy rdf:type owl:ObjectProperty ;
                rdfs:domain dwc:Provenance ;
@@ -5333,7 +5337,7 @@ dwc:MaterialEntityAssertion rdf:type owl:Class ;
 dwc:MolecularProtocol rdf:type owl:Class ;
                       rdfs:subClassOf dwc:Protocol ,
                                       [ rdf:type owl:Restriction ;
-                                        owl:onProperty dwcdp:usedFor ;
+                                        owl:onProperty dwcdp:followedBy ;
                                         owl:someValuesFrom dwc:NucleotideAnalysis
                                       ] ,
                                       [ rdf:type owl:Restriction ;
