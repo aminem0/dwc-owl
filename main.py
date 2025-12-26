@@ -115,15 +115,11 @@ createOC(
         (DWCDP["partOf"], AC["Media"]),
     ],
     maxcard1_restrictions=[
-        # AC["captureDevice"],
-        # AC["digitizationDate"],
-        # AC["frameRate"],
+        AC["freqHigh"],
+        AC["freqLow"],
         AC["heightFrac"],
         AC["widthFrac"],
-        # XMP["CreateDate"],
     ],
-    # maxcard1_restrictions=[AC["captureDevice"], AC["digitizationDate"], AC["frameRate"], AC["heightFrac"], AC["widthFrac"], XMP["CreateDate"]],
-    #card0_restrictions=[AC["radius"]],
     version_of_s="http://rs.tdwg.org/ac/terms/Media",
 )
 

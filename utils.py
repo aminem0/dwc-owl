@@ -8,14 +8,7 @@ from rdflib.namespace import DC, DCTERMS, OWL, RDF, RDFS, SKOS, XSD
 # to accomodate textual definitons of examples
 #
 # WARN: Rewriting this function.
-# For some reason, card0_restrictions seems like a useless parameter.
-# It is something that is already stated by stating that a property has
-# a specific domain.
-# The only notions that we "should" take into account is:
-# owl:cardinality of 1 for properties that NEED to be present
-# owl:maxCardinality of 1 for properties that can be absent, but if they
-# are present, MUST NOT EXCEED 1
-# Other properties should be valid under the OWA
+# Included universal restrictions into the function definition.
 def createOC(
         name: str,
         namespace: Namespace,
@@ -77,23 +70,6 @@ def createOC(
     # OWL Restrictions
     entity_pylist = []
 
-    if any(restriction is not None for restriction in (card1_restrictions, maxcard1_restrictions)):
-        if card1_restrictions:
-            for property in card1_restrictions:
-                R_BNode = BNode()
-                graph.add((R_BNode, RDF["type"], OWL["Restriction"]))
-                graph.add((R_BNode, OWL["onProperty"], property))
-                graph.add((R_BNode, OWL["cardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
-                entity_pylist.append(R_BNode)
-
-        if maxcard1_restrictions:
-            for property in maxcard1_restrictions:
-                R1_BNode = BNode()
-                graph.add((R1_BNode, RDF["type"], OWL["Restriction"]))
-                graph.add((R1_BNode, OWL["onProperty"], property))
-                graph.add((R1_BNode, OWL["maxCardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
-                entity_pylist.append(R1_BNode)
-
     if univ_rest_filler:
         for pair in univ_rest_filler:
             print(pair)
@@ -105,6 +81,22 @@ def createOC(
             graph.add((UR_class, OWL["allValuesFrom"], pair[1]))
             entity_pylist.append(UR_class)
 
+    if card1_restrictions:
+        for property in card1_restrictions:
+            R1_BNode = BNode()
+            graph.add((R1_BNode, RDF["type"], OWL["Restriction"]))
+            graph.add((R1_BNode, OWL["onProperty"], property))
+            graph.add((R1_BNode, OWL["cardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
+            entity_pylist.append(R1_BNode)
+
+    if maxcard1_restrictions:
+        for property in maxcard1_restrictions:
+            RM1_BNode = BNode()
+            graph.add((RM1_BNode, RDF["type"], OWL["Restriction"]))
+            graph.add((RM1_BNode, OWL["onProperty"], property))
+            graph.add((RM1_BNode, OWL["maxCardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
+            entity_pylist.append(RM1_BNode)
+
 
     for entity in entity_pylist:
         graph.add((class_uri, RDFS["subClassOf"], entity))
@@ -115,7 +107,7 @@ def createOC(
         # graph.add((Entity_intersection, RDF["type"], OWL["Class"]))
         # graph.add((Entity_intersection, OWL["intersectionOf"], Entity_list))
         # graph.add((class_uri, RDFS["subClassOf"], Entity_intersection))
-        #
+
 def createDP(
         name: str,
         namespace: Namespace,
@@ -131,6 +123,7 @@ def createDP(
         examples: Literal | list[Literal] | None = None,
         references_s: str | None = None,
         ) -> None:
+
     # Create the owl:DatatypeProperty URI
     dp_uri = namespace[name]
 

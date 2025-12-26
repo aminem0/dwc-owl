@@ -1326,28 +1326,6 @@ ac:endTimestamp a owl:DatatypeProperty ;
     skos:definition "The end of a temporal region, specified as real-world clock time ISO 8601 timestamps, using UTC timezone, with an optional fractional part to indicate milliseconds or finer. There is no limit on the number of decimal places for the decimal fraction."@en ;
     skos:prefLabel "End Time Stamp"@en .
 
-ac:freqHigh a owl:DatatypeProperty ;
-    dcterms:isVersionOf ac:freqHigh ;
-    dcterms:references <http://rs.tdwg.org/ac/terms/version/freqHigh-2021-10-05> ;
-    rdfs:comment "Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible."@en ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy ac: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "The highest frequency of the phenomena reflected in the multimedia item or Region of Interest."@en ;
-    skos:example 60.0 ;
-    skos:prefLabel "Upper Frequency Bound"@en .
-
-ac:freqLow a owl:DatatypeProperty ;
-    dcterms:isVersionOf ac:freqLow ;
-    dcterms:references <http://rs.tdwg.org/ac/terms/version/freqLow-2021-10-05> ;
-    rdfs:comment "Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible."@en ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy ac: ;
-    rdfs:range xsd:decimal ;
-    skos:definition "The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest."@en ;
-    skos:example 60.0 ;
-    skos:prefLabel "Lower Frequency Bound"@en .
-
 ac:fundingAttribution a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:fundingAttribution ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/fundingAttribution-2020-01-27> ;
@@ -3534,6 +3512,28 @@ bibo:volume a owl:DatatypeProperty ;
 
 tdt:monotypy a dwc:TypeDesignationType .
 
+ac:freqHigh a owl:DatatypeProperty ;
+    dcterms:isVersionOf ac:freqHigh ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/freqHigh-2021-10-05> ;
+    rdfs:comment "Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible."@en ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The highest frequency of the phenomena reflected in the multimedia item or Region of Interest."@en ;
+    skos:example 60.0 ;
+    skos:prefLabel "Upper Frequency Bound"@en .
+
+ac:freqLow a owl:DatatypeProperty ;
+    dcterms:isVersionOf ac:freqLow ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/freqLow-2021-10-05> ;
+    rdfs:comment "Numeric value in hertz (Hz). This term refers to the sound events depicted and not to the constraints of the recording medium, so are in principle independent from sampleRate. If [dwc:scientificName] is specified and if applied to the entire multimedia item, these frequency bounds refer to the sounds of the species given in the [dwc:scientificName] throughout the whole recording. Although many users will specify both [ac:freqLow] and [ac:freqHigh], it is permitted to specify just one or the other, for example if only one of the bounds is discernible."@en ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:range xsd:decimal ;
+    skos:definition "The lowest frequency of the phenomena reflected in the multimedia item or Region of Interest."@en ;
+    skos:example 60.0 ;
+    skos:prefLabel "Lower Frequency Bound"@en .
+
 ac:heightFrac a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:heightFrac ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/heightFrac-2021-10-05> ;
@@ -4847,20 +4847,20 @@ dwc:BibliographicDocument a owl:Class ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:edition ],
         [ a owl:Restriction ;
-            owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dc:title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:pages ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:volume ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty bibo:status ],
+        [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dc:title ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:issue ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:status ],
+            owl:onProperty bibo:pages ],
         dcterms:BibliographicResource,
         bibo:Document ;
     skos:definition "A book, article, or other documentatry resource."@en ;
@@ -5187,10 +5187,10 @@ dwc:MaterialEntity a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom dwc:MaterialEntity ;
-            owl:onProperty dwcdp:partOf ],
+            owl:onProperty dwcdp:derivedFrom ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:MaterialEntity ;
-            owl:onProperty dwcdp:derivedFrom ] ;
+            owl:onProperty dwcdp:partOf ] ;
     skos:definition "An entity that can be identified, exist for some period of time, and consist in whole or in part of physical matter while it exists."@en ;
     skos:example "a flower on a plant specimen",
         "a fossil within a rock",
@@ -5231,17 +5231,23 @@ ac:Media a owl:Class ;
     rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
     rdfs:isDefinedBy ac: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:partOf ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:heightFrac ],
+            owl:onProperty ac:freqLow ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:widthFrac ],
         [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:heightFrac ],
+        [ a owl:Restriction ;
             owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:derivedFrom ] ;
+            owl:onProperty dwcdp:derivedFrom ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ac:Media ;
+            owl:onProperty dwcdp:partOf ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:freqHigh ] ;
     skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
     skos:example "dcmi:MovingImage",
         "dcmi:Sound",

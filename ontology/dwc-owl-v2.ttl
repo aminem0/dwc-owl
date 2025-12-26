@@ -5080,6 +5080,14 @@ ac:Media rdf:type owl:Class ;
                            owl:allValuesFrom ac:Media
                          ] ,
                          [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:freqHigh ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:freqLow ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
                            owl:onProperty ac:heightFrac ;
                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
                          ] ,
