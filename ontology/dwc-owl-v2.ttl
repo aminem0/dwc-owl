@@ -5355,6 +5355,10 @@ dwc:MolecularProtocol rdf:type owl:Class ;
                                         owl:someValuesFrom dwc:NucleotideAnalysis
                                       ] ,
                                       [ rdf:type owl:Restriction ;
+                                        owl:onProperty dwcdp:followedBy ;
+                                        owl:allValuesFrom dwc:NucleotideAnalysis
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
                                         owl:onProperty dwc:assayType ;
                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                       ] ,
@@ -5422,7 +5426,7 @@ dwc:MolecularProtocol rdf:type owl:Class ;
                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/MolecularProtocol-0000-00-00> ;
                       rdfs:isDefinedBy dwc: ;
                       skos:definition "A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]."@en ;
-                      skos:prefLabel "MolecularProtocol"@en .
+                      skos:prefLabel "Molecular Protocol"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/NucleotideAnalysis

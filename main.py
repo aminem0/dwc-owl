@@ -456,12 +456,16 @@ createOC(
     name="MolecularProtocol",
     namespace=DWC,
     graph=g,
-    pref_label=Literal("MolecularProtocol", lang="en"),
+    pref_label=Literal("Molecular Protocol", lang="en"),
     subclass_of=DWC["Protocol"],
     definition=Literal("A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity].", lang="en"),
     exist_rest_filler=[
         (DWCDP["followedBy"], DWC["NucleotideAnalysis"]),
     ],
+    univ_rest_filler=[
+        (DWCDP["followedBy"], DWC["NucleotideAnalysis"]),
+    ],
+
     maxcard1_restrictions=[
         DWC["assayType"],
         MIXS["0000001"],
