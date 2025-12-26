@@ -7507,12 +7507,14 @@ dcterms:source dcterms:isVersionOf dcterms:source ;
 
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( dcterms:Agent
+                dcterms:BibliographicResource
                 dcterms:Location
                 ac:Media
                 chrono:ChronometricAge
                 dwc:Assertion
                 dwc:Event
                 dwc:GeologicalContext
+                dwc:Identification
                 dwc:MaterialEntity
                 dwc:NucleotideAnalysis
                 dwc:NucleotideSequence

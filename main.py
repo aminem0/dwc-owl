@@ -2911,7 +2911,28 @@ createSC(
 
 # NOTE: Can a dwc:Event be a eco:Survey?
 declare_disjoint(
-    classes=[CHRONO["ChronometricAge"], DCTERMS["Agent"], DCTERMS["Location"], AC["Media"], DWC["Assertion"], DWC["Event"], DWC["GeologicalContext"], DWC["MaterialEntity"], DWC["NucleotideAnalysis"], DWC["NucleotideSequence"], DWC["Occurrence"], DWC["Organism"], DWC["OrganismInteraction"], DWC["Protocol"], DWC["ResourceRelationship"], DWC["UsagePolicy"], ECO["Survey"], ECO["SurveyTarget"]],
+    classes=[
+        CHRONO["ChronometricAge"],
+        DCTERMS["Agent"],
+        DCTERMS["BibliographicResource"],
+        DCTERMS["Location"],
+        AC["Media"],
+        DWC["Assertion"],
+        DWC["Event"],
+        DWC["GeologicalContext"],
+        DWC["Identification"],
+        DWC["MaterialEntity"],
+        DWC["NucleotideAnalysis"],
+        DWC["NucleotideSequence"],
+        DWC["Occurrence"],
+        DWC["Organism"],
+        DWC["OrganismInteraction"],
+        DWC["Protocol"],
+        DWC["ResourceRelationship"],
+        DWC["UsagePolicy"],
+        ECO["Survey"],
+        ECO["SurveyTarget"]
+    ],
     graph=g
 )
 
