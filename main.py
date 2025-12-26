@@ -8,7 +8,7 @@ import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
-from utils import createCTOP, createDP, createEDP, createEOC, createNI, createOC, createOP, createRDP, createSC, createSCS, declare_disjoint
+from utils import createDP, createEDP, createEOC, createNI, createOC, createOP, createRDP, createSC, createSCS, declare_disjoint
 
 #####################################################################################################
 # BEGIN ONTOLOGY DEFINITION
@@ -79,7 +79,6 @@ g.bind("skos", SKOS)
 g.bind("tdt", TDT)
 g.bind("vann", VANN)
 g.bind("xmp", XMP)
-
 
 # Define ontology URI and basic definitions.
 #
