@@ -72,9 +72,6 @@ def createOC(
 
     if univ_rest_filler:
         for pair in univ_rest_filler:
-            print(pair)
-
-            # Create an OWL universal restriction
             UR_class = BNode()
             graph.add((UR_class, RDF["type"], OWL["Restriction"]))
             graph.add((UR_class, OWL["onProperty"], pair[0]))
