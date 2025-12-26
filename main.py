@@ -115,6 +115,8 @@ createOC(
         (DWCDP["partOf"], AC["Media"]),
     ],
     maxcard1_restrictions=[
+        AC["captureDevice"],
+        AC["digitizationDate"],
         AC["freqHigh"],
         AC["freqLow"],
         AC["heightFrac"],
@@ -4449,6 +4451,43 @@ createDP(
     version_of_s="http://rs.tdwg.org/ac/terms/subtypeLiteral",
     references_s="http://rs.tdwg.org/ac/terms/version/subtypeLiteral-2023-09-05",
 )
+
+createDP(
+    name="captureDevice",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["string"],
+    pref_label=Literal("Capture Device", lang="en"),
+    definition=Literal("Free-form text describing the device or devices used to create the resource.", lang="en"),
+    comments=Literal("The sum of a valid value plus [ac:xFrac] MUST be greater than zero and less than or equal to one. The precision of this value SHOULD be great enough that when [ac:widthFrac] and [ac:xFrac] are used with the [exif:PixelXDimension] of the Best Quality variant of the Service Access point to calculate the lower right corner of the rectangle, rounding to the nearest integer results in the same horizontal pixel originally used to define the point. This term MUST NOT be used with [ac:radius] to define a region of interest. Zero-sized bounding rectangles are not allowed. To designate a point, use the radius option with a zero value.", lang="en"),
+    examples=[
+        Literal("Canon Supershot 2000"),
+        Literal("Zeiss Axioscope with Camera Illu"),
+        Literal("SEM (Scanning Electron Microscope)"),
+    ],
+    version_of_s="http://rs.tdwg.org/ac/terms/captureDevice",
+    references_s="http://rs.tdwg.org/ac/terms/version/captureDevice-2020-01-27",
+)
+
+
+createDP(
+    name="digitizationDate",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["string"],
+    pref_label=Literal("Digitization Date", lang="en"),
+    definition=Literal("Date the first digital version was created, if different from Original Date found in the Temporal Coverage Vocabulary.", lang="en"),
+    comments=Literal("The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime](https://www.w3.org/TR/NOTE-datetime), which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits.This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html](https://www.iso.org/standard/40874.html). AC datetime values MAY also follow 8601:2004 for ranges by separating the ISO 8601 fields by a solidus (\"forward slash\", '/'). Use the international (ISO/xml) format yyyy-mm-ddThh:mm. Where available, timezone information SHOULD be added.", lang="en"),
+    examples=[
+        Literal("2007-12-31"),
+        Literal("2007-12-31T14:59"),
+    ],
+    version_of_s="http://rs.tdwg.org/ac/terms/digitizationDate",
+    references_s="http://rs.tdwg.org/ac/terms/version/digitizationDate-2021-01-27",
+)
+
 
 createDP(
     name="widthFrac",
