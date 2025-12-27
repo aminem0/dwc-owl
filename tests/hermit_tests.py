@@ -12,8 +12,6 @@ owl_bottom_data_property_uri_s = "http://www.w3.org/2002/07/owl#bottomDataProper
 #
 ontology_uri = (Path(__file__).parent.parent / "ontology/dwc-owl-v2.ttl").resolve().as_uri()
 
-print(ontology_uri)
-
 # Use HermiT as validation that there are no unsatisfiable things.
 #
 single_classification = subprocess.run(["java", "-jar", "jarfiles/HermiT.jar", "-cOD", ontology_uri], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
