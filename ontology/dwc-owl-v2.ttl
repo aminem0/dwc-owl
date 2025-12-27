@@ -181,6 +181,26 @@ bibo:status rdf:type owl:ObjectProperty ;
             skos:prefLabel "Status"@en .
 
 
+###  http://rs.tdwg.org/ac/terms/metadataCreator
+ac:metadataCreator rdf:type owl:ObjectProperty ;
+                   dcterms:isVersionOf ac:metadataCreator ;
+                   dcterms:references <http://rs.tdwg.org/ac/terms/version/metadataCreator-2023-09-05> ;
+                   rdfs:comment "See also the entry for [ac:metadataCreatorLiteral] and the section Namespaces, Prefixes and Term Names in the Audiovisual Core Term List document for discussion of the rationale for separate terms taking URI values from those taking Literal values where both are possible. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions."@en ;
+                   rdfs:isDefinedBy ac: ;
+                   skos:definition "URI of person or organization originally creating the resource metadata record."@en ;
+                   skos:prefLabel "Metadata Creator"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/metadataProvider
+ac:metadataProvider rdf:type owl:ObjectProperty ;
+                    dcterms:isVersionOf ac:metadataProvider ;
+                    dcterms:references <http://rs.tdwg.org/ac/terms/version/metadataProvider-2023-09-05> ;
+                    rdfs:comment "Media resources and their metadata may be served from different institutions, e.g. in the case of aggregators adding user annotations, taxon identifications, or ratings. Compare Provider. See also the entry for [ac:metadataProviderLiteral] and the section Namespaces, Prefixes and Term Names in the Audiovisual Core Term List document for discussion of the rationale for separate terms taking URI values from those taking Literal values where both are possible. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions."@en ;
+                    rdfs:isDefinedBy ac: ;
+                    skos:definition "URI of person or organization originally responsible for providing the resource metadata record."@en ;
+                    skos:prefLabel "Metadata Provider"@en .
+
+
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
 dwciri:assertionTypeIRI rdf:type owl:ObjectProperty ;
                         rdfs:domain dwc:Assertion ;
@@ -955,6 +975,38 @@ dwcdp:mentionedIn rdf:type owl:ObjectProperty ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."@en ;
                   skos:prefLabel "Mentionned In" .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/metadataCreator
+dwcdp:metadataCreator rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf ac:metadataCreator ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( ac:Media
+                                                  dwc:Provenance
+                                                )
+                                  ] ;
+                      rdfs:range dcterms:Agent ;
+                      dcterms:isVersionOf <http://example.com/term-pending/dwc/metadataProvider> ;
+                      rdfs:comment "The domain of this property can be either [ac:Media] or [dwc:Provenance]."@en ;
+                      rdfs:isDefinedBy dwcdp: ;
+                      skos:definition "An owl:ObjectProperty relating a resource to the [dcterms:Agent] responsible for creating its associated metadata."@en ;
+                      skos:prefLabel "Metadata Creator (DWCDP)"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/metadataProvider
+dwcdp:metadataProvider rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf ac:metadataProvider ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( ac:Media
+                                                   dwc:Provenance
+                                                 )
+                                   ] ;
+                       rdfs:range dcterms:Agent ;
+                       dcterms:isVersionOf <http://example.com/term-pending/dwc/metadataProvider> ;
+                       rdfs:comment "The domain of this property can be either [ac:Media] or [dwc:Provenance]."@en ;
+                       rdfs:isDefinedBy dwcdp: ;
+                       skos:definition "An owl:ObjectProperty relating a resource to the [dcterms:Agent] responsible for providing its associated metadata."@en ;
+                       skos:prefLabel "Metadata Provider (DWCDP)"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/occurrenceOf

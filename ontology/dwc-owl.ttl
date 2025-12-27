@@ -154,10 +154,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -720,6 +720,28 @@ dwcdp:mentionedIn a owl:ObjectProperty ;
     rdfs:range dwc:BibliographicDocument ;
     skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."@en ;
     skos:prefLabel "Mentionned In" .
+
+dwcdp:metadataCreator a owl:ObjectProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/metadataProvider> ;
+    rdfs:comment "The domain of this property can be either [ac:Media] or [dwc:Provenance]."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( ac:Media dwc:Provenance ) ] ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dcterms:Agent ;
+    rdfs:subPropertyOf ac:metadataCreator ;
+    skos:definition "An owl:ObjectProperty relating a resource to the [dcterms:Agent] responsible for creating its associated metadata."@en ;
+    skos:prefLabel "Metadata Creator (DWCDP)"@en .
+
+dwcdp:metadataProvider a owl:ObjectProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/metadataProvider> ;
+    rdfs:comment "The domain of this property can be either [ac:Media] or [dwc:Provenance]."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( ac:Media dwc:Provenance ) ] ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dcterms:Agent ;
+    rdfs:subPropertyOf ac:metadataProvider ;
+    skos:definition "An owl:ObjectProperty relating a resource to the [dcterms:Agent] responsible for providing its associated metadata."@en ;
+    skos:prefLabel "Metadata Provider (DWCDP)"@en .
 
 dwcdp:ownedBy a owl:ObjectProperty ;
     rdfs:domain dwc:MaterialEntity ;
@@ -3628,6 +3650,22 @@ ac:heightFrac a owl:DatatypeProperty ;
         1.0 ;
     skos:prefLabel "Fractional Height"@en .
 
+ac:metadataCreator a owl:ObjectProperty ;
+    dcterms:isVersionOf ac:metadataCreator ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/metadataCreator-2023-09-05> ;
+    rdfs:comment "See also the entry for [ac:metadataCreatorLiteral] and the section Namespaces, Prefixes and Term Names in the Audiovisual Core Term List document for discussion of the rationale for separate terms taking URI values from those taking Literal values where both are possible. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions."@en ;
+    rdfs:isDefinedBy ac: ;
+    skos:definition "URI of person or organization originally creating the resource metadata record."@en ;
+    skos:prefLabel "Metadata Creator"@en .
+
+ac:metadataProvider a owl:ObjectProperty ;
+    dcterms:isVersionOf ac:metadataProvider ;
+    dcterms:references <http://rs.tdwg.org/ac/terms/version/metadataProvider-2023-09-05> ;
+    rdfs:comment "Media resources and their metadata may be served from different institutions, e.g. in the case of aggregators adding user annotations, taxon identifications, or ratings. Compare Provider. See also the entry for [ac:metadataProviderLiteral] and the section Namespaces, Prefixes and Term Names in the Audiovisual Core Term List document for discussion of the rationale for separate terms taking URI values from those taking Literal values where both are possible. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions."@en ;
+    rdfs:isDefinedBy ac: ;
+    skos:definition "URI of person or organization originally responsible for providing the resource metadata record."@en ;
+    skos:prefLabel "Metadata Provider"@en .
+
 ac:resourceCreationTechnique a owl:DatatypeProperty ;
     dcterms:isVersionOf ac:resourceCreationTechnique ;
     dcterms:references <http://rs.tdwg.org/ac/terms/version/resourceCreationTechnique-2020-10-13> ;
@@ -4965,8 +5003,14 @@ dwc:BibliographicDocument a owl:Class ;
     rdfs:comment "An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dc:title ],
+        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:issue ],
+            owl:onProperty bibo:status ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty bibo:pages ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:volume ],
@@ -4975,13 +5019,7 @@ dwc:BibliographicDocument a owl:Class ;
             owl:onProperty bibo:edition ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:status ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:pages ],
-        [ a owl:Restriction ;
-            owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dc:title ],
+            owl:onProperty bibo:issue ],
         dcterms:BibliographicResource,
         bibo:Document ;
     skos:definition "A book, article, or other documentatry resource."@en ;
@@ -5005,10 +5043,10 @@ dwc:NucleotideSequence a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:nucleotideSequenceID ],
+            owl:onProperty dwc:sequence ],
         [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:sequence ] ;
+            owl:onProperty dwc:nucleotideSequenceID ] ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
     skos:prefLabel "Nucleotide Sequence"@en .
 
@@ -5046,13 +5084,6 @@ dwc:OrganismInteraction a owl:Class ;
         "a slug eating a fungus growing on a decomposing stump (2 interactions)",
         "a viral infection in a plant" ;
     skos:prefLabel "Organism Interaction"@en .
-
-dwc:Provenance a owl:Class ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/provenance> ;
-    rdfs:comment "This is a convenience class to group related properties."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "Information about an entity's origins."@en ;
-    skos:prefLabel "Provenance"@en .
 
 dwc:OccurrenceAssertion a owl:Class ;
     dcterms:isVersionOf dwc:OccurrenceAssertion ;
@@ -5102,6 +5133,13 @@ skos:Concept a owl:Class ;
     rdfs:isDefinedBy skos: ;
     skos:definition "An idea or notion; a unit of thought."@en ;
     skos:prefLabel "Concept"@en .
+
+dwc:Provenance a owl:Class ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/provenance> ;
+    rdfs:comment "This is a convenience class to group related properties."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "Information about an entity's origins."@en ;
+    skos:prefLabel "Provenance"@en .
 
 dwcpw:p045 a dwc:Pathway ;
     dcterms:isVersionOf dwcpw:p045 ;
@@ -5342,98 +5380,52 @@ dwc:Event a owl:Class ;
         "an organism occurrence" ;
     skos:prefLabel "Event"@en .
 
-ac:Media a owl:Class ;
-    dcterms:isVersionOf ac:Media ;
-    rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
-    rdfs:isDefinedBy ac: ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:derivedFrom ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashValue ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:timeOfDay ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mo:sample_rate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:resourceCreationTechnique ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashFunction ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:heightFrac ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:captureDevice ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:digitizationDate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:frameRate ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:partOf ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:freqLow ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:widthFrac ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:freqHigh ] ;
-    skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
-    skos:example "dcmi:MovingImage",
-        "dcmi:Sound",
-        "dcmi:StillImage" ;
-    skos:prefLabel "Media"@en .
-
 dwc:MolecularProtocol a owl:Class ;
     dcterms:isVersionOf dwc:MolecularProtocol ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/MolecularProtocol-0000-00-00> ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0001320 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000005 ],
+            owl:onProperty mixs:0000017 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000013 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000002 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000020 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000001 ],
-        [ a owl:Restriction ;
-            owl:onProperty dwcdp:followedBy ;
-            owl:someValuesFrom dwc:NucleotideAnalysis ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000017 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000012 ],
+            owl:onProperty mixs:0000016 ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:NucleotideAnalysis ;
             owl:onProperty dwcdp:followedBy ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0001107 ],
+            owl:onProperty mixs:0000001 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000016 ],
+            owl:onProperty mixs:0000006 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000005 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000008 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000015 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000020 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000012 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000003 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0001320 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000002 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000092 ],
@@ -5442,19 +5434,65 @@ dwc:MolecularProtocol a owl:Class ;
             owl:onProperty dwc:assayType ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000003 ],
+            owl:onProperty mixs:0001107 ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000015 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000008 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000006 ],
+            owl:onProperty dwcdp:followedBy ;
+            owl:someValuesFrom dwc:NucleotideAnalysis ],
         dwc:Protocol ;
     skos:definition "A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]."@en ;
     skos:prefLabel "Molecular Protocol"@en .
+
+ac:Media a owl:Class ;
+    dcterms:isVersionOf ac:Media ;
+    rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
+    rdfs:isDefinedBy ac: ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:captureDevice ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:hashValue ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mo:sample_rate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:freqLow ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:frameRate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:hashFunction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:resourceCreationTechnique ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ac:Media ;
+            owl:onProperty dwcdp:partOf ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:digitizationDate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:timeOfDay ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ac:Media ;
+            owl:onProperty dwcdp:derivedFrom ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:heightFrac ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:freqHigh ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:widthFrac ] ;
+    skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
+    skos:example "dcmi:MovingImage",
+        "dcmi:Sound",
+        "dcmi:StillImage" ;
+    skos:prefLabel "Media"@en .
 
 dwc:Pathway a owl:Class ;
     rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;

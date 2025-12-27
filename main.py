@@ -3132,6 +3132,28 @@ createOP(
 
 #############################################################################
 
+createOP(
+    name="metadataCreator",
+    namespace=AC,
+    graph=g,
+    pref_label=Literal("Metadata Creator", lang="en"),
+    definition=Literal("URI of person or organization originally creating the resource metadata record.", lang="en"),
+    comments=Literal("See also the entry for [ac:metadataCreatorLiteral] and the section Namespaces, Prefixes and Term Names in the Audiovisual Core Term List document for discussion of the rationale for separate terms taking URI values from those taking Literal values where both are possible. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions.", lang="en"),
+    version_of_s="http://rs.tdwg.org/ac/terms/metadataCreator",
+    references_s="http://rs.tdwg.org/ac/terms/version/metadataCreator-2023-09-05",
+)
+
+createOP(
+    name="metadataProvider",
+    namespace=AC,
+    graph=g,
+    pref_label=Literal("Metadata Provider", lang="en"),
+    definition=Literal("URI of person or organization originally responsible for providing the resource metadata record.", lang="en"),
+    comments=Literal("Media resources and their metadata may be served from different institutions, e.g. in the case of aggregators adding user annotations, taxon identifications, or ratings. Compare Provider. See also the entry for [ac:metadataProviderLiteral] and the section Namespaces, Prefixes and Term Names in the Audiovisual Core Term List document for discussion of the rationale for separate terms taking URI values from those taking Literal values where both are possible. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions.", lang="en"),
+    version_of_s="http://rs.tdwg.org/ac/terms/metadataProvider",
+    references_s="http://rs.tdwg.org/ac/terms/version/metadataProvider-2023-09-05",
+)
+
 # BUG: To avoid inconsistencies, changed range list
 createOP(
     name="assertionTypeIRI",
@@ -3926,6 +3948,38 @@ createOP(
     ranges=DWC["BibliographicDocument"],
     pref_label=Literal("Mentionned In"),
     definition=Literal("An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey].", lang="en"),
+)
+
+createOP(
+    name="metadataCreator",
+    namespace=DWCDP,
+    graph=g,
+    domains=[
+        AC["Media"],
+        DWC["Provenance"],
+    ],
+    ranges=DCTERMS["Agent"],
+    subproperty_of=AC["metadataCreator"],
+    pref_label=Literal("Metadata Creator (DWCDP)", lang="en"),
+    definition=Literal("An owl:ObjectProperty relating a resource to the [dcterms:Agent] responsible for creating its associated metadata.", lang="en"),
+    comments=Literal("The domain of this property can be either [ac:Media] or [dwc:Provenance].", lang="en"),
+    version_of_s="http://example.com/term-pending/dwc/metadataProvider",
+)
+
+createOP(
+    name="metadataProvider",
+    namespace=DWCDP,
+    graph=g,
+    domains=[
+        AC["Media"],
+        DWC["Provenance"],
+    ],
+    ranges=DCTERMS["Agent"],
+    subproperty_of=AC["metadataProvider"],
+    pref_label=Literal("Metadata Provider (DWCDP)", lang="en"),
+    definition=Literal("An owl:ObjectProperty relating a resource to the [dcterms:Agent] responsible for providing its associated metadata.", lang="en"),
+    comments=Literal("The domain of this property can be either [ac:Media] or [dwc:Provenance].", lang="en"),
+    version_of_s="http://example.com/term-pending/dwc/metadataProvider",
 )
 
 # NOTE: Maybe consider longer and more informative names than the explorer
