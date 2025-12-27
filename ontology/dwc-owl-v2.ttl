@@ -2,6 +2,7 @@
 @prefix ac: <http://rs.tdwg.org/ac/terms/> .
 @prefix bb: <http://bioboum.ca/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
 @prefix dsw: <http://purl.org/dsw/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix eco: <http://rs.tdwg.org/eco/terms/> .
@@ -1330,6 +1331,17 @@ bibo:volume rdf:type owl:DatatypeProperty ;
             skos:prefLabel "Volume"@en .
 
 
+###  http://purl.org/ontology/mo/sample_rate
+mo:sample_rate rdf:type owl:DatatypeProperty ;
+               rdfs:domain ac:Media ;
+               rdfs:range xsd:decimal ;
+               dcterms:isVersionOf mo:sample_rate ;
+               rdfs:comment "Numeric valuein hertz (Hz). Forexample, a Service Access Point may have a specific resolution, quality or format. \"Sample Rate\" is distinct from the related concept of \"bit rate\" for compressed files such as MP#, and is applicable to both uncompressed and compressed files. see [http://musicontology.com/specification/#term-sample_rate](http://musicontology.com/specification/#term-sample_rate) for additional information."@en ;
+               rdfs:isDefinedBy mo: ;
+               skos:definition "Associates a digital signal to its sample rate."@en ;
+               skos:prefLabel "Sample Rate"@en .
+
+
 ###  http://rs.gbif.org/terms/dna_sequence
 gbif:dna_sequence rdf:type owl:DatatypeProperty ;
                   rdfs:domain dwc:MolecularProtocol ;
@@ -1553,6 +1565,20 @@ ac:endTimestamp rdf:type owl:DatatypeProperty ;
                 skos:prefLabel "End Time Stamp"@en .
 
 
+###  http://rs.tdwg.org/ac/terms/frameRate
+ac:frameRate rdf:type owl:DatatypeProperty ;
+             rdfs:domain ac:Media ;
+             rdfs:range xsd:decimal ;
+             dcterms:isVersionOf ac:frameRate ;
+             dcterms:references <http://rs.tdwg.org/ac/terms/version/frameRate-2022-02-23> ;
+             rdfs:comment "This term representsthe rate at which consecutive images were captured in real time, not the rate at which the media is encoded to play back the recording. For example, in a recording where 60 consecutive images (frames) are captured for each second of the real-time recording, this would be `60`. In a time-lapse recording where one image (frame) is recorded every 5 seconds of recording, this would be `0.2`." ;
+             rdfs:isDefinedBy ac: ;
+             skos:definition "The decimal fraction representing the frequency (rate) at which consecutive images (frames) were captured in real time for a [dcmi:MovingImage], expressed as the number of frames per second."@en ;
+             skos:example 0.2 ,
+                          60.0 ;
+             skos:prefLabel "Frame Rate"@en .
+
+
 ###  http://rs.tdwg.org/ac/terms/freqHigh
 ac:freqHigh rdf:type owl:DatatypeProperty ;
             rdfs:domain ac:Media ;
@@ -1608,6 +1634,30 @@ ac:fundingAttributionID rdf:type owl:DatatypeProperty ;
                                      "https://ror.org/00epmv149 | https://ror.org/04jnzhb65" ,
                                      "https://www.wikidata.org/wiki/Q13102615" ;
                         skos:prefLabel "Funding Attribution ID" .
+
+
+###  http://rs.tdwg.org/ac/terms/hashFunction
+ac:hashFunction rdf:type owl:DatatypeProperty ;
+                rdfs:domain ac:Media ;
+                rdfs:range xsd:string ;
+                dcterms:isVersionOf ac:hashFunction ;
+                dcterms:references <http://rs.tdwg.org/ac/terms/version/hashFunction-2020-01-27> ;
+                rdfs:comment "Recommended values include MD5, SHA-1, SHA-224, SHA-256, SHA-385, SHA-512, SHA-512/224 and SHA-512/256." ;
+                rdfs:isDefinedBy ac: ;
+                skos:definition "The cryptographic hash function used to compute the value given in the [ac:hashValue]."@en ;
+                skos:prefLabel "Hash Function"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/hashValue
+ac:hashValue rdf:type owl:DatatypeProperty ;
+             rdfs:domain ac:Media ;
+             rdfs:range xsd:string ;
+             dcterms:isVersionOf ac:hashValue ;
+             dcterms:references <http://rs.tdwg.org/ac/terms/version/hashValue-2020-01-27> ;
+             rdfs:comment "Best practice is to also specify the hash function by supplying a value of the [ac:hashFunction] term, using one of the standard literals from the comments there." ;
+             rdfs:isDefinedBy ac: ;
+             skos:definition "The value computedby by a hash function applied to the media that will be delivered at the access point."@en ;
+             skos:prefLabel "Hash"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/heightFrac
@@ -1673,6 +1723,20 @@ ac:radius rdf:type owl:DatatypeProperty ;
           skos:definition "The radius of a bounding circle or arc, expressed as a fraction of the width of a [dwc:Media] resource."@en ;
           skos:example 100 ;
           skos:prefLabel "Radius"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/resourceCreationTechnique
+ac:resourceCreationTechnique rdf:type owl:DatatypeProperty ;
+                             rdfs:domain ac:Media ;
+                             rdfs:range xsd:string ;
+                             dcterms:isVersionOf ac:resourceCreationTechnique ;
+                             dcterms:references <http://rs.tdwg.org/ac/terms/version/resourceCreationTechnique-2020-10-13> ;
+                             rdfs:comment "Annotating whether and how a resource has been modified or edited significantly in ways that are not immediately obvious to, or expected by, consumers is of special significance. Examples for images are: Removing a distracting twig from a picture, moving an object to a different surrounding, changing the color in parts of the image, or blurring the background of an image. Modification that are standard practice and expected or obvious are not necessary to document; examples of such practices include changing resolution, cropping, minor sharpening or overall color correction, and clearly perceptible modifications (e.g. addition of arrows or the placement of multiple pictures into a table). If it is only known that significant modifications were made but no details are known, a general statement like \"Media may have been manipulated to improve appearance\" may be appropriate. See also Subject Preparation Techniques (dwc:preparations)."@en ;
+                             rdfs:isDefinedBy ac: ;
+                             skos:definition "Information about technical aspects of the creation and digitization process of the resource. This includes modification steps (\"retouching\") after the initial resource capture."@en ;
+                             skos:example "2007-12-31" ,
+                                          "2007-12-31T14:59" ;
+                             skos:prefLabel "Resource Creation Technique"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/startTime
@@ -1910,6 +1974,19 @@ ac:subtypeLiteral rdf:type owl:DatatypeProperty ;
                   rdfs:isDefinedBy ac: ;
                   skos:definition "A subcategory that allows further specialization of a [dwc:Media] resource type than [mediaType]."@en ;
                   skos:prefLabel "Subtype Literal" .
+
+
+###  http://rs.tdwg.org/ac/terms/timeOfDay
+ac:timeOfDay rdf:type owl:DatatypeProperty ;
+             rdfs:domain ac:Media ;
+             rdfs:range xsd:string ;
+             dcterms:isVersionOf ac:timeOfDay ;
+             dcterms:references <http://rs.tdwg.org/ac/terms/version/timeOfDay-2020-01-27> ;
+             rdfs:isDefinedBy ac: ;
+             skos:definition "Free text information beyond exact clock times."@en ;
+             skos:example "afternoon" ,
+                          "twilight" ;
+             skos:prefLabel "Time Of Day"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/widthFrac
@@ -2531,6 +2608,23 @@ dwc:establishmentMeans rdf:type owl:DatatypeProperty ;
                        skos:prefLabel "Establishment Means"@en .
 
 
+###  http://rs.tdwg.org/dwc/terms/eventCategory
+dwc:eventCategory rdf:type owl:DatatypeProperty ;
+                  rdfs:domain dwc:Event ;
+                  rdfs:range rdfs:Literal ;
+                  dcterms:isVersionOf dwc:eventCategory ;
+                  rdfs:comment "Recommended best practice is to use a limited, tightly controlled vocabulary."@en ;
+                  rdfs:isDefinedBy dwc: ;
+                  skos:definition "A broad category tat best matches the nature of a [dwc:Event]."@en ;
+                  skos:example "material gathering" ,
+                               "nucleotide analysis" ,
+                               "occurrence" ,
+                               "organism interaction" ,
+                               "survey" ,
+                               "varied" ;
+                  skos:prefLabel "Event Category"@en .
+
+
 ###  http://rs.tdwg.org/dwc/terms/eventDate
 dwc:eventDate rdf:type owl:DatatypeProperty ;
               rdfs:domain dwc:Event ;
@@ -2549,7 +2643,7 @@ dwc:eventDate rdf:type owl:DatatypeProperty ;
                            "2007-11-13/15" ,
                            "2009-02-20T08:40Z" ,
                            "2018-08-29T15:19" ;
-              skos:prefLabel "Event Date" .
+              skos:prefLabel "Event Date"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/eventID
@@ -5099,11 +5193,19 @@ ac:Media rdf:type owl:Class ;
                            owl:allValuesFrom ac:Media
                          ] ,
                          [ rdf:type owl:Restriction ;
+                           owl:onProperty mo:sample_rate ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
                            owl:onProperty ac:captureDevice ;
                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
                          ] ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty ac:digitizationDate ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:frameRate ;
                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
                          ] ,
                          [ rdf:type owl:Restriction ;
@@ -5115,7 +5217,23 @@ ac:Media rdf:type owl:Class ;
                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
                          ] ,
                          [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:hashFunction ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:hashValue ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
                            owl:onProperty ac:heightFrac ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:resourceCreationTechnique ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:timeOfDay ;
                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
                          ] ,
                          [ rdf:type owl:Restriction ;

@@ -39,6 +39,7 @@ FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 GBIF = Namespace("http://rs.gbif.org/terms/")
 GGBN = Namespace("http://data.ggbn.org/schemas/ggbn/terms/")
 MINEXT = Namespace("http://rs.tdwg.org/mineralogy/terms/")
+MO = Namespace("http://purl.org/ontology/mo/")
 MIQE = Namespace("http://rs.gbif.org/terms/miqe/")
 MIXS = Namespace("https://w3id.org/mixs/")
 SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
@@ -75,6 +76,7 @@ g.bind("ggbn", GGBN)
 g.bind("minext", MINEXT)
 g.bind("miqe", MIQE)
 g.bind("mixs", MIXS)
+g.bind("mo", MO)
 g.bind("skos", SKOS)
 g.bind("tdt", TDT)
 g.bind("vann", VANN)
@@ -116,10 +118,16 @@ createOC(
     maxcard1_restrictions=[
         AC["captureDevice"],
         AC["digitizationDate"],
+        AC["frameRate"],
         AC["freqHigh"],
         AC["freqLow"],
+        AC["hashFunction"],
+        AC["hashValue"],
         AC["heightFrac"],
+        AC["resourceCreationTechnique"],
+        AC["timeOfDay"],
         AC["widthFrac"],
+        MO["sample_rate"],
     ],
     version_of_s="http://rs.tdwg.org/ac/terms/Media",
 )
@@ -4566,6 +4574,81 @@ createDP(
     references_s="http://rs.tdwg.org/ac/terms/version/digitizationDate-2021-01-27",
 )
 
+createDP(
+    name="frameRate",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Frame Rate", lang="en"),
+    definition=Literal("The decimal fraction representing the frequency (rate) at which consecutive images (frames) were captured in real time for a [dcmi:MovingImage], expressed as the number of frames per second.", lang="en"),
+    comments=Literal("This term representsthe rate at which consecutive images were captured in real time, not the rate at which the media is encoded to play back the recording. For example, in a recording where 60 consecutive images (frames) are captured for each second of the real-time recording, this would be `60`. In a time-lapse recording where one image (frame) is recorded every 5 seconds of recording, this would be `0.2`."),
+    examples=[
+        Literal("60", datatype=XSD["decimal"]),
+        Literal("0.2", datatype=XSD["decimal"]),
+    ],
+    version_of_s="http://rs.tdwg.org/ac/terms/frameRate",
+    references_s="http://rs.tdwg.org/ac/terms/version/frameRate-2022-02-23",
+)
+
+createDP(
+    name="hashFunction",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["string"],
+    pref_label=Literal("Hash Function", lang="en"),
+    definition=Literal("The cryptographic hash function used to compute the value given in the [ac:hashValue].", lang="en"),
+    comments=Literal("Recommended values include MD5, SHA-1, SHA-224, SHA-256, SHA-385, SHA-512, SHA-512/224 and SHA-512/256."),
+    version_of_s="http://rs.tdwg.org/ac/terms/hashFunction",
+    references_s="http://rs.tdwg.org/ac/terms/version/hashFunction-2020-01-27",
+)
+
+createDP(
+    name="hashValue",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["string"],
+    pref_label=Literal("Hash", lang="en"),
+    definition=Literal("The value computedby by a hash function applied to the media that will be delivered at the access point.", lang="en"),
+    comments=Literal("Best practice is to also specify the hash function by supplying a value of the [ac:hashFunction] term, using one of the standard literals from the comments there."),
+    version_of_s="http://rs.tdwg.org/ac/terms/hashValue",
+    references_s="http://rs.tdwg.org/ac/terms/version/hashValue-2020-01-27",
+)
+
+createDP(
+    name="resourceCreationTechnique",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["string"],
+    pref_label=Literal("Resource Creation Technique", lang="en"),
+    definition=Literal("Information about technical aspects of the creation and digitization process of the resource. This includes modification steps (\"retouching\") after the initial resource capture.", lang="en"),
+    comments=Literal("Annotating whether and how a resource has been modified or edited significantly in ways that are not immediately obvious to, or expected by, consumers is of special significance. Examples for images are: Removing a distracting twig from a picture, moving an object to a different surrounding, changing the color in parts of the image, or blurring the background of an image. Modification that are standard practice and expected or obvious are not necessary to document; examples of such practices include changing resolution, cropping, minor sharpening or overall color correction, and clearly perceptible modifications (e.g. addition of arrows or the placement of multiple pictures into a table). If it is only known that significant modifications were made but no details are known, a general statement like \"Media may have been manipulated to improve appearance\" may be appropriate. See also Subject Preparation Techniques (dwc:preparations).", lang="en"),
+    examples=[
+        Literal("2007-12-31"),
+        Literal("2007-12-31T14:59"),
+    ],
+    version_of_s="http://rs.tdwg.org/ac/terms/resourceCreationTechnique",
+    references_s="http://rs.tdwg.org/ac/terms/version/resourceCreationTechnique-2020-10-13",
+)
+createDP(
+    name="timeOfDay",
+    namespace=AC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["string"],
+    pref_label=Literal("Time Of Day", lang="en"),
+    definition=Literal("Free text information beyond exact clock times.", lang="en"),
+    examples=[
+        Literal("afternoon"),
+        Literal("twilight"),
+    ],
+    version_of_s="http://rs.tdwg.org/ac/terms/timeOfDay",
+    references_s="http://rs.tdwg.org/ac/terms/version/timeOfDay-2020-01-27",
+)
+
 
 createDP(
     name="widthFrac",
@@ -5403,12 +5486,32 @@ createEDP(
 )
 
 createDP(
+    name="eventCategory",
+    namespace=DWC,
+    graph=g,
+    domains=DWC["Event"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Event Category", lang="en"),
+    definition=Literal("A broad category tat best matches the nature of a [dwc:Event].", lang="en"),
+    comments=Literal("Recommended best practice is to use a limited, tightly controlled vocabulary.", lang="en"),
+    examples=[
+        Literal("material gathering"),
+        Literal("nucleotide analysis"),
+        Literal("occurrence"),
+        Literal("organism interaction"),
+        Literal("survey"),
+        Literal("varied"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/eventCategory",
+)
+
+createDP(
     name="eventDate",
     namespace=DWC,
     graph=g,
     domains=DWC["Event"],
     ranges=XSD["string"],
-    pref_label=Literal("Event Date"),
+    pref_label=Literal("Event Date", lang="en"),
     definition=Literal("The date-time or interval during which a dwc:Event occurred. For occurrences, this is the date-time when the dwc:Event was recorded. Not suitable for a time in a geological context.", lang="en"),
     comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
     examples=[
@@ -8555,6 +8658,18 @@ createDP(
     pref_label=Literal("Positive Control Type"),
     definition=Literal("The substance, mixture, product, or apparatus used to verify that a process which is part of an investigation delivers a true positive.", lang="en"),
     version_of_s="https://w3id.org/mixs/0001322",
+)
+
+createDP(
+    name="sample_rate",
+    namespace=MO,
+    graph=g,
+    domains=AC["Media"],
+    ranges=XSD["decimal"],
+    pref_label=Literal("Sample Rate", lang="en"),
+    definition=Literal("Associates a digital signal to its sample rate.", lang="en"),
+    comments=Literal("Numeric valuein hertz (Hz). Forexample, a Service Access Point may have a specific resolution, quality or format. \"Sample Rate\" is distinct from the related concept of \"bit rate\" for compressed files such as MP#, and is applicable to both uncompressed and compressed files. see [http://musicontology.com/specification/#term-sample_rate](http://musicontology.com/specification/#term-sample_rate) for additional information.", lang="en"),
+    version_of_s="http://purl.org/ontology/mo/sample_rate",
 )
 
 createDP(
