@@ -8,7 +8,7 @@ import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
-from utils import createDP, createEDP, createEOC, createNI, createOC, createOP, createRDP, createSC, createSCS, declare_disjoint
+from utils import createDP, createEDP, createEOC, createNI, createOC, createOP, createSC, createSCS, declare_disjoint
 
 #####################################################################################################
 # BEGIN ONTOLOGY DEFINITION
@@ -5348,15 +5348,15 @@ createDP(
 )
 
 # NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
-createRDP(
+createDP(
     name="endDayOfYear",
     namespace=DWC,
     graph=g,
     domains=DWC["Event"],
-    range_n=XSD["integer"],
-    restrictions=[
-        [XSD["minInclusive"], 1, XSD["integer"]],
-        [XSD["maxInclusive"], 366, XSD["integer"]],
+    ranges=XSD["integer"],
+    num_restrictions=[
+        (XSD["minInclusive"], 1),
+        (XSD["maxInclusive"], 366),
     ],
     pref_label=Literal("End Day Of Year"),
     definition=Literal("The latest integer day of the year on which a dwc:Event occurred.", lang="en"),
@@ -6052,15 +6052,15 @@ createDP(
 )
 
 # NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
-createRDP(
+createDP(
     name="maximumDepthInMeters",
     namespace=DWC,
     graph=g,
     domains=DCTERMS["Location"],
-    range_n=XSD["decimal"],
-    restrictions=[
-        [XSD["minInclusive"], 0, XSD["decimal"]],
-        [XSD["maxInclusive"], 11000, XSD["decimal"]],
+    ranges=XSD["decimal"],
+    num_restrictions=[
+        (XSD["minInclusive"], 0),
+        (XSD["maxInclusive"], 11000),
     ],
     pref_label=Literal("Maximum Depth In Meters"),
     definition=Literal("The greater depth of a range of depth below the local surface, in meters.", lang="en"),
@@ -6089,15 +6089,15 @@ createDP(
 )
 
 # NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
-createRDP(
+createDP(
     name="maximumElevationInMeters",
     namespace=DWC,
     graph=g,
     domains=DCTERMS["Location"],
-    range_n=XSD["decimal"],
-    restrictions=[
-        [XSD["minInclusive"], -430, XSD["decimal"]],
-        [XSD["maxInclusive"], 8850, XSD["decimal"]],
+    ranges=XSD["decimal"],
+    num_restrictions=[
+        [XSD["minInclusive"], -430],
+        [XSD["maxInclusive"], 8850],
     ],
     pref_label=Literal("Maximum Elevation In Meters"),
     definition=Literal("The upper limit of the range of elevation (altitude, usually above sea level), in meters.", lang="en"),
@@ -6140,15 +6140,15 @@ createDP(
 )
 
 # NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
-createRDP(
+createDP(
     name="minimumDepthInMeters",
     namespace=DWC,
     graph=g,
     domains=DCTERMS["Location"],
-    range_n=XSD["decimal"],
-    restrictions=[
-        [XSD["minInclusive"], 0, XSD["decimal"]],
-        [XSD["maxInclusive"], 11000, XSD["decimal"]],
+    ranges=XSD["decimal"],
+    num_restrictions=[
+        (XSD["minInclusive"], 0),
+        (XSD["maxInclusive"], 11000),
     ],
     pref_label=Literal("Minimum Depth In Meters"),
     definition=Literal("The lesser depth of a range of depth below the local surface, in meters.", lang="en"),
@@ -6177,15 +6177,15 @@ createDP(
 )
 
 # NOTE: Used the same range restriction as the DwCDP SQL schema for compatibility
-createRDP(
+createDP(
     name="minimumElevationInMeters",
     namespace=DWC,
     graph=g,
     domains=DCTERMS["Location"],
-    range_n=XSD["decimal"],
-    restrictions=[
-        [XSD["minInclusive"], -430, XSD["decimal"]],
-        [XSD["maxInclusive"], 8850, XSD["decimal"]],
+    ranges=XSD["decimal"],
+    num_restrictions=[
+        (XSD["minInclusive"], -430),
+        (XSD["maxInclusive"], 8850),
     ],
     pref_label=Literal("Minimum Elevation In Meters"),
     definition=Literal("The lower limit of the range of elevation (altitude, usually above sea level), in meters.", lang="en"),
