@@ -26,7 +26,11 @@ On that note, the HermiT reasoner is used to assess and ensure the consistency o
 
 ## The role of reasoners
 
-Consider for example the story around ![this photo of an Antarctic lanternfish (*Electrona antarctica*).](https://zenodo.org/records/14899069/files/AAV3FF_00249_01.JPG). This is a photo of preserved specimen, not of the fish as it occurred during its capture. This fish was identified by a researcher by the name of Anton Van de Putte, who used the book `Fishes of the Southern Ocean` as a taxonomic reference.
+Consider for example the story around the following image:
+
+![photo of an Antarctic lanternfish](https://zenodo.org/records/14899069/files/AAV3FF_00249_01.JPG).
+
+  The media is a photo of an Antarctic lanternfish (*Electrona antarctica*). It is a photo of preserved specimen, not of the fish as it occurred during its capture. This fish was identified by a researcher by the name of Anton Van de Putte, who used the book `Fishes of the Southern Ocean` as a taxonomic reference.
 
   These statements can be expressed using an ontology together with Darwin Core terms. At this stage, the goal is not to encode every possible detail, but to capture only the relationships that are explicitly known. This results in the following turtle file:
 
