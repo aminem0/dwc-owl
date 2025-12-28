@@ -31,7 +31,15 @@ Consider for example the story around ![this photo of an Antarctic lanternfish (
   These statements can be expressed using an ontology together with Darwin Core terms. At this stage, the goal is not to encode every possible detail, but to capture only the relationships that are explicitly known. This results in the following turtle file:
 
   ```turtle
+  @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
 
+  <http://bioboum.ca/identification/0ace24a7-2a0d-4f5f-903e-215a43aed359> dwcdp:basedOn <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> ;
+      dwcdp:identifiedBy <https://orcid.org/0000-0003-1336-5554> ;
+      dwcdp:used <https://archive.org/details/fishesofsouthern00gono> .
+
+  <https://zenodo.org/records/14899069/files/AAV3FF_00249_01.JPG> dwcdp:mediaOf <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> .
+
+  <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> dwcdp:evidenceFor <http://bioboum.ca/occurrence/e4ea05b4-3b87-4f49-8797-5629b9bfa578> .
   ``` 
 
   As can be seen, the file is quite sparse. It contains only the object property assertions between entities explicitly mentionned in the text. In addition, it contains no `rdf:type` statements, meaning that the intended nature of each URI is not formally asserted. From a human point of view, one can get an idea (though this is dangerous), but from a machine point of view, no assumptions can be made.
@@ -49,7 +57,39 @@ Consider for example the story around ![this photo of an Antarctic lanternfish (
   After reasoning using the developped ontology, the data can be represented as the following, richer turtle file:
 
   ```turtle
+  @prefix ac: <http://rs.tdwg.org/ac/terms/> .
+  @prefix dcterms: <http://purl.org/dc/terms/> .
+  @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
+  @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
+  @prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
+  @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
+  <http://bioboum.ca/identification/0ace24a7-2a0d-4f5f-903e-215a43aed359> a dwc:Identification,
+          owl:NamedIndividual ;
+      dwciri:identifiedBy <https://orcid.org/0000-0003-1336-5554> ;
+      dwcdp:basedOn <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> ;
+      dwcdp:identifiedBy <https://orcid.org/0000-0003-1336-5554> ;
+      dwcdp:used <https://archive.org/details/fishesofsouthern00gono> .
+
+  <http://bioboum.ca/occurrence/e4ea05b4-3b87-4f49-8797-5629b9bfa578> a dwc:Occurrence,
+          owl:NamedIndividual ;
+      dwcdp:hasEvidence <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> .
+
+  <https://archive.org/details/fishesofsouthern00gono> a dcterms:BibliographicResource,
+          owl:NamedIndividual ;
+      dwcdp:usedFor <http://bioboum.ca/identification/0ace24a7-2a0d-4f5f-903e-215a43aed359> .
+
+  <https://zenodo.org/records/14899069/files/AAV3FF_00249_01.JPG> a ac:Media,
+          owl:NamedIndividual ;
+      dwcdp:mediaOf <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> .
+
+  <https://orcid.org/0000-0003-1336-5554> a dcterms:Agent,
+          owl:NamedIndividual .
+
+  <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> a dwc:MaterialEntity,
+          owl:NamedIndividual ;
+      dwcdp:evidenceFor <http://bioboum.ca/occurrence/e4ea05b4-3b87-4f49-8797-5629b9bfa578> ;
+      dwcdp:hasMedia <https://zenodo.org/records/14899069/files/AAV3FF_00249_01.JPG> .
   ```  
 
   Notice that this turtle file is considerably different from the previous. The first difference is that `rdf:type` statements have been inferred. For example, the URI identifying the researcher is now known to be a `dcterms:Agent`, the URI identifying the image is classified as `ac:Media` and the URI identifying the specimen is classified as a `dwc:MaterialEntity`. These types were not asserted directly, but were inferred from the use of specific properties whose domain and range were defined in the ontology.
