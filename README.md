@@ -24,6 +24,48 @@ You can also load the `dwc-owl.ttl` file into an ontology editor such as [Proté
 
 On that note, the HermiT reasoner is used to assess and ensure the consistency of the ontology. Through DL reasoning, it ensures that the description logic is sound and correct. 
 
+## The role of reasoners
+
+Consider for example the story around ![this photo of an Antarctic lanternfish (*Electrona antarctica*).](https://zenodo.org/records/14899069/files/AAV3FF_00249_01.JPG). This is a photo of preserved specimen, not of the fish as it occurred during its capture. This fish was identified by a researcher by the name of Anton Van de Putte, who used the book `Fishes of the Southern Ocean` as a taxonomic reference.
+
+  These statements can be expressed using an ontology together with Darwin Core terms. At this stage, the goal is not to encode every possible detail, but to capture only the relationships that are explicitly known. This results in the following turtle file:
+
+  ```turtle
+
+  ``` 
+
+  As can be seen, the file is quite sparse. It contains only the object property assertions between entities explicitly mentionned in the text. In addition, it contains no `rdf:type` statements, meaning that the intended nature of each URI is not formally asserted. From a human point of view, one can get an idea (though this is dangerous), but from a machine point of view, no assumptions can be made.
+
+  The researcher is identified using his ORCID identifier, and the reference book is identified using a persistent link from the Internet Archive. For the time being, entities such as the occurrence, the identification event, and the specimen itself are identified using URIs minted in a dummy namespace based on UUIDs, as placeholders. Later, the occurrence URI could be replaced by a GBIF or OBIS URI, and the specimen URI could be replaced by a collection-level identifier from the Institute of Natural Sciences, once accessioning is completed (as suggested by the entry for the property `dwc:disposition`).
+
+  From a graph perspective, the situation can be represented as follows:
+
+  ![image of the graph pre-reasoner](images/reasoner-0.png)
+
+  In this initial graph, nodes are connected using simple links. In addition, none of the nodes are typed. In OWL terms, all resources are implicitly instances of `owl:Thing`, the most general class in the ontology, itself only a subclass of `rdfs:Resource`. The graph expresses what was said, but nothing more.
+
+   This is where the ontology, together with a reasoner, becomes relevant. An ontology does not merely define terms, but also contains constraints and regularities about how those terms are intended to be used. When a reasoner is applied, these constraints allow new knowledge to be safely inferred from the existing statements, without requiring that knowledge to be asserted explicitly.
+
+  After reasoning using the developped ontology, the data can be represented as the following, richer turtle file:
+
+  ```turtle
+
+  ```  
+
+  Notice that this turtle file is considerably different from the previous. The first difference is that `rdf:type` statements have been inferred. For example, the URI identifying the researcher is now known to be a `dcterms:Agent`, the URI identifying the image is classified as `ac:Media` and the URI identifying the specimen is classified as a `dwc:MaterialEntity`. These types were not asserted directly, but were inferred from the use of specific properties whose domain and range were defined in the ontology.
+
+  In addition, inverse object properties were also inferred. For example, if the image is a media of the specimen, then the specimen also has the image as a media representation. This inverse relationship is implicit, but was not stated earlier. This explicit mention of knowledge facilitates queries in various directions. Likewise, subproperty relationships between the terms in the ontology and those in the `dwciri:` namespace also become apparent.
+
+  From a graph perspective, the result now looks like this:
+
+  ![image of the graph post-reasoner](images/reasoner-1.png)
+
+  The graph is not only denser, but also semantically clearer. Nodes are no longer anonymous resources, but explicitly typed entities that can be interpreted consistently across datasets. This illustrates an important role of reasoners, which is to make explicit the knowledge that is already implicit in the data and the ontology.
+
+  This added structure is what enables reliable querying, validation, and integration. Once entities are typed, SPARQL queries that target precise aspects of datasets, such as `retrieve all occurrences of Antarctic lanternfish that have media`, `list all agents involved in identifications` or `retrieve all occurrences whose identifications used bibliographic resources` no longer rely on conventions or documentation alone. Instead, they rely on formal semantics that can be applied consistently by machines.
+
+  In this sense, reasoning allows the turning minimally asserted, loosely structured RDF graphs into interoperable knowledge graphs, while still allowing data providers to state only what they know with certainty.
+
 ## Initial motivation
 
 The project was also motivated by another side-project: *sparql-completer*, a completion engine for sparql files. The neovim plugin is written in Lua and is based on a series of input Lua tables. The plugin can make calls to cURL, allowing for the direct execution of the SPARQL query, rather than through another programming language.
