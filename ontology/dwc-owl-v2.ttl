@@ -1,6 +1,5 @@
 @prefix : <http://bioboum.ca/dwc-owl.owl#> .
 @prefix ac: <http://rs.tdwg.org/ac/terms/> .
-@prefix bb: <http://bioboum.ca/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix mo: <http://purl.org/ontology/mo/> .
 @prefix dsw: <http://purl.org/dsw/> .
@@ -95,6 +94,10 @@ xsd:date rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
+###  http://purl.org/dc/terms/contributor
+dcterms:contributor rdf:type owl:ObjectProperty .
+
+
 ###  http://purl.org/dc/terms/creator
 dcterms:creator rdf:type owl:ObjectProperty ;
                 dcterms:isVersionOf dcterms:creator ;
@@ -102,6 +105,10 @@ dcterms:creator rdf:type owl:ObjectProperty ;
                 rdfs:isDefinedBy dcterms: ;
                 skos:definition "An entity responsible for making the resource."@en ;
                 skos:prefLabel "Creator (DCTERMS)"@en .
+
+
+###  http://purl.org/dc/terms/publisher
+dcterms:publisher rdf:type owl:ObjectProperty .
 
 
 ###  http://purl.org/dc/terms/rights
@@ -181,6 +188,16 @@ bibo:status rdf:type owl:ObjectProperty ;
             skos:prefLabel "Status"@en .
 
 
+###  http://rs.tdwg.org/ac/terms/commenter
+ac:commenter rdf:type owl:ObjectProperty ;
+             dcterms:isVersionOf ac:commenter ;
+             dcterms:references <http://rs.tdwg.org/ac/terms/version/commenter-2023-09-05> ;
+             rdfs:comment "See also Reviewer Comments for the distinction betweeen Comments and Reviewer Comments. See also the entry for [ac:commenterLiteral] and the section Namespaces, Prefixes and Term Names in the Audiovisual Core Term List document for discussion of the rationale for separate terms taking URI values from those taking Literal values where both are possible. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions."@en ;
+             rdfs:isDefinedBy ac: ;
+             skos:definition "A URI denoting a person who created a comment."@en ;
+             skos:prefLabel "Commenter"@en .
+
+
 ###  http://rs.tdwg.org/ac/terms/metadataCreator
 ac:metadataCreator rdf:type owl:ObjectProperty ;
                    dcterms:isVersionOf ac:metadataCreator ;
@@ -199,6 +216,16 @@ ac:metadataProvider rdf:type owl:ObjectProperty ;
                     rdfs:isDefinedBy ac: ;
                     skos:definition "URI of person or organization originally responsible for providing the resource metadata record."@en ;
                     skos:prefLabel "Metadata Provider"@en .
+
+
+###  http://rs.tdwg.org/ac/terms/reviewer
+ac:reviewer rdf:type owl:ObjectProperty ;
+            dcterms:isVersionOf ac:reviewer ;
+            dcterms:references <http://rs.tdwg.org/ac/terms/version/reviewer-2023-09-05> ;
+            rdfs:comment "Provider is asserting they accept this review as competent. See also [ac:reviewerLiteral] and the section Namespaces, Prefixes and Term Names in the Audiovisual Core Term List documentation for discussion of the rationale for separate terms taking URI values from those taking Literal values where both are possible. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions."@en ;
+            rdfs:isDefinedBy ac: ;
+            skos:definition "URI for a reviewer."@en ;
+            skos:prefLabel "Reviewer"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
@@ -624,11 +651,13 @@ dwcdp:about rdf:type owl:ObjectProperty ;
                                        dwc:NucleotideAnalysis
                                        dwc:Occurrence
                                        dwc:Organism
+                                       dwc:OrganismInteraction
                                      )
                        ] ;
+            rdfs:comment "The object of this property can be an instance of [ac:Media], [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism] or [dwc:OrganismInteraction]."@en ;
             rdfs:isDefinedBy dwcdp: ;
-            skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about. This object can be a [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:Media], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism]."@en ;
-            skos:prefLabel "About" .
+            skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about."@en ;
+            skos:prefLabel "About"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/allowsFor
@@ -640,9 +669,10 @@ dwcdp:allowsFor rdf:type owl:ObjectProperty ;
                                            eco:Survey
                                          )
                            ] ;
+                rdfs:comment "The allowed activities can be varied, and include [dwc:Event], [dwc:NucleotideAnalysis] and [eco:Survey]."@en ;
                 rdfs:isDefinedBy dwcdp: ;
-                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the activities it allows for. These activities can be varied, and include [dwc:Event], [dwc:NucleotideAnalysis] and [eco:Survey]."@en ;
-                skos:prefLabel "Allows For" .
+                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the activities it allows for."@en ;
+                skos:prefLabel "Allows For"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/analysisOf
@@ -651,7 +681,7 @@ dwcdp:analysisOf rdf:type owl:ObjectProperty ;
                  rdfs:range dwc:MaterialEntity ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:MaterialEntity] of which it is an analysis of."@en ;
-                 skos:prefLabel "Analysis Of" .
+                 skos:prefLabel "Analysis Of"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/assertedBy
@@ -660,44 +690,45 @@ dwcdp:assertedBy rdf:type owl:ObjectProperty ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the [dcterms:Agent] that asserted it."@en ;
-                 skos:prefLabel "Asserted By" .
+                 skos:prefLabel "Asserted By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/authoredBy
 dwcdp:authoredBy rdf:type owl:ObjectProperty ;
-                 rdfs:domain dwc:BibliographicDocument ;
+                 rdfs:subPropertyOf dcterms:contributor ,
+                                    dcterms:creator ;
+                 rdfs:domain dcterms:BibliographicResource ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that authored it."@en ;
-                 skos:prefLabel "Authored By" .
+                 skos:prefLabel "Authored By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/basedOn
 dwcdp:basedOn rdf:type owl:ObjectProperty ;
               rdfs:domain dwc:Identification ;
               rdfs:range [ rdf:type owl:Class ;
-                           owl:unionOf ( ac:Media
+                           owl:unionOf ( dcterms:BibliographicResource
+                                         ac:Media
                                          dwc:MaterialEntity
-                                         dwc:NucleotideAnalysis
                                          dwc:NucleotideSequence
                                          dwc:Occurrence
                                        )
                          ] ;
-              owl:propertyChainAxiom ( dwcdp:basedOn
-                                       dwcdp:partOf
-                                     ) ;
+              rdfs:comment "The entities upon which identifications can be based on include [ac:Media], [dcterms:BibliographicResource], [dwc:MaterialEntity], [dwc:NucleotideSequence] and [dwc:Occurrence]."@en ;
               rdfs:isDefinedBy dwcdp: ;
-              skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the entity on which it is based. These entities include [ac:Media], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:NucleotideSequence] and [dwc:Occurrence]."@en ;
-              skos:prefLabel "Based On" .
+              skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the entity on which it is based."@en ;
+              skos:prefLabel "Based On"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/commentedBy
 dwcdp:commentedBy rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf ac:commenter ;
                   rdfs:domain ac:Media ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
-                  skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that commented it."@en ;
-                  skos:prefLabel "Commented By" .
+                  skos:definition "An [owl:ObjectProperty] used to relate a [ac:Media] to the [dcterms:Agent] that commented it."@en ;
+                  skos:prefLabel "Commented By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/conductedBy
@@ -706,7 +737,7 @@ dwcdp:conductedBy rdf:type owl:ObjectProperty ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Agent] that conducted it."@en ;
-                  skos:prefLabel "Conducted By" .
+                  skos:prefLabel "Conducted By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/createdBy
@@ -716,7 +747,7 @@ dwcdp:createdBy rdf:type owl:ObjectProperty ;
                 rdfs:range dcterms:Agent ;
                 rdfs:isDefinedBy dwcdp: ;
                 skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dcterms:Agent] that created it."@en ;
-                skos:prefLabel "Created By" .
+                skos:prefLabel "Created By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/datedMaterial
@@ -725,12 +756,11 @@ dwcdp:datedMaterial rdf:type owl:ObjectProperty ;
                     rdfs:range dwc:MaterialEntity ;
                     rdfs:isDefinedBy dwcdp: ;
                     skos:definition "An [owl:ObjectProperty] used to relate a [chrono:ChronometricAge] to the [dwc:MaterialEntity] it represents the age of."@en ;
-                    skos:prefLabel "Dated Material" .
+                    skos:prefLabel "Dated Material"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/derivedFrom
-dwcdp:derivedFrom rdf:type owl:ObjectProperty ,
-                           owl:TransitiveProperty ;
+dwcdp:derivedFrom rdf:type owl:ObjectProperty ;
                   rdfs:domain [ rdf:type owl:Class ;
                                 owl:unionOf ( ac:Media
                                               dwc:MaterialEntity
@@ -741,19 +771,36 @@ dwcdp:derivedFrom rdf:type owl:ObjectProperty ,
                                              dwc:MaterialEntity
                                            )
                              ] ;
-                  rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term."@en ;
+                  rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, universal restrictions on the classes prevent cross-class use of the term."@en ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
-                  skos:prefLabel "Derived From" .
+                  skos:prefLabel "Derived From"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/editedBy
 dwcdp:editedBy rdf:type owl:ObjectProperty ;
-               rdfs:domain dwc:BibliographicDocument ;
+               rdfs:domain dcterms:BibliographicResource ;
                rdfs:range dcterms:Agent ;
                rdfs:isDefinedBy dwcdp: ;
-               skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it." ;
-               skos:prefLabel "Edited By" .
+               skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it."@en ;
+               skos:prefLabel "Edited By"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/evidenceFor
+dwcdp:evidenceFor rdf:type owl:ObjectProperty ;
+                  owl:inverseOf dwcdp:hasEvidence ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( dcterms:BibliographicResource
+                                              ac:Media
+                                              dwc:MaterialEntity
+                                              dwc:NucleotideSequence
+                                            )
+                              ] ;
+                  rdfs:range dwc:Occurrence ;
+                  rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:hasEvidence], which allows reasoners queries to go through different ways."@en ;
+                  rdfs:isDefinedBy dwcdp: ;
+                  skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [dwc:Occurrence]. These entities can be [ac:Media], [dcterms:BibliographicResource], [dwc:MaterialEntity], [dwc:NucleotideSequence]."@en ;
+                  skos:prefLabel "Evidence For"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/followedBy
@@ -770,9 +817,10 @@ dwcdp:followedBy rdf:type owl:ObjectProperty ;
                                             eco:Survey
                                           )
                             ] ;
+                 rdfs:comment "The considered resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]."@en ;
                  rdfs:isDefinedBy dwcdp: ;
-                 skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Protocol] to the entities it is followed by. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
-                 skos:prefLabel "Followed By" .
+                 skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Protocol] to the entities it is followed by."@en ;
+                 skos:prefLabel "Followed By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/follows
@@ -788,9 +836,10 @@ dwcdp:follows rdf:type owl:ObjectProperty ;
                                         )
                           ] ;
               rdfs:range dwc:Protocol ;
+              rdfs:comment "The considered resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]."@en ;
               rdfs:isDefinedBy dwcdp: ;
-              skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed. These resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]"@en ;
-              skos:prefLabel "Follows" .
+              skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dwc:Protocol] it followed."@en ;
+              skos:prefLabel "Follows"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/fundedBy
@@ -798,8 +847,8 @@ dwcdp:fundedBy rdf:type owl:ObjectProperty ;
                rdfs:domain dwc:Provenance ;
                rdfs:range dcterms:Agent ;
                rdfs:isDefinedBy dwcdp: ;
-               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dwc:Agent] that funded it."@en ;
-               skos:prefLabel "Funded By" .
+               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Provenance] to a [dcterms:Agent] that funded it."@en ;
+               skos:prefLabel "Funded By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/georeferencedBy
@@ -808,13 +857,12 @@ dwcdp:georeferencedBy rdf:type owl:ObjectProperty ;
                       rdfs:domain dcterms:Location ;
                       rdfs:range dcterms:Agent ;
                       rdfs:isDefinedBy dwcdp: ;
-                      skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:Location] to the [dwc:Agent] that georeferenced it."@en ;
-                      skos:prefLabel "Georeferenced By" .
+                      skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:Location] to a [dcterms:Agent] that georeferenced it."@en ;
+                      skos:prefLabel "Georeferenced By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/happenedDuring
-dwcdp:happenedDuring rdf:type owl:ObjectProperty ,
-                              owl:TransitiveProperty ;
+dwcdp:happenedDuring rdf:type owl:ObjectProperty ;
                      rdfs:domain [ rdf:type owl:Class ;
                                    owl:unionOf ( dwc:Event
                                                  dwc:Occurrence
@@ -823,29 +871,46 @@ dwcdp:happenedDuring rdf:type owl:ObjectProperty ,
                                                )
                                  ] ;
                      rdfs:range dwc:Event ;
-                     rdfs:comment "This property is also an [owl:TransitiveProperty], which allows reasoners to infer hierarchical sampling patterns."@en ;
                      rdfs:isDefinedBy dwcdp: ;
                      skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to its parent [dwc:Event]." ;
-                     skos:prefLabel "Happened During" .
+                     skos:prefLabel "Happened During"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/happenedWithin
 dwcdp:happenedWithin rdf:type owl:ObjectProperty ;
                      rdfs:domain [ rdf:type owl:Class ;
-                                   owl:unionOf ( dwc:Event
-                                                 dwc:MaterialEntity
+                                   owl:unionOf ( dwc:MaterialEntity
+                                                 dwc:Occurrence
                                                )
                                  ] ;
                      rdfs:range dwc:GeologicalContext ;
                      rdfs:isDefinedBy dwcdp: ;
-                     skos:definition "An [owl:ObjectProperty] used to relate either a [dwc:Event] or a [dwc:MaterialEntity] to the [dwc:GeologicalContext] within which it happened."@en ;
-                     skos:prefLabel "Happened Within" .
+                     skos:definition "An [owl:ObjectProperty] used to relate either a [dwc:MaterialEntity] or a [dwc:Occurrence] to the [dwc:GeologicalContext] within which it happened."@en ;
+                     skos:prefLabel "Happened Within"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/hasEvidence
+dwcdp:hasEvidence rdf:type owl:ObjectProperty ;
+                  rdfs:domain dwc:Occurrence ;
+                  rdfs:range [ rdf:type owl:Class ;
+                               owl:unionOf ( dcterms:BibliographicResource
+                                             ac:Media
+                                             dwc:MaterialEntity
+                                             dwc:NucleotideSequence
+                                           )
+                             ] ;
+                  rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:evidenceFor], which allows reasoners queries to go through different ways."@en ;
+                  rdfs:isDefinedBy dwcdp: ;
+                  skos:definition "An [owl:ObjectProperty] used to relate an instance of [dwc:Occurrence] to various entities which are evidence for it. These entities can be [ac:Media], [dcterms:BibliographicResource], [dwc:MaterialEntity], [dwc:NucleotideSequence]."@en ;
+                  skos:prefLabel "Has Evidence"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/hasMedia
 dwcdp:hasMedia rdf:type owl:ObjectProperty ;
+               owl:inverseOf dwcdp:mediaOf ;
                rdfs:domain [ rdf:type owl:Class ;
                              owl:unionOf ( dcterms:Agent
+                                           dcterms:BibliographicResource
                                            chrono:ChronometricAge
                                            dwc:Event
                                            dwc:GeologicalContext
@@ -855,10 +920,10 @@ dwcdp:hasMedia rdf:type owl:ObjectProperty ;
                                          )
                            ] ;
                rdfs:range ac:Media ;
-               rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:isMediaOf], which allows reasoners queries to go through different ways."@en ;
+               rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:mediaOf], which allows reasoners queries to go through different ways."@en ;
                rdfs:isDefinedBy dwcdp: ;
-               skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]"@en ;
-               skos:prefLabel "Has Media" .
+               skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]."@en ;
+               skos:prefLabel "Has Media"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/hasPermitStatus
@@ -867,7 +932,7 @@ dwcdp:hasPermitStatus rdf:type owl:ObjectProperty ;
                       rdfs:range ggbn:permitStatus_vocabulary ;
                       rdfs:isDefinedBy dwcdp: ;
                       skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to concepts associated in [ggbn:permitStatus_vocabulary]."@en ;
-                      skos:prefLabel "Has Permit Status" .
+                      skos:prefLabel "Has Permit Status"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/hasPermitType
@@ -876,17 +941,27 @@ dwcdp:hasPermitType rdf:type owl:ObjectProperty ;
                     rdfs:range ggbn:permitType_vocabulary ;
                     rdfs:isDefinedBy dwcdp: ;
                     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to concepts associated in [ggbn:permitType_vocabulary]."@en ;
-                    skos:prefLabel "Has Permit Type" .
+                    skos:prefLabel "Has Permit Type"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/hasTarget
+dwcdp:hasTarget rdf:type owl:ObjectProperty ;
+                owl:inverseOf dwcdp:targetFor ;
+                rdfs:domain eco:Survey ;
+                rdfs:range eco:SurveyTarget ;
+                rdfs:isDefinedBy dwcdp: ;
+                skos:definition "An [owl:ObjectProperty] used to relate a [eco:Survey] to the [eco:SurveyTarget] it has as a target."@en ;
+                skos:prefLabel "Has Target"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/identificationsBy
 dwcdp:identificationsBy rdf:type owl:ObjectProperty ;
                         rdfs:domain eco:Survey ;
                         rdfs:range dcterms:Agent ;
-                        rdfs:comment "The property [dwcdp:idenficationsBy] should not be confused with [dwcdp:identifiedBy], which has a different [rdfs:domain]. The former applies to a [eco:Survey], whereas the latter applies to a [dwc:Identification]."@en ;
+                        rdfs:comment "The property [dwcdp:identificationsBy] should not be confused with [dwcdp:identifiedBy], which has a different [rdfs:domain]. The former applies to a [eco:Survey], whereas the latter applies to a [dwc:Identification]."@en ;
                         rdfs:isDefinedBy dwcdp: ;
-                        skos:definition "An [owl:ObjectProperty] used to relate a [eco:Survey] to the [dwc:Agent] who conducted the identifications."@en ;
-                        skos:prefLabel "Identifications By" .
+                        skos:definition "An [owl:ObjectProperty] used to relate a [eco:Survey] to a [dwc:Agent] who conducted the identifications for it."@en ;
+                        skos:prefLabel "Identifications By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/identifiedBy
@@ -894,13 +969,14 @@ dwcdp:identifiedBy rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf dwciri:identifiedBy ;
                    rdfs:domain [ rdf:type owl:Class ;
                                  owl:unionOf ( dwc:Identification
+                                               dwc:MaterialEntity
                                                dwc:Occurrence
-                                               eco:Survey
                                              )
                                ] ;
                    rdfs:range dcterms:Agent ;
+                   rdfs:comment "Resources that can be identified include [dwc:Identification], [dwc:MaterialEntity] and [dwc:Occurrence]."@en ;
                    rdfs:isDefinedBy dwcdp: ;
-                   skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Agent] that identified it."@en ;
+                   skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dwc:Agent] that identified it."@en ;
                    skos:prefLabel "Identified By" .
 
 
@@ -924,28 +1000,13 @@ dwcdp:interactionWith rdf:type owl:ObjectProperty ;
                       skos:prefLabel "Interaction With" .
 
 
-###  http://rs.tdwg.org/dwcdp/terms/involves
-dwcdp:involves rdf:type owl:ObjectProperty ;
-               rdfs:domain [ rdf:type owl:Class ;
-                             owl:unionOf ( dwc:Occurrence
-                                         )
-                           ] ;
-               rdfs:range [ rdf:type owl:Class ;
-                            owl:unionOf ( dwc:Organism
-                                        )
-                          ] ;
-               rdfs:isDefinedBy dwcdp: ;
-               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [dwc:Organism] it involves."@en ;
-               skos:prefLabel "Involves" .
-
-
 ###  http://rs.tdwg.org/dwcdp/terms/issuedBy
 dwcdp:issuedBy rdf:type owl:ObjectProperty ;
                rdfs:domain dwc:Permit ;
                rdfs:range dcterms:Agent ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the [dcterms:Agent] that issued it."@en ;
-               skos:prefLabel "Issued By" .
+               skos:prefLabel "Issued By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/materialCollectedDuring
@@ -954,11 +1015,32 @@ dwcdp:materialCollectedDuring rdf:type owl:ObjectProperty ;
                               rdfs:range dwc:Event ;
                               rdfs:isDefinedBy dwcdp: ;
                               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:Event] from which the material was collected."@en ;
-                              skos:prefLabel "Material Collected During" .
+                              skos:prefLabel "Material Collected During"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/mediaOf
+dwcdp:mediaOf rdf:type owl:ObjectProperty ;
+              rdfs:domain ac:Media ;
+              rdfs:range [ rdf:type owl:Class ;
+                           owl:unionOf ( dcterms:Agent
+                                         dcterms:BibliographicResource
+                                         chrono:ChronometricAge
+                                         dwc:Event
+                                         dwc:GeologicalContext
+                                         dwc:MaterialEntity
+                                         dwc:Occurrence
+                                         dwc:OrganismInteraction
+                                       )
+                         ] ;
+              rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:hasMedia], which allows reasoners queries to go through different ways."@en ;
+              rdfs:isDefinedBy dwcdp: ;
+              skos:definition "An [owl:ObjectProperty] used to relate an instance of [ac:Media] to an entity of which it is a media of. These entities can be [chrono:ChronometricAge], [dcterms:Agent],[dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]."@en ;
+              skos:prefLabel "mediaOf"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/mentionedIn
 dwcdp:mentionedIn rdf:type owl:ObjectProperty ;
+                  owl:inverseOf dwcdp:mentions ;
                   rdfs:domain [ rdf:type owl:Class ;
                                 owl:unionOf ( chrono:ChronometricAge
                                               dwc:Event
@@ -971,10 +1053,32 @@ dwcdp:mentionedIn rdf:type owl:ObjectProperty ;
                                               eco:Survey
                                             )
                               ] ;
-                  rdfs:range dwc:BibliographicDocument ;
+                  rdfs:range dcterms:BibliographicResource ;
+                  rdfs:comment "The mentionable resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."@en ;
                   rdfs:isDefinedBy dwcdp: ;
-                  skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned. These resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."@en ;
-                  skos:prefLabel "Mentionned In" .
+                  skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned."@en ;
+                  skos:prefLabel "Mentioned In"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/mentions
+dwcdp:mentions rdf:type owl:ObjectProperty ;
+               rdfs:domain dcterms:BibliographicResource ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( chrono:ChronometricAge
+                                          dwc:Event
+                                          dwc:Identification
+                                          dwc:MaterialEntity
+                                          dwc:Occurrence
+                                          dwc:Organism
+                                          dwc:OrganismInteraction
+                                          dwc:Protocol
+                                          eco:Survey
+                                        )
+                          ] ;
+               rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:mediaOf], which allows reasoners queries to go through different ways."@en ;
+               rdfs:isDefinedBy dwcdp: ;
+               skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]"@en ;
+               skos:prefLabel "Mentions"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/metadataCreator
@@ -1015,7 +1119,7 @@ dwcdp:occurrenceOf rdf:type owl:ObjectProperty ;
                    rdfs:range dwc:Organism ;
                    rdfs:isDefinedBy dwcdp: ;
                    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [DWC:Organism] it is an occurrence of."@en ;
-                   skos:prefLabel "Occurrence Of (DWCDP)" .
+                   skos:prefLabel "Occurrence Of (DWCDP)"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/ownedBy
@@ -1024,22 +1128,24 @@ dwcdp:ownedBy rdf:type owl:ObjectProperty ;
               rdfs:range dcterms:Agent ;
               rdfs:isDefinedBy dwcdp: ;
               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] which owns it."@en ;
-              skos:prefLabel "Owned By" .
+              skos:prefLabel "Owned By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/partOf
 dwcdp:partOf rdf:type owl:ObjectProperty ;
              rdfs:domain [ rdf:type owl:Class ;
-                           owl:unionOf ( ac:Media
+                           owl:unionOf ( dcterms:BibliographicResource
+                                         ac:Media
                                          dwc:MaterialEntity
                                        )
                          ] ;
              rdfs:range [ rdf:type owl:Class ;
-                          owl:unionOf ( ac:Media
+                          owl:unionOf ( dcterms:BibliographicResource
+                                        ac:Media
                                         dwc:MaterialEntity
                                       )
                         ] ;
-             rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, [owl:Restriction]s on the classes prevent cross-class use of the term."@en ;
+             rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, universal restrictions on the classes prevent cross-class use of the term."@en ;
              rdfs:isDefinedBy dwcdp: ;
              skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
              skos:prefLabel "Part Of" .
@@ -1047,20 +1153,31 @@ dwcdp:partOf rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/produced
 dwcdp:produced rdf:type owl:ObjectProperty ;
+               owl:inverseOf dwcdp:producedBy ;
                rdfs:domain dwc:NucleotideAnalysis ;
                rdfs:range dwc:NucleotideSequence ;
                rdfs:isDefinedBy dwcdp: ;
-               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideSequence] to the [dwc:NucleotideAnalysis] that produced it."@en ;
-               skos:prefLabel "Produced" .
+               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:NucleotideSequences] that it produced."@en ;
+               skos:prefLabel "Produced"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/producedBy
+dwcdp:producedBy rdf:type owl:ObjectProperty ;
+                 rdfs:domain dwc:NucleotideSequence ;
+                 rdfs:range dwc:NucleotideAnalysis ;
+                 rdfs:isDefinedBy dwcdp: ;
+                 skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideSequence] to the [dwc:NucleotideAnalysis] that produced it."@en ;
+                 skos:prefLabel "Produced By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/publishedBy
 dwcdp:publishedBy rdf:type owl:ObjectProperty ;
-                  rdfs:domain dwc:BibliographicDocument ;
+                  rdfs:subPropertyOf dcterms:publisher ;
+                  rdfs:domain dcterms:BibliographicResource ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it."@en ;
-                  skos:prefLabel "Published By" .
+                  skos:prefLabel "Published By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/recordedBy
@@ -1068,10 +1185,9 @@ dwcdp:recordedBy rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf dwciri:recordedBy ;
                  rdfs:domain dwc:Occurrence ;
                  rdfs:range dcterms:Agent ;
-                 rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "A person, group, or organization responsible for recording the original dwc:Occurrence."@en ;
-                 skos:prefLabel "Recorded By (DWCDP)" .
+                 skos:prefLabel "Recorded By (DWCDP)"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/relationshipOf
@@ -1079,7 +1195,7 @@ dwcdp:relationshipOf rdf:type owl:ObjectProperty ;
                      rdfs:comment "To keep the interaction terms semantically correct and in order, the resource considered by this property should be the subject of the statement."@en ;
                      rdfs:isDefinedBy dwcdp: ;
                      skos:definition "An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves."@en ;
-                     skos:prefLabel "Relationship Of" .
+                     skos:prefLabel "Relationship Of"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/relationshipTo
@@ -1087,11 +1203,12 @@ dwcdp:relationshipTo rdf:type owl:ObjectProperty ;
                      rdfs:comment "To keep the interaction terms semantically correct and in order, the resource considered by this property should be the object of the statement."@en ;
                      rdfs:isDefinedBy dwcdp: ;
                      skos:definition "An [owl:ObjectProperty] used to relate [dwc:ResourceRelationship] to the resource it involves."@en ;
-                     skos:prefLabel "Relationship To" .
+                     skos:prefLabel "Relationship To"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/reviewedBy
 dwcdp:reviewedBy rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf ac:reviewer ;
                  rdfs:domain ac:Media ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
@@ -1106,7 +1223,7 @@ dwcdp:samplingPerformedBy rdf:type owl:ObjectProperty ;
                           rdfs:range dcterms:Agent ;
                           rdfs:isDefinedBy dwcdp: ;
                           skos:definition "An [owl:ObjectProperty] used to relate a [eco:Survey] to the [dcterms:Agent] that carried out the sampling."@en ;
-                          skos:prefLabel "Sampling Performed By" .
+                          skos:prefLabel "Sampling Performed By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/spatialLocation
@@ -1125,7 +1242,7 @@ dwcdp:storedIn rdf:type owl:ObjectProperty ;
                rdfs:range dcterms:Agent ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dcterms:Agent] in which it is stored."@en ;
-               skos:prefLabel "Stored In" .
+               skos:prefLabel "Stored In"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/targetFor
@@ -1134,7 +1251,7 @@ dwcdp:targetFor rdf:type owl:ObjectProperty ;
                 rdfs:range eco:Survey ;
                 rdfs:isDefinedBy dwcdp: ;
                 skos:definition "An [owl:ObjectProperty] used to relate a [eco:SurveyTarget] to the [eco:Survey] it is a target for."@en ;
-                skos:prefLabel "Target For" .
+                skos:prefLabel "Target For"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/targetOccurrence
@@ -1143,7 +1260,7 @@ dwcdp:targetOccurrence rdf:type owl:ObjectProperty ;
                        rdfs:range dwc:Occurrence ;
                        rdfs:isDefinedBy dwcdp: ;
                        skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Occurrence] it identifies."@en ;
-                       skos:prefLabel "Target Occurrence" .
+                       skos:prefLabel "Target Occurrence"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/typeDesignationType
@@ -1153,21 +1270,31 @@ dwcdp:typeDesignationType rdf:type owl:ObjectProperty ;
                           rdfs:comment "The class [dwc:TypeDesignationType] considers a finite set of named individuals."@en ;
                           rdfs:isDefinedBy dwcdp: ;
                           skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to an instance of a [dwc:TypeDesignationType]."@en ;
-                          skos:prefLabel "Type Designation Type" .
+                          skos:prefLabel "Type Designation Type"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/used
+dwcdp:used rdf:type owl:ObjectProperty ;
+           owl:inverseOf dwcdp:usedFor ;
+           rdfs:domain dwc:Identification ;
+           rdfs:range dcterms:BibliographicResource ;
+           rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:mediaOf], which allows reasoners queries to go through different ways."@en ;
+           rdfs:isDefinedBy dwcdp: ;
+           skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]"@en ;
+           skos:prefLabel "Used"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/usedFor
 dwcdp:usedFor rdf:type owl:ObjectProperty ;
-              rdfs:domain dwc:BibliographicDocument ;
+              rdfs:domain dcterms:BibliographicResource ;
               rdfs:range dwc:Identification ;
               rdfs:isDefinedBy dwcdp: ;
               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:BibliographicResource] to an instance of a [dwc:Identification] it was used to determine."@en ;
-              skos:prefLabel "Used For" .
+              skos:prefLabel "Used For"@en .
 
 
 ###  http://rs.tdwg.org/eco/iri/samplingPerformedBy
 <http://rs.tdwg.org/eco/iri/samplingPerformedBy> rdf:type owl:ObjectProperty ;
-                                                 rdfs:domain eco:Survey ;
                                                  dcterms:isVersionOf <http://rs.tdwg.org/eco/iri/samplingPerformedBy> ;
                                                  dcterms:references <http://rs.tdwg.org/eco/iri/version/samplingPerformedBy-2025-07-10> ;
                                                  rdfs:comment "The sampling dwc:Event could be at any level of hierarchy. In the case of a higher level (parent) dwc:Event, include all the organizations or people involved in the child dwc:Events that contributed to the parent dwc:Event. Terms in the ecoiri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -1179,7 +1306,6 @@ dwcdp:usedFor rdf:type owl:ObjectProperty ;
 ###  http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI
 <http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI> rdf:type owl:ObjectProperty ;
                                                        rdfs:subPropertyOf dcterms:source ;
-                                                       rdfs:domain eco:SurveyTarget ;
                                                        dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
                                                        rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
                                                        rdfs:isDefinedBy <http://rs.tdwg.org/eco/iri/> ;
@@ -2680,7 +2806,11 @@ dwc:eventCategory rdf:type owl:DatatypeProperty ;
 ###  http://rs.tdwg.org/dwc/terms/eventDate
 dwc:eventDate rdf:type owl:DatatypeProperty ;
               rdfs:domain dwc:Event ;
-              rdfs:range xsd:string ;
+              rdfs:range [ rdf:type rdfs:Datatype ;
+                           owl:unionOf ( xsd:dateTime
+                                         xsd:string
+                                       )
+                         ] ;
               dcterms:isVersionOf dwc:eventDate ;
               dcterms:references <http://rs.tdwg.org/dwc/terms/version/eventDate-2025-06-12> ;
               rdfs:comment "Recommended best practice is to use a date that conforms to ISO 8601-1:2019."@en ;
@@ -5939,6 +6069,12 @@ skos:ConceptScheme rdf:type owl:Class ;
 #################################################################
 #    Individuals
 #################################################################
+
+###  http://bioboum.ca/badom
+<http://bioboum.ca/badom> rdf:type owl:NamedIndividual ,
+                                   dwc:Event ;
+                          dwc:eventDate "1995" .
+
 
 ###  http://bioboum.ca/dwc-owl.owl
 <http://bioboum.ca/dwc-owl.owl> rdf:type owl:NamedIndividual ;
