@@ -470,10 +470,9 @@ createOC(
     exist_rest_filler=[
         (DWCDP["followedBy"], DWC["NucleotideAnalysis"]),
     ],
-    univ_rest_filler=[
-        (DWCDP["followedBy"], DWC["NucleotideAnalysis"]),
-    ],
-
+   univ_rest_filler=[
+      (DWCDP["followedBy"], DWC["NucleotideAnalysis"]),
+   ],
     maxcard1_restrictions=[
         DWC["assayType"],
         MIXS["0000001"],
@@ -494,6 +493,7 @@ createOC(
         MIXS["0001107"],
         MIXS["0001320"],
     ],
+    equiv_def=(DWCDP["followedBy"], DWC["NucleotideAnalysis"]),
     version_of_s="http://rs.tdwg.org/dwc/terms/MolecularProtocol",
     references_s="http://rs.tdwg.org/dwc/terms/version/MolecularProtocol-0000-00-00",
 )
@@ -623,73 +623,73 @@ createOC(
     # card1_restrictions=[DWC["organismInteractionID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/OrganismInteraction",
 )
-
-# NOTE: Review integration of skos:Concept and owl:Classes.
-# Here there is a defined skos:ConceptScheme
-createEOC(
-    name="Pathway",
-    namespace=DWC,
-    graph=g,
-    pref_label=Literal("Pathway", lang="en"),
-    definition=Literal("Controlled value for Darwin Core terms with local name pathway.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    one_of=[
-        URIRef("http://rs.tdwg.org/dwcpw/values/p001"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p002"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p003"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p004"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p005"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p006"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p007"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p008"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p009"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p010"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p011"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p012"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p013"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p014"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p015"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p016"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p017"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p018"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p019"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p020"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p021"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p022"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p023"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p024"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p025"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p026"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p027"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p028"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p029"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p030"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p031"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p032"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p033"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p034"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p035"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p036"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p037"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p038"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p039"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p040"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p041"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p042"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p043"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p044"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p049"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p050"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p051"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p052"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p053"),
-    ],
-)
-
+#
+# # NOTE: Review integration of skos:Concept and owl:Classes.
+# # Here there is a defined skos:ConceptScheme
+# createEOC(
+#     name="Pathway",
+#     namespace=DWC,
+#     graph=g,
+#     pref_label=Literal("Pathway", lang="en"),
+#     definition=Literal("Controlled value for Darwin Core terms with local name pathway.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     one_of=[
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p001"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p002"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p003"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p004"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p005"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p006"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p007"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p008"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p009"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p010"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p011"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p012"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p013"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p014"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p015"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p016"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p017"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p018"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p019"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p020"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p021"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p022"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p023"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p024"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p025"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p026"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p027"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p028"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p029"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p030"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p031"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p032"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p033"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p034"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p035"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p036"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p037"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p038"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p039"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p040"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p041"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p042"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p043"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p044"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p045"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p047"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p048"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p049"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p050"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p051"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p052"),
+#         URIRef("http://rs.tdwg.org/dwcpw/values/p053"),
+#     ],
+# )
+#
 # WARN: Not in original DwCDP definition, but I added it.
 # NOTE: Should it be a "legal" document. Maybe consider dcterms:LicenseDocument?
 createOC(
@@ -2005,911 +2005,911 @@ createSC(
 
 
 #################################################################################################
-
-createSC(
-    name="d001",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Native (category A)", lang="en"),
-    definition=Literal("Not transported beyond limits of native range.", lang="en"),
-    comments=Literal("Considered native and naturally occurring. See also \"category A\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d001",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d001-2021-09-01",
-)
-
-createSC(
-    name="d002",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Captive (category B1)", lang="en"),
-    definition=Literal("Individuals in captivity or quarantine (i.e., individuals provided with conditions suitable for them, but explicit measures of containment are in place).", lang="en"),
-    comments=Literal("Only for cases where specific actions have been taken place to prevent escape of individuals or propagules. See also \"category B1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d002",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d002-2021-09-01",
-)
-
-createSC(
-    name="d003",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Cultivated (category B2)", lang="en"),
-    definition=Literal("Individuals in cultivation (i.e., individuals provided with conditions suitable for them, but explicit measures to prevent dispersal are limited at best).", lang="en"),
-    comments=Literal("Examples include gardens, parks and farms. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d003",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d003-2021-09-01",
-)
-
-createSC(
-    name="d004",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Released (category B3)", lang="en"),
-    definition=Literal("Individuals directly released into novel environment.", lang="en"),
-    comments=Literal("For example, fish stocked for angling, birds for hunting. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d004",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d004-2021-09-01",
-)
-
-createSC(
-    name="d005",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Failing (category C0)", lang="en"),
-    definition=Literal("Individuals released outside of captivity or cultivation in a location, but incapable of surviving for a significant period.", lang="en"),
-    comments=Literal("For example, frost-tender plants sown or planted in a cold climate. See also \"category C0\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d005",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d005-2021-09-01",
-)
-
-createSC(
-    name="d006",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Casual (category C1)", lang="en"),
-    definition=Literal("Individuals surviving outside of captivity or cultivation in a location with no reproduction.", lang="en"),
-    comments=Literal("Trees planted in the wild for forestry or ornament may come under this category. See also \"category C1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d006",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d006-2021-09-01",
-)
-
-createSC(
-    name="d007",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Reproducing (category C2)", lang="en"),
-    definition=Literal("Individuals surviving outside of captivity or cultivation in a location with no reproduction.", lang="en"),
-    comments=Literal("Offspring are produced, but these either do not survive or are not fertile enough to maintain the population. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d007",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d007-2021-09-01",
-)
-
-createSC(
-    name="d008",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Established (category C3)", lang="en"),
-    definition=Literal("Individuals surviving outside of captivity or cultivation in a location. Reproduction occurring, and population self-sustaining.", lang="en"),
-    comments=Literal("The population is maintained by reproduction, but is not spreading. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d008",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d008-2021-09-01",
-)
-
-createSC(
-    name="d009",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Colonising (category D1)", lang="en"),
-    definition=Literal("Self-sustaining population outside of captivity or cultivation, with individuals surviving a significant distance from the original point of introduction.", lang="en"),
-    comments=Literal("The population is maintained by reproduction and is spreading. See also \"category D1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d009",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d009-2021-09-01",
-)
-
-createSC(
-    name="d010",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Invasive (category D2)", lang="en"),
-    definition=Literal("Self-sustaining population outside of captivity or cultivation, with individuals surviving and reproducing a significant distance from the original point of introduction.", lang="en"),
-    comments=Literal("The population is maintained by reproduction, is spreading, and its progeny are also reproducing and spreading. See also \"category D2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d010",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d010-2021-09-01",
-)
-
-createSC(
-    name="d011",
-    namespace=DWCDOE,
-    graph=g,
-    pref_label=Literal("Widespread invasive (category E)", lang="en"),
-    definition=Literal("Fully invasive species, with individuals dispersing, surviving and reproducing at multiple sites across a spectrum of habitats and geographic range.", lang="en"),
-    comments=Literal("This term is only used for those invasives with the highest degree of encroachment. See also \"category E\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-    in_scheme=DWCDOE["d"],
-    version_of_s="http://rs.tdwg.org/dwcdoe/values/d011",
-    references_s="http://rs.tdwg.org/dwcdoe/values/version/d011-2021-09-01",
-)
-
-createSC(
-    name="e001",
-    namespace=DWCEM,
-    graph=g,
-    pref_label=Literal("Native (indigenous)", lang="en"),
-    definition=Literal("A taxon occurring within its natural range.", lang="en"),
-    comments=Literal("What is considered native to an area varies with the biogeographic history of an area and the local interpretation of what is a \"natural range\".", lang="en"),
-    in_scheme=DWCEM["e"],
-    version_of_s="http://rs.tdwg.org/dwcem/values/e001",
-    references_s="http://rs.tdwg.org/dwcem/values/version/e001-2021-09-01",
-)
-
-createSC(
-    name="e002",
-    namespace=DWCEM,
-    graph=g,
-    pref_label=Literal("Native (reintroduced)", lang="en"),
-    definition=Literal("A taxon re-established by direct introduction by humans into an area that was once part of its natural range, but from where it had become extinct.", lang="en"),
-    comments=Literal("Where a taxon has become extirpated from an area where it had naturally occurred it may be returned to that area deliberately with the intention of re-establishing it.", lang="en"),
-    in_scheme=DWCEM["e"],
-    version_of_s="http://rs.tdwg.org/dwcem/values/e002",
-    references_s="http://rs.tdwg.org/dwcem/values/version/e002-2025-06-12",
-)
-
-createSC(
-    name="e003",
-    namespace=DWCEM,
-    graph=g,
-    pref_label=Literal("Introduced (alien, exotic, non-native, nonindigenous)", lang="en"),
-    definition=Literal("Establishment of a taxon by human agency into an area that is not part of its natural range.", lang="en"),
-    comments=Literal("Organisms can be introduced to novel areas and habitats by human activity, either on purpose or by accident. Humans can also inadvertently create corridors that break down natural barriers to dispersal and allow organisms to spread beyond their natural range.", lang="en"),
-    in_scheme=DWCEM["e"],
-    version_of_s="http://rs.tdwg.org/dwcem/values/e003",
-    references_s="http://rs.tdwg.org/dwcem/values/version/e003-2021-09-01",
-)
-
-createSC(
-    name="e004",
-    namespace=DWCEM,
-    graph=g,
-    pref_label=Literal("Introduced (assisted colonisation)", lang="en"),
-    definition=Literal("Establishment of a taxon specifically with the intention of creating a self-sustaining wild population in an area that is not part of the taxon's natural range.", lang="en"),
-    comments=Literal("In the event of environmental change and habitat destruction a conservation option is to introduce a taxon into an area it did not naturally occur.", lang="en"),
-    in_scheme=DWCEM["e"],
-    version_of_s="http://rs.tdwg.org/dwcem/values/e004",
-    references_s="http://rs.tdwg.org/dwcem/values/version/e004-2021-09-01",
-)
-
-createSC(
-    name="e005",
-    namespace=DWCEM,
-    graph=g,
-    pref_label=Literal("Vagrant (casual)", lang="en"),
-    definition=Literal("The temporary occurrence of a taxon far outside its natural or migratory range.", lang="en"),
-    comments=Literal("Natural events and human activity can disperse organisms unpredictably into places where they may stay or survive for a period.", lang="en"),
-    in_scheme=DWCEM["e"],
-    version_of_s="http://rs.tdwg.org/dwcem/values/e005",
-    references_s="http://rs.tdwg.org/dwcem/values/version/e005-2020-10-13",
-)
-
-createSC(
-    name="e006",
-    namespace=DWCEM,
-    graph=g,
-    pref_label=Literal("Uncertain (unknown, cryptogenic)", lang="en"),
-    definition=Literal("The origin of the occurrence of the taxon in an area is obscure.", lang="en"),
-    comments=Literal("When there is a lack of fossil or historical evidence for the occurrence of a taxon in an area it can be impossible to know if the taxon is new to the area or native.", lang="en"),
-    in_scheme=DWCEM["e"],
-    version_of_s="http://rs.tdwg.org/dwcem/values/e006",
-    references_s="http://rs.tdwg.org/dwcem/values/version/e006-2021-09-01",
-)
-
-createSC(
-    name="e007",
-    namespace=DWCEM,
-    graph=g,
-    pref_label=Literal("Native (endemic)", lang="en"),
-    definition=Literal("A taxon with a natural distribution restricted to a single geographical area.", lang="en"),
-    comments=Literal("The term endemic is a subcategory of native and relates to geography, such as \"areas of endemism\", bioregions, and sometimes administrative boundaries. While a native taxon can naturally occur in several geographical areas an endemic taxon only occurs in one. In Darwin Core terms this would mean, \"A dwc:Organism referred to is recognized as a member of a dwc:Taxon endemic to the dcterms:Location at the time of the dwc:Occurrence.\"", lang="en"),
-    in_scheme=DWCEM["e"],
-    version_of_s="http://rs.tdwg.org/dwcem/values/e007",
-    references_s="http://rs.tdwg.org/dwcem/values/version/e007-2025-06-12",
-)
-
-createSC(
-    name="p001",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Biological Control", lang="en"),
-    definition=Literal("Organisms occuring in an area because they were introduced for the purpose of biological control of another organism.", lang="en"),
-    comments=Literal("Released intentionally into the (semi)natural environment with the purpose of controlling the population(s) of one or more organisms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p045"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p001",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p001-2021-09-01",
-)
-
-createSC(
-    name="p002",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Erosion Control", lang="en"),
-    definition=Literal("Organisms introduced for the purpose of erosion control/dune stabilization (windbreaks, hedges, etc.).", lang="en"),
-    comments=Literal("Probably only applicable to plants. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p045"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p002",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p002-2021-09-01",
-)
-
-createSC(
-    name="p003",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Fishery In The Wild", lang="en"),
-    definition=Literal("Fish stocked into the wild either to create a fishery or for recreational angling.", lang="en"),
-    comments=Literal("Largely applicable to freshwater and anadromous fish. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p045"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p003",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p003-2021-09-01",
-)
-
-createSC(
-    name="p004",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Hunting", lang="en"),
-    definition=Literal("Animals stocked into the wild specifically with the intention that they would be hunted for sport.", lang="en"),
-    comments=Literal("Largely applicable to terrestrial vertebrates. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p045"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p004",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p004-2021-09-01",
-)
-
-createSC(
-    name="p005",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Landscape Improvement", lang="en"),
-    definition=Literal("Landscape/flora/fauna \"improvement\" in the wild.", lang="en"),
-    comments=Literal("\"Improvement\" in this context is intended for introductions for the purpose of aesthetic enhancement of the landscape, as opposed to practical introductions for the purpose of erosion control, agriculture, forestry etc. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p045"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p005",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p005-2021-09-01",
-)
-
-createSC(
-    name="p006",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Conservation Or Wildlife Management", lang="en"),
-    definition=Literal("Organisms introduced for conservation purposes or wildlife management.", lang="en"),
-    comments=Literal("The organism was released with the intention of improving the conservation status of the species or the conservation status other species in the habitat. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p045"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p006",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p006-2021-09-01",
-)
-
-createSC(
-    name="p007",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Released For Use", lang="en"),
-    definition=Literal("Release in nature for use (other than above, e.g., fur, transport, medical use).", lang="en"),
-    comments=Literal("This term refers to organisms intentionally and directly released into the wild to serve a specific purpose. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p045"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p007",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p007-2021-09-01",
-)
-
-createSC(
-    name="p008",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Other Intentional Release", lang="en"),
-    definition=Literal("A catch-all term for intentional releases not for human use that are not covered by other more specific terms.", lang="en"),
-    comments=Literal("Compare with \"other escape from confinement\". See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p045"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p008",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p008-2021-09-01",
-)
-
-createSC(
-    name="p009",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Agriculture (Including Biofuel Feedstocks)", lang="en"),
-    definition=Literal("Plants grown with the intention of harvesting.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p009",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p009-2021-09-01",
-)
-
-createSC(
-    name="p010",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Aquaculture/Mariculture", lang="en"),
-    definition=Literal("The analog of agriculture and farmed animals, specifically related to aquatic organisms.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p010",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p010-2021-09-01",
-)
-
-createSC(
-    name="p011",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Botanic Garden/Zoo/Aquaria (Excluding Domestic Aquaria)", lang="en"),
-    definition=Literal("Organisms in public collections of plants and/or animals.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p011",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p011-2021-09-01",
-)
-
-createSC(
-    name="p012",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Pet/Aquarium/Terrarium Species (Including Live Food For Such Species)", lang="en"),
-    definition=Literal("Privately kept animals.", lang="en"),
-    comments=Literal("Animals kept for hunting, such as falcons and ferrets, SHOULD be included here, not under the hunting term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p012",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p012-2021-09-01",
-)
-
-createSC(
-    name="p013",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Farmed Animals (Including Animals Left Under Limited Control)", lang="en"),
-    definition=Literal("Animals cared for and bred with the specific intention of using their products, such as meat and milk.", lang="en"),
-    comments=Literal("Farmed animals are generally kept in a defined area, such as a fields. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p013",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p013-2021-09-01",
-)
-
-createSC(
-    name="p014",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Forestry (Including Reforestation)", lang="en"),
-    definition=Literal("Trees specifically introduced to provide timber and other forestry products.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p014",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p014-2021-09-01",
-)
-
-createSC(
-    name="p015",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Fur Farms", lang="en"),
-    definition=Literal("Organisms escaped from a fur farm, including unauthorised releases.", lang="en"),
-    comments=Literal("Probably only applicable to vertebrates raised for their pelts and skins. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p015",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p015-2021-09-01",
-)
-
-createSC(
-    name="p016",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Horticulture", lang="en"),
-    definition=Literal("Plants distributed by the ornamental and decorative plants industry.", lang="en"),
-    comments=Literal("This term excludes plants and other organisms from aquaria and terrariums, which SHOULD be classified under the pet/aquarium/terrarium term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p016",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p016-2021-09-01",
-)
-
-createSC(
-    name="p017",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Ornamental Purpose Other Than Horticulture", lang="en"),
-    definition=Literal("Ornamental plants introduced through pathways other than the horticultural industry.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p017",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p017-2021-09-01",
-)
-
-createSC(
-    name="p018",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Research And Ex-Situ Breeding (In Facilities)", lang="en"),
-    definition=Literal("Plants and animals introduced for the purpose of breeding or scientific and medical research, including science education.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p018",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p018-2021-09-01",
-)
-
-createSC(
-    name="p019",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Live Food And Live Bait", lang="en"),
-    definition=Literal("Live food imported for human consumption or live bait, such as shellfish and snails.", lang="en"),
-    comments=Literal("Live food, such as mealworms, for the organisms kept as pets should be classified under the pet term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p019",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p019-2021-09-01",
-)
-
-createSC(
-    name="p020",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Other Escape From Confinement", lang="en"),
-    definition=Literal("Organisms brought into an area with the intention of keeping them in captivity permanently, but that have subsequently escaped.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p046"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p020",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p020-2021-09-01",
-)
-
-createSC(
-    name="p021",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Contaminant Nursery Material", lang="en"),
-    definition=Literal("Organisms transported into an area together with plant material.", lang="en"),
-    comments=Literal("These may be other plants, diseases, fungi and animals. They may be attached to the plant or within the soil. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p047"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p021",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p021-2021-09-01",
-)
-
-createSC(
-    name="p022",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Contaminated Bait", lang="en"),
-    definition=Literal("Contaminants, pathogens and parasites transported with live, frozen or preserved bait used to catch fish or other organisms.", lang="en"),
-    comments=Literal("Typical examples include crustaceans, cephalopods and molluscs. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p047"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p022",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p022-2021-09-01",
-)
-
-createSC(
-    name="p023",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Food Contaminant (Including Of Live Food)", lang="en"),
-    definition=Literal("Foods for human consumption, whether they are transported live or dead.", lang="en"),
-    comments=Literal("This term includes unintentional introduction of contaminants such as diseases on those foods and in the case of plants, should include seeds. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p047"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p023",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p023-2021-09-01",
-)
-
-createSC(
-    name="p024",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Contaminant On Animals (Except Parasites, Organisms Transported By Host/Vector)", lang="en"),
-    definition=Literal("Contaminants carried either on or in the body of transported animals.", lang="en"),
-    comments=Literal("This term excludes parasites and pathogens, which SHOULD be classified under their own specific term (\"parasites on animals\"). Transported animals carry other organisms in their coats, in their guts and in soil on their hooves and feet. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p047"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p024",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p024-2021-09-01",
-)
-
-createSC(
-    name="p025",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Parasites On Animals (Including Organisms Transported By Host And Vector)", lang="en"),
-    definition=Literal("Parasitic and pathogenic organisms transported with their host or vector animal.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p047"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p025",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p025-2021-09-01",
-)
-
-createSC(
-    name="p026",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Contaminant On Plants (Except Parasites, Species Transported By Host/Vector)", lang="en"),
-    definition=Literal("Organisms transported on plant material.", lang="en"),
-    comments=Literal("This term excludes organisms carried on contaminant nursery material, seed contaminants, and the material from the timber trade, which SHOULD be classified under their own pathway terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p047"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p026",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p026-2021-09-01",
-)
-
-createSC(
-    name="p027",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Parasites On Plants (Including Species Transported By Host And Vector)", lang="en"),
-    definition=Literal("Parasitic and pathogenic organisms transported with their host or vector plant.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p047"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p027",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p027-2021-09-01",
-)
-
-createSC(
-    name="p028",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Seed Contaminant", lang="en"),
-    definition=Literal("Organisms contaminating transported seeds.", lang="en"),
-    comments=Literal("These may be parasites or pathogens of seeds or species that eat seeds, whether intended to be transported or not. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p047"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p028",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p028-2021-09-01",
-)
-
-createSC(
-    name="p029",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Timber Trade", lang="en"),
-    definition=Literal("Contaminants on unprocessed timber, processed wood and wood-derived products.", lang="en"),
-    comments=Literal("This term excludes packing material and habitat material made from wood, which SHOULD be included under their own terms (\"packing material\" and \"transportation of habitat material\"). Examples include wooden furniture, saw dust and fire wood. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p047"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p029",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p029-2021-09-01",
-)
-
-createSC(
-    name="p030",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Transportation Of Habitat Material (Soil, Vegetation, Wood, Etc.)", lang="en"),
-    definition=Literal("Organisms transported with their habitat material to a new location.", lang="en"),
-    comments=Literal("Examples include materials such as soil, vegetation, straw and wood chips. Unless these materials are sterilised the organisms can be transported with their habitat to a new location. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p047"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p030",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p030-2021-09-01",
-)
-
-
-createSC(
-    name="p031",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Angling/Fishing Equipment", lang="en"),
-    definition=Literal("Aquatic organisms moved between sites on equipment of recreational anglers and professional fishermen.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p031",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p031-2021-09-01",
-)
-
-
-createSC(
-    name="p032",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Container/Bulk", lang="en"),
-    definition=Literal("Stowaways transported in or on cargo containers or bulk cargo units.", lang="en"),
-    comments=Literal("The difference between this category and others, such as \"hitchhikers on ship/boat\", is that the organism embarked and disembarked from the container rather than the ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p032",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p032-2021-09-01",
-)
-
-createSC(
-    name="p033",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Hitchhikers In Or On Airplane", lang="en"),
-    definition=Literal("Organisms that enter airplanes or other aircraft, such as helicopters, and are transported by them to another location.", lang="en"),
-    comments=Literal("This term does not apply to organisms that embarked in containers that were subsequently loaded onto an aircraft. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p033",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p033-2021-09-01",
-)
-
-createSC(
-    name="p034",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Hitchhikers On Ship/Boat (Excluding Ballast Water And Hull Fouling)", lang="en"),
-    definition=Literal("Organisms that enter directly onto boats or ships and are transported by them to another location.", lang="en"),
-    comments=Literal("This term does not apply to organisms that embarked in containers that are subsequently loaded onto the ship, nor to contaminants of products loaded onto the ship. The term is intended for organisms that directly interact with the boat or ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p034",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p034-2021-09-01",
-)
-
-createSC(
-    name="p035",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Machinery/Equipment", lang="en"),
-    definition=Literal("Organisms carried on the surfaces of or within heavy machinery and equipment.", lang="en"),
-    comments=Literal("This includes military equipment, farm machinery and manufacturing equipment. This term does not include products carried by vehicles. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p035",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p035-2021-09-01",
-)
-
-
-createSC(
-    name="p036",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("People And Their Luggage/Equipment (In Particular Tourism)", lang="en"),
-    definition=Literal("Organisms transported on people and/or their personal luggage.", lang="en"),
-    comments=Literal("This term excludes recreational angling equipment, which SHOULD be classified under its own term (\"angling/fishing equipment\"). Examples include organisms transported by tourists. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p036",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p036-2021-09-01",
-)
-
-createSC(
-    name="p037",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Organic Packing Material, In Particular Wood Packaging", lang="en"),
-    definition=Literal("Organic material, particularly unprocessed plant material that is used to pack transported goods.", lang="en"),
-    comments=Literal("Examples include woodern pallets, boxes, bags and baskets. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p037",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01",
-)
-
-createSC(
-    name="p038",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Ship/Boat Ballast Water", lang="en"),
-    definition=Literal("Organisms transported within the water pumped into boats and ships to provide ballast.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p038",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01",
-)
-
-createSC(
-    name="p039",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Ship/Boat Hull Fouling", lang="en"),
-    definition=Literal("Organisms that attach themselves to the subsurface hull of boats and ships.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p039",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p039-2021-09-01",
-)
-
-createSC(
-    name="p040",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Vehicles (Car, Train, Etc.)", lang="en"),
-    definition=Literal("Other vehicle hitchhikers that have been unintentionally dispersed, but are not covered by other terms.", lang="en"),
-    comments=Literal("These organisms may be carried on or within the vehicle. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p040",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p040-2021-09-01",
-)
-
-createSC(
-    name="p041",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Other Means Of Transport", lang="en"),
-    definition=Literal("A catch-all term for any transport related dispersal that is not covered in other terms.", lang="en"),
-    comments=Literal("Examples include fouling from offshore oil and gas platforms, offshore renewable energy sites (such as wind farms, pipelines, cable transport, etc.). See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p048"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p041",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p041-2021-09-01",
-)
-
-createSC(
-    name="p042",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Interconnected Waterways/Basins/Seas", lang="en"),
-    definition=Literal("Organisms that dispersed through artificial waterways created to connect previosuly unconnected water bodies.", lang="en"),
-    comments=Literal("Organisms transported along these corridors in ballast or as hull fouling SHOULD be categorised under the \"ship/boat ballast water\" or \"ship/boat hull fouling\" terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p049"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p042",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p042-2021-09-01",
-)
-
-createSC(
-    name="p043",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Tunnels And Land Bridges", lang="en"),
-    definition=Literal("Unintentional dispersal by organisms using artificial tunnels, bridges, roads and railways.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p049"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p043",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p043-2021-09-01",
-)
-
-createSC(
-    name="p044",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Natural Dispersal Across Borders Of Invasive Alien Organisms", lang="en"),
-    definition=Literal("Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid.", lang="en"),
-    comments=Literal("Dispersal of organisms to new regions by natural dispersal from regions in which they are alien. These are alien species that have previously been introduced through one of these pathways: release in nature, escape from confinement, transport-contaminant, transport-stowaway, or corridor. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p050"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p044",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p044-2021-09-01",
-)
-
-createSC(
-    name="p045",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Release In Nature", lang="en"),
-    definition=Literal("Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p051"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p045",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p045-2021-09-01",
-)
-
-createSC(
-    name="p046",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Escape From Confinement", lang="en"),
-    definition=Literal("Organisms intentionally transported by humans and intended to be kept in captivity or cultivation, but having inadvertently escaped from human control.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p051"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p046",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p046-2021-09-01",
-)
-
-createSC(
-    name="p047",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Transport-Contaminant", lang="en"),
-    definition=Literal("An umbrella term for all species transported as contaminants in other products.", lang="en"),
-    comments=Literal("An alien species is a contaminant if it had a trophic or biotic relationship to organisms or items being transported and was to some extent dependent on them for survival. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p052"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p047",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p047-2021-09-01",
-)
-
-createSC(
-    name="p048",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Transport-Stowaway", lang="en"),
-    definition=Literal("An umbrella term for all species transported by riding on forms of transport where the organism has a direct interaction with the transport and is not merely carried as part of, or a contaminant of cargo.", lang="en"),
-    comments=Literal("A stowaway has no trophic or biotic relationship to the organisms or items being transported. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p052"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p048",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p048-2021-09-01",
-)
-
-createSC(
-    name="p049",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Corridor", lang="en"),
-    definition=Literal("Infrastructure, such as bridges, tunnels and canals have removed natural barriers to dispersal and allowed a species to move into a novel location.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p053"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p049",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p049-2021-09-01",
-)
-
-createSC(
-    name="p050",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Unaided", lang="en"),
-    definition=Literal("Organisms that spread by natural dispersal, without action or assistance by humans, from regions in which they are also alien.", lang="en"),
-    comments=Literal("The term refers to secondary dispersal from an area where the taxon is also alien. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    broader=DWCPW["p053"],
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p051",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01",
-)
-
-createSC(
-    name="p051",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Intentional", lang="en"),
-    definition=Literal("Organisms were brought to new area with the specific intention of keeping them alive in the new region, regardless of whether they were intended to be cultivated or released into the wild.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p051",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01",
-)
-
-createSC(
-    name="p052",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Unintentional", lang="en"),
-    definition=Literal("The organism was unintentionally brought to a new region.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p052",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p052-2021-09-01",
-)
-
-createSC(
-    name="p053",
-    namespace=DWCPW,
-    graph=g,
-    pref_label=Literal("Corridor and Dispersal", lang="en"),
-    definition=Literal("Organisms dispersed naturally, even if that dispersal was aided by changes in the landscape created by humans.", lang="en"),
-    comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
-    in_scheme=DWCPW["p"],
-    version_of_s="http://rs.tdwg.org/dwcpw/values/p053",
-    references_s="http://rs.tdwg.org/dwcpw/values/version/p053-2021-09-01",
-)
+#
+# createSC(
+#     name="d001",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Native (category A)", lang="en"),
+#     definition=Literal("Not transported beyond limits of native range.", lang="en"),
+#     comments=Literal("Considered native and naturally occurring. See also \"category A\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d001",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d001-2021-09-01",
+# )
+#
+# createSC(
+#     name="d002",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Captive (category B1)", lang="en"),
+#     definition=Literal("Individuals in captivity or quarantine (i.e., individuals provided with conditions suitable for them, but explicit measures of containment are in place).", lang="en"),
+#     comments=Literal("Only for cases where specific actions have been taken place to prevent escape of individuals or propagules. See also \"category B1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d002",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d002-2021-09-01",
+# )
+#
+# createSC(
+#     name="d003",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Cultivated (category B2)", lang="en"),
+#     definition=Literal("Individuals in cultivation (i.e., individuals provided with conditions suitable for them, but explicit measures to prevent dispersal are limited at best).", lang="en"),
+#     comments=Literal("Examples include gardens, parks and farms. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d003",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d003-2021-09-01",
+# )
+#
+# createSC(
+#     name="d004",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Released (category B3)", lang="en"),
+#     definition=Literal("Individuals directly released into novel environment.", lang="en"),
+#     comments=Literal("For example, fish stocked for angling, birds for hunting. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d004",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d004-2021-09-01",
+# )
+#
+# createSC(
+#     name="d005",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Failing (category C0)", lang="en"),
+#     definition=Literal("Individuals released outside of captivity or cultivation in a location, but incapable of surviving for a significant period.", lang="en"),
+#     comments=Literal("For example, frost-tender plants sown or planted in a cold climate. See also \"category C0\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d005",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d005-2021-09-01",
+# )
+#
+# createSC(
+#     name="d006",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Casual (category C1)", lang="en"),
+#     definition=Literal("Individuals surviving outside of captivity or cultivation in a location with no reproduction.", lang="en"),
+#     comments=Literal("Trees planted in the wild for forestry or ornament may come under this category. See also \"category C1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d006",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d006-2021-09-01",
+# )
+#
+# createSC(
+#     name="d007",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Reproducing (category C2)", lang="en"),
+#     definition=Literal("Individuals surviving outside of captivity or cultivation in a location with no reproduction.", lang="en"),
+#     comments=Literal("Offspring are produced, but these either do not survive or are not fertile enough to maintain the population. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d007",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d007-2021-09-01",
+# )
+#
+# createSC(
+#     name="d008",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Established (category C3)", lang="en"),
+#     definition=Literal("Individuals surviving outside of captivity or cultivation in a location. Reproduction occurring, and population self-sustaining.", lang="en"),
+#     comments=Literal("The population is maintained by reproduction, but is not spreading. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d008",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d008-2021-09-01",
+# )
+#
+# createSC(
+#     name="d009",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Colonising (category D1)", lang="en"),
+#     definition=Literal("Self-sustaining population outside of captivity or cultivation, with individuals surviving a significant distance from the original point of introduction.", lang="en"),
+#     comments=Literal("The population is maintained by reproduction and is spreading. See also \"category D1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d009",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d009-2021-09-01",
+# )
+#
+# createSC(
+#     name="d010",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Invasive (category D2)", lang="en"),
+#     definition=Literal("Self-sustaining population outside of captivity or cultivation, with individuals surviving and reproducing a significant distance from the original point of introduction.", lang="en"),
+#     comments=Literal("The population is maintained by reproduction, is spreading, and its progeny are also reproducing and spreading. See also \"category D2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d010",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d010-2021-09-01",
+# )
+#
+# createSC(
+#     name="d011",
+#     namespace=DWCDOE,
+#     graph=g,
+#     pref_label=Literal("Widespread invasive (category E)", lang="en"),
+#     definition=Literal("Fully invasive species, with individuals dispersing, surviving and reproducing at multiple sites across a spectrum of habitats and geographic range.", lang="en"),
+#     comments=Literal("This term is only used for those invasives with the highest degree of encroachment. See also \"category E\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+#     in_scheme=DWCDOE["d"],
+#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d011",
+#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d011-2021-09-01",
+# )
+#
+# createSC(
+#     name="e001",
+#     namespace=DWCEM,
+#     graph=g,
+#     pref_label=Literal("Native (indigenous)", lang="en"),
+#     definition=Literal("A taxon occurring within its natural range.", lang="en"),
+#     comments=Literal("What is considered native to an area varies with the biogeographic history of an area and the local interpretation of what is a \"natural range\".", lang="en"),
+#     in_scheme=DWCEM["e"],
+#     version_of_s="http://rs.tdwg.org/dwcem/values/e001",
+#     references_s="http://rs.tdwg.org/dwcem/values/version/e001-2021-09-01",
+# )
+#
+# createSC(
+#     name="e002",
+#     namespace=DWCEM,
+#     graph=g,
+#     pref_label=Literal("Native (reintroduced)", lang="en"),
+#     definition=Literal("A taxon re-established by direct introduction by humans into an area that was once part of its natural range, but from where it had become extinct.", lang="en"),
+#     comments=Literal("Where a taxon has become extirpated from an area where it had naturally occurred it may be returned to that area deliberately with the intention of re-establishing it.", lang="en"),
+#     in_scheme=DWCEM["e"],
+#     version_of_s="http://rs.tdwg.org/dwcem/values/e002",
+#     references_s="http://rs.tdwg.org/dwcem/values/version/e002-2025-06-12",
+# )
+#
+# createSC(
+#     name="e003",
+#     namespace=DWCEM,
+#     graph=g,
+#     pref_label=Literal("Introduced (alien, exotic, non-native, nonindigenous)", lang="en"),
+#     definition=Literal("Establishment of a taxon by human agency into an area that is not part of its natural range.", lang="en"),
+#     comments=Literal("Organisms can be introduced to novel areas and habitats by human activity, either on purpose or by accident. Humans can also inadvertently create corridors that break down natural barriers to dispersal and allow organisms to spread beyond their natural range.", lang="en"),
+#     in_scheme=DWCEM["e"],
+#     version_of_s="http://rs.tdwg.org/dwcem/values/e003",
+#     references_s="http://rs.tdwg.org/dwcem/values/version/e003-2021-09-01",
+# )
+#
+# createSC(
+#     name="e004",
+#     namespace=DWCEM,
+#     graph=g,
+#     pref_label=Literal("Introduced (assisted colonisation)", lang="en"),
+#     definition=Literal("Establishment of a taxon specifically with the intention of creating a self-sustaining wild population in an area that is not part of the taxon's natural range.", lang="en"),
+#     comments=Literal("In the event of environmental change and habitat destruction a conservation option is to introduce a taxon into an area it did not naturally occur.", lang="en"),
+#     in_scheme=DWCEM["e"],
+#     version_of_s="http://rs.tdwg.org/dwcem/values/e004",
+#     references_s="http://rs.tdwg.org/dwcem/values/version/e004-2021-09-01",
+# )
+#
+# createSC(
+#     name="e005",
+#     namespace=DWCEM,
+#     graph=g,
+#     pref_label=Literal("Vagrant (casual)", lang="en"),
+#     definition=Literal("The temporary occurrence of a taxon far outside its natural or migratory range.", lang="en"),
+#     comments=Literal("Natural events and human activity can disperse organisms unpredictably into places where they may stay or survive for a period.", lang="en"),
+#     in_scheme=DWCEM["e"],
+#     version_of_s="http://rs.tdwg.org/dwcem/values/e005",
+#     references_s="http://rs.tdwg.org/dwcem/values/version/e005-2020-10-13",
+# )
+#
+# createSC(
+#     name="e006",
+#     namespace=DWCEM,
+#     graph=g,
+#     pref_label=Literal("Uncertain (unknown, cryptogenic)", lang="en"),
+#     definition=Literal("The origin of the occurrence of the taxon in an area is obscure.", lang="en"),
+#     comments=Literal("When there is a lack of fossil or historical evidence for the occurrence of a taxon in an area it can be impossible to know if the taxon is new to the area or native.", lang="en"),
+#     in_scheme=DWCEM["e"],
+#     version_of_s="http://rs.tdwg.org/dwcem/values/e006",
+#     references_s="http://rs.tdwg.org/dwcem/values/version/e006-2021-09-01",
+# )
+#
+# createSC(
+#     name="e007",
+#     namespace=DWCEM,
+#     graph=g,
+#     pref_label=Literal("Native (endemic)", lang="en"),
+#     definition=Literal("A taxon with a natural distribution restricted to a single geographical area.", lang="en"),
+#     comments=Literal("The term endemic is a subcategory of native and relates to geography, such as \"areas of endemism\", bioregions, and sometimes administrative boundaries. While a native taxon can naturally occur in several geographical areas an endemic taxon only occurs in one. In Darwin Core terms this would mean, \"A dwc:Organism referred to is recognized as a member of a dwc:Taxon endemic to the dcterms:Location at the time of the dwc:Occurrence.\"", lang="en"),
+#     in_scheme=DWCEM["e"],
+#     version_of_s="http://rs.tdwg.org/dwcem/values/e007",
+#     references_s="http://rs.tdwg.org/dwcem/values/version/e007-2025-06-12",
+# )
+#
+# createSC(
+#     name="p001",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Biological Control", lang="en"),
+#     definition=Literal("Organisms occuring in an area because they were introduced for the purpose of biological control of another organism.", lang="en"),
+#     comments=Literal("Released intentionally into the (semi)natural environment with the purpose of controlling the population(s) of one or more organisms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p045"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p001",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p001-2021-09-01",
+# )
+#
+# createSC(
+#     name="p002",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Erosion Control", lang="en"),
+#     definition=Literal("Organisms introduced for the purpose of erosion control/dune stabilization (windbreaks, hedges, etc.).", lang="en"),
+#     comments=Literal("Probably only applicable to plants. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p045"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p002",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p002-2021-09-01",
+# )
+#
+# createSC(
+#     name="p003",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Fishery In The Wild", lang="en"),
+#     definition=Literal("Fish stocked into the wild either to create a fishery or for recreational angling.", lang="en"),
+#     comments=Literal("Largely applicable to freshwater and anadromous fish. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p045"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p003",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p003-2021-09-01",
+# )
+#
+# createSC(
+#     name="p004",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Hunting", lang="en"),
+#     definition=Literal("Animals stocked into the wild specifically with the intention that they would be hunted for sport.", lang="en"),
+#     comments=Literal("Largely applicable to terrestrial vertebrates. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p045"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p004",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p004-2021-09-01",
+# )
+#
+# createSC(
+#     name="p005",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Landscape Improvement", lang="en"),
+#     definition=Literal("Landscape/flora/fauna \"improvement\" in the wild.", lang="en"),
+#     comments=Literal("\"Improvement\" in this context is intended for introductions for the purpose of aesthetic enhancement of the landscape, as opposed to practical introductions for the purpose of erosion control, agriculture, forestry etc. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p045"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p005",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p005-2021-09-01",
+# )
+#
+# createSC(
+#     name="p006",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Conservation Or Wildlife Management", lang="en"),
+#     definition=Literal("Organisms introduced for conservation purposes or wildlife management.", lang="en"),
+#     comments=Literal("The organism was released with the intention of improving the conservation status of the species or the conservation status other species in the habitat. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p045"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p006",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p006-2021-09-01",
+# )
+#
+# createSC(
+#     name="p007",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Released For Use", lang="en"),
+#     definition=Literal("Release in nature for use (other than above, e.g., fur, transport, medical use).", lang="en"),
+#     comments=Literal("This term refers to organisms intentionally and directly released into the wild to serve a specific purpose. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p045"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p007",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p007-2021-09-01",
+# )
+#
+# createSC(
+#     name="p008",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Other Intentional Release", lang="en"),
+#     definition=Literal("A catch-all term for intentional releases not for human use that are not covered by other more specific terms.", lang="en"),
+#     comments=Literal("Compare with \"other escape from confinement\". See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p045"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p008",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p008-2021-09-01",
+# )
+#
+# createSC(
+#     name="p009",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Agriculture (Including Biofuel Feedstocks)", lang="en"),
+#     definition=Literal("Plants grown with the intention of harvesting.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p009",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p009-2021-09-01",
+# )
+#
+# createSC(
+#     name="p010",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Aquaculture/Mariculture", lang="en"),
+#     definition=Literal("The analog of agriculture and farmed animals, specifically related to aquatic organisms.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p010",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p010-2021-09-01",
+# )
+#
+# createSC(
+#     name="p011",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Botanic Garden/Zoo/Aquaria (Excluding Domestic Aquaria)", lang="en"),
+#     definition=Literal("Organisms in public collections of plants and/or animals.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p011",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p011-2021-09-01",
+# )
+#
+# createSC(
+#     name="p012",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Pet/Aquarium/Terrarium Species (Including Live Food For Such Species)", lang="en"),
+#     definition=Literal("Privately kept animals.", lang="en"),
+#     comments=Literal("Animals kept for hunting, such as falcons and ferrets, SHOULD be included here, not under the hunting term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p012",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p012-2021-09-01",
+# )
+#
+# createSC(
+#     name="p013",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Farmed Animals (Including Animals Left Under Limited Control)", lang="en"),
+#     definition=Literal("Animals cared for and bred with the specific intention of using their products, such as meat and milk.", lang="en"),
+#     comments=Literal("Farmed animals are generally kept in a defined area, such as a fields. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p013",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p013-2021-09-01",
+# )
+#
+# createSC(
+#     name="p014",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Forestry (Including Reforestation)", lang="en"),
+#     definition=Literal("Trees specifically introduced to provide timber and other forestry products.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p014",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p014-2021-09-01",
+# )
+#
+# createSC(
+#     name="p015",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Fur Farms", lang="en"),
+#     definition=Literal("Organisms escaped from a fur farm, including unauthorised releases.", lang="en"),
+#     comments=Literal("Probably only applicable to vertebrates raised for their pelts and skins. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p015",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p015-2021-09-01",
+# )
+#
+# createSC(
+#     name="p016",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Horticulture", lang="en"),
+#     definition=Literal("Plants distributed by the ornamental and decorative plants industry.", lang="en"),
+#     comments=Literal("This term excludes plants and other organisms from aquaria and terrariums, which SHOULD be classified under the pet/aquarium/terrarium term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p016",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p016-2021-09-01",
+# )
+#
+# createSC(
+#     name="p017",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Ornamental Purpose Other Than Horticulture", lang="en"),
+#     definition=Literal("Ornamental plants introduced through pathways other than the horticultural industry.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p017",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p017-2021-09-01",
+# )
+#
+# createSC(
+#     name="p018",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Research And Ex-Situ Breeding (In Facilities)", lang="en"),
+#     definition=Literal("Plants and animals introduced for the purpose of breeding or scientific and medical research, including science education.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p018",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p018-2021-09-01",
+# )
+#
+# createSC(
+#     name="p019",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Live Food And Live Bait", lang="en"),
+#     definition=Literal("Live food imported for human consumption or live bait, such as shellfish and snails.", lang="en"),
+#     comments=Literal("Live food, such as mealworms, for the organisms kept as pets should be classified under the pet term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p019",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p019-2021-09-01",
+# )
+#
+# createSC(
+#     name="p020",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Other Escape From Confinement", lang="en"),
+#     definition=Literal("Organisms brought into an area with the intention of keeping them in captivity permanently, but that have subsequently escaped.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p046"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p020",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p020-2021-09-01",
+# )
+#
+# createSC(
+#     name="p021",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Contaminant Nursery Material", lang="en"),
+#     definition=Literal("Organisms transported into an area together with plant material.", lang="en"),
+#     comments=Literal("These may be other plants, diseases, fungi and animals. They may be attached to the plant or within the soil. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p047"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p021",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p021-2021-09-01",
+# )
+#
+# createSC(
+#     name="p022",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Contaminated Bait", lang="en"),
+#     definition=Literal("Contaminants, pathogens and parasites transported with live, frozen or preserved bait used to catch fish or other organisms.", lang="en"),
+#     comments=Literal("Typical examples include crustaceans, cephalopods and molluscs. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p047"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p022",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p022-2021-09-01",
+# )
+#
+# createSC(
+#     name="p023",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Food Contaminant (Including Of Live Food)", lang="en"),
+#     definition=Literal("Foods for human consumption, whether they are transported live or dead.", lang="en"),
+#     comments=Literal("This term includes unintentional introduction of contaminants such as diseases on those foods and in the case of plants, should include seeds. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p047"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p023",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p023-2021-09-01",
+# )
+#
+# createSC(
+#     name="p024",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Contaminant On Animals (Except Parasites, Organisms Transported By Host/Vector)", lang="en"),
+#     definition=Literal("Contaminants carried either on or in the body of transported animals.", lang="en"),
+#     comments=Literal("This term excludes parasites and pathogens, which SHOULD be classified under their own specific term (\"parasites on animals\"). Transported animals carry other organisms in their coats, in their guts and in soil on their hooves and feet. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p047"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p024",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p024-2021-09-01",
+# )
+#
+# createSC(
+#     name="p025",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Parasites On Animals (Including Organisms Transported By Host And Vector)", lang="en"),
+#     definition=Literal("Parasitic and pathogenic organisms transported with their host or vector animal.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p047"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p025",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p025-2021-09-01",
+# )
+#
+# createSC(
+#     name="p026",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Contaminant On Plants (Except Parasites, Species Transported By Host/Vector)", lang="en"),
+#     definition=Literal("Organisms transported on plant material.", lang="en"),
+#     comments=Literal("This term excludes organisms carried on contaminant nursery material, seed contaminants, and the material from the timber trade, which SHOULD be classified under their own pathway terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p047"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p026",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p026-2021-09-01",
+# )
+#
+# createSC(
+#     name="p027",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Parasites On Plants (Including Species Transported By Host And Vector)", lang="en"),
+#     definition=Literal("Parasitic and pathogenic organisms transported with their host or vector plant.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p047"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p027",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p027-2021-09-01",
+# )
+#
+# createSC(
+#     name="p028",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Seed Contaminant", lang="en"),
+#     definition=Literal("Organisms contaminating transported seeds.", lang="en"),
+#     comments=Literal("These may be parasites or pathogens of seeds or species that eat seeds, whether intended to be transported or not. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p047"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p028",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p028-2021-09-01",
+# )
+#
+# createSC(
+#     name="p029",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Timber Trade", lang="en"),
+#     definition=Literal("Contaminants on unprocessed timber, processed wood and wood-derived products.", lang="en"),
+#     comments=Literal("This term excludes packing material and habitat material made from wood, which SHOULD be included under their own terms (\"packing material\" and \"transportation of habitat material\"). Examples include wooden furniture, saw dust and fire wood. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p047"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p029",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p029-2021-09-01",
+# )
+#
+# createSC(
+#     name="p030",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Transportation Of Habitat Material (Soil, Vegetation, Wood, Etc.)", lang="en"),
+#     definition=Literal("Organisms transported with their habitat material to a new location.", lang="en"),
+#     comments=Literal("Examples include materials such as soil, vegetation, straw and wood chips. Unless these materials are sterilised the organisms can be transported with their habitat to a new location. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p047"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p030",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p030-2021-09-01",
+# )
+#
+#
+# createSC(
+#     name="p031",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Angling/Fishing Equipment", lang="en"),
+#     definition=Literal("Aquatic organisms moved between sites on equipment of recreational anglers and professional fishermen.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p031",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p031-2021-09-01",
+# )
+#
+#
+# createSC(
+#     name="p032",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Container/Bulk", lang="en"),
+#     definition=Literal("Stowaways transported in or on cargo containers or bulk cargo units.", lang="en"),
+#     comments=Literal("The difference between this category and others, such as \"hitchhikers on ship/boat\", is that the organism embarked and disembarked from the container rather than the ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p032",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p032-2021-09-01",
+# )
+#
+# createSC(
+#     name="p033",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Hitchhikers In Or On Airplane", lang="en"),
+#     definition=Literal("Organisms that enter airplanes or other aircraft, such as helicopters, and are transported by them to another location.", lang="en"),
+#     comments=Literal("This term does not apply to organisms that embarked in containers that were subsequently loaded onto an aircraft. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p033",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p033-2021-09-01",
+# )
+#
+# createSC(
+#     name="p034",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Hitchhikers On Ship/Boat (Excluding Ballast Water And Hull Fouling)", lang="en"),
+#     definition=Literal("Organisms that enter directly onto boats or ships and are transported by them to another location.", lang="en"),
+#     comments=Literal("This term does not apply to organisms that embarked in containers that are subsequently loaded onto the ship, nor to contaminants of products loaded onto the ship. The term is intended for organisms that directly interact with the boat or ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p034",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p034-2021-09-01",
+# )
+#
+# createSC(
+#     name="p035",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Machinery/Equipment", lang="en"),
+#     definition=Literal("Organisms carried on the surfaces of or within heavy machinery and equipment.", lang="en"),
+#     comments=Literal("This includes military equipment, farm machinery and manufacturing equipment. This term does not include products carried by vehicles. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p035",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p035-2021-09-01",
+# )
+#
+#
+# createSC(
+#     name="p036",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("People And Their Luggage/Equipment (In Particular Tourism)", lang="en"),
+#     definition=Literal("Organisms transported on people and/or their personal luggage.", lang="en"),
+#     comments=Literal("This term excludes recreational angling equipment, which SHOULD be classified under its own term (\"angling/fishing equipment\"). Examples include organisms transported by tourists. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p036",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p036-2021-09-01",
+# )
+#
+# createSC(
+#     name="p037",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Organic Packing Material, In Particular Wood Packaging", lang="en"),
+#     definition=Literal("Organic material, particularly unprocessed plant material that is used to pack transported goods.", lang="en"),
+#     comments=Literal("Examples include woodern pallets, boxes, bags and baskets. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p037",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01",
+# )
+#
+# createSC(
+#     name="p038",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Ship/Boat Ballast Water", lang="en"),
+#     definition=Literal("Organisms transported within the water pumped into boats and ships to provide ballast.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p038",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01",
+# )
+#
+# createSC(
+#     name="p039",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Ship/Boat Hull Fouling", lang="en"),
+#     definition=Literal("Organisms that attach themselves to the subsurface hull of boats and ships.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p039",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p039-2021-09-01",
+# )
+#
+# createSC(
+#     name="p040",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Vehicles (Car, Train, Etc.)", lang="en"),
+#     definition=Literal("Other vehicle hitchhikers that have been unintentionally dispersed, but are not covered by other terms.", lang="en"),
+#     comments=Literal("These organisms may be carried on or within the vehicle. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p040",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p040-2021-09-01",
+# )
+#
+# createSC(
+#     name="p041",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Other Means Of Transport", lang="en"),
+#     definition=Literal("A catch-all term for any transport related dispersal that is not covered in other terms.", lang="en"),
+#     comments=Literal("Examples include fouling from offshore oil and gas platforms, offshore renewable energy sites (such as wind farms, pipelines, cable transport, etc.). See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p048"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p041",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p041-2021-09-01",
+# )
+#
+# createSC(
+#     name="p042",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Interconnected Waterways/Basins/Seas", lang="en"),
+#     definition=Literal("Organisms that dispersed through artificial waterways created to connect previosuly unconnected water bodies.", lang="en"),
+#     comments=Literal("Organisms transported along these corridors in ballast or as hull fouling SHOULD be categorised under the \"ship/boat ballast water\" or \"ship/boat hull fouling\" terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p049"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p042",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p042-2021-09-01",
+# )
+#
+# createSC(
+#     name="p043",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Tunnels And Land Bridges", lang="en"),
+#     definition=Literal("Unintentional dispersal by organisms using artificial tunnels, bridges, roads and railways.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p049"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p043",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p043-2021-09-01",
+# )
+#
+# createSC(
+#     name="p044",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Natural Dispersal Across Borders Of Invasive Alien Organisms", lang="en"),
+#     definition=Literal("Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid.", lang="en"),
+#     comments=Literal("Dispersal of organisms to new regions by natural dispersal from regions in which they are alien. These are alien species that have previously been introduced through one of these pathways: release in nature, escape from confinement, transport-contaminant, transport-stowaway, or corridor. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p050"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p044",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p044-2021-09-01",
+# )
+#
+# createSC(
+#     name="p045",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Release In Nature", lang="en"),
+#     definition=Literal("Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p051"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p045",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p045-2021-09-01",
+# )
+#
+# createSC(
+#     name="p046",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Escape From Confinement", lang="en"),
+#     definition=Literal("Organisms intentionally transported by humans and intended to be kept in captivity or cultivation, but having inadvertently escaped from human control.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p051"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p046",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p046-2021-09-01",
+# )
+#
+# createSC(
+#     name="p047",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Transport-Contaminant", lang="en"),
+#     definition=Literal("An umbrella term for all species transported as contaminants in other products.", lang="en"),
+#     comments=Literal("An alien species is a contaminant if it had a trophic or biotic relationship to organisms or items being transported and was to some extent dependent on them for survival. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p052"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p047",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p047-2021-09-01",
+# )
+#
+# createSC(
+#     name="p048",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Transport-Stowaway", lang="en"),
+#     definition=Literal("An umbrella term for all species transported by riding on forms of transport where the organism has a direct interaction with the transport and is not merely carried as part of, or a contaminant of cargo.", lang="en"),
+#     comments=Literal("A stowaway has no trophic or biotic relationship to the organisms or items being transported. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p052"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p048",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p048-2021-09-01",
+# )
+#
+# createSC(
+#     name="p049",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Corridor", lang="en"),
+#     definition=Literal("Infrastructure, such as bridges, tunnels and canals have removed natural barriers to dispersal and allowed a species to move into a novel location.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p053"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p049",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p049-2021-09-01",
+# )
+#
+# createSC(
+#     name="p050",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Unaided", lang="en"),
+#     definition=Literal("Organisms that spread by natural dispersal, without action or assistance by humans, from regions in which they are also alien.", lang="en"),
+#     comments=Literal("The term refers to secondary dispersal from an area where the taxon is also alien. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     broader=DWCPW["p053"],
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p051",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01",
+# )
+#
+# createSC(
+#     name="p051",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Intentional", lang="en"),
+#     definition=Literal("Organisms were brought to new area with the specific intention of keeping them alive in the new region, regardless of whether they were intended to be cultivated or released into the wild.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p051",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01",
+# )
+#
+# createSC(
+#     name="p052",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Unintentional", lang="en"),
+#     definition=Literal("The organism was unintentionally brought to a new region.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p052",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p052-2021-09-01",
+# )
+#
+# createSC(
+#     name="p053",
+#     namespace=DWCPW,
+#     graph=g,
+#     pref_label=Literal("Corridor and Dispersal", lang="en"),
+#     definition=Literal("Organisms dispersed naturally, even if that dispersal was aided by changes in the landscape created by humans.", lang="en"),
+#     comments=Literal("See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129).", lang="en"),
+#     in_scheme=DWCPW["p"],
+#     version_of_s="http://rs.tdwg.org/dwcpw/values/p053",
+#     references_s="http://rs.tdwg.org/dwcpw/values/version/p053-2021-09-01",
+# )
 
 #####################################################################################################
 # BEGIN AXIOMS
@@ -3637,6 +3637,16 @@ createOP(
 )
 
 createOP(
+    name="analyzedIn",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["MaterialEntity"],
+    ranges=DWC["NucleotideAnalysis"],
+    pref_label=Literal("Analyzed In", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dwc:NucleotideAnalysis] of which it is analysis of.", lang="en"),
+)
+
+createOP(
     name="assertedBy",
     namespace=DWCDP,
     graph=g,
@@ -3681,6 +3691,16 @@ createOP(
     pref_label=Literal("Based On", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the entity on which it is based.", lang="en"),
     comments=Literal("The entities upon which identifications can be based on include [ac:Media], [dcterms:BibliographicResource], [dwc:MaterialEntity], [dwc:NucleotideSequence] and [dwc:Occurrence].", lang="en"),
+)
+
+createOP(
+    name="collectedDuring",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["MaterialEntity"],
+    ranges=DWC["Event"],
+    pref_label=Literal("Collected During", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dwc:Event] during which it was collected.", lang="en"),
 )
 
 createOP(
@@ -3797,7 +3817,7 @@ createOP(
 )
 
 createOP(
-    name="follows",
+    name="followed",
     namespace=DWCDP,
     graph=g,
     domains=[
@@ -3833,7 +3853,7 @@ createOP(
     pref_label=Literal("Followed By", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Protocol] to the entities it is followed by.", lang="en"),
     comments=Literal("The considered resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey].", lang="en"),
-    inverse_prop=DWCDP["follows"],
+    inverse_prop=DWCDP["followed"],
 )
 
 createOP(
@@ -4037,9 +4057,15 @@ createOP(
     graph=g,
     domains=DWC["NucleotideAnalysis"],
     ranges=DWC["Event"],
+    prop_chains=[DWCDP["analysisOf"], DWCDP["collectedDuring"]],
     pref_label=Literal("Material Collected During", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:Event] from which the material was collected.", lang="en"),
 )
+
+# prop_chain = BNode()
+# Collection(g, prop_chain, [DWCDP["analysisOf"], DWCDP["collectedDuring"]])
+# g.add((DWCDP["materialCollectedDuring"], OWL["propertyChainAxiom"], prop_chain))
+
 
 # NOTE: Added dcterms:BibliographicResource for pictures of a document.
 #
@@ -4058,7 +4084,7 @@ createOP(
         DWC["Occurrence"],
         DWC["OrganismInteraction"],
     ],
-    pref_label=Literal("mediaOf", lang="en"),
+    pref_label=Literal("Media Of", lang="en"),
     inverse_prop=DWCDP["hasMedia"],
     definition=Literal("An [owl:ObjectProperty] used to relate an instance of [ac:Media] to an entity of which it is a media of. These entities can be [chrono:ChronometricAge], [dcterms:Agent],[dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction].", lang="en"),
     comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:hasMedia], which allows reasoners queries to go through different ways.", lang="en"),
@@ -5745,12 +5771,6 @@ createDP(
     version_of_s="http://rs.tdwg.org/dwc/terms/eventDate",
     references_s="http://rs.tdwg.org/dwc/terms/version/eventDate-2025-06-12"
 )
-
-# g.add((XSD["date"], RDF["type"], RDFS["Datatype"]))
-
-g.add((BB["badom"], RDF["type"], DWC["Event"]))
-g.add((BB["badom"], DWC["eventDate"], Literal("1995")))
-
 
 createDP(
     name="eventID",
@@ -8899,7 +8919,7 @@ createDP(
     name="CreateDate",
     namespace=XMP,
     graph=g,
-    domains=DWC["MolecularProtocol"],
+    domains=AC["Media"],
     ranges=RDFS["Literal"],
     pref_label=Literal("Original Date and Time"),
     definition=Literal("The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different.", lang="en"),

@@ -28,9 +28,6 @@
 @prefix xmp: <http://ns.adobe.com/xap/1.0/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://bioboum.ca/badom> a dwc:Event ;
-    dwc:eventDate "1995" .
-
 <http://bioboum.ca/dwc-owl.owl> a owl:Ontology ;
     dc:description "Darwin Core OWL is an effort to represent Darwin Core terms, along with the newly proposed Darwin Core DataPackage terms, as OWL concepts, specifically as OWL classes and properties. Darwin-SW has previously explored similar ideas using OWL classes. This work extends that approach by incorporating OWL restrictions and additional object properties. The goal is to interlink entities through these object properties, creating a semantically connected network of biodiversity data rather than a simple, flat RDF representation."@en ;
     dc:title "Darwin Core OWL" ;
@@ -156,10 +153,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -547,12 +544,12 @@ dwcdp:allowsFor a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the activities it allows for."@en ;
     skos:prefLabel "Allows For"@en .
 
-dwcdp:analysisOf a owl:ObjectProperty ;
-    rdfs:domain dwc:NucleotideAnalysis ;
+dwcdp:analyzedIn a owl:ObjectProperty ;
+    rdfs:domain dwc:MaterialEntity ;
     rdfs:isDefinedBy dwcdp: ;
-    rdfs:range dwc:MaterialEntity ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:MaterialEntity] of which it is an analysis of."@en ;
-    skos:prefLabel "Analysis Of"@en .
+    rdfs:range dwc:NucleotideAnalysis ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dwc:NucleotideAnalysis] of which it is analysis of."@en ;
+    skos:prefLabel "Analyzed In"@en .
 
 dwcdp:assertedBy a owl:ObjectProperty ;
     rdfs:domain dwc:Assertion ;
@@ -706,6 +703,7 @@ dwcdp:materialCollectedDuring a owl:ObjectProperty ;
     rdfs:domain dwc:NucleotideAnalysis ;
     rdfs:isDefinedBy dwcdp: ;
     rdfs:range dwc:Event ;
+    owl:propertyChainAxiom ( dwcdp:analysisOf dwcdp:collectedDuring ) ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:Event] from which the material was collected."@en ;
     skos:prefLabel "Material Collected During"@en .
 
@@ -1140,7 +1138,7 @@ ggbn:ratioOfAbsorbance260_280 a owl:DatatypeProperty ;
 xmp:CreateDate a owl:DatatypeProperty ;
     dcterms:isVersionOf xmp:CreateDate ;
     rdfs:comment "The date of the creation of the original resource from which the digital media was derived or created. The date and time MUST comply with the World Wide Web Consortium (W3C) datetime practice, [https://www.w3.org/TR/NOTE-datetime], which requires that date and time representation correspond to ISO 8601:1998, but with year fields always comprising 4 digits. This makes datetime records compliant with 8601:2004, [https://www.iso.org/standard/40874.html]. [ac:] datetime values MAY also follow 8601:2004 for ranges by separating two IS0 8601 datetime fields by a solidus (\"forward slash\", '/'). When applied to a media resource with temporal extent such as audio or video, this property indicates the startTime of the recording. What constitutes \"original\" is determined by the metadata author. Example: Digitization of a photographic slide of a map would normally give the date at which the map was created; however a photographic work of art including the same map as its content may give the date of the original photographic exposure. Imprecise or unknown dates can be represented as ISO dates or ranges. Compare also Date and Time Digitized in the Resource Creation Vocabulary. See also the wikipedia IS0 8601 entry, [https://en.wikipedia.org/wiki/ISO_8601], for further explanation and examples."@en ;
-    rdfs:domain dwc:MolecularProtocol ;
+    rdfs:domain ac:Media ;
     rdfs:isDefinedBy xmp: ;
     rdfs:range rdfs:Literal ;
     skos:definition "The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different."@en ;
@@ -1718,13 +1716,7 @@ dwc:BibliographicDocument a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:issue ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:volume ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:edition ],
+            owl:onProperty bibo:pages ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:status ],
@@ -1733,7 +1725,13 @@ dwc:BibliographicDocument a owl:Class ;
             owl:onProperty dc:title ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:pages ],
+            owl:onProperty bibo:edition ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty bibo:issue ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty bibo:volume ],
         dcterms:BibliographicResource,
         bibo:Document ;
     skos:definition "A book, article, or other documentatry resource."@en ;
@@ -1743,10 +1741,7 @@ dwc:OrganismAssertion a owl:Class ;
     dcterms:isVersionOf dwc:OrganismAssertion ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/OrganismAssertion-0000-00-00> ;
     rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:about ;
-            owl:someValuesFrom dwc:Organism ],
-        dwc:Assertion ;
+    rdfs:subClassOf dwc:Assertion ;
     skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]."@en ;
     skos:prefLabel "Organism Assertion"@en .
 
@@ -3197,6 +3192,38 @@ dwc:year a owl:DatatypeProperty ;
         2008 ;
     skos:prefLabel "Year" .
 
+dwcdoe:d001 a dwc:DegreeOfEstablishment .
+
+dwcdoe:d002 a dwc:DegreeOfEstablishment .
+
+dwcdoe:d004 a dwc:DegreeOfEstablishment .
+
+dwcdoe:d006 a dwc:DegreeOfEstablishment .
+
+dwcdoe:d007 a dwc:DegreeOfEstablishment .
+
+dwcdoe:d008 a dwc:DegreeOfEstablishment .
+
+dwcdoe:d009 a dwc:DegreeOfEstablishment .
+
+dwcdoe:d010 a dwc:DegreeOfEstablishment .
+
+dwcdoe:d011 a dwc:DegreeOfEstablishment .
+
+dwcdp:analysisOf a owl:ObjectProperty ;
+    rdfs:domain dwc:NucleotideAnalysis ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dwc:MaterialEntity ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:MaterialEntity] of which it is an analysis of."@en ;
+    skos:prefLabel "Analysis Of"@en .
+
+dwcdp:collectedDuring a owl:ObjectProperty ;
+    rdfs:domain dwc:MaterialEntity ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dwc:Event ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dwc:Event] during which it was collected."@en ;
+    skos:prefLabel "Collected During"@en .
+
 dwcdp:evidenceFor a owl:ObjectProperty ;
     rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:hasEvidence], which allows reasoners queries to go through different ways."@en ;
     rdfs:domain [ a owl:Class ;
@@ -3207,7 +3234,7 @@ dwcdp:evidenceFor a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [dwc:Occurrence]. These entities can be [ac:Media], [dcterms:BibliographicResource], [dwc:MaterialEntity], [dwc:NucleotideSequence]."@en ;
     skos:prefLabel "Evidence For"@en .
 
-dwcdp:follows a owl:ObjectProperty ;
+dwcdp:followed a owl:ObjectProperty ;
     rdfs:comment "The considered resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]."@en ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( chrono:ChronometricAge dwc:Assertion dwc:Event dwc:MaterialEntity dwc:NucleotideAnalysis dwc:Occurrence eco:Survey ) ] ;
@@ -3253,7 +3280,7 @@ dwcdp:mediaOf a owl:ObjectProperty ;
             owl:unionOf ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dwc:Event dwc:GeologicalContext dwc:MaterialEntity dwc:Occurrence dwc:OrganismInteraction ) ] ;
     owl:inverseOf dwcdp:hasMedia ;
     skos:definition "An [owl:ObjectProperty] used to relate an instance of [ac:Media] to an entity of which it is a media of. These entities can be [chrono:ChronometricAge], [dcterms:Agent],[dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]."@en ;
-    skos:prefLabel "mediaOf"@en .
+    skos:prefLabel "Media Of"@en .
 
 dwcdp:mentionedIn a owl:ObjectProperty ;
     rdfs:comment "The mentionable resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."@en ;
@@ -3344,6 +3371,16 @@ dwcdp:usedFor a owl:ObjectProperty ;
     owl:inverseOf dwcdp:used ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:BibliographicResource] to an instance of a [dwc:Identification] it was used to determine."@en ;
     skos:prefLabel "Used For"@en .
+
+dwcem:e002 a dwc:EstablishmentMeans .
+
+dwcem:e003 a dwc:EstablishmentMeans .
+
+dwcem:e004 a dwc:EstablishmentMeans .
+
+dwcem:e006 a dwc:EstablishmentMeans .
+
+dwcem:e007 a dwc:EstablishmentMeans .
 
 eco:includeOrExclude a owl:DatatypeProperty ;
     dcterms:isVersionOf eco:includeOrExclude ;
@@ -4209,86 +4246,9 @@ dwc:organismID a owl:DatatypeProperty ;
     skos:definition "An identifier for a [dwc:Organism]."@en ;
     skos:prefLabel "Organism ID" .
 
-dwcdoe:d001 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d001 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d001-2021-09-01> ;
-    rdfs:comment "Considered native and naturally occurring. See also \"category A\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Not transported beyond limits of native range."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Native (category A)"@en .
+dwcdoe:d003 a dwc:DegreeOfEstablishment .
 
-dwcdoe:d002 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d002 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d002-2021-09-01> ;
-    rdfs:comment "Only for cases where specific actions have been taken place to prevent escape of individuals or propagules. See also \"category B1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Individuals in captivity or quarantine (i.e., individuals provided with conditions suitable for them, but explicit measures of containment are in place)."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Captive (category B1)"@en .
-
-dwcdoe:d004 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d004 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d004-2021-09-01> ;
-    rdfs:comment "For example, fish stocked for angling, birds for hunting. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Individuals directly released into novel environment."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Released (category B3)"@en .
-
-dwcdoe:d006 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d006 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d006-2021-09-01> ;
-    rdfs:comment "Trees planted in the wild for forestry or ornament may come under this category. See also \"category C1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Individuals surviving outside of captivity or cultivation in a location with no reproduction."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Casual (category C1)"@en .
-
-dwcdoe:d007 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d007 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d007-2021-09-01> ;
-    rdfs:comment "Offspring are produced, but these either do not survive or are not fertile enough to maintain the population. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Individuals surviving outside of captivity or cultivation in a location with no reproduction."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Reproducing (category C2)"@en .
-
-dwcdoe:d008 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d008 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d008-2021-09-01> ;
-    rdfs:comment "The population is maintained by reproduction, but is not spreading. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Individuals surviving outside of captivity or cultivation in a location. Reproduction occurring, and population self-sustaining."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Established (category C3)"@en .
-
-dwcdoe:d009 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d009 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d009-2021-09-01> ;
-    rdfs:comment "The population is maintained by reproduction and is spreading. See also \"category D1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Self-sustaining population outside of captivity or cultivation, with individuals surviving a significant distance from the original point of introduction."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Colonising (category D1)"@en .
-
-dwcdoe:d010 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d010 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d010-2021-09-01> ;
-    rdfs:comment "The population is maintained by reproduction, is spreading, and its progeny are also reproducing and spreading. See also \"category D2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Self-sustaining population outside of captivity or cultivation, with individuals surviving and reproducing a significant distance from the original point of introduction."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Invasive (category D2)"@en .
-
-dwcdoe:d011 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d011 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d011-2021-09-01> ;
-    rdfs:comment "This term is only used for those invasives with the highest degree of encroachment. See also \"category E\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Fully invasive species, with individuals dispersing, surviving and reproducing at multiple sites across a spectrum of habitats and geographic range."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Widespread invasive (category E)"@en .
+dwcdoe:d005 a dwc:DegreeOfEstablishment .
 
 dwcdp:derivedFrom a owl:ObjectProperty ;
     rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, universal restrictions on the classes prevent cross-class use of the term."@en ;
@@ -4310,490 +4270,9 @@ dwcdp:partOf a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
     skos:prefLabel "Part Of" .
 
-dwcem:e002 a dwc:EstablishmentMeans ;
-    dcterms:isVersionOf dwcem:e002 ;
-    dcterms:references <http://rs.tdwg.org/dwcem/values/version/e002-2025-06-12> ;
-    rdfs:comment "Where a taxon has become extirpated from an area where it had naturally occurred it may be returned to that area deliberately with the intention of re-establishing it."@en ;
-    rdfs:isDefinedBy dwcem: ;
-    skos:definition "A taxon re-established by direct introduction by humans into an area that was once part of its natural range, but from where it had become extinct."@en ;
-    skos:inScheme dwcem:e ;
-    skos:prefLabel "Native (reintroduced)"@en .
+dwcem:e001 a dwc:EstablishmentMeans .
 
-dwcem:e003 a dwc:EstablishmentMeans ;
-    dcterms:isVersionOf dwcem:e003 ;
-    dcterms:references <http://rs.tdwg.org/dwcem/values/version/e003-2021-09-01> ;
-    rdfs:comment "Organisms can be introduced to novel areas and habitats by human activity, either on purpose or by accident. Humans can also inadvertently create corridors that break down natural barriers to dispersal and allow organisms to spread beyond their natural range."@en ;
-    rdfs:isDefinedBy dwcem: ;
-    skos:definition "Establishment of a taxon by human agency into an area that is not part of its natural range."@en ;
-    skos:inScheme dwcem:e ;
-    skos:prefLabel "Introduced (alien, exotic, non-native, nonindigenous)"@en .
-
-dwcem:e004 a dwc:EstablishmentMeans ;
-    dcterms:isVersionOf dwcem:e004 ;
-    dcterms:references <http://rs.tdwg.org/dwcem/values/version/e004-2021-09-01> ;
-    rdfs:comment "In the event of environmental change and habitat destruction a conservation option is to introduce a taxon into an area it did not naturally occur."@en ;
-    rdfs:isDefinedBy dwcem: ;
-    skos:definition "Establishment of a taxon specifically with the intention of creating a self-sustaining wild population in an area that is not part of the taxon's natural range."@en ;
-    skos:inScheme dwcem:e ;
-    skos:prefLabel "Introduced (assisted colonisation)"@en .
-
-dwcem:e006 a dwc:EstablishmentMeans ;
-    dcterms:isVersionOf dwcem:e006 ;
-    dcterms:references <http://rs.tdwg.org/dwcem/values/version/e006-2021-09-01> ;
-    rdfs:comment "When there is a lack of fossil or historical evidence for the occurrence of a taxon in an area it can be impossible to know if the taxon is new to the area or native."@en ;
-    rdfs:isDefinedBy dwcem: ;
-    skos:definition "The origin of the occurrence of the taxon in an area is obscure."@en ;
-    skos:inScheme dwcem:e ;
-    skos:prefLabel "Uncertain (unknown, cryptogenic)"@en .
-
-dwcem:e007 a dwc:EstablishmentMeans ;
-    dcterms:isVersionOf dwcem:e007 ;
-    dcterms:references <http://rs.tdwg.org/dwcem/values/version/e007-2025-06-12> ;
-    rdfs:comment "The term endemic is a subcategory of native and relates to geography, such as \"areas of endemism\", bioregions, and sometimes administrative boundaries. While a native taxon can naturally occur in several geographical areas an endemic taxon only occurs in one. In Darwin Core terms this would mean, \"A dwc:Organism referred to is recognized as a member of a dwc:Taxon endemic to the dcterms:Location at the time of the dwc:Occurrence.\""@en ;
-    rdfs:isDefinedBy dwcem: ;
-    skos:definition "A taxon with a natural distribution restricted to a single geographical area."@en ;
-    skos:inScheme dwcem:e ;
-    skos:prefLabel "Native (endemic)"@en .
-
-dwcpw:p001 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p001 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p001-2021-09-01> ;
-    rdfs:comment "Released intentionally into the (semi)natural environment with the purpose of controlling the population(s) of one or more organisms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p045 ;
-    skos:definition "Organisms occuring in an area because they were introduced for the purpose of biological control of another organism."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Biological Control"@en .
-
-dwcpw:p003 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p003 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p003-2021-09-01> ;
-    rdfs:comment "Largely applicable to freshwater and anadromous fish. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p045 ;
-    skos:definition "Fish stocked into the wild either to create a fishery or for recreational angling."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Fishery In The Wild"@en .
-
-dwcpw:p004 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p004 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p004-2021-09-01> ;
-    rdfs:comment "Largely applicable to terrestrial vertebrates. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p045 ;
-    skos:definition "Animals stocked into the wild specifically with the intention that they would be hunted for sport."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Hunting"@en .
-
-dwcpw:p005 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p005 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p005-2021-09-01> ;
-    rdfs:comment "\"Improvement\" in this context is intended for introductions for the purpose of aesthetic enhancement of the landscape, as opposed to practical introductions for the purpose of erosion control, agriculture, forestry etc. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p045 ;
-    skos:definition "Landscape/flora/fauna \"improvement\" in the wild."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Landscape Improvement"@en .
-
-dwcpw:p006 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p006 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p006-2021-09-01> ;
-    rdfs:comment "The organism was released with the intention of improving the conservation status of the species or the conservation status other species in the habitat. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p045 ;
-    skos:definition "Organisms introduced for conservation purposes or wildlife management."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Conservation Or Wildlife Management"@en .
-
-dwcpw:p007 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p007 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p007-2021-09-01> ;
-    rdfs:comment "This term refers to organisms intentionally and directly released into the wild to serve a specific purpose. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p045 ;
-    skos:definition "Release in nature for use (other than above, e.g., fur, transport, medical use)."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Released For Use"@en .
-
-dwcpw:p008 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p008 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p008-2021-09-01> ;
-    rdfs:comment "Compare with \"other escape from confinement\". See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p045 ;
-    skos:definition "A catch-all term for intentional releases not for human use that are not covered by other more specific terms."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Other Intentional Release"@en .
-
-dwcpw:p009 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p009 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p009-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Plants grown with the intention of harvesting."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Agriculture (Including Biofuel Feedstocks)"@en .
-
-dwcpw:p010 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p010 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p010-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "The analog of agriculture and farmed animals, specifically related to aquatic organisms."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Aquaculture/Mariculture"@en .
-
-dwcpw:p011 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p011 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p011-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Organisms in public collections of plants and/or animals."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Botanic Garden/Zoo/Aquaria (Excluding Domestic Aquaria)"@en .
-
-dwcpw:p012 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p012 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p012-2021-09-01> ;
-    rdfs:comment "Animals kept for hunting, such as falcons and ferrets, SHOULD be included here, not under the hunting term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Privately kept animals."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Pet/Aquarium/Terrarium Species (Including Live Food For Such Species)"@en .
-
-dwcpw:p013 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p013 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p013-2021-09-01> ;
-    rdfs:comment "Farmed animals are generally kept in a defined area, such as a fields. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Animals cared for and bred with the specific intention of using their products, such as meat and milk."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Farmed Animals (Including Animals Left Under Limited Control)"@en .
-
-dwcpw:p014 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p014 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p014-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Trees specifically introduced to provide timber and other forestry products."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Forestry (Including Reforestation)"@en .
-
-dwcpw:p015 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p015 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p015-2021-09-01> ;
-    rdfs:comment "Probably only applicable to vertebrates raised for their pelts and skins. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Organisms escaped from a fur farm, including unauthorised releases."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Fur Farms"@en .
-
-dwcpw:p016 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p016 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p016-2021-09-01> ;
-    rdfs:comment "This term excludes plants and other organisms from aquaria and terrariums, which SHOULD be classified under the pet/aquarium/terrarium term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Plants distributed by the ornamental and decorative plants industry."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Horticulture"@en .
-
-dwcpw:p017 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p017 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p017-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Ornamental plants introduced through pathways other than the horticultural industry."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Ornamental Purpose Other Than Horticulture"@en .
-
-dwcpw:p018 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p018 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p018-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Plants and animals introduced for the purpose of breeding or scientific and medical research, including science education."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Research And Ex-Situ Breeding (In Facilities)"@en .
-
-dwcpw:p019 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p019 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p019-2021-09-01> ;
-    rdfs:comment "Live food, such as mealworms, for the organisms kept as pets should be classified under the pet term. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Live food imported for human consumption or live bait, such as shellfish and snails."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Live Food And Live Bait"@en .
-
-dwcpw:p020 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p020 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p020-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p046 ;
-    skos:definition "Organisms brought into an area with the intention of keeping them in captivity permanently, but that have subsequently escaped."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Other Escape From Confinement"@en .
-
-dwcpw:p021 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p021 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p021-2021-09-01> ;
-    rdfs:comment "These may be other plants, diseases, fungi and animals. They may be attached to the plant or within the soil. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p047 ;
-    skos:definition "Organisms transported into an area together with plant material."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Contaminant Nursery Material"@en .
-
-dwcpw:p022 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p022 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p022-2021-09-01> ;
-    rdfs:comment "Typical examples include crustaceans, cephalopods and molluscs. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p047 ;
-    skos:definition "Contaminants, pathogens and parasites transported with live, frozen or preserved bait used to catch fish or other organisms."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Contaminated Bait"@en .
-
-dwcpw:p023 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p023 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p023-2021-09-01> ;
-    rdfs:comment "This term includes unintentional introduction of contaminants such as diseases on those foods and in the case of plants, should include seeds. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p047 ;
-    skos:definition "Foods for human consumption, whether they are transported live or dead."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Food Contaminant (Including Of Live Food)"@en .
-
-dwcpw:p024 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p024 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p024-2021-09-01> ;
-    rdfs:comment "This term excludes parasites and pathogens, which SHOULD be classified under their own specific term (\"parasites on animals\"). Transported animals carry other organisms in their coats, in their guts and in soil on their hooves and feet. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p047 ;
-    skos:definition "Contaminants carried either on or in the body of transported animals."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Contaminant On Animals (Except Parasites, Organisms Transported By Host/Vector)"@en .
-
-dwcpw:p025 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p025 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p025-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p047 ;
-    skos:definition "Parasitic and pathogenic organisms transported with their host or vector animal."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Parasites On Animals (Including Organisms Transported By Host And Vector)"@en .
-
-dwcpw:p026 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p026 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p026-2021-09-01> ;
-    rdfs:comment "This term excludes organisms carried on contaminant nursery material, seed contaminants, and the material from the timber trade, which SHOULD be classified under their own pathway terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p047 ;
-    skos:definition "Organisms transported on plant material."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Contaminant On Plants (Except Parasites, Species Transported By Host/Vector)"@en .
-
-dwcpw:p027 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p027 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p027-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p047 ;
-    skos:definition "Parasitic and pathogenic organisms transported with their host or vector plant."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Parasites On Plants (Including Species Transported By Host And Vector)"@en .
-
-dwcpw:p028 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p028 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p028-2021-09-01> ;
-    rdfs:comment "These may be parasites or pathogens of seeds or species that eat seeds, whether intended to be transported or not. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p047 ;
-    skos:definition "Organisms contaminating transported seeds."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Seed Contaminant"@en .
-
-dwcpw:p029 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p029 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p029-2021-09-01> ;
-    rdfs:comment "This term excludes packing material and habitat material made from wood, which SHOULD be included under their own terms (\"packing material\" and \"transportation of habitat material\"). Examples include wooden furniture, saw dust and fire wood. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p047 ;
-    skos:definition "Contaminants on unprocessed timber, processed wood and wood-derived products."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Timber Trade"@en .
-
-dwcpw:p030 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p030 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p030-2021-09-01> ;
-    rdfs:comment "Examples include materials such as soil, vegetation, straw and wood chips. Unless these materials are sterilised the organisms can be transported with their habitat to a new location. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p047 ;
-    skos:definition "Organisms transported with their habitat material to a new location."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Transportation Of Habitat Material (Soil, Vegetation, Wood, Etc.)"@en .
-
-dwcpw:p031 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p031 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p031-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "Aquatic organisms moved between sites on equipment of recreational anglers and professional fishermen."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Angling/Fishing Equipment"@en .
-
-dwcpw:p032 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p032 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p032-2021-09-01> ;
-    rdfs:comment "The difference between this category and others, such as \"hitchhikers on ship/boat\", is that the organism embarked and disembarked from the container rather than the ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "Stowaways transported in or on cargo containers or bulk cargo units."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Container/Bulk"@en .
-
-dwcpw:p033 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p033 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p033-2021-09-01> ;
-    rdfs:comment "This term does not apply to organisms that embarked in containers that were subsequently loaded onto an aircraft. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "Organisms that enter airplanes or other aircraft, such as helicopters, and are transported by them to another location."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Hitchhikers In Or On Airplane"@en .
-
-dwcpw:p034 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p034 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p034-2021-09-01> ;
-    rdfs:comment "This term does not apply to organisms that embarked in containers that are subsequently loaded onto the ship, nor to contaminants of products loaded onto the ship. The term is intended for organisms that directly interact with the boat or ship. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "Organisms that enter directly onto boats or ships and are transported by them to another location."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Hitchhikers On Ship/Boat (Excluding Ballast Water And Hull Fouling)"@en .
-
-dwcpw:p035 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p035 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p035-2021-09-01> ;
-    rdfs:comment "This includes military equipment, farm machinery and manufacturing equipment. This term does not include products carried by vehicles. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "Organisms carried on the surfaces of or within heavy machinery and equipment."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Machinery/Equipment"@en .
-
-dwcpw:p036 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p036 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p036-2021-09-01> ;
-    rdfs:comment "This term excludes recreational angling equipment, which SHOULD be classified under its own term (\"angling/fishing equipment\"). Examples include organisms transported by tourists. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "Organisms transported on people and/or their personal luggage."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "People And Their Luggage/Equipment (In Particular Tourism)"@en .
-
-dwcpw:p037 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p037 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01> ;
-    rdfs:comment "Examples include woodern pallets, boxes, bags and baskets. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "Organic material, particularly unprocessed plant material that is used to pack transported goods."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Organic Packing Material, In Particular Wood Packaging"@en .
-
-dwcpw:p038 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p038 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p037-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "Organisms transported within the water pumped into boats and ships to provide ballast."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Ship/Boat Ballast Water"@en .
-
-dwcpw:p039 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p039 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p039-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "Organisms that attach themselves to the subsurface hull of boats and ships."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Ship/Boat Hull Fouling"@en .
-
-dwcpw:p040 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p040 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p040-2021-09-01> ;
-    rdfs:comment "These organisms may be carried on or within the vehicle. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "Other vehicle hitchhikers that have been unintentionally dispersed, but are not covered by other terms."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Vehicles (Car, Train, Etc.)"@en .
-
-dwcpw:p041 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p041 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p041-2021-09-01> ;
-    rdfs:comment "Examples include fouling from offshore oil and gas platforms, offshore renewable energy sites (such as wind farms, pipelines, cable transport, etc.). See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p048 ;
-    skos:definition "A catch-all term for any transport related dispersal that is not covered in other terms."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Other Means Of Transport"@en .
-
-dwcpw:p042 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p042 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p042-2021-09-01> ;
-    rdfs:comment "Organisms transported along these corridors in ballast or as hull fouling SHOULD be categorised under the \"ship/boat ballast water\" or \"ship/boat hull fouling\" terms. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p049 ;
-    skos:definition "Organisms that dispersed through artificial waterways created to connect previosuly unconnected water bodies."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Interconnected Waterways/Basins/Seas"@en .
-
-dwcpw:p043 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p043 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p043-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p049 ;
-    skos:definition "Unintentional dispersal by organisms using artificial tunnels, bridges, roads and railways."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Tunnels And Land Bridges"@en .
-
-dwcpw:p044 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p044 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p044-2021-09-01> ;
-    rdfs:comment "Dispersal of organisms to new regions by natural dispersal from regions in which they are alien. These are alien species that have previously been introduced through one of these pathways: release in nature, escape from confinement, transport-contaminant, transport-stowaway, or corridor. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p050 ;
-    skos:definition "Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Natural Dispersal Across Borders Of Invasive Alien Organisms"@en .
-
-dwcpw:p050 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p051 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01> ;
-    rdfs:comment "The term refers to secondary dispersal from an area where the taxon is also alien. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p053 ;
-    skos:definition "Organisms that spread by natural dispersal, without action or assistance by humans, from regions in which they are also alien."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Unaided"@en .
+dwcem:e005 a dwc:EstablishmentMeans .
 
 <http://rs.tdwg.org/eco/iri/samplingPerformedBy> a owl:ObjectProperty ;
     dcterms:isVersionOf <http://rs.tdwg.org/eco/iri/samplingPerformedBy> ;
@@ -4931,24 +4410,6 @@ dwc:relationshipOfResourceID a owl:ObjectProperty ;
         "https://www.inaturalist.org/observation_fields/879" ;
     skos:prefLabel "Relationship Of Resource ID" .
 
-dwcdoe:d003 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d003 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d003-2021-09-01> ;
-    rdfs:comment "Examples include gardens, parks and farms. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Individuals in cultivation (i.e., individuals provided with conditions suitable for them, but explicit measures to prevent dispersal are limited at best)."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Cultivated (category B2)"@en .
-
-dwcdoe:d005 a dwc:DegreeOfEstablishment ;
-    dcterms:isVersionOf dwcdoe:d005 ;
-    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d005-2021-09-01> ;
-    rdfs:comment "For example, frost-tender plants sown or planted in a cold climate. See also \"category C0\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
-    rdfs:isDefinedBy dwcdoe: ;
-    skos:definition "Individuals released outside of captivity or cultivation in a location, but incapable of surviving for a significant period."@en ;
-    skos:inScheme dwcdoe:d ;
-    skos:prefLabel "Failing (category C0)"@en .
-
 dwcdp:about a owl:ObjectProperty ;
     rdfs:comment "The object of this property can be an instance of [ac:Media], [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism] or [dwc:OrganismInteraction]."@en ;
     rdfs:domain dwc:Assertion ;
@@ -4957,44 +4418,6 @@ dwcdp:about a owl:ObjectProperty ;
             owl:unionOf ( ac:Media chrono:ChronometricAge dwc:Event dwc:MaterialEntity dwc:NucleotideAnalysis dwc:Occurrence dwc:Organism dwc:OrganismInteraction ) ] ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the object it is about."@en ;
     skos:prefLabel "About"@en .
-
-dwcdp:followedBy a owl:ObjectProperty ;
-    rdfs:comment "The considered resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]."@en ;
-    rdfs:domain dwc:Protocol ;
-    rdfs:isDefinedBy dwcdp: ;
-    rdfs:range [ a owl:Class ;
-            owl:unionOf ( chrono:ChronometricAge dwc:Assertion dwc:Event dwc:NucleotideAnalysis dwc:MaterialEntity dwc:Occurrence eco:Survey ) ] ;
-    owl:inverseOf dwcdp:follows ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Protocol] to the entities it is followed by."@en ;
-    skos:prefLabel "Followed By"@en .
-
-dwcem:e001 a dwc:EstablishmentMeans ;
-    dcterms:isVersionOf dwcem:e001 ;
-    dcterms:references <http://rs.tdwg.org/dwcem/values/version/e001-2021-09-01> ;
-    rdfs:comment "What is considered native to an area varies with the biogeographic history of an area and the local interpretation of what is a \"natural range\"."@en ;
-    rdfs:isDefinedBy dwcem: ;
-    skos:definition "A taxon occurring within its natural range."@en ;
-    skos:inScheme dwcem:e ;
-    skos:prefLabel "Native (indigenous)"@en .
-
-dwcem:e005 a dwc:EstablishmentMeans ;
-    dcterms:isVersionOf dwcem:e005 ;
-    dcterms:references <http://rs.tdwg.org/dwcem/values/version/e005-2020-10-13> ;
-    rdfs:comment "Natural events and human activity can disperse organisms unpredictably into places where they may stay or survive for a period."@en ;
-    rdfs:isDefinedBy dwcem: ;
-    skos:definition "The temporary occurrence of a taxon far outside its natural or migratory range."@en ;
-    skos:inScheme dwcem:e ;
-    skos:prefLabel "Vagrant (casual)"@en .
-
-dwcpw:p002 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p002 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p002-2021-09-01> ;
-    rdfs:comment "Probably only applicable to plants. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p045 ;
-    skos:definition "Organisms introduced for the purpose of erosion control/dune stabilization (windbreaks, hedges, etc.)."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Erosion Control"@en .
 
 acorient:r0003 a dwc:SubjectOrientation ;
     dcterms:isVersionOf acorient:r0003 ;
@@ -5035,33 +4458,15 @@ dwc:UsagePolicy a owl:Class ;
     skos:definition "Information about rights, usage, and attribution statements applicable to an entity."@en ;
     skos:prefLabel "Usage Policy"@en .
 
-dwcpw:p049 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p049 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p049-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p053 ;
-    skos:definition "Infrastructure, such as bridges, tunnels and canals have removed natural barriers to dispersal and allowed a species to move into a novel location."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Corridor"@en .
-
-dwcpw:p052 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p052 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p052-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:definition "The organism was unintentionally brought to a new region."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Unintentional"@en .
-
-dwcpw:p053 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p053 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p053-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:definition "Organisms dispersed naturally, even if that dispersal was aided by changes in the landscape created by humans."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Corridor and Dispersal"@en .
+dwcdp:followedBy a owl:ObjectProperty ;
+    rdfs:comment "The considered resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]."@en ;
+    rdfs:domain dwc:Protocol ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( chrono:ChronometricAge dwc:Assertion dwc:Event dwc:NucleotideAnalysis dwc:MaterialEntity dwc:Occurrence eco:Survey ) ] ;
+    owl:inverseOf dwcdp:followed ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Protocol] to the entities it is followed by."@en ;
+    skos:prefLabel "Followed By"@en .
 
 acpart:p0016 a dwc:SubjectPart ;
     dcterms:isVersionOf acpart:p0016 ;
@@ -5077,15 +4482,6 @@ dwc:Permit a owl:Class ;
     skos:definition "A document, allowing for the execution of certain activities."@en ;
     skos:example "a license to put up mist-nets to sample for bird communities" ;
     skos:prefLabel "Permit"@en .
-
-dwcpw:p051 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p051 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p051-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:definition "Organisms were brought to new area with the specific intention of keeping them alive in the new region, regardless of whether they were intended to be cultivated or released into the wild."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Intentional"@en .
 
 ggbn:permitStatus_vocabulary a owl:Class ;
     dcterms:isVersionOf ggbn:permitStatus_vocabulary ;
@@ -5125,14 +4521,17 @@ dwc:EstablishmentMeans a owl:Class ;
     skos:definition "Controlled value for Darwin Core terms with local name establishmentMeans."@en ;
     skos:prefLabel "Establishment Means"@en .
 
+skos:Concept a owl:Class ;
+    dcterms:isVersionOf skos:Concept ;
+    rdfs:isDefinedBy skos: ;
+    skos:definition "An idea or notion; a unit of thought."@en ;
+    skos:prefLabel "Concept"@en .
+
 dwc:OccurrenceAssertion a owl:Class ;
     dcterms:isVersionOf dwc:OccurrenceAssertion ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/OccurrenceAssertion-0000-00-00> ;
     rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:about ;
-            owl:someValuesFrom dwc:Occurrence ],
-        dwc:Assertion ;
+    rdfs:subClassOf dwc:Assertion ;
     skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."@en ;
     skos:prefLabel "Occurrence Assertion"@en .
 
@@ -5168,12 +4567,6 @@ eco:SurveyTarget a owl:Class ;
         "reproductive female Ctenomys sociabilis (only)" ;
     skos:prefLabel "Survey Target"@en .
 
-skos:Concept a owl:Class ;
-    dcterms:isVersionOf skos:Concept ;
-    rdfs:isDefinedBy skos: ;
-    skos:definition "An idea or notion; a unit of thought."@en ;
-    skos:prefLabel "Concept"@en .
-
 chrono:ChronometricAge a owl:Class ;
     dcterms:isVersionOf chrono:ChronometricAge ;
     dcterms:references <http://rs.tdwg.org/chrono/terms/version/ChronometricAge-2021-02-21> ;
@@ -5206,16 +4599,6 @@ dwc:Provenance a owl:Class ;
     skos:definition "Information about an entity's origins."@en ;
     skos:prefLabel "Provenance"@en .
 
-dwcpw:p045 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p045 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p045-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p051 ;
-    skos:definition "Organisms transported and released by humans in a (semi)natural environment with the intention that they should live there without further human aid."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Release In Nature"@en .
-
 bibo:DocumentStatus a owl:Class ;
     dcterms:isVersionOf bibo:DocumentStatus ;
     rdfs:isDefinedBy bibo: ;
@@ -5246,16 +4629,6 @@ dwc:DegreeOfEstablishment a owl:Class ;
     skos:definition "Controlled value for Darwin Core terms with local name degreeOfEstablishment."@en ;
     skos:prefLabel "Degree Of Establishment"@en .
 
-dwcpw:p047 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p047 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p047-2021-09-01> ;
-    rdfs:comment "An alien species is a contaminant if it had a trophic or biotic relationship to organisms or items being transported and was to some extent dependent on them for survival. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p052 ;
-    skos:definition "An umbrella term for all species transported as contaminants in other products."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Transport-Contaminant"@en .
-
 dwc:Protocol a owl:Class ;
     dcterms:isVersionOf dwc:Protocol ;
     rdfs:isDefinedBy dwc: ;
@@ -5265,16 +4638,6 @@ dwc:Protocol a owl:Class ;
         "a pitfall method for sampling ground-dwelling arthropods",
         "a point-radius georeferencing method" ;
     skos:prefLabel "Protocol"@en .
-
-dwcpw:p048 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p048 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p048-2021-09-01> ;
-    rdfs:comment "A stowaway has no trophic or biotic relationship to the organisms or items being transported. See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p052 ;
-    skos:definition "An umbrella term for all species transported by riding on forms of transport where the organism has a direct interaction with the transport and is not merely carried as part of, or a contaminant of cargo."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Transport-Stowaway"@en .
 
 acorient:r dcterms:isVersionOf acorient:r ;
     dcterms:references <http://rs.tdwg.org/acorient/values/version/r-2023-04-26> ;
@@ -5291,12 +4654,6 @@ dwc:Identification a owl:Class ;
     skos:example "a nomenclatural act designating a specimen as a holotype",
         "a subspecies determination of an organism" ;
     skos:prefLabel "Identification"@en .
-
-dwc:NucleotideAnalysis a owl:Class ;
-    dcterms:isVersionOf dwc:NucleotideAnalysis ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
-    skos:prefLabel "Nucleotide Analysis"@en .
 
 dwc:Organism a owl:Class ;
     dcterms:isVersionOf dwc:Organism ;
@@ -5316,21 +4673,17 @@ dwc:SubjectOrientation a owl:Class ;
     skos:definition "Controlled value for Darwin Core terms for Audiovisual Core subject orientation."@en ;
     skos:prefLabel "Subject Orientation"@en .
 
-dwcpw:p046 a dwc:Pathway ;
-    dcterms:isVersionOf dwcpw:p046 ;
-    dcterms:references <http://rs.tdwg.org/dwcpw/values/version/p046-2021-09-01> ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwcpw: ;
-    skos:broader dwcpw:p051 ;
-    skos:definition "Organisms intentionally transported by humans and intended to be kept in captivity or cultivation, but having inadvertently escaped from human control."@en ;
-    skos:inScheme dwcpw:p ;
-    skos:prefLabel "Escape From Confinement"@en .
-
 dcterms:BibliographicResource a owl:Class ;
     dcterms:isVersionOf dcterms:BibliographicResource ;
     rdfs:isDefinedBy dcterms: ;
     skos:definition "A book, article, or other documentary resource."@en ;
     skos:prefLabel "Bibliographic Resource"@en .
+
+dwc:NucleotideAnalysis a owl:Class ;
+    dcterms:isVersionOf dwc:NucleotideAnalysis ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
+    skos:prefLabel "Nucleotide Analysis"@en .
 
 dwc:Assertion a owl:Class ;
     dcterms:isVersionOf dwc:MeasurementOrFact ;
@@ -5358,10 +4711,7 @@ dwc:MaterialEntityAssertion a owl:Class ;
     dcterms:isVersionOf dwc:MaterialEntityAssertion ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/MaterialEntityAssertion-0000-00-00> ;
     rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:about ;
-            owl:someValuesFrom dwc:MaterialEntity ],
-        dwc:Assertion ;
+    rdfs:subClassOf dwc:Assertion ;
     skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:MaterialEntity]."@en ;
     skos:prefLabel "Material Entity Assertion"@en .
 
@@ -5470,17 +4820,38 @@ dwc:MolecularProtocol a owl:Class ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/MolecularProtocol-0000-00-00> ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:followedBy ;
-            owl:someValuesFrom dwc:NucleotideAnalysis ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000002 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000006 ],
+            owl:onProperty mixs:0001320 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000017 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000008 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000013 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000016 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000003 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dwc:assayType ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000092 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000005 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000015 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000001 ],
@@ -5489,41 +4860,20 @@ dwc:MolecularProtocol a owl:Class ;
             owl:onProperty mixs:0000012 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:assayType ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0001320 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000013 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000015 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0001107 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000008 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000092 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom dwc:NucleotideAnalysis ;
-            owl:onProperty dwcdp:followedBy ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000017 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000020 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000016 ],
+            owl:onProperty mixs:0000006 ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000005 ],
+            owl:allValuesFrom dwc:NucleotideAnalysis ;
+            owl:onProperty dwcdp:followedBy ],
         dwc:Protocol ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty dwcdp:followedBy ;
+            owl:someValuesFrom dwc:NucleotideAnalysis ] ;
     skos:definition "A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]."@en ;
     skos:prefLabel "Molecular Protocol"@en .
 
@@ -5533,59 +4883,51 @@ ac:Media a owl:Class ;
     rdfs:isDefinedBy ac: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:widthFrac ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:derivedFrom ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashFunction ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:freqHigh ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:timeOfDay ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:captureDevice ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:frameRate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:resourceCreationTechnique ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:heightFrac ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashValue ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:freqLow ],
         [ a owl:Restriction ;
             owl:allValuesFrom ac:Media ;
             owl:onProperty dwcdp:partOf ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mo:sample_rate ],
+            owl:onProperty ac:freqHigh ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:digitizationDate ] ;
+            owl:onProperty ac:hashFunction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:hashValue ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:digitizationDate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:frameRate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:freqLow ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:captureDevice ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:heightFrac ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:timeOfDay ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:widthFrac ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mo:sample_rate ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ac:Media ;
+            owl:onProperty dwcdp:derivedFrom ] ;
     skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
     skos:example "dcmi:MovingImage",
         "dcmi:Sound",
         "dcmi:StillImage" ;
     skos:prefLabel "Media"@en .
-
-dwc:Pathway a owl:Class ;
-    rdfs:comment "See also Harrower et al. 2017: [http://nora.nerc.ac.uk/id/eprint/519129](http://nora.nerc.ac.uk/id/eprint/519129)."@en ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf skos:Concept ;
-    owl:oneOf ( dwcpw:p001 dwcpw:p002 dwcpw:p003 dwcpw:p004 dwcpw:p005 dwcpw:p006 dwcpw:p007 dwcpw:p008 dwcpw:p009 dwcpw:p010 dwcpw:p011 dwcpw:p012 dwcpw:p013 dwcpw:p014 dwcpw:p015 dwcpw:p016 dwcpw:p017 dwcpw:p018 dwcpw:p019 dwcpw:p020 dwcpw:p021 dwcpw:p022 dwcpw:p023 dwcpw:p024 dwcpw:p025 dwcpw:p026 dwcpw:p027 dwcpw:p028 dwcpw:p029 dwcpw:p030 dwcpw:p031 dwcpw:p032 dwcpw:p033 dwcpw:p034 dwcpw:p035 dwcpw:p036 dwcpw:p037 dwcpw:p038 dwcpw:p039 dwcpw:p040 dwcpw:p041 dwcpw:p042 dwcpw:p043 dwcpw:p044 dwcpw:p045 dwcpw:p046 dwcpw:p047 dwcpw:p048 dwcpw:p049 dwcpw:p050 dwcpw:p051 dwcpw:p052 dwcpw:p053 ) ;
-    skos:definition "Controlled value for Darwin Core terms with local name pathway."@en ;
-    skos:prefLabel "Pathway"@en .
 
 dcterms:Location a owl:Class ;
     dcterms:isVersionOf dcterms:Location ;
@@ -5595,6 +4937,22 @@ dcterms:Location a owl:Class ;
         "the place defined by a georeference" ;
     skos:prefLabel "Location"@en .
 
+[] a owl:Restriction ;
+    owl:onProperty dwcdp:about ;
+    owl:someValuesFrom dwc:Occurrence .
+
+[] a owl:Restriction ;
+    owl:onProperty dwcdp:followedBy ;
+    owl:someValuesFrom dwc:NucleotideAnalysis .
+
 [] a owl:AllDisjointClasses ;
     owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:Identification dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .
+
+[] a owl:Restriction ;
+    owl:onProperty dwcdp:about ;
+    owl:someValuesFrom dwc:Organism .
+
+[] a owl:Restriction ;
+    owl:onProperty dwcdp:about ;
+    owl:someValuesFrom dwc:MaterialEntity .
 
