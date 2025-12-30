@@ -124,9 +124,9 @@ dcterms:publisher rdf:type owl:ObjectProperty ;
 dcterms:rights rdf:type owl:ObjectProperty ;
                rdfs:domain dwc:UsagePolicy ;
                dcterms:isVersionOf dcterms:rights ;
-               rdfs:comment "Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights. Recommended practice is to refer to a rights statement with a URI. If this is not possible or feasible, a literal value (name, label, or short text) may be provided." ;
+               rdfs:comment "Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights. Recommended practice is to refer to a rights statement with a URI. If this is not possible or feasible, a literal value (name, label, or short text) may be provided."@en ;
                rdfs:isDefinedBy dcterms: ;
-               skos:definition "Information about rights held in and over the resource." ;
+               skos:definition "Information about rights held in and over the resource."@en ;
                skos:prefLabel "Rights (DCTERMS)" .
 
 
@@ -136,7 +136,7 @@ dcterms:rightsHolder rdf:type owl:ObjectProperty ;
                      rdfs:comment "Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided." ;
                      rdfs:isDefinedBy dcterms: ;
                      skos:definition "A person or organization owning or managing rights over the resource." ;
-                     skos:prefLabel "Rights Holder" .
+                     skos:prefLabel "Rights Holder"@en .
 
 
 ###  http://purl.org/dc/terms/source
@@ -150,7 +150,7 @@ dcterms:spatial rdf:type owl:ObjectProperty ;
                 dcterms:isVersionOf dcterms:spatial ;
                 rdfs:isDefinedBy dcterms: ;
                 skos:definition "Spatial characteristics of the resource."@en ;
-                skos:prefLabel "Spatial Coverage" .
+                skos:prefLabel "Spatial Coverage"@en .
 
 
 ###  http://purl.org/dc/terms/type
@@ -158,7 +158,7 @@ dcterms:type rdf:type owl:ObjectProperty ;
              dcterms:isVersionOf dcterms:type ;
              rdfs:comment "Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/). To describe the file format, physical medium, or dimensions of the resource, use the property Format." ;
              rdfs:isDefinedBy dcterms: ;
-             skos:definition "The nature or genre of the resource." ;
+             skos:definition "The nature or genre of the resource."@en ;
              skos:prefLabel "Type" .
 
 
@@ -171,7 +171,7 @@ dsw:locatedAt rdf:type owl:ObjectProperty ;
               rdfs:comment "The dsw:locatedAt relationship is many-to-one (many events at one location). This property is preferred over its inverse if the link is made in only one direction."@en ;
               rdfs:isDefinedBy dsw: ;
               skos:definition "Links a subject dwc:Event instance to an object dcterms:Location instance."@en ;
-              skos:prefLabel "Located At" .
+              skos:prefLabel "Located At"@en .
 
 
 ###  http://purl.org/dsw/occurrenceOf
@@ -183,7 +183,7 @@ dsw:occurrenceOf rdf:type owl:ObjectProperty ;
                  rdfs:comment "The dsw:occurrrenceOf relationship is many-to-one (many occurrences for one individual organism). This property is preferred over its inverse if the link is made in only one direction."@en ;
                  rdfs:isDefinedBy dsw: ;
                  skos:definition "Links a subject dwc:Occurrence instance to an object dwc:Organism instance."@en ;
-                 skos:prefLabel "Occurrence Of (DSW)" .
+                 skos:prefLabel "Occurrence Of (DSW)"@en .
 
 
 ###  http://purl.org/ontology/bibo/status
@@ -5684,7 +5684,11 @@ dwc:MaterialEntity rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/MaterialEntityAssertion
 dwc:MaterialEntityAssertion rdf:type owl:Class ;
-                            rdfs:subClassOf dwc:Assertion ;
+                            rdfs:subClassOf dwc:Assertion ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty dwcdp:about ;
+                                              owl:someValuesFrom dwc:MaterialEntity
+                                            ] ;
                             dcterms:isVersionOf dwc:MaterialEntityAssertion ;
                             dcterms:references <http://rs.tdwg.org/dwc/terms/version/MaterialEntityAssertion-0000-00-00> ;
                             rdfs:isDefinedBy dwc: ;
@@ -5699,6 +5703,10 @@ dwc:MolecularProtocol rdf:type owl:Class ;
                                             owl:someValuesFrom dwc:NucleotideAnalysis
                                           ] ;
                       rdfs:subClassOf dwc:Protocol ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty dwcdp:followedBy ;
+                                        owl:someValuesFrom dwc:NucleotideAnalysis
+                                      ] ,
                                       [ rdf:type owl:Restriction ;
                                         owl:onProperty dwcdp:followedBy ;
                                         owl:allValuesFrom dwc:NucleotideAnalysis
@@ -5812,7 +5820,11 @@ dwc:Occurrence rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/OccurrenceAssertion
 dwc:OccurrenceAssertion rdf:type owl:Class ;
-                        rdfs:subClassOf dwc:Assertion ;
+                        rdfs:subClassOf dwc:Assertion ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:about ;
+                                          owl:someValuesFrom dwc:Occurrence
+                                        ] ;
                         dcterms:isVersionOf dwc:OccurrenceAssertion ;
                         dcterms:references <http://rs.tdwg.org/dwc/terms/version/OccurrenceAssertion-0000-00-00> ;
                         rdfs:isDefinedBy dwc: ;
@@ -5835,7 +5847,11 @@ dwc:Organism rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismAssertion
 dwc:OrganismAssertion rdf:type owl:Class ;
-                      rdfs:subClassOf dwc:Assertion ;
+                      rdfs:subClassOf dwc:Assertion ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty dwcdp:about ;
+                                        owl:someValuesFrom dwc:Organism
+                                      ] ;
                       dcterms:isVersionOf dwc:OrganismAssertion ;
                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/OrganismAssertion-0000-00-00> ;
                       rdfs:isDefinedBy dwc: ;

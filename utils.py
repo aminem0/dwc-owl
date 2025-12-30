@@ -144,7 +144,6 @@ def createOC(
         card1_restrictions: list[Node] | None = None,
         maxcard1_restrictions: list[Node] | None = None,
         references_s: str | None = None,
-        equivalent: bool = False,
         equiv_def: tuple[Node, Node] | None = None,
 ) -> None:
     """
@@ -192,7 +191,6 @@ def createOC(
 
     # OWL Restrictions
     entity_pylist = []
-    restrictions_pylist = []
 
     if exist_rest_filler:
         for pair in exist_rest_filler:
@@ -200,9 +198,7 @@ def createOC(
             graph.add((ER_class, RDF["type"], OWL["Restriction"]))
             graph.add((ER_class, OWL["onProperty"], pair[0]))
             graph.add((ER_class, OWL["someValuesFrom"], pair[1]))
-            # entity_pylist.append(ER_class)
-            #
-            restrictions_pylist.append(ER_class)
+            entity_pylist.append(ER_class)
 
     if univ_rest_filler:
         for pair in univ_rest_filler:
@@ -211,8 +207,6 @@ def createOC(
             graph.add((UR_class, OWL["onProperty"], pair[0]))
             graph.add((UR_class, OWL["allValuesFrom"], pair[1]))
             entity_pylist.append(UR_class)
-            #
-            # restrictions_pylist.append(UR_class)
 
     if card1_restrictions:
         for property in card1_restrictions:
@@ -233,26 +227,6 @@ def createOC(
     for entity in entity_pylist:
             graph.add((class_uri, RDFS["subClassOf"], entity))
     
-    if equivalent == True:
-        # WARN: Take the intersectionOf for existential and universal restrictions
-        # THIS IS FUNDAMENTAL
-        #
-
-        # Create a list of the restrictions
-        #
-        restriction_list_bnode = BNode()
-        Collection(graph, restriction_list_bnode, restrictions_pylist)
-
-        # Create an intersection of this list of restrictions
-        #
-        restriction_intersection_bnode = BNode()
-        graph.add((restriction_intersection_bnode, RDF["type"], OWL["Class"]))
-        graph.add((restriction_intersection_bnode, OWL["intersectionOf"], restriction_list_bnode))
-
-        # Assign it to the equivalentClass
-        #
-        graph.add((class_uri, OWL["equivalentClass"], restriction_intersection_bnode))
-
     # If given, consider the equivalent definition of the class 
     if equiv_def:
         if isinstance(equiv_def, tuple) and all(isinstance(item, Node) for item in equiv_def):
@@ -262,39 +236,6 @@ def createOC(
             graph.add((equiv_restr_bnode, OWL["someValuesFrom"], equiv_def[1]))
             #
             graph.add((class_uri, OWL["equivalentClass"], equiv_restr_bnode))
-
-
-
-#
-# if len(equiv_def) == 1:
-#     entity_pylist = []
-#     restrictions_pylist = []
-#
-#     if exist_rest_filler:
-#         for pair in exist_rest_filler:
-#             ER_class = BNode()
-#             graph.add((ER_class, RDF["type"], OWL["Restriction"]))
-#             graph.add((ER_class, OWL["onProperty"], pair[0]))
-#             graph.add((ER_class, OWL["someValuesFrom"], pair[1]))
-#             # entity_pylist.append(ER_class)
-#             #
-#             restrictions_pylist.append(ER_class)
-#
-
-    # entity_pylist = []
-    # restrictions_pylist = []
-    #
-    # if exist_rest_filler:
-    #     for pair in exist_rest_filler:
-    #         ER_class = BNode()
-    #         graph.add((ER_class, RDF["type"], OWL["Restriction"]))
-    #         graph.add((ER_class, OWL["onProperty"], pair[0]))
-    #         graph.add((ER_class, OWL["someValuesFrom"], pair[1]))
-    #         # entity_pylist.append(ER_class)
-    #         #
-    #         restrictions_pylist.append(ER_class)
-    #
-
 
 # TEST: Function that creates an owl:DatatypeProperty but with a numeric range restriction
 # NOTE: Maybe later consider tuples, but for now, lists do the job
