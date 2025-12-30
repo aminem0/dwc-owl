@@ -95,7 +95,12 @@ xsd:date rdf:type rdfs:Datatype .
 #################################################################
 
 ###  http://purl.org/dc/terms/contributor
-dcterms:contributor rdf:type owl:ObjectProperty .
+dcterms:contributor rdf:type owl:ObjectProperty ;
+                    dcterms:isVersionOf dcterms:contributor ;
+                    rdfs:comment "The guidellines for using names of persons or organizations as creators apply to contributors."@en ;
+                    rdfs:isDefinedBy dcterms: ;
+                    skos:definition "An entity responsible for making contributions to this resource."@en ;
+                    skos:prefLabel "Contributor (DCTERMS)"@en .
 
 
 ###  http://purl.org/dc/terms/creator
@@ -108,7 +113,11 @@ dcterms:creator rdf:type owl:ObjectProperty ;
 
 
 ###  http://purl.org/dc/terms/publisher
-dcterms:publisher rdf:type owl:ObjectProperty .
+dcterms:publisher rdf:type owl:ObjectProperty ;
+                  dcterms:isVersionOf dcterms:publisher ;
+                  rdfs:isDefinedBy dcterms: ;
+                  skos:definition "An entity responsible for making the resource available."@en ;
+                  skos:prefLabel "Publisher (DCTERMS)"@en .
 
 
 ###  http://purl.org/dc/terms/rights
@@ -261,7 +270,11 @@ dwciri:behavior rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/caste
 dwciri:caste rdf:type owl:ObjectProperty ;
-             rdfs:domain dwc:OccurrenceAssertion ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( dwc:MaterialEntityAssertion
+                                         dwc:OccurrenceAssertion
+                                       )
+                         ] ;
              dcterms:isVersionOf dwciri:caste ;
              dcterms:references <http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10> ;
              rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -515,7 +528,11 @@ dwciri:recordedBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/reproductiveCondition
 dwciri:reproductiveCondition rdf:type owl:ObjectProperty ;
-                             rdfs:domain dwc:OccurrenceAssertion ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( dwc:MaterialEntityAssertion
+                                                         dwc:OccurrenceAssertion
+                                                       )
+                                         ] ;
                              dcterms:isVersionOf dwciri:reproductiveCondition ;
                              dcterms:references <http://rs.tdwg.org/dwc/iri/version/reproductiveCondition-2025-07-10> ;
                              rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -582,7 +599,11 @@ dwciri:verticalDatum rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/vitality
 dwciri:vitality rdf:type owl:ObjectProperty ;
-                rdfs:domain dwc:OccurrenceAssertion ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( dwc:MaterialEntityAssertion
+                                            dwc:OccurrenceAssertion
+                                          )
+                            ] ;
                 dcterms:isVersionOf dwciri:vitality ;
                 dcterms:references <http://rs.tdwg.org/dwc/iri/version/vitality-2025-07-10> ;
                 rdfs:comment "Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -2236,10 +2257,10 @@ dwc:agentID rdf:type owl:DatatypeProperty ;
             rdfs:domain dcterms:Agent ;
             rdfs:range rdfs:Literal ;
             dcterms:isVersionOf <http://example.com/term-pending/dwc/agentID> ;
-            rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+            rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
             rdfs:isDefinedBy dwc: ;
-            skos:definition "An identifier for a [dcterms:Agent]." ;
-            skos:prefLabel "Agent ID" .
+            skos:definition "An identifier for a [dcterms:Agent]."@en ;
+            skos:prefLabel "Agent ID"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/agentRemarks
@@ -2248,8 +2269,8 @@ dwc:agentRemarks rdf:type owl:DatatypeProperty ;
                  rdfs:range rdfs:Literal ;
                  dcterms:isVersionOf <http://example.com/term-pending/dwc/agentRemarks> ;
                  rdfs:isDefinedBy dwc: ;
-                 skos:definition "Comments or notes about a [dcterms:Agent]." ;
-                 skos:prefLabel "Agent Remarks" .
+                 skos:definition "Comments or notes about a [dcterms:Agent]."@en ;
+                 skos:prefLabel "Agent Remarks"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/agentType
@@ -2257,14 +2278,14 @@ dwc:agentType rdf:type owl:DatatypeProperty ;
               rdfs:domain dcterms:Agent ;
               rdfs:range rdfs:Literal ;
               dcterms:isVersionOf <http://example.com/term-pending/dwc/agentType> ;
-              rdfs:comment "Recommended best practice is to use a controlled vocabulary." ;
+              rdfs:comment "Recommended best practice is to use a controlled vocabulary."@en ;
               rdfs:isDefinedBy dwc: ;
-              skos:definition "A category that best matches the nature of a [dcterms:Agent]." ;
+              skos:definition "A category that best matches the nature of a [dcterms:Agent]."@en ;
               skos:example "camera" ,
                            "group" ,
                            "organization" ,
                            "person" ;
-              skos:prefLabel "Agent Type" .
+              skos:prefLabel "Agent Type"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/assayType
@@ -2272,13 +2293,13 @@ dwc:assayType rdf:type owl:DatatypeProperty ;
               rdfs:domain dwc:MolecularProtocol ;
               rdfs:range rdfs:Literal ;
               dcterms:isVersionOf <http://example.com/term-pending/dwc/assayType> ;
-              rdfs:comment "Recommended best practice is to use a controlled vocabulary." ;
+              rdfs:comment "Recommended best practice is to use a controlled vocabulary."@en ;
               rdfs:isDefinedBy dwc: ;
-              skos:definition "A method used in the study to detect taxon/taxa of interest in the sample" ;
+              skos:definition "A method used in the study to detect taxon/taxa of interest in the sample"@en ;
               skos:example "metabarcoding" ,
                            "other" ,
                            "targeted" ;
-              skos:prefLabel "Assay Type" .
+              skos:prefLabel "Assay Type"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/assertionEffectiveDate
@@ -2286,9 +2307,9 @@ dwc:assertionEffectiveDate rdf:type owl:DatatypeProperty ;
                            rdfs:domain dwc:Assertion ;
                            rdfs:range rdfs:Literal ;
                            dcterms:isVersionOf <http://example.com/term-pending/dwc/assertionEffectiveDate> ;
-                           rdfs:comment "Recommended best practice is to use a date that conforms to ISO 8601-1:2019." ;
+                           rdfs:comment "Recommended best practice is to use a date that conforms to ISO 8601-1:2019."@en ;
                            rdfs:isDefinedBy dwc: ;
-                           skos:definition "A date on which a state or measurement of a [dwc:Assertion] was deemed to first be in effect." ;
+                           skos:definition "A date on which a state or measurement of a [dwc:Assertion] was deemed to first be in effect."@en ;
                            skos:example "1809-02-12" ,
                                         "1900/1909" ,
                                         "1906-06" ,
@@ -2298,7 +2319,7 @@ dwc:assertionEffectiveDate rdf:type owl:DatatypeProperty ;
                                         "2007-11-13/15" ,
                                         "2009-02-20T08:40Z" ,
                                         "2018-08-29T15:19" ;
-                           skos:prefLabel "Assertion Effective Date" .
+                           skos:prefLabel "Assertion Effective Date"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/assertionID
@@ -2307,10 +2328,10 @@ dwc:assertionID rdf:type owl:DatatypeProperty ;
                 rdfs:domain dwc:Assertion ;
                 rdfs:range rdfs:Literal ;
                 dcterms:isVersionOf <http://example.com/term-pending/dwc/assertionID> ;
-                rdfs:comment "Recommended best practice is to use a globally unique identifier." ;
+                rdfs:comment "Recommended best practice is to use a globally unique identifier."@en ;
                 rdfs:isDefinedBy dwc: ;
-                skos:definition "An identifier for a [dwc:Assertion]." ;
-                skos:prefLabel "Assertion ID" .
+                skos:definition "An identifier for a [dwc:Assertion]."@en ;
+                skos:prefLabel "Assertion ID"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/assertionMadeDate
@@ -2318,9 +2339,9 @@ dwc:assertionMadeDate rdf:type owl:DatatypeProperty ;
                       rdfs:domain dwc:Assertion ;
                       rdfs:range rdfs:Literal ;
                       dcterms:isVersionOf <http://example.com/term-pending/dwc/assertionMadeDate> ;
-                      rdfs:comment "Recommended best practice is to use a date that conforms to ISO 8601-1:2019." ;
+                      rdfs:comment "Recommended best practice is to use a date that conforms to ISO 8601-1:2019."@en ;
                       rdfs:isDefinedBy dwc: ;
-                      skos:definition "A date on which a [dwc:Assertion] was created." ;
+                      skos:definition "A date on which a [dwc:Assertion] was created."@en ;
                       skos:example "1809-02-12" ,
                                    "1900/1909" ,
                                    "1906-06" ,
@@ -2330,7 +2351,7 @@ dwc:assertionMadeDate rdf:type owl:DatatypeProperty ;
                                    "2007-11-13/15" ,
                                    "2009-02-20T08:40Z" ,
                                    "2018-08-29T15:19" ;
-                      skos:prefLabel "Assertion Made Date" .
+                      skos:prefLabel "Assertion Made Date"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/assertionType
@@ -2338,15 +2359,15 @@ dwc:assertionType rdf:type owl:DatatypeProperty ;
                   rdfs:domain dwc:Assertion ;
                   rdfs:range rdfs:Literal ;
                   dcterms:isVersionOf <http://example.com/term-pending/dwc/assertionType> ;
-                  rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the [dwciri:] namespace that allows only an IRI as a value, whereas this term allows for any string literal value." ;
+                  rdfs:comment "Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the [dwciri:] namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
                   rdfs:isDefinedBy dwc: ;
-                  skos:definition "A category that best matches the nature of a [dwc:Assertion]." ;
+                  skos:definition "A category that best matches the nature of a [dwc:Assertion]."@en ;
                   skos:example "survey area" ,
                                "tail length" ,
                                "temperature" ,
                                "trap line length" ,
                                "trap type" ;
-                  skos:prefLabel "Assertion Type" .
+                  skos:prefLabel "Assertion Type"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/assertionTypeSource
@@ -2366,8 +2387,8 @@ dwc:assertionValue rdf:type owl:DatatypeProperty ;
                    rdfs:range rdfs:Literal ;
                    dcterms:isVersionOf <http://example.com/term-pending/dwc/assertionValue> ;
                    rdfs:isDefinedBy dwc: ;
-                   skos:definition "An asserted value, if it is not numeric." ;
-                   skos:prefLabel "Assertion Value" .
+                   skos:definition "An asserted value, if it is not numeric."@en ;
+                   skos:prefLabel "Assertion Value"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/assertionValueNumeric
@@ -2376,8 +2397,8 @@ dwc:assertionValueNumeric rdf:type owl:DatatypeProperty ;
                           rdfs:range xsd:decimal ;
                           dcterms:isVersionOf <http://example.com/term-pending/dwc/assertionValueNumeric> ;
                           rdfs:isDefinedBy dwc: ;
-                          skos:definition "An asserted value, if it is numeric." ;
-                          skos:prefLabel "Assertion Value Numeric" .
+                          skos:definition "An asserted value, if it is numeric."@en ;
+                          skos:prefLabel "Assertion Value Numeric"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/assertionValueSource
@@ -2387,8 +2408,8 @@ dwc:assertionValueSource rdf:type owl:DatatypeProperty ;
                          rdfs:range rdfs:Literal ;
                          dcterms:isVersionOf dc:source ;
                          rdfs:isDefinedBy dwc: ;
-                         skos:definition "A reference to a controlled vocabulary in which the definition of a value in [dwc:assertionValue] is given." ;
-                         skos:prefLabel "Assertion Value Source" .
+                         skos:definition "A reference to a controlled vocabulary in which the definition of a value in [dwc:assertionValue] is given."@en ;
+                         skos:prefLabel "Assertion Value Source"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/bed
@@ -2400,12 +2421,31 @@ dwc:bed rdf:type owl:DatatypeProperty ;
         rdfs:isDefinedBy dwc: ;
         skos:definition "The full name of the lithostratigraphic bed from which the [dwc:MaterialEntity] was collected."@en ;
         skos:example "Harlem coal" ;
-        skos:prefLabel "Bed" .
+        skos:prefLabel "Bed"@en .
+
+
+###  http://rs.tdwg.org/dwc/terms/behavior
+dwc:behavior rdf:type owl:DatatypeProperty ;
+             rdfs:domain dwc:OccurrenceAssertion ;
+             rdfs:range xsd:string ;
+             dcterms:isVersionOf dwc:behavior ;
+             dcterms:references <http://rs.tdwg.org/dwc/terms/version/behavior-2023-06-28> ;
+             rdfs:comment "This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value."@en ;
+             rdfs:isDefinedBy dwc: ;
+             skos:definition "The behavior shown by the subject at the time the [dwc:Occurrence] was recorded."@en ;
+             skos:example "foraging" ,
+                          "roosting" ,
+                          "running" ;
+             skos:prefLabel "Behavior"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/caste
 dwc:caste rdf:type owl:DatatypeProperty ;
-          rdfs:domain dwc:OccurrenceAssertion ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( dwc:MaterialEntityAssertion
+                                      dwc:OccurrenceAssertion
+                                    )
+                      ] ;
           rdfs:range xsd:string ;
           dcterms:isVersionOf dwc:caste ;
           dcterms:references <http://rs.tdwg.org/dwc/terms/version/caste-2023-06-28> ;
@@ -2418,7 +2458,7 @@ dwc:caste rdf:type owl:DatatypeProperty ;
                        "minor worker" ,
                        "queen" ,
                        "soldier" ;
-          skos:prefLabel "Caste" .
+          skos:prefLabel "Caste"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/causeOfDeath
@@ -4139,7 +4179,11 @@ dwc:relationshipRemarks rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/reproductiveCondition
 dwc:reproductiveCondition rdf:type owl:DatatypeProperty ;
-                          rdfs:domain dwc:OccurrenceAssertion ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( dwc:MaterialEntityAssertion
+                                                      dwc:OccurrenceAssertion
+                                                    )
+                                      ] ;
                           rdfs:range xsd:string ;
                           dcterms:isVersionOf dwc:reproductiveCondition ;
                           dcterms:references <http://rs.tdwg.org/dwc/terms/version/reproductiveCondition-2023-06-28> ;
@@ -4249,7 +4293,11 @@ dwc:sequence rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/sex
 dwc:sex rdf:type owl:DatatypeProperty ;
-        rdfs:domain dwc:OccurrenceAssertion ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( dwc:MaterialEntityAssertion
+                                    dwc:OccurrenceAssertion
+                                  )
+                    ] ;
         rdfs:range xsd:string ;
         dcterms:isVersionOf dwc:sex ;
         dcterms:references <http://rs.tdwg.org/dwc/terms/version/sex-2023-06-28> ;
@@ -4582,7 +4630,11 @@ dwc:verticalDatum rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/dwc/terms/vitality
 dwc:vitality rdf:type owl:DatatypeProperty ;
-             rdfs:domain dwc:OccurrenceAssertion ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( dwc:MaterialEntityAssertion
+                                         dwc:OccurrenceAssertion
+                                       )
+                         ] ;
              rdfs:range xsd:string ;
              dcterms:isVersionOf dwc:vitality ;
              dcterms:references <http://rs.tdwg.org/dwc/terms/version/vitality-2023-09-13> ;
@@ -5351,6 +5403,10 @@ dcterms:Agent rdf:type owl:Class ;
 
 ###  http://purl.org/dc/terms/BibliographicResource
 dcterms:BibliographicResource rdf:type owl:Class ;
+                              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                owl:onProperty dwcdp:partOf ;
+                                                owl:allValuesFrom dcterms:BibliographicResource
+                                              ] ;
                               dcterms:isVersionOf dcterms:BibliographicResource ;
                               rdfs:isDefinedBy dcterms: ;
                               skos:definition "A book, article, or other documentary resource."@en ;

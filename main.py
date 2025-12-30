@@ -222,6 +222,18 @@ createOC(
     version_of_s="http://purl.org/dc/terms/Agent",
 )
 
+createOC(
+    name="BibliographicResource",
+    namespace=DCTERMS,
+    graph=g,
+    univ_rest_filler=[
+        (DWCDP["partOf"], DCTERMS["BibliographicResource"]),
+    ],
+    pref_label=Literal("Bibliographic Resource", lang="en"),
+    definition=Literal("A book, article, or other documentary resource.", lang="en"),
+    version_of_s="http://purl.org/dc/terms/BibliographicResource",
+)
+
 # NOTE: Should we consider dwc:Assertion as a special case of dwc:MeasurmentOrFact?
 createOC(
     name="Assertion",
@@ -231,15 +243,6 @@ createOC(
     # card0_restrictions=[DWCDP["assertedBy"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/MeasurementOrFact",
     references_s="http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13",
-)
-
-createOC(
-    name="BibliographicResource",
-    namespace=DCTERMS,
-    graph=g,
-    pref_label=Literal("Bibliographic Resource", lang="en"),
-    definition=Literal("A book, article, or other documentary resource.", lang="en"),
-    version_of_s="http://purl.org/dc/terms/BibliographicResource",
 )
 
 # NOTE: Revoir definition
@@ -3048,6 +3051,16 @@ createOP(
 #############################################################################
 
 createOP(
+    name="contributor",
+    namespace=DCTERMS,
+    graph=g,
+    pref_label=Literal("Contributor (DCTERMS)", lang="en"),
+    definition=Literal("An entity responsible for making contributions to this resource.", lang="en"),
+    comments=Literal("The guidellines for using names of persons or organizations as creators apply to contributors.", lang="en"),
+    version_of_s="http://purl.org/dc/terms/contributor",
+)
+
+createOP(
     name="creator",
     namespace=DCTERMS,
     graph=g,
@@ -3058,13 +3071,22 @@ createOP(
 )
 
 createOP(
+    name="publisher",
+    namespace=DCTERMS,
+    graph=g,
+    pref_label=Literal("Publisher (DCTERMS)", lang="en"),
+    definition=Literal("An entity responsible for making the resource available.", lang="en"),
+    version_of_s="http://purl.org/dc/terms/publisher",
+)
+
+createOP(
     name="rights",
     namespace=DCTERMS,
     graph=g,
     domains=DWC["UsagePolicy"],
     pref_label=Literal("Rights (DCTERMS)"),
-    definition=Literal("Information about rights held in and over the resource."),
-    comments=Literal("Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights. Recommended practice is to refer to a rights statement with a URI. If this is not possible or feasible, a literal value (name, label, or short text) may be provided."),
+    definition=Literal("Information about rights held in and over the resource.", lang="en"),
+    comments=Literal("Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights. Recommended practice is to refer to a rights statement with a URI. If this is not possible or feasible, a literal value (name, label, or short text) may be provided.", lang="en"),
     version_of_s="http://purl.org/dc/terms/rights",
 )
 
@@ -3072,7 +3094,7 @@ createOP(
     name="rightsHolder",
     namespace=DCTERMS,
     graph=g,
-    pref_label=Literal("Rights Holder"),
+    pref_label=Literal("Rights Holder", lang="en"),
     definition=Literal("A person or organization owning or managing rights over the resource."),
     comments=Literal("Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided."),
     version_of_s="http://purl.org/dc/terms/rightsHolder",
@@ -3082,7 +3104,7 @@ createOP(
     name="spatial",
     namespace=DCTERMS,
     graph=g,
-    pref_label=Literal("Spatial Coverage"),
+    pref_label=Literal("Spatial Coverage", lang="en"),
     definition=Literal("Spatial characteristics of the resource.", lang="en"),
     version_of_s="http://purl.org/dc/terms/spatial",
 )
@@ -3092,7 +3114,7 @@ createOP(
     namespace=DCTERMS,
     graph=g,
     pref_label=Literal("Type"),
-    definition=Literal("The nature or genre of the resource."),
+    definition=Literal("The nature or genre of the resource.", lang="en"),
     comments=Literal("Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/). To describe the file format, physical medium, or dimensions of the resource, use the property Format."),
     version_of_s="http://purl.org/dc/terms/type",
 )
@@ -3108,7 +3130,7 @@ createOP(
     equivalent_property_list=[
         DWCDP["spatialLocation"],
     ],
-    pref_label=Literal("Located At"),
+    pref_label=Literal("Located At", lang="en"),
     definition=Literal("Links a subject dwc:Event instance to an object dcterms:Location instance.", lang="en"),
     comments=Literal("The dsw:locatedAt relationship is many-to-one (many events at one location). This property is preferred over its inverse if the link is made in only one direction.", lang="en"),
     references_s="http://purl.org/dsw/locatedAt",
@@ -3123,7 +3145,7 @@ createOP(
     equivalent_property_list=[
         DWCDP["occurrenceOf"],
     ],
-    pref_label=Literal("Occurrence Of (DSW)"),
+    pref_label=Literal("Occurrence Of (DSW)", lang="en"),
     definition=Literal("Links a subject dwc:Occurrence instance to an object dwc:Organism instance.", lang="en"),
     comments=Literal("The dsw:occurrrenceOf relationship is many-to-one (many occurrences for one individual organism). This property is preferred over its inverse if the link is made in only one direction.", lang="en"),
     references_s="http://purl.org/dsw/occurrenceOf",
@@ -3233,7 +3255,10 @@ createOP(
     name="caste",
     namespace=DWCIRI,
     graph=g,
-    domains=DWC["OccurrenceAssertion"],
+    domains=[
+        DWC["MaterialEntityAssertion"],
+        DWC["OccurrenceAssertion"],
+    ],
     pref_label=Literal("Caste (IRI)"),
     definition=Literal("Categorisation of individuals for eusocial species (including some mammals and arthropods).", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -3518,7 +3543,10 @@ createOP(
     name="reproductiveCondition",
     namespace=DWCIRI,
     graph=g,
-    domains=DWC["OccurrenceAssertion"],
+    domains=[
+        DWC["MaterialEntityAssertion"],
+        DWC["OccurrenceAssertion"],
+    ],
     pref_label=Literal("Reproductive Condition (IRI)"),
     definition=Literal("The reproductive condition of the biological individual(s) represented in the dwc:Occurrence.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -3579,7 +3607,10 @@ createOP(
     name="vitality",
     namespace=DWCIRI,
     graph=g,
-    domains=DWC["OccurrenceAssertion"],
+    domains=[
+        DWC["MaterialEntityAssertion"],
+        DWC["OccurrenceAssertion"],
+    ],
     pref_label=Literal("Vitality (IRI)"),
     definition=Literal("An indication of whether a dwc:Organism was alive or dead at the time of collection or observation.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -5096,10 +5127,10 @@ createDP(
     graph=g,
     domains=DCTERMS["Agent"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Agent ID"),
-    definition=Literal("An identifier for a [dcterms:Agent]."),
+    pref_label=Literal("Agent ID", lang="en"),
+    definition=Literal("An identifier for a [dcterms:Agent].", lang="en"),
     subproperty_of=DCTERMS["identifier"],
-    comments=Literal("Recommended best practice is to use a globally unique identifier."),
+    comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/agentID"
 )
 
@@ -5109,8 +5140,8 @@ createDP(
     graph=g,
     domains=DCTERMS["Agent"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Agent Remarks"),
-    definition=Literal("Comments or notes about a [dcterms:Agent]."),
+    pref_label=Literal("Agent Remarks", lang="en"),
+    definition=Literal("Comments or notes about a [dcterms:Agent].", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/agentRemarks"
 )
 
@@ -5120,9 +5151,9 @@ createDP(
     graph=g,
     domains=DCTERMS["Agent"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Agent Type"),
-    definition=Literal("A category that best matches the nature of a [dcterms:Agent]."),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary."),
+    pref_label=Literal("Agent Type", lang="en"),
+    definition=Literal("A category that best matches the nature of a [dcterms:Agent].", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary.", lang="en"),
     examples=[
         Literal("person"),
         Literal("group"),
@@ -5138,9 +5169,9 @@ createDP(
     graph=g,
     domains=DWC["MolecularProtocol"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Assay Type"),
-    definition=Literal("A method used in the study to detect taxon/taxa of interest in the sample"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary."),
+    pref_label=Literal("Assay Type", lang="en"),
+    definition=Literal("A method used in the study to detect taxon/taxa of interest in the sample", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary.", lang="en"),
     examples=[
         Literal("targeted"),
         Literal("metabarcoding"),
@@ -5150,15 +5181,16 @@ createDP(
 )
 
 # NOTE: I would have liked an xsd:date like datatype, but non-ISO 8601 and / make it difficult.
+#
 createDP(
     name="assertionEffectiveDate",
     namespace=DWC,
     graph=g,
     domains=DWC["Assertion"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Assertion Effective Date"),
-    definition=Literal("A date on which a state or measurement of a [dwc:Assertion] was deemed to first be in effect."),
-    comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019."),
+    pref_label=Literal("Assertion Effective Date", lang="en"),
+    definition=Literal("A date on which a state or measurement of a [dwc:Assertion] was deemed to first be in effect.", lang="en"),
+    comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
     examples=[
         Literal("1963-04-08T14:07-06:00"),
         Literal("2009-02-20T08:40Z"),
@@ -5179,9 +5211,9 @@ createDP(
     graph=g,
     domains=DWC["Assertion"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Assertion ID"),
-    definition=Literal("An identifier for a [dwc:Assertion]."),
-    comments=Literal("Recommended best practice is to use a globally unique identifier."),
+    pref_label=Literal("Assertion ID", lang="en"),
+    definition=Literal("An identifier for a [dwc:Assertion].", lang="en"),
+    comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
     subproperty_of=DCTERMS["identifier"],
     version_of_s="http://example.com/term-pending/dwc/assertionID"
 )
@@ -5193,9 +5225,9 @@ createDP(
     graph=g,
     domains=DWC["Assertion"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Assertion Made Date"),
-    definition=Literal("A date on which a [dwc:Assertion] was created."),
-    comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019."),
+    pref_label=Literal("Assertion Made Date", lang="en"),
+    definition=Literal("A date on which a [dwc:Assertion] was created.", lang="en"),
+    comments=Literal("Recommended best practice is to use a date that conforms to ISO 8601-1:2019.", lang="en"),
     examples=[
         Literal("1963-04-08T14:07-06:00"),
         Literal("2009-02-20T08:40Z"),
@@ -5216,9 +5248,9 @@ createDP(
     graph=g,
     domains=DWC["Assertion"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Assertion Type"),
-    definition=Literal("A category that best matches the nature of a [dwc:Assertion]."),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the [dwciri:] namespace that allows only an IRI as a value, whereas this term allows for any string literal value."),
+    pref_label=Literal("Assertion Type", lang="en"),
+    definition=Literal("A category that best matches the nature of a [dwc:Assertion].", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the [dwciri:] namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
     examples=[
         Literal("tail length"),
         Literal("temperature"),
@@ -5248,8 +5280,8 @@ createDP(
     graph=g,
     domains=DWC["Assertion"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Assertion Value"),
-    definition=Literal("An asserted value, if it is not numeric."),
+    pref_label=Literal("Assertion Value", lang="en"),
+    definition=Literal("An asserted value, if it is not numeric.", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/assertionValue",
 )
 
@@ -5260,20 +5292,21 @@ createDP(
     graph=g,
     domains=DWC["Assertion"],
     ranges=XSD["decimal"],
-    pref_label=Literal("Assertion Value Numeric"),
-    definition=Literal("An asserted value, if it is numeric."),
+    pref_label=Literal("Assertion Value Numeric", lang="en"),
+    definition=Literal("An asserted value, if it is numeric.", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/assertionValueNumeric",
 )
 
 # NOTE: Personally, I think a dwc:assertionValueSourceIRI being a subproperty of dcterms:source would be a better fit.
+#
 createDP(
     name="assertionValueSource",
     namespace=DWC,
     graph=g,
     domains=DWC["Assertion"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Assertion Value Source"),
-    definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [dwc:assertionValue] is given."),
+    pref_label=Literal("Assertion Value Source", lang="en"),
+    definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [dwc:assertionValue] is given.", lang="en"),
     subproperty_of=DC["source"],
     version_of_s="http://purl.org/dc/elements/1.1/source",
 )
@@ -5284,7 +5317,7 @@ createDP(
     graph=g,
     domains=DWC["GeologicalContext"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Bed"),
+    pref_label=Literal("Bed", lang="en"),
     definition=Literal("The full name of the lithostratigraphic bed from which the [dwc:MaterialEntity] was collected.", lang="en"),
     examples=[
         Literal("Harlem coal"),
@@ -5294,12 +5327,33 @@ createDP(
 )
 
 createDP(
-    name="caste",
+    name="behavior",
     namespace=DWC,
     graph=g,
     domains=DWC["OccurrenceAssertion"],
     ranges=XSD["string"],
-    pref_label=Literal("Caste"),
+    pref_label=Literal("Behavior", lang="en"),
+    definition=Literal("The behavior shown by the subject at the time the [dwc:Occurrence] was recorded.", lang="en"),
+    comments=Literal("This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
+    examples=[
+        Literal("roosting"),
+        Literal("foraging"),
+        Literal("running"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/behavior",
+    references_s="http://rs.tdwg.org/dwc/terms/version/behavior-2023-06-28",
+)
+
+createDP(
+    name="caste",
+    namespace=DWC,
+    graph=g,
+    domains=[
+        DWC["MaterialEntityAssertion"],
+        DWC["OccurrenceAssertion"],
+    ],
+    ranges=XSD["string"],
+    pref_label=Literal("Caste", lang="en"),
     definition=Literal("Categorisation of individuals for eusocial species (including some mammals and arthropods).", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
     examples=[
@@ -7202,7 +7256,10 @@ createDP(
     name="reproductiveCondition",
     namespace=DWC,
     graph=g,
-    domains=DWC["OccurrenceAssertion"],
+    domains=[
+        DWC["MaterialEntityAssertion"],
+        DWC["OccurrenceAssertion"],
+    ],
     ranges=XSD["string"],
     pref_label=Literal("Reproductive Condition"),
     definition=Literal("The reproductive condition of the biological individual(s) represented in the dwc:Occurrence.", lang="en"),
@@ -7343,7 +7400,10 @@ createDP(
     name="sex",
     namespace=DWC,
     graph=g,
-    domains=DWC["OccurrenceAssertion"],
+    domains=[
+        DWC["MaterialEntityAssertion"],
+        DWC["OccurrenceAssertion"],
+    ],
     ranges=XSD["string"],
     pref_label=Literal("Sex"),
     definition=Literal("The sex of the biological individual(s) represented in the dwc:Occurrence.", lang="en"),
@@ -7754,7 +7814,10 @@ createDP(
     name="vitality",
     namespace=DWC,
     graph=g,
-    domains=DWC["OccurrenceAssertion"],
+    domains=[
+        DWC["MaterialEntityAssertion"],
+        DWC["OccurrenceAssertion"],
+    ],
     ranges=XSD["string"],
     pref_label=Literal("Vitality"),
     definition=Literal("An indication of whether a dwc:Organism was alive or dead at the time of collection or observation.", lang="en"),
