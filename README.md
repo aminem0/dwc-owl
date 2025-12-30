@@ -61,7 +61,7 @@ Consider for example the story around the following image:
 
   From a graph perspective, the situation can be represented as follows:
 
-  ![image of the graph pre-reasoner](images/reasoner-0.png)
+  ![image of the graph pre-reasoner](images/graph1-pre-reasoner.png)
 
   In this initial graph, nodes are connected using simple links. In addition, none of the nodes are typed. In OWL terms, all resources are implicitly instances of `owl:Thing`, the most general class in the ontology, itself only a subclass of `rdfs:Resource`. The graph expresses what was said, but nothing more.
 
@@ -111,7 +111,7 @@ Consider for example the story around the following image:
 
   From a graph perspective, the result now looks like this:
 
-  ![image of the graph post-reasoner](images/reasoner-1.png)
+  ![image of the graph post-reasoner](images/graph1-post-reasoner.png)
 
   The graph is not only denser, but also semantically clearer. Nodes are no longer anonymous resources, but explicitly typed entities that can be interpreted consistently across datasets. This illustrates an important role of reasoners, which is to make explicit the knowledge that is already implicit in the data and the ontology.
 
@@ -145,7 +145,7 @@ Another story may be told around the following image:
 
   Again, the turtle file is sparse, containing only the object properties directly asserted in the text. From a graph perspective, we are once more in a case where we only have loosely-connected data that has no `rdf:type` statements, as shown in the following graph:
 
-  ![image of the graph pre-reasoner](images/reasoner-02.png)
+  ![image of the graph pre-reasoner](images/graph2-pre-reasoner.png)
 
   Once again, running the reasoner with the ontology on the dataset produces the following, richer turtle file:
 
@@ -190,7 +190,7 @@ Another story may be told around the following image:
 
   Likewise, the graph is much more connected and has explicit `rdf:type` statements, as seen in the following graph:
 
-  ![image of the graph post-reasoner](images/reasoner-12.png)
+  ![image of the graph post-reasoner](images/graph2-post-reasoner.png)
 
   As with the previous example, the reasoned correctly inferred all instance types and the associated inverse properties. However, in addition to this, the graph and its associated turtle file show two additional things, that the previous example did not:
 
