@@ -127,6 +127,18 @@ Another story may be told around the following image:
   Again, these statements can be expressed using an ontology together with Darwin Core terms, which results in the following turtle file:
 
   ```turtle
+  @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
+
+  <http://bioboum.ca/protocol/imp-3> dwcdp:followedBy <http://bioboum.ca/nucleotide-analysis/imp-3-d0217d085689bcb62a7403d102999a9c19205289c-p133-2b-p133-2bs> .
+
+  <http://bioboum.ca/protocol/insektmobilen> dwcdp:followedBy <http://bioboum.ca/event/p133-2b> .
+
+  <https://api.gbif.org/v1/image/cache/occurrence/4850060137/media/5ddb1808d104654811554a54e12da753> dwcdp:mediaOf <http://bioboum.ca/material/p133-2bs> .
+
+  <http://bioboum.ca/nucleotide-analysis/imp-3-d0217d085689bcb62a7403d102999a9c19205289c-p133-2b-p133-2bs> dwcdp:analysisOf <http://bioboum.ca/material/p133-2bs> ;
+      dwcdp:produced <http://bioboum.ca/nucleotide-sequence/0217d085689bcb62a7403d102999a9c19205289c> .
+
+  <http://bioboum.ca/material/p133-2bs> dwcdp:collectedDuring <http://bioboum.ca/event/p133-2b> .
   ``` 
 
   Note that, as [the link from the Natural History Museum of Denmark](https://media.danbif.dk/media/insektmobil/P133.2BS_dry_2018_00L12S_03S.jpg) appears to be dead, the URI of the image is that of the GBIF cache. Dummy URIs are considered for most of the resources. Additional considerations could be taken, such as making the example more complex (e.g. considering the derivation steps from size-sorted insects to purified DNA extract) or by seeking more stable URIs, but these do detract from the example.
@@ -138,6 +150,42 @@ Another story may be told around the following image:
   Once again, running the reasoner with the ontology on the dataset produces the following, richer turtle file:
 
   ```turtle
+  @prefix ac: <http://rs.tdwg.org/ac/terms/> .
+  @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
+  @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
+  @prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+  <http://bioboum.ca/nucleotide-sequence/0217d085689bcb62a7403d102999a9c19205289c> a dwc:NucleotideSequence,
+          owl:NamedIndividual ;
+      dwcdp:producedBy <http://bioboum.ca/nucleotide-analysis/imp-3-d0217d085689bcb62a7403d102999a9c19205289c-p133-2b-p133-2bs> .
+
+  <http://bioboum.ca/protocol/imp-3> a dwc:MolecularProtocol,
+          owl:NamedIndividual ;
+      dwcdp:followedBy <http://bioboum.ca/nucleotide-analysis/imp-3-d0217d085689bcb62a7403d102999a9c19205289c-p133-2b-p133-2bs> .
+
+  <http://bioboum.ca/protocol/insektmobilen> a dwc:Protocol,
+          owl:NamedIndividual ;
+      dwcdp:followedBy <http://bioboum.ca/event/p133-2b> .
+
+  <https://api.gbif.org/v1/image/cache/occurrence/4850060137/media/5ddb1808d104654811554a54e12da753> a ac:Media,
+          owl:NamedIndividual ;
+      dwcdp:mediaOf <http://bioboum.ca/material/p133-2bs> .
+
+  <http://bioboum.ca/material/p133-2bs> a dwc:MaterialEntity,
+          owl:NamedIndividual ;
+      dwcdp:collectedDuring <http://bioboum.ca/event/p133-2b> ;
+      dwcdp:hasMedia <https://api.gbif.org/v1/image/cache/occurrence/4850060137/media/5ddb1808d104654811554a54e12da753> .
+
+  <http://bioboum.ca/nucleotide-analysis/imp-3-d0217d085689bcb62a7403d102999a9c19205289c-p133-2b-p133-2bs> a dwc:NucleotideAnalysis,
+          owl:NamedIndividual ;
+      dwcdp:analysisOf <http://bioboum.ca/material/p133-2bs> ;
+      dwcdp:followed <http://bioboum.ca/protocol/imp-3> ;
+      dwcdp:materialCollectedDuring <http://bioboum.ca/event/p133-2b> ;
+      dwcdp:produced <http://bioboum.ca/nucleotide-sequence/0217d085689bcb62a7403d102999a9c19205289c> .
+
+  <http://bioboum.ca/event/p133-2b> a dwc:Event,
+          owl:NamedIndividual ;
+      dwcdp:followed <http://bioboum.ca/protocol/insektmobilen> .
   ```
 
   Likewise, the graph is much more connected and has explicit `rdf:type` statements, as seen in the following graph:
@@ -154,7 +202,7 @@ Another story may be told around the following image:
 
 ### Conclusion
 
-  This added structure is what enables reliable querying, validation, and integration. Once entities are typed, SPARQL queries that target precise aspects of datasets, such as `retrieve all occurrences of Antarctic lanternfish that have media`, `list all agents involved in identifications` or `retrieve all occurrences whose identifications used bibliographic resources` no longer rely on conventions or documentation alone. Instead, they rely on formal semantics that can be applied consistently by machines.
+  This added structure is what enables reliable querying, validation, and integration. Once entities are typed, SPARQL queries that target precise aspects of datasets, such as `retrieve all occurrences of Antarctic lanternfish that have media`, `list all agents involved in identifications`, `retrieve all nucleotide sequences producedby material collected in a particular event` no longer rely on conventions or documentation alone. Instead, they rely on formal semantics that can be applied consistently by machines.
 
   Beyond querying, reasoning also supports data validation and quality control. Inferred types and relationships can be checked against expectations, revealing modeling inconsistencies, missing assertions, or unintended uses of terms. In this way, reasoners act not only as knowledge expanders, but also as diagnostic tools.
 
