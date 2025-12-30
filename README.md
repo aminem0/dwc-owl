@@ -26,9 +26,18 @@ On that note, the HermiT reasoner is used to assess and ensure the consistency o
 
 ## The role of reasoners
 
+### Introduction
+
+The benefits and importance of an ontology, and of automated reasoning over that ontology, are often difficult to appreciate in the abstract. The value of an ontology does not lie primarily in forcing data into strict schemas, but in making implicit knowledge explicit in a controlled and inspectable way. When paired with a reasoner, an ontology provides a mechanism to derive new knowledge that is already logically implied by the data and the modeling choices, without requiring data providers to assert that knowledge manually.
+
+The following examples illustrate this point using concrete biodiversity data scenarios, derived from actual datasets. Each story starts from a deliberately minimal RDF graph that captures only what is explicitly stated. The effect of applying a reasoner is then examined, highlighting what additional structure and meaning can be recovered, and why this matters for querying, integration, and reuse.
+
+### Story 1
+
 Consider for example the story around the following image:
 
 ![photo of an Antarctic lanternfish](https://zenodo.org/records/14899069/files/AAV3FF_00249_01.JPG)
+*Image obtained from [the Zenodo record for the BROKE-West dataset](https://doi.org/10.5281/zenodo.14899069). Released as public domain under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/legalcode).*
 
   The media is a photo of an Antarctic lanternfish (*Electrona antarctica*). It is a photo of preserved specimen, not of the fish as it occurred during its capture. This fish was identified by a researcher by the name of Anton Van de Putte, who used the book `Fishes of the Southern Ocean` as a taxonomic reference.
 
@@ -56,7 +65,7 @@ Consider for example the story around the following image:
 
   In this initial graph, nodes are connected using simple links. In addition, none of the nodes are typed. In OWL terms, all resources are implicitly instances of `owl:Thing`, the most general class in the ontology, itself only a subclass of `rdfs:Resource`. The graph expresses what was said, but nothing more.
 
-   This is where the ontology, together with a reasoner, becomes relevant. An ontology does not merely define terms, but also contains constraints and regularities about how those terms are intended to be used. When a reasoner is applied, these constraints allow new knowledge to be safely inferred from the existing statements, without requiring that knowledge to be asserted explicitly.
+  This is where the ontology, together with a reasoner, becomes relevant. An ontology does not merely define terms, but also contains constraints and regularities about how those terms are intended to be used. When a reasoner is applied, these constraints allow new knowledge to be safely inferred from the existing statements, without requiring that knowledge to be asserted explicitly.
 
   After reasoning using the developped ontology, the data can be represented as the following, richer turtle file:
 
@@ -106,9 +115,52 @@ Consider for example the story around the following image:
 
   The graph is not only denser, but also semantically clearer. Nodes are no longer anonymous resources, but explicitly typed entities that can be interpreted consistently across datasets. This illustrates an important role of reasoners, which is to make explicit the knowledge that is already implicit in the data and the ontology.
 
+### Story 2
+
+Another story may be told around the following image:
+
+  ![insektmobilen size sorted insects for ](https://api.gbif.org/v1/image/cache/occurrence/4850060137/media/5ddb1808d104654811554a54e12da753)
+  *Image obtained from the GBIF media cache, owned by the Natural History Museum of Denmark. Licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).*
+
+  This is an image of of a material entity, namely of size sorted insects. This material was collected during an event, which followed a protocol, which consisted of driving back and forth predefined 5 km routes with a insect net mounted on the rooftop of their car. A metabarcoding sequencing of this material, according to a defined molecular protocol (IMP3) produced a nucleotide sequence that is `tctttcagcaaatgtgtcacatgccggcgcatctgtagacctagcaattttttcccttcacttagccgggatttcttccattctaggagctgtaaactttattacaacgattattaatatacgatctaatggaattacatttgaccgaatacccctatttgtatgatctgtccttattacggctattctattattgctatcatta`.
+
+  Again, these statements can be expressed using an ontology together with Darwin Core terms, which results in the following turtle file:
+
+  ```turtle
+  ``` 
+
+  Note that, as [the link from the Natural History Museum of Denmark](https://media.danbif.dk/media/insektmobil/P133.2BS_dry_2018_00L12S_03S.jpg) appears to be dead, the URI of the image is that of the GBIF cache. Dummy URIs are considered for most of the resources. Additional considerations could be taken, such as making the example more complex (e.g. considering the derivation steps from size-sorted insects to purified DNA extract) or by seeking more stable URIs, but these do detract from the example.
+
+  Again, the turtle file is sparse, containing only the object properties directly asserted in the text. From a graph perspective, we are once more in a case where we only have loosely-connected data that has no `rdf:type` statements, as shown in the following graph:
+
+  ![image of the graph pre-reasoner](images/reasoner-02.png)
+
+  Once again, running the reasoner with the ontology on the dataset produces the following, richer turtle file:
+
+  ```turtle
+  ```
+
+  Likewise, the graph is much more connected and has explicit `rdf:type` statements, as seen in the following graph:
+
+  ![image of the graph post-reasoner](images/reasoner-12.png)
+
+  As with the previous example, the reasoned correctly inferred all instance types and the associated inverse properties. However, in addition to this, the graph and its associated turtle file show two additional things, that the previous example did not:
+
+  1. There was an additional distinction between the Insektmobilen protocol and the IMP3 protocol. The Insektmobilen is typified as a `dwc:Protocol` instance, whereas the IMP3 is typified as a `dwc:MolecularProtocol` instance. This happened even though they both used the same object property `dwcdp:followedBy`. The distinction is based on the set of rules defined by the ontology, which allows the distinction of the two based on explicitly asserted knowledge and knowledge that can be inferred.
+  
+  2. An additional relationship between the nucleotide analysis and the event has been created. These are connected by the object property `dwcdp:materialCollectedDuring`. Even though this assertion was never explicitly mentionned, it was implied by the fact. Again, this inference of new knowledge is based on a particular set of rules defined in the ontology.
+  
+  In this second example, the inferred structure is not merely additive, but also discriminative. The reasoner does not only enrich the graph with more links and types, it also differentiates between conceptually similar entities based on their roles in the workflow. This highlights an often overlooked strength of reasoning, which is to recover semantic distinctions that were never explicitly asserted, but that follow necessarily from the modeling choices.
+
+### Conclusion
+
   This added structure is what enables reliable querying, validation, and integration. Once entities are typed, SPARQL queries that target precise aspects of datasets, such as `retrieve all occurrences of Antarctic lanternfish that have media`, `list all agents involved in identifications` or `retrieve all occurrences whose identifications used bibliographic resources` no longer rely on conventions or documentation alone. Instead, they rely on formal semantics that can be applied consistently by machines.
 
-  In this sense, reasoning allows the turning minimally asserted, loosely structured RDF graphs into interoperable knowledge graphs, while still allowing data providers to state only what they know with certainty.
+  Beyond querying, reasoning also supports data validation and quality control. Inferred types and relationships can be checked against expectations, revealing modeling inconsistencies, missing assertions, or unintended uses of terms. In this way, reasoners act not only as knowledge expanders, but also as diagnostic tools.
+
+  In this sense, reasoning allows minimally asserted, loosely structured RDF graphs to be transformed into interoperable knowledge graphs, while still allowing data providers to state only what they know with certainty. The ontology captures shared assumptions about the domain, and the reasoner makes those assumptions operational, bridging the gap between human understanding and machine-actionable knowledge.
+
+  Importantly, these inferences do not introduce speculative knowledge. They are logical consequences of the ontology design: the class hierarchy, the property constraints, and the axioms that relate the resources. If any of these inferences were incorrect, the error would lie either in the ontology itself or in the original assertions, making such issues detectable and debuggable rather than silently embedded in downstream analyses. These highlight the importance of building a robust ontology, that not only accurately describes biological phenomena, but also allows the inferrence of additional knowledge in a structured and predictable manner.
 
 ## Initial motivation
 
