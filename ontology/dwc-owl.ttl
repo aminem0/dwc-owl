@@ -153,10 +153,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -179,19 +179,6 @@ dwc:agentRemarks a owl:DatatypeProperty ;
     rdfs:range rdfs:Literal ;
     skos:definition "Comments or notes about a [dcterms:Agent]."@en ;
     skos:prefLabel "Agent Remarks"@en .
-
-dwc:agentType a owl:DatatypeProperty ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/agentType> ;
-    rdfs:comment "Recommended best practice is to use a controlled vocabulary."@en ;
-    rdfs:domain dcterms:Agent ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "A category that best matches the nature of a [dcterms:Agent]."@en ;
-    skos:example "camera",
-        "group",
-        "organization",
-        "person" ;
-    skos:prefLabel "Agent Type"@en .
 
 dwc:assertionEffectiveDate a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/assertionEffectiveDate> ;
@@ -385,6 +372,16 @@ dwc:organismInteractionID a owl:DatatypeProperty ;
     skos:definition "An identifier for a [dwc:OrganismInteraction]."@en ;
     skos:prefLabel "Organism Interaction ID" .
 
+dwc:parentReferenceID a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/parentReferenceID> ;
+    rdfs:comment "Recommended best practice is to use a gloally unique identifier." ;
+    rdfs:domain dcterms:BibliographicResource ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    skos:definition "An identifier for a dcterms:BibliographicResource that this dcterms:BibliographicResource is a part of."@en ;
+    skos:prefLabel "Parent Reference ID" .
+
 dwc:protocolDescription a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/protocolDescription> ;
     rdfs:domain dwc:Protocol ;
@@ -446,6 +443,16 @@ dwc:readCount a owl:DatatypeProperty ;
     rdfs:range xsd:integer ;
     skos:definition "A number of reads for a [dwc:NucleotideSequence] in a [dwc:NucleotideAnalysis]."@en ;
     skos:prefLabel "Read Count" .
+
+dwc:referenceID a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/referenceID> ;
+    rdfs:comment "Recommended best practice is to use a gloally unique identifier." ;
+    rdfs:domain dcterms:BibliographicResource ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    rdfs:subPropertyOf dcterms:identifier ;
+    skos:definition "An identifier for a dcterms:BibliographicResource."@en ;
+    skos:prefLabel "Reference ID" .
 
 dwc:relationshipTypeIRI a owl:ObjectProperty ;
     dcterms:isVersionOf dwc:relationshipOfResourceID ;
@@ -1152,14 +1159,14 @@ dc:rights a owl:DatatypeProperty ;
         "http://creativecommons.org/licenses/by/3.0/legalcode" ;
     skos:prefLabel "Rights (DC)" .
 
-dcterms:description a owl:DatatypeProperty ;
-    dcterms:isVersionOf dcterms:description ;
-    rdfs:comment "Description of collection or individual resource, containing the Who, What, When, Where and Why as free-form text. This property optionally allows the presentation of detailed information and will in most cases be show together with the resource title. If both a [dcterms:description] and a [ac:caption] are present in the metadata, a [dcterms:description] is typically displayed instead of the resource, whereas a [ac:caption] is displayed together with the resource. The [dcterms:description] should aim to be a good proxy for the underlying media resource in cases where only text can be shown, whereas the [ac:caption] may only make sense when shown together with the media. Thus, in HTML it would e appropriate to use [dcterms:description] values for alt attributes in img elements. Often only one of description or caption is present; choose the term most appropriate for your metadata. It is the role of implementers of an [ac:] concrete representation (e.g. an XML Schema, an RDF representation, etc.) to decide and document how formatting advice will be represented in descriptions serialized according to such representations." ;
-    rdfs:domain owl:Thing ;
+dcterms:bibliographicCitation a owl:DatatypeProperty ;
+    dcterms:isVersionOf dcterms:bibliographicCitation ;
+    rdfs:comment "Recommended practice is to include sufficient bibliographic detail to identify the resource as unambiguously as possible. The intended usage of this term in Darwin core is to provide the preferred way to cite the resource itself. Note that the intended usage of dcterms:references in Darwin Core, by contrast, is to point to the definitive source representation of the resource, if one is available."@en ;
     rdfs:isDefinedBy dcterms: ;
     rdfs:range rdfs:Literal ;
-    skos:definition "An account of the resource." ;
-    skos:prefLabel "Description" .
+    rdfs:subPropertyOf dcterms:identifier ;
+    skos:definition "A bibliographic reference for the resource."@en ;
+    skos:prefLabel "Bibliographic Citation"@en .
 
 dcterms:rights a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:rights ;
@@ -1718,23 +1725,23 @@ dwc:BibliographicDocument a owl:Class ;
     rdfs:comment "An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dc:title ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:pages ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:status ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:issue ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:volume ],
+            owl:onProperty bibo:status ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:edition ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty bibo:volume ],
+        [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dc:title ],
         dcterms:BibliographicResource,
         bibo:Document ;
     skos:definition "A book, article, or other documentatry resource."@en ;
@@ -1750,6 +1757,19 @@ dwc:OrganismAssertion a owl:Class ;
         dwc:Assertion ;
     skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Organism]."@en ;
     skos:prefLabel "Organism Assertion"@en .
+
+dwc:agentType a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/agentType> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary."@en ;
+    rdfs:domain dcterms:Agent ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A category that best matches the nature of a [dcterms:Agent]."@en ;
+    skos:example "camera",
+        "group",
+        "organization",
+        "person" ;
+    skos:prefLabel "Agent Type"@en .
 
 dwc:assayType a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/assayType> ;
@@ -2841,6 +2861,15 @@ dwc:projectTitle a owl:DatatypeProperty ;
         "The Nansen Legacy",
         "Underwater Oases of the Mar del Plata Canyon: Talud Continental IV" ;
     skos:prefLabel "Project Title" .
+
+dwc:referenceType a owl:DatatypeProperty ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/referenceType> ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary."@en ;
+    rdfs:domain dcterms:BibliographicResource ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "A category that best matches the nature of a [dcterms:BibliographicResource]."@en ;
+    skos:prefLabel "Reference Type"@en .
 
 dwc:relationshipEstablishedDate a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:relationshipEstablishedDate ;
@@ -4530,11 +4559,10 @@ ggbn:permitStatus_vocabulary a owl:Class ;
 dcterms:title a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:title ;
     rdfs:comment "Concise title, name, or brief descriptive label of institution, resource collection, or individual resource. This field SHOULD include the complete title with all the subtitles, if any. It is strongly suggested to provide a title. The title facilitates interactions with humans: e.g, it could be used as display text of hyperlinks or to provide a choice of images in a pick list. The title is therefore highly useful and an effort should be made to provide it where it is not already available. When the resource is a collection without an institutional or official name, but with a thematic content, a descriptive title, e.g. \"Urban Ants of New England\", would be suitable. In individual media resources depicting taxa, the scientific name or names of taxa are often a good title. Common names, in addition to or instead of scientific names are also acceptable. Indications of action or roles captured by the media resource, such as predatory acts, are desireable (\"Rattlesnake eating deer mouse\", \"Pollinators of California Native Plants\")." ;
-    rdfs:domain owl:Thing ;
     rdfs:isDefinedBy dcterms: ;
     rdfs:range rdfs:Literal ;
-    skos:definition "A name given to a resource." ;
-    skos:prefLabel "Title" .
+    skos:definition "A name given to a resource."@en ;
+    skos:prefLabel "Title"@en .
 
 dc:source a owl:DatatypeProperty ;
     dcterms:isVersionOf dc:source ;
@@ -4718,15 +4746,6 @@ dwc:NucleotideAnalysis a owl:Class ;
     skos:definition "A link between a [dwc:NucleotideSequence] and a [dwc:Event] and a [dwc:MaterialEntity] from which it was derived, using a specified [dwc:Protocol]."@en ;
     skos:prefLabel "Nucleotide Analysis"@en .
 
-dcterms:BibliographicResource a owl:Class ;
-    dcterms:isVersionOf dcterms:BibliographicResource ;
-    rdfs:isDefinedBy dcterms: ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom dcterms:BibliographicResource ;
-            owl:onProperty dwcdp:partOf ] ;
-    skos:definition "A book, article, or other documentary resource."@en ;
-    skos:prefLabel "Bibliographic Resource"@en .
-
 dwc:Assertion a owl:Class ;
     dcterms:isVersionOf dwc:MeasurementOrFact ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
@@ -4757,14 +4776,17 @@ ggbn:permitType_vocabulary a owl:Class ;
     skos:definition "Vocabulary of ggbn:permitType term."@en ;
     skos:prefLabel "Permit Type Vocabulary"@en .
 
-dcterms:identifier a owl:DatatypeProperty ;
-    dcterms:isVersionOf dcterms:identifier ;
-    rdfs:comment "Recommended practice is to identify the resource by means of a string conforming to an identification system. Examples include International Standard Book Number (ISBN), Digital Object Identifier (DOI), and Uniform Resource Name (URN). Persistent identifiers should be provided as HTTP URIs." ;
-    rdfs:domain owl:Thing ;
+dcterms:BibliographicResource a owl:Class ;
+    dcterms:isVersionOf dcterms:BibliographicResource ;
     rdfs:isDefinedBy dcterms: ;
-    rdfs:range rdfs:Literal ;
-    skos:definition "An unambiguous reference to the resource within a given context." ;
-    skos:prefLabel "Identifier" .
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom dcterms:BibliographicResource ;
+            owl:onProperty dwcdp:partOf ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dwc:referenceType ] ;
+    skos:definition "A book, article, or other documentary resource."@en ;
+    skos:prefLabel "Bibliographic Resource"@en .
 
 dwc:GeologicalContext a owl:Class ;
     dcterms:isVersionOf dwc:GeologicalContext ;
@@ -4778,11 +4800,22 @@ dwc:GeologicalContext a owl:Class ;
         "a specific chronostratigraphic unit" ;
     skos:prefLabel "Geological Context"@en .
 
+dcterms:identifier a owl:DatatypeProperty ;
+    dcterms:isVersionOf dcterms:identifier ;
+    rdfs:comment "Recommended practice is to identify the resource by means of a string conforming to an identification system. Examples include International Standard Book Number (ISBN), Digital Object Identifier (DOI), and Uniform Resource Name (URN). Persistent identifiers should be provided as HTTP URIs." ;
+    rdfs:isDefinedBy dcterms: ;
+    rdfs:range rdfs:Literal ;
+    skos:definition "An unambiguous reference to the resource within a given context." ;
+    skos:prefLabel "Identifier" .
+
 dcterms:Agent a owl:Class ;
     dcterms:isVersionOf dcterms:Agent ;
     rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
     rdfs:isDefinedBy dcterms: ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dwc:agentType ],
+        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty dwc:preferredAgentName ] ;
     skos:definition "A resource that acts or has the power to act."@en ;
@@ -4828,10 +4861,10 @@ dwc:MaterialEntity a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom dwc:MaterialEntity ;
-            owl:onProperty dwcdp:derivedFrom ],
+            owl:onProperty dwcdp:partOf ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:MaterialEntity ;
-            owl:onProperty dwcdp:partOf ] ;
+            owl:onProperty dwcdp:derivedFrom ] ;
     skos:definition "An entity that can be identified, exist for some period of time, and consist in whole or in part of physical matter while it exists."@en ;
     skos:example "a flower on a plant specimen",
         "a fossil within a rock",
@@ -4866,58 +4899,58 @@ dwc:MolecularProtocol a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000008 ],
-        [ a owl:Restriction ;
-            owl:onProperty dwcdp:followedBy ;
-            owl:someValuesFrom dwc:NucleotideAnalysis ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0001320 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000020 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000002 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:assayType ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000015 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000017 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000006 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000016 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0001107 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000003 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom dwc:NucleotideAnalysis ;
-            owl:onProperty dwcdp:followedBy ],
+            owl:onProperty mixs:0000015 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000092 ],
+            owl:onProperty mixs:0000003 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000012 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000017 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000001 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000006 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom dwc:NucleotideAnalysis ;
+            owl:onProperty dwcdp:followedBy ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000008 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dwc:assayType ],
+        [ a owl:Restriction ;
+            owl:onProperty dwcdp:followedBy ;
+            owl:someValuesFrom dwc:NucleotideAnalysis ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000005 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0001320 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000013 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000001 ],
+            owl:onProperty mixs:0000092 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000016 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000002 ],
         dwc:Protocol ;
     owl:equivalentClass [ a owl:Restriction ;
             owl:onProperty dwcdp:followedBy ;
@@ -4934,43 +4967,43 @@ ac:Media a owl:Class ;
             owl:onProperty ac:resourceCreationTechnique ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:hashFunction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:freqHigh ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:digitizationDate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashValue ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:frameRate ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:freqLow ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:timeOfDay ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:derivedFrom ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashFunction ],
+            owl:onProperty mo:sample_rate ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:captureDevice ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mo:sample_rate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:widthFrac ],
+            owl:onProperty ac:timeOfDay ],
         [ a owl:Restriction ;
             owl:allValuesFrom ac:Media ;
             owl:onProperty dwcdp:partOf ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:heightFrac ],
+            owl:onProperty ac:frameRate ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:freqHigh ] ;
+            owl:onProperty ac:hashValue ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ac:Media ;
+            owl:onProperty dwcdp:derivedFrom ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:widthFrac ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:heightFrac ] ;
     skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
     skos:example "dcmi:MovingImage",
         "dcmi:Sound",

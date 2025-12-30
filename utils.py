@@ -143,6 +143,7 @@ def createOC(
         examples: Literal | list[URIRef] | list[Literal] | None = None,
         card1_restrictions: list[Node] | None = None,
         maxcard1_restrictions: list[Node] | None = None,
+        mincard1_restrictions: list[Node] | None = None,
         references_s: str | None = None,
         equiv_def: tuple[Node, Node] | None = None,
 ) -> None:
@@ -218,12 +219,21 @@ def createOC(
 
     if maxcard1_restrictions:
         for property in maxcard1_restrictions:
-            RM1_BNode = BNode()
-            graph.add((RM1_BNode, RDF["type"], OWL["Restriction"]))
-            graph.add((RM1_BNode, OWL["onProperty"], property))
-            graph.add((RM1_BNode, OWL["maxCardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
-            entity_pylist.append(RM1_BNode)
+            RMax1_BNode = BNode()
+            graph.add((RMax1_BNode, RDF["type"], OWL["Restriction"]))
+            graph.add((RMax1_BNode, OWL["onProperty"], property))
+            graph.add((RMax1_BNode, OWL["maxCardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
+            entity_pylist.append(RMax1_BNode)
 
+    if mincard1_restrictions:
+        for property in mincard1_restrictions:
+            RMin1_BNode = BNode()
+            graph.add((RMin1_BNode, RDF["type"], OWL["Restriction"]))
+            graph.add((RMin1_BNode, OWL["onProperty"], property))
+            graph.add((RMin1_BNode, OWL["minCardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
+            entity_pylist.append(RMin1_BNode)
+
+ 
     for entity in entity_pylist:
             graph.add((class_uri, RDFS["subClassOf"], entity))
     

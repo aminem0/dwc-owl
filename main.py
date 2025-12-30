@@ -217,8 +217,12 @@ createOC(
         Literal("The El Yunque National Forest ARBIMON System"),
         Literal("ChatGPT"),
     ],
-    # card1_restrictions=[DWC["agentID"], DWC["agentType"]],
-    maxcard1_restrictions=[DWC["preferredAgentName"]],
+    card1_restrictions=[
+        DWC["agentType"]
+    ],
+    maxcard1_restrictions=[
+        DWC["preferredAgentName"],
+    ],
     version_of_s="http://purl.org/dc/terms/Agent",
 )
 
@@ -231,6 +235,9 @@ createOC(
     ],
     pref_label=Literal("Bibliographic Resource", lang="en"),
     definition=Literal("A book, article, or other documentary resource.", lang="en"),
+    maxcard1_restrictions=[
+        DWC["referenceType"],
+    ],
     version_of_s="http://purl.org/dc/terms/BibliographicResource",
 )
 
@@ -5026,24 +5033,34 @@ createDP(
 # g.add((URIRef("bibi"), BIBO["pages"], Literal("1-20")))
 
 createDP(
-    name="description",
+    name="bibliographicCitation",
     namespace=DCTERMS,
     graph=g,
-#    domains=[AC["Media"]],
-    domains=OWL["Thing"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Description"),
-    definition=Literal("An account of the resource."),
-    comments=Literal("Description of collection or individual resource, containing the Who, What, When, Where and Why as free-form text. This property optionally allows the presentation of detailed information and will in most cases be show together with the resource title. If both a [dcterms:description] and a [ac:caption] are present in the metadata, a [dcterms:description] is typically displayed instead of the resource, whereas a [ac:caption] is displayed together with the resource. The [dcterms:description] should aim to be a good proxy for the underlying media resource in cases where only text can be shown, whereas the [ac:caption] may only make sense when shown together with the media. Thus, in HTML it would e appropriate to use [dcterms:description] values for alt attributes in img elements. Often only one of description or caption is present; choose the term most appropriate for your metadata. It is the role of implementers of an [ac:] concrete representation (e.g. an XML Schema, an RDF representation, etc.) to decide and document how formatting advice will be represented in descriptions serialized according to such representations."),
-    version_of_s="http://purl.org/dc/terms/description",
+    pref_label=Literal("Bibliographic Citation", lang="en"),
+    definition=Literal("A bibliographic reference for the resource.", lang="en"),
+    comments=Literal("Recommended practice is to include sufficient bibliographic detail to identify the resource as unambiguously as possible. The intended usage of this term in Darwin core is to provide the preferred way to cite the resource itself. Note that the intended usage of dcterms:references in Darwin Core, by contrast, is to point to the definitive source representation of the resource, if one is available.", lang="en"),
+    subproperty_of=DCTERMS["identifier"],
+    version_of_s="http://purl.org/dc/terms/bibliographicCitation",
 )
+
+createDP(
+    name="identifier",
+    namespace=DCTERMS,
+    graph=g,
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Identifier"),
+    definition=Literal("An unambiguous reference to the resource within a given context."),
+    comments=Literal("Recommended practice is to identify the resource by means of a string conforming to an identification system. Examples include International Standard Book Number (ISBN), Digital Object Identifier (DOI), and Uniform Resource Name (URN). Persistent identifiers should be provided as HTTP URIs."),
+    version_of_s="http://purl.org/dc/terms/identifier",
+)
+
 
 # WARN: Consider subproperty of dc:identifier with caution
 createDP(
     name="identifier",
     namespace=DCTERMS,
     graph=g,
-    domains=OWL["Thing"],
     ranges=RDFS["Literal"],
     pref_label=Literal("Identifier"),
     definition=Literal("An unambiguous reference to the resource within a given context."),
@@ -5089,11 +5106,9 @@ createDP(
     name="title",
     namespace=DCTERMS,
     graph=g,
-#    domains=[AC["Media"]],
-    domains=OWL["Thing"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Title"),
-    definition=Literal("A name given to a resource."),
+    pref_label=Literal("Title", lang="en"),
+    definition=Literal("A name given to a resource.", lang="en"),
     comments=Literal("Concise title, name, or brief descriptive label of institution, resource collection, or individual resource. This field SHOULD include the complete title with all the subtitles, if any. It is strongly suggested to provide a title. The title facilitates interactions with humans: e.g, it could be used as display text of hyperlinks or to provide a choice of images in a pick list. The title is therefore highly useful and an effort should be made to provide it where it is not already available. When the resource is a collection without an institutional or official name, but with a thematic content, a descriptive title, e.g. \"Urban Ants of New England\", would be suitable. In individual media resources depicting taxa, the scientific name or names of taxa are often a good title. Common names, in addition to or instead of scientific names are also acceptable. Indications of action or roles captured by the media resource, such as predatory acts, are desireable (\"Rattlesnake eating deer mouse\", \"Pollinators of California Native Plants\")."),
     version_of_s="http://purl.org/dc/terms/title",
 )
@@ -6889,6 +6904,19 @@ createDP(
     references_s="http://rs.tdwg.org/dwc/terms/version/parentEventID-2023-06-28",
 )
 
+createDP(
+    name="parentReferenceID",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["BibliographicResource"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Parent Reference ID"),
+    definition=Literal("An identifier for a dcterms:BibliographicResource that this dcterms:BibliographicResource is a part of.", lang="en"),
+    comments=Literal("Recommended best practice is to use a gloally unique identifier."),
+    subproperty_of=DCTERMS["identifier"],
+    version_of_s="http://example.com/term-pending/dwc/parentReferenceID",
+)
+
 # createDP(
 #     name="pathway",
 #     namespace=DWC,
@@ -7173,6 +7201,33 @@ createDP(
     pref_label=Literal("Read Count"),
     definition=Literal("A number of reads for a [dwc:NucleotideSequence] in a [dwc:NucleotideAnalysis].", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/readCount",
+)
+
+createDP(
+    name="referenceID",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["BibliographicResource"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Reference ID"),
+    definition=Literal("An identifier for a dcterms:BibliographicResource.", lang="en"),
+    comments=Literal("Recommended best practice is to use a gloally unique identifier."),
+    subproperty_of=DCTERMS["identifier"],
+    version_of_s="http://example.com/term-pending/dwc/referenceID",
+)
+
+createDP(
+    name="referenceType",
+    namespace=DWC,
+    graph=g,
+    domains=DCTERMS["BibliographicResource"],
+    ranges=RDFS["Literal"],
+    pref_label=Literal("Reference Type", lang="en"),
+    definition=Literal("A category that best matches the nature of a [dcterms:BibliographicResource].", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary.", lang="en"),
+    examples=[
+    ],
+    version_of_s="http://example.com/term-pending/dwc/referenceType",
 )
 
 createDP(

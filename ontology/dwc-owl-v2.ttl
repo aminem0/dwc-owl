@@ -1472,20 +1472,19 @@ dc:title rdf:type owl:DatatypeProperty ;
          skos:prefLabel "Title (DC)"@en .
 
 
-###  http://purl.org/dc/terms/description
-dcterms:description rdf:type owl:DatatypeProperty ;
-                    rdfs:domain owl:Thing ;
-                    rdfs:range rdfs:Literal ;
-                    dcterms:isVersionOf dcterms:description ;
-                    rdfs:comment "Description of collection or individual resource, containing the Who, What, When, Where and Why as free-form text. This property optionally allows the presentation of detailed information and will in most cases be show together with the resource title. If both a [dcterms:description] and a [ac:caption] are present in the metadata, a [dcterms:description] is typically displayed instead of the resource, whereas a [ac:caption] is displayed together with the resource. The [dcterms:description] should aim to be a good proxy for the underlying media resource in cases where only text can be shown, whereas the [ac:caption] may only make sense when shown together with the media. Thus, in HTML it would e appropriate to use [dcterms:description] values for alt attributes in img elements. Often only one of description or caption is present; choose the term most appropriate for your metadata. It is the role of implementers of an [ac:] concrete representation (e.g. an XML Schema, an RDF representation, etc.) to decide and document how formatting advice will be represented in descriptions serialized according to such representations." ;
-                    rdfs:isDefinedBy dcterms: ;
-                    skos:definition "An account of the resource." ;
-                    skos:prefLabel "Description" .
+###  http://purl.org/dc/terms/bibliographicCitation
+dcterms:bibliographicCitation rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf dcterms:identifier ;
+                              rdfs:range rdfs:Literal ;
+                              dcterms:isVersionOf dcterms:bibliographicCitation ;
+                              rdfs:comment "Recommended practice is to include sufficient bibliographic detail to identify the resource as unambiguously as possible. The intended usage of this term in Darwin core is to provide the preferred way to cite the resource itself. Note that the intended usage of dcterms:references in Darwin Core, by contrast, is to point to the definitive source representation of the resource, if one is available."@en ;
+                              rdfs:isDefinedBy dcterms: ;
+                              skos:definition "A bibliographic reference for the resource."@en ;
+                              skos:prefLabel "Bibliographic Citation"@en .
 
 
 ###  http://purl.org/dc/terms/identifier
 dcterms:identifier rdf:type owl:DatatypeProperty ;
-                   rdfs:domain owl:Thing ;
                    rdfs:range rdfs:Literal ;
                    dcterms:isVersionOf dcterms:identifier ;
                    rdfs:comment "Recommended practice is to identify the resource by means of a string conforming to an identification system. Examples include International Standard Book Number (ISBN), Digital Object Identifier (DOI), and Uniform Resource Name (URN). Persistent identifiers should be provided as HTTP URIs." ;
@@ -1500,13 +1499,12 @@ dcterms:source rdf:type owl:DatatypeProperty .
 
 ###  http://purl.org/dc/terms/title
 dcterms:title rdf:type owl:DatatypeProperty ;
-              rdfs:domain owl:Thing ;
               rdfs:range rdfs:Literal ;
               dcterms:isVersionOf dcterms:title ;
               rdfs:comment "Concise title, name, or brief descriptive label of institution, resource collection, or individual resource. This field SHOULD include the complete title with all the subtitles, if any. It is strongly suggested to provide a title. The title facilitates interactions with humans: e.g, it could be used as display text of hyperlinks or to provide a choice of images in a pick list. The title is therefore highly useful and an effort should be made to provide it where it is not already available. When the resource is a collection without an institutional or official name, but with a thematic content, a descriptive title, e.g. \"Urban Ants of New England\", would be suitable. In individual media resources depicting taxa, the scientific name or names of taxa are often a good title. Common names, in addition to or instead of scientific names are also acceptable. Indications of action or roles captured by the media resource, such as predatory acts, are desireable (\"Rattlesnake eating deer mouse\", \"Pollinators of California Native Plants\")." ;
               rdfs:isDefinedBy dcterms: ;
-              skos:definition "A name given to a resource." ;
-              skos:prefLabel "Title" .
+              skos:definition "A name given to a resource."@en ;
+              skos:prefLabel "Title"@en .
 
 
 ###  http://purl.org/ontology/bibo/edition
@@ -3797,6 +3795,18 @@ dwc:parentEventID rdf:type owl:DatatypeProperty ;
                   skos:prefLabel "Parent Event ID" .
 
 
+###  http://rs.tdwg.org/dwc/terms/parentReferenceID
+dwc:parentReferenceID rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf dcterms:identifier ;
+                      rdfs:domain dcterms:BibliographicResource ;
+                      rdfs:range rdfs:Literal ;
+                      dcterms:isVersionOf <http://example.com/term-pending/dwc/parentReferenceID> ;
+                      rdfs:comment "Recommended best practice is to use a gloally unique identifier." ;
+                      rdfs:isDefinedBy dwc: ;
+                      skos:definition "An identifier for a dcterms:BibliographicResource that this dcterms:BibliographicResource is a part of."@en ;
+                      skos:prefLabel "Parent Reference ID" .
+
+
 ###  http://rs.tdwg.org/dwc/terms/pathway
 dwc:pathway rdf:type owl:DatatypeProperty ;
             rdfs:domain dwc:Occurrence ;
@@ -4141,6 +4151,29 @@ dwc:readCount rdf:type owl:DatatypeProperty ;
               rdfs:isDefinedBy dwc: ;
               skos:definition "A number of reads for a [dwc:NucleotideSequence] in a [dwc:NucleotideAnalysis]."@en ;
               skos:prefLabel "Read Count" .
+
+
+###  http://rs.tdwg.org/dwc/terms/referenceID
+dwc:referenceID rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf dcterms:identifier ;
+                rdfs:domain dcterms:BibliographicResource ;
+                rdfs:range rdfs:Literal ;
+                dcterms:isVersionOf <http://example.com/term-pending/dwc/referenceID> ;
+                rdfs:comment "Recommended best practice is to use a gloally unique identifier." ;
+                rdfs:isDefinedBy dwc: ;
+                skos:definition "An identifier for a dcterms:BibliographicResource."@en ;
+                skos:prefLabel "Reference ID" .
+
+
+###  http://rs.tdwg.org/dwc/terms/referenceType
+dwc:referenceType rdf:type owl:DatatypeProperty ;
+                  rdfs:domain dcterms:BibliographicResource ;
+                  rdfs:range rdfs:Literal ;
+                  dcterms:isVersionOf <http://example.com/term-pending/dwc/referenceType> ;
+                  rdfs:comment "Recommended best practice is to use a controlled vocabulary."@en ;
+                  rdfs:isDefinedBy dwc: ;
+                  skos:definition "A category that best matches the nature of a [dcterms:BibliographicResource]."@en ;
+                  skos:prefLabel "Reference Type"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/relationshipEstablishedDate
@@ -5386,6 +5419,10 @@ ggbn:permitType_vocabulary rdf:type owl:Class ;
 ###  http://purl.org/dc/terms/Agent
 dcterms:Agent rdf:type owl:Class ;
               rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty dwc:agentType ;
+                                owl:cardinality "1"^^xsd:nonNegativeInteger
+                              ] ,
+                              [ rdf:type owl:Restriction ;
                                 owl:onProperty dwc:preferredAgentName ;
                                 owl:maxCardinality "1"^^xsd:nonNegativeInteger
                               ] ;
@@ -5406,6 +5443,10 @@ dcterms:BibliographicResource rdf:type owl:Class ;
                               rdfs:subClassOf [ rdf:type owl:Restriction ;
                                                 owl:onProperty dwcdp:partOf ;
                                                 owl:allValuesFrom dcterms:BibliographicResource
+                                              ] ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty dwc:referenceType ;
+                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                               ] ;
                               dcterms:isVersionOf dcterms:BibliographicResource ;
                               rdfs:isDefinedBy dcterms: ;
