@@ -39,11 +39,12 @@ Consider for example the story around the following image:
 ![photo of an Antarctic lanternfish](https://zenodo.org/records/14899069/files/AAV3FF_00249_01.JPG)
 *Image obtained from [the Zenodo record for the BROKE-West dataset](https://doi.org/10.5281/zenodo.14899069). Released as public domain under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/legalcode).*
 
-  The media is a photo of an Antarctic lanternfish (*Electrona antarctica*). It is a photo of preserved specimen, not of the fish as it occurred during its capture. This fish was identified by a researcher by the name of Anton Van de Putte, who used the book `Fishes of the Southern Ocean` as a taxonomic reference.
+  The media is a photo of an Antarctic lanternfish (*Electrona antarctica*). It is a photo of the specimen, which was preserved in formalin, not of the fish as it occurred during its capture. The specimen is evidence for the an occurrence at its point of capture. This fish was identified by a researcher by the name of Anton Van de Putte, who used the book `Fishes of the Southern Ocean` as a taxonomic reference.
 
   These statements can be expressed using an ontology together with Darwin Core terms. At this stage, the goal is not to encode every possible detail, but to capture only the relationships that are explicitly known. This results in the following turtle file:
 
   ```turtle
+  @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
   @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
 
   <http://bioboum.ca/identification/0ace24a7-2a0d-4f5f-903e-215a43aed359> dwcdp:basedOn <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> ;
@@ -52,7 +53,8 @@ Consider for example the story around the following image:
 
   <https://zenodo.org/records/14899069/files/AAV3FF_00249_01.JPG> dwcdp:mediaOf <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> .
 
-  <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> dwcdp:evidenceFor <http://bioboum.ca/occurrence/e4ea05b4-3b87-4f49-8797-5629b9bfa578> .
+  <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> dwc:preparations:"formalin" ;
+      dwcdp:evidenceFor <http://bioboum.ca/occurrence/e4ea05b4-3b87-4f49-8797-5629b9bfa578> .
   ``` 
 
   As can be seen, the file is quite sparse. It contains only the object property assertions between entities explicitly mentionned in the text. In addition, it contains no `rdf:type` statements, meaning that the intended nature of each URI is not formally asserted. From a human point of view, one can get an idea (though this is dangerous), but from a machine point of view, no assumptions can be made.
@@ -101,6 +103,7 @@ Consider for example the story around the following image:
 
   <http://bioboum.ca/material/bc044ff4-3896-4617-9829-2f2345255887> a dwc:MaterialEntity,
           owl:NamedIndividual ;
+      dwc:preparations "formalin" ;
       dwcdp:evidenceFor <http://bioboum.ca/occurrence/e4ea05b4-3b87-4f49-8797-5629b9bfa578> ;
       dwcdp:hasMedia <https://zenodo.org/records/14899069/files/AAV3FF_00249_01.JPG> .
   ```  
