@@ -536,27 +536,6 @@ createOC(
     references_s="http://rs.tdwg.org/dwc/terms/version/OrganismAssertion-0000-00-00",
 )
 
-
-
-#
-#     object_prop=DWCDP["about"],
-#     use_inverse=False,
-#     values_class=DWC["MaterialEntity"],
-#     definition=Literal("A dwc:Assertion made by a dcterms:Agent about a dwc:MaterialEntity."),
-# )
-#
-# createCTOP(
-#     name="MaterialEntityAssertion",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Material Entity Assertion", lang="en"),
-#     subclass_of=DWC["Assertion"],
-#     object_prop=DWCDP["about"],
-#     use_inverse=False,
-#     values_class=DWC["MaterialEntity"],
-#     definition=Literal("A dwc:Assertion made by a dcterms:Agent about a dwc:MaterialEntity."),
-# )
-#
 createOC(
     name="NucleotideAnalysis",
     namespace=DWC,
@@ -898,326 +877,6 @@ createOC(
     definition=Literal("A set of concepts, optionally including statements about semantic relationships between those concepts.", lang="en"),
     version_of_s="http://www.w3.org/2004/02/skos/core#ConceptScheme",
 )
-
-#####################################################################################################
-# BEGIN CLASSES THROUGH OBJECT PROPERTY DEFINITIONS
-#####################################################################################################
-
-# createCTOP(
-#     name="AssertionAgent",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Assertion Agent"),
-#     subclass_list=[DCTERMS["Agent"]],
-#     object_prop=DWCDP["assertedBy"],
-#     use_inverse=True,
-#     values_class=DWC["Assertion"],
-#     definition=Literal("An instance of a [dcterms:Agent] that has made a [dwc:Assertion].", lang="en"),
-#     comments=Literal("Due to the directionality of the property [dwcdp:assertedBy], the class is defined in description logic as [dwcdp:AssertionAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:assertedBy]⁻).[dwc:Assertion].", lang="en")
-# )
-
-# createCTOP(
-#     name="AuthorAgent",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Author Agent"),
-#     subclass_list=[DCTERMS["Agent"]],
-#     object_prop=DWCDP["authoredBy"],
-#     use_inverse=True,
-#     values_class=DCTERMS["BibliographicResource"],
-#     definition=Literal("An instance of a [dcterms:Agent] that has authored a [dcterms:BibliographicResource].", lang="en"),
-#     comments=Literal("Due to the directionality of the property [dwcdp:authoredBy], the class is defined in description logic as [dwcdp:AuthorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:authoredBy]⁻).[dcterms:BibliographicResource].", lang="en")
-# )
-
-# # WARN: Related to WebVOWL
-# # TEST: Trying an inverse object property
-
-# g.add((DWCDP["commentedOn"], OWL["inverseOf"], DWCDP["commentedBy"]))
-
-# createCTOP(
-#     name="CommenterAgent",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Commenter Agent"),
-#     subclass_list=[DCTERMS["Agent"]],
-#     object_prop=DWCDP["commentedOn"],
-#     use_inverse=False,
-#     values_class=AC["Media"],
-#     definition=Literal("An instance of a [dcterms:Agent] that has commented a [dwc:Media].", lang="en"),
-#     comments=Literal("Due to the directionality of the property [dwcdp:commentedBy], the class is defined in description logic as [dwcdp:Commenter] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:commentedBy]⁻).[ac:Media].", lang="en")
-# )
-
-# createCTOP(
-#     name="ConductorAgent",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Conductor Agent"),
-#     subclass_list=[DCTERMS["Agent"]],
-#     object_prop=DWCDP["conductedBy"],
-#     use_inverse=True,
-#     values_class=DWC["Event"],
-#     definition=Literal("An instance of a [dcterms:Agent] that has conducted a [dwc:Event].", lang="en"),
-#     comments=Literal("Due to the directionality of the property [dwcdp:conductedBy], the class is defined in description logic as [dwc:ConductorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:conductedBy]⁻).[dwc:Event].", lang="en")
-# )
-
-# # NOTE: Possibly find a better name, it looks too much like the object property dwcdp:datedMaterial
-# createCTOP(
-#     name="DatedMaterialEntity",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Dated Material Entity"),
-#     subclass_list=[DWC["MaterialEntity"]],
-#     object_prop=DWCDP["datedMaterial"],
-#     use_inverse=True,
-#     values_class=CHRONO["ChronometricAge"],
-#     definition=Literal("An instance of a [dwc:MaterialEntity] that has been dated by a [chrono:ChronometricAge].", lang="en"),
-#     comments=Literal("Due to the directionality of the property [dwcdp:datedMaterial], the class is defined in description logic as [dwc:DatedMaterialEntity] ≡ [dwc:MaterialEntity] ⊓ ∃([dwcdp:datedMaterial]⁻).[dwc:MaterialEntity].", lang="en")
-# )
-
-# # NOTE: Used bibo: property bibo:editor.
-# # But bibo: does not provide straightforward object properties for other relationships like authoring and publishing.
-# createCTOP(
-#     name="EditorAgent",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Editor Agent"),
-#     subclass_list=[DCTERMS["Agent"]],
-#     # object_prop=DWCDP.editedBy,
-#     object_prop=BIBO["editor"],
-#     use_inverse=True,
-#     values_class=DCTERMS["BibliographicResource"],
-#     definition=Literal("An instance of a [dcterms:Agent] that has edited a [dcterms:BibliographicResource].", lang="en"),
-#     comments=Literal("Due to the directionality of the property [dwcdp:editedBy], the class is defined in description logic as [dwcdp:EditorAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:editedBy]⁻).[dcterms:BibliographicResource].", lang="en")
-# )
-
-# createCTOP(
-#     name="FunderAgent",
-#     namespace=DWC,
-#     graph=g,
-#     subclass_list=[DCTERMS["Agent"]],
-#     object_prop=DWCDP["fundedBy"],
-#     values_class=DWC["Provenance"],
-#     use_inverse=True,
-#     pref_label=Literal("Funder Agent"),
-#     definition=Literal("An instance of a [dcterms:Agent] that has funded a [dwc:Provenance].", lang="en"),
-#     comments=Literal("Due to the directionality of the property [dwcdp:fundedBy], the class is defined in description logic as [dwcdp:FunderAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:fundedBy]⁻).[dwc:Provenance].", lang="en")
-# )
-
-# # NOTE: Possibly find a better name, a bit too long
-# createCTOP(
-#     name="GeologicalContextMaterialEntity",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Geological Context Material Entity"),
-#     subclass_list=[DWC["MaterialEntity"]],
-#     object_prop=DWCDP["happenedWithin"],
-#     use_inverse=False,
-#     values_class=DWC["GeologicalContext"],
-#     definition=Literal("An instance of a [dwc:MaterialEntity] that happened within a [dwc:GeologicalContext].", lang="en"),
-# )
-
-# createCTOP(
-#     name="GeoreferencerAgent",
-#     namespace=DWC,
-#     graph=g,
-#     subclass_list=[DCTERMS["Agent"]],
-#     object_prop=DWCDP["georeferencedBy"],
-#     values_class=DCTERMS["Location"],
-#     use_inverse=True,
-#     pref_label=Literal("Georeferencer Agent"),
-#     definition=Literal("An instance of a [dcterms:Agent] that has georeferenced a [dcterms:Location].", lang="en"),
-#     comments=Literal("Due to the directionality of the property [dwcdp:georeferencedBy], the class is defined in description logic as [dwcdp:GeoreferencerAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:georeferencedBy]⁻).[dcterms:Location].", lang="en")
-# )
-
-# createCTOP(
-#     name="IdentificationAgent",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Identification Agent"),
-#     subclass_list=[DCTERMS["Agent"]],
-#     object_prop=DWCDP["identifiedBy"],
-#     use_inverse=True,
-#     values_class=DWC["Identification"],
-#     definition=Literal("An instance of a [dcterms:Agent] that has published a [dwc:Identification]."),
-#     comments=Literal("Due to the directionality of the property [dwcdp:identifiedBy], the class is defined in description logic as [dwcdp:IdentificationAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:identifiedBy]⁻).[dwc:Identification].")
-# )
-
-# createCTOP(
-#     name="PublisherAgent",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Publisher Agent"),
-#     subclass_list=[DCTERMS["Agent"]],
-#     object_prop=DWCDP["publishedBy"],
-#     use_inverse=True,
-#     values_class=DCTERMS["BibliographicResource"],
-#     definition=Literal("An instance of a [dcterms:Agent] that has published a [dcterms:BibliographicResource]."),
-#     comments=Literal("Due to the directionality of the property [dwcdp:publishedBy], the class is defined in description logic as [dwcdp:PublisherAgent] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:publishedBy]⁻).[dcterms:BibliographicResource].")
-# )
-
-# createCTOP(
-#     name="ReviewerAgent",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Reviewer Agent"),
-#     subclass_list=[DCTERMS["Agent"]],
-#     object_prop=DWCDP["reviewedBy"],
-#     use_inverse=True,
-#     values_class=AC["Media"],
-#     definition=Literal("An instance of a [dcterms:Agent] that has reviewed a [dwc:Media]."),
-#     comments=Literal("Due to the directionality of the property [dwcdp:reviewedBy], the class is defined in description logic as [dwcdp:Reviewer] ≡ [dcterms:Agent] ⊓ ∃([dwcdp:reviewedBy]⁻).[dwc:Media].")
-# )
-
-
-###############################################################################################
-
-
-# createCTOP(
-#     name="EventAssertion",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Event Assertion"),
-#     subclass_list=[DWC["Assertion"]],
-#     object_prop=DWCDP["about"],
-#     use_inverse=False,
-#     values_class=DWC["Event"],
-#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Event]."),
-# )
-
-# createCTOP(
-#     name="ChronometricAgeAssertion",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Chronometric Age Assertion"),
-#     subclass_list=[DWC["Assertion"]],
-#     object_prop=DWCDP["about"],
-#     use_inverse=False,
-#     values_class=CHRONO["ChronometricAge"],
-#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:ChronometricAge]."),
-# )
-
-
-# createCTOP(
-#     name="MediaAssertion",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Media Assertion"),
-#     subclass_list=[DWC["Assertion"]],
-#     object_prop=DWCDP["about"],
-#     use_inverse=False,
-#     values_class=AC["Media"],
-#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [ac:Media]."),
-# )
-
-# createCTOP(
-#     name="NucleotideAnalysisAssertion",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Nucleotide Analysis Assertion"),
-#     subclass_list=[DWC["Assertion"]],
-#     object_prop=DWCDP["about"],
-#     use_inverse=False,
-#     values_class=DWC["NucleotideAnalysis"],
-#     definition=Literal("A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:NucleotideAnalysis]."),
-# )
-
-##########################################################
-
-# createCTOP(
-#     name="AssertionProtocol",
-#     namespace=DWCDP,
-#     graph=g,
-#     pref_label=Literal("Assertion Protocol"),
-#     subclass_list=[DWC["Protocol"]],
-#     object_prop=DWCDP["followed"],
-#     use_inverse=True,
-#     values_class=DWC["Assertion"],
-#     definition=Literal("A [dwc:Protocol] followed by a [dcterms:Agent] for a [dwc:Assertion]."),
-#     comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Assertion].")
-# )
-
-# # GOOD COMPLEX EXAMPLE
-# # BEFORE AFTER ADD
-# createCTOP(
-#     name="EventProtocol",
-#     namespace=DWCDP,
-#     graph=g,
-#     pref_label=Literal("Event Protocol"),
-#     subclass_list=[DWC["Protocol"]],
-#     object_prop=DWCDP["followed"],
-#     use_inverse=True,
-#     values_class=DWC["Event"],
-#     definition=Literal("A [dwc:Protocol] followed by a [dcterms:Agent] for a [dwc:NucleotideAnalysis]."),
-#     comments=Literal("Due to the directionality of the property [dwcdp:followed], the class is defined in description logic as [dwc:EventProtocol] ≡ [dwc:Protocol] ⊓ ∃([dwcdp:followed]⁻).[dwc:Event].")
-# )
-##############################################
-
-# # NOTE: owl:inverseFunction test
-# createCTOP(
-#     name="AgentMedia",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Agent Media"),
-#     subclass_list=[AC["Media"]],
-#     object_prop=DWCDP["isMediaOf"],
-#     use_inverse=False,
-#     values_class=DCTERMS["Agent"],
-#     definition=Literal("A [ac:Media] about a [dcterms:Agent]."),
-# )
-
-# # NOTE: owl:inverseFunction test
-# createCTOP(
-#     name="EventMedia",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Event Media"),
-#     subclass_list=[AC["Media"]],
-#     object_prop=DWCDP["isMediaOf"],
-#     use_inverse=False,
-#     values_class=DWC["Event"],
-#     definition=Literal("A [ac:Media] about a [dwc:Event]."),
-# )
-
-# # NOTE: owl:inverseFunction test
-# createCTOP(
-#     name="GeologicalContextMedia",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Geological Context Media"),
-#     subclass_list=[AC["Media"]],
-#     object_prop=DWCDP["isMediaOf"],
-#     use_inverse=False,
-#     values_class=DWC["GeologicalContext"],
-#     definition=Literal("A [ac:Media] about a [dwc:GeologicalContext]."),
-# )
-
-# # NOTE: owl:inverseFunction test
-# createCTOP(
-#     name="MaterialEntityMedia",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Material Entity Media"),
-#     subclass_list=[AC["Media"]],
-#     object_prop=DWCDP["isMediaOf"],
-#     use_inverse=False,
-#     values_class=DWC["MaterialEntity"],
-#     definition=Literal("A [ac:Media] about a [dwc:MaterialEntity]."),
-# )
-
-# # NOTE: owl:inverseFunction test
-# createCTOP(
-#     name="OccurrenceMedia",
-#     namespace=DWC,
-#     graph=g,
-#     pref_label=Literal("Occurrence Media"),
-#     subclass_list=[AC["Media"]],
-#     object_prop=DWCDP["isMediaOf"],
-#     use_inverse=False,
-#     values_class=DWC["Occurrence"],
-#     definition=Literal("A [ac:Media] about a [dwc:Occurrence]."),
-# )
-
-# g.add((DWCDP["hasMedia"], OWL["inverseOf"], DWCDP["isMediaOf"]))
 
 
 #########################################################
@@ -2015,139 +1674,139 @@ createSC(
 
 
 #################################################################################################
-#
-# createSC(
-#     name="d001",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Native (category A)", lang="en"),
-#     definition=Literal("Not transported beyond limits of native range.", lang="en"),
-#     comments=Literal("Considered native and naturally occurring. See also \"category A\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d001",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d001-2021-09-01",
-# )
-#
-# createSC(
-#     name="d002",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Captive (category B1)", lang="en"),
-#     definition=Literal("Individuals in captivity or quarantine (i.e., individuals provided with conditions suitable for them, but explicit measures of containment are in place).", lang="en"),
-#     comments=Literal("Only for cases where specific actions have been taken place to prevent escape of individuals or propagules. See also \"category B1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d002",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d002-2021-09-01",
-# )
-#
-# createSC(
-#     name="d003",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Cultivated (category B2)", lang="en"),
-#     definition=Literal("Individuals in cultivation (i.e., individuals provided with conditions suitable for them, but explicit measures to prevent dispersal are limited at best).", lang="en"),
-#     comments=Literal("Examples include gardens, parks and farms. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d003",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d003-2021-09-01",
-# )
-#
-# createSC(
-#     name="d004",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Released (category B3)", lang="en"),
-#     definition=Literal("Individuals directly released into novel environment.", lang="en"),
-#     comments=Literal("For example, fish stocked for angling, birds for hunting. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d004",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d004-2021-09-01",
-# )
-#
-# createSC(
-#     name="d005",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Failing (category C0)", lang="en"),
-#     definition=Literal("Individuals released outside of captivity or cultivation in a location, but incapable of surviving for a significant period.", lang="en"),
-#     comments=Literal("For example, frost-tender plants sown or planted in a cold climate. See also \"category C0\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d005",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d005-2021-09-01",
-# )
-#
-# createSC(
-#     name="d006",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Casual (category C1)", lang="en"),
-#     definition=Literal("Individuals surviving outside of captivity or cultivation in a location with no reproduction.", lang="en"),
-#     comments=Literal("Trees planted in the wild for forestry or ornament may come under this category. See also \"category C1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d006",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d006-2021-09-01",
-# )
-#
-# createSC(
-#     name="d007",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Reproducing (category C2)", lang="en"),
-#     definition=Literal("Individuals surviving outside of captivity or cultivation in a location with no reproduction.", lang="en"),
-#     comments=Literal("Offspring are produced, but these either do not survive or are not fertile enough to maintain the population. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d007",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d007-2021-09-01",
-# )
-#
-# createSC(
-#     name="d008",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Established (category C3)", lang="en"),
-#     definition=Literal("Individuals surviving outside of captivity or cultivation in a location. Reproduction occurring, and population self-sustaining.", lang="en"),
-#     comments=Literal("The population is maintained by reproduction, but is not spreading. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d008",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d008-2021-09-01",
-# )
-#
-# createSC(
-#     name="d009",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Colonising (category D1)", lang="en"),
-#     definition=Literal("Self-sustaining population outside of captivity or cultivation, with individuals surviving a significant distance from the original point of introduction.", lang="en"),
-#     comments=Literal("The population is maintained by reproduction and is spreading. See also \"category D1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d009",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d009-2021-09-01",
-# )
-#
-# createSC(
-#     name="d010",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Invasive (category D2)", lang="en"),
-#     definition=Literal("Self-sustaining population outside of captivity or cultivation, with individuals surviving and reproducing a significant distance from the original point of introduction.", lang="en"),
-#     comments=Literal("The population is maintained by reproduction, is spreading, and its progeny are also reproducing and spreading. See also \"category D2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d010",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d010-2021-09-01",
-# )
-#
-# createSC(
-#     name="d011",
-#     namespace=DWCDOE,
-#     graph=g,
-#     pref_label=Literal("Widespread invasive (category E)", lang="en"),
-#     definition=Literal("Fully invasive species, with individuals dispersing, surviving and reproducing at multiple sites across a spectrum of habitats and geographic range.", lang="en"),
-#     comments=Literal("This term is only used for those invasives with the highest degree of encroachment. See also \"category E\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
-#     in_scheme=DWCDOE["d"],
-#     version_of_s="http://rs.tdwg.org/dwcdoe/values/d011",
-#     references_s="http://rs.tdwg.org/dwcdoe/values/version/d011-2021-09-01",
-# )
-#
+
+createSC(
+    name="d001",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Native (category A)", lang="en"),
+    definition=Literal("Not transported beyond limits of native range.", lang="en"),
+    comments=Literal("Considered native and naturally occurring. See also \"category A\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d001",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d001-2021-09-01",
+)
+
+createSC(
+    name="d002",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Captive (category B1)", lang="en"),
+    definition=Literal("Individuals in captivity or quarantine (i.e., individuals provided with conditions suitable for them, but explicit measures of containment are in place).", lang="en"),
+    comments=Literal("Only for cases where specific actions have been taken place to prevent escape of individuals or propagules. See also \"category B1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d002",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d002-2021-09-01",
+)
+
+createSC(
+    name="d003",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Cultivated (category B2)", lang="en"),
+    definition=Literal("Individuals in cultivation (i.e., individuals provided with conditions suitable for them, but explicit measures to prevent dispersal are limited at best).", lang="en"),
+    comments=Literal("Examples include gardens, parks and farms. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d003",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d003-2021-09-01",
+)
+
+createSC(
+    name="d004",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Released (category B3)", lang="en"),
+    definition=Literal("Individuals directly released into novel environment.", lang="en"),
+    comments=Literal("For example, fish stocked for angling, birds for hunting. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d004",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d004-2021-09-01",
+)
+
+createSC(
+    name="d005",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Failing (category C0)", lang="en"),
+    definition=Literal("Individuals released outside of captivity or cultivation in a location, but incapable of surviving for a significant period.", lang="en"),
+    comments=Literal("For example, frost-tender plants sown or planted in a cold climate. See also \"category C0\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d005",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d005-2021-09-01",
+)
+
+createSC(
+    name="d006",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Casual (category C1)", lang="en"),
+    definition=Literal("Individuals surviving outside of captivity or cultivation in a location with no reproduction.", lang="en"),
+    comments=Literal("Trees planted in the wild for forestry or ornament may come under this category. See also \"category C1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d006",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d006-2021-09-01",
+)
+
+createSC(
+    name="d007",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Reproducing (category C2)", lang="en"),
+    definition=Literal("Individuals surviving outside of captivity or cultivation in a location with no reproduction.", lang="en"),
+    comments=Literal("Offspring are produced, but these either do not survive or are not fertile enough to maintain the population. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d007",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d007-2021-09-01",
+)
+
+createSC(
+    name="d008",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Established (category C3)", lang="en"),
+    definition=Literal("Individuals surviving outside of captivity or cultivation in a location. Reproduction occurring, and population self-sustaining.", lang="en"),
+    comments=Literal("The population is maintained by reproduction, but is not spreading. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d008",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d008-2021-09-01",
+)
+
+createSC(
+    name="d009",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Colonising (category D1)", lang="en"),
+    definition=Literal("Self-sustaining population outside of captivity or cultivation, with individuals surviving a significant distance from the original point of introduction.", lang="en"),
+    comments=Literal("The population is maintained by reproduction and is spreading. See also \"category D1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d009",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d009-2021-09-01",
+)
+
+createSC(
+    name="d010",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Invasive (category D2)", lang="en"),
+    definition=Literal("Self-sustaining population outside of captivity or cultivation, with individuals surviving and reproducing a significant distance from the original point of introduction.", lang="en"),
+    comments=Literal("The population is maintained by reproduction, is spreading, and its progeny are also reproducing and spreading. See also \"category D2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d010",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d010-2021-09-01",
+)
+
+createSC(
+    name="d011",
+    namespace=DWCDOE,
+    graph=g,
+    pref_label=Literal("Widespread invasive (category E)", lang="en"),
+    definition=Literal("Fully invasive species, with individuals dispersing, surviving and reproducing at multiple sites across a spectrum of habitats and geographic range.", lang="en"),
+    comments=Literal("This term is only used for those invasives with the highest degree of encroachment. See also \"category E\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023)).", lang="en"),
+    in_scheme=DWCDOE["d"],
+    version_of_s="http://rs.tdwg.org/dwcdoe/values/d011",
+    references_s="http://rs.tdwg.org/dwcdoe/values/version/d011-2021-09-01",
+)
+
 # createSC(
 #     name="e001",
 #     namespace=DWCEM,
@@ -2944,6 +2603,7 @@ declare_disjoint(
         DWC["Organism"],
         DWC["OrganismInteraction"],
         DWC["Protocol"],
+        DWC["Provenance"],
         DWC["ResourceRelationship"],
         DWC["UsagePolicy"],
         ECO["Survey"],
@@ -2969,51 +2629,6 @@ from rdflib.collection import Collection
 #####################################################################################################
 # BEGIN OBJECT PROPERTY DEFINITIONS
 #####################################################################################################
-
-createDP(
-    name="creator",
-    namespace=DC,
-    graph=g,
-    pref_label=Literal("Creator (DC)"),
-    definition=Literal("An entity primarily responsible for making the resource.", lang="en"),
-    comments=Literal("Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity.", lang="en"),
-    version_of_s="http://purl.org/dc/elements/1.1/creator",
-)
-
-# NOTE: REVOIR COMMENTS. THIS DOCUMENT? ALSO, ACCEPT BOTH A STRING OR A URI?
-createDP(
-    name="rights",
-    namespace=DC,
-    graph=g,
-    pref_label=Literal("Rights (DC)"),
-    definition=Literal("Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions."),
-    examples=[
-        Literal("Copyright 2014 Ron Thomas"),
-        Literal("http://creativecommons.org/licenses/by/3.0/legalcode"),
-    ],
-    version_of_s="http://purl.org/dc/elements/1.1/rights",
-)
-
-# WARN: Verify domain
-# BUG: dc:source is source (heh) of inconsistency
-createDP(
-    name="source",
-    namespace=DC,
-    graph=g,
-    pref_label=Literal("Source (DC)", lang="en"),
-    definition=Literal("A related resource from which the described resource is derived", lang="en"),
-    comments=Literal("The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.", lang="en"),
-    version_of_s="http://purl.org/dc/elements/1.1/source",
-)
-
-createDP(
-    name="title",
-    namespace=DC,
-    graph=g,
-    pref_label=Literal("Title (DC)", lang="en"),
-    definition=Literal("A name given to the resource.", lang="en"),
-    version_of_s="http://purl.org/dc/elements/1.1/title",
-)
 
 
 ############################################################################
@@ -5029,8 +4644,83 @@ createDP(
     version_of_s="http://purl.org/ontology/bibo/volume",
 )
 
-# g.add((URIRef("bibi"), RDF["type"], DCTERMS["BibliographicResource"]))
-# g.add((URIRef("bibi"), BIBO["pages"], Literal("1-20")))
+createDP(
+    name="creator",
+    namespace=DC,
+    graph=g,
+    pref_label=Literal("Creator (DC)", lang="en"),
+    definition=Literal("An entity primarily responsible for making the resource.", lang="en"),
+    comments=Literal("Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity.", lang="en"),
+    version_of_s="http://purl.org/dc/elements/1.1/creator",
+)
+
+createDP(
+    name="format",
+    namespace=DC,
+    graph=g,
+    pref_label=Literal("Format (DC)", lang="en"),
+    definition=Literal("The file format, physical medium, or dimensions of the resource.", lang="en"),
+    comments=Literal("Recommended practice is to use a controlled vocabulary where available. For example, for file formats one could use the list of Internet Media Types [MIME](https://www.iana.org/assignments/media-types/media-types.xhtml).", lang="en"),
+    version_of_s="http://purl.org/dc/elements/1.1/format",
+)
+
+createDP(
+    name="language",
+    namespace=DC,
+    graph=g,
+    pref_label=Literal("Language (DC)", lang="en"),
+    definition=Literal("A language of the resource.", lang="en"),
+    comments=Literal("Recommended practice is to use either a non-literal value representing a language from a controlled vocabulary such as ISO 639-2 or ISO 639-3, or a literal value consisting of an IETF Best Current Practice 47 [IETF-BCP47](https://tools.ietf.org/html/bcp47) language tag.", lang="en"),
+    version_of_s="http://purl.org/dc/elements/1.1/language",
+)
+
+createDP(
+    name="rights",
+    namespace=DC,
+    graph=g,
+    pref_label=Literal("Rights (DC)", lang="en"),
+    definition=Literal("Information about rights held in and over the resource.", lang="en"),
+    comments=Literal("Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights", lang="en"),
+    version_of_s="http://purl.org/dc/elements/1.1/rights",
+)
+
+createDP(
+    name="source",
+    namespace=DC,
+    graph=g,
+    pref_label=Literal("Source (DC)", lang="en"),
+    definition=Literal("A related resource from which the described resource is derived", lang="en"),
+    comments=Literal("The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.", lang="en"),
+    version_of_s="http://purl.org/dc/elements/1.1/source",
+)
+
+createDP(
+    name="title",
+    namespace=DC,
+    graph=g,
+    pref_label=Literal("Title (DC)", lang="en"),
+    definition=Literal("A name given to the resource.", lang="en"),
+    version_of_s="http://purl.org/dc/elements/1.1/title",
+)
+
+createDP(
+    name="type",
+    namespace=DC,
+    graph=g,
+    pref_label=Literal("Type (DC)", lang="en"),
+    definition=Literal("The nature or genre of the resource.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary). To describe the file format, physical medium, or dimensions of the resource, use the Format element.", lang="en"),
+    version_of_s="http://purl.org/dc/elements/1.1/type",
+)
+
+
+
+
+
+
+
+
+
 
 createDP(
     name="bibliographicCitation",
@@ -5044,16 +4734,7 @@ createDP(
     version_of_s="http://purl.org/dc/terms/bibliographicCitation",
 )
 
-createDP(
-    name="identifier",
-    namespace=DCTERMS,
-    graph=g,
-    ranges=RDFS["Literal"],
-    pref_label=Literal("Identifier"),
-    definition=Literal("An unambiguous reference to the resource within a given context."),
-    comments=Literal("Recommended practice is to identify the resource by means of a string conforming to an identification system. Examples include International Standard Book Number (ISBN), Digital Object Identifier (DOI), and Uniform Resource Name (URN). Persistent identifiers should be provided as HTTP URIs."),
-    version_of_s="http://purl.org/dc/terms/identifier",
-)
+
 
 
 # WARN: Consider subproperty of dc:identifier with caution
@@ -7446,7 +7127,7 @@ createDP(
     graph=g,
     domains=DWC["NucleotideSequence"],
     ranges=XSD["string"],
-    pref_label=Literal("Sequence"),
+    pref_label=Literal("Sequence", lang="en"),
     definition=Literal("A string representing nucleotide base pairs.", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/sequence",
 )
@@ -7460,7 +7141,7 @@ createDP(
         DWC["OccurrenceAssertion"],
     ],
     ranges=XSD["string"],
-    pref_label=Literal("Sex"),
+    pref_label=Literal("Sex", lang="en"),
     definition=Literal("The sex of the biological individual(s) represented in the dwc:Occurrence.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
     examples=[
@@ -7472,18 +7153,13 @@ createDP(
     references_s="http://rs.tdwg.org/dwc/terms/version/sex-2023-06-28",
 )
 
-# WARN: On purpose left bad triple
-# Shows that tests using HermiT can silently fail if the ontology is 
-# g.add((DWC["BadEvent"], RDF["type"], DWC["Event"]))
-# g.add((DWC["BadEvent"], DWC["startDayOfYear"], Literal("2", datatype=XSD["string"])))
-
 createDP(
     name="startDayOfYear",
     namespace=DWC,
     graph=g,
     domains=DWC["Event"],
     ranges=XSD["integer"],
-    pref_label=Literal("Start Day Of Year"),
+    pref_label=Literal("Start Day Of Year", lang="en"),
     definition=Literal("The earliest integer day of the year on which the dwc:Event occurred (`1` for January 1, `365` for December 31, except in a leap year, in which case it is `366`).", lang="en"),
     examples=[
         Literal("1", datatype=XSD["integer"]),
@@ -7500,7 +7176,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Location"],
     ranges=XSD["string"],
-    pref_label=Literal("First Order Division"),
+    pref_label=Literal("First Order Division", lang="en"),
     definition=Literal("The name of the next smaller administrative region than country (state, province, canton, department, region, etc.) in which the dcterms:Location occurs.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names. Recommended best practice is to leave this field blank if the dcterms:Location spans multiple entities at this administrative level or if the dcterms:Location might be in one or another of multiple possible entities at this level. Multiplicity and uncertainty of the geographic entity can be captured either in the term dwc:higherGeography or in the term dwc:locality, or both.", lang="en"),
     examples=[
@@ -7519,7 +7195,7 @@ createDP(
     graph=g,
     domains=ECO["Survey"],
     ranges=XSD["string"],
-    pref_label=Literal("Survey ID"),
+    pref_label=Literal("Survey ID", lang="en"),
     definition=Literal("An identifier for a [eco:Survey].", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
     subproperty_of=DCTERMS["identifier"],
@@ -7533,7 +7209,7 @@ createDP(
     graph=g,
     domains=ECO["SurveyTarget"],
     ranges=XSD["string"],
-    pref_label=Literal("Survey Target ID"),
+    pref_label=Literal("Survey Target ID", lang="en"),
     definition=Literal("An identifier for a [eco:SurveyTarget].", lang="en"),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
     subproperty_of=DCTERMS["identifier"],
@@ -7546,7 +7222,7 @@ createDP(
     graph=g,
     domains=ECO["SurveyTarget"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Survey Target Type"),
+    pref_label=Literal("Survey Target Type", lang="en"),
     definition=Literal("A scope a [eco:SurveyTarget] describes.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary.", lang="en"),
     examples=[
@@ -7568,7 +7244,7 @@ createDP(
     graph=g,
     domains=ECO["SurveyTarget"],
     ranges=XSD["string"],
-    pref_label=Literal("Survey Target Type Source"),
+    pref_label=Literal("Survey Target Type Source", lang="en"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
     subproperty_of=DC["source"],
     version_of_s="http://purl.org/dc/elements/1.1/source",
@@ -7580,7 +7256,7 @@ createDP(
     graph=g,
     domains=DWC["NucleotideAnalysis"],
     ranges=XSD["integer"],
-    pref_label=Literal("Total Read Count"),
+    pref_label=Literal("Total Read Count", lang="en"),
     definition=Literal("A total number of reads in a [dwc:NucleotideAnalysis].", lang="en"),
     version_of_s="http://example.com/term-pending/dwc/totalReadCount",
 )
@@ -7591,7 +7267,7 @@ createDP(
     graph=g,
     domains=DWC["UsagePolicy"],
     ranges=XSD["string"],
-    pref_label=Literal("Usage Policy ID"),
+    pref_label=Literal("Usage Policy ID", lang="en"),
     definition=Literal("An identifier for a [dwc:UsagePolicy]."),
     comments=Literal("Recommended best practice is to use a globally unique identifier.", lang="en"),
     subproperty_of=DCTERMS["identifier"],
@@ -7604,7 +7280,7 @@ createDP(
     graph=g,
     domains=DWC["Assertion"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Verbatim Assertion Type"),
+    pref_label=Literal("Verbatim Assertion Type", lang="en"),
     definition=Literal("A string representing the type of [dwc:Assertion] as it appeared in the original record.", lang="en"),
     comments=Literal("This term is meant to allow the capture of an unaltered original name for a [dwc:assertionType]. This term is meant to be used in addition to [dwc:assertionType], not instead of it.", lang="en"),
     examples=[
@@ -7621,7 +7297,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Location"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim Coordinates"),
+    pref_label=Literal("Verbatim Coordinates", lang="en"),
     definition=Literal("The verbatim original spatial coordinates of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem.", lang="en"),
     examples=[
         Literal("41 05 54S 121 05 34W"),
@@ -7637,7 +7313,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Location"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim Coordinate System"),
+    pref_label=Literal("Verbatim Coordinate System", lang="en"),
     definition=Literal("The coordinate format for the dwc:verbatimLatitude and dwc:verbatimLongitude or the dwc:verbatimCoordinates of the dcterms:Location.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
     examples=[
@@ -7656,7 +7332,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Location"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim Depth"),
+    pref_label=Literal("Verbatim Depth", lang="en"),
     definition=Literal("The original description of the depth below the local surface.", lang="en"),
     examples=[
         Literal("100-200 m"),
@@ -7665,14 +7341,13 @@ createDP(
     references_s="http://rs.tdwg.org/dwc/terms/version/verbatimDepth-2017-10-06",
 )
 
-# NOTE: I added dcterms:
 createDP(
     name="verbatimElevation",
     namespace=DWC,
     graph=g,
     domains=DCTERMS["Location"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim Elevation"),
+    pref_label=Literal("Verbatim Elevation", lang="en"),
     definition=Literal("The original description of the elevation (altitude, usually above sea level) of the dcterms:Location.", lang="en"),
     examples=[
         Literal("100-200 m"),
@@ -7688,7 +7363,7 @@ createDP(
     graph=g,
     domains=DWC["Event"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim EventDate"),
+    pref_label=Literal("Verbatim EventDate", lang="en"),
     definition=Literal("The verbatim original representation of the date and time information for a dwc:Event.", lang="en"),
     examples=[
         Literal("spring 1910"),
@@ -7706,7 +7381,7 @@ createDP(
     graph=g,
     domains=DWC["Identification"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim Label"),
+    pref_label=Literal("Verbatim Identification", lang="en"),
     definition=Literal("A string representing the taxonomic identification as it appeared in the original record.", lang="en"),
     comments=Literal("This term is meant to allow the capture of an unaltered original identification/determination, including identification qualifiers, hybrid formulas, uncertainties, etc. This term is meant to be used in addition to dwc:scientificName (and dwc:identificationQualifier etc.), not instead of it.", lang="en"),
     examples=[
@@ -7728,19 +7403,7 @@ createDP(
     graph=g,
     domains=DWC["MaterialEntity"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim Label"),
-    definition=Literal("The content of this term should include no embellishments, prefixes, headers or other additions made to the text. Abbreviations must not be expanded and supposed misspellings must not be corrected. Lines or breakpoints between blocks of text that could be verified by seeing the original labels or images of them may be used. Examples of material entities include preserved specimens, fossil specimens, and material samples. Best practice is to use UTF-8 for all characters. Best practice is to add comment “verbatimLabel derived from human transcription” in dwc:occurrenceRemarks.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/terms/verbatimLabel",
-    references_s="http://rs.tdwg.org/dwc/terms/version/verbatimLabel-2023-09-13",
-)
-
-createDP(
-    name="verbatimLabel",
-    namespace=DWC,
-    graph=g,
-    domains=DWC["MaterialEntity"],
-    ranges=XSD["string"],
-    pref_label=Literal("Verbatim Label"),
+    pref_label=Literal("Verbatim Label", lang="en"),
     definition=Literal("The content of this term should include no embellishments, prefixes, headers or other additions made to the text. Abbreviations must not be expanded and supposed misspellings must not be corrected. Lines or breakpoints between blocks of text that could be verified by seeing the original labels or images of them may be used. Examples of material entities include preserved specimens, fossil specimens, and material samples. Best practice is to use UTF-8 for all characters. Best practice is to add comment “verbatimLabel derived from human transcription” in dwc:occurrenceRemarks.", lang="en"),
     version_of_s="http://rs.tdwg.org/dwc/terms/verbatimLabel",
     references_s="http://rs.tdwg.org/dwc/terms/version/verbatimLabel-2023-09-13",
@@ -7752,7 +7415,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Location"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim Latitude"),
+    pref_label=Literal("Verbatim Latitude", lang="en"),
     definition=Literal("The verbatim original latitude of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem.", lang="en"),
     examples=[
         Literal("41 05 54.03S"),
@@ -7767,7 +7430,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Location"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim Locality"),
+    pref_label=Literal("Verbatim Locality", lang="en"),
     definition=Literal("The original textual description of the place.", lang="en"),
     examples=[
         Literal("25 km NNE Bariloche por R. Nac. 237"),
@@ -7782,7 +7445,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Location"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim Longitude"),
+    pref_label=Literal("Verbatim Longitude", lang="en"),
     definition=Literal("The verbatim original longitude of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem.", lang="en"),
     examples=[
         Literal("121d 10' 34\" W"),
@@ -7797,7 +7460,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Location"],
     ranges=XSD["string"],
-    pref_label=Literal("Verbatim SRS"),
+    pref_label=Literal("Verbatim SRS", lang="en"),
     definition=Literal("The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which coordinates given in dwc:verbatimLatitude and dwc:verbatimLongitude, or dwc:verbatimCoordinates are based.", lang="en"),
     comments=Literal("Recommended best practice is to use the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use the value `not recorded`. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
     examples=[
@@ -7819,7 +7482,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Location"],
     ranges=XSD["string"],
-    pref_label=Literal("Vertical Datum"),
+    pref_label=Literal("Vertical Datum", lang="en"),
     definition=Literal("The vertical datum used as the reference upon which the values in the elevation terms are based.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
     examples=[
@@ -7847,7 +7510,7 @@ createDP(
         DWC["Occurrence"],
     ],
     ranges=XSD["string"],
-    pref_label=Literal("Vernacular Name"),
+    pref_label=Literal("Vernacular Name", lang="en"),
     definition=Literal("A common or vernacular name.", lang="en"),
     examples=[
         Literal("Andean Condor"),
@@ -7874,7 +7537,7 @@ createDP(
         DWC["OccurrenceAssertion"],
     ],
     ranges=XSD["string"],
-    pref_label=Literal("Vitality"),
+    pref_label=Literal("Vitality", lang="en"),
     definition=Literal("An indication of whether a dwc:Organism was alive or dead at the time of collection or observation.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`,` MaterialSample`, or `HumanObservation`. This term has an equivalent in the dwciri: namespace that allows only an IRI as a value, whereas this term allows for any string literal value.", lang="en"),
     examples=[
@@ -7894,7 +7557,7 @@ createDP(
     graph=g,
     domains=DCTERMS["Location"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Water Body"),
+    pref_label=Literal("Water Body", lang="en"),
     definition=Literal("The name of the water body in which the dcterms:Location occurs.", lang="en"),
     comments=Literal("Recommended best practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names.", lang="en"),
     examples=[
@@ -7913,7 +7576,7 @@ createDP(
     graph=g,
     domains=DWC["Event"],
     ranges=XSD["integer"],
-    pref_label=Literal("Year"),
+    pref_label=Literal("Year", lang="en"),
     definition=Literal("The four-digit year in which the dwc:Event occurred, according to the Common Era Calendar.", lang="en"),
     examples=[
         Literal("1160", datatype=XSD["integer"]),

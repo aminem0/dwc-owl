@@ -153,10 +153,10 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -475,7 +475,7 @@ dwc:surveyID a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [eco:Survey]."@en ;
-    skos:prefLabel "Survey ID" .
+    skos:prefLabel "Survey ID"@en .
 
 dwc:surveyTargetID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyTargetID> ;
@@ -485,7 +485,7 @@ dwc:surveyTargetID a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [eco:SurveyTarget]."@en ;
-    skos:prefLabel "Survey Target ID" .
+    skos:prefLabel "Survey Target ID"@en .
 
 dwc:surveyTargetType a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/surveyTargetType> ;
@@ -501,7 +501,7 @@ dwc:surveyTargetType a owl:DatatypeProperty ;
         "minimum length",
         "sex",
         "taxon" ;
-    skos:prefLabel "Survey Target Type" .
+    skos:prefLabel "Survey Target Type"@en .
 
 dwc:surveyTargetTypeSource a owl:DatatypeProperty ;
     dcterms:isVersionOf dc:source ;
@@ -510,7 +510,7 @@ dwc:surveyTargetTypeSource a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dc:source ;
     skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
-    skos:prefLabel "Survey Target Type Source" .
+    skos:prefLabel "Survey Target Type Source"@en .
 
 dwc:totalReadCount a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/totalReadCount> ;
@@ -518,7 +518,7 @@ dwc:totalReadCount a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range xsd:integer ;
     skos:definition "A total number of reads in a [dwc:NucleotideAnalysis]."@en ;
-    skos:prefLabel "Total Read Count" .
+    skos:prefLabel "Total Read Count"@en .
 
 dwc:usagePolicyID a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/usagePolicyID> ;
@@ -528,7 +528,7 @@ dwc:usagePolicyID a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf dcterms:identifier ;
     skos:definition "An identifier for a [dwc:UsagePolicy]." ;
-    skos:prefLabel "Usage Policy ID" .
+    skos:prefLabel "Usage Policy ID"@en .
 
 dwc:verbatimAssertionType a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwc/verbatimAssertionType> ;
@@ -540,7 +540,7 @@ dwc:verbatimAssertionType a owl:DatatypeProperty ;
     skos:example "Fish biomass",
         "sampling net mesh size",
         "water_temp" ;
-    skos:prefLabel "Verbatim Assertion Type" .
+    skos:prefLabel "Verbatim Assertion Type"@en .
 
 dwcdp:allowsFor a owl:ObjectProperty ;
     rdfs:comment "The allowed activities can be varied, and include [dwc:Event], [dwc:NucleotideAnalysis] and [eco:Survey]."@en ;
@@ -1151,13 +1151,33 @@ xmp:CreateDate a owl:DatatypeProperty ;
     skos:definition "The date and time a resource was created. For a digital file, this need not match a file-system creation time. For a freshly created resource, it should be close to that time, modulo the time taken to write the file. Later file transfer, copying, and so on, can make the file-system time arbitrarily different."@en ;
     skos:prefLabel "Original Date and Time" .
 
+dc:format a owl:DatatypeProperty ;
+    dcterms:isVersionOf dc:format ;
+    rdfs:comment "Recommended practice is to use a controlled vocabulary where available. For example, for file formats one could use the list of Internet Media Types [MIME](https://www.iana.org/assignments/media-types/media-types.xhtml)."@en ;
+    rdfs:isDefinedBy dc: ;
+    skos:definition "The file format, physical medium, or dimensions of the resource."@en ;
+    skos:prefLabel "Format (DC)"@en .
+
+dc:language a owl:DatatypeProperty ;
+    dcterms:isVersionOf dc:language ;
+    rdfs:comment "Recommended practice is to use either a non-literal value representing a language from a controlled vocabulary such as ISO 639-2 or ISO 639-3, or a literal value consisting of an IETF Best Current Practice 47 [IETF-BCP47](https://tools.ietf.org/html/bcp47) language tag."@en ;
+    rdfs:isDefinedBy dc: ;
+    skos:definition "A language of the resource."@en ;
+    skos:prefLabel "Language (DC)"@en .
+
 dc:rights a owl:DatatypeProperty ;
     dcterms:isVersionOf dc:rights ;
+    rdfs:comment "Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights"@en ;
     rdfs:isDefinedBy dc: ;
-    skos:definition "Information about rights held in and over the resource. A full-text, readable copyright statement, as rquired by the national legislation of the copyright holder. On collections, this applies to all contained objects, unless the object itself has a different statement. Do not place just the name of the copyright holder(s) here! That belongs in a list in the [xmpRights:Owner] field, which should be supplied only if [dc:rights] is not `Public Domain`, which is appropriate only if the resource is known to be not under copyright. See also the entry for [dcterms:rights] in this document and see the DMCI FAQ on [dc:] and [dcterms:] Namespaces for discussion of the rationale for terms in two namespaces. Normal practice is to use the same Label if both are provided. Labels have no effect on information discovery and are only suggestions." ;
-    skos:example "Copyright 2014 Ron Thomas",
-        "http://creativecommons.org/licenses/by/3.0/legalcode" ;
-    skos:prefLabel "Rights (DC)" .
+    skos:definition "Information about rights held in and over the resource."@en ;
+    skos:prefLabel "Rights (DC)"@en .
+
+dc:type a owl:DatatypeProperty ;
+    dcterms:isVersionOf dc:type ;
+    rdfs:comment "Recommended best practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary). To describe the file format, physical medium, or dimensions of the resource, use the Format element."@en ;
+    rdfs:isDefinedBy dc: ;
+    skos:definition "The nature or genre of the resource."@en ;
+    skos:prefLabel "Type (DC)"@en .
 
 dcterms:bibliographicCitation a owl:DatatypeProperty ;
     dcterms:isVersionOf dcterms:bibliographicCitation ;
@@ -1726,13 +1746,10 @@ dwc:BibliographicDocument a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:pages ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:issue ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:status ],
+        [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dc:title ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:edition ],
@@ -1740,8 +1757,11 @@ dwc:BibliographicDocument a owl:Class ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:volume ],
         [ a owl:Restriction ;
-            owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dc:title ],
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty bibo:issue ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty bibo:pages ],
         dcterms:BibliographicResource,
         bibo:Document ;
     skos:definition "A book, article, or other documentatry resource."@en ;
@@ -2992,7 +3012,7 @@ dwc:sequence a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range xsd:string ;
     skos:definition "A string representing nucleotide base pairs."@en ;
-    skos:prefLabel "Sequence" .
+    skos:prefLabel "Sequence"@en .
 
 dwc:sex a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:sex ;
@@ -3006,7 +3026,7 @@ dwc:sex a owl:DatatypeProperty ;
     skos:example "female",
         "hermaphrodite",
         "male" ;
-    skos:prefLabel "Sex" .
+    skos:prefLabel "Sex"@en .
 
 dwc:startDayOfYear a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:startDayOfYear ;
@@ -3018,7 +3038,7 @@ dwc:startDayOfYear a owl:DatatypeProperty ;
     skos:example 1,
         365,
         366 ;
-    skos:prefLabel "Start Day Of Year" .
+    skos:prefLabel "Start Day Of Year"@en .
 
 dwc:stateProvince a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:stateProvince ;
@@ -3031,7 +3051,7 @@ dwc:stateProvince a owl:DatatypeProperty ;
     skos:example "Córdoba",
         "Minas Gerais",
         "Montana" ;
-    skos:prefLabel "First Order Division" .
+    skos:prefLabel "First Order Division"@en .
 
 dwc:verbatimCoordinateSystem a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimCoordinateSystem ;
@@ -3045,7 +3065,7 @@ dwc:verbatimCoordinateSystem a owl:DatatypeProperty ;
         "decimal degrees",
         "degrees decimal minutes",
         "degrees minutes seconds" ;
-    skos:prefLabel "Verbatim Coordinate System" .
+    skos:prefLabel "Verbatim Coordinate System"@en .
 
 dwc:verbatimCoordinates a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimCoordinates ;
@@ -3056,7 +3076,7 @@ dwc:verbatimCoordinates a owl:DatatypeProperty ;
     skos:definition "The verbatim original spatial coordinates of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem."@en ;
     skos:example "17T 630000 4833400",
         "41 05 54S 121 05 34W" ;
-    skos:prefLabel "Verbatim Coordinates" .
+    skos:prefLabel "Verbatim Coordinates"@en .
 
 dwc:verbatimDepth a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimDepth ;
@@ -3066,7 +3086,7 @@ dwc:verbatimDepth a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     skos:definition "The original description of the depth below the local surface."@en ;
     skos:example "100-200 m" ;
-    skos:prefLabel "Verbatim Depth" .
+    skos:prefLabel "Verbatim Depth"@en .
 
 dwc:verbatimElevation a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimElevation ;
@@ -3076,7 +3096,7 @@ dwc:verbatimElevation a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     skos:definition "The original description of the elevation (altitude, usually above sea level) of the dcterms:Location."@en ;
     skos:example "100-200 m" ;
-    skos:prefLabel "Verbatim Elevation" .
+    skos:prefLabel "Verbatim Elevation"@en .
 
 dwc:verbatimEventDate a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimEventDate ;
@@ -3089,7 +3109,7 @@ dwc:verbatimEventDate a owl:DatatypeProperty ;
         "1999-03-XX",
         "Marzo 2002",
         "spring 1910" ;
-    skos:prefLabel "Verbatim EventDate" .
+    skos:prefLabel "Verbatim EventDate"@en .
 
 dwc:verbatimIdentification a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimIdentification ;
@@ -3106,7 +3126,7 @@ dwc:verbatimIdentification a owl:DatatypeProperty ;
         "Pachyporidae?",
         "Peromyscus sp.",
         "Potentilla × pantotricha Soják" ;
-    skos:prefLabel "Verbatim Label" .
+    skos:prefLabel "Verbatim Identification"@en .
 
 dwc:verbatimLabel a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimLabel ;
@@ -3115,7 +3135,7 @@ dwc:verbatimLabel a owl:DatatypeProperty ;
     rdfs:isDefinedBy dwc: ;
     rdfs:range xsd:string ;
     skos:definition "The content of this term should include no embellishments, prefixes, headers or other additions made to the text. Abbreviations must not be expanded and supposed misspellings must not be corrected. Lines or breakpoints between blocks of text that could be verified by seeing the original labels or images of them may be used. Examples of material entities include preserved specimens, fossil specimens, and material samples. Best practice is to use UTF-8 for all characters. Best practice is to add comment “verbatimLabel derived from human transcription” in dwc:occurrenceRemarks."@en ;
-    skos:prefLabel "Verbatim Label" .
+    skos:prefLabel "Verbatim Label"@en .
 
 dwc:verbatimLatitude a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimLatitude ;
@@ -3125,7 +3145,7 @@ dwc:verbatimLatitude a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     skos:definition "The verbatim original latitude of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem."@en ;
     skos:example "41 05 54.03S" ;
-    skos:prefLabel "Verbatim Latitude" .
+    skos:prefLabel "Verbatim Latitude"@en .
 
 dwc:verbatimLocality a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimLocality ;
@@ -3135,7 +3155,7 @@ dwc:verbatimLocality a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     skos:definition "The original textual description of the place."@en ;
     skos:example "25 km NNE Bariloche por R. Nac. 237" ;
-    skos:prefLabel "Verbatim Locality" .
+    skos:prefLabel "Verbatim Locality"@en .
 
 dwc:verbatimLongitude a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimLongitude ;
@@ -3145,7 +3165,7 @@ dwc:verbatimLongitude a owl:DatatypeProperty ;
     rdfs:range xsd:string ;
     skos:definition "The verbatim original longitude of the dcterms:Location. The coordinate ellipsoid, geodeticDatum, or full Spatial Reference System (SRS) for these coordinates should be stored in dwc:verbatimSRS and the coordinate system should be stored in dwc:verbatimCoordinateSystem."@en ;
     skos:example "121d 10' 34\" W" ;
-    skos:prefLabel "Verbatim Longitude" .
+    skos:prefLabel "Verbatim Longitude"@en .
 
 dwc:verbatimSRS a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verbatimSRS ;
@@ -3162,7 +3182,7 @@ dwc:verbatimSRS a owl:DatatypeProperty ;
         "NAD27",
         "WGS84",
         "not recorded" ;
-    skos:prefLabel "Verbatim SRS" .
+    skos:prefLabel "Verbatim SRS"@en .
 
 dwc:vernacularName a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:vernacularName ;
@@ -3182,7 +3202,7 @@ dwc:vernacularName a owl:DatatypeProperty ;
         "Tiger's Eye",
         "death cap",
         "rainbow trout" ;
-    skos:prefLabel "Vernacular Name" .
+    skos:prefLabel "Vernacular Name"@en .
 
 dwc:verticalDatum a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:verticalDatum ;
@@ -3201,7 +3221,7 @@ dwc:verticalDatum a owl:DatatypeProperty ;
         "PGM2006",
         "PGM2007",
         "not recorded" ;
-    skos:prefLabel "Vertical Datum" .
+    skos:prefLabel "Vertical Datum"@en .
 
 dwc:vitality a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:vitality ;
@@ -3217,7 +3237,7 @@ dwc:vitality a owl:DatatypeProperty ;
         "mixedLot",
         "notAssessed",
         "uncertain" ;
-    skos:prefLabel "Vitality" .
+    skos:prefLabel "Vitality"@en .
 
 dwc:waterBody a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:waterBody ;
@@ -3231,7 +3251,7 @@ dwc:waterBody a owl:DatatypeProperty ;
         "Hudson River",
         "Indian Ocean",
         "Lago Nahuel Huapi" ;
-    skos:prefLabel "Water Body" .
+    skos:prefLabel "Water Body"@en .
 
 dwc:year a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:year ;
@@ -3242,25 +3262,7 @@ dwc:year a owl:DatatypeProperty ;
     skos:definition "The four-digit year in which the dwc:Event occurred, according to the Common Era Calendar."@en ;
     skos:example 1160,
         2008 ;
-    skos:prefLabel "Year" .
-
-dwcdoe:d001 a dwc:DegreeOfEstablishment .
-
-dwcdoe:d002 a dwc:DegreeOfEstablishment .
-
-dwcdoe:d004 a dwc:DegreeOfEstablishment .
-
-dwcdoe:d006 a dwc:DegreeOfEstablishment .
-
-dwcdoe:d007 a dwc:DegreeOfEstablishment .
-
-dwcdoe:d008 a dwc:DegreeOfEstablishment .
-
-dwcdoe:d009 a dwc:DegreeOfEstablishment .
-
-dwcdoe:d010 a dwc:DegreeOfEstablishment .
-
-dwcdoe:d011 a dwc:DegreeOfEstablishment .
+    skos:prefLabel "Year"@en .
 
 dwcdp:analysisOf a owl:ObjectProperty ;
     rdfs:domain dwc:NucleotideAnalysis ;
@@ -4311,9 +4313,86 @@ dwc:organismID a owl:DatatypeProperty ;
     skos:definition "An identifier for a [dwc:Organism]."@en ;
     skos:prefLabel "Organism ID" .
 
-dwcdoe:d003 a dwc:DegreeOfEstablishment .
+dwcdoe:d001 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d001 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d001-2021-09-01> ;
+    rdfs:comment "Considered native and naturally occurring. See also \"category A\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Not transported beyond limits of native range."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Native (category A)"@en .
 
-dwcdoe:d005 a dwc:DegreeOfEstablishment .
+dwcdoe:d002 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d002 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d002-2021-09-01> ;
+    rdfs:comment "Only for cases where specific actions have been taken place to prevent escape of individuals or propagules. See also \"category B1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Individuals in captivity or quarantine (i.e., individuals provided with conditions suitable for them, but explicit measures of containment are in place)."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Captive (category B1)"@en .
+
+dwcdoe:d004 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d004 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d004-2021-09-01> ;
+    rdfs:comment "For example, fish stocked for angling, birds for hunting. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Individuals directly released into novel environment."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Released (category B3)"@en .
+
+dwcdoe:d006 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d006 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d006-2021-09-01> ;
+    rdfs:comment "Trees planted in the wild for forestry or ornament may come under this category. See also \"category C1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Individuals surviving outside of captivity or cultivation in a location with no reproduction."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Casual (category C1)"@en .
+
+dwcdoe:d007 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d007 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d007-2021-09-01> ;
+    rdfs:comment "Offspring are produced, but these either do not survive or are not fertile enough to maintain the population. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Individuals surviving outside of captivity or cultivation in a location with no reproduction."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Reproducing (category C2)"@en .
+
+dwcdoe:d008 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d008 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d008-2021-09-01> ;
+    rdfs:comment "The population is maintained by reproduction, but is not spreading. See also \"category C2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Individuals surviving outside of captivity or cultivation in a location. Reproduction occurring, and population self-sustaining."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Established (category C3)"@en .
+
+dwcdoe:d009 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d009 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d009-2021-09-01> ;
+    rdfs:comment "The population is maintained by reproduction and is spreading. See also \"category D1\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Self-sustaining population outside of captivity or cultivation, with individuals surviving a significant distance from the original point of introduction."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Colonising (category D1)"@en .
+
+dwcdoe:d010 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d010 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d010-2021-09-01> ;
+    rdfs:comment "The population is maintained by reproduction, is spreading, and its progeny are also reproducing and spreading. See also \"category D2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Self-sustaining population outside of captivity or cultivation, with individuals surviving and reproducing a significant distance from the original point of introduction."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Invasive (category D2)"@en .
+
+dwcdoe:d011 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d011 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d011-2021-09-01> ;
+    rdfs:comment "This term is only used for those invasives with the highest degree of encroachment. See also \"category E\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Fully invasive species, with individuals dispersing, surviving and reproducing at multiple sites across a spectrum of habitats and geographic range."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Widespread invasive (category E)"@en .
 
 dwcdp:derivedFrom a owl:ObjectProperty ;
     rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, universal restrictions on the classes prevent cross-class use of the term."@en ;
@@ -4429,7 +4508,7 @@ dc:creator a owl:DatatypeProperty ;
     rdfs:comment "Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity."@en ;
     rdfs:isDefinedBy dc: ;
     skos:definition "An entity primarily responsible for making the resource."@en ;
-    skos:prefLabel "Creator (DC)" .
+    skos:prefLabel "Creator (DC)"@en .
 
 dcterms:creator a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:creator ;
@@ -4464,6 +4543,24 @@ dwc:relationshipOfResourceID a owl:ObjectProperty ;
         "http://purl.obolibrary.org/obo/RO_0002456",
         "https://www.inaturalist.org/observation_fields/879" ;
     skos:prefLabel "Relationship Of Resource ID" .
+
+dwcdoe:d003 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d003 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d003-2021-09-01> ;
+    rdfs:comment "Examples include gardens, parks and farms. See also \"category B2\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Individuals in cultivation (i.e., individuals provided with conditions suitable for them, but explicit measures to prevent dispersal are limited at best)."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Cultivated (category B2)"@en .
+
+dwcdoe:d005 a dwc:DegreeOfEstablishment ;
+    dcterms:isVersionOf dwcdoe:d005 ;
+    dcterms:references <http://rs.tdwg.org/dwcdoe/values/version/d005-2021-09-01> ;
+    rdfs:comment "For example, frost-tender plants sown or planted in a cold climate. See also \"category C0\" in Blackburn et al. 2011 ([https://doi.org/10.1016/j.tree.2011.03.023](https://doi.org/10.1016/j.tree.2011.03.023))."@en ;
+    rdfs:isDefinedBy dwcdoe: ;
+    skos:definition "Individuals released outside of captivity or cultivation in a location, but incapable of surviving for a significant period."@en ;
+    skos:inScheme dwcdoe:d ;
+    skos:prefLabel "Failing (category C0)"@en .
 
 dwcdp:about a owl:ObjectProperty ;
     rdfs:comment "The object of this property can be an instance of [ac:Media], [chrono:ChronometricAge], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [dwc:Organism] or [dwc:OrganismInteraction]."@en ;
@@ -4641,10 +4738,10 @@ dwc:NucleotideSequence a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:sequence ],
+            owl:onProperty dwc:nucleotideSequenceID ],
         [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:nucleotideSequenceID ] ;
+            owl:onProperty dwc:sequence ] ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
     skos:prefLabel "Nucleotide Sequence"@en .
 
@@ -4658,13 +4755,6 @@ dwc:OccurrenceAssertion a owl:Class ;
         dwc:Assertion ;
     skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."@en ;
     skos:prefLabel "Occurrence Assertion"@en .
-
-dwc:Provenance a owl:Class ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/provenance> ;
-    rdfs:comment "This is a convenience class to group related properties."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "Information about an entity's origins."@en ;
-    skos:prefLabel "Provenance"@en .
 
 bibo:DocumentStatus a owl:Class ;
     dcterms:isVersionOf bibo:DocumentStatus ;
@@ -4687,6 +4777,13 @@ dwc:OrganismInteraction a owl:Class ;
         "a slug eating a fungus growing on a decomposing stump (2 interactions)",
         "a viral infection in a plant" ;
     skos:prefLabel "Organism Interaction"@en .
+
+dwc:Provenance a owl:Class ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/provenance> ;
+    rdfs:comment "This is a convenience class to group related properties."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "Information about an entity's origins."@en ;
+    skos:prefLabel "Provenance"@en .
 
 dwc:DegreeOfEstablishment a owl:Class ;
     rdfs:comment "For details and rationale, see [Groom et al. 2019](https://doi.org/10.3897/biss.3.38084)."@en ;
@@ -4780,11 +4877,11 @@ dcterms:BibliographicResource a owl:Class ;
     dcterms:isVersionOf dcterms:BibliographicResource ;
     rdfs:isDefinedBy dcterms: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom dcterms:BibliographicResource ;
-            owl:onProperty dwcdp:partOf ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:referenceType ] ;
+            owl:onProperty dwc:referenceType ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom dcterms:BibliographicResource ;
+            owl:onProperty dwcdp:partOf ] ;
     skos:definition "A book, article, or other documentary resource."@en ;
     skos:prefLabel "Bibliographic Resource"@en .
 
@@ -4813,11 +4910,11 @@ dcterms:Agent a owl:Class ;
     rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
     rdfs:isDefinedBy dcterms: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:agentType ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:preferredAgentName ] ;
+            owl:onProperty dwc:preferredAgentName ],
+        [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dwc:agentType ] ;
     skos:definition "A resource that acts or has the power to act."@en ;
     skos:example "Carl Linnaeus",
         "ChatGPT",
@@ -4861,10 +4958,10 @@ dwc:MaterialEntity a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom dwc:MaterialEntity ;
-            owl:onProperty dwcdp:partOf ],
+            owl:onProperty dwcdp:derivedFrom ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:MaterialEntity ;
-            owl:onProperty dwcdp:derivedFrom ] ;
+            owl:onProperty dwcdp:partOf ] ;
     skos:definition "An entity that can be identified, exist for some period of time, and consist in whole or in part of physical matter while it exists."@en ;
     skos:example "a flower on a plant specimen",
         "a fossil within a rock",
@@ -4899,16 +4996,49 @@ dwc:MolecularProtocol a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000020 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0001107 ],
+            owl:onProperty dwc:assayType ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000015 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000092 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000003 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000002 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000001 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000020 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000016 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom dwc:NucleotideAnalysis ;
+            owl:onProperty dwcdp:followedBy ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000013 ],
+        [ a owl:Restriction ;
+            owl:onProperty dwcdp:followedBy ;
+            owl:someValuesFrom dwc:NucleotideAnalysis ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000006 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000005 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0001107 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000008 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000012 ],
@@ -4917,40 +5047,7 @@ dwc:MolecularProtocol a owl:Class ;
             owl:onProperty mixs:0000017 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000001 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000006 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom dwc:NucleotideAnalysis ;
-            owl:onProperty dwcdp:followedBy ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000008 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:assayType ],
-        [ a owl:Restriction ;
-            owl:onProperty dwcdp:followedBy ;
-            owl:someValuesFrom dwc:NucleotideAnalysis ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000005 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0001320 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000013 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000092 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000016 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000002 ],
         dwc:Protocol ;
     owl:equivalentClass [ a owl:Restriction ;
             owl:onProperty dwcdp:followedBy ;
@@ -4964,46 +5061,46 @@ ac:Media a owl:Class ;
     rdfs:isDefinedBy ac: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:resourceCreationTechnique ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashFunction ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:freqHigh ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:digitizationDate ],
+            owl:onProperty ac:widthFrac ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:freqLow ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mo:sample_rate ],
+            owl:onProperty ac:heightFrac ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:captureDevice ],
+            owl:onProperty ac:resourceCreationTechnique ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mo:sample_rate ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:timeOfDay ],
         [ a owl:Restriction ;
             owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:partOf ],
+            owl:onProperty dwcdp:derivedFrom ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:frameRate ],
+            owl:onProperty ac:captureDevice ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:freqHigh ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:hashValue ],
         [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:frameRate ],
+        [ a owl:Restriction ;
             owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:derivedFrom ],
+            owl:onProperty dwcdp:partOf ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:widthFrac ],
+            owl:onProperty ac:hashFunction ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:heightFrac ] ;
+            owl:onProperty ac:digitizationDate ] ;
     skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
     skos:example "dcmi:MovingImage",
         "dcmi:Sound",
@@ -5019,5 +5116,5 @@ dcterms:Location a owl:Class ;
     skos:prefLabel "Location"@en .
 
 [] a owl:AllDisjointClasses ;
-    owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:Identification dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .
+    owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:Identification dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:Provenance dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .
 
