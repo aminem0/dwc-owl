@@ -517,7 +517,6 @@ dwciri:pathway rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/recordedBy
 dwciri:recordedBy rdf:type owl:ObjectProperty ;
-                  rdfs:domain dwc:Occurrence ;
                   dcterms:isVersionOf dwciri:recordedBy ;
                   dcterms:references <http://rs.tdwg.org/dwc/iri/version/recordedBy-2025-07-10> ;
                   rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -1080,6 +1079,12 @@ dwcdp:mediaOf rdf:type owl:ObjectProperty ;
                                          dwc:OrganismInteraction
                                        )
                          ] ;
+              owl:propertyChainAxiom ( dwcdp:mediaOf
+                                       dwcdp:interactionBy
+                                     ) ,
+                                     ( dwcdp:mediaOf
+                                       dwcdp:interactionWith
+                                     ) ;
               rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:hasMedia], which allows reasoners queries to go through different ways."@en ;
               rdfs:isDefinedBy dwcdp: ;
               skos:definition "An [owl:ObjectProperty] used to relate an instance of [ac:Media] to an entity of which it is a media of. These entities can be [chrono:ChronometricAge], [dcterms:Agent],[dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]."@en ;
@@ -1232,10 +1237,28 @@ dwcdp:publishedBy rdf:type owl:ObjectProperty ;
                   skos:prefLabel "Published By"@en .
 
 
+###  http://rs.tdwg.org/dwcdp/terms/recorded
+dwcdp:recorded rdf:type owl:ObjectProperty ;
+               owl:inverseOf dwcdp:recordedBy ;
+               rdfs:domain dcterms:Agent ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( dwc:Occurrence
+                                          dwc:OrganismInteraction
+                                        )
+                          ] ;
+               rdfs:isDefinedBy dwcdp: ;
+               skos:definition "A person, group, or organization responsible for recording the original dwc:Occurrence."@en ;
+               skos:prefLabel "Recorded (DWCDP)"@en .
+
+
 ###  http://rs.tdwg.org/dwcdp/terms/recordedBy
 dwcdp:recordedBy rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf dwciri:recordedBy ;
-                 rdfs:domain dwc:Occurrence ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( dwc:Occurrence
+                                             dwc:OrganismInteraction
+                                           )
+                             ] ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "A person, group, or organization responsible for recording the original dwc:Occurrence."@en ;
@@ -5953,6 +5976,22 @@ dwc:OrganismAssertion rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismInteraction
 dwc:OrganismInteraction rdf:type owl:Class ;
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:interactionBy ;
+                                          owl:someValuesFrom dwc:Occurrence
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:interactionWith ;
+                                          owl:someValuesFrom dwc:Occurrence
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:interactionBy ;
+                                          owl:allValuesFrom dwc:Occurrence
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:interactionWith ;
+                                          owl:allValuesFrom dwc:Occurrence
+                                        ] ;
                         dcterms:isVersionOf dwc:OrganismInteraction ;
                         rdfs:comment "Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s."@en ;
                         rdfs:isDefinedBy dwc: ;
@@ -5967,6 +6006,26 @@ dwc:OrganismInteraction rdf:type owl:Class ;
                         skos:prefLabel "Organism Interaction"@en .
 
 
+###  http://rs.tdwg.org/dwc/terms/OrganismInteractionAgentRole
+dwc:OrganismInteractionAgentRole rdf:type owl:Class ;
+                                 rdfs:subClassOf dwc:ResourceRelationship ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty dwcdp:relationshipOf ;
+                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass dcterms:Agent
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty dwcdp:relationshipTo ;
+                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass dwc:OrganismInteraction
+                                                 ] ;
+                                 dcterms:isVersionOf dwc:dodo ;
+                                 dcterms:references <http://rs.tdwg.org/dwc/terms/version/dodo> ;
+                                 rdfs:isDefinedBy dwc: ;
+                                 skos:definition "A relationship of one [rdfs:Resource] ([http://www.w3.org/2000/01/rdf-schema#Resource]) to another."@en ;
+                                 skos:prefLabel "Organism Interaction Agent Role"@en .
+
+
 ###  http://rs.tdwg.org/dwc/terms/OrganismRelationship
 dwc:OrganismRelationship rdf:type owl:Class ;
                          rdfs:subClassOf dwc:ResourceRelationship ,
@@ -5977,6 +6036,14 @@ dwc:OrganismRelationship rdf:type owl:Class ;
                                          [ rdf:type owl:Restriction ;
                                            owl:onProperty dwcdp:relationshipTo ;
                                            owl:someValuesFrom dwc:Organism
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty dwcdp:relationshipOf ;
+                                           owl:allValuesFrom dwc:Organism
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty dwcdp:relationshipTo ;
+                                           owl:allValuesFrom dwc:Organism
                                          ] ;
                          rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
                          rdfs:isDefinedBy dwc: ;

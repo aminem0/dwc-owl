@@ -597,6 +597,14 @@ createOC(
     name="OrganismInteraction",
     namespace=DWC,
     graph=g,
+    exist_rest_filler=[
+        (DWCDP["interactionBy"], DWC["Occurrence"]),
+        (DWCDP["interactionWith"], DWC["Occurrence"]),
+    ],
+    univ_rest_filler=[
+        (DWCDP["interactionBy"], DWC["Occurrence"]),
+        (DWCDP["interactionWith"], DWC["Occurrence"]),
+    ],
     pref_label=Literal("Organism Interaction", lang="en"),
     definition=Literal("An interaction between two [dwc:Organism]s during a [dwc:Event].", lang="en"),
     comments=Literal("Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s.", lang="en"),
@@ -612,6 +620,9 @@ createOC(
     # card1_restrictions=[DWC["organismInteractionID"]],
     version_of_s="http://rs.tdwg.org/dwc/terms/OrganismInteraction",
 )
+
+
+
 #
 # # NOTE: Review integration of skos:Concept and owl:Classes.
 # # Here there is a defined skos:ConceptScheme
@@ -787,6 +798,20 @@ createOC(
     references_s="http://rs.tdwg.org/dwc/terms/version/ResourceRelationship-2023-09-13",
 )
 
+createOC(
+    name="OrganismInteractionAgentRole",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Organism Interaction Agent Role", lang="en"),
+    definition=Literal("A relationship of one [rdfs:Resource] ([http://www.w3.org/2000/01/rdf-schema#Resource]) to another.", lang="en"),
+    subclass_of=DWC["ResourceRelationship"],
+    qualcard_restrictions=[
+        (DWCDP["relationshipOf"], 1, DCTERMS["Agent"]),
+        (DWCDP["relationshipTo"], 1, DWC["OrganismInteraction"]),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/terms/dodo",
+    references_s="http://rs.tdwg.org/dwc/terms/version/dodo",
+)
 createEOC(
     name="TypeDesignationType",
     namespace=DWC,
@@ -893,17 +918,30 @@ g.add((DWC["OrganismRelationship"], SKOS["definition"], Literal("A [dwc:Resource
 g.add((DWC["OrganismRelationship"], RDFS["comment"], Literal("A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s.", lang="en")))
 
 # OWL Restrictions
-Rsubj_class = BNode()
-g.add((Rsubj_class, RDF["type"], OWL["Restriction"]))
-g.add((Rsubj_class, OWL["onProperty"], DWCDP["relationshipOf"]))
-g.add((Rsubj_class, OWL["someValuesFrom"], DWC["Organism"]))
-g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], Rsubj_class))
+REx_subj_class = BNode()
+g.add((REx_subj_class, RDF["type"], OWL["Restriction"]))
+g.add((REx_subj_class, OWL["onProperty"], DWCDP["relationshipOf"]))
+g.add((REx_subj_class, OWL["someValuesFrom"], DWC["Organism"]))
+g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], REx_subj_class))
 
-Robj_class = BNode()
-g.add((Robj_class, RDF["type"], OWL["Restriction"]))
-g.add((Robj_class, OWL["onProperty"], DWCDP["relationshipTo"]))
-g.add((Robj_class, OWL["someValuesFrom"], DWC["Organism"]))
-g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], Robj_class))
+REx_obj_class = BNode()
+g.add((REx_obj_class, RDF["type"], OWL["Restriction"]))
+g.add((REx_obj_class, OWL["onProperty"], DWCDP["relationshipTo"]))
+g.add((REx_obj_class, OWL["someValuesFrom"], DWC["Organism"]))
+g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], REx_obj_class))
+
+RUn_subj_class = BNode()
+g.add((RUn_subj_class, RDF["type"], OWL["Restriction"]))
+g.add((RUn_subj_class, OWL["onProperty"], DWCDP["relationshipOf"]))
+g.add((RUn_subj_class, OWL["allValuesFrom"], DWC["Organism"]))
+g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], RUn_subj_class))
+
+RUn_obj_class = BNode()
+g.add((RUn_obj_class, RDF["type"], OWL["Restriction"]))
+g.add((RUn_obj_class, OWL["onProperty"], DWCDP["relationshipTo"]))
+g.add((RUn_obj_class, OWL["allValuesFrom"], DWC["Organism"]))
+g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], RUn_obj_class))
+
 
 #####################################################################################################
 # BEGIN INDIVIDUALS
@@ -3152,7 +3190,6 @@ createOP(
     name="recordedBy",
     namespace=DWCIRI,
     graph=g,
-    domains=DWC["Occurrence"],
     pref_label=Literal("Recorded By (IRI)"),
     definition=Literal("A person, group, or organization responsible for recording the original dwc:Occurrence.", lang="en"),
     comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
@@ -3586,7 +3623,9 @@ createOP(
     ranges=AC["Media"],
     pref_label=Literal("Has Media", lang="en"),
     inverse_prop=DWCDP["mediaOf"],
-    prop_chains=[DWCDP["hasMedia"], DWCDP["partOf"]],
+    prop_chains=[
+        (DWCDP["hasMedia"], DWCDP["partOf"]),
+    ],
     definition=Literal("An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction].", lang="en"),
     comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:mediaOf], which allows reasoners queries to go through different ways.", lang="en"),
 )
@@ -3606,7 +3645,9 @@ createOP(
     ],
     pref_label=Literal("Has Evidence", lang="en"),
     inverse_prop=DWCDP["evidenceFor"],
-    prop_chains=[DWCDP["hasEvidence"], DWCDP["partOf"]],
+    prop_chains=[
+        (DWCDP["hasEvidence"], DWCDP["partOf"]),
+    ],
     definition=Literal("An [owl:ObjectProperty] used to relate an instance of [dwc:Occurrence] to various entities which are evidence for it. These entities can be [ac:Media], [dcterms:BibliographicResource], [dwc:MaterialEntity], [dwc:NucleotideSequence].", lang="en"),
     comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:evidenceFor], which allows reasoners queries to go through different ways.", lang="en"),
 )
@@ -3712,7 +3753,9 @@ createOP(
     graph=g,
     domains=DWC["NucleotideAnalysis"],
     ranges=DWC["Event"],
-    prop_chains=[DWCDP["analysisOf"], DWCDP["collectedDuring"]],
+    prop_chains=[
+        (DWCDP["analysisOf"], DWCDP["collectedDuring"]),
+    ],
     pref_label=Literal("Material Collected During", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:Event] from which the material was collected.", lang="en"),
 )
@@ -3741,6 +3784,10 @@ createOP(
     ],
     pref_label=Literal("Media Of", lang="en"),
     inverse_prop=DWCDP["hasMedia"],
+    prop_chains=[
+        (DWCDP["mediaOf"], DWCDP["interactionBy"]),
+        (DWCDP["mediaOf"], DWCDP["interactionWith"]),
+    ],
     definition=Literal("An [owl:ObjectProperty] used to relate an instance of [ac:Media] to an entity of which it is a media of. These entities can be [chrono:ChronometricAge], [dcterms:Agent],[dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction].", lang="en"),
     comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:hasMedia], which allows reasoners queries to go through different ways.", lang="en"),
 )
@@ -3764,7 +3811,9 @@ createOP(
     ranges=DCTERMS["BibliographicResource"],
     pref_label=Literal("Mentioned In", lang="en"),
     inverse_prop=DWCDP["mentions"],
-    prop_chains=[DWCDP["mentionedIn"], DWCDP["partOf"]],
+    prop_chains=[
+        (DWCDP["mentionedIn"], DWCDP["partOf"]),
+    ],
     definition=Literal("An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned.", lang="en"),
     comments=Literal("The mentionable resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey].", lang="en"),
 )
@@ -3903,12 +3952,46 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it.", lang="en"),
 )
 
+# WARN: Added dwc:OrganismInteraction to domain
+# Check if subproperty_of still holds
+#
+# BUG: Valid reason not to consider the property chain axiom.
+# Like in the fish metabaracoding. The fish occurrence is recordedBy someone
+# if someone else asserts that it ate something, it would incorrectly be made
+# the recorder of the fish occurrence as well
+#
+createOP(
+    name="recorded",
+    namespace=DWCDP,
+    graph=g,
+    domains=DCTERMS["Agent"],
+    ranges=[
+        DWC["Occurrence"],
+        DWC["OrganismInteraction"],
+    ],
+    inverse_prop=DWCDP["recordedBy"],
+    # prop_chains=[
+        # (DWCDP["recorded"], DWCDP["interactionBy"]),
+        # (DWCDP["recorded"], DWCDP["interactionWith"]),
+    # ],
+    pref_label=Literal("Recorded (DWCDP)", lang="en"),
+    definition=Literal("A person, group, or organization responsible for recording the original dwc:Occurrence.", lang="en"),
+)
+
+
+# WARN: Added dwc:OrganismInteraction to domain
+# Check if subproperty_of still holds
+#
 createOP(
     name="recordedBy",
     namespace=DWCDP,
     graph=g,
-    domains=DWC["Occurrence"],
+    domains=[
+        DWC["Occurrence"],
+        DWC["OrganismInteraction"],
+    ],
     ranges=DCTERMS["Agent"],
+    inverse_prop=DWCDP["recorded"],
     pref_label=Literal("Recorded By (DWCDP)", lang="en"),
     subproperty_of=DWCIRI["recordedBy"],
     definition=Literal("A person, group, or organization responsible for recording the original dwc:Occurrence.", lang="en"),

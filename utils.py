@@ -144,6 +144,7 @@ def createOC(
         card1_restrictions: list[Node] | None = None,
         maxcard1_restrictions: list[Node] | None = None,
         mincard1_restrictions: list[Node] | None = None,
+        qualcard_restrictions: list[Node] | None = None,
         references_s: str | None = None,
         equiv_def: tuple[Node, Node] | None = None,
 ) -> None:
@@ -233,7 +234,16 @@ def createOC(
             graph.add((RMin1_BNode, OWL["minCardinality"], Literal(1, datatype=XSD["nonNegativeInteger"])))
             entity_pylist.append(RMin1_BNode)
 
- 
+    if qualcard_restrictions:
+        for _tuple in qualcard_restrictions:
+            QC_BNode = BNode()
+            graph.add((QC_BNode, RDF["type"], OWL["Restriction"]))
+            graph.add((QC_BNode, OWL["onProperty"], _tuple[0]))
+            graph.add((QC_BNode, OWL["qualifiedCardinality"], Literal(_tuple[1], datatype=XSD["nonNegativeInteger"])))
+            graph.add((QC_BNode, OWL["onClass"], _tuple[2]))
+            entity_pylist.append(QC_BNode)
+
+
     for entity in entity_pylist:
             graph.add((class_uri, RDFS["subClassOf"], entity))
     
@@ -260,7 +270,7 @@ def createOP(
     equivalent_property_list: list[Node] | None = None,
     additional_props: list[Node] | None = None,
     inverse_prop: Node | None = None,
-    prop_chains: list[Node] | list[list[Node]] | None = None,
+    prop_chains: list[tuple[Node]] | None = None,
     definition: Literal | None = None,
     comments: Literal | None = None,
     examples: URIRef | list[URIRef] | None = None,
@@ -362,11 +372,11 @@ def createOP(
         graph.add((op_uri, OWL["inverseOf"], inverse_prop))
 
     if prop_chains:
-        if isinstance(prop_chains, list) and all(isinstance(item, Node) for item in prop_chains):
+        for prop_chain in prop_chains:
             # Add it with a blank node
-            prop_chain = BNode()
-            Collection(graph, prop_chain, prop_chains)
-            graph.add((op_uri, OWL["propertyChainAxiom"], prop_chain))
+            prop_chain_bnode = BNode()
+            Collection(graph, prop_chain_bnode, prop_chain)
+            graph.add((op_uri, OWL["propertyChainAxiom"], prop_chain_bnode))
 
     if additional_props:
         if isinstance(additional_props, Node):
