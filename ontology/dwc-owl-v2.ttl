@@ -938,6 +938,9 @@ dwcdp:hasEvidence rdf:type owl:ObjectProperty ;
                                              dwc:NucleotideSequence
                                            )
                              ] ;
+                  owl:propertyChainAxiom ( dwcdp:hasEvidence
+                                           dwcdp:partOf
+                                         ) ;
                   rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:evidenceFor], which allows reasoners queries to go through different ways."@en ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate an instance of [dwc:Occurrence] to various entities which are evidence for it. These entities can be [ac:Media], [dcterms:BibliographicResource], [dwc:MaterialEntity], [dwc:NucleotideSequence]."@en ;
@@ -959,6 +962,9 @@ dwcdp:hasMedia rdf:type owl:ObjectProperty ;
                                          )
                            ] ;
                rdfs:range ac:Media ;
+               owl:propertyChainAxiom ( dwcdp:hasMedia
+                                        dwcdp:partOf
+                                      ) ;
                rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:mediaOf], which allows reasoners queries to go through different ways."@en ;
                rdfs:isDefinedBy dwcdp: ;
                skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]."@en ;
@@ -1096,6 +1102,9 @@ dwcdp:mentionedIn rdf:type owl:ObjectProperty ;
                                             )
                               ] ;
                   rdfs:range dcterms:BibliographicResource ;
+                  owl:propertyChainAxiom ( dwcdp:mentionedIn
+                                           dwcdp:partOf
+                                         ) ;
                   rdfs:comment "The mentionable resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."@en ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned."@en ;
@@ -1174,7 +1183,8 @@ dwcdp:ownedBy rdf:type owl:ObjectProperty ;
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/partOf
-dwcdp:partOf rdf:type owl:ObjectProperty ;
+dwcdp:partOf rdf:type owl:ObjectProperty ,
+                      owl:TransitiveProperty ;
              rdfs:domain [ rdf:type owl:Class ;
                            owl:unionOf ( dcterms:BibliographicResource
                                          ac:Media
@@ -1255,7 +1265,22 @@ dwcdp:reviewedBy rdf:type owl:ObjectProperty ;
                  rdfs:range dcterms:Agent ;
                  rdfs:isDefinedBy dwcdp: ;
                  skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that reviewed it."@en ;
-                 skos:prefLabel "Reviewed By" .
+                 skos:prefLabel "Reviewed By"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/rightsHeldBy
+dwcdp:rightsHeldBy rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf dcterms:rightsHolder ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( ac:Media
+                                               dwc:MaterialEntity
+                                             )
+                               ] ;
+                   rdfs:range dcterms:Agent ;
+                   rdfs:comment "In the context of Darwin Core, these resources include ac:Media and dwc:MaterialEntity."@en ;
+                   rdfs:isDefinedBy dwcdp: ;
+                   skos:definition "An [owl:ObjectProperty] used to relate a resource to the [dcterms:Agent] that holds rights over it."@en ;
+                   skos:prefLabel "Rights Held By"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/samplingPerformedBy
@@ -1275,7 +1300,7 @@ dwcdp:spatialLocation rdf:type owl:ObjectProperty ;
                       rdfs:range dcterms:Location ;
                       rdfs:isDefinedBy dwcdp: ;
                       skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."@en ;
-                      skos:prefLabel "Spatial Location" .
+                      skos:prefLabel "Spatial Location"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/storedIn
@@ -1862,7 +1887,7 @@ ac:fundingAttribution rdf:type owl:DatatypeProperty ;
                                    "National Science Foundation" ,
                                    "Norges forskningsråd" ,
                                    "Ocean Census | Nippon Foundation" ;
-                      skos:prefLabel "Funding Attribution" .
+                      skos:prefLabel "Funding Attribution"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/fundingAttributionID
@@ -1877,7 +1902,7 @@ ac:fundingAttributionID rdf:type owl:DatatypeProperty ;
                         skos:example "https://ror.org/00epmv149" ,
                                      "https://ror.org/00epmv149 | https://ror.org/04jnzhb65" ,
                                      "https://www.wikidata.org/wiki/Q13102615" ;
-                        skos:prefLabel "Funding Attribution ID" .
+                        skos:prefLabel "Funding Attribution ID"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/hashFunction
@@ -1927,7 +1952,7 @@ ac:isROIOf rdf:type owl:DatatypeProperty ;
            rdfs:comment "This term can be used to define an [ac:RegionOfInterest] within an [ac:Media] resource. Recommended best practice is to use a globally unique identifier."@en ;
            rdfs:isDefinedBy ac: ;
            skos:definition "An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part."@en ;
-           skos:prefLabel "Is Part Of Media ID" .
+           skos:prefLabel "Is Part Of Media ID"@en .
 
 
 ###  http://rs.tdwg.org/ac/terms/mediaDuration
@@ -4102,7 +4127,7 @@ dwc:projectTitle rdf:type owl:DatatypeProperty ;
                               "Scalidophora i Noreg" ,
                               "The Nansen Legacy" ,
                               "Underwater Oases of the Mar del Plata Canyon: Talud Continental IV" ;
-                 skos:prefLabel "Project Title" .
+                 skos:prefLabel "Project Title"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/protocolDescription

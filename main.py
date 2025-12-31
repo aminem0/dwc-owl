@@ -3586,6 +3586,7 @@ createOP(
     ranges=AC["Media"],
     pref_label=Literal("Has Media", lang="en"),
     inverse_prop=DWCDP["mediaOf"],
+    prop_chains=[DWCDP["hasMedia"], DWCDP["partOf"]],
     definition=Literal("An [owl:ObjectProperty] used to relate an entity to an instance of [ac:Media]. These entities can be [chrono:ChronometricAge], [dcterms:Agent], [dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction].", lang="en"),
     comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:mediaOf], which allows reasoners queries to go through different ways.", lang="en"),
 )
@@ -3605,6 +3606,7 @@ createOP(
     ],
     pref_label=Literal("Has Evidence", lang="en"),
     inverse_prop=DWCDP["evidenceFor"],
+    prop_chains=[DWCDP["hasEvidence"], DWCDP["partOf"]],
     definition=Literal("An [owl:ObjectProperty] used to relate an instance of [dwc:Occurrence] to various entities which are evidence for it. These entities can be [ac:Media], [dcterms:BibliographicResource], [dwc:MaterialEntity], [dwc:NucleotideSequence].", lang="en"),
     comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:evidenceFor], which allows reasoners queries to go through different ways.", lang="en"),
 )
@@ -3762,6 +3764,7 @@ createOP(
     ranges=DCTERMS["BibliographicResource"],
     pref_label=Literal("Mentioned In", lang="en"),
     inverse_prop=DWCDP["mentions"],
+    prop_chains=[DWCDP["mentionedIn"], DWCDP["partOf"]],
     definition=Literal("An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned.", lang="en"),
     comments=Literal("The mentionable resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey].", lang="en"),
 )
@@ -3860,6 +3863,7 @@ createOP(
         DCTERMS["BibliographicResource"],
         DWC["MaterialEntity"],
     ],
+    additional_props=OWL["TransitiveProperty"],
     pref_label=Literal("Part Of"),
     definition=Literal("An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived.", lang="en"),
     comments=Literal("Though the [rdfs:domain] and [rdfs:range] of this property are varied, universal restrictions on the classes prevent cross-class use of the term.", lang="en"),
@@ -3937,8 +3941,23 @@ createOP(
     domains=AC["Media"],
     ranges=DCTERMS["Agent"],
     subproperty_of=AC["reviewer"],
-    pref_label=Literal("Reviewed By"),
+    pref_label=Literal("Reviewed By", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Media] to the [dcterms:Agent] that reviewed it.", lang="en"),
+)
+
+createOP(
+    name="rightsHeldBy",
+    namespace=DWCDP,
+    graph=g,
+    domains=[
+        AC["Media"],
+        DWC["MaterialEntity"],
+    ],
+    ranges=DCTERMS["Agent"],
+    subproperty_of=DCTERMS["rightsHolder"],
+    pref_label=Literal("Rights Held By", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a resource to the [dcterms:Agent] that holds rights over it.", lang="en"),
+    comments=Literal("In the context of Darwin Core, these resources include ac:Media and dwc:MaterialEntity.", lang="en"),
 )
 
 createOP(
@@ -3962,7 +3981,7 @@ createOP(
     equivalent_property_list=[
         DSW["locatedAt"],
     ],
-    pref_label=Literal("Spatial Location"),
+    pref_label=Literal("Spatial Location", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in.", lang="en"),
 )
 
@@ -4163,7 +4182,7 @@ createDP(
     graph=g,
     domains=DWC["Provenance"],
     ranges=XSD["string"],
-    pref_label=Literal("Funding Attribution"),
+    pref_label=Literal("Funding Attribution", lang="en"),
     definition=Literal("A list (concatenated and separated) of names of the funding organizations or agencies that provided funding for a project.", lang="en"),
     comments=Literal("Specify the full official name of the funding body. This should include the complete name without abbreviations, unless the abbreviation is an official and commonly recognized form (e.g., `NSF` for the `National Science Foundation`). Recommended best practice is to separate the values in a list with space vertical bar space (` | `).", lang="en"),
     examples=[
@@ -4186,7 +4205,7 @@ createDP(
     graph=g,
     domains=DWC["Provenance"],
     ranges=XSD["string"],
-    pref_label=Literal("Funding Attribution ID"),
+    pref_label=Literal("Funding Attribution ID", lang="en"),
     definition=Literal("An identifier for a dcterms:Agent that financially supported a project.", lang="en"),
     comments=Literal("Provide a unique identifier for the funding body, such as an identifier used in governmental or international databases. If no official identifier exists, use a persistent and unique identifier within your organization or dataset. Recommended best practice is to separate the values in a list with space vertical bar space (` | `).", lang="en"),
     examples=[
@@ -4223,7 +4242,7 @@ createDP(
     graph=g,
     domains=AC["Media"],
     ranges=RDFS["Literal"],
-    pref_label=Literal("Is Part Of Media ID"),
+    pref_label=Literal("Is Part Of Media ID", lang="en"),
     definition=Literal("An identifier for an [ac:Media] resource of which this [ac:Media] resource is a part.", lang="en"),
     comments=Literal("This term can be used to define an [ac:RegionOfInterest] within an [ac:Media] resource. Recommended best practice is to use a globally unique identifier.", lang="en"),
     version_of_s="http://rs.tdwg.org/ac/terms/isROIOf",
@@ -6787,7 +6806,7 @@ createDP(
     graph=g,
     domains=DWC["Provenance"],
     ranges=RDF["langString"],
-    pref_label=Literal("Project Title"),
+    pref_label=Literal("Project Title", lang="en"),
     definition=Literal("A list (concatenated and separated) of titles or names for projects that contributed to a dwc:Event.", lang="en"),
     comments=Literal("Use this term to provide the official name or title of a project as it is commonly known and cited. Avoid abbreviations unless they are widely understood. Recommended best practice is to separate the values in a list with space vertical bar space (` | `).", lang="en"),
     examples=[
