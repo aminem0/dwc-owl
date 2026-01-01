@@ -203,6 +203,78 @@ Another story may be told around the following image:
   
   In this second example, the inferred structure is not merely additive, but also discriminative. The reasoner does not only enrich the graph with more links and types, it also differentiates between conceptually similar entities based on their roles in the workflow. This highlights an often overlooked strength of reasoning, which is to recover semantic distinctions that were never explicitly asserted, but that follow necessarily from the modeling choices.
 
+### Story 3
+
+A final story may be told around the following image:
+
+  ![specimen of sandwicense](https://pacific.symbiota.org/media/HAW_/HAW45/HAW45308_1764564301_web.jpg)
+  *Image obtained from [the associated record in the Consortium for Pacific Herbaria](https://pacific.symbiota.org/portal/collections/individual/index.php?occid=1282283). Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
+
+  This image depicts a material entity, namely a preserved plant specimen housed in a herbarium. The herbarium in question is the Joseph F. Rock Herbarium at the University of Hawaiʻi at Mānoa. According to the herbarium label, the specimen has been identified as *Myoporum sandwicense* var. *stellatum*. As with most herbarium material, the specimen constitutes physical evidence for an occurrence that took place at the time and place of collection. In this case, the collection event occurred at Barber’s Point on the island of Oʻahu, at the spatial coordinates `POINT (-158.1056, 21.29697)`.
+
+  After populating the relevant Darwin Core fields, one could arrive at the following turtle serialization:
+
+  ```turtle
+  @prefix ac: <http://rs.tdwg.org/ac/terms/> .
+  @prefix dcterms: <http://purl.org/dc/terms/> .
+  @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
+  @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
+  @prefix exif: <http://ns.adobe.com/exif/1.0/> .
+
+  <https://scientific-collections.gbif.org/institution/96f1a3e5-f438-4c39-8c13-ef0d12afd837> a dcterms:Agent ;
+      dwc:agentType "organization" ;
+      dwc:preferredAgentName "University of Hawaiʻi at Mānoa" ;
+      dwcdp:owns <http://bioboum.ca/material/d8702673-fa82-4076-bbff-1997d7c1285a> .
+
+  <http://bioboum.ca/location/a6d13689-d957-4c54-bc15-ad5779f1d0b5> a dcterms:Location ;
+      dwc:country "United States of America" ;
+      dwc:county "Honolulu" ;
+      dwc:decimalLatitude 21.29697 ;
+      dwc:decimalLongitude -158.1056 ;
+      dwc:island "Oʻahu" ;
+      dwc:locality "Barber's Point" ;
+      dwc:stateProvince "Hawaiʻi" .
+
+  <https://media01.symbiota.org/media/pacific/HAW/HAW45/HAW45309.JPG> a ac:Media ;
+      exif:PixelXDimension 1400 ;
+      exif:PixelYDimension 2127 ;
+      dwcdp:mediaOf <http://bioboum.ca/material/d8702673-fa82-4076-bbff-1997d7c1285a> .
+
+  <https://www.gbif.org/occurrence/5912078058> a dwc:Occurrence ;
+      dwcdp:hasEvidence <http://bioboum.ca/material/d8702673-fa82-4076-bbff-1997d7c1285a> ;
+      dwcdp:spatialLocation <http://bioboum.ca/location/a6d13689-d957-4c54-bc15-ad5779f1d0b5> .
+
+  <http://bioboum.ca/material/d8702673-fa82-4076-bbff-1997d7c1285a> a dwc:MaterialEntity ;
+      dwcdp:evidenceFor <https://www.gbif.org/occurrence/5912078058> ;
+      dwcdp:hasMedia <https://media01.symbiota.org/media/pacific/HAW/HAW45/HAW45309.JPG> ;
+      dwcdp:ownedBy <https://scientific-collections.gbif.org/institution/96f1a3e5-f438-4c39-8c13-ef0d12afd837> .
+  ```
+
+  Some fields have been intentionally left blank and could be populated later. The key point here is that the `dcterms:Location` instance is fully described and explicitly linked into the graph.
+
+  From a graph perspective, this yields the following structure:
+
+  ![graph of the herbarium example](images/graph3-inconsistent.png)
+
+  At first glance, the model *appears* coherent. However, when a reasoner is run over this data with the ontology, rather than inferring new knowledge, as was the case in the previous two examples, it reports an inconsistency. This indicates that the data violates one or more axioms defined in the ontology.
+
+  Most reasoning tools are able to provide explanations to help identify the source of the problem. In this case, a typical laconic explanation is as follows:
+
+  ```markdown
+  # Axiom Impact 
+  ## Axioms used 1 times
+  -  DisjointClasses: [Event](http://rs.tdwg.org/dwc/terms/Event), [Occurrence](http://rs.tdwg.org/dwc/terms/Occurrence) [dwc-owl.owl]
+  - [5912078058](https://www.gbif.org/occurrence/5912078058) Type [Occurrence](http://rs.tdwg.org/dwc/terms/Occurrence) [dwc-owl.owl]
+  - [5912078058](https://www.gbif.org/occurrence/5912078058) [spatialLocation](http://rs.tdwg.org/dwcdp/terms/spatialLocation) [a6d13689-d957-4c54-bc15-ad5779f1d0b5](http://bioboum.ca/location/a6d13689-d957-4c54-bc15-ad5779f1d0b5) [dwc-owl.owl]
+  - [spatialLocation](http://rs.tdwg.org/dwcdp/terms/spatialLocation) Domain [Event](http://rs.tdwg.org/dwc/terms/Event) [dwc-owl.owl]
+  ```
+
+  The above snippet gives an explanation as to where the inconsistency lies. The `dwc:Occurrence` and the `dcterms:Location` instances are related through the triple `<https://www.gbif.org/occurrence/5912078058> dwcdp:spatialLocation <http://bioboum.ca/location/hasho>`. In DwC-OWL, the domain of the object property `dwcdp:spatialLocation` is set to be an instance of `dcterms:Event`. This is consistent with Darwin Core terminology and the corresponding object property `dsw:locatedAt` in Darwin-SW.
+  
+  However, at the same time, we have declared `dwc:Event` and `dwc:Occurrence` to be disjoint classes, implying that no individual can belong to both. As a result, the reasoner correctly detects a contradiction: the occurrence should be inferred as both an instance of `dwc:Event` and `dwc:Occurrence`, which is impossible according to the ontology.
+
+  This example highlights a crucial role of reasoners beyond inference, which is consistency checking. Ontologies do not only enrich data with additional semantics, but they also enforce constraints on how entities may be related. By exposing modelling errors early, reasoners help ensure that datasets adhere to shared conceptual expectations, thereby improving interoperability, reuse, and trust in biodiversity data.
+
 ### Conclusion
 
   This added structure is what enables reliable querying, validation, and integration. Once entities are typed, SPARQL queries that target precise aspects of datasets, such as `retrieve all occurrences of Antarctic lanternfish that have media`, `list all agents involved in identifications`, `retrieve all nucleotide sequences producedby material collected in a particular event` no longer rely on conventions or documentation alone. Instead, they rely on formal semantics that can be applied consistently by machines.
