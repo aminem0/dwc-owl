@@ -224,7 +224,6 @@ A final story may be told around the following image:
   <https://scientific-collections.gbif.org/institution/96f1a3e5-f438-4c39-8c13-ef0d12afd837> a dcterms:Agent ;
       dwc:agentType "organization" ;
       dwc:preferredAgentName "University of Hawaiʻi at Mānoa" ;
-      dwcdp:owns <http://bioboum.ca/material/d8702673-fa82-4076-bbff-1997d7c1285a> .
 
   <http://bioboum.ca/location/a6d13689-d957-4c54-bc15-ad5779f1d0b5> a dcterms:Location ;
       dwc:country "United States of America" ;
@@ -241,12 +240,10 @@ A final story may be told around the following image:
       dwcdp:mediaOf <http://bioboum.ca/material/d8702673-fa82-4076-bbff-1997d7c1285a> .
 
   <https://www.gbif.org/occurrence/5912078058> a dwc:Occurrence ;
-      dwcdp:hasEvidence <http://bioboum.ca/material/d8702673-fa82-4076-bbff-1997d7c1285a> ;
       dwcdp:spatialLocation <http://bioboum.ca/location/a6d13689-d957-4c54-bc15-ad5779f1d0b5> .
 
   <http://bioboum.ca/material/d8702673-fa82-4076-bbff-1997d7c1285a> a dwc:MaterialEntity ;
       dwcdp:evidenceFor <https://www.gbif.org/occurrence/5912078058> ;
-      dwcdp:hasMedia <https://media01.symbiota.org/media/pacific/HAW/HAW45/HAW45309.JPG> ;
       dwcdp:ownedBy <https://scientific-collections.gbif.org/institution/96f1a3e5-f438-4c39-8c13-ef0d12afd837> .
   ```
 
@@ -263,7 +260,7 @@ A final story may be told around the following image:
   ```markdown
   # Axiom Impact 
   ## Axioms used 1 times
-  -  DisjointClasses: [Event](http://rs.tdwg.org/dwc/terms/Event), [Occurrence](http://rs.tdwg.org/dwc/terms/Occurrence) [dwc-owl.owl]
+  - DisjointClasses: [Event](http://rs.tdwg.org/dwc/terms/Event), [Occurrence](http://rs.tdwg.org/dwc/terms/Occurrence) [dwc-owl.owl]
   - [5912078058](https://www.gbif.org/occurrence/5912078058) Type [Occurrence](http://rs.tdwg.org/dwc/terms/Occurrence) [dwc-owl.owl]
   - [5912078058](https://www.gbif.org/occurrence/5912078058) [spatialLocation](http://rs.tdwg.org/dwcdp/terms/spatialLocation) [a6d13689-d957-4c54-bc15-ad5779f1d0b5](http://bioboum.ca/location/a6d13689-d957-4c54-bc15-ad5779f1d0b5) [dwc-owl.owl]
   - [spatialLocation](http://rs.tdwg.org/dwcdp/terms/spatialLocation) Domain [Event](http://rs.tdwg.org/dwc/terms/Event) [dwc-owl.owl]
