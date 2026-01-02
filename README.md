@@ -132,13 +132,13 @@ Another story may be told around the following image:
   ```turtle
   @prefix dwcdp: <http://rs.tdwg.org/dwcdp/terms/> .
 
-  <http://bioboum.ca/protocol/imp-3> dwcdp:followedBy <http://bioboum.ca/nucleotide-analysis/imp-3-d0217d085689bcb62a7403d102999a9c19205289c-p133-2b-p133-2bs> .
+  <http://bioboum.ca/protocol/imp-3> dwcdp:followedBy <http://bioboum.ca/nucleotide-analysis/imp-3-p133-2b-p133-2bs> .
 
   <http://bioboum.ca/protocol/insektmobilen> dwcdp:followedBy <http://bioboum.ca/event/p133-2b> .
 
   <https://api.gbif.org/v1/image/cache/occurrence/4850060137/media/5ddb1808d104654811554a54e12da753> dwcdp:mediaOf <http://bioboum.ca/material/p133-2bs> .
 
-  <http://bioboum.ca/nucleotide-analysis/imp-3-d0217d085689bcb62a7403d102999a9c19205289c-p133-2b-p133-2bs> dwcdp:analysisOf <http://bioboum.ca/material/p133-2bs> ;
+  <http://bioboum.ca/nucleotide-analysis/imp-3-p133-2b-p133-2bs> dwcdp:analysisOf <http://bioboum.ca/material/p133-2bs> ;
       dwcdp:produced <http://bioboum.ca/nucleotide-sequence/0217d085689bcb62a7403d102999a9c19205289c> .
 
   <http://bioboum.ca/material/p133-2bs> dwcdp:collectedDuring <http://bioboum.ca/event/p133-2b> .
@@ -160,11 +160,11 @@ Another story may be told around the following image:
 
   <http://bioboum.ca/nucleotide-sequence/0217d085689bcb62a7403d102999a9c19205289c> a dwc:NucleotideSequence,
           owl:NamedIndividual ;
-      dwcdp:producedBy <http://bioboum.ca/nucleotide-analysis/imp-3-d0217d085689bcb62a7403d102999a9c19205289c-p133-2b-p133-2bs> .
+      dwcdp:producedBy <http://bioboum.ca/nucleotide-analysis/imp-3-p133-2b-p133-2bs> .
 
   <http://bioboum.ca/protocol/imp-3> a dwc:MolecularProtocol,
           owl:NamedIndividual ;
-      dwcdp:followedBy <http://bioboum.ca/nucleotide-analysis/imp-3-d0217d085689bcb62a7403d102999a9c19205289c-p133-2b-p133-2bs> .
+      dwcdp:followedBy <http://bioboum.ca/nucleotide-analysis/imp-3-p133-2b-p133-2bs> .
 
   <http://bioboum.ca/protocol/insektmobilen> a dwc:Protocol,
           owl:NamedIndividual ;
@@ -179,7 +179,7 @@ Another story may be told around the following image:
       dwcdp:collectedDuring <http://bioboum.ca/event/p133-2b> ;
       dwcdp:hasMedia <https://api.gbif.org/v1/image/cache/occurrence/4850060137/media/5ddb1808d104654811554a54e12da753> .
 
-  <http://bioboum.ca/nucleotide-analysis/imp-3-d0217d085689bcb62a7403d102999a9c19205289c-p133-2b-p133-2bs> a dwc:NucleotideAnalysis,
+  <http://bioboum.ca/nucleotide-analysis/imp-3-p133-2b-p133-2bs> a dwc:NucleotideAnalysis,
           owl:NamedIndividual ;
       dwcdp:analysisOf <http://bioboum.ca/material/p133-2bs> ;
       dwcdp:followed <http://bioboum.ca/protocol/imp-3> ;
