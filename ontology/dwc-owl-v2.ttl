@@ -5503,16 +5503,13 @@ ggbn:permitType_vocabulary rdf:type owl:Class ;
 
 ###  http://purl.org/dc/terms/Agent
 dcterms:Agent rdf:type owl:Class ;
-              rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                       owl:onProperty dwc:agentType ;
-                                                       owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                     ]
-                                                     [ rdf:type owl:Restriction ;
-                                                       owl:onProperty dwc:preferredAgentName ;
-                                                       owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                     ]
-                                                   ) ;
-                                rdf:type owl:Class
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty dwc:agentType ;
+                                owl:cardinality "1"^^xsd:nonNegativeInteger
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty dwc:preferredAgentName ;
+                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
                               ] ;
               dcterms:isVersionOf dcterms:Agent ;
               rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
@@ -5528,16 +5525,13 @@ dcterms:Agent rdf:type owl:Class ;
 
 ###  http://purl.org/dc/terms/BibliographicResource
 dcterms:BibliographicResource rdf:type owl:Class ;
-                              rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                       owl:onProperty dwcdp:partOf ;
-                                                                       owl:allValuesFrom dcterms:BibliographicResource
-                                                                     ]
-                                                                     [ rdf:type owl:Restriction ;
-                                                                       owl:onProperty dwc:referenceType ;
-                                                                       owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                     ]
-                                                                   ) ;
-                                                rdf:type owl:Class
+                              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                owl:onProperty dwcdp:partOf ;
+                                                owl:allValuesFrom dcterms:BibliographicResource
+                                              ] ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty dwc:referenceType ;
+                                                owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                               ] ;
                               dcterms:isVersionOf dcterms:BibliographicResource ;
                               rdfs:isDefinedBy dcterms: ;
@@ -5575,64 +5569,61 @@ bibo:DocumentStatus rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/ac/terms/Media
 ac:Media rdf:type owl:Class ;
-         rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                  owl:onProperty dwcdp:derivedFrom ;
-                                                  owl:allValuesFrom ac:Media
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty dwcdp:partOf ;
-                                                  owl:allValuesFrom ac:Media
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty mo:sample_rate ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:captureDevice ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:digitizationDate ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:frameRate ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:freqHigh ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:freqLow ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:hashFunction ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:hashValue ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:heightFrac ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:resourceCreationTechnique ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:timeOfDay ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                                [ rdf:type owl:Restriction ;
-                                                  owl:onProperty ac:widthFrac ;
-                                                  owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                ]
-                                              ) ;
-                           rdf:type owl:Class
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty dwcdp:derivedFrom ;
+                           owl:allValuesFrom ac:Media
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty dwcdp:partOf ;
+                           owl:allValuesFrom ac:Media
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty mo:sample_rate ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:captureDevice ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:digitizationDate ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:frameRate ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:freqHigh ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:freqLow ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:hashFunction ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:hashValue ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:heightFrac ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:resourceCreationTechnique ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:timeOfDay ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ac:widthFrac ;
+                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
                          ] ;
          dcterms:isVersionOf ac:Media ;
          rdfs:comment "An instance of digital textual media may be better represented as a dcterms:BibliographicResource."@en ;
@@ -5671,32 +5662,29 @@ dwc:Assertion rdf:type owl:Class ;
 dwc:BibliographicDocument rdf:type owl:Class ;
                           rdfs:subClassOf dcterms:BibliographicResource ,
                                           bibo:Document ,
-                                          [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty bibo:status ;
-                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty dc:title ;
-                                                                   owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty bibo:edition ;
-                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty bibo:issue ;
-                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty bibo:pages ;
-                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty bibo:volume ;
-                                                                   owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                               ) ;
-                                            rdf:type owl:Class
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bibo:status ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty dc:title ;
+                                            owl:cardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bibo:edition ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bibo:issue ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bibo:pages ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty bibo:volume ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                           ] ;
                           dcterms:isVersionOf dwc:BibliographicDocument ;
                           rdfs:comment "An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions."@en ;
@@ -5786,16 +5774,13 @@ dwc:Identification rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/MaterialEntity
 dwc:MaterialEntity rdf:type owl:Class ;
-                   rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                            owl:onProperty dwcdp:derivedFrom ;
-                                                            owl:allValuesFrom dwc:MaterialEntity
-                                                          ]
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty dwcdp:partOf ;
-                                                            owl:allValuesFrom dwc:MaterialEntity
-                                                          ]
-                                                        ) ;
-                                     rdf:type owl:Class
+                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                     owl:onProperty dwcdp:derivedFrom ;
+                                     owl:allValuesFrom dwc:MaterialEntity
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty dwcdp:partOf ;
+                                     owl:allValuesFrom dwc:MaterialEntity
                                    ] ;
                    dcterms:isVersionOf dwc:MaterialEntity ;
                    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MaterialEntity-2023-09-13> ;
@@ -5832,80 +5817,77 @@ dwc:MolecularProtocol rdf:type owl:Class ;
                                             owl:someValuesFrom dwc:NucleotideAnalysis
                                           ] ;
                       rdfs:subClassOf dwc:Protocol ,
-                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                               owl:onProperty dwcdp:followedBy ;
-                                                               owl:someValuesFrom dwc:NucleotideAnalysis
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty dwcdp:followedBy ;
-                                                               owl:allValuesFrom dwc:NucleotideAnalysis
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty dwc:assayType ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000001> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000002> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000003> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000005> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000006> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000008> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000012> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000013> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000015> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000016> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000017> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000020> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0000092> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0001107> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                             [ rdf:type owl:Restriction ;
-                                                               owl:onProperty <https://w3id.org/mixs/0001320> ;
-                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
-                                                             ]
-                                                           ) ;
-                                        rdf:type owl:Class
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty dwcdp:followedBy ;
+                                        owl:someValuesFrom dwc:NucleotideAnalysis
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty dwcdp:followedBy ;
+                                        owl:allValuesFrom dwc:NucleotideAnalysis
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty dwc:assayType ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000001> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000002> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000003> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000005> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000006> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000008> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000012> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000013> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000015> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000016> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000017> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000020> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0000092> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0001107> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty <https://w3id.org/mixs/0001320> ;
+                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
                                       ] ;
                       dcterms:isVersionOf dwc:MolecularProtocol ;
                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/MolecularProtocol-0000-00-00> ;
@@ -5924,16 +5906,13 @@ dwc:NucleotideAnalysis rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/NucleotideSequence
 dwc:NucleotideSequence rdf:type owl:Class ;
-                       rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:nucleotideSequenceID ;
-                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty dwc:sequence ;
-                                                                owl:cardinality "1"^^xsd:nonNegativeInteger
-                                                              ]
-                                                            ) ;
-                                         rdf:type owl:Class
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty dwc:nucleotideSequenceID ;
+                                         owl:cardinality "1"^^xsd:nonNegativeInteger
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty dwc:sequence ;
+                                         owl:cardinality "1"^^xsd:nonNegativeInteger
                                        ] ;
                        dcterms:isVersionOf dwc:NucleotideSequence ;
                        rdfs:isDefinedBy dwc: ;
@@ -5988,24 +5967,21 @@ dwc:OrganismAssertion rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismInteraction
 dwc:OrganismInteraction rdf:type owl:Class ;
-                        rdfs:subClassOf [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty dwcdp:interactionBy ;
-                                                                 owl:someValuesFrom dwc:Occurrence
-                                                               ]
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty dwcdp:interactionWith ;
-                                                                 owl:someValuesFrom dwc:Occurrence
-                                                               ]
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty dwcdp:interactionBy ;
-                                                                 owl:allValuesFrom dwc:Occurrence
-                                                               ]
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty dwcdp:interactionWith ;
-                                                                 owl:allValuesFrom dwc:Occurrence
-                                                               ]
-                                                             ) ;
-                                          rdf:type owl:Class
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:interactionBy ;
+                                          owl:someValuesFrom dwc:Occurrence
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:interactionWith ;
+                                          owl:someValuesFrom dwc:Occurrence
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:interactionBy ;
+                                          owl:allValuesFrom dwc:Occurrence
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:interactionWith ;
+                                          owl:allValuesFrom dwc:Occurrence
                                         ] ;
                         dcterms:isVersionOf dwc:OrganismInteraction ;
                         rdfs:comment "Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s."@en ;
@@ -6024,18 +6000,15 @@ dwc:OrganismInteraction rdf:type owl:Class ;
 ###  http://rs.tdwg.org/dwc/terms/OrganismInteractionAgentRole
 dwc:OrganismInteractionAgentRole rdf:type owl:Class ;
                                  rdfs:subClassOf dwc:ResourceRelationship ,
-                                                 [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                                          owl:onProperty dwcdp:relationshipOf ;
-                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                          owl:onClass dcterms:Agent
-                                                                        ]
-                                                                        [ rdf:type owl:Restriction ;
-                                                                          owl:onProperty dwcdp:relationshipTo ;
-                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                          owl:onClass dwc:OrganismInteraction
-                                                                        ]
-                                                                      ) ;
-                                                   rdf:type owl:Class
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty dwcdp:relationshipOf ;
+                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass dcterms:Agent
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty dwcdp:relationshipTo ;
+                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass dwc:OrganismInteraction
                                                  ] ;
                                  dcterms:isVersionOf dwc:dodo ;
                                  dcterms:references <http://rs.tdwg.org/dwc/terms/version/dodo> ;

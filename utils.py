@@ -244,14 +244,19 @@ def createOC(
             entity_pylist.append(QC_BNode)
 
     if len(entity_pylist) > 1:
-        rest_list = BNode()
-        Collection(graph, rest_list, entity_pylist)
-
-        rest_inter_class = BNode()
-        graph.add((rest_inter_class, RDF["type"], OWL["Class"]))
-        graph.add((rest_inter_class, OWL["intersectionOf"], rest_list))
-        graph.add((class_uri, RDFS["subClassOf"], rest_inter_class))
+        for rest in entity_pylist:
+            graph.add((class_uri, RDFS["subClassOf"], rest))
         # graph.add((rest_inter_class, RDFS["subClassOf"], class_uri))
+
+    # if len(entity_pylist) > 1:
+    #     rest_list = BNode()
+    #     Collection(graph, rest_list, entity_pylist)
+    #
+    #     rest_inter_class = BNode()
+    #     graph.add((rest_inter_class, RDF["type"], OWL["Class"]))
+    #     graph.add((rest_inter_class, OWL["intersectionOf"], rest_list))
+    #     graph.add((class_uri, RDFS["subClassOf"], rest_inter_class))
+    #     # graph.add((rest_inter_class, RDFS["subClassOf"], class_uri))
 
     # If given, consider the equivalent definition of the class 
     if equiv_def:
