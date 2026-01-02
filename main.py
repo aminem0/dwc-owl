@@ -3322,6 +3322,7 @@ createOP(
     graph=g,
     domains=DWC["NucleotideAnalysis"],
     ranges=DWC["MaterialEntity"],
+    inverse_prop=DWCDP["analyzedIn"],
     pref_label=Literal("Analysis Of", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:MaterialEntity] of which it is an analysis of.", lang="en"),
 )
@@ -3332,6 +3333,7 @@ createOP(
     graph=g,
     domains=DWC["MaterialEntity"],
     ranges=DWC["NucleotideAnalysis"],
+    inverse_prop=DWCDP["analysisOf"],
     pref_label=Literal("Analyzed In", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dwc:NucleotideAnalysis] of which it is analysis of.", lang="en"),
 )

@@ -705,6 +705,7 @@ dwcdp:allowsFor rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/analysisOf
 dwcdp:analysisOf rdf:type owl:ObjectProperty ;
+                 owl:inverseOf dwcdp:analyzedIn ;
                  rdfs:domain dwc:NucleotideAnalysis ;
                  rdfs:range dwc:MaterialEntity ;
                  rdfs:isDefinedBy dwcdp: ;

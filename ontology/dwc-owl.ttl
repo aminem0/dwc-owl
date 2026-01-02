@@ -169,16 +169,16 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:comment "A [dwc:OrganismRelationship] must be a permanent relationship. Ephemeral relationships between [dwc:Organism]s should be recorded as [dwc:OrganismInteraction]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty dwcdp:relationshipTo ;
+            owl:someValuesFrom dwc:Organism ],
+        [ a owl:Restriction ;
             owl:allValuesFrom dwc:Organism ;
             owl:onProperty dwcdp:relationshipOf ],
-        [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
-            owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:Organism ;
             owl:onProperty dwcdp:relationshipTo ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -572,13 +572,6 @@ dwcdp:allowsFor a owl:ObjectProperty ;
             owl:unionOf ( dwc:Event dwc:NucleotideAnalysis eco:Survey ) ] ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Permit] to the activities it allows for."@en ;
     skos:prefLabel "Allows For"@en .
-
-dwcdp:analyzedIn a owl:ObjectProperty ;
-    rdfs:domain dwc:MaterialEntity ;
-    rdfs:isDefinedBy dwcdp: ;
-    rdfs:range dwc:NucleotideAnalysis ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dwc:NucleotideAnalysis] of which it is analysis of."@en ;
-    skos:prefLabel "Analyzed In"@en .
 
 dwcdp:authoredBy a owl:ObjectProperty ;
     rdfs:domain dcterms:BibliographicResource ;
@@ -3251,12 +3244,13 @@ dwc:year a owl:DatatypeProperty ;
         2008 ;
     skos:prefLabel "Year"@en .
 
-dwcdp:analysisOf a owl:ObjectProperty ;
-    rdfs:domain dwc:NucleotideAnalysis ;
+dwcdp:analyzedIn a owl:ObjectProperty ;
+    rdfs:domain dwc:MaterialEntity ;
     rdfs:isDefinedBy dwcdp: ;
-    rdfs:range dwc:MaterialEntity ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:MaterialEntity] of which it is an analysis of."@en ;
-    skos:prefLabel "Analysis Of"@en .
+    rdfs:range dwc:NucleotideAnalysis ;
+    owl:inverseOf dwcdp:analysisOf ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dwc:NucleotideAnalysis] of which it is analysis of."@en ;
+    skos:prefLabel "Analyzed In"@en .
 
 dwcdp:asserted a owl:ObjectProperty ;
     rdfs:domain dcterms:Agent ;
@@ -4368,6 +4362,14 @@ dwcdoe:d011 a dwc:DegreeOfEstablishment ;
     skos:inScheme dwcdoe:d ;
     skos:prefLabel "Widespread invasive (category E)"@en .
 
+dwcdp:analysisOf a owl:ObjectProperty ;
+    rdfs:domain dwc:NucleotideAnalysis ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dwc:MaterialEntity ;
+    owl:inverseOf dwcdp:analyzedIn ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:MaterialEntity] of which it is an analysis of."@en ;
+    skos:prefLabel "Analysis Of"@en .
+
 dwcdp:derivedFrom a owl:ObjectProperty ;
     rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, universal restrictions on the classes prevent cross-class use of the term."@en ;
     rdfs:domain [ a owl:Class ;
@@ -4601,8 +4603,8 @@ dwcdp:mediaOf a owl:ObjectProperty ;
     rdfs:range [ a owl:Class ;
             owl:unionOf ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dwc:Event dwc:GeologicalContext dwc:MaterialEntity dwc:Occurrence dwc:OrganismInteraction ) ] ;
     owl:inverseOf dwcdp:hasMedia ;
-    owl:propertyChainAxiom ( dwcdp:mediaOf dwcdp:interactionBy ),
-        ( dwcdp:mediaOf dwcdp:interactionWith ) ;
+    owl:propertyChainAxiom ( dwcdp:mediaOf dwcdp:interactionWith ),
+        ( dwcdp:mediaOf dwcdp:interactionBy ) ;
     skos:definition "An [owl:ObjectProperty] used to relate an instance of [ac:Media] to an entity of which it is a media of. These entities can be [chrono:ChronometricAge], [dcterms:Agent],[dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]."@en ;
     skos:prefLabel "Media Of"@en .
 
@@ -5138,21 +5140,21 @@ dcterms:Location a owl:Class ;
     owl:someValuesFrom dwc:Organism .
 
 [] a owl:Restriction ;
-    owl:onProperty dwcdp:about ;
-    owl:someValuesFrom dwc:Occurrence .
-
-[] a owl:AllDisjointClasses ;
-    owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:Identification dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:Provenance dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .
-
-[] a owl:Restriction ;
-    owl:onProperty dwcdp:about ;
-    owl:someValuesFrom dwc:MaterialEntity .
-
-[] a owl:Restriction ;
     owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
     owl:onProperty dwc:preferredEventName .
 
 [] a owl:Restriction ;
     owl:cardinality "1"^^xsd:nonNegativeInteger ;
     owl:onProperty dwc:geologicalContextID .
+
+[] a owl:Restriction ;
+    owl:onProperty dwcdp:about ;
+    owl:someValuesFrom dwc:MaterialEntity .
+
+[] a owl:Restriction ;
+    owl:onProperty dwcdp:about ;
+    owl:someValuesFrom dwc:Occurrence .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:Identification dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:Provenance dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .
 

@@ -4466,7 +4466,7 @@ td {
                       <sup class="sup-op" title="OWL Object Property">op</sup>
                     </span>
                     <span>
-                      <span class="cardinality">only</span>
+                      <span class="cardinality">some</span>
                       <span>
                         <span>
                           <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
@@ -4484,7 +4484,7 @@ td {
                       <sup class="sup-op" title="OWL Object Property">op</sup>
                     </span>
                     <span>
-                      <span class="cardinality">some</span>
+                      <span class="cardinality">only</span>
                       <span>
                         <span>
                           <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
@@ -4681,26 +4681,7 @@ td {
                     <span>
                       <span>
                         <span>
-                          <a href="http://rs.tdwg.org/dwcdp/terms/relationshipOf">Relationship Of</a>
-                          <sup class="sup-op" title="OWL Object Property">op</sup>
-                        </span>
-                        <span>
-                          <span class="cardinality">only</span>
-                          <span>
-                            <span>
-                              <a href="http://rs.tdwg.org/dwc/terms/Organism">Organism</a>
-                              <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                            </span>
-                          </span>
-                        </span><br>
-                      </span>
-                    </span>
-                  </li>
-                  <li>
-                    <span>
-                      <span>
-                        <span>
-                          <a href="http://rs.tdwg.org/dwcdp/terms/relationshipOf">Relationship Of</a>
+                          <a href="http://rs.tdwg.org/dwcdp/terms/relationshipTo">Relationship To</a>
                           <sup class="sup-op" title="OWL Object Property">op</sup>
                         </span>
                         <span>
@@ -4719,7 +4700,7 @@ td {
                     <span>
                       <span>
                         <span>
-                          <a href="http://rs.tdwg.org/dwcdp/terms/relationshipTo">Relationship To</a>
+                          <a href="http://rs.tdwg.org/dwcdp/terms/relationshipOf">Relationship Of</a>
                           <sup class="sup-op" title="OWL Object Property">op</sup>
                         </span>
                         <span>
@@ -4739,6 +4720,25 @@ td {
                       <span>
                         <span>
                           <a href="http://rs.tdwg.org/dwcdp/terms/relationshipTo">Relationship To</a>
+                          <sup class="sup-op" title="OWL Object Property">op</sup>
+                        </span>
+                        <span>
+                          <span class="cardinality">only</span>
+                          <span>
+                            <span>
+                              <a href="http://rs.tdwg.org/dwc/terms/Organism">Organism</a>
+                              <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                            </span>
+                          </span>
+                        </span><br>
+                      </span>
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>
+                        <span>
+                          <a href="http://rs.tdwg.org/dwcdp/terms/relationshipOf">Relationship Of</a>
                           <sup class="sup-op" title="OWL Object Property">op</sup>
                         </span>
                         <span>
@@ -6528,12 +6528,12 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntityAssertion">Material Entity Assertion</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/OccurrenceAssertion">Occurrence Assertion</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/OccurrenceAssertion">Occurrence Assertion</a>
+                  <a href="http://rs.tdwg.org/dwc/terms/MaterialEntityAssertion">Material Entity Assertion</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -9009,11 +9009,6 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://purl.org/dc/terms/BibliographicResource">Bibliographic Resource</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
                   <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
@@ -9025,6 +9020,11 @@ td {
                 <span class="cardinality">or</span>
                 <span>
                   <a href="http://rs.tdwg.org/dwc/terms/NucleotideSequence">Nucleotide Sequence</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://purl.org/dc/terms/BibliographicResource">Bibliographic Resource</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -9484,11 +9484,6 @@ td {
               </th>
               <td>
                 <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/NucleotideSequence">Nucleotide Sequence</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
                   <a href="http://rs.tdwg.org/dwc/terms/MaterialEntity">Material Entity</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
@@ -9500,6 +9495,11 @@ td {
                 <span class="cardinality">or</span>
                 <span>
                   <a href="http://rs.tdwg.org/ac/terms/Media">Media</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/NucleotideSequence">Nucleotide Sequence</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
               </td>
@@ -10134,17 +10134,17 @@ td {
                 </span>
                 <span class="cardinality">or</span>
                 <span>
+                  <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
+                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+                </span>
+                <span class="cardinality">or</span>
+                <span>
                   <a href="http://rs.tdwg.org/dwc/terms/GeologicalContext">Geological Context</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
                 <span>
                   <a href="http://rs.tdwg.org/chrono/terms/ChronometricAge">Chronometric Age</a>
-                  <sup class="sup-c" title="OWL/RDFS Class">c</sup>
-                </span>
-                <span class="cardinality">or</span>
-                <span>
-                  <a href="http://rs.tdwg.org/dwc/terms/Occurrence">Occurrence</a>
                   <sup class="sup-c" title="OWL/RDFS Class">c</sup>
                 </span>
                 <span class="cardinality">or</span>
