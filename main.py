@@ -3337,11 +3337,23 @@ createOP(
 )
 
 createOP(
+    name="asserted",
+    namespace=DWCDP,
+    graph=g,
+    domains=DCTERMS["Agent"],
+    ranges=DWC["Assertion"],
+    inverse_prop=DWCDP["assertedBy"],
+    pref_label=Literal("Asserted", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:Agent] to the [dwc:Assertion] that he made.", lang="en"),
+)
+
+createOP(
     name="assertedBy",
     namespace=DWCDP,
     graph=g,
     domains=DWC["Assertion"],
     ranges=DCTERMS["Agent"],
+    inverse_prop=DWCDP["asserted"],
     pref_label=Literal("Asserted By", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the [dcterms:Agent] that asserted it.", lang="en"),
 )
@@ -3952,44 +3964,27 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it.", lang="en"),
 )
 
-# WARN: Added dwc:OrganismInteraction to domain
-# Check if subproperty_of still holds
-#
-# BUG: Valid reason not to consider the property chain axiom.
-# Like in the fish metabaracoding. The fish occurrence is recordedBy someone
-# if someone else asserts that it ate something, it would incorrectly be made
-# the recorder of the fish occurrence as well
+# WARN: Consider dwc:MaterialEntity to domain
 #
 createOP(
     name="recorded",
     namespace=DWCDP,
     graph=g,
     domains=DCTERMS["Agent"],
-    ranges=[
-        DWC["Occurrence"],
-        DWC["OrganismInteraction"],
-    ],
+    ranges=DWC["Occurrence"],
     inverse_prop=DWCDP["recordedBy"],
-    # prop_chains=[
-        # (DWCDP["recorded"], DWCDP["interactionBy"]),
-        # (DWCDP["recorded"], DWCDP["interactionWith"]),
-    # ],
     pref_label=Literal("Recorded (DWCDP)", lang="en"),
     definition=Literal("A person, group, or organization responsible for recording the original dwc:Occurrence.", lang="en"),
 )
 
-
-# WARN: Added dwc:OrganismInteraction to domain
+# WARN: Consider dwc:MaterialEntity to domain
 # Check if subproperty_of still holds
 #
 createOP(
     name="recordedBy",
     namespace=DWCDP,
     graph=g,
-    domains=[
-        DWC["Occurrence"],
-        DWC["OrganismInteraction"],
-    ],
+    domains=DWC["Occurrence"],
     ranges=DCTERMS["Agent"],
     inverse_prop=DWCDP["recorded"],
     pref_label=Literal("Recorded By (DWCDP)", lang="en"),
