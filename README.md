@@ -266,7 +266,7 @@ A final story may be told around the following image:
   - [spatialLocation](http://rs.tdwg.org/dwcdp/terms/spatialLocation) Domain [Event](http://rs.tdwg.org/dwc/terms/Event) [dwc-owl.owl]
   ```
 
-  The above snippet gives an explanation as to where the inconsistency lies. The `dwc:Occurrence` and the `dcterms:Location` instances are related through the triple `<https://www.gbif.org/occurrence/5912078058> dwcdp:spatialLocation <http://bioboum.ca/location/hasho>`. In DwC-OWL, the domain of the object property `dwcdp:spatialLocation` is set to be an instance of `dcterms:Event`. This is consistent with Darwin Core terminology and the corresponding object property `dsw:locatedAt` in Darwin-SW.
+  The above snippet gives an explanation as to where the inconsistency lies. The `dwc:Occurrence` and the `dcterms:Location` instances are related through the triple `<https://www.gbif.org/occurrence/5912078058> dwcdp:spatialLocation <http://bioboum.ca/location/a6d13689-d957-4c54-bc15-ad5779f1d0b5>`. In DwC-OWL, the domain of the object property `dwcdp:spatialLocation` is set to be an instance of `dcterms:Event`. This is consistent with Darwin Core terminology and the corresponding object property `dsw:locatedAt` in Darwin-SW.
   
   However, at the same time, we have declared `dwc:Event` and `dwc:Occurrence` to be disjoint classes, implying that no individual can belong to both. As a result, the reasoner correctly detects a contradiction: the occurrence should be inferred as both an instance of `dwc:Event` and `dwc:Occurrence`, which is impossible according to the ontology.
 
