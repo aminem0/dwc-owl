@@ -8,7 +8,7 @@ import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
-from utils import createDP, createEDP, createEOC, createNI, createOC, createOP, createSC, createSCS, declare_disjoint
+from utils.base import createDP, createEDP, createEOC, createNI, createOC, createOP, createSC, createSCS, declare_disjoint
 
 #####################################################################################################
 # BEGIN ONTOLOGY DEFINITION
