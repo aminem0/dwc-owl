@@ -27,6 +27,7 @@
 @prefix chrono: <http://rs.tdwg.org/chrono/terms/> .
 @prefix dwcdoe: <http://rs.tdwg.org/dwcdoe/values/> .
 @prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
+@prefix ecoiri: <http://rs.tdwg.org/eco/iri/> .
 @prefix minext: <http://rs.tdwg.org/mineralogy/terms/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix acorient: <http://rs.tdwg.org/acorient/values/> .
@@ -1320,7 +1321,7 @@ dwcdp:rightsHeldBy rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwcdp/terms/samplingPerformedBy
 dwcdp:samplingPerformedBy rdf:type owl:ObjectProperty ;
-                          rdfs:subPropertyOf <http://rs.tdwg.org/eco/iri/samplingPerformedBy> ;
+                          rdfs:subPropertyOf ecoiri:samplingPerformedBy ;
                           rdfs:domain eco:Survey ;
                           rdfs:range dcterms:Agent ;
                           rdfs:isDefinedBy dwcdp: ;
@@ -1396,23 +1397,23 @@ dwcdp:usedFor rdf:type owl:ObjectProperty ;
 
 
 ###  http://rs.tdwg.org/eco/iri/samplingPerformedBy
-<http://rs.tdwg.org/eco/iri/samplingPerformedBy> rdf:type owl:ObjectProperty ;
-                                                 dcterms:isVersionOf <http://rs.tdwg.org/eco/iri/samplingPerformedBy> ;
-                                                 dcterms:references <http://rs.tdwg.org/eco/iri/version/samplingPerformedBy-2025-07-10> ;
-                                                 rdfs:comment "The sampling dwc:Event could be at any level of hierarchy. In the case of a higher level (parent) dwc:Event, include all the organizations or people involved in the child dwc:Events that contributed to the parent dwc:Event. Terms in the ecoiri: namespace are intended to be used in RDF with non-literal objects."@en ;
-                                                 rdfs:isDefinedBy <http://rs.tdwg.org/eco/iri/> ;
-                                                 skos:definition "A person, group, or organization responsible for recording the dwc:Event."@en ;
-                                                 skos:prefLabel "Sampling Performed By (IRI)" .
+ecoiri:samplingPerformedBy rdf:type owl:ObjectProperty ;
+                           dcterms:isVersionOf ecoiri:samplingPerformedBy ;
+                           dcterms:references <http://rs.tdwg.org/eco/iri/version/samplingPerformedBy-2025-07-10> ;
+                           rdfs:comment "The sampling dwc:Event could be at any level of hierarchy. In the case of a higher level (parent) dwc:Event, include all the organizations or people involved in the child dwc:Events that contributed to the parent dwc:Event. Terms in the ecoiri: namespace are intended to be used in RDF with non-literal objects."@en ;
+                           rdfs:isDefinedBy ecoiri: ;
+                           skos:definition "A person, group, or organization responsible for recording the dwc:Event."@en ;
+                           skos:prefLabel "Sampling Performed By (IRI)" .
 
 
 ###  http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI
-<http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI> rdf:type owl:ObjectProperty ;
-                                                       rdfs:subPropertyOf dcterms:source ;
-                                                       dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
-                                                       rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
-                                                       rdfs:isDefinedBy <http://rs.tdwg.org/eco/iri/> ;
-                                                       skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
-                                                       skos:prefLabel "Survey Target Type Source IRI" .
+ecoiri:surveyTargetTypeSourceIRI rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf dcterms:source ;
+                                 dcterms:isVersionOf <http://purl.org/dc/elements/terms/source> ;
+                                 rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
+                                 rdfs:isDefinedBy ecoiri: ;
+                                 skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
+                                 skos:prefLabel "Survey Target Type Source IRI" .
 
 
 ###  http://www.w3.org/2004/02/skos/core#inScheme
@@ -7241,21 +7242,21 @@ dcterms:source dcterms:isVersionOf dcterms:source ;
 #    Rules
 #################################################################
 
-_:genid-nodeid-genid-b4aec4acec234bb6b7bcc51dd94481d8-9CC8FA9DDE297074AB4587F38B209217 rdf:type swrl:Variable .
+_:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-841759A15C6C959464E03C4607FBE80F rdf:type swrl:Variable .
 
-_:genid-nodeid-genid-b4aec4acec234bb6b7bcc51dd94481d8-D9CC1A7F6F2906D2DE845D3DCB9E7F0B rdf:type swrl:Variable .
+_:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-0E4A55E8DBCAC46DED171EC430E5ECD8 rdf:type swrl:Variable .
 
 [ rdf:type swrl:Imp ;
    swrl:body [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:mediaOf ;
-                           swrl:argument1 _:genid-nodeid-genid-b4aec4acec234bb6b7bcc51dd94481d8-9CC8FA9DDE297074AB4587F38B209217 ;
-                           swrl:argument2 _:genid-nodeid-genid-b4aec4acec234bb6b7bcc51dd94481d8-D9CC1A7F6F2906D2DE845D3DCB9E7F0B
+                           swrl:argument1 _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-841759A15C6C959464E03C4607FBE80F ;
+                           swrl:argument2 _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-0E4A55E8DBCAC46DED171EC430E5ECD8
                          ] ;
                rdf:rest [ rdf:type swrl:AtomList ;
                           rdf:first [ rdf:type swrl:ClassAtom ;
                                       swrl:classPredicate dwc:Occurrence ;
-                                      swrl:argument1 _:genid-nodeid-genid-b4aec4acec234bb6b7bcc51dd94481d8-D9CC1A7F6F2906D2DE845D3DCB9E7F0B
+                                      swrl:argument1 _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-0E4A55E8DBCAC46DED171EC430E5ECD8
                                     ] ;
                           rdf:rest rdf:nil
                         ]
@@ -7263,8 +7264,8 @@ _:genid-nodeid-genid-b4aec4acec234bb6b7bcc51dd94481d8-D9CC1A7F6F2906D2DE845D3DCB
    swrl:head [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:evidenceFor ;
-                           swrl:argument1 _:genid-nodeid-genid-b4aec4acec234bb6b7bcc51dd94481d8-9CC8FA9DDE297074AB4587F38B209217 ;
-                           swrl:argument2 _:genid-nodeid-genid-b4aec4acec234bb6b7bcc51dd94481d8-D9CC1A7F6F2906D2DE845D3DCB9E7F0B
+                           swrl:argument1 _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-841759A15C6C959464E03C4607FBE80F ;
+                           swrl:argument2 _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-0E4A55E8DBCAC46DED171EC430E5ECD8
                          ] ;
                rdf:rest rdf:nil
              ]
