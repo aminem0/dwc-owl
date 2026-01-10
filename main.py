@@ -8,6 +8,7 @@ import subprocess
 from rdflib import BNode, Graph, Literal, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
+#
 from utils.base import createDP, createEDP, createEOC, createNI, createOC, createOP, createSC, createSCS, declare_disjoint
 
 #####################################################################################################
@@ -2663,6 +2664,29 @@ from rdflib.collection import Collection
 # Collection(g, prop_chain, [DWCDP["basedOn"], DWCDP["evidenceFor"]])
 # g.add((DWCDP["targetOccurrence"], OWL["propertyChainAxiom"], prop_chain))
 #
+
+#####################################################################################################
+# BEGIN SWRL RULES
+#####################################################################################################
+
+from utils.swrl_utils import add_swrl_rule, create_swrl_variable, swrl_class_atom, swrl_property_atom
+
+# Create SWRL variables
+#
+x = create_swrl_variable(g)
+y = create_swrl_variable(g)
+
+add_swrl_rule(
+    g,
+    [
+        swrl_property_atom(g, DWCDP["mediaOf"], x, y),
+        swrl_class_atom(g, DWC["Occurrence"], y)
+    ],
+    [
+        swrl_property_atom(g, DWCDP["evidenceFor"], x, y),
+    ],
+)
+
 
 #####################################################################################################
 # BEGIN OBJECT PROPERTY DEFINITIONS

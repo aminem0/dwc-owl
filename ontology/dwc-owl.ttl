@@ -19,6 +19,7 @@
 @prefix miqe: <http://rs.gbif.org/terms/miqe/> .
 @prefix mixs: <https://w3id.org/mixs/> .
 @prefix mo: <http://purl.org/ontology/mo/> .
+@prefix ns1: <http://www.w3.org/2003/11/swrl#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -154,12 +155,12 @@ dwc:OrganismInteractionAgentRole a owl:Class ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/dodo> ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass dcterms:Agent ;
-            owl:onProperty dwcdp:relationshipOf ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
             owl:onClass dwc:OrganismInteraction ;
             owl:onProperty dwcdp:relationshipTo ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass dcterms:Agent ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         dwc:ResourceRelationship ;
     skos:definition "A relationship of one [rdfs:Resource] ([http://www.w3.org/2000/01/rdf-schema#Resource]) to another."@en ;
@@ -172,13 +173,13 @@ dwc:OrganismRelationship a owl:Class ;
             owl:allValuesFrom dwc:Organism ;
             owl:onProperty dwcdp:relationshipOf ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipOf ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:Organism ;
             owl:onProperty dwcdp:relationshipTo ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
+            owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
@@ -1733,19 +1734,19 @@ dwc:BibliographicDocument a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:volume ],
+            owl:onProperty bibo:status ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:edition ],
+        [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dc:title ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:pages ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:status ],
-        [ a owl:Restriction ;
-            owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dc:title ],
+            owl:onProperty bibo:volume ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:issue ],
@@ -3279,16 +3280,6 @@ dwcdp:collectedDuring a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:MaterialEntity] to the [dwc:Event] during which it was collected."@en ;
     skos:prefLabel "Collected During"@en .
 
-dwcdp:evidenceFor a owl:ObjectProperty ;
-    rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:hasEvidence], which allows reasoners queries to go through different ways."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( ac:Media dcterms:BibliographicResource dwc:MaterialEntity dwc:NucleotideSequence ) ] ;
-    rdfs:isDefinedBy dwcdp: ;
-    rdfs:range dwc:Occurrence ;
-    owl:inverseOf dwcdp:hasEvidence ;
-    skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [dwc:Occurrence]. These entities can be [ac:Media], [dcterms:BibliographicResource], [dwc:MaterialEntity], [dwc:NucleotideSequence]."@en ;
-    skos:prefLabel "Evidence For"@en .
-
 dwcdp:followed a owl:ObjectProperty ;
     rdfs:comment "The considered resources can be varied and include [chrono:ChronometricAge], [dwc:Assertion], [dwc:Event], [dwc:MaterialEntity], [dwc:NucleotideAnalysis], [dwc:Occurrence], [eco:Survey]."@en ;
     rdfs:domain [ a owl:Class ;
@@ -4384,6 +4375,16 @@ dwcdp:derivedFrom a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a subject entity to the entity from which it was derived."@en ;
     skos:prefLabel "Derived From"@en .
 
+dwcdp:evidenceFor a owl:ObjectProperty ;
+    rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:hasEvidence], which allows reasoners queries to go through different ways."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( ac:Media dcterms:BibliographicResource dwc:MaterialEntity dwc:NucleotideSequence ) ] ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range dwc:Occurrence ;
+    owl:inverseOf dwcdp:hasEvidence ;
+    skos:definition "An [owl:ObjectProperty] used to relate an entity to an instance of [dwc:Occurrence]. These entities can be [ac:Media], [dcterms:BibliographicResource], [dwc:MaterialEntity], [dwc:NucleotideSequence]."@en ;
+    skos:prefLabel "Evidence For"@en .
+
 dwcdp:hasEvidence a owl:ObjectProperty ;
     rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:evidenceFor], which allows reasoners queries to go through different ways."@en ;
     rdfs:domain dwc:Occurrence ;
@@ -4600,18 +4601,6 @@ dwcdp:interactionWith a owl:ObjectProperty ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:OrganismInteraction] to the [dwc:Occurrence] it involves."@en ;
     skos:prefLabel "Interaction With" .
 
-dwcdp:mediaOf a owl:ObjectProperty ;
-    rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:hasMedia], which allows reasoners queries to go through different ways."@en ;
-    rdfs:domain ac:Media ;
-    rdfs:isDefinedBy dwcdp: ;
-    rdfs:range [ a owl:Class ;
-            owl:unionOf ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dwc:Event dwc:GeologicalContext dwc:MaterialEntity dwc:Occurrence dwc:OrganismInteraction ) ] ;
-    owl:inverseOf dwcdp:hasMedia ;
-    owl:propertyChainAxiom ( dwcdp:mediaOf dwcdp:interactionWith ),
-        ( dwcdp:mediaOf dwcdp:interactionBy ) ;
-    skos:definition "An [owl:ObjectProperty] used to relate an instance of [ac:Media] to an entity of which it is a media of. These entities can be [chrono:ChronometricAge], [dcterms:Agent],[dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]."@en ;
-    skos:prefLabel "Media Of"@en .
-
 dwcdp:relationshipOf a owl:ObjectProperty ;
     rdfs:comment "To keep the interaction terms semantically correct and in order, the resource considered by this property should be the subject of the statement."@en ;
     rdfs:isDefinedBy dwcdp: ;
@@ -4672,6 +4661,18 @@ dwcdp:followedBy a owl:ObjectProperty ;
     owl:inverseOf dwcdp:followed ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Protocol] to the entities it is followed by."@en ;
     skos:prefLabel "Followed By"@en .
+
+dwcdp:mediaOf a owl:ObjectProperty ;
+    rdfs:comment "This property also has a [owl:InverseProperty], [dwcdp:hasMedia], which allows reasoners queries to go through different ways."@en ;
+    rdfs:domain ac:Media ;
+    rdfs:isDefinedBy dwcdp: ;
+    rdfs:range [ a owl:Class ;
+            owl:unionOf ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dwc:Event dwc:GeologicalContext dwc:MaterialEntity dwc:Occurrence dwc:OrganismInteraction ) ] ;
+    owl:inverseOf dwcdp:hasMedia ;
+    owl:propertyChainAxiom ( dwcdp:mediaOf dwcdp:interactionBy ),
+        ( dwcdp:mediaOf dwcdp:interactionWith ) ;
+    skos:definition "An [owl:ObjectProperty] used to relate an instance of [ac:Media] to an entity of which it is a media of. These entities can be [chrono:ChronometricAge], [dcterms:Agent],[dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]."@en ;
+    skos:prefLabel "Media Of"@en .
 
 acpart:p0016 a dwc:SubjectPart ;
     dcterms:isVersionOf acpart:p0016 ;
@@ -4781,10 +4782,10 @@ dwc:NucleotideSequence a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:sequence ],
+            owl:onProperty dwc:nucleotideSequenceID ],
         [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:nucleotideSequenceID ] ;
+            owl:onProperty dwc:sequence ] ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
     skos:prefLabel "Nucleotide Sequence"@en .
 
@@ -4835,17 +4836,17 @@ dwc:OrganismInteraction a owl:Class ;
     rdfs:comment "Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty dwcdp:interactionBy ;
-            owl:someValuesFrom dwc:Occurrence ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom dwc:Occurrence ;
-            owl:onProperty dwcdp:interactionWith ],
-        [ a owl:Restriction ;
             owl:allValuesFrom dwc:Occurrence ;
             owl:onProperty dwcdp:interactionBy ],
         [ a owl:Restriction ;
             owl:onProperty dwcdp:interactionWith ;
-            owl:someValuesFrom dwc:Occurrence ] ;
+            owl:someValuesFrom dwc:Occurrence ],
+        [ a owl:Restriction ;
+            owl:onProperty dwcdp:interactionBy ;
+            owl:someValuesFrom dwc:Occurrence ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom dwc:Occurrence ;
+            owl:onProperty dwcdp:interactionWith ] ;
     skos:definition "An interaction between two [dwc:Organism]s during a [dwc:Event]."@en ;
     skos:example "a Mallophora ruficauda hunting an Apis mellifera in flight",
         "a bee visiting a flower",
@@ -4940,11 +4941,11 @@ dcterms:BibliographicResource a owl:Class ;
     dcterms:isVersionOf dcterms:BibliographicResource ;
     rdfs:isDefinedBy dcterms: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom dcterms:BibliographicResource ;
-            owl:onProperty dwcdp:partOf ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:referenceType ] ;
+            owl:onProperty dwc:referenceType ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom dcterms:BibliographicResource ;
+            owl:onProperty dwcdp:partOf ] ;
     skos:definition "A book, article, or other documentary resource."@en ;
     skos:prefLabel "Bibliographic Resource"@en .
 
@@ -4978,11 +4979,11 @@ dcterms:Agent a owl:Class ;
     rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
     rdfs:isDefinedBy dcterms: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:preferredAgentName ],
-        [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:agentType ] ;
+            owl:onProperty dwc:agentType ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dwc:preferredAgentName ] ;
     skos:definition "A resource that acts or has the power to act."@en ;
     skos:example "Carl Linnaeus",
         "ChatGPT",
@@ -5050,22 +5051,28 @@ dwc:MolecularProtocol a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000092 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000015 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000006 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000003 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000005 ],
+            owl:onProperty mixs:0000001 ],
         [ a owl:Restriction ;
-            owl:onProperty dwcdp:followedBy ;
-            owl:someValuesFrom dwc:NucleotideAnalysis ],
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000017 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000092 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0001320 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000012 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000002 ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:NucleotideAnalysis ;
             owl:onProperty dwcdp:followedBy ],
@@ -5074,31 +5081,25 @@ dwc:MolecularProtocol a owl:Class ;
             owl:onProperty mixs:0000013 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000012 ],
+            owl:onProperty mixs:0000005 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000008 ],
+            owl:onProperty mixs:0000015 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000001 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000016 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0001320 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000017 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000002 ],
+            owl:onProperty dwc:assayType ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000020 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:assayType ],
+            owl:onProperty mixs:0000008 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000016 ],
+        [ a owl:Restriction ;
+            owl:onProperty dwcdp:followedBy ;
+            owl:someValuesFrom dwc:NucleotideAnalysis ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0001107 ],
@@ -5115,46 +5116,46 @@ ac:Media a owl:Class ;
     rdfs:isDefinedBy ac: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:freqHigh ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mo:sample_rate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:digitizationDate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashFunction ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:derivedFrom ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:partOf ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:widthFrac ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:heightFrac ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashValue ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:resourceCreationTechnique ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:timeOfDay ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:frameRate ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:captureDevice ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:freqLow ] ;
+            owl:onProperty ac:resourceCreationTechnique ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mo:sample_rate ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ac:Media ;
+            owl:onProperty dwcdp:derivedFrom ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:widthFrac ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:frameRate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:freqLow ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:hashValue ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ac:Media ;
+            owl:onProperty dwcdp:partOf ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:hashFunction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:timeOfDay ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:heightFrac ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:freqHigh ] ;
     skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
     skos:example "dcmi:MovingImage",
         "dcmi:Sound",
@@ -5169,6 +5170,37 @@ dcterms:Location a owl:Class ;
         "the place defined by a georeference" ;
     skos:prefLabel "Location"@en .
 
+[] a owl:AllDisjointClasses ;
+    owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:Identification dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:Provenance dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .
+
+[] a owl:Restriction ;
+    owl:onProperty dwcdp:about ;
+    owl:someValuesFrom dwc:MaterialEntity .
+
+[] a owl:Restriction ;
+    owl:onProperty dwcdp:about ;
+    owl:someValuesFrom dwc:Organism .
+
+[] a owl:Restriction ;
+    owl:cardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onProperty dwc:geologicalContextID .
+
+[] a ns1:Imp ;
+    ns1:body [ a ns1:AtomList ;
+            rdf:first [ a ns1:IndividualPropertyAtom ;
+                    ns1:argument1 _:Nf6d4c46c2cfd4b8cb284281c867ab5fd ;
+                    ns1:argument2 _:N6325422229734816b40620d42de24205 ;
+                    ns1:propertyPredicate dwcdp:mediaOf ] ;
+            rdf:rest ( [ a ns1:ClassAtom ;
+                        ns1:argument1 _:N6325422229734816b40620d42de24205 ;
+                        ns1:classPredicate dwc:Occurrence ] ) ] ;
+    ns1:head [ a ns1:AtomList ;
+            rdf:first [ a ns1:IndividualPropertyAtom ;
+                    ns1:argument1 _:Nf6d4c46c2cfd4b8cb284281c867ab5fd ;
+                    ns1:argument2 _:N6325422229734816b40620d42de24205 ;
+                    ns1:propertyPredicate dwcdp:evidenceFor ] ;
+            rdf:rest () ] .
+
 [] a owl:Restriction ;
     owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
     owl:onProperty dwc:preferredEventName .
@@ -5177,18 +5209,7 @@ dcterms:Location a owl:Class ;
     owl:onProperty dwcdp:about ;
     owl:someValuesFrom dwc:Occurrence .
 
-[] a owl:Restriction ;
-    owl:cardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onProperty dwc:geologicalContextID .
+_:Nf6d4c46c2cfd4b8cb284281c867ab5fd a ns1:Variable .
 
-[] a owl:Restriction ;
-    owl:onProperty dwcdp:about ;
-    owl:someValuesFrom dwc:Organism .
-
-[] a owl:Restriction ;
-    owl:onProperty dwcdp:about ;
-    owl:someValuesFrom dwc:MaterialEntity .
-
-[] a owl:AllDisjointClasses ;
-    owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:Identification dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:Provenance dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .
+_:N6325422229734816b40620d42de24205 a ns1:Variable .
 
