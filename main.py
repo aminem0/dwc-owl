@@ -816,6 +816,17 @@ createOC(
     version_of_s="http://rs.tdwg.org/dwc/terms/dodo",
     references_s="http://rs.tdwg.org/dwc/terms/version/dodo",
 )
+
+createOC(
+    name="Taxon",
+    namespace=DWC,
+    graph=g,
+    pref_label=Literal("Taxon", lang="en"),
+    definition=Literal("A group of organisms (sensu [http://purl.obolibrary.org/obo/OBI_0100026](http://purl.obolibrary.org/obo/OBI_0100026) considered by taxonomists to form a homogeneous unit.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/Taxon",
+    references_s="http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18",
+)
+
 createEOC(
     name="TypeDesignationType",
     namespace=DWC,
@@ -3254,6 +3265,17 @@ createOP(
 )
 
 createOP(
+    name="toTaxon",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("To Taxon (IRI)"),
+    definition=Literal("Use to link a [dwc:Identification] instance subject to a taxonomic entity such as a taxon, taxon concept, or taxon name use.", lang="en"),
+    comments=Literal("A \"convenience property\" that replaces Darwin Core literal-value terms related to taxonomic entities. See Section 2.7.4 of the Darwin Core RDF Guide for details.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/toTaxon",
+    references_s="http://rs.tdwg.org/dwc/iri/version/toTaxon-2015-03-27",
+)
+
+createOP(
     name="verbatimCoordinateSystem",
     namespace=DWCIRI,
     graph=g,
@@ -4123,6 +4145,30 @@ createOP(
     pref_label=Literal("Target Occurrence", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Occurrence] it identifies.", lang="en"),
 )
+
+createOP(
+    name="taxonFor",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["Taxon"],
+    ranges=DWC["Identification"],
+    inverse_prop=DWCDP["toTaxon"],
+    pref_label=Literal("Taxon For", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Taxon] to the [dwc:Identification] it is used for.", lang="en"),
+)
+
+createOP(
+    name="toTaxon",
+    namespace=DWCDP,
+    graph=g,
+    domains=DWC["Identification"],
+    ranges=DWC["Taxon"],
+    inverse_prop=DWCDP["taxonFor"],
+    subproperty_of=DWCIRI["toTaxon"],
+    pref_label=Literal("To Taxon (DWCDP)", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Taxon] it considers.", lang="en"),
+)
+
 
 # NOTE: For now, use the same name as the class, but with camelCase.
 #

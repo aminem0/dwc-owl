@@ -66,19 +66,3 @@ def add_swrl_rule(
     Collection(graph, head, head_atoms)
     graph.add((swrl_rule, SWRL["head"], head))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

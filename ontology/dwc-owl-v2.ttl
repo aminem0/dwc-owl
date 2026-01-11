@@ -573,6 +573,16 @@ dwciri:surveyTargetTypeIRI rdf:type owl:ObjectProperty ;
                            skos:prefLabel "Survey Target Type IRI" .
 
 
+###  http://rs.tdwg.org/dwc/iri/toTaxon
+dwciri:toTaxon rdf:type owl:ObjectProperty ;
+               dcterms:isVersionOf dwciri:toTaxon ;
+               dcterms:references <http://rs.tdwg.org/dwc/iri/version/toTaxon-2015-03-27> ;
+               rdfs:comment "A \"convenience property\" that replaces Darwin Core literal-value terms related to taxonomic entities. See Section 2.7.4 of the Darwin Core RDF Guide for details."@en ;
+               rdfs:isDefinedBy dwciri: ;
+               skos:definition "Use to link a [dwc:Identification] instance subject to a taxonomic entity such as a taxon, taxon concept, or taxon name use."@en ;
+               skos:prefLabel "To Taxon (IRI)" .
+
+
 ###  http://rs.tdwg.org/dwc/iri/verbatimCoordinateSystem
 dwciri:verbatimCoordinateSystem rdf:type owl:ObjectProperty ;
                                 rdfs:domain dcterms:Location ;
@@ -1364,6 +1374,26 @@ dwcdp:targetOccurrence rdf:type owl:ObjectProperty ;
                        rdfs:isDefinedBy dwcdp: ;
                        skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Occurrence] it identifies."@en ;
                        skos:prefLabel "Target Occurrence"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/taxonFor
+dwcdp:taxonFor rdf:type owl:ObjectProperty ;
+               owl:inverseOf dwcdp:toTaxon ;
+               rdfs:domain dwc:Taxon ;
+               rdfs:range dwc:Identification ;
+               rdfs:isDefinedBy dwcdp: ;
+               skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Taxon] to the [dwc:Identification] it is used for."@en ;
+               skos:prefLabel "Taxon For"@en .
+
+
+###  http://rs.tdwg.org/dwcdp/terms/toTaxon
+dwcdp:toTaxon rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf dwciri:toTaxon ;
+              rdfs:domain dwc:Identification ;
+              rdfs:range dwc:Taxon ;
+              rdfs:isDefinedBy dwcdp: ;
+              skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Taxon] it considers."@en ;
+              skos:prefLabel "To Taxon (DWCDP)"@en .
 
 
 ###  http://rs.tdwg.org/dwcdp/terms/typeDesignationType
@@ -6160,6 +6190,15 @@ dwc:SubjectPart rdf:type owl:Class ;
                 skos:prefLabel "Subject Part"@en .
 
 
+###  http://rs.tdwg.org/dwc/terms/Taxon
+dwc:Taxon rdf:type owl:Class ;
+          dcterms:isVersionOf dwc:Taxon ;
+          dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
+          rdfs:isDefinedBy dwc: ;
+          skos:definition "A group of organisms (sensu [http://purl.obolibrary.org/obo/OBI_0100026](http://purl.obolibrary.org/obo/OBI_0100026) considered by taxonomists to form a homogeneous unit."@en ;
+          skos:prefLabel "Taxon"@en .
+
+
 ###  http://rs.tdwg.org/dwc/terms/TypeDesignationType
 dwc:TypeDesignationType rdf:type owl:Class ;
                         owl:equivalentClass [ rdf:type owl:Class ;
@@ -7242,21 +7281,21 @@ dcterms:source dcterms:isVersionOf dcterms:source ;
 #    Rules
 #################################################################
 
-_:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-841759A15C6C959464E03C4607FBE80F rdf:type swrl:Variable .
+_:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-3CF3AD6DF3D3167E95A6398F48908162 rdf:type swrl:Variable .
 
-_:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-0E4A55E8DBCAC46DED171EC430E5ECD8 rdf:type swrl:Variable .
+_:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-C665FAB709790A83DF9E1282E7A23093 rdf:type swrl:Variable .
 
 [ rdf:type swrl:Imp ;
    swrl:body [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:mediaOf ;
-                           swrl:argument1 _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-841759A15C6C959464E03C4607FBE80F ;
-                           swrl:argument2 _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-0E4A55E8DBCAC46DED171EC430E5ECD8
+                           swrl:argument1 _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-3CF3AD6DF3D3167E95A6398F48908162 ;
+                           swrl:argument2 _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-C665FAB709790A83DF9E1282E7A23093
                          ] ;
                rdf:rest [ rdf:type swrl:AtomList ;
                           rdf:first [ rdf:type swrl:ClassAtom ;
                                       swrl:classPredicate dwc:Occurrence ;
-                                      swrl:argument1 _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-0E4A55E8DBCAC46DED171EC430E5ECD8
+                                      swrl:argument1 _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-C665FAB709790A83DF9E1282E7A23093
                                     ] ;
                           rdf:rest rdf:nil
                         ]
@@ -7264,8 +7303,8 @@ _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-0E4A55E8DBCAC46DED171EC430
    swrl:head [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:evidenceFor ;
-                           swrl:argument1 _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-841759A15C6C959464E03C4607FBE80F ;
-                           swrl:argument2 _:genid-nodeid-genid-aa84c34bab2a4b018851e737bfca76a5-0E4A55E8DBCAC46DED171EC430E5ECD8
+                           swrl:argument1 _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-3CF3AD6DF3D3167E95A6398F48908162 ;
+                           swrl:argument2 _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-C665FAB709790A83DF9E1282E7A23093
                          ] ;
                rdf:rest rdf:nil
              ]
