@@ -278,7 +278,7 @@ def createOP(
     version_of_s: str | None = None,
     references_s: str | None = None,
     subproperty_of: Node | list[Node] | None = None,
-    equivalent_property_list: Node | list[Node] | None = None,
+    equivalent_property: Node | list[Node] | None = None,
     additional_props: Node | list[Node] | None = None,
     inverse_prop: Node | None = None,
     prop_chains: list[tuple[Node]] | None = None,
@@ -374,10 +374,14 @@ def createOP(
         for property in subproperty_of:
             graph.add((op_uri, RDFS["subPropertyOf"], property))
 
-    if equivalent_property_list:
-        # Technically not a unified list, so can add them all with a for loop
-        for property in equivalent_property_list:
-            graph.add((op_uri, OWL["equivalentProperty"], property))
+    if equivalent_property:
+        if isinstance(equivalent_property, Node):
+            graph.add((op_uri, OWL["equivalentProperty"], equivalent_property))
+        
+        elif isinstance(equivalent_property, list):
+            # Technically not a unified list, so can add them all with a for loop
+            for property in equivalent_property:
+                graph.add((op_uri, OWL["equivalentProperty"], property))
 
     if inverse_prop:
         graph.add((op_uri, OWL["inverseOf"], inverse_prop))

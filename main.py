@@ -2816,9 +2816,7 @@ createOP(
     graph=g,
     domains=DWC["Event"],
     ranges=DCTERMS["Location"],
-    equivalent_property_list=[
-        DWCDP["spatialLocation"],
-    ],
+    # equivalent_property=DWCDP["spatialLocation"],
     pref_label=Literal("Located At", lang="en"),
     definition=Literal("Links a subject dwc:Event instance to an object dcterms:Location instance.", lang="en"),
     comments=Literal("The dsw:locatedAt relationship is many-to-one (many events at one location). This property is preferred over its inverse if the link is made in only one direction.", lang="en"),
@@ -2831,9 +2829,7 @@ createOP(
     graph=g,
     domains=DWC["Occurrence"],
     ranges=DWC["Organism"],
-    equivalent_property_list=[
-        DWCDP["occurrenceOf"],
-    ],
+    equivalent_property=DWCDP["occurrenceOf"],
     pref_label=Literal("Occurrence Of (DSW)", lang="en"),
     definition=Literal("Links a subject dwc:Occurrence instance to an object dwc:Organism instance.", lang="en"),
     comments=Literal("The dsw:occurrrenceOf relationship is many-to-one (many occurrences for one individual organism). This property is preferred over its inverse if the link is made in only one direction.", lang="en"),
@@ -3422,9 +3418,7 @@ createOP(
     graph=g,
     domains=DWC["Occurrence"],
     ranges=DWC["Organism"],
-    equivalent_property_list=[
-        DSW["occurrenceOf"],
-    ],
+    equivalent_property=DSW["occurrenceOf"],
     pref_label=Literal("Occurrence Of (DWCDP)", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Occurrence] to the [DWC:Organism] it is an occurrence of.", lang="en"),
 )
@@ -3587,9 +3581,7 @@ createOP(
     domains=DWC["Event"],
     ranges=DCTERMS["Location"],
     subproperty_of=DCTERMS["spatial"],
-    # equivalent_property_list=[
-        # DSW["locatedAt"],
-    # ],
+    # equivalent_property=DSW["locatedAt"],
     pref_label=Literal("Spatial Location", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in.", lang="en"),
 )

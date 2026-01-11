@@ -174,7 +174,6 @@ dcterms:type rdf:type owl:ObjectProperty ;
 
 ###  http://purl.org/dsw/locatedAt
 dsw:locatedAt rdf:type owl:ObjectProperty ;
-              owl:equivalentProperty dwcdp:spatialLocation ;
               rdfs:domain dwc:Event ;
               rdfs:range dcterms:Location ;
               dcterms:references dsw:locatedAt ;
@@ -7183,10 +7182,10 @@ dwcem:e007 rdf:type owl:NamedIndividual ,
                     dwc:EstablishmentMeans .
 
 
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
+[ owl:cardinality "1"^^xsd:nonNegativeInteger
 ] .
 
-[ owl:cardinality "1"^^xsd:nonNegativeInteger
+[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
  ] .
 
 #################################################################
@@ -7234,21 +7233,21 @@ dcterms:source dcterms:isVersionOf dcterms:source ;
 #    Rules
 #################################################################
 
-_:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-F65FEB5802CEADDE3EC60590A46B8B18 rdf:type swrl:Variable .
+_:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-52F25C2D082E67682EB4877D53504B1A rdf:type swrl:Variable .
 
-_:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-487C895DB8D55FF70AB0AFF64067098F rdf:type swrl:Variable .
+_:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-93FB3E4A96D899383113B621A5B65C8B rdf:type swrl:Variable .
 
 [ rdf:type swrl:Imp ;
    swrl:body [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:mediaOf ;
-                           swrl:argument1 _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-F65FEB5802CEADDE3EC60590A46B8B18 ;
-                           swrl:argument2 _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-487C895DB8D55FF70AB0AFF64067098F
+                           swrl:argument1 _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-52F25C2D082E67682EB4877D53504B1A ;
+                           swrl:argument2 _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-93FB3E4A96D899383113B621A5B65C8B
                          ] ;
                rdf:rest [ rdf:type swrl:AtomList ;
                           rdf:first [ rdf:type swrl:ClassAtom ;
                                       swrl:classPredicate dwc:Occurrence ;
-                                      swrl:argument1 _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-487C895DB8D55FF70AB0AFF64067098F
+                                      swrl:argument1 _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-93FB3E4A96D899383113B621A5B65C8B
                                     ] ;
                           rdf:rest rdf:nil
                         ]
@@ -7256,8 +7255,8 @@ _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-487C895DB8D55FF70AB0AFF640
    swrl:head [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:evidenceFor ;
-                           swrl:argument1 _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-F65FEB5802CEADDE3EC60590A46B8B18 ;
-                           swrl:argument2 _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-487C895DB8D55FF70AB0AFF64067098F
+                           swrl:argument1 _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-52F25C2D082E67682EB4877D53504B1A ;
+                           swrl:argument2 _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-93FB3E4A96D899383113B621A5B65C8B
                          ] ;
                rdf:rest rdf:nil
              ]
