@@ -1,5 +1,5 @@
 #####################################################################################################
-# BEGIN IMPORTS
+# NOTE: BEGIN IMPORTS
 #####################################################################################################
 
 from pathlib import Path
@@ -10,9 +10,10 @@ from rdflib.namespace import OWL, RDF, RDFS, SKOS, XSD
 from pylode import OntPub
 #
 from utils.base import createDP, createEDP, createEOC, createNI, createOC, createOP, createSC, createSCS, declare_disjoint
+from utils.swrl_utils import add_swrl_rule, create_swrl_variable, swrl_class_atom, swrl_property_atom
 
 #####################################################################################################
-# BEGIN ONTOLOGY DEFINITION
+# NOTE: BEGIN ONTOLOGY DEFINITION
 #####################################################################################################
 
 # Define all namespces to be used
@@ -98,7 +99,7 @@ g.add((ontology_uri, DC["description"], Literal("Darwin Core OWL is an effort to
 g.add((ontology_uri, DCTERMS["created"], Literal("2025-04-03", datatype=XSD["date"])))
 
 #####################################################################################################
-# BEGIN OWL CLASS DEFINITIONS
+# NOTE: BEGIN OWL CLASS DEFINITIONS
 #####################################################################################################
 
 # NOTE: RECHECK terms in example.
@@ -959,7 +960,7 @@ g.add((DWC["OrganismRelationship"], RDFS["subClassOf"], RUn_obj_class))
 
 
 #####################################################################################################
-# BEGIN INDIVIDUALS
+# NOTE: BEGIN INDIVIDUALS
 #####################################################################################################
 
 createNI(
@@ -2634,10 +2635,9 @@ createSC(
 # )
 
 #####################################################################################################
-# BEGIN AXIOMS
+# NOTE: BEGIN AXIOMS
 #####################################################################################################
 
-# NOTE: Can a dwc:Event be a eco:Survey?
 declare_disjoint(
     classes=[
         CHRONO["ChronometricAge"],
@@ -2665,25 +2665,16 @@ declare_disjoint(
     graph=g
 )
 
-from rdflib.collection import Collection
-
 # NOTE: Try a property chain
 # For a test case: dwcdp:basedOn o dwcdp:isPartOf -> dwcdp:basedOn
 # prop_chain = BNode()
 # Collection(g, prop_chain, [DWCDP["basedOn"], DWCDP["partOf"]])
 # g.add((DWCDP["basedOn"], OWL.propertyChainAxiom, prop_chain))
 #
-# BUG: Does not handle Insektmobilen case
-# prop_chain = BNode()
-# Collection(g, prop_chain, [DWCDP["basedOn"], DWCDP["evidenceFor"]])
-# g.add((DWCDP["targetOccurrence"], OWL["propertyChainAxiom"], prop_chain))
-#
 
 #####################################################################################################
-# BEGIN SWRL RULES
+# NOTE: BEGIN SWRL RULES
 #####################################################################################################
-
-from utils.swrl_utils import add_swrl_rule, create_swrl_variable, swrl_class_atom, swrl_property_atom
 
 # Create SWRL variables
 #
@@ -2703,153 +2694,8 @@ add_swrl_rule(
 
 
 #####################################################################################################
-# BEGIN OBJECT PROPERTY DEFINITIONS
+# NOTE: BEGIN OBJECT PROPERTY DEFINITIONS
 #####################################################################################################
-
-
-############################################################################
-
-createOP(
-    name="hasSubjectOrientation",
-    namespace=DWC,
-    graph=g,
-    domains=AC["Media"],
-    ranges=DWC["SubjectOrientation"],
-    pref_label=Literal("Has Subject Orientation", lang="en"),
-    definition=Literal("Object property to relate a ac:Media instance to a controlled IRI value from the acorient vocabulary.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/terms/hasSubjectOrientation",
-)
-
-createOP(
-    name="hasSubjectPart",
-    namespace=DWC,
-    graph=g,
-    domains=AC["Media"],
-    ranges=DWC["SubjectPart"],
-    pref_label=Literal("Has Subject Part", lang="en"),
-    definition=Literal("Object property to relate a ac:Media instance to a controlled IRI value from the acpart vocabulary.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/terms/hasSubjectOrientation",
-)
-
-#############################################################################
-
-# NOTE: Possibly reword previously skos:editorialNote into a comment
-createOP(
-    name="status",
-    namespace=BIBO,
-    graph=g,
-    domains=BIBO["Document"],
-    ranges=BIBO["DocumentStatus"],
-    pref_label=Literal("Status", lang="en"),
-    definition=Literal("The publication status of (typically academic) content.", lang="en"),
-    comments=Literal("We are not defining, using an enumeration, the range of the bibo:status to the defined list of bibo:DocumentStatus. We won't do it because we want people to be able to define new status if needed by some special usecases. Creating such an enumeration would restrict this to happen.", lang="en"),
-    version_of_s="http://purl.org/ontology/bibo/status",
-)
-
-#############################################################################
-
-createOP(
-    name="contributor",
-    namespace=DCTERMS,
-    graph=g,
-    pref_label=Literal("Contributor (DCTERMS)", lang="en"),
-    definition=Literal("An entity responsible for making contributions to this resource.", lang="en"),
-    comments=Literal("The guidellines for using names of persons or organizations as creators apply to contributors.", lang="en"),
-    version_of_s="http://purl.org/dc/terms/contributor",
-)
-
-createOP(
-    name="creator",
-    namespace=DCTERMS,
-    graph=g,
-    pref_label=Literal("Creator (DCTERMS)", lang="en"),
-    definition=Literal("An entity responsible for making the resource.", lang="en"),
-    comments=Literal("Recommended practice is to identify the creator with a URI. If this is not possible or feasible, a literal value that identifies the creator may be provided.", lang="en"),
-    version_of_s="http://purl.org/dc/terms/creator",
-)
-
-createOP(
-    name="publisher",
-    namespace=DCTERMS,
-    graph=g,
-    pref_label=Literal("Publisher (DCTERMS)", lang="en"),
-    definition=Literal("An entity responsible for making the resource available.", lang="en"),
-    version_of_s="http://purl.org/dc/terms/publisher",
-)
-
-createOP(
-    name="rights",
-    namespace=DCTERMS,
-    graph=g,
-    domains=DWC["UsagePolicy"],
-    pref_label=Literal("Rights (DCTERMS)"),
-    definition=Literal("Information about rights held in and over the resource.", lang="en"),
-    comments=Literal("Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights. Recommended practice is to refer to a rights statement with a URI. If this is not possible or feasible, a literal value (name, label, or short text) may be provided.", lang="en"),
-    version_of_s="http://purl.org/dc/terms/rights",
-)
-
-createOP(
-    name="rightsHolder",
-    namespace=DCTERMS,
-    graph=g,
-    pref_label=Literal("Rights Holder", lang="en"),
-    definition=Literal("A person or organization owning or managing rights over the resource."),
-    comments=Literal("Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided."),
-    version_of_s="http://purl.org/dc/terms/rightsHolder",
-)
-
-createOP(
-    name="spatial",
-    namespace=DCTERMS,
-    graph=g,
-    pref_label=Literal("Spatial Coverage", lang="en"),
-    definition=Literal("Spatial characteristics of the resource.", lang="en"),
-    version_of_s="http://purl.org/dc/terms/spatial",
-)
-
-createOP(
-    name="type",
-    namespace=DCTERMS,
-    graph=g,
-    pref_label=Literal("Type"),
-    definition=Literal("The nature or genre of the resource.", lang="en"),
-    comments=Literal("Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/). To describe the file format, physical medium, or dimensions of the resource, use the property Format."),
-    version_of_s="http://purl.org/dc/terms/type",
-)
-
-#############################################################################
-
-createOP(
-    name="locatedAt",
-    namespace=DSW,
-    graph=g,
-    domains=DWC["Event"],
-    ranges=DCTERMS["Location"],
-    equivalent_property_list=[
-        DWCDP["spatialLocation"],
-    ],
-    pref_label=Literal("Located At", lang="en"),
-    definition=Literal("Links a subject dwc:Event instance to an object dcterms:Location instance.", lang="en"),
-    comments=Literal("The dsw:locatedAt relationship is many-to-one (many events at one location). This property is preferred over its inverse if the link is made in only one direction.", lang="en"),
-    references_s="http://purl.org/dsw/locatedAt",
-)
-
-createOP(
-    name="occurrenceOf",
-    namespace=DSW,
-    graph=g,
-    domains=DWC["Occurrence"],
-    ranges=DWC["Organism"],
-    equivalent_property_list=[
-        DWCDP["occurrenceOf"],
-    ],
-    pref_label=Literal("Occurrence Of (DSW)", lang="en"),
-    definition=Literal("Links a subject dwc:Occurrence instance to an object dwc:Organism instance.", lang="en"),
-    comments=Literal("The dsw:occurrrenceOf relationship is many-to-one (many occurrences for one individual organism). This property is preferred over its inverse if the link is made in only one direction.", lang="en"),
-    references_s="http://purl.org/dsw/occurrenceOf",
-)
-
-#############################################################################
 
 createOP(
     name="commenter",
@@ -2895,438 +2741,104 @@ createOP(
     references_s="http://rs.tdwg.org/ac/terms/version/reviewer-2023-09-05",
 )
 
-
-
-
-# BUG: To avoid inconsistencies, changed range list
 createOP(
-    name="assertionTypeIRI",
-    namespace=DWCIRI,
+    name="contributor",
+    namespace=DCTERMS,
     graph=g,
-    domains=DWC["Assertion"],
-    pref_label=Literal("Assertion Type (IRI)"),
-    definition=Literal("An IRI of a controlled vocabulary value for a type of [dwc:Assertion].", lang="en"),
-    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
-    version_of_s="http://example.com/term-pending/dwciri/assertionTypeIRI",
+    pref_label=Literal("Contributor (DCTERMS)", lang="en"),
+    definition=Literal("An entity responsible for making contributions to this resource.", lang="en"),
+    comments=Literal("The guidelines for using names of persons or organizations as creators apply to contributors.", lang="en"),
+    version_of_s="http://purl.org/dc/terms/contributor",
 )
 
-# NOTE: I added the example IRI
 createOP(
-    name="assertionValueIRI",
-    namespace=DWCIRI,
+    name="creator",
+    namespace=DCTERMS,
     graph=g,
-    domains=DWC["Assertion"],
-    pref_label=Literal("Assertion Value (IRI)"),
-    definition=Literal("An IRI of the controlled vocabulary value for a value of a [dwc:Assertion].", lang="en"),
-    examples=[
-        URIRef("http://purl.obolibrary.org/obo/OBA_VT0000047"),
-    ],
-    version_of_s="http://example.com/term-pending/dwciri/assertionValueIRI",
+    pref_label=Literal("Creator (DCTERMS)", lang="en"),
+    definition=Literal("An entity responsible for making the resource.", lang="en"),
+    comments=Literal("Recommended practice is to identify the creator with a URI. If this is not possible or feasible, a literal value that identifies the creator may be provided.", lang="en"),
+    version_of_s="http://purl.org/dc/terms/creator",
 )
 
-# WARN: Comment in JSON file says dwc:SurveyTargetType?
 createOP(
-    name="surveyTargetTypeIRI",
-    namespace=DWCIRI,
+    name="publisher",
+    namespace=DCTERMS,
     graph=g,
-    domains=ECO["SurveyTarget"],
-    pref_label=Literal("Survey Target Type IRI"),
-    definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given.", lang="en"),
-    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
-    subproperty_of=DCTERMS["type"],
+    pref_label=Literal("Publisher (DCTERMS)", lang="en"),
+    definition=Literal("An entity responsible for making the resource available.", lang="en"),
+    version_of_s="http://purl.org/dc/terms/publisher",
+)
+
+createOP(
+    name="rights",
+    namespace=DCTERMS,
+    graph=g,
+    domains=DWC["UsagePolicy"],
+    pref_label=Literal("Rights (DCTERMS)", lang="en"),
+    definition=Literal("Information about rights held in and over the resource.", lang="en"),
+    comments=Literal("Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights. Recommended practice is to refer to a rights statement with a URI. If this is not possible or feasible, a literal value (name, label, or short text) may be provided.", lang="en"),
+    version_of_s="http://purl.org/dc/terms/rights",
+)
+
+createOP(
+    name="rightsHolder",
+    namespace=DCTERMS,
+    graph=g,
+    pref_label=Literal("Rights Holder", lang="en"),
+    definition=Literal("A person or organization owning or managing rights over the resource."),
+    comments=Literal("Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided.", lang="en"),
+    version_of_s="http://purl.org/dc/terms/rightsHolder",
+)
+
+createOP(
+    name="spatial",
+    namespace=DCTERMS,
+    graph=g,
+    pref_label=Literal("Spatial Coverage", lang="en"),
+    definition=Literal("Spatial characteristics of the resource.", lang="en"),
+    version_of_s="http://purl.org/dc/terms/spatial",
+)
+
+createOP(
+    name="type",
+    namespace=DCTERMS,
+    graph=g,
+    pref_label=Literal("Type", lang="en"),
+    definition=Literal("The nature or genre of the resource.", lang="en"),
+    comments=Literal("Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/). To describe the file format, physical medium, or dimensions of the resource, use the property Format.", lang="en"),
     version_of_s="http://purl.org/dc/terms/type",
 )
 
 createOP(
-    name="behavior",
-    namespace=DWCIRI,
+    name="locatedAt",
+    namespace=DSW,
     graph=g,
-    domains=DWC["OccurrenceAssertion"],
-    pref_label=Literal("Behavior (IRI)"),
-    definition=Literal("A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/behavior",
-    references_s="http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10",
-)
-
-createOP(
-    name="caste",
-    namespace=DWCIRI,
-    graph=g,
-    domains=[
-        DWC["MaterialEntityAssertion"],
-        DWC["OccurrenceAssertion"],
+    domains=DWC["Event"],
+    ranges=DCTERMS["Location"],
+    equivalent_property_list=[
+        DWCDP["spatialLocation"],
     ],
-    pref_label=Literal("Caste (IRI)"),
-    definition=Literal("Categorisation of individuals for eusocial species (including some mammals and arthropods).", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/caste",
-    references_s="http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10",
+    pref_label=Literal("Located At", lang="en"),
+    definition=Literal("Links a subject dwc:Event instance to an object dcterms:Location instance.", lang="en"),
+    comments=Literal("The dsw:locatedAt relationship is many-to-one (many events at one location). This property is preferred over its inverse if the link is made in only one direction.", lang="en"),
+    references_s="http://purl.org/dsw/locatedAt",
 )
 
-# WARN: Revoir domain
 createOP(
-    name="dataGeneralizations",
-    namespace=DWCIRI,
-    graph=g,
-    pref_label=Literal("Data Generalizations (IRI)"),
-    definition=Literal("Actions taken to make the shared data less specific or complete than in its original form. Suggests that alternative data of higher quality may be available on request.", lang="en"),
-    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/dataGeneralizations",
-    references_s="http://rs.tdwg.org/dwc/iri/version/dataGeneralizations-2025-07-10",
-)
-
-# WARN: Verify if actually about dwc:Occurrence
-createOP(
-    name="degreeOfEstablishment",
-    namespace=DWCIRI,
+    name="occurrenceOf",
+    namespace=DSW,
     graph=g,
     domains=DWC["Occurrence"],
-    ranges=DWC["DegreeOfEstablishment"],
-    pref_label=Literal("Degree Of Establishment (IRI)"),
-    definition=Literal("The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time.", lang="en"),
-    comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    examples=[
-        URIRef("http://rs.tdwg.org/dwcdoe/values/d003"),
-        URIRef("http://rs.tdwg.org/dwcdoe/values/d005"),
+    ranges=DWC["Organism"],
+    equivalent_property_list=[
+        DWCDP["occurrenceOf"],
     ],
-    version_of_s="http://rs.tdwg.org/dwc/iri/degreeOfEstablishment",
-    references_s="http://rs.tdwg.org/dwc/iri/version/degreeOfEstablishment-2025-07-10",
+    pref_label=Literal("Occurrence Of (DSW)", lang="en"),
+    definition=Literal("Links a subject dwc:Occurrence instance to an object dwc:Organism instance.", lang="en"),
+    comments=Literal("The dsw:occurrrenceOf relationship is many-to-one (many occurrences for one individual organism). This property is preferred over its inverse if the link is made in only one direction.", lang="en"),
+    references_s="http://purl.org/dsw/occurrenceOf",
 )
-
-# WARN: Revoir domain
-createOP(
-    name="discipline",
-    namespace=DWCIRI,
-    graph=g,
-    pref_label=Literal("Discipline (IRI)"),
-    definition=Literal("The primary branch or branches of knowledge represented by the record.", lang="en"),
-    comments=Literal("This term can be used to classify records according to branches of knowledge. Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/discipline",
-    references_s="http://rs.tdwg.org/dwc/iri/version/discipline-2025-06-12",
-)
-
-createOP(
-    name="disposition",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DWC["MaterialEntity"],
-    pref_label=Literal("Disposition (IRI)"),
-    definition=Literal("The current state of a specimen with respect to the collection identified in dwc:collectionCode or dwc:collectionID.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/disposition",
-    references_s="http://rs.tdwg.org/dwc/iri/version/disposition-2025-07-10",
-)
-
-createOP(
-    name="earliestGeochronologicalEra",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DWC["MaterialEntity"],
-    pref_label=Literal("Earliest Geochronological Era"),
-    definition=Literal("Use to link a dwc:GeologicalContext instance to chronostratigraphic time periods at the lowest possible level in a standardized hierarchy. Use this property to point to the earliest possible geological time period from which the dwc:MaterialEntity was collected.", lang="en"),
-    comments=Literal("Recommended best practice is to use an IRI from a controlled vocabulary. A \"convenience property\" that replaces Darwin Core literal-value terms related to geological context. See Section 2.7.6 of the Darwin Core RDF Guide for details.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/earliestGeochronologicalEra",
-    references_s="http://rs.tdwg.org/dwc/iri/version/earliestGeochronologicalEra-2023-09-13",
-)
-
-createOP(
-    name="establishmentMeans",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DWC["Occurrence"],
-    ranges=DWC["EstablishmentMeans"],
-    pref_label=Literal("Establishment Means (IRI)"),
-    definition=Literal("Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans.", lang="en"),
-    comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    examples=[
-        URIRef("http://rs.tdwg.org/dwcem/values/e001"),
-        URIRef("http://rs.tdwg.org/dwcem/values/e005"),
-    ],
-    version_of_s="http://rs.tdwg.org/dwc/iri/establishmentMeans",
-    references_s="http://rs.tdwg.org/dwc/iri/version/establishmentMeans-2025-07-10",
-)
-
-createOP(
-    name="eventType",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DWC["Event"],
-    pref_label=Literal("Event Type (IRI)"),
-    definition=Literal("The nature of the dwc:Event.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary. Regardless of the dwc:eventType, the interval of the dwc:Event can be captured in dwc:eventDate. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/eventType",
-    references_s="http://rs.tdwg.org/dwc/iri/version/eventType-2025-07-10",
-)
-
-createOP(
-    name="fieldNotes",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DWC["Event"],
-    pref_label=Literal("Field Notes (IRI)"),
-    definition=Literal("One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event.", lang="en"),
-    comments=Literal("The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/fieldNotes",
-    references_s="http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28",
-)
-
-createOP(
-    name="fieldNumber",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DWC["Event"],
-    pref_label=Literal("Field Number (IRI)"),
-    definition=Literal("An identifier given to the event in the field. Often serves as a link between field notes and the dwc:Event.", lang="en"),
-    comments=Literal("The subject is a (possibly IRI-identified) resource that is the field notes and the object is a dwc:Event instance.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/fieldNumber",
-    references_s="http://rs.tdwg.org/dwc/iri/version/fieldNumber-2023-06-28",
-)
-
-createOP(
-    name="footprintWKT",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DCTERMS["Location"],
-    pref_label=Literal("Footprint WKT (IRI)"),
-    definition=Literal("A Well-Known Text (WKT) representation of the shape (footprint, geometry) that defines the dcterms:Location. A dcterms:Location may have both a point-radius representation (see dwc:decimalLatitude) and a footprint representation, and they may differ from each other.", lang="en"),
-    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/footprintWKT",
-    references_s="http://rs.tdwg.org/dwc/iri/version/footprintWKT-2025-07-10",
-)
-
-createOP(
-    name="geodeticDatum",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DCTERMS["Location"],
-    pref_label=Literal("Geodetic Datum (IRI)"),
-    definition=Literal("The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which the geographic coordinates given in dwc:decimalLatitude and dwc:decimalLongitude are based.", lang="en"),
-    comments=Literal("Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use an IRI corresponding to the value not recorded.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/geodeticDatum",
-    references_s="http://rs.tdwg.org/dwc/iri/version/geodeticDatum-2025-06-12",
-)
-
-createOP(
-    name="georeferencedBy",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DCTERMS["Location"],
-    pref_label=Literal("Georeferenced By (IRI)"),
-    definition=Literal("A person, group, or organization who determined the georeference (spatial representation) for the dcterms:Location.", lang="en"),
-    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/georeferencedBy",
-    references_s="http://rs.tdwg.org/dwc/iri/version/georeferencedBy-2025-07-10",
-)
-
-createOP(
-    name="georeferenceProtocol",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DCTERMS["Location"],
-    pref_label=Literal("Georeference Protocol (IRI)"),
-    definition=Literal("A description or reference to the methods used to determine the spatial footprint, coordinates, and uncertainties.", lang="en"),
-    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/georeferenceProtocol",
-    references_s="http://rs.tdwg.org/dwc/iri/version/georeferenceProtocol-2025-07-10",
-)
-
-createOP(
-    name="georeferenceSources",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DCTERMS["Location"],
-    pref_label=Literal("Georeference Sources (IRI)"),
-    definition=Literal("A map, gazetteer, or other resource used to georeference the dcterms:Location.", lang="en"),
-    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/georeferenceSources",
-    references_s="http://rs.tdwg.org/dwc/iri/version/georeferenceSources-2025-07-10",
-)
-
-createOP(
-    name="georeferenceVerificationStatus",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DCTERMS["Location"],
-    pref_label=Literal("Georeference Verification Status (IRI)"),
-    definition=Literal("A categorical description of the extent to which the georeference has been verified to represent the best possible spatial description for the dcterms:Location of the dwc:Occurrence.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/georeferenceVerificationStatus",
-    references_s="http://rs.tdwg.org/dwc/iri/version/georeferenceVerificationStatus-2025-07-10",
-)
-
-createOP(
-    name="habitat",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DWC["Event"],
-    pref_label=Literal("Habitat (IRI)"),
-    definition=Literal("A category or description of the habitat in which the dwc:Event occurred.", lang="en"),
-    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/habitat",
-    references_s="http://rs.tdwg.org/dwc/iri/version/habitat-2025-07-10",
-)
-
-createOP(
-    name="identifiedBy",
-    namespace=DWCIRI,
-    graph=g,
-    domains=[
-        DWC["Identification"],
-        DWC["Occurrence"],
-        ECO["Survey"],
-    ],
-    pref_label=Literal("Identified By (IRI)"),
-    definition=Literal("A person, group, or organization who assigned the dwc:Taxon to the subject.", lang="en"),
-    comments=Literal("When used in the context of an Event (such as in the Humboldt Extension), the subject consists of all of the dwc:Organisms related to the Event. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/identifiedBy",
-    references_s="http://rs.tdwg.org/dwc/iri/version/identifiedBy-2025-07-10",
-)
-
-createOP(
-    name="locationAccordingTo",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DCTERMS["Location"],
-    pref_label=Literal("Location According To (IRI)"),
-    definition=Literal("Information about the source of this dcterms:Location information. Could be a publication (gazetteer), institution, or team of individuals.", lang="en"),
-    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/locationAccordingTo",
-    references_s="http://rs.tdwg.org/dwc/iri/version/locationAccordingTo-2025-07-10",
-)
-
-createOP(
-    name="occurrenceStatus",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DWC["Occurrence"],
-    pref_label=Literal("Occurrence Status (IRI)"),
-    definition=Literal("A statement about the presence or absence of a dwc:Taxon at a dcterms:Location.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/occurrenceStatus",
-    references_s="http://rs.tdwg.org/dwc/iri/version/occurrenceStatus-2025-07-10",
-)
-
-createOP(
-    name="pathway",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DWC["Occurrence"],
-    ranges=DWC["Pathway"],
-    pref_label=Literal("Pathway (IRI)"),
-    definition=Literal("The process by which a dwc:Organism came to be in a given place at a given time.", lang="en"),
-    comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    examples=[
-        URIRef("http://rs.tdwg.org/dwcpw/values/p002"),
-        URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
-    ],
-    version_of_s="http://rs.tdwg.org/dwc/iri/pathway",
-    references_s="http://rs.tdwg.org/dwc/iri/version/pathway-2025-07-10",
-)
-
-createOP(
-    name="recordedBy",
-    namespace=DWCIRI,
-    graph=g,
-    pref_label=Literal("Recorded By (IRI)"),
-    definition=Literal("A person, group, or organization responsible for recording the original dwc:Occurrence.", lang="en"),
-    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/recordedBy",
-    references_s="http://rs.tdwg.org/dwc/iri/version/recordedBy-2025-07-10",
-)
-
-# WARN: Verify if actually about dwc:Occurrence
-createOP(
-    name="reproductiveCondition",
-    namespace=DWCIRI,
-    graph=g,
-    domains=[
-        DWC["MaterialEntityAssertion"],
-        DWC["OccurrenceAssertion"],
-    ],
-    pref_label=Literal("Reproductive Condition (IRI)"),
-    definition=Literal("The reproductive condition of the biological individual(s) represented in the dwc:Occurrence.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/reproductiveCondition",
-    references_s="http://rs.tdwg.org/dwc/iri/version/reproductiveCondition-2025-07-10",
-)
-
-createOP(
-    name="samplingProtocol",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DWC["Event"],
-    pref_label=Literal("Sampling Protocol (IRI)"),
-    definition=Literal("The methods or protocols used during a dwc:Event, denoted by an IRI.", lang="en"),
-    comments=Literal("Recommended best practice is describe a dwc:Event with no more than one sampling protocol. In the case of a summary dwc:Event in which a specific protocol can not be attributed to specific dwc:Occurrences, the recommended best practice is to repeat the property for each IRI that denotes a different sampling protocol that applies to the dwc:Occurrence.", lang="en"),
-    examples=URIRef("https://doi.org/10.1111/j.1466-8238.2009.00467.x"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/samplingProtocol",
-    references_s="http://rs.tdwg.org/dwc/iri/version/samplingProtocol-2023-06-28",
-)
-
-createOP(
-    name="toTaxon",
-    namespace=DWCIRI,
-    graph=g,
-    pref_label=Literal("To Taxon (IRI)"),
-    definition=Literal("Use to link a [dwc:Identification] instance subject to a taxonomic entity such as a taxon, taxon concept, or taxon name use.", lang="en"),
-    comments=Literal("A \"convenience property\" that replaces Darwin Core literal-value terms related to taxonomic entities. See Section 2.7.4 of the Darwin Core RDF Guide for details.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/toTaxon",
-    references_s="http://rs.tdwg.org/dwc/iri/version/toTaxon-2015-03-27",
-)
-
-createOP(
-    name="verbatimCoordinateSystem",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DCTERMS["Location"],
-    pref_label=Literal("Verbatim Coordinate System (IRI)"),
-    definition=Literal("The spatial coordinate system for the dwc:verbatimLatitude and dwc:verbatimLongitude or the dwc:verbatimCoordinates of the dcterms:Location.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/verbatimCoordinateSystem",
-    references_s="http://rs.tdwg.org/dwc/iri/version/verbatimCoordinateSystem-2025-07-10",
-)
-
-createOP(
-    name="verbatimSRS",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DCTERMS["Location"],
-    pref_label=Literal("Verbatim SRS (IRI)"),
-    definition=Literal("The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which coordinates given in dwc:verbatimLatitude and dwc:verbatimLongitude, or dwc:verbatimCoordinates are based.", lang="en"),
-    comments=Literal("Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary IRI for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary IRI for the name or code of the ellipsoid, if known. Otherwise use an IRI for the value corresponding to `not recorded`.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/verbatimSRS",
-    references_s="http://rs.tdwg.org/dwc/iri/version/verbatimSRS-2025-06-12",
-)
-
-createOP(
-    name="verticalDatum",
-    namespace=DWCIRI,
-    graph=g,
-    domains=DCTERMS["Location"],
-    pref_label=Literal("Vertical Datum (IRI)"),
-    definition=Literal("The vertical datum used as the reference upon which the values in the elevation terms are based.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/verticalDatum",
-    references_s="http://rs.tdwg.org/dwc/iri/version/verticalDatum-2025-07-10",
-)
-
-createOP(
-    name="vitality",
-    namespace=DWCIRI,
-    graph=g,
-    domains=[
-        DWC["MaterialEntityAssertion"],
-        DWC["OccurrenceAssertion"],
-    ],
-    pref_label=Literal("Vitality (IRI)"),
-    definition=Literal("An indication of whether a dwc:Organism was alive or dead at the time of collection or observation.", lang="en"),
-    comments=Literal("Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
-    version_of_s="http://rs.tdwg.org/dwc/iri/vitality",
-    references_s="http://rs.tdwg.org/dwc/iri/version/vitality-2025-07-10",
-)
-
-#############################################################################
 
 createOP(
     name="about",
@@ -3350,6 +2862,7 @@ createOP(
 
 # NOTE: Consider the types of things a permit could allow for.
 # For now, dwc:Event, dwc:NucleotideAnalysis and eco:Survey make sense.
+#
 createOP(
     name="allowsFor",
     namespace=DWCDP,
@@ -3395,7 +2908,7 @@ createOP(
     ranges=DWC["Assertion"],
     inverse_prop=DWCDP["assertedBy"],
     pref_label=Literal("Asserted", lang="en"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:Agent] to the [dwc:Assertion] that he made.", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:Agent] to the [dwc:Assertion] that it made.", lang="en"),
 )
 
 createOP(
@@ -3409,8 +2922,6 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Assertion] to the [dcterms:Agent] that asserted it.", lang="en"),
 )
 
-# WARN:Make it a subproperty of dcterms:creator and dcterms:contributor
-#
 createOP(
     name="authoredBy",
     namespace=DWCDP,
@@ -3425,10 +2936,6 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that authored it.", lang="en"),
 )
 
-# NOTE: Can an dwc:Identification be dwcdp:basedOn a dwc:NucleotideAnalysis? I thought it was logically possible through the dwc:NucleotideSequence it produced? If so, why not have the same for dwc:Event and dwc:Occurrence?
-#
-# NOTE: Technically, if only a textual definition of an organism is available, shouldn't we also allow dcterms:BibliographicResource to be included? Stated that "textual references would be better fit as dcterms:BibliographicResource"
-#
 createOP(
     name="basedOn",
     namespace=DWCDP,
@@ -3464,7 +2971,7 @@ createOP(
     ranges=DCTERMS["Agent"],
     subproperty_of=AC["commenter"],
     pref_label=Literal("Commented By", lang="en"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [ac:Media] to the [dcterms:Agent] that commented it.", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a [ac:Media] to the [dcterms:Agent] that commented on it.", lang="en"),
 )
 
 createOP(
@@ -3477,18 +2984,19 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Agent] that conducted it.", lang="en"),
 )
 
-# NOTE: Verify if we shouldn't also consider adding ac:Media in the domain
-# Also check contributor vs creator
-#
 createOP(
     name="createdBy",
     namespace=DWCDP,
     graph=g,
-    domains=DWC["Provenance"],
+    domains=[
+        AC["Media"],
+        DWC["Provenance"],
+    ],
     ranges=DCTERMS["Agent"],
     subproperty_of=DCTERMS["creator"],
     pref_label=Literal("Created By", lang="en"),
-    definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dcterms:Agent] that created it.", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a resource to the to the [dcterms:Agent] that created it.", lang="en"),
+    comments=Literal("The types of created resources include [ac:Media] and [dwc:Provenance].", lang="en"),
 )
 
 createOP(
@@ -3521,8 +3029,6 @@ createOP(
     comments=Literal("Though the [rdfs:domain] and [rdfs:range] of this property are varied, universal restrictions on the classes prevent cross-class use of the term.", lang="en"),
 )
 
-# NOTE: Could be redundant to bibo:editor, but bibo:editor has a domain of bibo:Document, not dcterms:BibliographicResource, so resources would need to be declared as both.
-# NOTE: I imagine this is related to the OWA.
 createOP(
     name="editedBy",
     namespace=DWCDP,
@@ -3530,28 +3036,9 @@ createOP(
     domains=DCTERMS["BibliographicResource"],
     ranges=DCTERMS["Agent"],
     pref_label=Literal("Edited By", lang="en"),
-    # equivalent_property_list=[
-    #     BIBO["editor"],
-    # ],
     definition=Literal("An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that edited it.", lang="en"),
 )
 
-# createOP(
-#     name="editor",
-#     namespace=BIBO,
-#     graph=g,
-#     domains=[
-#         BIBO["Collection"],
-#         BIBO["Document"],
-#     ],
-#     ranges=FOAF["Agent"],
-#     subproperty_of=DCTERMS["contributor"],
-#     pref_label=Literal("Editor"),
-#     definition=Literal("A person having managerial and sometimes policy-making responsibility for the editorial part of a publishing firm or of a newspaper, magazine, or other publication.", lang="en"),
-# )
-
-# NOTE: As with the dwcdp:basedOn, dcterms:BibliographicResource could be put in here possibly
-#
 createOP(
     name="evidenceFor",
     namespace=DWCDP,
@@ -3667,8 +3154,6 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate either a [dwc:MaterialEntity] or a [dwc:Occurrence] to the [dwc:GeologicalContext] within which it happened.", lang="en"),
 )
 
-# NOTE: Sort of redundant, but a fish capture logbook can have images, so we could add dcterms:BibliographicResource here.
-#
 createOP(
     name="hasMedia",
     namespace=DWCDP,
@@ -3693,8 +3178,6 @@ createOP(
     comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:mediaOf], which allows reasoners queries to go through different ways.", lang="en"),
 )
 
-# NOTE: Added dcterms:BibliographicResource
-#
 createOP(
     name="hasEvidence",
     namespace=DWCDP,
@@ -3823,11 +3306,6 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:NucleotideAnalysis] to the [dwc:Event] from which the material was collected.", lang="en"),
 )
 
-# prop_chain = BNode()
-# Collection(g, prop_chain, [DWCDP["analysisOf"], DWCDP["collectedDuring"]])
-# g.add((DWCDP["materialCollectedDuring"], OWL["propertyChainAxiom"], prop_chain))
-
-
 # NOTE: Added dcterms:BibliographicResource for pictures of a document.
 #
 createOP(
@@ -3856,6 +3334,7 @@ createOP(
 )
 
 # NOTE: dwc:MolecularProtocol is included in the explorer, but I think it should be handled by dwc:Protocol.
+#
 createOP(
     name="mentionedIn",
     namespace=DWCDP,
@@ -3877,7 +3356,7 @@ createOP(
     prop_chains=[
         (DWCDP["mentionedIn"], DWCDP["partOf"]),
     ],
-    definition=Literal("An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned.", lang="en"),
+    definition=Literal("An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentioned.", lang="en"),
     comments=Literal("The mentionable resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey].", lang="en"),
 )
 
@@ -4008,7 +3487,6 @@ createOP(
     namespace=DWCDP,
     graph=g,
     domains=DCTERMS["BibliographicResource"],
-    # domains=DWC["BibliographicDocument"],
     ranges=DCTERMS["Agent"],
     subproperty_of=DCTERMS["publisher"],
     pref_label=Literal("Published By", lang="en"),
@@ -4100,6 +3578,8 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [eco:Survey] to the [dcterms:Agent] that carried out the sampling.", lang="en"),
 )
 
+# WARN: Commented out relationship to dsw:locatedAt as it is not explicitly mentioned as a subproperty of dcterms:spatial.
+#
 createOP(
     name="spatialLocation",
     namespace=DWCDP,
@@ -4107,14 +3587,15 @@ createOP(
     domains=DWC["Event"],
     ranges=DCTERMS["Location"],
     subproperty_of=DCTERMS["spatial"],
-    equivalent_property_list=[
-        DSW["locatedAt"],
-    ],
+    # equivalent_property_list=[
+        # DSW["locatedAt"],
+    # ],
     pref_label=Literal("Spatial Location", lang="en"),
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in.", lang="en"),
 )
 
 # WARN: Possibly a subproperty of a future dwciri: term.
+#
 createOP(
     name="storedIn",
     namespace=DWCDP,
@@ -4169,7 +3650,6 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:Identification] to the [dwc:Taxon] it considers.", lang="en"),
 )
 
-
 # NOTE: For now, use the same name as the class, but with camelCase.
 #
 createOP(
@@ -4195,7 +3675,6 @@ createOP(
     comments=Literal("This property also has a [owl:InverseProperty], [dwcdp:mediaOf], which allows reasoners queries to go through different ways.", lang="en"),
 )
 
-# NOTE: For now, use the same name as the class, but with camelCase.
 createOP(
     name="usedFor",
     namespace=DWCDP,
@@ -4207,20 +3686,392 @@ createOP(
     definition=Literal("An [owl:ObjectProperty] used to relate a [dwc:BibliographicResource] to an instance of a [dwc:Identification] it was used to determine.", lang="en"),
 )
 
-# TEST: Example to see how not considering owl:unionOf affects WebVOWL
-# BUG: Simply considering the domains separately considers the intersection
-# g.add((DWCDP["hasUsagePolicy"], RDF["type"], OWL["ObjectProperty"]))
-# g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], AC["Media"]))
-# g.add((DWCDP["hasUsagePolicy"], RDFS["domain"], DWC["MaterialEntity"]))
-# g.add((DWCDP["hasUsagePolicy"], RDFS["range"], DWC["UsagePolicy"]))
+# WARN: All DWCIRI properties are explicitly stated as only rdf:Property with no domain or range.
+# The domain and range are therefore left blank, making them the equivalent of owl:Thing.
 #
-#############################################################################
+createOP(
+    name="assertionTypeIRI",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Assertion Type (IRI)", lang="en"),
+    definition=Literal("An IRI of a controlled vocabulary value for a type of [dwc:Assertion].", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
+    version_of_s="http://example.com/term-pending/dwciri/assertionTypeIRI",
+)
+
+createOP(
+    name="assertionValueIRI",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Assertion Value (IRI)", lang="en"),
+    definition=Literal("An IRI of the controlled vocabulary value for a value of a [dwc:Assertion].", lang="en"),
+    examples=[
+        URIRef("http://purl.obolibrary.org/obo/OBA_VT0000047"),
+    ],
+    version_of_s="http://example.com/term-pending/dwciri/assertionValueIRI",
+)
+
+# WARN: Comment in JSON file says dwc:SurveyTargetType?
+createOP(
+    name="surveyTargetTypeIRI",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Survey Target Type IRI", lang="en"),
+    definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for a term in a controlled vocabulary.", lang="en"),
+    subproperty_of=DCTERMS["type"],
+    version_of_s="http://purl.org/dc/terms/type",
+)
+
+createOP(
+    name="behavior",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Behavior (IRI)", lang="en"),
+    definition=Literal("A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/behavior",
+    references_s="http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10",
+)
+
+createOP(
+    name="caste",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Caste (IRI)", lang="en"),
+    definition=Literal("Categorisation of individuals for eusocial species (including some mammals and arthropods).", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/caste",
+    references_s="http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10",
+)
+
+createOP(
+    name="dataGeneralizations",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Data Generalizations (IRI)", lang="en"),
+    definition=Literal("Actions taken to make the shared data less specific or complete than in its original form. Suggests that alternative data of higher quality may be available on request.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/dataGeneralizations",
+    references_s="http://rs.tdwg.org/dwc/iri/version/dataGeneralizations-2025-07-10",
+)
+
+createOP(
+    name="degreeOfEstablishment",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Degree Of Establishment (IRI)", lang="en"),
+    definition=Literal("The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time.", lang="en"),
+    comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    examples=[
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d003"),
+        URIRef("http://rs.tdwg.org/dwcdoe/values/d005"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/iri/degreeOfEstablishment",
+    references_s="http://rs.tdwg.org/dwc/iri/version/degreeOfEstablishment-2025-07-10",
+)
+
+createOP(
+    name="discipline",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Discipline (IRI)", lang="en"),
+    definition=Literal("The primary branch or branches of knowledge represented by the record.", lang="en"),
+    comments=Literal("This term can be used to classify records according to branches of knowledge. Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/discipline",
+    references_s="http://rs.tdwg.org/dwc/iri/version/discipline-2025-06-12",
+)
+
+createOP(
+    name="disposition",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Disposition (IRI)", lang="en"),
+    definition=Literal("The current state of a specimen with respect to the collection identified in dwc:collectionCode or dwc:collectionID.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/disposition",
+    references_s="http://rs.tdwg.org/dwc/iri/version/disposition-2025-07-10",
+)
+
+createOP(
+    name="earliestGeochronologicalEra",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Earliest Geochronological Era", lang="en"),
+    definition=Literal("Use to link a dwc:GeologicalContext instance to chronostratigraphic time periods at the lowest possible level in a standardized hierarchy. Use this property to point to the earliest possible geological time period from which the dwc:MaterialEntity was collected.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI from a controlled vocabulary. A \"convenience property\" that replaces Darwin Core literal-value terms related to geological context. See Section 2.7.6 of the Darwin Core RDF Guide for details.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/earliestGeochronologicalEra",
+    references_s="http://rs.tdwg.org/dwc/iri/version/earliestGeochronologicalEra-2023-09-13",
+)
+
+createOP(
+    name="establishmentMeans",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Establishment Means (IRI)", lang="en"),
+    definition=Literal("Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans.", lang="en"),
+    comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    examples=[
+        URIRef("http://rs.tdwg.org/dwcem/values/e001"),
+        URIRef("http://rs.tdwg.org/dwcem/values/e005"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/iri/establishmentMeans",
+    references_s="http://rs.tdwg.org/dwc/iri/version/establishmentMeans-2025-07-10",
+)
+
+createOP(
+    name="eventType",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Event Type (IRI)", lang="en"),
+    definition=Literal("The nature of the dwc:Event.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Regardless of the dwc:eventType, the interval of the dwc:Event can be captured in dwc:eventDate. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/eventType",
+    references_s="http://rs.tdwg.org/dwc/iri/version/eventType-2025-07-10",
+)
+
+createOP(
+    name="fieldNotes",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Field Notes (IRI)", lang="en"),
+    definition=Literal("One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event.", lang="en"),
+    comments=Literal("The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/fieldNotes",
+    references_s="http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28",
+)
+
+createOP(
+    name="fieldNumber",
+    namespace=DWCIRI,
+    graph=g,
+    domains=DWC["Event"],
+    pref_label=Literal("Field Number (IRI)", lang="en"),
+    definition=Literal("An identifier given to the event in the field. Often serves as a link between field notes and the dwc:Event.", lang="en"),
+    comments=Literal("The subject is a (possibly IRI-identified) resource that is the field notes and the object is a dwc:Event instance.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/fieldNumber",
+    references_s="http://rs.tdwg.org/dwc/iri/version/fieldNumber-2023-06-28",
+)
+
+createOP(
+    name="footprintWKT",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Footprint WKT (IRI)", lang="en"),
+    definition=Literal("A Well-Known Text (WKT) representation of the shape (footprint, geometry) that defines the dcterms:Location. A dcterms:Location may have both a point-radius representation (see dwc:decimalLatitude) and a footprint representation, and they may differ from each other.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/footprintWKT",
+    references_s="http://rs.tdwg.org/dwc/iri/version/footprintWKT-2025-07-10",
+)
+
+createOP(
+    name="geodeticDatum",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Geodetic Datum (IRI)", lang="en"),
+    definition=Literal("The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which the geographic coordinates given in dwc:decimalLatitude and dwc:decimalLongitude are based.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use an IRI corresponding to the value not recorded.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/geodeticDatum",
+    references_s="http://rs.tdwg.org/dwc/iri/version/geodeticDatum-2025-06-12",
+)
+
+createOP(
+    name="georeferencedBy",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Georeferenced By (IRI)", lang="en"),
+    definition=Literal("A person, group, or organization who determined the georeference (spatial representation) for the dcterms:Location.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/georeferencedBy",
+    references_s="http://rs.tdwg.org/dwc/iri/version/georeferencedBy-2025-07-10",
+)
+
+createOP(
+    name="georeferenceProtocol",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Georeference Protocol (IRI)", lang="en"),
+    definition=Literal("A description or reference to the methods used to determine the spatial footprint, coordinates, and uncertainties.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/georeferenceProtocol",
+    references_s="http://rs.tdwg.org/dwc/iri/version/georeferenceProtocol-2025-07-10",
+)
+
+createOP(
+    name="georeferenceSources",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Georeference Sources (IRI)", lang="en"),
+    definition=Literal("A map, gazetteer, or other resource used to georeference the dcterms:Location.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/georeferenceSources",
+    references_s="http://rs.tdwg.org/dwc/iri/version/georeferenceSources-2025-07-10",
+)
+
+createOP(
+    name="georeferenceVerificationStatus",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Georeference Verification Status (IRI)", lang="en"),
+    definition=Literal("A categorical description of the extent to which the georeference has been verified to represent the best possible spatial description for the dcterms:Location of the dwc:Occurrence.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/georeferenceVerificationStatus",
+    references_s="http://rs.tdwg.org/dwc/iri/version/georeferenceVerificationStatus-2025-07-10",
+)
+
+createOP(
+    name="habitat",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Habitat (IRI)", lang="en"),
+    definition=Literal("A category or description of the habitat in which the dwc:Event occurred.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/habitat",
+    references_s="http://rs.tdwg.org/dwc/iri/version/habitat-2025-07-10",
+)
+
+createOP(
+    name="identifiedBy",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Identified By (IRI)", lang="en"),
+    definition=Literal("A person, group, or organization who assigned the dwc:Taxon to the subject.", lang="en"),
+    comments=Literal("When used in the context of an Event (such as in the Humboldt Extension), the subject consists of all of the dwc:Organisms related to the Event. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/identifiedBy",
+    references_s="http://rs.tdwg.org/dwc/iri/version/identifiedBy-2025-07-10",
+)
+
+createOP(
+    name="locationAccordingTo",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Location According To (IRI)", lang="en"),
+    definition=Literal("Information about the source of this dcterms:Location information. Could be a publication (gazetteer), institution, or team of individuals.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/locationAccordingTo",
+    references_s="http://rs.tdwg.org/dwc/iri/version/locationAccordingTo-2025-07-10",
+)
+
+createOP(
+    name="occurrenceStatus",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Occurrence Status (IRI)", lang="en"),
+    definition=Literal("A statement about the presence or absence of a dwc:Taxon at a dcterms:Location.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/occurrenceStatus",
+    references_s="http://rs.tdwg.org/dwc/iri/version/occurrenceStatus-2025-07-10",
+)
+
+createOP(
+    name="pathway",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Pathway (IRI)", lang="en"),
+    definition=Literal("The process by which a dwc:Organism came to be in a given place at a given time.", lang="en"),
+    comments=Literal("Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    examples=[
+        URIRef("http://rs.tdwg.org/dwcpw/values/p002"),
+        URIRef("http://rs.tdwg.org/dwcpw/values/p046"),
+    ],
+    version_of_s="http://rs.tdwg.org/dwc/iri/pathway",
+    references_s="http://rs.tdwg.org/dwc/iri/version/pathway-2025-07-10",
+)
+
+createOP(
+    name="recordedBy",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Recorded By (IRI)", lang="en"),
+    definition=Literal("A person, group, or organization responsible for recording the original dwc:Occurrence.", lang="en"),
+    comments=Literal("Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/recordedBy",
+    references_s="http://rs.tdwg.org/dwc/iri/version/recordedBy-2025-07-10",
+)
+
+createOP(
+    name="reproductiveCondition",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Reproductive Condition (IRI)", lang="en"),
+    definition=Literal("The reproductive condition of the biological individual(s) represented in the dwc:Occurrence.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/reproductiveCondition",
+    references_s="http://rs.tdwg.org/dwc/iri/version/reproductiveCondition-2025-07-10",
+)
+
+createOP(
+    name="samplingProtocol",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Sampling Protocol (IRI)", lang="en"),
+    definition=Literal("The methods or protocols used during a dwc:Event, denoted by an IRI.", lang="en"),
+    comments=Literal("Recommended best practice is describe a dwc:Event with no more than one sampling protocol. In the case of a summary dwc:Event in which a specific protocol can not be attributed to specific dwc:Occurrences, the recommended best practice is to repeat the property for each IRI that denotes a different sampling protocol that applies to the dwc:Occurrence.", lang="en"),
+    examples=URIRef("https://doi.org/10.1111/j.1466-8238.2009.00467.x"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/samplingProtocol",
+    references_s="http://rs.tdwg.org/dwc/iri/version/samplingProtocol-2023-06-28",
+)
+
+createOP(
+    name="toTaxon",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("To Taxon (IRI)", lang="en"),
+    definition=Literal("Use to link a [dwc:Identification] instance subject to a taxonomic entity such as a taxon, taxon concept, or taxon name use.", lang="en"),
+    comments=Literal("A \"convenience property\" that replaces Darwin Core literal-value terms related to taxonomic entities. See Section 2.7.4 of the Darwin Core RDF Guide for details.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/toTaxon",
+    references_s="http://rs.tdwg.org/dwc/iri/version/toTaxon-2015-03-27",
+)
+
+createOP(
+    name="verbatimCoordinateSystem",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Verbatim Coordinate System (IRI)", lang="en"),
+    definition=Literal("The spatial coordinate system for the dwc:verbatimLatitude and dwc:verbatimLongitude or the dwc:verbatimCoordinates of the dcterms:Location.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/verbatimCoordinateSystem",
+    references_s="http://rs.tdwg.org/dwc/iri/version/verbatimCoordinateSystem-2025-07-10",
+)
+
+createOP(
+    name="verbatimSRS",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Verbatim SRS (IRI)", lang="en"),
+    definition=Literal("The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which coordinates given in dwc:verbatimLatitude and dwc:verbatimLongitude, or dwc:verbatimCoordinates are based.", lang="en"),
+    comments=Literal("Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary IRI for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary IRI for the name or code of the ellipsoid, if known. Otherwise use an IRI for the value corresponding to `not recorded`.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/verbatimSRS",
+    references_s="http://rs.tdwg.org/dwc/iri/version/verbatimSRS-2025-06-12",
+)
+
+createOP(
+    name="verticalDatum",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Vertical Datum (IRI)", lang="en"),
+    definition=Literal("The vertical datum used as the reference upon which the values in the elevation terms are based.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/verticalDatum",
+    references_s="http://rs.tdwg.org/dwc/iri/version/verticalDatum-2025-07-10",
+)
+
+createOP(
+    name="vitality",
+    namespace=DWCIRI,
+    graph=g,
+    pref_label=Literal("Vitality (IRI)", lang="en"),
+    definition=Literal("An indication of whether a dwc:Organism was alive or dead at the time of collection or observation.", lang="en"),
+    comments=Literal("Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/iri/vitality",
+    references_s="http://rs.tdwg.org/dwc/iri/version/vitality-2025-07-10",
+)
 
 createOP(
     name="samplingPerformedBy",
     namespace=ECOIRI,
     graph=g,
-    pref_label=Literal("Sampling Performed By (IRI)"),
+    pref_label=Literal("Sampling Performed By (IRI)", lang="en"),
     definition=Literal("A person, group, or organization responsible for recording the dwc:Event.", lang="en"),
     comments=Literal("The sampling dwc:Event could be at any level of hierarchy. In the case of a higher level (parent) dwc:Event, include all the organizations or people involved in the child dwc:Events that contributed to the parent dwc:Event. Terms in the ecoiri: namespace are intended to be used in RDF with non-literal objects.", lang="en"),
     version_of_s="http://rs.tdwg.org/eco/iri/samplingPerformedBy",
@@ -4232,13 +4083,12 @@ createOP(
     name="surveyTargetTypeSourceIRI",
     namespace=ECOIRI,
     graph=g,
-    pref_label=Literal("Survey Target Type Source IRI"),
+    pref_label=Literal("Survey Target Type Source IRI", lang="en"),
     definition=Literal("A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given.", lang="en"),
     comments=Literal("Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings.", lang="en"),
     subproperty_of=DCTERMS["source"],
     version_of_s="http://purl.org/dc/elements/terms/source",
 )
-
 
 createOP(
     name="inScheme",
@@ -4248,14 +4098,50 @@ createOP(
     pref_label=Literal("Is In Scheme", lang="en"),
     definition=Literal("Relates a resource (for example a concept) to a concept scheme in which it is included", lang="en"),
     comments=Literal("A conceptmay be a member of more than one concept scheme.", lang="en"),
-    version_of_s="http://www.w3.org/2004/02/skos/core#",
+    version_of_s="http://www.w3.org/2004/02/skos/core#inScheme",
 )
 
+############################################################################
 
+createOP(
+    name="hasSubjectOrientation",
+    namespace=DWC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=DWC["SubjectOrientation"],
+    pref_label=Literal("Has Subject Orientation", lang="en"),
+    definition=Literal("Object property to relate a ac:Media instance to a controlled IRI value from the acorient vocabulary.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/hasSubjectOrientation",
+)
 
+createOP(
+    name="hasSubjectPart",
+    namespace=DWC,
+    graph=g,
+    domains=AC["Media"],
+    ranges=DWC["SubjectPart"],
+    pref_label=Literal("Has Subject Part", lang="en"),
+    definition=Literal("Object property to relate a ac:Media instance to a controlled IRI value from the acpart vocabulary.", lang="en"),
+    version_of_s="http://rs.tdwg.org/dwc/terms/hasSubjectOrientation",
+)
+
+#############################################################################
+
+# NOTE: Possibly reword previously skos:editorialNote into a comment
+createOP(
+    name="status",
+    namespace=BIBO,
+    graph=g,
+    domains=BIBO["Document"],
+    ranges=BIBO["DocumentStatus"],
+    pref_label=Literal("Status", lang="en"),
+    definition=Literal("The publication status of (typically academic) content.", lang="en"),
+    comments=Literal("We are not defining, using an enumeration, the range of the bibo:status to the defined list of bibo:DocumentStatus. We won't do it because we want people to be able to define new status if needed by some special usecases. Creating such an enumeration would restrict this to happen.", lang="en"),
+    version_of_s="http://purl.org/ontology/bibo/status",
+)
 
 #####################################################################################################
-# BEGIN DATATYPE PROPERTY DEFINITIONS
+# NOTE: BEGIN DATATYPE PROPERTY DEFINITIONS
 #####################################################################################################
 
 createDP(

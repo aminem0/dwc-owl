@@ -107,7 +107,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://purl.org/dc/terms/contributor
 dcterms:contributor rdf:type owl:ObjectProperty ;
                     dcterms:isVersionOf dcterms:contributor ;
-                    rdfs:comment "The guidellines for using names of persons or organizations as creators apply to contributors."@en ;
+                    rdfs:comment "The guidelines for using names of persons or organizations as creators apply to contributors."@en ;
                     rdfs:isDefinedBy dcterms: ;
                     skos:definition "An entity responsible for making contributions to this resource."@en ;
                     skos:prefLabel "Contributor (DCTERMS)"@en .
@@ -137,13 +137,13 @@ dcterms:rights rdf:type owl:ObjectProperty ;
                rdfs:comment "Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights. Recommended practice is to refer to a rights statement with a URI. If this is not possible or feasible, a literal value (name, label, or short text) may be provided."@en ;
                rdfs:isDefinedBy dcterms: ;
                skos:definition "Information about rights held in and over the resource."@en ;
-               skos:prefLabel "Rights (DCTERMS)" .
+               skos:prefLabel "Rights (DCTERMS)"@en .
 
 
 ###  http://purl.org/dc/terms/rightsHolder
 dcterms:rightsHolder rdf:type owl:ObjectProperty ;
                      dcterms:isVersionOf dcterms:rightsHolder ;
-                     rdfs:comment "Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided." ;
+                     rdfs:comment "Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided."@en ;
                      rdfs:isDefinedBy dcterms: ;
                      skos:definition "A person or organization owning or managing rights over the resource." ;
                      skos:prefLabel "Rights Holder"@en .
@@ -166,10 +166,10 @@ dcterms:spatial rdf:type owl:ObjectProperty ;
 ###  http://purl.org/dc/terms/type
 dcterms:type rdf:type owl:ObjectProperty ;
              dcterms:isVersionOf dcterms:type ;
-             rdfs:comment "Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/). To describe the file format, physical medium, or dimensions of the resource, use the property Format." ;
+             rdfs:comment "Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/). To describe the file format, physical medium, or dimensions of the resource, use the property Format."@en ;
              rdfs:isDefinedBy dcterms: ;
              skos:definition "The nature or genre of the resource."@en ;
-             skos:prefLabel "Type" .
+             skos:prefLabel "Type"@en .
 
 
 ###  http://purl.org/dsw/locatedAt
@@ -249,48 +249,40 @@ ac:reviewer rdf:type owl:ObjectProperty ;
 
 ###  http://rs.tdwg.org/dwc/iri/assertionTypeIRI
 dwciri:assertionTypeIRI rdf:type owl:ObjectProperty ;
-                        rdfs:domain dwc:Assertion ;
                         dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
                         rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
                         rdfs:isDefinedBy dwciri: ;
                         skos:definition "An IRI of a controlled vocabulary value for a type of [dwc:Assertion]."@en ;
-                        skos:prefLabel "Assertion Type (IRI)" .
+                        skos:prefLabel "Assertion Type (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/assertionValueIRI
 dwciri:assertionValueIRI rdf:type owl:ObjectProperty ;
-                         rdfs:domain dwc:Assertion ;
                          dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionValueIRI> ;
                          rdfs:isDefinedBy dwciri: ;
                          skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
                          skos:example <http://purl.obolibrary.org/obo/OBA_VT0000047> ;
-                         skos:prefLabel "Assertion Value (IRI)" .
+                         skos:prefLabel "Assertion Value (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/behavior
 dwciri:behavior rdf:type owl:ObjectProperty ;
-                rdfs:domain dwc:OccurrenceAssertion ;
                 dcterms:isVersionOf dwciri:behavior ;
                 dcterms:references <http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10> ;
                 rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                 rdfs:isDefinedBy dwciri: ;
                 skos:definition "A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded."@en ;
-                skos:prefLabel "Behavior (IRI)" .
+                skos:prefLabel "Behavior (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/caste
 dwciri:caste rdf:type owl:ObjectProperty ;
-             rdfs:domain [ rdf:type owl:Class ;
-                           owl:unionOf ( dwc:MaterialEntityAssertion
-                                         dwc:OccurrenceAssertion
-                                       )
-                         ] ;
              dcterms:isVersionOf dwciri:caste ;
              dcterms:references <http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10> ;
              rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
              rdfs:isDefinedBy dwciri: ;
              skos:definition "Categorisation of individuals for eusocial species (including some mammals and arthropods)."@en ;
-             skos:prefLabel "Caste (IRI)" .
+             skos:prefLabel "Caste (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/dataGeneralizations
@@ -300,13 +292,11 @@ dwciri:dataGeneralizations rdf:type owl:ObjectProperty ;
                            rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                            rdfs:isDefinedBy dwciri: ;
                            skos:definition "Actions taken to make the shared data less specific or complete than in its original form. Suggests that alternative data of higher quality may be available on request."@en ;
-                           skos:prefLabel "Data Generalizations (IRI)" .
+                           skos:prefLabel "Data Generalizations (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/degreeOfEstablishment
 dwciri:degreeOfEstablishment rdf:type owl:ObjectProperty ;
-                             rdfs:domain dwc:Occurrence ;
-                             rdfs:range dwc:DegreeOfEstablishment ;
                              dcterms:isVersionOf dwciri:degreeOfEstablishment ;
                              dcterms:references <http://rs.tdwg.org/dwc/iri/version/degreeOfEstablishment-2025-07-10> ;
                              rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -314,7 +304,7 @@ dwciri:degreeOfEstablishment rdf:type owl:ObjectProperty ;
                              skos:definition "The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time."@en ;
                              skos:example dwcdoe:d003 ,
                                           dwcdoe:d005 ;
-                             skos:prefLabel "Degree Of Establishment (IRI)" .
+                             skos:prefLabel "Degree Of Establishment (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/discipline
@@ -324,35 +314,31 @@ dwciri:discipline rdf:type owl:ObjectProperty ;
                   rdfs:comment "This term can be used to classify records according to branches of knowledge. Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                   rdfs:isDefinedBy dwciri: ;
                   skos:definition "The primary branch or branches of knowledge represented by the record."@en ;
-                  skos:prefLabel "Discipline (IRI)" .
+                  skos:prefLabel "Discipline (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/disposition
 dwciri:disposition rdf:type owl:ObjectProperty ;
-                   rdfs:domain dwc:MaterialEntity ;
                    dcterms:isVersionOf dwciri:disposition ;
                    dcterms:references <http://rs.tdwg.org/dwc/iri/version/disposition-2025-07-10> ;
                    rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                    rdfs:isDefinedBy dwciri: ;
                    skos:definition "The current state of a specimen with respect to the collection identified in dwc:collectionCode or dwc:collectionID."@en ;
-                   skos:prefLabel "Disposition (IRI)" .
+                   skos:prefLabel "Disposition (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/earliestGeochronologicalEra
 dwciri:earliestGeochronologicalEra rdf:type owl:ObjectProperty ;
-                                   rdfs:domain dwc:MaterialEntity ;
                                    dcterms:isVersionOf dwciri:earliestGeochronologicalEra ;
                                    dcterms:references <http://rs.tdwg.org/dwc/iri/version/earliestGeochronologicalEra-2023-09-13> ;
                                    rdfs:comment "Recommended best practice is to use an IRI from a controlled vocabulary. A \"convenience property\" that replaces Darwin Core literal-value terms related to geological context. See Section 2.7.6 of the Darwin Core RDF Guide for details."@en ;
                                    rdfs:isDefinedBy dwciri: ;
                                    skos:definition "Use to link a dwc:GeologicalContext instance to chronostratigraphic time periods at the lowest possible level in a standardized hierarchy. Use this property to point to the earliest possible geological time period from which the dwc:MaterialEntity was collected."@en ;
-                                   skos:prefLabel "Earliest Geochronological Era" .
+                                   skos:prefLabel "Earliest Geochronological Era"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/establishmentMeans
 dwciri:establishmentMeans rdf:type owl:ObjectProperty ;
-                          rdfs:domain dwc:Occurrence ;
-                          rdfs:range dwc:EstablishmentMeans ;
                           dcterms:isVersionOf dwciri:establishmentMeans ;
                           dcterms:references <http://rs.tdwg.org/dwc/iri/version/establishmentMeans-2025-07-10> ;
                           rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -360,29 +346,27 @@ dwciri:establishmentMeans rdf:type owl:ObjectProperty ;
                           skos:definition "Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans."@en ;
                           skos:example dwcem:e001 ,
                                        dwcem:e005 ;
-                          skos:prefLabel "Establishment Means (IRI)" .
+                          skos:prefLabel "Establishment Means (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/eventType
 dwciri:eventType rdf:type owl:ObjectProperty ;
-                 rdfs:domain dwc:Event ;
                  dcterms:isVersionOf dwciri:eventType ;
                  dcterms:references <http://rs.tdwg.org/dwc/iri/version/eventType-2025-07-10> ;
                  rdfs:comment "Recommended best practice is to use a controlled vocabulary. Regardless of the dwc:eventType, the interval of the dwc:Event can be captured in dwc:eventDate. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                  rdfs:isDefinedBy dwciri: ;
                  skos:definition "The nature of the dwc:Event."@en ;
-                 skos:prefLabel "Event Type (IRI)" .
+                 skos:prefLabel "Event Type (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/fieldNotes
 dwciri:fieldNotes rdf:type owl:ObjectProperty ;
-                  rdfs:domain dwc:Event ;
                   dcterms:isVersionOf dwciri:fieldNotes ;
                   dcterms:references <http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28> ;
                   rdfs:comment "The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes."@en ;
                   rdfs:isDefinedBy dwciri: ;
                   skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
-                  skos:prefLabel "Field Notes (IRI)" .
+                  skos:prefLabel "Field Notes (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/fieldNumber
@@ -393,128 +377,111 @@ dwciri:fieldNumber rdf:type owl:ObjectProperty ;
                    rdfs:comment "The subject is a (possibly IRI-identified) resource that is the field notes and the object is a dwc:Event instance."@en ;
                    rdfs:isDefinedBy dwciri: ;
                    skos:definition "An identifier given to the event in the field. Often serves as a link between field notes and the dwc:Event."@en ;
-                   skos:prefLabel "Field Number (IRI)" .
+                   skos:prefLabel "Field Number (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/footprintWKT
 dwciri:footprintWKT rdf:type owl:ObjectProperty ;
-                    rdfs:domain dcterms:Location ;
                     dcterms:isVersionOf dwciri:footprintWKT ;
                     dcterms:references <http://rs.tdwg.org/dwc/iri/version/footprintWKT-2025-07-10> ;
                     rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                     rdfs:isDefinedBy dwciri: ;
                     skos:definition "A Well-Known Text (WKT) representation of the shape (footprint, geometry) that defines the dcterms:Location. A dcterms:Location may have both a point-radius representation (see dwc:decimalLatitude) and a footprint representation, and they may differ from each other."@en ;
-                    skos:prefLabel "Footprint WKT (IRI)" .
+                    skos:prefLabel "Footprint WKT (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/geodeticDatum
 dwciri:geodeticDatum rdf:type owl:ObjectProperty ;
-                     rdfs:domain dcterms:Location ;
                      dcterms:isVersionOf dwciri:geodeticDatum ;
                      dcterms:references <http://rs.tdwg.org/dwc/iri/version/geodeticDatum-2025-06-12> ;
                      rdfs:comment "Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use an IRI corresponding to the value not recorded."@en ;
                      rdfs:isDefinedBy dwciri: ;
                      skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which the geographic coordinates given in dwc:decimalLatitude and dwc:decimalLongitude are based."@en ;
-                     skos:prefLabel "Geodetic Datum (IRI)" .
+                     skos:prefLabel "Geodetic Datum (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/georeferenceProtocol
 dwciri:georeferenceProtocol rdf:type owl:ObjectProperty ;
-                            rdfs:domain dcterms:Location ;
                             dcterms:isVersionOf dwciri:georeferenceProtocol ;
                             dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferenceProtocol-2025-07-10> ;
                             rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                             rdfs:isDefinedBy dwciri: ;
                             skos:definition "A description or reference to the methods used to determine the spatial footprint, coordinates, and uncertainties."@en ;
-                            skos:prefLabel "Georeference Protocol (IRI)" .
+                            skos:prefLabel "Georeference Protocol (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/georeferenceSources
 dwciri:georeferenceSources rdf:type owl:ObjectProperty ;
-                           rdfs:domain dcterms:Location ;
                            dcterms:isVersionOf dwciri:georeferenceSources ;
                            dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferenceSources-2025-07-10> ;
                            rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                            rdfs:isDefinedBy dwciri: ;
                            skos:definition "A map, gazetteer, or other resource used to georeference the dcterms:Location."@en ;
-                           skos:prefLabel "Georeference Sources (IRI)" .
+                           skos:prefLabel "Georeference Sources (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/georeferenceVerificationStatus
 dwciri:georeferenceVerificationStatus rdf:type owl:ObjectProperty ;
-                                      rdfs:domain dcterms:Location ;
                                       dcterms:isVersionOf dwciri:georeferenceVerificationStatus ;
                                       dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferenceVerificationStatus-2025-07-10> ;
                                       rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                                       rdfs:isDefinedBy dwciri: ;
                                       skos:definition "A categorical description of the extent to which the georeference has been verified to represent the best possible spatial description for the dcterms:Location of the dwc:Occurrence."@en ;
-                                      skos:prefLabel "Georeference Verification Status (IRI)" .
+                                      skos:prefLabel "Georeference Verification Status (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/georeferencedBy
 dwciri:georeferencedBy rdf:type owl:ObjectProperty ;
-                       rdfs:domain dcterms:Location ;
                        dcterms:isVersionOf dwciri:georeferencedBy ;
                        dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferencedBy-2025-07-10> ;
                        rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                        rdfs:isDefinedBy dwciri: ;
                        skos:definition "A person, group, or organization who determined the georeference (spatial representation) for the dcterms:Location."@en ;
-                       skos:prefLabel "Georeferenced By (IRI)" .
+                       skos:prefLabel "Georeferenced By (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/habitat
 dwciri:habitat rdf:type owl:ObjectProperty ;
-               rdfs:domain dwc:Event ;
                dcterms:isVersionOf dwciri:habitat ;
                dcterms:references <http://rs.tdwg.org/dwc/iri/version/habitat-2025-07-10> ;
                rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                rdfs:isDefinedBy dwciri: ;
                skos:definition "A category or description of the habitat in which the dwc:Event occurred."@en ;
-               skos:prefLabel "Habitat (IRI)" .
+               skos:prefLabel "Habitat (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/identifiedBy
 dwciri:identifiedBy rdf:type owl:ObjectProperty ;
-                    rdfs:domain [ rdf:type owl:Class ;
-                                  owl:unionOf ( dwc:Identification
-                                                dwc:Occurrence
-                                                eco:Survey
-                                              )
-                                ] ;
                     dcterms:isVersionOf dwciri:identifiedBy ;
                     dcterms:references <http://rs.tdwg.org/dwc/iri/version/identifiedBy-2025-07-10> ;
                     rdfs:comment "When used in the context of an Event (such as in the Humboldt Extension), the subject consists of all of the dwc:Organisms related to the Event. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                     rdfs:isDefinedBy dwciri: ;
                     skos:definition "A person, group, or organization who assigned the dwc:Taxon to the subject."@en ;
-                    skos:prefLabel "Identified By (IRI)" .
+                    skos:prefLabel "Identified By (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/locationAccordingTo
 dwciri:locationAccordingTo rdf:type owl:ObjectProperty ;
-                           rdfs:domain dcterms:Location ;
                            dcterms:isVersionOf dwciri:locationAccordingTo ;
                            dcterms:references <http://rs.tdwg.org/dwc/iri/version/locationAccordingTo-2025-07-10> ;
                            rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                            rdfs:isDefinedBy dwciri: ;
                            skos:definition "Information about the source of this dcterms:Location information. Could be a publication (gazetteer), institution, or team of individuals."@en ;
-                           skos:prefLabel "Location According To (IRI)" .
+                           skos:prefLabel "Location According To (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/occurrenceStatus
 dwciri:occurrenceStatus rdf:type owl:ObjectProperty ;
-                        rdfs:domain dwc:Occurrence ;
                         dcterms:isVersionOf dwciri:occurrenceStatus ;
                         dcterms:references <http://rs.tdwg.org/dwc/iri/version/occurrenceStatus-2025-07-10> ;
                         rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                         rdfs:isDefinedBy dwciri: ;
                         skos:definition "A statement about the presence or absence of a dwc:Taxon at a dcterms:Location."@en ;
-                        skos:prefLabel "Occurrence Status (IRI)" .
+                        skos:prefLabel "Occurrence Status (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/pathway
 dwciri:pathway rdf:type owl:ObjectProperty ;
-               rdfs:domain dwc:Occurrence ;
-               rdfs:range dwc:Pathway ;
                dcterms:isVersionOf dwciri:pathway ;
                dcterms:references <http://rs.tdwg.org/dwc/iri/version/pathway-2025-07-10> ;
                rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
@@ -522,7 +489,7 @@ dwciri:pathway rdf:type owl:ObjectProperty ;
                skos:definition "The process by which a dwc:Organism came to be in a given place at a given time."@en ;
                skos:example dwcpw:p002 ,
                             dwcpw:p046 ;
-               skos:prefLabel "Pathway (IRI)" .
+               skos:prefLabel "Pathway (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/recordedBy
@@ -532,45 +499,38 @@ dwciri:recordedBy rdf:type owl:ObjectProperty ;
                   rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                   rdfs:isDefinedBy dwciri: ;
                   skos:definition "A person, group, or organization responsible for recording the original dwc:Occurrence."@en ;
-                  skos:prefLabel "Recorded By (IRI)" .
+                  skos:prefLabel "Recorded By (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/reproductiveCondition
 dwciri:reproductiveCondition rdf:type owl:ObjectProperty ;
-                             rdfs:domain [ rdf:type owl:Class ;
-                                           owl:unionOf ( dwc:MaterialEntityAssertion
-                                                         dwc:OccurrenceAssertion
-                                                       )
-                                         ] ;
                              dcterms:isVersionOf dwciri:reproductiveCondition ;
                              dcterms:references <http://rs.tdwg.org/dwc/iri/version/reproductiveCondition-2025-07-10> ;
                              rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                              rdfs:isDefinedBy dwciri: ;
                              skos:definition "The reproductive condition of the biological individual(s) represented in the dwc:Occurrence."@en ;
-                             skos:prefLabel "Reproductive Condition (IRI)" .
+                             skos:prefLabel "Reproductive Condition (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/samplingProtocol
 dwciri:samplingProtocol rdf:type owl:ObjectProperty ;
-                        rdfs:domain dwc:Event ;
                         dcterms:isVersionOf dwciri:samplingProtocol ;
                         dcterms:references <http://rs.tdwg.org/dwc/iri/version/samplingProtocol-2023-06-28> ;
                         rdfs:comment "Recommended best practice is describe a dwc:Event with no more than one sampling protocol. In the case of a summary dwc:Event in which a specific protocol can not be attributed to specific dwc:Occurrences, the recommended best practice is to repeat the property for each IRI that denotes a different sampling protocol that applies to the dwc:Occurrence."@en ;
                         rdfs:isDefinedBy dwciri: ;
                         skos:definition "The methods or protocols used during a dwc:Event, denoted by an IRI."@en ;
                         skos:example <https://doi.org/10.1111/j.1466-8238.2009.00467.x> ;
-                        skos:prefLabel "Sampling Protocol (IRI)" .
+                        skos:prefLabel "Sampling Protocol (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/surveyTargetTypeIRI
 dwciri:surveyTargetTypeIRI rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf dcterms:type ;
-                           rdfs:domain eco:SurveyTarget ;
                            dcterms:isVersionOf dcterms:type ;
                            rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
                            rdfs:isDefinedBy dwciri: ;
                            skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given."@en ;
-                           skos:prefLabel "Survey Target Type IRI" .
+                           skos:prefLabel "Survey Target Type IRI"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/toTaxon
@@ -580,55 +540,47 @@ dwciri:toTaxon rdf:type owl:ObjectProperty ;
                rdfs:comment "A \"convenience property\" that replaces Darwin Core literal-value terms related to taxonomic entities. See Section 2.7.4 of the Darwin Core RDF Guide for details."@en ;
                rdfs:isDefinedBy dwciri: ;
                skos:definition "Use to link a [dwc:Identification] instance subject to a taxonomic entity such as a taxon, taxon concept, or taxon name use."@en ;
-               skos:prefLabel "To Taxon (IRI)" .
+               skos:prefLabel "To Taxon (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/verbatimCoordinateSystem
 dwciri:verbatimCoordinateSystem rdf:type owl:ObjectProperty ;
-                                rdfs:domain dcterms:Location ;
                                 dcterms:isVersionOf dwciri:verbatimCoordinateSystem ;
                                 dcterms:references <http://rs.tdwg.org/dwc/iri/version/verbatimCoordinateSystem-2025-07-10> ;
                                 rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                                 rdfs:isDefinedBy dwciri: ;
                                 skos:definition "The spatial coordinate system for the dwc:verbatimLatitude and dwc:verbatimLongitude or the dwc:verbatimCoordinates of the dcterms:Location."@en ;
-                                skos:prefLabel "Verbatim Coordinate System (IRI)" .
+                                skos:prefLabel "Verbatim Coordinate System (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/verbatimSRS
 dwciri:verbatimSRS rdf:type owl:ObjectProperty ;
-                   rdfs:domain dcterms:Location ;
                    dcterms:isVersionOf dwciri:verbatimSRS ;
                    dcterms:references <http://rs.tdwg.org/dwc/iri/version/verbatimSRS-2025-06-12> ;
                    rdfs:comment "Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary IRI for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary IRI for the name or code of the ellipsoid, if known. Otherwise use an IRI for the value corresponding to `not recorded`."@en ;
                    rdfs:isDefinedBy dwciri: ;
                    skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which coordinates given in dwc:verbatimLatitude and dwc:verbatimLongitude, or dwc:verbatimCoordinates are based."@en ;
-                   skos:prefLabel "Verbatim SRS (IRI)" .
+                   skos:prefLabel "Verbatim SRS (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/verticalDatum
 dwciri:verticalDatum rdf:type owl:ObjectProperty ;
-                     rdfs:domain dcterms:Location ;
                      dcterms:isVersionOf dwciri:verticalDatum ;
                      dcterms:references <http://rs.tdwg.org/dwc/iri/version/verticalDatum-2025-07-10> ;
                      rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                      rdfs:isDefinedBy dwciri: ;
                      skos:definition "The vertical datum used as the reference upon which the values in the elevation terms are based."@en ;
-                     skos:prefLabel "Vertical Datum (IRI)" .
+                     skos:prefLabel "Vertical Datum (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/iri/vitality
 dwciri:vitality rdf:type owl:ObjectProperty ;
-                rdfs:domain [ rdf:type owl:Class ;
-                              owl:unionOf ( dwc:MaterialEntityAssertion
-                                            dwc:OccurrenceAssertion
-                                          )
-                            ] ;
                 dcterms:isVersionOf dwciri:vitality ;
                 dcterms:references <http://rs.tdwg.org/dwc/iri/version/vitality-2025-07-10> ;
                 rdfs:comment "Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
                 rdfs:isDefinedBy dwciri: ;
                 skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
-                skos:prefLabel "Vitality (IRI)" .
+                skos:prefLabel "Vitality (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/dwc/terms/hasSubjectOrientation
@@ -740,7 +692,7 @@ dwcdp:asserted rdf:type owl:ObjectProperty ;
                rdfs:domain dcterms:Agent ;
                rdfs:range dwc:Assertion ;
                rdfs:isDefinedBy dwcdp: ;
-               skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:Agent] to the [dwc:Assertion] that he made."@en ;
+               skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:Agent] to the [dwc:Assertion] that it made."@en ;
                skos:prefLabel "Asserted"@en .
 
 
@@ -796,7 +748,7 @@ dwcdp:commentedBy rdf:type owl:ObjectProperty ;
                   rdfs:domain ac:Media ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
-                  skos:definition "An [owl:ObjectProperty] used to relate a [ac:Media] to the [dcterms:Agent] that commented it."@en ;
+                  skos:definition "An [owl:ObjectProperty] used to relate a [ac:Media] to the [dcterms:Agent] that commented on it."@en ;
                   skos:prefLabel "Commented By"@en .
 
 
@@ -812,10 +764,15 @@ dwcdp:conductedBy rdf:type owl:ObjectProperty ;
 ###  http://rs.tdwg.org/dwcdp/terms/createdBy
 dwcdp:createdBy rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf dcterms:creator ;
-                rdfs:domain dwc:Provenance ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( ac:Media
+                                            dwc:Provenance
+                                          )
+                            ] ;
                 rdfs:range dcterms:Agent ;
+                rdfs:comment "The types of created resources include [ac:Media] and [dwc:Provenance]."@en ;
                 rdfs:isDefinedBy dwcdp: ;
-                skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dcterms:Agent] that created it."@en ;
+                skos:definition "An [owl:ObjectProperty] used to relate a resource to the to the [dcterms:Agent] that created it."@en ;
                 skos:prefLabel "Created By"@en .
 
 
@@ -1143,7 +1100,7 @@ dwcdp:mentionedIn rdf:type owl:ObjectProperty ;
                                          ) ;
                   rdfs:comment "The mentionable resources include [chrono:ChronometricAge], [dwc:Event], [dwc:Identification], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:Organism], [dwc:OrganismInteraction], [dwc:Protocol] and [eco:Survey]."@en ;
                   rdfs:isDefinedBy dwcdp: ;
-                  skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned."@en ;
+                  skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentioned."@en ;
                   skos:prefLabel "Mentioned In"@en .
 
 
@@ -1433,7 +1390,7 @@ ecoiri:samplingPerformedBy rdf:type owl:ObjectProperty ;
                            rdfs:comment "The sampling dwc:Event could be at any level of hierarchy. In the case of a higher level (parent) dwc:Event, include all the organizations or people involved in the child dwc:Events that contributed to the parent dwc:Event. Terms in the ecoiri: namespace are intended to be used in RDF with non-literal objects."@en ;
                            rdfs:isDefinedBy ecoiri: ;
                            skos:definition "A person, group, or organization responsible for recording the dwc:Event."@en ;
-                           skos:prefLabel "Sampling Performed By (IRI)" .
+                           skos:prefLabel "Sampling Performed By (IRI)"@en .
 
 
 ###  http://rs.tdwg.org/eco/iri/surveyTargetTypeSourceIRI
@@ -1443,13 +1400,13 @@ ecoiri:surveyTargetTypeSourceIRI rdf:type owl:ObjectProperty ;
                                  rdfs:comment "Recommended best practice is to use an IRI for a controlled vocabulary. This term is to be used only with IRI values and not strings."@en ;
                                  rdfs:isDefinedBy ecoiri: ;
                                  skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
-                                 skos:prefLabel "Survey Target Type Source IRI" .
+                                 skos:prefLabel "Survey Target Type Source IRI"@en .
 
 
 ###  http://www.w3.org/2004/02/skos/core#inScheme
 skos:inScheme rdf:type owl:ObjectProperty ;
               rdfs:range skos:ConceptScheme ;
-              dcterms:isVersionOf skos: ;
+              dcterms:isVersionOf skos:inScheme ;
               rdfs:comment "A conceptmay be a member of more than one concept scheme."@en ;
               rdfs:isDefinedBy skos: ;
               skos:definition "Relates a resource (for example a concept) to a concept scheme in which it is included"@en ;
@@ -6074,10 +6031,6 @@ dwc:OrganismRelationship rdf:type owl:Class ;
                          skos:prefLabel "Organism Relationship" .
 
 
-###  http://rs.tdwg.org/dwc/terms/Pathway
-dwc:Pathway rdf:type owl:Class .
-
-
 ###  http://rs.tdwg.org/dwc/terms/Permit
 dwc:Permit rdf:type owl:Class ;
            dcterms:isVersionOf dwc:Permit ;
@@ -7281,21 +7234,21 @@ dcterms:source dcterms:isVersionOf dcterms:source ;
 #    Rules
 #################################################################
 
-_:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-3CF3AD6DF3D3167E95A6398F48908162 rdf:type swrl:Variable .
+_:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-F65FEB5802CEADDE3EC60590A46B8B18 rdf:type swrl:Variable .
 
-_:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-C665FAB709790A83DF9E1282E7A23093 rdf:type swrl:Variable .
+_:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-487C895DB8D55FF70AB0AFF64067098F rdf:type swrl:Variable .
 
 [ rdf:type swrl:Imp ;
    swrl:body [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:mediaOf ;
-                           swrl:argument1 _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-3CF3AD6DF3D3167E95A6398F48908162 ;
-                           swrl:argument2 _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-C665FAB709790A83DF9E1282E7A23093
+                           swrl:argument1 _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-F65FEB5802CEADDE3EC60590A46B8B18 ;
+                           swrl:argument2 _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-487C895DB8D55FF70AB0AFF64067098F
                          ] ;
                rdf:rest [ rdf:type swrl:AtomList ;
                           rdf:first [ rdf:type swrl:ClassAtom ;
                                       swrl:classPredicate dwc:Occurrence ;
-                                      swrl:argument1 _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-C665FAB709790A83DF9E1282E7A23093
+                                      swrl:argument1 _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-487C895DB8D55FF70AB0AFF64067098F
                                     ] ;
                           rdf:rest rdf:nil
                         ]
@@ -7303,8 +7256,8 @@ _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-C665FAB709790A83DF9E1282E7
    swrl:head [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:evidenceFor ;
-                           swrl:argument1 _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-3CF3AD6DF3D3167E95A6398F48908162 ;
-                           swrl:argument2 _:genid-nodeid-genid-df3e15c4fc764842a68c1860bd7b011a-C665FAB709790A83DF9E1282E7A23093
+                           swrl:argument1 _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-F65FEB5802CEADDE3EC60590A46B8B18 ;
+                           swrl:argument2 _:genid-nodeid-genid-e8b3e22d03e246008f209e555c24fdaf-487C895DB8D55FF70AB0AFF64067098F
                          ] ;
                rdf:rest rdf:nil
              ]

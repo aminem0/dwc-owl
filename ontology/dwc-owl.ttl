@@ -129,39 +129,36 @@ ac:subjectPartIRI a owl:DatatypeProperty ;
 dwciri:assertionTypeIRI a owl:ObjectProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionTypeIRI> ;
     rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
-    rdfs:domain dwc:Assertion ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "An IRI of a controlled vocabulary value for a type of [dwc:Assertion]."@en ;
-    skos:prefLabel "Assertion Type (IRI)" .
+    skos:prefLabel "Assertion Type (IRI)"@en .
 
 dwciri:assertionValueIRI a owl:ObjectProperty ;
     dcterms:isVersionOf <http://example.com/term-pending/dwciri/assertionValueIRI> ;
-    rdfs:domain dwc:Assertion ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "An IRI of the controlled vocabulary value for a value of a [dwc:Assertion]."@en ;
     skos:example <http://purl.obolibrary.org/obo/OBA_VT0000047> ;
-    skos:prefLabel "Assertion Value (IRI)" .
+    skos:prefLabel "Assertion Value (IRI)"@en .
 
 dwciri:surveyTargetTypeIRI a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:type ;
     rdfs:comment "Recommended best practice is to use an IRI for a term in a controlled vocabulary."@en ;
-    rdfs:domain eco:SurveyTarget ;
     rdfs:isDefinedBy dwciri: ;
     rdfs:subPropertyOf dcterms:type ;
     skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:SurveyTargetType] is given."@en ;
-    skos:prefLabel "Survey Target Type IRI" .
+    skos:prefLabel "Survey Target Type IRI"@en .
 
 dwc:OrganismInteractionAgentRole a owl:Class ;
     dcterms:isVersionOf dwc:dodo ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/dodo> ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass dwc:OrganismInteraction ;
-            owl:onProperty dwcdp:relationshipTo ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
             owl:onClass dcterms:Agent ;
             owl:onProperty dwcdp:relationshipOf ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass dwc:OrganismInteraction ;
+            owl:onProperty dwcdp:relationshipTo ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         dwc:ResourceRelationship ;
     skos:definition "A relationship of one [rdfs:Resource] ([http://www.w3.org/2000/01/rdf-schema#Resource]) to another."@en ;
@@ -172,16 +169,16 @@ dwc:OrganismRelationship a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom dwc:Organism ;
-            owl:onProperty dwcdp:relationshipOf ],
-        [ a owl:Restriction ;
-            owl:onProperty dwcdp:relationshipTo ;
-            owl:someValuesFrom dwc:Organism ],
+            owl:onProperty dwcdp:relationshipTo ],
         [ a owl:Restriction ;
             owl:onProperty dwcdp:relationshipOf ;
             owl:someValuesFrom dwc:Organism ],
         [ a owl:Restriction ;
+            owl:onProperty dwcdp:relationshipTo ;
+            owl:someValuesFrom dwc:Organism ],
+        [ a owl:Restriction ;
             owl:allValuesFrom dwc:Organism ;
-            owl:onProperty dwcdp:relationshipTo ],
+            owl:onProperty dwcdp:relationshipOf ],
         dwc:ResourceRelationship ;
     skos:definition "A [dwc:ResourceRelationship] of one [dwc:Organism] to another [dwc:Organism]."@en ;
     skos:prefLabel "Organism Relationship" .
@@ -598,7 +595,7 @@ dwcdp:commentedBy a owl:ObjectProperty ;
     rdfs:isDefinedBy dwcdp: ;
     rdfs:range dcterms:Agent ;
     rdfs:subPropertyOf ac:commenter ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [ac:Media] to the [dcterms:Agent] that commented it."@en ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [ac:Media] to the [dcterms:Agent] that commented on it."@en ;
     skos:prefLabel "Commented By"@en .
 
 dwcdp:conductedBy a owl:ObjectProperty ;
@@ -609,11 +606,13 @@ dwcdp:conductedBy a owl:ObjectProperty ;
     skos:prefLabel "Conducted By"@en .
 
 dwcdp:createdBy a owl:ObjectProperty ;
-    rdfs:domain dwc:Provenance ;
+    rdfs:comment "The types of created resources include [ac:Media] and [dwc:Provenance]."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( ac:Media dwc:Provenance ) ] ;
     rdfs:isDefinedBy dwcdp: ;
     rdfs:range dcterms:Agent ;
     rdfs:subPropertyOf dcterms:creator ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Provenance] to the [dcterms:Agent] that created it."@en ;
+    skos:definition "An [owl:ObjectProperty] used to relate a resource to the to the [dcterms:Agent] that created it."@en ;
     skos:prefLabel "Created By"@en .
 
 dwcdp:datedMaterial a owl:ObjectProperty ;
@@ -799,7 +798,7 @@ ecoiri:surveyTargetTypeSourceIRI a owl:ObjectProperty ;
     rdfs:isDefinedBy ecoiri: ;
     rdfs:subPropertyOf dcterms:source ;
     skos:definition "A reference to a controlled vocabulary in which the definition of a value in [eco:surveyTargetValue] is given."@en ;
-    skos:prefLabel "Survey Target Type Source IRI" .
+    skos:prefLabel "Survey Target Type Source IRI"@en .
 
 minext:aggregateForm a owl:DatatypeProperty ;
     dcterms:isVersionOf <http://rs.tdwg.org/minext/terms/aggregateForm> ;
@@ -1038,14 +1037,6 @@ minext:verbatimSize a owl:DatatypeProperty ;
         "width 3 inches" ;
     skos:prefLabel "Verbatim Size" .
 
-skos:inScheme a owl:ObjectProperty ;
-    dcterms:isVersionOf skos: ;
-    rdfs:comment "A conceptmay be a member of more than one concept scheme."@en ;
-    rdfs:isDefinedBy skos: ;
-    rdfs:range skos:ConceptScheme ;
-    skos:definition "Relates a resource (for example a concept) to a concept scheme in which it is included"@en ;
-    skos:prefLabel "Is In Scheme"@en .
-
 ggbn:Collecting_Permit a ggbn:permitType_vocabulary .
 
 ggbn:Contract a ggbn:permitType_vocabulary .
@@ -1190,7 +1181,17 @@ dcterms:rights a owl:ObjectProperty ;
     rdfs:domain dwc:UsagePolicy ;
     rdfs:isDefinedBy dcterms: ;
     skos:definition "Information about rights held in and over the resource."@en ;
-    skos:prefLabel "Rights (DCTERMS)" .
+    skos:prefLabel "Rights (DCTERMS)"@en .
+
+dsw:locatedAt a owl:ObjectProperty ;
+    dcterms:references dsw:locatedAt ;
+    rdfs:comment "The dsw:locatedAt relationship is many-to-one (many events at one location). This property is preferred over its inverse if the link is made in only one direction."@en ;
+    rdfs:domain dwc:Event ;
+    rdfs:isDefinedBy dsw: ;
+    rdfs:range dcterms:Location ;
+    owl:equivalentProperty dwcdp:spatialLocation ;
+    skos:definition "Links a subject dwc:Event instance to an object dcterms:Location instance."@en ;
+    skos:prefLabel "Located At"@en .
 
 <http://purl.org/ontology/bibo/status/draft> a bibo:DocumentStatus ;
     dcterms:isVersionOf <http://purl.org/ontology/bibo/status/draft> ;
@@ -1488,20 +1489,17 @@ dwciri:behavior a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:behavior ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/behavior-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dwc:OccurrenceAssertion ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A description of the behavior shown by the subject at the time the dwc:Occurrence was recorded."@en ;
-    skos:prefLabel "Behavior (IRI)" .
+    skos:prefLabel "Behavior (IRI)"@en .
 
 dwciri:caste a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:caste ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/caste-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary that aligns best with the dwc:Taxon. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:MaterialEntityAssertion dwc:OccurrenceAssertion ) ] ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "Categorisation of individuals for eusocial species (including some mammals and arthropods)."@en ;
-    skos:prefLabel "Caste (IRI)" .
+    skos:prefLabel "Caste (IRI)"@en .
 
 dwciri:dataGeneralizations a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:dataGeneralizations ;
@@ -1509,19 +1507,17 @@ dwciri:dataGeneralizations a owl:ObjectProperty ;
     rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "Actions taken to make the shared data less specific or complete than in its original form. Suggests that alternative data of higher quality may be available on request."@en ;
-    skos:prefLabel "Data Generalizations (IRI)" .
+    skos:prefLabel "Data Generalizations (IRI)"@en .
 
 dwciri:degreeOfEstablishment a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:degreeOfEstablishment ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/degreeOfEstablishment-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/doe/](http://rs.tdwg.org/dwc/doc/doe/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dwc:Occurrence ;
     rdfs:isDefinedBy dwciri: ;
-    rdfs:range dwc:DegreeOfEstablishment ;
     skos:definition "The degree to which a dwc:Organism survives, reproduces, and expands its range at the given place and time."@en ;
     skos:example dwcdoe:d003,
         dwcdoe:d005 ;
-    skos:prefLabel "Degree Of Establishment (IRI)" .
+    skos:prefLabel "Degree Of Establishment (IRI)"@en .
 
 dwciri:discipline a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:discipline ;
@@ -1529,55 +1525,49 @@ dwciri:discipline a owl:ObjectProperty ;
     rdfs:comment "This term can be used to classify records according to branches of knowledge. Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "The primary branch or branches of knowledge represented by the record."@en ;
-    skos:prefLabel "Discipline (IRI)" .
+    skos:prefLabel "Discipline (IRI)"@en .
 
 dwciri:disposition a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:disposition ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/disposition-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dwc:MaterialEntity ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "The current state of a specimen with respect to the collection identified in dwc:collectionCode or dwc:collectionID."@en ;
-    skos:prefLabel "Disposition (IRI)" .
+    skos:prefLabel "Disposition (IRI)"@en .
 
 dwciri:earliestGeochronologicalEra a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:earliestGeochronologicalEra ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/earliestGeochronologicalEra-2023-09-13> ;
     rdfs:comment "Recommended best practice is to use an IRI from a controlled vocabulary. A \"convenience property\" that replaces Darwin Core literal-value terms related to geological context. See Section 2.7.6 of the Darwin Core RDF Guide for details."@en ;
-    rdfs:domain dwc:MaterialEntity ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "Use to link a dwc:GeologicalContext instance to chronostratigraphic time periods at the lowest possible level in a standardized hierarchy. Use this property to point to the earliest possible geological time period from which the dwc:MaterialEntity was collected."@en ;
-    skos:prefLabel "Earliest Geochronological Era" .
+    skos:prefLabel "Earliest Geochronological Era"@en .
 
 dwciri:establishmentMeans a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:establishmentMeans ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/establishmentMeans-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/em/](http://rs.tdwg.org/dwc/doc/em/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dwc:Occurrence ;
     rdfs:isDefinedBy dwciri: ;
-    rdfs:range dwc:EstablishmentMeans ;
     skos:definition "Statement about whether a dwc:Organism has been introduced to a given place and time through the direct or indirect activity of modern humans."@en ;
     skos:example dwcem:e001,
         dwcem:e005 ;
-    skos:prefLabel "Establishment Means (IRI)" .
+    skos:prefLabel "Establishment Means (IRI)"@en .
 
 dwciri:eventType a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:eventType ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/eventType-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Regardless of the dwc:eventType, the interval of the dwc:Event can be captured in dwc:eventDate. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dwc:Event ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "The nature of the dwc:Event."@en ;
-    skos:prefLabel "Event Type (IRI)" .
+    skos:prefLabel "Event Type (IRI)"@en .
 
 dwciri:fieldNotes a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:fieldNotes ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/fieldNotes-2023-06-28> ;
     rdfs:comment "The subject is a dwc:Event instance and the object is a (possibly IRI-identified) resource that is the field notes."@en ;
-    rdfs:domain dwc:Event ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "One of a) an indicator of the existence of, b) a reference to (publication, URI), or c) the text of notes taken in the field about the dwc:Event."@en ;
-    skos:prefLabel "Field Notes (IRI)" .
+    skos:prefLabel "Field Notes (IRI)"@en .
 
 dwciri:fieldNumber a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:fieldNumber ;
@@ -1586,171 +1576,153 @@ dwciri:fieldNumber a owl:ObjectProperty ;
     rdfs:domain dwc:Event ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "An identifier given to the event in the field. Often serves as a link between field notes and the dwc:Event."@en ;
-    skos:prefLabel "Field Number (IRI)" .
+    skos:prefLabel "Field Number (IRI)"@en .
 
 dwciri:footprintWKT a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:footprintWKT ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/footprintWKT-2025-07-10> ;
     rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A Well-Known Text (WKT) representation of the shape (footprint, geometry) that defines the dcterms:Location. A dcterms:Location may have both a point-radius representation (see dwc:decimalLatitude) and a footprint representation, and they may differ from each other."@en ;
-    skos:prefLabel "Footprint WKT (IRI)" .
+    skos:prefLabel "Footprint WKT (IRI)"@en .
 
 dwciri:geodeticDatum a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:geodeticDatum ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/geodeticDatum-2025-06-12> ;
     rdfs:comment "Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary for the name or code of the ellipsoid, if known. If none of these is known, use an IRI corresponding to the value not recorded."@en ;
-    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which the geographic coordinates given in dwc:decimalLatitude and dwc:decimalLongitude are based."@en ;
-    skos:prefLabel "Geodetic Datum (IRI)" .
+    skos:prefLabel "Geodetic Datum (IRI)"@en .
 
 dwciri:georeferenceProtocol a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:georeferenceProtocol ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferenceProtocol-2025-07-10> ;
     rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A description or reference to the methods used to determine the spatial footprint, coordinates, and uncertainties."@en ;
-    skos:prefLabel "Georeference Protocol (IRI)" .
+    skos:prefLabel "Georeference Protocol (IRI)"@en .
 
 dwciri:georeferenceSources a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:georeferenceSources ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferenceSources-2025-07-10> ;
     rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A map, gazetteer, or other resource used to georeference the dcterms:Location."@en ;
-    skos:prefLabel "Georeference Sources (IRI)" .
+    skos:prefLabel "Georeference Sources (IRI)"@en .
 
 dwciri:georeferenceVerificationStatus a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:georeferenceVerificationStatus ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferenceVerificationStatus-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A categorical description of the extent to which the georeference has been verified to represent the best possible spatial description for the dcterms:Location of the dwc:Occurrence."@en ;
-    skos:prefLabel "Georeference Verification Status (IRI)" .
+    skos:prefLabel "Georeference Verification Status (IRI)"@en .
 
 dwciri:habitat a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:habitat ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/habitat-2025-07-10> ;
     rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dwc:Event ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A category or description of the habitat in which the dwc:Event occurred."@en ;
-    skos:prefLabel "Habitat (IRI)" .
+    skos:prefLabel "Habitat (IRI)"@en .
 
 dwciri:locationAccordingTo a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:locationAccordingTo ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/locationAccordingTo-2025-07-10> ;
     rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "Information about the source of this dcterms:Location information. Could be a publication (gazetteer), institution, or team of individuals."@en ;
-    skos:prefLabel "Location According To (IRI)" .
+    skos:prefLabel "Location According To (IRI)"@en .
 
 dwciri:occurrenceStatus a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:occurrenceStatus ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/occurrenceStatus-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dwc:Occurrence ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A statement about the presence or absence of a dwc:Taxon at a dcterms:Location."@en ;
-    skos:prefLabel "Occurrence Status (IRI)" .
+    skos:prefLabel "Occurrence Status (IRI)"@en .
 
 dwciri:pathway a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:pathway ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/pathway-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use IRIs from the controlled vocabulary designated for use with this term, listed at [http://rs.tdwg.org/dwc/doc/pw/](http://rs.tdwg.org/dwc/doc/pw/). For details, refer to [https://doi.org/10.3897/biss.3.38084](https://doi.org/10.3897/biss.3.38084). Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dwc:Occurrence ;
     rdfs:isDefinedBy dwciri: ;
-    rdfs:range dwc:Pathway ;
     skos:definition "The process by which a dwc:Organism came to be in a given place at a given time."@en ;
     skos:example dwcpw:p002,
         dwcpw:p046 ;
-    skos:prefLabel "Pathway (IRI)" .
+    skos:prefLabel "Pathway (IRI)"@en .
 
 dwciri:reproductiveCondition a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:reproductiveCondition ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/reproductiveCondition-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:MaterialEntityAssertion dwc:OccurrenceAssertion ) ] ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "The reproductive condition of the biological individual(s) represented in the dwc:Occurrence."@en ;
-    skos:prefLabel "Reproductive Condition (IRI)" .
+    skos:prefLabel "Reproductive Condition (IRI)"@en .
 
 dwciri:samplingProtocol a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:samplingProtocol ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/samplingProtocol-2023-06-28> ;
     rdfs:comment "Recommended best practice is describe a dwc:Event with no more than one sampling protocol. In the case of a summary dwc:Event in which a specific protocol can not be attributed to specific dwc:Occurrences, the recommended best practice is to repeat the property for each IRI that denotes a different sampling protocol that applies to the dwc:Occurrence."@en ;
-    rdfs:domain dwc:Event ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "The methods or protocols used during a dwc:Event, denoted by an IRI."@en ;
     skos:example <https://doi.org/10.1111/j.1466-8238.2009.00467.x> ;
-    skos:prefLabel "Sampling Protocol (IRI)" .
+    skos:prefLabel "Sampling Protocol (IRI)"@en .
 
 dwciri:verbatimCoordinateSystem a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:verbatimCoordinateSystem ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/verbatimCoordinateSystem-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "The spatial coordinate system for the dwc:verbatimLatitude and dwc:verbatimLongitude or the dwc:verbatimCoordinates of the dcterms:Location."@en ;
-    skos:prefLabel "Verbatim Coordinate System (IRI)" .
+    skos:prefLabel "Verbatim Coordinate System (IRI)"@en .
 
 dwciri:verbatimSRS a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:verbatimSRS ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/verbatimSRS-2025-06-12> ;
     rdfs:comment "Recommended best practice is to use an IRI for the EPSG code of the SRS, if known. Otherwise use a controlled vocabulary IRI for the name or code of the geodetic datum, if known. Otherwise use a controlled vocabulary IRI for the name or code of the ellipsoid, if known. Otherwise use an IRI for the value corresponding to `not recorded`."@en ;
-    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "The ellipsoid, geodetic datum, or spatial reference system (SRS) upon which coordinates given in dwc:verbatimLatitude and dwc:verbatimLongitude, or dwc:verbatimCoordinates are based."@en ;
-    skos:prefLabel "Verbatim SRS (IRI)" .
+    skos:prefLabel "Verbatim SRS (IRI)"@en .
 
 dwciri:verticalDatum a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:verticalDatum ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/verticalDatum-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "The vertical datum used as the reference upon which the values in the elevation terms are based."@en ;
-    skos:prefLabel "Vertical Datum (IRI)" .
+    skos:prefLabel "Vertical Datum (IRI)"@en .
 
 dwciri:vitality a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:vitality ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/vitality-2025-07-10> ;
     rdfs:comment "Recommended best practice is to use a controlled vocabulary. Intended to be used with records having a dwc:basisOfRecord of `PreservedSpecimen`, `MaterialEntity`, `MaterialSample`, or `HumanObservation`. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:MaterialEntityAssertion dwc:OccurrenceAssertion ) ] ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "An indication of whether a dwc:Organism was alive or dead at the time of collection or observation."@en ;
-    skos:prefLabel "Vitality (IRI)" .
+    skos:prefLabel "Vitality (IRI)"@en .
 
 dwc:BibliographicDocument a owl:Class ;
     dcterms:isVersionOf dwc:BibliographicDocument ;
     rdfs:comment "An owl:Class created as a subclass of both dcterms:BibliographicResource and bibo:Document to allow setting of restrictions."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dc:title ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:pages ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:edition ],
+            owl:onProperty bibo:volume ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:issue ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty bibo:volume ],
+            owl:onProperty bibo:pages ],
+        [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dc:title ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty bibo:status ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty bibo:edition ],
         dcterms:BibliographicResource,
         bibo:Document ;
     skos:definition "A book, article, or other documentatry resource."@en ;
@@ -3263,7 +3235,7 @@ dwcdp:asserted a owl:ObjectProperty ;
     rdfs:isDefinedBy dwcdp: ;
     rdfs:range dwc:Assertion ;
     owl:inverseOf dwcdp:assertedBy ;
-    skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:Agent] to the [dwc:Assertion] that he made."@en ;
+    skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:Agent] to the [dwc:Assertion] that it made."@en ;
     skos:prefLabel "Asserted"@en .
 
 dwcdp:assertedBy a owl:ObjectProperty ;
@@ -3355,7 +3327,6 @@ dwcdp:spatialLocation a owl:ObjectProperty ;
     rdfs:isDefinedBy dwcdp: ;
     rdfs:range dcterms:Location ;
     rdfs:subPropertyOf dcterms:spatial ;
-    owl:equivalentProperty dsw:locatedAt ;
     skos:definition "An [owl:ObjectProperty] used to relate a [dwc:Event] to the [dcterms:Location] it spatially occurred in."@en ;
     skos:prefLabel "Spatial Location"@en .
 
@@ -3491,6 +3462,14 @@ eco:verbatimSiteNames a owl:DatatypeProperty ;
         "S1 | S2 | C1 | C2 | R14 | R22 | W1" ;
     skos:prefLabel "Verbatim Site Names" .
 
+skos:inScheme a owl:ObjectProperty ;
+    dcterms:isVersionOf skos:inScheme ;
+    rdfs:comment "A conceptmay be a member of more than one concept scheme."@en ;
+    rdfs:isDefinedBy skos: ;
+    rdfs:range skos:ConceptScheme ;
+    skos:definition "Relates a resource (for example a concept) to a concept scheme in which it is included"@en ;
+    skos:prefLabel "Is In Scheme"@en .
+
 mixs:0000001 a owl:DatatypeProperty ;
     dcterms:isVersionOf mixs:00000001 ;
     rdfs:domain dwc:MolecularProtocol ;
@@ -3617,7 +3596,7 @@ dc:title a owl:DatatypeProperty ;
 
 dcterms:contributor a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:contributor ;
-    rdfs:comment "The guidellines for using names of persons or organizations as creators apply to contributors."@en ;
+    rdfs:comment "The guidelines for using names of persons or organizations as creators apply to contributors."@en ;
     rdfs:isDefinedBy dcterms: ;
     skos:definition "An entity responsible for making contributions to this resource."@en ;
     skos:prefLabel "Contributor (DCTERMS)"@en .
@@ -3630,7 +3609,7 @@ dcterms:publisher a owl:ObjectProperty ;
 
 dcterms:rightsHolder a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:rightsHolder ;
-    rdfs:comment "Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided." ;
+    rdfs:comment "Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided."@en ;
     rdfs:isDefinedBy dcterms: ;
     skos:definition "A person or organization owning or managing rights over the resource." ;
     skos:prefLabel "Rights Holder"@en .
@@ -3649,16 +3628,6 @@ dcterms:spatial a owl:ObjectProperty ;
     rdfs:isDefinedBy dcterms: ;
     skos:definition "Spatial characteristics of the resource."@en ;
     skos:prefLabel "Spatial Coverage"@en .
-
-dsw:locatedAt a owl:ObjectProperty ;
-    dcterms:references dsw:locatedAt ;
-    rdfs:comment "The dsw:locatedAt relationship is many-to-one (many events at one location). This property is preferred over its inverse if the link is made in only one direction."@en ;
-    rdfs:domain dwc:Event ;
-    rdfs:isDefinedBy dsw: ;
-    rdfs:range dcterms:Location ;
-    owl:equivalentProperty dwcdp:spatialLocation ;
-    skos:definition "Links a subject dwc:Event instance to an object dcterms:Location instance."@en ;
-    skos:prefLabel "Located At"@en .
 
 dsw:occurrenceOf a owl:ObjectProperty ;
     dcterms:references dsw:occurrenceOf ;
@@ -4240,20 +4209,17 @@ dwciri:georeferencedBy a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:georeferencedBy ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/georeferencedBy-2025-07-10> ;
     rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain dcterms:Location ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A person, group, or organization who determined the georeference (spatial representation) for the dcterms:Location."@en ;
-    skos:prefLabel "Georeferenced By (IRI)" .
+    skos:prefLabel "Georeferenced By (IRI)"@en .
 
 dwciri:identifiedBy a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:identifiedBy ;
     dcterms:references <http://rs.tdwg.org/dwc/iri/version/identifiedBy-2025-07-10> ;
     rdfs:comment "When used in the context of an Event (such as in the Humboldt Extension), the subject consists of all of the dwc:Organisms related to the Event. Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
-    rdfs:domain [ a owl:Class ;
-            owl:unionOf ( dwc:Identification dwc:Occurrence eco:Survey ) ] ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A person, group, or organization who assigned the dwc:Taxon to the subject."@en ;
-    skos:prefLabel "Identified By (IRI)" .
+    skos:prefLabel "Identified By (IRI)"@en .
 
 dwciri:recordedBy a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:recordedBy ;
@@ -4261,7 +4227,7 @@ dwciri:recordedBy a owl:ObjectProperty ;
     rdfs:comment "Terms in the dwciri: namespace are intended to be used in RDF with non-literal objects."@en ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "A person, group, or organization responsible for recording the original dwc:Occurrence."@en ;
-    skos:prefLabel "Recorded By (IRI)" .
+    skos:prefLabel "Recorded By (IRI)"@en .
 
 dwciri:toTaxon a owl:ObjectProperty ;
     dcterms:isVersionOf dwciri:toTaxon ;
@@ -4269,7 +4235,7 @@ dwciri:toTaxon a owl:ObjectProperty ;
     rdfs:comment "A \"convenience property\" that replaces Darwin Core literal-value terms related to taxonomic entities. See Section 2.7.4 of the Darwin Core RDF Guide for details."@en ;
     rdfs:isDefinedBy dwciri: ;
     skos:definition "Use to link a [dwc:Identification] instance subject to a taxonomic entity such as a taxon, taxon concept, or taxon name use."@en ;
-    skos:prefLabel "To Taxon (IRI)" .
+    skos:prefLabel "To Taxon (IRI)"@en .
 
 dwc:geologicalContextID a owl:DatatypeProperty ;
     dcterms:isVersionOf dwc:geologicalContextID ;
@@ -4441,7 +4407,7 @@ dwcdp:mentionedIn a owl:ObjectProperty ;
     rdfs:range dcterms:BibliographicResource ;
     owl:inverseOf dwcdp:mentions ;
     owl:propertyChainAxiom ( dwcdp:mentionedIn dwcdp:partOf ) ;
-    skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentionned."@en ;
+    skos:definition "An [owl:ObjectProperty] used to relate a resource to a [dcterms:BibliographicResource] where it was mentioned."@en ;
     skos:prefLabel "Mentioned In"@en .
 
 dwcem:e001 a dwc:EstablishmentMeans .
@@ -4454,7 +4420,7 @@ ecoiri:samplingPerformedBy a owl:ObjectProperty ;
     rdfs:comment "The sampling dwc:Event could be at any level of hierarchy. In the case of a higher level (parent) dwc:Event, include all the organizations or people involved in the child dwc:Events that contributed to the parent dwc:Event. Terms in the ecoiri: namespace are intended to be used in RDF with non-literal objects."@en ;
     rdfs:isDefinedBy ecoiri: ;
     skos:definition "A person, group, or organization responsible for recording the dwc:Event."@en ;
-    skos:prefLabel "Sampling Performed By (IRI)" .
+    skos:prefLabel "Sampling Performed By (IRI)"@en .
 
 skos:ConceptScheme a owl:Class ;
     dcterms:isVersionOf skos:ConceptScheme ;
@@ -4559,10 +4525,10 @@ dcterms:creator a owl:ObjectProperty ;
 
 dcterms:type a owl:ObjectProperty ;
     dcterms:isVersionOf dcterms:type ;
-    rdfs:comment "Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/). To describe the file format, physical medium, or dimensions of the resource, use the property Format." ;
+    rdfs:comment "Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/). To describe the file format, physical medium, or dimensions of the resource, use the property Format."@en ;
     rdfs:isDefinedBy dcterms: ;
     skos:definition "The nature or genre of the resource."@en ;
-    skos:prefLabel "Type" .
+    skos:prefLabel "Type"@en .
 
 acpart:p0007 a dwc:SubjectPart ;
     dcterms:isVersionOf acpart:p0007 ;
@@ -4702,8 +4668,8 @@ dwcdp:mediaOf a owl:ObjectProperty ;
     rdfs:range [ a owl:Class ;
             owl:unionOf ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dwc:Event dwc:GeologicalContext dwc:MaterialEntity dwc:Occurrence dwc:OrganismInteraction ) ] ;
     owl:inverseOf dwcdp:hasMedia ;
-    owl:propertyChainAxiom ( dwcdp:mediaOf dwcdp:interactionBy ),
-        ( dwcdp:mediaOf dwcdp:interactionWith ) ;
+    owl:propertyChainAxiom ( dwcdp:mediaOf dwcdp:interactionWith ),
+        ( dwcdp:mediaOf dwcdp:interactionBy ) ;
     skos:definition "An [owl:ObjectProperty] used to relate an instance of [ac:Media] to an entity of which it is a media of. These entities can be [chrono:ChronometricAge], [dcterms:Agent],[dcterms:BibliographicResource], [dwc:Event], [dwc:GeologicalContext], [dwc:MaterialEntity], [dwc:Occurrence], [dwc:OrganismInteraction]."@en ;
     skos:prefLabel "Media Of"@en .
 
@@ -4738,6 +4704,14 @@ dcterms:title a owl:DatatypeProperty ;
     skos:definition "A name given to a resource."@en ;
     skos:prefLabel "Title"@en .
 
+dwc:OccurrenceAssertion a owl:Class ;
+    dcterms:isVersionOf dwc:OccurrenceAssertion ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/OccurrenceAssertion-0000-00-00> ;
+    rdfs:isDefinedBy dwc: ;
+    rdfs:subClassOf dwc:Assertion ;
+    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."@en ;
+    skos:prefLabel "Occurrence Assertion"@en .
+
 dwcdp:partOf a owl:ObjectProperty,
         owl:TransitiveProperty ;
     rdfs:comment "Though the [rdfs:domain] and [rdfs:range] of this property are varied, universal restrictions on the classes prevent cross-class use of the term."@en ;
@@ -4770,6 +4744,17 @@ dwc:EstablishmentMeans a owl:Class ;
     skos:definition "Controlled value for Darwin Core terms with local name establishmentMeans."@en ;
     skos:prefLabel "Establishment Means"@en .
 
+eco:SurveyTarget a owl:Class ;
+    dcterms:isVersionOf eco:SurveyTarget ;
+    rdfs:isDefinedBy eco: ;
+    skos:definition "An intended scope for [dwc:Occurrence]s in a [eco:Survey]."@en ;
+    skos:example "Oncorhynchus mykiss and Oncorhynchus clarkii (only)",
+        "all bird species",
+        "all bird species except Larus gulls, fulmars and kittiwakes",
+        "all total lengths except < 12 inches",
+        "reproductive female Ctenomys sociabilis (only)" ;
+    skos:prefLabel "Survey Target"@en .
+
 skos:Concept a owl:Class ;
     dcterms:isVersionOf skos:Concept ;
     rdfs:isDefinedBy skos: ;
@@ -4785,17 +4770,6 @@ dwc:TypeDesignationType a owl:Class ;
     owl:oneOf ( tdt:originalDesignation tdt:presentDesignation tdt:subsequentDesignation tdt:monotypy tdt:subsequentMonotypy tdt:absoluteTautonymy tdt:monotypy tdt:linnaeanTautonymy tdt:rulingByCommission ) ;
     skos:definition "A category that best matches the nature of a type designation."@en ;
     skos:prefLabel "Type Designation Type"@en .
-
-eco:SurveyTarget a owl:Class ;
-    dcterms:isVersionOf eco:SurveyTarget ;
-    rdfs:isDefinedBy eco: ;
-    skos:definition "An intended scope for [dwc:Occurrence]s in a [eco:Survey]."@en ;
-    skos:example "Oncorhynchus mykiss and Oncorhynchus clarkii (only)",
-        "all bird species",
-        "all bird species except Larus gulls, fulmars and kittiwakes",
-        "all total lengths except < 12 inches",
-        "reproductive female Ctenomys sociabilis (only)" ;
-    skos:prefLabel "Survey Target"@en .
 
 chrono:ChronometricAge a owl:Class ;
     dcterms:isVersionOf chrono:ChronometricAge ;
@@ -4815,20 +4789,12 @@ dwc:NucleotideSequence a owl:Class ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:nucleotideSequenceID ],
+            owl:onProperty dwc:sequence ],
         [ a owl:Restriction ;
             owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:sequence ] ;
+            owl:onProperty dwc:nucleotideSequenceID ] ;
     skos:definition "A digital representation of a nucleotide sequence."@en ;
     skos:prefLabel "Nucleotide Sequence"@en .
-
-dwc:OccurrenceAssertion a owl:Class ;
-    dcterms:isVersionOf dwc:OccurrenceAssertion ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/OccurrenceAssertion-0000-00-00> ;
-    rdfs:isDefinedBy dwc: ;
-    rdfs:subClassOf dwc:Assertion ;
-    skos:definition "A [dwc:Assertion] made by a [dcterms:Agent] about a [dwc:Occurrence]."@en ;
-    skos:prefLabel "Occurrence Assertion"@en .
 
 dwc:ResourceRelationship a owl:Class ;
     dcterms:isVersionOf dwc:ResourceRelationship ;
@@ -4849,13 +4815,6 @@ bibo:DocumentStatus a owl:Class ;
         <http://purl.org/ontology/bibo/status/published> ;
     skos:prefLabel "Document Status"@en .
 
-dwc:Provenance a owl:Class ;
-    dcterms:isVersionOf <http://example.com/term-pending/dwc/provenance> ;
-    rdfs:comment "This is a convenience class to group related properties."@en ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "Information about an entity's origins."@en ;
-    skos:prefLabel "Provenance"@en .
-
 dwc:DegreeOfEstablishment a owl:Class ;
     rdfs:comment "For details and rationale, see [Groom et al. 2019](https://doi.org/10.3897/biss.3.38084)."@en ;
     rdfs:isDefinedBy dwc: ;
@@ -4864,22 +4823,29 @@ dwc:DegreeOfEstablishment a owl:Class ;
     skos:definition "Controlled value for Darwin Core terms with local name degreeOfEstablishment."@en ;
     skos:prefLabel "Degree Of Establishment"@en .
 
+dwc:Provenance a owl:Class ;
+    dcterms:isVersionOf <http://example.com/term-pending/dwc/provenance> ;
+    rdfs:comment "This is a convenience class to group related properties."@en ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "Information about an entity's origins."@en ;
+    skos:prefLabel "Provenance"@en .
+
 dwc:OrganismInteraction a owl:Class ;
     dcterms:isVersionOf dwc:OrganismInteraction ;
     rdfs:comment "Supports only primary observed interactions, not habitualor derived taxon-level interactions. Pairwise interactions must be used to represent multi-organism interactions. When possible, typify the action rather than the state from which the action is inferred, with the actor as the subject in [dwc:Occurrence] and the acted-upon as the related [dwc:Occurrence]. Only one direction of a two-way interaction is necessary, though both are permissible as distinct [dwc:OrganismInteraction]s with distinct subject [dwc:Occurrence]s."@en ;
     rdfs:isDefinedBy dwc: ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty dwcdp:interactionWith ;
+            owl:someValuesFrom dwc:Occurrence ],
+        [ a owl:Restriction ;
             owl:onProperty dwcdp:interactionBy ;
             owl:someValuesFrom dwc:Occurrence ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:Occurrence ;
-            owl:onProperty dwcdp:interactionWith ],
-        [ a owl:Restriction ;
-            owl:onProperty dwcdp:interactionWith ;
-            owl:someValuesFrom dwc:Occurrence ],
+            owl:onProperty dwcdp:interactionBy ],
         [ a owl:Restriction ;
             owl:allValuesFrom dwc:Occurrence ;
-            owl:onProperty dwcdp:interactionBy ] ;
+            owl:onProperty dwcdp:interactionWith ] ;
     skos:definition "An interaction between two [dwc:Organism]s during a [dwc:Event]."@en ;
     skos:example "a Mallophora ruficauda hunting an Apis mellifera in flight",
         "a bee visiting a flower",
@@ -4940,6 +4906,12 @@ dwc:Organism a owl:Class ;
         "a specific wolf pack" ;
     skos:prefLabel "Organism"@en .
 
+dwc:Assertion a owl:Class ;
+    dcterms:isVersionOf dwc:MeasurementOrFact ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
+    rdfs:isDefinedBy dwc: ;
+    skos:prefLabel "Assertion"@en .
+
 eco:Survey a owl:Class ;
     dcterms:isVersionOf eco:Survey ;
     rdfs:comment "This class includes properties found in the Humboldt Extension to Darwin Core ([eco:]), except for target scope terms, which can be accomodated in [eco:SurveyTarget]."@en ;
@@ -4956,12 +4928,6 @@ eco:Survey a owl:Class ;
         "an environmental impact assessment (e.g. pre-construction baseline survey for a wind farm project)" ;
     skos:prefLabel "Survey"@en .
 
-dwc:Assertion a owl:Class ;
-    dcterms:isVersionOf dwc:MeasurementOrFact ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/MeasurementOrFact-2023-09-13> ;
-    rdfs:isDefinedBy dwc: ;
-    skos:prefLabel "Assertion"@en .
-
 ggbn:permitType_vocabulary a owl:Class ;
     dcterms:isVersionOf ggbn:permitType_vocabulary ;
     rdfs:isDefinedBy ggbn: ;
@@ -4974,11 +4940,11 @@ dcterms:BibliographicResource a owl:Class ;
     dcterms:isVersionOf dcterms:BibliographicResource ;
     rdfs:isDefinedBy dcterms: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:referenceType ],
-        [ a owl:Restriction ;
             owl:allValuesFrom dcterms:BibliographicResource ;
-            owl:onProperty dwcdp:partOf ] ;
+            owl:onProperty dwcdp:partOf ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dwc:referenceType ] ;
     skos:definition "A book, article, or other documentary resource."@en ;
     skos:prefLabel "Bibliographic Resource"@en .
 
@@ -5012,11 +4978,11 @@ dcterms:Agent a owl:Class ;
     rdfs:comment "A person, group, organization, machine, software or other entity that can act. Membership in the [dcterms:Agent] class is determined by the capacity to act, even if not doing so in a specific context. To act: To participate in an event or process by contributing through behavior, operation, or an effect resulting from active participation — regardless of whether that contribution is intentional, volitional, or conscious."@en ;
     rdfs:isDefinedBy dcterms: ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:cardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:agentType ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty dwc:preferredAgentName ] ;
+            owl:onProperty dwc:preferredAgentName ],
+        [ a owl:Restriction ;
+            owl:cardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty dwc:agentType ] ;
     skos:definition "A resource that acts or has the power to act."@en ;
     skos:example "Carl Linnaeus",
         "ChatGPT",
@@ -5044,6 +5010,16 @@ dwc:Event a owl:Class ;
         "an organism occurrence" ;
     skos:prefLabel "Event"@en .
 
+dwc:Occurrence a owl:Class ;
+    dcterms:isVersionOf dwc:Occurrence ;
+    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
+    rdfs:isDefinedBy dwc: ;
+    skos:definition "A state of a [dwc:Organism] in a [dwc:Event]."@en ;
+    skos:example "a fungus in Central Park in the summer of 1929",
+        "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23",
+        "a wolf pack on the shore of Kluane Lake in 1988" ;
+    skos:prefLabel "Occurrence"@en .
+
 dwc:MaterialEntity a owl:Class ;
     dcterms:isVersionOf dwc:MaterialEntity ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/MaterialEntity-2023-09-13> ;
@@ -5068,16 +5044,6 @@ dwc:MaterialEntity a owl:Class ;
         "the stomach contents of a fish" ;
     skos:prefLabel "Material Entity"@en .
 
-dwc:Occurrence a owl:Class ;
-    dcterms:isVersionOf dwc:Occurrence ;
-    dcterms:references <http://rs.tdwg.org/dwc/terms/version/Occurrence-2023-09-18> ;
-    rdfs:isDefinedBy dwc: ;
-    skos:definition "A state of a [dwc:Organism] in a [dwc:Event]."@en ;
-    skos:example "a fungus in Central Park in the summer of 1929",
-        "a virus in a plant leaf in the New York Botanical Garden at 15:29 on 2014-10-23",
-        "a wolf pack on the shore of Kluane Lake in 1988" ;
-    skos:prefLabel "Occurrence"@en .
-
 dwc:MolecularProtocol a owl:Class ;
     dcterms:isVersionOf dwc:MolecularProtocol ;
     dcterms:references <http://rs.tdwg.org/dwc/terms/version/MolecularProtocol-0000-00-00> ;
@@ -5087,61 +5053,69 @@ dwc:MolecularProtocol a owl:Class ;
             owl:onProperty mixs:0000013 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000020 ],
-        [ a owl:Restriction ;
-            owl:onProperty dwcdp:followedBy ;
-            owl:someValuesFrom dwc:NucleotideAnalysis ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0001107 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom dwc:NucleotideAnalysis ;
-            owl:onProperty dwcdp:followedBy ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0001320 ],
+            owl:onProperty mixs:0000003 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000012 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000015 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000017 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000005 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000008 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000001 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000002 ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000006 ],
+            owl:onProperty mixs:0000092 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty dwc:assayType ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000001 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000020 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0001320 ],
+        [ a owl:Restriction ;
+            owl:onProperty dwcdp:followedBy ;
+            owl:someValuesFrom dwc:NucleotideAnalysis ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mixs:0000016 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000092 ],
+            owl:onProperty mixs:0000006 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty mixs:0000003 ],
+            owl:onProperty mixs:0001107 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000002 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom dwc:NucleotideAnalysis ;
+            owl:onProperty dwcdp:followedBy ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000008 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000005 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000017 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty mixs:0000015 ],
         dwc:Protocol ;
     owl:equivalentClass [ a owl:Restriction ;
             owl:onProperty dwcdp:followedBy ;
             owl:someValuesFrom dwc:NucleotideAnalysis ] ;
     skos:definition "A [dwc:Protocol] used to derive and identify a [dwc:NucleotideSequence] from a [dwc:MaterialEntity]."@en ;
     skos:prefLabel "Molecular Protocol"@en .
+
+dcterms:Location a owl:Class ;
+    dcterms:isVersionOf dcterms:Location ;
+    rdfs:isDefinedBy dcterms: ;
+    skos:definition "A spatial region or named place."@en ;
+    skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
+        "the place defined by a georeference" ;
+    skos:prefLabel "Location"@en .
 
 ac:Media a owl:Class ;
     dcterms:isVersionOf ac:Media ;
@@ -5152,63 +5126,48 @@ ac:Media a owl:Class ;
             owl:onProperty dwcdp:partOf ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashValue ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:digitizationDate ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:resourceCreationTechnique ],
+            owl:onProperty ac:heightFrac ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:widthFrac ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:hashValue ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:captureDevice ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:heightFrac ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:timeOfDay ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:frameRate ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty mo:sample_rate ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:hashFunction ],
+            owl:onProperty ac:resourceCreationTechnique ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ac:Media ;
+            owl:onProperty dwcdp:derivedFrom ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty ac:freqLow ],
+            owl:onProperty ac:frameRate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:hashFunction ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty ac:freqHigh ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ac:Media ;
-            owl:onProperty dwcdp:derivedFrom ] ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:digitizationDate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:timeOfDay ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty ac:freqLow ] ;
     skos:definition "A dcmi:MediaType or other media type with other entities as subject matter."@en ;
     skos:example "dcmi:MovingImage",
         "dcmi:Sound",
         "dcmi:StillImage" ;
     skos:prefLabel "Media"@en .
-
-dcterms:Location a owl:Class ;
-    dcterms:isVersionOf dcterms:Location ;
-    rdfs:isDefinedBy dcterms: ;
-    skos:definition "A spatial region or named place."@en ;
-    skos:example "the municipality of San Carlos de Bariloche, Río Negro, Argentina",
-        "the place defined by a georeference" ;
-    skos:prefLabel "Location"@en .
-
-[] a owl:Restriction ;
-    owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-    owl:onProperty dwc:preferredEventName .
-
-[] a owl:AllDisjointClasses ;
-    owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:Identification dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:Provenance dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .
 
 [] a owl:Restriction ;
     owl:cardinality "1"^^xsd:nonNegativeInteger ;
@@ -5216,33 +5175,40 @@ dcterms:Location a owl:Class ;
 
 [] a owl:Restriction ;
     owl:onProperty dwcdp:about ;
-    owl:someValuesFrom dwc:Organism .
-
-[] a owl:Restriction ;
-    owl:onProperty dwcdp:about ;
     owl:someValuesFrom dwc:MaterialEntity .
-
-[] a swrl:Imp ;
-    swrl:body [ a swrl:AtomList ;
-            rdf:first [ a swrl:IndividualPropertyAtom ;
-                    swrl:argument1 _:Ncd7a5749c6d94f5b8ecf9ea03e82448e ;
-                    swrl:argument2 _:Nede15aaf2e0f44ae94e9bb2eba0819a3 ;
-                    swrl:propertyPredicate dwcdp:mediaOf ] ;
-            rdf:rest ( [ a swrl:ClassAtom ;
-                        swrl:argument1 _:Nede15aaf2e0f44ae94e9bb2eba0819a3 ;
-                        swrl:classPredicate dwc:Occurrence ] ) ] ;
-    swrl:head [ a swrl:AtomList ;
-            rdf:first [ a swrl:IndividualPropertyAtom ;
-                    swrl:argument1 _:Ncd7a5749c6d94f5b8ecf9ea03e82448e ;
-                    swrl:argument2 _:Nede15aaf2e0f44ae94e9bb2eba0819a3 ;
-                    swrl:propertyPredicate dwcdp:evidenceFor ] ;
-            rdf:rest () ] .
 
 [] a owl:Restriction ;
     owl:onProperty dwcdp:about ;
     owl:someValuesFrom dwc:Occurrence .
 
-_:Ncd7a5749c6d94f5b8ecf9ea03e82448e a swrl:Variable .
+[] a owl:Restriction ;
+    owl:onProperty dwcdp:about ;
+    owl:someValuesFrom dwc:Organism .
 
-_:Nede15aaf2e0f44ae94e9bb2eba0819a3 a swrl:Variable .
+[] a owl:Restriction ;
+    owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onProperty dwc:preferredEventName .
+
+[] a swrl:Imp ;
+    swrl:body [ a swrl:AtomList ;
+            rdf:first [ a swrl:IndividualPropertyAtom ;
+                    swrl:argument1 _:N3a10fd1ac2414d3882d01933787be23c ;
+                    swrl:argument2 _:N51e0440340504f4780f2cef7f5810d1f ;
+                    swrl:propertyPredicate dwcdp:mediaOf ] ;
+            rdf:rest ( [ a swrl:ClassAtom ;
+                        swrl:argument1 _:N51e0440340504f4780f2cef7f5810d1f ;
+                        swrl:classPredicate dwc:Occurrence ] ) ] ;
+    swrl:head [ a swrl:AtomList ;
+            rdf:first [ a swrl:IndividualPropertyAtom ;
+                    swrl:argument1 _:N3a10fd1ac2414d3882d01933787be23c ;
+                    swrl:argument2 _:N51e0440340504f4780f2cef7f5810d1f ;
+                    swrl:propertyPredicate dwcdp:evidenceFor ] ;
+            rdf:rest () ] .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( chrono:ChronometricAge dcterms:Agent dcterms:BibliographicResource dcterms:Location ac:Media dwc:Assertion dwc:Event dwc:GeologicalContext dwc:Identification dwc:MaterialEntity dwc:NucleotideAnalysis dwc:NucleotideSequence dwc:Occurrence dwc:Organism dwc:OrganismInteraction dwc:Protocol dwc:Provenance dwc:ResourceRelationship dwc:UsagePolicy eco:Survey eco:SurveyTarget ) .
+
+_:N3a10fd1ac2414d3882d01933787be23c a swrl:Variable .
+
+_:N51e0440340504f4780f2cef7f5810d1f a swrl:Variable .
 
