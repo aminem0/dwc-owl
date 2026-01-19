@@ -1217,7 +1217,11 @@ dwcdp:producedBy rdf:type owl:ObjectProperty ;
 ###  http://rs.tdwg.org/dwcdp/terms/publishedBy
 dwcdp:publishedBy rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf dcterms:publisher ;
-                  rdfs:domain dcterms:BibliographicResource ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( dcterms:BibliographicResource
+                                              dwc:Provenance
+                                            )
+                              ] ;
                   rdfs:range dcterms:Agent ;
                   rdfs:isDefinedBy dwcdp: ;
                   skos:definition "An [owl:ObjectProperty] used to relate a [dcterms:BibliographicResource] to the [dcterms:Agent] that published it."@en ;
@@ -4807,7 +4811,7 @@ eco:includeOrExclude rdf:type owl:DatatypeProperty ;
 
 ###  http://rs.tdwg.org/eco/terms/isSurveyTargetFullyReported
 eco:isSurveyTargetFullyReported rdf:type owl:DatatypeProperty ;
-                                rdfs:domain eco:Survey ;
+                                rdfs:domain eco:SurveyTarget ;
                                 rdfs:range xsd:boolean ;
                                 dcterms:isVersionOf eco:isSurveyTargetFullyReported ;
                                 rdfs:comment "If true (the survey target is fully reported - nothing was left unreported), then this enables inference of absence of detection for everything in that dwc:SurveyTarget that is included but that does not appear in the counts (absent counts signify absence of detection)."@en ;
@@ -7233,21 +7237,21 @@ dcterms:source dcterms:isVersionOf dcterms:source ;
 #    Rules
 #################################################################
 
-_:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-52F25C2D082E67682EB4877D53504B1A rdf:type swrl:Variable .
+_:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-5178A1B120D3E4132B73BE42EE28448E rdf:type swrl:Variable .
 
-_:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-93FB3E4A96D899383113B621A5B65C8B rdf:type swrl:Variable .
+_:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-93B02AC0025414002B9F2F177855ED34 rdf:type swrl:Variable .
 
 [ rdf:type swrl:Imp ;
    swrl:body [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:mediaOf ;
-                           swrl:argument1 _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-52F25C2D082E67682EB4877D53504B1A ;
-                           swrl:argument2 _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-93FB3E4A96D899383113B621A5B65C8B
+                           swrl:argument1 _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-5178A1B120D3E4132B73BE42EE28448E ;
+                           swrl:argument2 _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-93B02AC0025414002B9F2F177855ED34
                          ] ;
                rdf:rest [ rdf:type swrl:AtomList ;
                           rdf:first [ rdf:type swrl:ClassAtom ;
                                       swrl:classPredicate dwc:Occurrence ;
-                                      swrl:argument1 _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-93FB3E4A96D899383113B621A5B65C8B
+                                      swrl:argument1 _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-93B02AC0025414002B9F2F177855ED34
                                     ] ;
                           rdf:rest rdf:nil
                         ]
@@ -7255,8 +7259,8 @@ _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-93FB3E4A96D899383113B621A5
    swrl:head [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:evidenceFor ;
-                           swrl:argument1 _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-52F25C2D082E67682EB4877D53504B1A ;
-                           swrl:argument2 _:genid-nodeid-genid-9711a95b6fff41e9b472d0a093ddf744-93FB3E4A96D899383113B621A5B65C8B
+                           swrl:argument1 _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-5178A1B120D3E4132B73BE42EE28448E ;
+                           swrl:argument2 _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-93B02AC0025414002B9F2F177855ED34
                          ] ;
                rdf:rest rdf:nil
              ]
