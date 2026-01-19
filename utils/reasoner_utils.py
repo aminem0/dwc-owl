@@ -6,7 +6,8 @@ from rdflib import Graph, URIRef
 def call_reasoner(
     graph: Graph,
     reasoner: str = "hermit",
-    axiom_generators: list[str] = ["ClassAssertion", "PropertyAssertion"]
+    axiom_generators: list[str] = ["ClassAssertion", "PropertyAssertion"],
+    include_subclasses: bool = True,
 ) -> Graph:
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpdir = Path(tmpdir)
@@ -24,6 +25,8 @@ def call_reasoner(
                 "reason",
                 "--reasoner",
                 reasoner,
+                "include-indirect",
+                "true" if include_subclasses else "false",
                 "--axiom-generators",
                 " ".join(ax for ax in axiom_generators),
                 "--input",
