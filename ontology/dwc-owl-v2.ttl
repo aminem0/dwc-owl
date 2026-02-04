@@ -5260,10 +5260,7 @@ minext:verbatimSize rdf:type owl:DatatypeProperty ;
 ###  https://w3id.org/mixs/0000014
 <https://w3id.org/mixs/0000014> rdf:type owl:DatatypeProperty ;
                                 rdfs:domain dwc:MolecularProtocol ;
-                                rdfs:range [ rdf:type rdfs:Datatype ;
-                                             owl:unionOf ( xsd:string
-                                                         )
-                                           ] ;
+                                rdfs:range xsd:string ;
                                 dcterms:isVersionOf <https://w3id.org/mixs/0000014> ;
                                 rdfs:isDefinedBy mixs: ;
                                 skos:definition "In this field, report which environmental material or materials (pipe separated) immediately surrounded your sample or specimen prior to sampling, using one or more subclasses of ENVO’s environmental material class: [http://purl.obolibrary.org/obo/ENVO_00010483]. Format (one term): termLabel [termID]; Format (multiple terms): termLabel [termID]|termLabel [termID]|termLabel [termID]. Example: Annotating a fish swimming in the upper 100 m of the Atlantic Ocean, consider: ocean water [ENVO:00002151]. Example: Annotating a duck on a pond consider: pond water [ENVO:00002228]|air ENVO_00002005. If needed, request new terms on the ENVO tracker, identified here: [http://www.obofoundry.org/ontology/envo.html]."@en ;
@@ -7243,21 +7240,21 @@ dcterms:source dcterms:isVersionOf dcterms:source ;
 #    Rules
 #################################################################
 
-_:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-7EE1DFE4C48ACCD70961E2A1290C15F1 rdf:type swrl:Variable .
+_:genid-nodeid-genid-21beb6e0144242ceba35c635c064e1fd-36AD13A3EB1FCFD58191B335E2EC4B4E rdf:type swrl:Variable .
 
-_:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-CC2A33B9CD027671878D30A5E2D9050F rdf:type swrl:Variable .
+_:genid-nodeid-genid-21beb6e0144242ceba35c635c064e1fd-CA21927E7D26D21E7B8DE86C9D666C4D rdf:type swrl:Variable .
 
 [ rdf:type swrl:Imp ;
    swrl:body [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:mediaOf ;
-                           swrl:argument1 _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-7EE1DFE4C48ACCD70961E2A1290C15F1 ;
-                           swrl:argument2 _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-CC2A33B9CD027671878D30A5E2D9050F
+                           swrl:argument1 _:genid-nodeid-genid-21beb6e0144242ceba35c635c064e1fd-36AD13A3EB1FCFD58191B335E2EC4B4E ;
+                           swrl:argument2 _:genid-nodeid-genid-21beb6e0144242ceba35c635c064e1fd-CA21927E7D26D21E7B8DE86C9D666C4D
                          ] ;
                rdf:rest [ rdf:type swrl:AtomList ;
                           rdf:first [ rdf:type swrl:ClassAtom ;
                                       swrl:classPredicate dwc:Occurrence ;
-                                      swrl:argument1 _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-CC2A33B9CD027671878D30A5E2D9050F
+                                      swrl:argument1 _:genid-nodeid-genid-21beb6e0144242ceba35c635c064e1fd-CA21927E7D26D21E7B8DE86C9D666C4D
                                     ] ;
                           rdf:rest rdf:nil
                         ]
@@ -7265,8 +7262,8 @@ _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-CC2A33B9CD027671878D30A5E2
    swrl:head [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:evidenceFor ;
-                           swrl:argument1 _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-7EE1DFE4C48ACCD70961E2A1290C15F1 ;
-                           swrl:argument2 _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-CC2A33B9CD027671878D30A5E2D9050F
+                           swrl:argument1 _:genid-nodeid-genid-21beb6e0144242ceba35c635c064e1fd-36AD13A3EB1FCFD58191B335E2EC4B4E ;
+                           swrl:argument2 _:genid-nodeid-genid-21beb6e0144242ceba35c635c064e1fd-CA21927E7D26D21E7B8DE86C9D666C4D
                          ] ;
                rdf:rest rdf:nil
              ]
