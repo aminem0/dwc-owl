@@ -68,14 +68,6 @@ vann:example rdf:type owl:AnnotationProperty .
 vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
 
 
-###  http://www.w3.org/2002/07/owl#cardinality
-owl:cardinality rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/2002/07/owl#maxCardinality
-owl:maxCardinality rdf:type owl:AnnotationProperty .
-
-
 ###  http://www.w3.org/2004/02/skos/core#broader
 skos:broader rdf:type owl:AnnotationProperty .
 
@@ -5729,6 +5721,10 @@ dwc:EstablishmentMeans rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/Event
 dwc:Event rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty dwc:preferredEventName ;
+                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                          ] ;
           dcterms:isVersionOf dwc:Event ;
           dcterms:references <http://rs.tdwg.org/dwc/terms/version/Event-2023-09-18> ;
           rdfs:isDefinedBy dwc: ;
@@ -5743,6 +5739,10 @@ dwc:Event rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/GeologicalContext
 dwc:GeologicalContext rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty dwc:geologicalContextID ;
+                                        owl:cardinality "1"^^xsd:nonNegativeInteger
+                                      ] ;
                       dcterms:isVersionOf dwc:GeologicalContext ;
                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/GeologicalContext-2023-09-18> ;
                       rdfs:isDefinedBy dwc: ;
@@ -5794,7 +5794,11 @@ dwc:MaterialEntity rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/MaterialEntityAssertion
 dwc:MaterialEntityAssertion rdf:type owl:Class ;
-                            rdfs:subClassOf dwc:Assertion ;
+                            rdfs:subClassOf dwc:Assertion ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty dwcdp:about ;
+                                              owl:someValuesFrom dwc:MaterialEntity
+                                            ] ;
                             dcterms:isVersionOf dwc:MaterialEntityAssertion ;
                             dcterms:references <http://rs.tdwg.org/dwc/terms/version/MaterialEntityAssertion-0000-00-00> ;
                             rdfs:isDefinedBy dwc: ;
@@ -5926,7 +5930,11 @@ dwc:Occurrence rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/OccurrenceAssertion
 dwc:OccurrenceAssertion rdf:type owl:Class ;
-                        rdfs:subClassOf dwc:Assertion ;
+                        rdfs:subClassOf dwc:Assertion ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty dwcdp:about ;
+                                          owl:someValuesFrom dwc:Occurrence
+                                        ] ;
                         dcterms:isVersionOf dwc:OccurrenceAssertion ;
                         dcterms:references <http://rs.tdwg.org/dwc/terms/version/OccurrenceAssertion-0000-00-00> ;
                         rdfs:isDefinedBy dwc: ;
@@ -5949,7 +5957,11 @@ dwc:Organism rdf:type owl:Class ;
 
 ###  http://rs.tdwg.org/dwc/terms/OrganismAssertion
 dwc:OrganismAssertion rdf:type owl:Class ;
-                      rdfs:subClassOf dwc:Assertion ;
+                      rdfs:subClassOf dwc:Assertion ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty dwcdp:about ;
+                                        owl:someValuesFrom dwc:Organism
+                                      ] ;
                       dcterms:isVersionOf dwc:OrganismAssertion ;
                       dcterms:references <http://rs.tdwg.org/dwc/terms/version/OrganismAssertion-0000-00-00> ;
                       rdfs:isDefinedBy dwc: ;
@@ -7186,21 +7198,15 @@ dwcem:e007 rdf:type owl:NamedIndividual ,
                     dwc:EstablishmentMeans .
 
 
-[ owl:cardinality "1"^^xsd:nonNegativeInteger
-] .
-
-[ owl:maxCardinality "1"^^xsd:nonNegativeInteger
- ] .
-
 #################################################################
 #    Annotations
 #################################################################
 
 dcterms:source dcterms:isVersionOf dcterms:source ;
-                rdfs:comment "This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or string conforming to a formal identification system."@en ;
-                rdfs:isDefinedBy dcterms: ;
-                skos:definition "A related resource from which the described resource is derived"@en ;
-                skos:prefLabel "Source (DCTERMS)" .
+               rdfs:comment "This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or string conforming to a formal identification system."@en ;
+               rdfs:isDefinedBy dcterms: ;
+               skos:definition "A related resource from which the described resource is derived"@en ;
+               skos:prefLabel "Source (DCTERMS)" .
 
 
 #################################################################
@@ -7237,21 +7243,21 @@ dcterms:source dcterms:isVersionOf dcterms:source ;
 #    Rules
 #################################################################
 
-_:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-5178A1B120D3E4132B73BE42EE28448E rdf:type swrl:Variable .
+_:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-7EE1DFE4C48ACCD70961E2A1290C15F1 rdf:type swrl:Variable .
 
-_:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-93B02AC0025414002B9F2F177855ED34 rdf:type swrl:Variable .
+_:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-CC2A33B9CD027671878D30A5E2D9050F rdf:type swrl:Variable .
 
 [ rdf:type swrl:Imp ;
    swrl:body [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:mediaOf ;
-                           swrl:argument1 _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-5178A1B120D3E4132B73BE42EE28448E ;
-                           swrl:argument2 _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-93B02AC0025414002B9F2F177855ED34
+                           swrl:argument1 _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-7EE1DFE4C48ACCD70961E2A1290C15F1 ;
+                           swrl:argument2 _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-CC2A33B9CD027671878D30A5E2D9050F
                          ] ;
                rdf:rest [ rdf:type swrl:AtomList ;
                           rdf:first [ rdf:type swrl:ClassAtom ;
                                       swrl:classPredicate dwc:Occurrence ;
-                                      swrl:argument1 _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-93B02AC0025414002B9F2F177855ED34
+                                      swrl:argument1 _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-CC2A33B9CD027671878D30A5E2D9050F
                                     ] ;
                           rdf:rest rdf:nil
                         ]
@@ -7259,8 +7265,8 @@ _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-93B02AC0025414002B9F2F1778
    swrl:head [ rdf:type swrl:AtomList ;
                rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
                            swrl:propertyPredicate dwcdp:evidenceFor ;
-                           swrl:argument1 _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-5178A1B120D3E4132B73BE42EE28448E ;
-                           swrl:argument2 _:genid-nodeid-genid-0fffe34e39d745b7a41f60f279461754-93B02AC0025414002B9F2F177855ED34
+                           swrl:argument1 _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-7EE1DFE4C48ACCD70961E2A1290C15F1 ;
+                           swrl:argument2 _:genid-nodeid-genid-f14aafe3ec374b3183d2d28b77bbd3b7-CC2A33B9CD027671878D30A5E2D9050F
                          ] ;
                rdf:rest rdf:nil
              ]

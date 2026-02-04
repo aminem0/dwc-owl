@@ -243,7 +243,7 @@ def createOC(
             graph.add((QC_BNode, OWL["onClass"], _tuple[2]))
             entity_pylist.append(QC_BNode)
 
-    if len(entity_pylist) > 1:
+    if len(entity_pylist) >= 1:
         for rest in entity_pylist:
             graph.add((class_uri, RDFS["subClassOf"], rest))
         # graph.add((rest_inter_class, RDFS["subClassOf"], class_uri))
