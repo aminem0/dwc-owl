@@ -1,5 +1,7 @@
 # DwC-OWL
 
+---
+
 ## Intent of the project
 
 The project seeks to convert [Darwin Core](https://dwc.tdwg.org/list/) and recently suggested [Darwin Core DataPackage](https://www.gbif.org/composition/3Be8w9RzbjHtK2brXxTtun/introducing-the-darwin-core-data-package) terms into OWL concepts of classes and properties.
@@ -14,6 +16,8 @@ The goal of the project is to provide researchers with a semantically-sound onto
 4. Easier data publication processes to biodiversity aggregators (GBIF, OBIS)
 5. Direct integration into pipelines that allow the computation of biological indicators
 
+---
+
 ## Ontology exploration
 
 The easiest way to explore the ontology is to look at the `dwc-owl.html` file in the `docs/` directory for a complete listing of the terms considered in the ontology. The documentation for this ontology can be viewed on the [GitHub Pages site of this repository](https://aminem0.github.io/dwc-owl/).
@@ -23,6 +27,8 @@ Alternatively, a visual representation of the classes and their relationships th
 You can also load the `dwc-owl.ttl` file into an ontology editor such as [Protégé](https://protege.stanford.edu/). The difference is that Protégé includes reasoners such as HermiT, that allow reasoning over the test individuals created at the end of the ontology.
 
 On that note, the HermiT reasoner is used to assess and ensure the consistency of the ontology. Through DL reasoning, it ensures that the description logic is sound and correct. 
+
+---
 
 ## The role of reasoners
 
@@ -282,9 +288,11 @@ A final story may be told around the following image:
 
   Importantly, these inferences do not introduce speculative knowledge. They are logical consequences of the ontology design: the class hierarchy, the property constraints, and the axioms that relate the resources. If any of these inferences were incorrect, the error would lie either in the ontology itself or in the original assertions, making such issues detectable and debuggable rather than silently embedded in downstream analyses. These highlight the importance of building a robust ontology, that not only accurately describes biological phenomena, but also allows the inferrence of additional knowledge in a structured and predictable manner.
 
+---
+
 ## Initial motivation
 
-The project was also motivated by another side-project: *sparql-completer*, a completion engine for sparql files. The neovim plugin is written in Lua and is based on a series of input Lua tables. The plugin can make calls to cURL, allowing for the direct execution of the SPARQL query, rather than through another programming language.
+The project was also motivated by another project: [`sparql-completer`](https://github.com/aminem0/sparql-completer.nvim), a completion engine for sparql files. The neovim plugin is written in Lua and is based on a series of input Lua tables. The plugin can make calls to cURL, allowing for the direct execution of the SPARQL query, rather than through another programming language.
 
 ![Screenshot illustrating the use of *sparql-completer* offering term suggestions generated from an OWL ontology constructed using Darwin Core terms.](images/nvimsnip.png)
 
